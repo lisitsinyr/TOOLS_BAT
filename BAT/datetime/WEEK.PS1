@@ -1,0 +1,1 @@
+get-Date -uformat %W
