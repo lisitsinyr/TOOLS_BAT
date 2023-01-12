@@ -1,0 +1,8 @@
+PROJECTS_LYR_TOOLS_BAT-TOOLS_BAT.ffs_batch
+PROJECTS_LYR_TOOLS_BAT-TOOLS_BAT.ffs_gui
+
+out
+out/
+
+.vscode
+.vscode/
