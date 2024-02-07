@@ -1,10 +1,22 @@
-GIT_CONFIG
-
-PROJECTS_LYR_TOOLS_BAT-TOOLS_BAT.ffs_batch
-PROJECTS_LYR_TOOLS_BAT-TOOLS_BAT.ffs_gui
-
-out
-out/
-
-.vscode
+### VS Code ###
 .vscode/
+.vs/
+
+### PyCharm ###
+.idea/
+__pycache__/
+
+### ФАЙЛЫ ###
+GIT_CONFIG*
+config*
+*.log
+
+### КАТАЛОГИ ###
+clickers/
+LOGS/
+LOG/
+RE/
+Replace if-else Statements/
+out/
+EXE/
+WORK/
