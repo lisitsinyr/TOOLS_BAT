@@ -11,7 +11,7 @@ GIT_CONFIG*
 config*
 *.log
 PROJECTS_LYR*
-lyrgit*
+/lyrgit*.bat
 
 ### КАТАЛОГИ ###
 clickers/
