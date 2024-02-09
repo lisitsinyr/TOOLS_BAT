@@ -68,7 +68,7 @@ set LOG_BATFILENAME=%~n0
 echo %LOG_BATFILENAME%
 
 rem set LOG_FILE=%~d0%PROJECTS%LOGS\%LOG_BATBASENAME%.log
-echo "***" > %LOG_FILE%
+rem echo "***" > %LOG_FILE%
 
 :begin
 echo ---------------------------------------------------------------
@@ -93,11 +93,13 @@ git add --all >> %LOG_FILE%
 
 echo ---------------------------------------------------------------
 echo ...git commit -m "%Comment%"
-git commit -m "%Comment%" >> %LOG_FILE% 
+rem git commit -m "%Comment%" >> %LOG_FILE% 
+git commit -m "%Comment%"
 
 echo ---------------------------------------------------------------
 echo ...git push -u origin main
-git push -u origin main >> %LOG_FILE% 
+rem git push -u origin main >> %LOG_FILE% 
+git push -u origin main
 echo ---------------------------------------------------------------
 
 rem type %LOG_FILE%

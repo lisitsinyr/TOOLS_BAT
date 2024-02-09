@@ -57,12 +57,12 @@ rem -------------------------------------------------------------------
 rem PROJECTS
 rem -------------------------------------------------------------------
 rem set PROJECTS="D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX"
-set PROJECTS=%~p0
-set LOG_BATFileName=%~f0
-set BASENAME=%~n0%~x0
+rem set PROJECTS=%~p0
+rem set LOG_BATFileName=%~f0
+rem set BASENAME=%~n0%~x0
 rem set LOG_File=%~d0%PROJECTS%LOGS\%BASENAME%.log
-set LOG_File=%~d0%~p0LOGS\%~n0%~x0.log
-echo %LOG_File%
+rem set LOG_File=%~d0%~p0LOGS\%~n0%~x0.log
+rem echo %LOG_File%
 
 :begin
 echo ---------------------------------------------------------------
