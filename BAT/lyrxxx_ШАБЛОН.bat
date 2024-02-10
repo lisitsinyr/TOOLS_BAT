@@ -63,18 +63,30 @@ rem =======================================================
 rem 4.SCRIPT_KIX
 rem -------------------------------------------------------------------
 set KIX_DIR=""
+
 set SCRIPT_KIX=lyrxxx_ÿ¿¡ÀŒÕ.kix
 echo SCRIPT_KIX: %SCRIPT_KIX%
+
+set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
+echo BAT_DIR: %BAT_DIR%
+
 if EXIST %SCRIPT_KIX% (
-    echo file %SCRIPT_KIX% exists
-    set KIX_DIR=".\"
+    echo ‘‡ÈÎ %SCRIPT_KIX% exists
+    set KIX_DIR=.\
 ) else (
     echo file %SCRIPT_KIX% does not exist
     if EXIST KIX\%SCRIPT_KIX% (
-        echo file KIX\%SCRIPT_KIX% exists
-        set KIX_DIR="KIX"
+        echo ‘‡ÈÎ KIX\%SCRIPT_KIX% exists
+        set KIX_DIR=KIX
     ) else (
-        echo file %SCRIPT_KIX% does not exist
+        echo ‘‡ÈÎ KIX\%SCRIPT_KIX% does not exist
+        if EXIST %BAT_DIR%\KIX\%SCRIPT_KIX% (
+            echo ‘‡ÈÎ %BAT_DIR%\KIX\%SCRIPT_KIX% exists
+            set KIX_DIR=%BAT_DIR%\KIX
+        ) else (
+            echo ‘‡ÈÎ %BAT_DIR%\KIX\%SCRIPT_KIX% does not exist
+            exit :eof
+        )
     )
 )
 
