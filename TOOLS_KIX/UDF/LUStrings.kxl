@@ -88,6 +88,19 @@ Function ExistWord($String, $Delimiter, $Word)
    Next
 Endfunction
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;--------------------------------------------------------------------
 ; BaseConverter($v,$f,$t)
 ;--------------------------------------------------------------------
@@ -784,7 +797,6 @@ function Search($searchIn, $searchFor, $searchHow)
    endif
 endfunction
 
-
 ;--------------------------------------------------------------------------------
 ;FUNCTION RegASCIItoHEX
 ;
@@ -890,7 +902,10 @@ endfunction
 ;? "New string : $StringReplaced"; Source:
 ;Exit
 ;--------------------------------------------------------------------------------
-Function Replace($SourceString, $SearchString, $ReplaceString, Optional $First, Optional $CaseSensitive)
+
+;Новая функция REPLACE ("stringtoreplacein", "stringtoreplace", "stringtoreplacewith", offset, count)
+
+Function ReplaceSTR($SourceString, $SearchString, $ReplaceString, Optional $First, Optional $CaseSensitive)
    Dim $String1
    Dim $String2
    Dim $Finished   $Finished = 0
