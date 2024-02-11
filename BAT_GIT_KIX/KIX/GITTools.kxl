@@ -35,14 +35,14 @@ function RUN_GIT($A_APP)
    if $Command
       $Program = $Program+" "+$Command
    endif
-   if $P1 $Program = $Program+" "+$P1 endif
-   if $P2 $Program = $Program+" "+$P2 endif
-   if $P3 $Program = $Program+" "+$P3 endif
-   if $P4 $Program = $Program+" "+$P4 endif
-   if $P5 $Program = $Program+" "+$P5 endif
-   if $P6 $Program = $Program+" "+$P6 endif
+   if $A1 $Program = $Program+" "+$A1 endif
+   if $A2 $Program = $Program+" "+$A2 endif
+   if $A3 $Program = $Program+" "+$A3 endif
+   if $A4 $Program = $Program+" "+$A4 endif
+   if $A5 $Program = $Program+" "+$A5 endif
+   if $A6 $Program = $Program+" "+$A6 endif
    LogAdd($Log, $LogFile, "I", $Program)
-   ;Shell $Program
+   Shell $Program
    LogAdd($Log, $LogFile, "I", " ")
    if @Error > 0 
       Display_Error(@Error)
@@ -56,7 +56,7 @@ function lyrgit_config
 ;begin
     ; git config --list --show-origin --show-scope
     $Command = "config"
-    $P1 = "--list --show-origin --show-scope"
+    $A1 = "--list --show-origin --show-scope"
     RUN_GIT($APP)
     $Done = 1
 EndFunction
@@ -70,6 +70,7 @@ function Command_ERROR
     WriteLN ("w+/n",  "Команды системы")
     WriteLN ("b+/n",  "lyrgit_config - ")
     WriteLN ("g+/n", "   git config --list --show-origin --show-scope")
+    WriteLN ("w+/n",  "")
 EndFunction
 
 ;-------------------------------------------------
@@ -83,7 +84,7 @@ function GIT ()
     ;LogAdd($Log, $LogFile, "I", $P3)
     ;LogAdd($Log, $LogFile, "I", $P4)
     select
-        case LCase($BATFILENAME) = "lyrgit_config"
+        case LCase($SCRIPT_FILENAME) = "lyrgit_config"
             lyrgit_config
         case 1
             Command_ERROR
