@@ -21,6 +21,8 @@ rem     LOG_OPT=11
 rem -------------------------------------------------------------------
 chcp 1251
 
+set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT_GIT_KIX
+
 rem echo -------------------------------------------------------
 rem echo 0.DEFAULT
 rem echo -------------------------------------------------------
@@ -70,7 +72,9 @@ rem ...Файл скрипта: имя
 set SCRIPT_FILENAME=%~n0
 rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
 rem ...Каталог BAT_DIR: каталог
-set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
+if "%BAT_DIR%" == "" (
+    set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
+)
 rem echo BAT_DIR: %BAT_DIR%
 rem echo -------------------------------------------------------
 rem echo 2.Каталог журналов
