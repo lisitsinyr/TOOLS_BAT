@@ -41,9 +41,24 @@ function RUN_GIT($A_APP)
    if $A4 $Program = $Program+" "+$A4 endif
    if $A5 $Program = $Program+" "+$A5 endif
    if $A6 $Program = $Program+" "+$A6 endif
+   
+   ;SHELL @LDRIVE + "\UPDATE.EXE"
+   ;SHELL "%COMSPEC% /e:1024 /c DIR C:"
+   ;SHELL "SETW USERNAME=@USERID"
+   ;SHELL "CMD.EXE /C COPY " + @LDRIVE + "\FILE.TXT C:\"
+   ;SHELL "%COMSPEC% /C COPY Z:\FILE.TXT C:\"
+   ;SHELL "C:\WINNT\SYSTEM32\CMD /E:1024 /C " + @LDRIVE + "\SMSLS.BAT"
+
+   $Program = $Program
    LogAdd($Log, $LogFile, "I", $Program)
+
+   ;$Program2 = $Program+" >> "+$LOG_FULLFILENAME
+   ;LogAdd($Log, $LogFile, "I", $Program2)
+  
    Shell $Program
+
    LogAdd($Log, $LogFile, "I", " ")
+
    if @Error > 0 
       Display_Error(@Error)
    endif

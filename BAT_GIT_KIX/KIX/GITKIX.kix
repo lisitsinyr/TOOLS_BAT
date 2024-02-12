@@ -74,21 +74,25 @@
         endif
     endif
     ;============================================================
-    Call $LIB_KIX+"\LUConst.kxl"
-    Call $LIB_KIX+"\LUFile.kxl"
-    Call $LIB_KIX+"\LUDateTime.kxl"
+    ;Call $LIB_KIX+"\LUConst.kxl"
+    ;Call $LIB_KIX+"\LUFile.kxl"
+    ;Call $LIB_KIX+"\LUDateTime.kxl"
     Call $LIB_KIX+"\LUSupport.kxl"
-    Call $LIB_KIX+"\LUStrings.kxl"
-    Call $LIB_KIX+"\LUArray.kxl"
-    Call $LIB_KIX+"\LUNet.kxl"
-    Call $LIB_KIX+"\LUIniFiles.kxl"
+    ;Call $LIB_KIX+"\LUStrings.kxl"
+    ;Call $LIB_KIX+"\LUArray.kxl"
+    ;Call $LIB_KIX+"\LUNet.kxl"
+    ;Call $LIB_KIX+"\LUIniFiles.kxl"
     ;============================================================
 
 ;begin
     if not $Log $Log = 30 endif
     $LogDir = "."
-    $LogFile = "GIT.log"
+    $LogDir = $LOG_DIR
+    $LogFile = $SCRIPT_FILENAME+".log"
     $LogFile = LogFileName ($Log, $LogDir, $LogFile)
+
+    ;$LogFile = "D:\PROJECTS_LYR\LOGS\lyrgit_config.log"
+    ;$LogFile = $LOG_FULLFILENAME
 
     ;-------------------------------------------------------------------
     ; StartLogFile
