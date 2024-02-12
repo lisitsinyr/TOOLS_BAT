@@ -46,6 +46,7 @@ set LOG_DIR=D:\PROJECTS_LYR\LOGS
 set LOG_FILENAME=%REPO_NAME%_CONFIG_list_so_ss_current
 set LOG_FILENAME=
 rem echo LOG_FILENAME: %LOG_FILENAME%
+set BAT_DIR=D:\TOOLS\TOOLS_BAT\TOOLS_KIX\BAT
 
 rem ...Каталог BAT_DIR: каталог
 if "%BAT_DIR%" == "" (
