@@ -21,11 +21,21 @@ rem     LOG_OPT=11
 rem -------------------------------------------------------------------
 chcp 1251
 
-set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT_GIT_KIX
-
 rem echo -------------------------------------------------------
 rem echo 0.DEFAULT
 rem echo -------------------------------------------------------
+
+set LOG_DIR=D:\PROJECTS_LYR\LOGS
+set LOG_FILENAME=GIT_CONFIG_list_so_ss_current
+set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\BAT_GIT_KIX
+
+rem ...Каталог BAT_DIR: каталог
+if "%BAT_DIR%" == "" (
+    set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT_GIT_KIX
+)
+rem echo BAT_DIR: %BAT_DIR%
+
+rem ...DATETIME_STAMP
 set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
 rem echo DATETIME_STAMP: %DATETIME_STAMP%
 rem ...Формат имени файлф журнала: FILENAME,DT,...
@@ -107,7 +117,7 @@ if "%LOG_FILENAME%" == "" (
 rem echo LOG_FILENAME: %LOG_FILENAME%
 rem ...Файл журнала: каталог+имя+расширение
 set LOG_FULLFILENAME=%LOG_DIR%\%LOG_FILENAME%.log
-rem echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
+echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
 rem ...Параметры журнала
 set LOG_OPT1=%LOG_OPT:~0,1%
 if "%LOG_OPT1%" == "" (
@@ -166,7 +176,9 @@ rem echo KIX_DIR: %KIX_DIR%
 echo -------------------------------------------------------
 echo 5. Запуск APP_KIX
 echo -------------------------------------------------------
-kix32.exe %KIX_DIR%\%APP_KIX% "$P1=%1" "$P2=%2" "$P3=%3" "$P4=%4" "$P5=%5" "$P6=%6" "$P7=%7" "$P8=%8" "$P9=%9"
+kix32.exe %KIX_DIR%\%APP_KIX% "$P1=%1" "$P2=%2" "$P3=%3" "$P4=%4" "$P5=%5" "$P6=%6" "$P7=%7" "$P8=%8" "$P9=%9" > %LOG_FULLFILENAME%
+
+far -v %LOG_FULLFILENAME%
 
 exit /b 0
 
