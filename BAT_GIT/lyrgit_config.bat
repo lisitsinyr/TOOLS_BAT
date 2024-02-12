@@ -51,6 +51,7 @@ rem     --[no-]show-scope     show scope of config (worktree, local, global, sys
 rem     --[no-]default <value>
 rem                           with --get, use default value when missing entry
 rem ----------------------------------------------------------------------------
+chcp 1251
 
 rem -------------------------------------------------------------------
 rem Каталог журнала: каталог
@@ -64,8 +65,6 @@ rem     LOG_FILENAME_FORMAT=
 rem Параметры журнала
 rem     LOG_OPT=11
 rem -------------------------------------------------------------------
-
-chcp 1251
 
 rem echo -------------------------------------------------------
 rem echo 0.DEFAULT
@@ -168,10 +167,10 @@ echo 5. Запуск
 echo -------------------------------------------------------
 
 :begin
-echo ---------------------------------------------------------------
-echo git config --list --show-origin --show-scope
-echo ---------------------------------------------------------------
-git config --list --show-origin --show-scope > %LOG_FULLFILENAME%
+echo --------------------------------------------------------------- > %LOG_FULLFILENAME%
+echo ...git config --list --show-origin --show-scope >> %LOG_FULLFILENAME%
+echo --------------------------------------------------------------- >> %LOG_FULLFILENAME%
+git config --list --show-origin --show-scope  >> %LOG_FULLFILENAME%
 
 far -v %LOG_FULLFILENAME%
 
