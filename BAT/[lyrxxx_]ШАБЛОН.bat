@@ -114,7 +114,11 @@ if "%LOG_FILENAME%" == "" (
 )
 rem echo LOG_FILENAME: %LOG_FILENAME%
 rem ...Файл журнала: каталог+имя+расширение
-set LOG_FULLFILENAME=%LOG_DIR%\%LOG_FILENAME%.log
+if "%REPO_NAME%" == "" (
+    set LOG_FULLFILENAME=%LOG_DIR%\%LOG_FILENAME%.log
+) else (
+    set LOG_FULLFILENAME=%LOG_DIR%\%REPO_NAME%_%LOG_FILENAME%.log
+)
 rem echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
 rem ...Параметры журнала LOG_OPT1
 set LOG_OPT1=%LOG_OPT:~0,1%
