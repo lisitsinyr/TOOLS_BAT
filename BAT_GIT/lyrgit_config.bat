@@ -69,6 +69,20 @@ rem -------------------------------------------------------------------
 rem echo -------------------------------------------------------
 rem echo 0.DEFAULT
 rem echo -------------------------------------------------------
+
+set REPO_CONFIG=.git\config
+rem Проверка существования файла REPO_CONFIG
+if not exist %REPO_CONFIG% (
+    echo ERROR: Файл %REPO_CONFIG% с настройками отсутствует
+    exit /b 1
+)
+rem for /f "eol=# delims== tokens=1,2" %%i in (%REPO_CONFIG%) do (
+rem     rem В переменной i - ключ
+rem     rem В переменной j - значение
+rem     set %%i=%%j
+rem     echo %%j
+rem )
+
 set REPO=REPO.ini
 rem Проверка существования файла REPO
 if not exist %REPO% (
