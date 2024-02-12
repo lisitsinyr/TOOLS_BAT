@@ -102,8 +102,8 @@
     LogAdd ($Log, $LogFile, "I", "StartLogFile...")
     LogAdd ($Log, $LogFile, "I", "Журнал="+$LogFile)
 
-    Call $KIX_DIR+"\GITTools.kxl"
-    GIT
+    ;Call $KIX_DIR+"\GITTools.kxl"
+    ;GIT
 
     ; -------------------------------------------------------------------
     ; StopLogFile
