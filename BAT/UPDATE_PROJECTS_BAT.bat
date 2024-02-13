@@ -55,15 +55,23 @@ for /R %DIR_FROM% %%f in (%FILES%) do (
 rem ---------------
 rem 2.FreeFileSync:
 rem ---------------
-set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\LIB
-echo DIR_FROM: %DIR_FROM%
-set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\LIB
-echo DIR_TO: %DIR_TO%
-set FILES=*.bat
-echo FILES: %FILES%
-for /R %DIR_FROM% %%f in (%FILES%) do (
-    echo %%~nf%%~xf
-    copy %%f %DIR_TO%\
+rem set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\LIB
+rem echo DIR_FROM: %DIR_FROM%
+rem set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\LIB
+rem rem echo DIR_TO: %DIR_TO%
+rem set FILES=*.bat
+rem echo FILES: %FILES%
+rem for /R %DIR_FROM% %%f in (%FILES%) do (
+rem     echo %%~nf%%~xf
+rem     copy %%f %DIR_TO%\
+rem )
+
+set DIR_FreeFileSync=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\BAT\99.[lyr]FreeFileSync
+FreeFileSync "%DIR_FreeFileSync%\PROJECTS_BAT.TOOLS_BAT.LIB__TOOLS_BAT.LIB_gui.ffs_batch"
+if not %errorlevel% == 0 (
+  ::if return code is 1 or greater, something went wrong, add special treatment here
+  echo Errors occurred during synchronization...
+  pause & exit 1
 )
 
 rem ---------------
