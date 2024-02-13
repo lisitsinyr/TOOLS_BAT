@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem UPDATE_TOOLS_JAVA.bat
+rem UPDATE_YOUTUBE.bat
 rem -------------------------------------------------------------------
 chcp 1251
 
@@ -64,11 +64,11 @@ rem     copy %%f %DIR_TO%\
 rem )
 
 rem ---------------
-rem 3.git push TOOLS_JAVA:
+rem 3.git push YOUTUBE:
 rem ---------------
-rem call D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA\TOOLS_JAVA\lyrgit_push_main.bat
-set DIR_TOOLS_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA\TOOLS_JAVA
-cd /D %DIR_TOOLS_JAVA%
+rem call D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\YOUTUBE\lyrgit_push_main.bat
+set DIR_YOUTUBE=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\YOUTUBE
+cd /D %DIR_YOUTUBE%
 call lyrgit_push_main.bat
 
 cd /D %CURRENT_DIR%

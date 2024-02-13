@@ -36,9 +36,9 @@ echo Текущий каталог %CURRENT_DIR% >> %LOG_FULLFILENAME%
 
 echo ТЕЛО СКРИПТА %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 
-rem ---------------
-rem 1.FreeFileSync:
-rem ---------------
+rem ---------------------------------------------------------
+rem 1.COPY: PROJECTS_GIT\TOOLS_GIT\BAT\*.bat -> TOOLS_GIT\BAT
+rem ---------------------------------------------------------
 set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT
 echo DIR_FROM: %DIR_FROM%
 set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT\BAT
@@ -50,9 +50,9 @@ for /R %DIR_FROM% %%f in (%FILES%) do (
     copy %%f %DIR_TO%\
 )
 
-rem ---------------
-rem 2.FreeFileSync:
-rem ---------------
+rem ---------------------------------------------------------
+rem 2.COPY: PROJECTS_GIT\TOOLS_GIT\BAT_KIX\*.bat -> TOOLS_GIT\BAT_KIX
+rem ---------------------------------------------------------
 set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT_KIX
 echo DIR_FROM: %DIR_FROM%
 set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT\BAT_KIX
@@ -64,9 +64,9 @@ for /R %DIR_FROM% %%f in (%FILES%) do (
     copy %%f %DIR_TO%\
 )
 
-rem ---------------
-rem 3.FreeFileSync:
-rem ---------------
+rem ---------------------------------------------------------
+rem 3.COPY: PROJECTS_GIT\SH\*.sh -> TOOLS_SH\SH_GIT
+rem ---------------------------------------------------------
 set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\SH
 echo DIR_FROM: %DIR_FROM%
 set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH\SH_GIT
@@ -78,37 +78,97 @@ for /R %DIR_FROM% %%f in (%FILES%) do (
     copy %%f %DIR_TO%\
 )
 
-rem ---------------
+rem ---------------------------------------------------------
 rem 4.git push TOOLS_SH:
-rem ---------------
+rem ---------------------------------------------------------
 rem D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH\lyrgit_push_main.bat
 set DIR_TOOLS_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
 cd /D %DIR_TOOLS_SH%
 call lyrgit_push_main.bat
 
-rem ---------------
+rem ---------------------------------------------------------
 rem 5.git push PROJECTS_GIT:
-rem ---------------
+rem ---------------------------------------------------------
 rem call D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\lyrgit_push_main.bat
 set DIR_PROJECTS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT
 cd /D %DIR_PROJECTS_GIT%
 call lyrgit_push_main.bat
 
-rem ---------------
+rem ---------------------------------------------------------
 rem 6.git push TOOLS_GIT:
-rem ---------------
+rem ---------------------------------------------------------
 rem call D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT\lyrgit_push_main.bat
 set DIR_TOOLS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
 cd /D %DIR_TOOLS_GIT%
 call lyrgit_push_main.bat
 
-rem ---------------
+rem ---------------------------------------------------------
 rem 7.git pull TOOLS_GIT:
-rem ---------------
+rem ---------------------------------------------------------
 rem D:\TOOLS\TOOLS_GIT
 set DIR_TOOLS_GIT=D:\TOOLS\TOOLS_GIT
 cd /D %DIR_TOOLS_GIT%
 git pull    
+
+rem ---------------------------------------------------------
+rem COPY: D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK\*.bat
+rem  -> D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT
+rem ---------------------------------------------------------
+set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
+echo DIR_FROM: %DIR_FROM%
+set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT
+echo DIR_TO: %DIR_TO%
+set FILES=*.bat
+echo FILES: %FILES%
+for /R %DIR_FROM% %%f in (%FILES%) do (
+    echo %%~nf%%~xf
+    copy %%f %DIR_TO%\
+)
+rem ---------------------------------------------------------
+rem COPY: D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK\*.bat
+rem  -> D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
+rem ---------------------------------------------------------
+set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
+echo DIR_FROM: %DIR_FROM%
+set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
+echo DIR_TO: %DIR_TO%
+set FILES=*.bat
+echo FILES: %FILES%
+for /R %DIR_FROM% %%f in (%FILES%) do (
+    echo %%~nf%%~xf
+    copy %%f %DIR_TO%\
+)
+rem ---------------------------------------------------------
+rem COPY: D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK\*.bat
+rem  -> D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX
+rem ---------------------------------------------------------
+set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
+echo DIR_FROM: %DIR_FROM%
+set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX
+echo DIR_TO: %DIR_TO%
+set FILES=*.bat
+echo FILES: %FILES%
+for /R %DIR_FROM% %%f in (%FILES%) do (
+    echo %%~nf%%~xf
+    copy %%f %DIR_TO%\
+)
+rem ---------------------------------------------------------
+rem COPY: D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK\*.bat
+rem  -> D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
+rem ---------------------------------------------------------
+set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
+echo DIR_FROM: %DIR_FROM%
+set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
+echo DIR_TO: %DIR_TO%
+set FILES=*.bat
+echo FILES: %FILES%
+for /R %DIR_FROM% %%f in (%FILES%) do (
+    echo %%~nf%%~xf
+    copy %%f %DIR_TO%\
+)
+
+
+
 
 cd /D %CURRENT_DIR%
 echo Текущий каталог %CURRENT_DIR% >> %LOG_FULLFILENAME%

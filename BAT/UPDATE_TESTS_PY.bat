@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem UPDATE_TOOLS_JAVA.bat
+rem UPDATE_TESTS_PY.bat
 rem -------------------------------------------------------------------
 chcp 1251
 
@@ -64,11 +64,11 @@ rem     copy %%f %DIR_TO%\
 rem )
 
 rem ---------------
-rem 3.git push TOOLS_JAVA:
+rem 3.git push TESTS_PY:
 rem ---------------
-rem call D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA\TOOLS_JAVA\lyrgit_push_main.bat
-set DIR_TOOLS_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA\TOOLS_JAVA
-cd /D %DIR_TOOLS_JAVA%
+rem call D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TESTS_PY\lyrgit_push_main.bat
+set DIR_TESTS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TESTS_PY
+cd /D %DIR_TESTS_PY%
 call lyrgit_push_main.bat
 
 cd /D %CURRENT_DIR%
