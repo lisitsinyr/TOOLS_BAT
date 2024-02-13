@@ -175,7 +175,7 @@ if "%LIB_KIX%" == "" (
     rem echo Каталог LIB_KIX не установлен
     if "%COMPUTERNAME%" == "%USERDOMAIN%" (
         set LIB_KIX=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\01_KIX\%PROJECTS%\TOOLS_KIX\LIB
-        set LIB_KIX=D:\TOOLS\TOOLS_BAT\TOOLS_KIX\LIB
+        set LIB_KIX=D:\TOOLS\TOOLS_KIX\LIB
     ) else (
         set LIB_KIX=\\S73FS01\APPInfo\tools\LIB
     )

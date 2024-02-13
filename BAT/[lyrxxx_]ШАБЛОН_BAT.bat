@@ -25,7 +25,7 @@ if "%BAT_DIR%" == "" (
 )
 rem echo BAT_DIR: %BAT_DIR%
 
-call __SET__.bat
+call %BAT_DIR%\__SET__.bat
 
 :begin
 echo ------------------------------------------------------- > %LOG_FULLFILENAME%
