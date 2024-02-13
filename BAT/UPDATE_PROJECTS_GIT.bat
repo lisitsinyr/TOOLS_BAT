@@ -28,7 +28,6 @@ rem echo BAT_DIR: %BAT_DIR%
 
 call %BAT_DIR%\__SET__.bat
 
-
 echo ------------------------------------------------------- > %LOG_FULLFILENAME%
 echo Запуск %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 echo ------------------------------------------------------- >> %LOG_FULLFILENAME%
@@ -109,66 +108,6 @@ rem D:\TOOLS\TOOLS_GIT
 set DIR_TOOLS_GIT=D:\TOOLS\TOOLS_GIT
 cd /D %DIR_TOOLS_GIT%
 git pull    
-
-rem ---------------------------------------------------------
-rem COPY: D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK\*.bat
-rem  -> D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT
-rem ---------------------------------------------------------
-set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
-echo DIR_FROM: %DIR_FROM%
-set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT
-echo DIR_TO: %DIR_TO%
-set FILES=*.bat
-echo FILES: %FILES%
-for /R %DIR_FROM% %%f in (%FILES%) do (
-    echo %%~nf%%~xf
-    copy %%f %DIR_TO%\
-)
-rem ---------------------------------------------------------
-rem COPY: D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK\*.bat
-rem  -> D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
-rem ---------------------------------------------------------
-set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
-echo DIR_FROM: %DIR_FROM%
-set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
-echo DIR_TO: %DIR_TO%
-set FILES=*.bat
-echo FILES: %FILES%
-for /R %DIR_FROM% %%f in (%FILES%) do (
-    echo %%~nf%%~xf
-    copy %%f %DIR_TO%\
-)
-rem ---------------------------------------------------------
-rem COPY: D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK\*.bat
-rem  -> D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX
-rem ---------------------------------------------------------
-set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
-echo DIR_FROM: %DIR_FROM%
-set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX
-echo DIR_TO: %DIR_TO%
-set FILES=*.bat
-echo FILES: %FILES%
-for /R %DIR_FROM% %%f in (%FILES%) do (
-    echo %%~nf%%~xf
-    copy %%f %DIR_TO%\
-)
-rem ---------------------------------------------------------
-rem COPY: D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK\*.bat
-rem  -> D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
-rem ---------------------------------------------------------
-set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
-echo DIR_FROM: %DIR_FROM%
-set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
-echo DIR_TO: %DIR_TO%
-set FILES=*.bat
-echo FILES: %FILES%
-for /R %DIR_FROM% %%f in (%FILES%) do (
-    echo %%~nf%%~xf
-    copy %%f %DIR_TO%\
-)
-
-
-
 
 cd /D %CURRENT_DIR%
 echo Текущий каталог %CURRENT_DIR% >> %LOG_FULLFILENAME%

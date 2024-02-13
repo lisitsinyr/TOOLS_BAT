@@ -28,7 +28,6 @@ rem echo BAT_DIR: %BAT_DIR%
 
 call %BAT_DIR%\__SET__.bat
 
-
 echo ------------------------------------------------------- > %LOG_FULLFILENAME%
 echo Запуск %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 echo ------------------------------------------------------- >> %LOG_FULLFILENAME%

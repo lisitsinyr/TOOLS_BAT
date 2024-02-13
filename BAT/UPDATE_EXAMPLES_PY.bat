@@ -28,11 +28,11 @@ rem echo BAT_DIR: %BAT_DIR%
 
 call %BAT_DIR%\__SET__.bat
 
+:begin
 echo ------------------------------------------------------- > %LOG_FULLFILENAME%
 echo Çàïóñê %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 echo ------------------------------------------------------- >> %LOG_FULLFILENAME%
 echo Òåêóùèé êàòàëîã %CURRENT_DIR% >> %LOG_FULLFILENAME%
-
 echo ÒÅËÎ ÑÊÐÈÏÒÀ %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 
 rem ---------------
