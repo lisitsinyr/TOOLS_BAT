@@ -1,0 +1,28 @@
+﻿rem REPO_NAME: PROJECTS_BAT
+rem REPO_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT
+rem ====================================================================
+
+1.FreeFileSync:
+---------------
+D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\BAT
+->
+D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
+
+2.FreeFileSync:
+---------------
+D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\LIB
+->
+D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\LIB
+
+3.git push PROJECTS_BAT:
+---------------
+call D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\lyrgit_push_main.bat
+
+4.git push TOOLS_BAT:
+---------------
+call D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\lyrgit_push_main.bat
+
+5.git pull TOOLS_BAT:
+---------------
+D:\TOOLS\TOOLS_BAT
+    git pull    
