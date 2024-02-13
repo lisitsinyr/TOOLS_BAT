@@ -101,7 +101,7 @@ echo REPO_INI: %REPO_INI%
 rem -------------------------------------------------------------------
 rem Проверка существования файла REPO.ini
 if not exist %REPO_INI% (
-    echo Файл %REPO_INI% с настройками отсутствует
+    echo ФайлFile %REPO_INI% not exist
     rem exit /b 1
 ) else (
     for /f "eol=# delims== tokens=1,2" %%i in (%REPO_INI%) do (
@@ -126,7 +126,7 @@ if "%LOG_DIR%" == "" (
 )
 rem echo LOG_DIR: %LOG_DIR%
 if not exist %LOG_DIR% (
-    echo ERROR: Каталог %LOG_DIR% не существует
+    echo ERROR: Dir %LOG_DIR% not exist
     exit /b 1
 )
 rem Файл журнала: имя
@@ -137,7 +137,7 @@ if "%LOG_FILENAME%" == "" (
         if "%LOG_FILENAME_FORMAT%" == "DATETIME" (
             set LOG_FILENAME=%DATETIME_STAMP%
         ) else (
-            echo ERROR: Файл журнала не задан
+            echo ERROR: LOG_FILENAME not set
             exit /b 1
         )
     )
@@ -208,7 +208,7 @@ if exist %APP_KIX% (
             rem echo Файл %BAT_DIR%\KIX\%APP_KIX% существует
             set KIX_DIR=%BAT_DIR%\KIX
         ) else (
-            echo INFO: Файл %BAT_DIR%\KIX\%APP_KIX% не существует
+            echo INFO: File %BAT_DIR%\KIX\%APP_KIX% not exist
             rem exit /b 1
         )
     )
