@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem [lyrxxx_]ÿ¿¡ÀŒÕ_BAT.bat
+rem UPDATE_PROJECTS_BAT.bat
 rem -------------------------------------------------------------------
 chcp 1251
 
@@ -67,7 +67,7 @@ rem     copy %%f %DIR_TO%\
 rem )
 
 set DIR_FreeFileSync=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\BAT\99.[lyr]FreeFileSync
-FreeFileSync "%DIR_FreeFileSync%\PROJECTS_BAT.TOOLS_BAT.LIB__TOOLS_BAT.LIB_gui.ffs_batch"
+FreeFileSync "%DIR_FreeFileSync%\PROJECTS_BAT.TOOLS_BAT.LIB__TOOLS_BAT.LIB.ffs_batch"
 if not %errorlevel% == 0 (
   ::if return code is 1 or greater, something went wrong, add special treatment here
   echo Errors occurred during synchronization...

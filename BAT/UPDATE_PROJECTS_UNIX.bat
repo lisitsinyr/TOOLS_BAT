@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem UPDATE_PROJECTS_GIT.bat
+rem UPDATE_PROJECTS_UNIX.bat
 rem -------------------------------------------------------------------
 chcp 1251
 
@@ -39,37 +39,9 @@ echo ÒÅËÎ ÑÊÐÈÏÒÀ %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 rem ---------------
 rem 1.FreeFileSync:
 rem ---------------
-set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT
+set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SH\SH
 echo DIR_FROM: %DIR_FROM%
-set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT\BAT
-echo DIR_TO: %DIR_TO%
-set FILES=*.bat
-echo FILES: %FILES%
-for /R %DIR_FROM% %%f in (%FILES%) do (
-    echo %%~nf%%~xf
-    copy %%f %DIR_TO%\
-)
-
-rem ---------------
-rem 2.FreeFileSync:
-rem ---------------
-set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT_KIX
-echo DIR_FROM: %DIR_FROM%
-set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT\BAT_KIX
-echo DIR_TO: %DIR_TO%
-set FILES=*.bat
-echo FILES: %FILES%
-for /R %DIR_FROM% %%f in (%FILES%) do (
-    echo %%~nf%%~xf
-    copy %%f %DIR_TO%\
-)
-
-rem ---------------
-rem 3.FreeFileSync:
-rem ---------------
-set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\SH
-echo DIR_FROM: %DIR_FROM%
-set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH\SH_GIT
+set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH\SH
 echo DIR_TO: %DIR_TO%
 set FILES=*.sh
 echo FILES: %FILES%
@@ -79,36 +51,42 @@ for /R %DIR_FROM% %%f in (%FILES%) do (
 )
 
 rem ---------------
+rem 2.FreeFileSync:
+rem ---------------
+set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SH\LIB
+echo DIR_FROM: %DIR_FROM%
+set DIR_TO=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH\LIB
+echo DIR_TO: %DIR_TO%
+set FILES=*.*
+rem echo FILES: %FILES%
+rem for /R %DIR_FROM% %%f in (%FILES%) do (
+rem     echo %%~nf%%~xf
+rem     copy %%f %DIR_TO%\
+rem )
+
+set DIR_FreeFileSync=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\BAT\99.[lyr]FreeFileSync
+FreeFileSync "%DIR_FreeFileSync%\PROJECTS_UNIX.TOOLS_SH.LIB__TOOLS_SH.LIB.ffs_batch"
+if not %errorlevel% == 0 (
+  ::if return code is 1 or greater, something went wrong, add special treatment here
+  echo Errors occurred during synchronization...
+  pause & exit 1
+)
+
+rem ---------------
+rem 3.git push PROJECTS_UNIX:
+rem ---------------
+rem call D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\lyrgit_push_main.bat
+set DIR_PROJECTS_UNIX=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX
+cd /D %DIR_PROJECTS_UNIX%
+call lyrgit_push_main.bat
+
+rem ---------------
 rem 4.git push TOOLS_SH:
 rem ---------------
-rem D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH\lyrgit_push_main.bat
+rem call D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH\lyrgit_push_main.bat
 set DIR_TOOLS_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
 cd /D %DIR_TOOLS_SH%
 call lyrgit_push_main.bat
-
-rem ---------------
-rem 5.git push PROJECTS_GIT:
-rem ---------------
-rem call D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\lyrgit_push_main.bat
-set DIR_PROJECTS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT
-cd /D %DIR_PROJECTS_GIT%
-call lyrgit_push_main.bat
-
-rem ---------------
-rem 6.git push TOOLS_GIT:
-rem ---------------
-rem call D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT\lyrgit_push_main.bat
-set DIR_TOOLS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
-cd /D %DIR_TOOLS_GIT%
-call lyrgit_push_main.bat
-
-rem ---------------
-rem 7.git pull TOOLS_GIT:
-rem ---------------
-rem D:\TOOLS\TOOLS_GIT
-set DIR_TOOLS_GIT=D:\TOOLS\TOOLS_GIT
-cd /D %DIR_TOOLS_GIT%
-git pull    
 
 cd /D %CURRENT_DIR%
 echo Òåêóùèé êàòàëîã %CURRENT_DIR% >> %LOG_FULLFILENAME%
