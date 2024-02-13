@@ -101,7 +101,7 @@ echo REPO_INI: %REPO_INI%
 rem -------------------------------------------------------------------
 rem Проверка существования файла REPO.ini
 if not exist %REPO_INI% (
-    echo ФайлFile %REPO_INI% not exist
+    echo File %REPO_INI% not exist
     rem exit /b 1
 ) else (
     for /f "eol=# delims== tokens=1,2" %%i in (%REPO_INI%) do (
