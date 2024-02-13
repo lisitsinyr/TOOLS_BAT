@@ -101,7 +101,7 @@ git pull
 cd /D %CURRENT_DIR%
 echo Текущий каталог %CURRENT_DIR% >> %LOG_FULLFILENAME%
 
-far -v %LOG_FULLFILENAME%
+rem far -v %LOG_FULLFILENAME%
 
 exit /b 0
 
