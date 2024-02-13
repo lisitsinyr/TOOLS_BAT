@@ -5,64 +5,64 @@ rem -------------------------------------------------------------------
 
 rem ===================================================================
 rem -------------------------------------------------------------------
-rem Каталог журнала: каталог
+rem РљР°С‚Р°Р»РѕРі Р¶СѓСЂРЅР°Р»Р°: РєР°С‚Р°Р»РѕРі
 rem     LOG_DIR=
-rem Файл журнала: имя+расширение
+rem Р¤Р°Р№Р» Р¶СѓСЂРЅР°Р»Р°: РёРјСЏ+СЂР°СЃС€РёСЂРµРЅРёРµ
 rem     LOG_BASEFILENAME=
-rem Файл журнала: имя
+rem Р¤Р°Р№Р» Р¶СѓСЂРЅР°Р»Р°: РёРјСЏ
 rem     LOG_FILENAME=
-rem Формат имени файлф журнала: FILENAME,DT,...
+rem Р¤РѕСЂРјР°С‚ РёРјРµРЅРё С„Р°Р№Р»С„ Р¶СѓСЂРЅР°Р»Р°: FILENAME,DT,...
 rem     LOG_FILENAME_FORMAT=
-rem Параметры журнала
+rem РџР°СЂР°РјРµС‚СЂС‹ Р¶СѓСЂРЅР°Р»Р°
 rem     LOG_OPT=11
-rem Каталог APP_KIX: каталог с файлами .KIX
+rem РљР°С‚Р°Р»РѕРі APP_KIX: РєР°С‚Р°Р»РѕРі СЃ С„Р°Р№Р»Р°РјРё .KIX
 rem     KIX_DIR=
-rem Скрипт APP_KIX: имя+расширение
-rem     APP_KIX=lyrxxx_ШАБЛОН.kix
+rem РЎРєСЂРёРїС‚ APP_KIX: РёРјСЏ+СЂР°СЃС€РёСЂРµРЅРёРµ
+rem     APP_KIX=lyrxxx_РЁРђР‘Р›РћРќ.kix
 rem -------------------------------------------------------------------
 rem echo -------------------------------------------------------
-rem echo 1.Переменные по умолчанию
+rem echo 1.РџРµСЂРµРјРµРЅРЅС‹Рµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 rem echo    %LOG_DIR%
 rem echo    %LOG_FILENAME%
 rem echo    %DATETIME_STAMP%
 rem echo    %LOG_FILENAME_FORMAT%
 rem echo    %LOG_OPT%
 rem echo -------------------------------------------------------
-rem LOG_DIR - Каталог журнала: каталог
+rem LOG_DIR - РљР°С‚Р°Р»РѕРі Р¶СѓСЂРЅР°Р»Р°: РєР°С‚Р°Р»РѕРі
 set LOG_DIR=D:\PROJECTS_LYR\LOGS
 rem echo LOG_DIR: %LOG_DIR%
 rem -------------------------------------------------------------------
-rem LOG_FILENAME - Файл журнала: имя
+rem LOG_FILENAME - Р¤Р°Р№Р» Р¶СѓСЂРЅР°Р»Р°: РёРјСЏ
 set LOG_FILENAME=%REPO_NAME%_xxxxxxxxxxxxxxxxxx
 set LOG_FILENAME=
 rem echo LOG_FILENAME: %LOG_FILENAME%
 rem -------------------------------------------------------------------
-rem DATETIME_STAMP - формат имени файла журнала
+rem DATETIME_STAMP - С„РѕСЂРјР°С‚ РёРјРµРЅРё С„Р°Р№Р»Р° Р¶СѓСЂРЅР°Р»Р°
 set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
 rem echo DATETIME_STAMP: %DATETIME_STAMP%
 rem -------------------------------------------------------------------
-rem Формат имени файлф журнала: FILENAME,DT,...
+rem Р¤РѕСЂРјР°С‚ РёРјРµРЅРё С„Р°Р№Р»С„ Р¶СѓСЂРЅР°Р»Р°: FILENAME,DT,...
 if "%LOG_FILENAME_FORMAT%" == "" (
     set LOG_FILENAME_FORMAT=FILENAME
     rem set LOG_FILENAME_FORMAT=DATETIME
 )
 rem echo LOG_FILENAME_FORMAT: %LOG_FILENAME_FORMAT%
 rem -------------------------------------------------------------------
-rem Параметры журнала
+rem РџР°СЂР°РјРµС‚СЂС‹ Р¶СѓСЂРЅР°Р»Р°
 if "%LOG_OPT%" == "" (
     set LOG_OPT=11
 )
 rem echo LOG_OPT: %LOG_OPT%
 rem -------------------------------------------------------------------
-rem Каталог APP_KIX: каталог
+rem РљР°С‚Р°Р»РѕРі APP_KIX: РєР°С‚Р°Р»РѕРі
 set KIX_DIR=
 rem -------------------------------------------------------------------
-rem Скрипт APP_KIX: имя+расширение
-set APP_KIX=[lyrxxx_]ШАБЛОН_KIX.kix
+rem РЎРєСЂРёРїС‚ APP_KIX: РёРјСЏ+СЂР°СЃС€РёСЂРµРЅРёРµ
+set APP_KIX=[lyrxxx_]РЁРђР‘Р›РћРќ_KIX.kix
 rem -------------------------------------------------------------------
 
 rem echo -------------------------------------------------------
-rem echo 2.Проект [PROJECTS]
+rem echo 2.РџСЂРѕРµРєС‚ [PROJECTS]
 rem echo    %PROJECTS%
 rem echo    %UNAME%
 rem echo    %USERNAME%
@@ -88,25 +88,25 @@ set PROJECTS_DIR=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\04_BAT\%PROJECTS%
 rem echo PROJECTS_DIR: %PROJECTS_DIR%
 
 rem echo -------------------------------------------------------
-rem echo 3.Наличие репозитария
+rem echo 3.РќР°Р»РёС‡РёРµ СЂРµРїРѕР·РёС‚Р°СЂРёСЏ
 rem echo    %REPO_NAME%
 rem echo -------------------------------------------------------
-rem REPO_NAME - Имя репозитария
+rem REPO_NAME - РРјСЏ СЂРµРїРѕР·РёС‚Р°СЂРёСЏ
 set REPO_NAME=
 rem -------------------------------------------------------------------
-rem REPO - Файл с параметрами репозитария
+rem REPO - Р¤Р°Р№Р» СЃ РїР°СЂР°РјРµС‚СЂР°РјРё СЂРµРїРѕР·РёС‚Р°СЂРёСЏ
 set REPO_INI=REPO.ini
 rem set REPO_INI=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\REPO.ini
 echo REPO_INI: %REPO_INI%
 rem -------------------------------------------------------------------
-rem Проверка существования файла REPO.ini
+rem РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ С„Р°Р№Р»Р° REPO.ini
 if not exist %REPO_INI% (
-    echo Файл %REPO_INI% с настройками отсутствует
+    echo Р¤Р°Р№Р» %REPO_INI% СЃ РЅР°СЃС‚СЂРѕР№РєР°РјРё РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚
     rem exit /b 1
 ) else (
     for /f "eol=# delims== tokens=1,2" %%i in (%REPO_INI%) do (
-       rem В переменной i - ключ
-       rem В переменной j - значение
+       rem Р’ РїРµСЂРµРјРµРЅРЅРѕР№ i - РєР»СЋС‡
+       rem Р’ РїРµСЂРµРјРµРЅРЅРѕР№ j - Р·РЅР°С‡РµРЅРёРµ
        set %%i=%%j
        rem echo %%i: %%%j%
     )
@@ -114,22 +114,22 @@ if not exist %REPO_INI% (
 echo REPO_NAME: %REPO_NAME%
 
 rem echo -------------------------------------------------------
-rem echo 4.Настройка Каталога журналов и имени журнала 
+rem echo 4.РќР°СЃС‚СЂРѕР№РєР° РљР°С‚Р°Р»РѕРіР° Р¶СѓСЂРЅР°Р»РѕРІ Рё РёРјРµРЅРё Р¶СѓСЂРЅР°Р»Р° 
 rem echo    %LOG_DIR%
 rem echo    %LOG_FILENAME%
 rem echo    %LOG_OPT1%
 rem echo    %LOG_OPT2%
 rem echo -------------------------------------------------------
-rem Каталог журнала: каталог
+rem РљР°С‚Р°Р»РѕРі Р¶СѓСЂРЅР°Р»Р°: РєР°С‚Р°Р»РѕРі
 if "%LOG_DIR%" == "" (
     set LOG_DIR=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\04_BAT\%PROJECTS%\LOGS
 )
 rem echo LOG_DIR: %LOG_DIR%
 if not exist %LOG_DIR% (
-    echo ERROR: Каталог %LOG_DIR% не существует
+    echo ERROR: РљР°С‚Р°Р»РѕРі %LOG_DIR% РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
     exit /b 1
 )
-rem Файл журнала: имя
+rem Р¤Р°Р№Р» Р¶СѓСЂРЅР°Р»Р°: РёРјСЏ
 if "%LOG_FILENAME%" == "" (
     if "%LOG_FILENAME_FORMAT%" == "FILENAME" (
         set LOG_FILENAME=%SCRIPT_FILENAME%
@@ -137,14 +137,14 @@ if "%LOG_FILENAME%" == "" (
         if "%LOG_FILENAME_FORMAT%" == "DATETIME" (
             set LOG_FILENAME=%DATETIME_STAMP%
         ) else (
-            echo ERROR: Файл журнала не задан
+            echo ERROR: Р¤Р°Р№Р» Р¶СѓСЂРЅР°Р»Р° РЅРµ Р·Р°РґР°РЅ
             exit /b 1
         )
     )
 )
 rem echo LOG_FILENAME: %LOG_FILENAME%
 rem -------------------------------------------------------------------
-rem Файл журнала: каталог+имя+расширение
+rem Р¤Р°Р№Р» Р¶СѓСЂРЅР°Р»Р°: РєР°С‚Р°Р»РѕРі+РёРјСЏ+СЂР°СЃС€РёСЂРµРЅРёРµ
 if "%REPO_NAME%" == "" (
     set LOG_FULLFILENAME=%LOG_DIR%\%LOG_FILENAME%.log
 ) else (
@@ -152,14 +152,14 @@ if "%REPO_NAME%" == "" (
 )
 echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
 rem -------------------------------------------------------------------
-rem Параметры журнала LOG_OPT1
+rem РџР°СЂР°РјРµС‚СЂС‹ Р¶СѓСЂРЅР°Р»Р° LOG_OPT1
 set LOG_OPT1=%LOG_OPT:~0,1%
 if "%LOG_OPT1%" == "" (
     set LOG_OPT1=1
 )
 rem echo LOG_OPT1: %LOG_OPT1%
 rem -------------------------------------------------------------------
-rem Параметры журнала LOG_OPT2
+rem РџР°СЂР°РјРµС‚СЂС‹ Р¶СѓСЂРЅР°Р»Р° LOG_OPT2
 set LOG_OPT2=%LOG_OPT:~1,1%
 if "%LOG_OPT2%" == "" (
     set LOG_OPT2=1
@@ -169,12 +169,12 @@ rem ===================================================================
 
 rem ===================================================================
 rem echo -------------------------------------------------------
-rem echo 5.Каталог библиотеки KIX: каталог
+rem echo 5.РљР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё KIX: РєР°С‚Р°Р»РѕРі
 rem echo    %LIB_KIX%"
 rem echo -------------------------------------------------------
-rem Каталог библиотеки KIX: каталог
+rem РљР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё KIX: РєР°С‚Р°Р»РѕРі
 if "%LIB_KIX%" == "" (
-    rem echo Каталог LIB_KIX не установлен
+    rem echo РљР°С‚Р°Р»РѕРі LIB_KIX РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ
     if "%COMPUTERNAME%" == "%USERDOMAIN%" (
         set LIB_KIX=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\01_KIX\%PROJECTS%\TOOLS_KIX\LIB
         set LIB_KIX=D:\TOOLS\TOOLS_KIX\LIB
@@ -184,9 +184,9 @@ if "%LIB_KIX%" == "" (
 )
 rem echo LIB_KIX: %LIB_KIX%
 if exist %LIB_KIX% (
-    rem echo Каталог %LIB_KIX% существует
+    rem echo РљР°С‚Р°Р»РѕРі %LIB_KIX% СЃСѓС‰РµСЃС‚РІСѓРµС‚
 ) else (
-    echo INFO: Каталог %LIB_KIX% не существует
+    echo INFO: РљР°С‚Р°Р»РѕРі %LIB_KIX% РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
     rem exit /b 1
 )
 rem echo -------------------------------------------------------
@@ -195,20 +195,20 @@ rem echo    %APP_KIX%
 rem echo    %KIX_DIR%
 rem echo -------------------------------------------------------
 if exist %APP_KIX% (
-    rem echo Файл %APP_KIX% существует
+    rem echo Р¤Р°Р№Р» %APP_KIX% СЃСѓС‰РµСЃС‚РІСѓРµС‚
     set KIX_DIR=.
 ) else (
-    rem echo Файл %APP_KIX% не существует
+    rem echo Р¤Р°Р№Р» %APP_KIX% РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
     if exist KIX\%APP_KIX% (
-        rem echo Файл KIX\%APP_KIX% существует
+        rem echo Р¤Р°Р№Р» KIX\%APP_KIX% СЃСѓС‰РµСЃС‚РІСѓРµС‚
         set KIX_DIR=KIX
     ) else (
-        rem echo Файл KIX\%APP_KIX% не существует
+        rem echo Р¤Р°Р№Р» KIX\%APP_KIX% РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
         if exist %BAT_DIR%\KIX\%APP_KIX% (
-            rem echo Файл %BAT_DIR%\KIX\%APP_KIX% существует
+            rem echo Р¤Р°Р№Р» %BAT_DIR%\KIX\%APP_KIX% СЃСѓС‰РµСЃС‚РІСѓРµС‚
             set KIX_DIR=%BAT_DIR%\KIX
         ) else (
-            echo INFO: Файл %BAT_DIR%\KIX\%APP_KIX% не существует
+            echo INFO: Р¤Р°Р№Р» %BAT_DIR%\KIX\%APP_KIX% РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
             rem exit /b 1
         )
     )
