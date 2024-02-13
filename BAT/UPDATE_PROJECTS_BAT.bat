@@ -85,7 +85,9 @@ rem ---------------
 rem 5.git pull TOOLS_BAT:
 rem ---------------
 rem D:\TOOLS\TOOLS_BAT
-rem     git pull    
+set DIR_TOOLS_BAT=D:\TOOLS\TOOLS_BAT
+cd /D %DIR_TOOLS_BAT%
+git pull    
 
 cd /D %CURRENT_DIR%
 echo Текущий каталог %CURRENT_DIR% >> %LOG_FULLFILENAME%
