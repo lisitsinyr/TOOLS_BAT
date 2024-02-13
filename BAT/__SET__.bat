@@ -96,20 +96,22 @@ set REPO_NAME=
 rem -------------------------------------------------------------------
 rem REPO - Файл с параметрами репозитария
 set REPO_INI=REPO.ini
+rem set REPO_INI=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\REPO.ini
+echo REPO_INI: %REPO_INI%
 rem -------------------------------------------------------------------
 rem Проверка существования файла REPO.ini
 if not exist %REPO_INI% (
-    rem echo Файл %REPO_INI% с настройками отсутствует
+    echo Файл %REPO_INI% с настройками отсутствует
     rem exit /b 1
 ) else (
-    for /f "eol=# delims== tokens=1,2" %%i in (%REPO%) do (
+    for /f "eol=# delims== tokens=1,2" %%i in (%REPO_INI%) do (
        rem В переменной i - ключ
        rem В переменной j - значение
        set %%i=%%j
        rem echo %%i: %%%j%
     )
 )
-rem echo REPO_NAME: %REPO_NAME%
+echo REPO_NAME: %REPO_NAME%
 
 rem echo -------------------------------------------------------
 rem echo 4.Настройка Каталога журналов и имени журнала 
@@ -148,7 +150,7 @@ if "%REPO_NAME%" == "" (
 ) else (
     set LOG_FULLFILENAME=%LOG_DIR%\%REPO_NAME%_%LOG_FILENAME%.log
 )
-rem echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
+echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
 rem -------------------------------------------------------------------
 rem Параметры журнала LOG_OPT1
 set LOG_OPT1=%LOG_OPT:~0,1%
