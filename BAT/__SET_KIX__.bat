@@ -25,15 +25,15 @@ if "%BAT_DIR%"=="" (
 )
 echo BAT_DIR: %BAT_DIR%
 rem -------------------------------------------------------------------
-rem KIX_DIR - каталог APP_KIX
-set KIX_DIR=
+rem APP_KIX_DIR - каталог APP_KIX
+set APP_KIX_DIR=
 rem -------------------------------------------------------------------
 rem APP_KIX - Скрипт APP_KIX имя+расширение
 set APP_KIX=[lyrxxx_]PATTERN_KIX.kix
 rem -------------------------------------------------------------------
 
 rem echo -------------------------------------------------------
-rem echo 5.Каталог библиотеки KIX: каталог
+rem echo Каталог библиотеки KIX: каталог
 rem echo    %LIB_KIX%"
 rem echo -------------------------------------------------------
 rem LIB_KIX - Каталог библиотеки KIX [каталог]
@@ -55,26 +55,26 @@ if exist %LIB_KIX% (
 )
 
 rem echo -------------------------------------------------------
-rem echo 6.APP_KIX
+rem echo APP_KIX
 rem echo    %APP_KIX%
-rem echo    %KIX_DIR%
+rem echo    %APP_KIX_DIR%
 rem echo -------------------------------------------------------
 if "%APP_KIX%"=="" (
     echo File APP_KIX not set
 ) else (
     if exist %APP_KIX% (
         rem echo Файл %APP_KIX% существует
-        set KIX_DIR=.
+        set APP_KIX_DIR=.
     ) else (
         rem echo Файл %APP_KIX% не существует
         if exist KIX\%APP_KIX% (
             rem echo Файл KIX\%APP_KIX% существует
-            set KIX_DIR=KIX
+            set APP_KIX_DIR=KIX
         ) else (
             rem echo Файл KIX\%APP_KIX% не существует
             if exist %BAT_DIR%\KIX\%APP_KIX% (
                 rem echo Файл %BAT_DIR%\KIX\%APP_KIX% существует
-                set KIX_DIR=%BAT_DIR%\KIX
+                set APP_KIX_DIR=%BAT_DIR%\KIX
             ) else (
                 echo INFO: File %BAT_DIR%\KIX\%APP_KIX% not exist
                 rem exit /b 1
@@ -83,7 +83,7 @@ if "%APP_KIX%"=="" (
     )
 
 )
-rem echo KIX_DIR: %KIX_DIR%
+echo APP_KIX_DIR: %APP_KIX_DIR%
 rem ===================================================================
 
 :Exit

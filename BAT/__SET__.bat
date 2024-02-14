@@ -32,7 +32,7 @@ echo __SET__: %__SET__%
 if "%SCRIPT_FILENAME%"=="" (
     set SCRIPT_FILENAME=__SET__
 )
-echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
+rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
 
 rem Каталог BAT_DIR: каталог
 if "%BAT_DIR%"=="" (
