@@ -22,6 +22,7 @@ rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
 rem Каталог BAT_DIR: каталог
 if "%BAT_DIR%" == "" (
     set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
+    set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
 )
 rem echo BAT_DIR: %BAT_DIR%
 
@@ -34,15 +35,12 @@ echo ------------------------------------------------------- >> %LOG_FULLFILENAM
 echo CURRENT_DIR: %CURRENT_DIR%            >> %LOG_FULLFILENAME%
 set DIR_SAVE=%CURRENT_DIR%
 
-rem echo BODY script %SCRIPT_BASEFILENAME% ... 
-
-call :PATTERN || exit /b 1
-
 if exist %KIX_DIR%\%APP_KIX% (
     echo START script %KIX_DIR%\%APP_KIX% ... >> %LOG_FULLFILENAME%
     kix32.exe %KIX_DIR%\%APP_KIX% "$P1=%1" "$P2=%2" "$P3=%3" "$P4=%4" "$P5=%5" "$P6=%6" "$P7=%7" "$P8=%8" "$P9=%9"
 ) else (
-    echo BODY script %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
+    rem echo BODY script %SCRIPT_BASEFILENAME% ... 
+    call :PATTERN || exit /b 1
 )
 
 rem far -v %LOG_FULLFILENAME%
