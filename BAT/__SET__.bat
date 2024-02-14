@@ -22,20 +22,20 @@ rem     APP_KIX=lyrxxx_ШАБЛОН.kix
 rem -------------------------------------------------------------------
 
 :begin
-if "%__SET__%" == "1" (
+if "%__SET__%"=="1" (
     goto :eof
 ) else (
     set __SET__=1
 )
 echo __SET__: %__SET__%
 
-if "%SCRIPT_FILENAME%" == "" (
+if "%SCRIPT_FILENAME%"=="" (
     set SCRIPT_FILENAME=__SET__
 )
 echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
 
 rem Каталог BAT_DIR: каталог
-if "%BAT_DIR%" == "" (
+if "%BAT_DIR%"=="" (
     set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
     set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
 )
@@ -59,14 +59,14 @@ set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:
 rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
 rem -------------------------------------------------------------------
 rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DT,...]
-if "%LOG_FILENAME_FORMAT%" == "" (
+if "%LOG_FILENAME_FORMAT%"=="" (
     set LOG_FILENAME_FORMAT=FILENAME
     rem set LOG_FILENAME_FORMAT=DATETIME
 )
 rem echo LOG_FILENAME_FORMAT [FILENAME,DT,...]: %LOG_FILENAME_FORMAT%
 rem -------------------------------------------------------------------
 rem LOG_OPT - Параметры журнала [11]
-if "%LOG_OPT%" == "" (
+if "%LOG_OPT%"=="" (
     set LOG_OPT=11
 )
 rem echo LOG_OPT [11]: %LOG_OPT%
@@ -133,7 +133,7 @@ rem echo    %LOG_OPT1%
 rem echo    %LOG_OPT2%
 rem echo -------------------------------------------------------
 rem LOG_DIR - Каталог журнала [каталог]
-if "%LOG_DIR%" == "" (
+if "%LOG_DIR%"=="" (
     set LOG_DIR=%PROJECTS_LYR_DIR%\LOGS
 )
 rem echo LOG_DIR: %LOG_DIR%
@@ -142,11 +142,11 @@ if not exist %LOG_DIR% (
     exit /b 1
 )
 rem LOG_FILENAME - Файл журнала [имя]
-if "%LOG_FILENAME%" == "" (
-    if "%LOG_FILENAME_FORMAT%" == "FILENAME" (
+if "%LOG_FILENAME%"=="" (
+    if "%LOG_FILENAME_FORMAT%"=="FILENAME" (
         set LOG_FILENAME=%SCRIPT_FILENAME%
     ) else (
-        if "%LOG_FILENAME_FORMAT%" == "DATETIME" (
+        if "%LOG_FILENAME_FORMAT%"=="DATETIME" (
             set LOG_FILENAME=%DATETIME_STAMP%
         ) else (
             echo ERROR: LOG_FILENAME not set
@@ -157,7 +157,7 @@ if "%LOG_FILENAME%" == "" (
 rem echo LOG_FILENAME: %LOG_FILENAME%
 rem -------------------------------------------------------------------
 rem LOG_FULLFILENAME - Файл журнала [каталог+имя+расширение]
-if "%REPO_NAME%" == "" (
+if "%REPO_NAME%"=="" (
     set LOG_FULLFILENAME=%LOG_DIR%\%LOG_FILENAME%.log
 ) else (
     set LOG_FULLFILENAME=%LOG_DIR%\%REPO_NAME%_%LOG_FILENAME%.log
@@ -166,14 +166,14 @@ rem echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
 rem -------------------------------------------------------------------
 rem LOG_OPT1 - Параметр журнала [1]
 set LOG_OPT1=%LOG_OPT:~0,1%
-if "%LOG_OPT1%" == "" (
+if "%LOG_OPT1%"=="" (
     set LOG_OPT1=1
 )
 rem echo LOG_OPT1 [1]: %LOG_OPT1%
 rem -------------------------------------------------------------------
 rem LOG_OPT2 - Параметры журнала [1]
 set LOG_OPT2=%LOG_OPT:~1,1%
-if "%LOG_OPT2%" == "" (
+if "%LOG_OPT2%"=="" (
     set LOG_OPT2=1
 )
 rem echo LOG_OPT2 [1]: %LOG_OPT2%

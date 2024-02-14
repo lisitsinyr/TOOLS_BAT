@@ -5,21 +5,21 @@ rem -------------------------------------------------------------------
 chcp 1251
 
 :begin
-if "%__SET_KIX__%" == "1" (
+if "%__SET_KIX__%"=="1" (
     goto :eof
 ) else (
     set __SET_KIX__=1
 )
 echo __SET_KIX__: %__SET_KIX__%
 
-if "%SCRIPT_FILENAME%" == "" (
+if "%SCRIPT_FILENAME%"=="" (
     set SCRIPT_FILENAME=__SET_KIX__
 )
 echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
 
 rem -------------------------------------------------------------------
 rem Каталог BAT_DIR: каталог
-if "%BAT_DIR%" == "" (
+if "%BAT_DIR%"=="" (
     set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
     set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
 )
@@ -37,9 +37,9 @@ rem echo 5.Каталог библиотеки KIX: каталог
 rem echo    %LIB_KIX%"
 rem echo -------------------------------------------------------
 rem LIB_KIX - Каталог библиотеки KIX [каталог]
-if "%LIB_KIX%" == "" (
+if "%LIB_KIX%"=="" (
     rem echo INFO: Dir LIB_KIX not set
-    if "%COMPUTERNAME%" == "%USERDOMAIN%" (
+    if "%COMPUTERNAME%"=="%USERDOMAIN%" (
         set LIB_KIX=D:\TOOLS\TOOLS_KIX\LIB
         set LIB_KIX=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX\LIB
     ) else (
@@ -59,7 +59,7 @@ rem echo 6.APP_KIX
 rem echo    %APP_KIX%
 rem echo    %KIX_DIR%
 rem echo -------------------------------------------------------
-if "%APP_KIX%" == "" (
+if "%APP_KIX%"=="" (
     echo File APP_KIX not set
 ) else (
     if exist %APP_KIX% (

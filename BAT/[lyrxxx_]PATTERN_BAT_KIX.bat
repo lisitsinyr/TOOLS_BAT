@@ -15,7 +15,7 @@ rem Файл скрипта: имя
 set SCRIPT_FILENAME=%~n0
 rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
 rem Каталог BAT_DIR: каталог
-if "%BAT_DIR%" == "" (
+if "%BAT_DIR%"=="" (
     set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
     set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
 )
@@ -60,13 +60,13 @@ rem =================================================
 echo ---------------------------------------------------------------
 echo Check_P1 [P1]
 echo ---------------------------------------------------------------
-if "%1" == "" (
+if "%1"=="" (
     rem set /p P1=P1:
     set P1=""
 ) else (
     set P1=%1
 )
-if "%P1%" == "" (
+if "%P1%"=="" (
     set P1=""
 )
 echo P1: %P1%
