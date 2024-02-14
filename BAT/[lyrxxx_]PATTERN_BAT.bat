@@ -28,6 +28,9 @@ rem echo BAT_DIR: %BAT_DIR%
 
 call %BAT_DIR%\__SET__.bat
 
+rem APP_KIX - Скрипт APP_KIX имя+расширение
+set APP_KIX=
+
 :begin
 echo ------------------------------------------------------- >> %LOG_FULLFILENAME%
 echo Start %SCRIPT_BASEFILENAME% ...       >> %LOG_FULLFILENAME%
