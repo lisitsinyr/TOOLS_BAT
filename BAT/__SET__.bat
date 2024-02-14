@@ -2,6 +2,7 @@
 rem -------------------------------------------------------------------
 rem __SET__.bat
 rem -------------------------------------------------------------------
+chcp 1251
 
 rem -------------------------------------------------------------------
 rem Каталог журнала: каталог
@@ -27,8 +28,28 @@ if "%__SET__%" == "1" (
     set __SET__=1
 )
 echo __SET__: %__SET__%
+
 if "%SCRIPT_FILENAME%" == "" (
     set SCRIPT_FILENAME=__SET__
+)
+echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
+
+if "%SCRIPT_FILENAME%" == "__SET__" (
+    rem Каталог BAT_DIR: каталог
+    if "%BAT_DIR%" == "" (
+        set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
+        set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
+    )
+    echo BAT_DIR: %BAT_DIR%
+    rem -------------------------------------------------------------------
+    rem KIX_DIR - каталог APP_KIX
+    set KIX_DIR=
+    echo KIX_DIR: %KIX_DIR%
+    rem -------------------------------------------------------------------
+    rem APP_KIX - Скрипт APP_KIX имя+расширение
+    set APP_KIX=[lyrxxx_]PATTERN_KIX.kix
+    echo APP_KIX: %APP_KIX%
+    rem -------------------------------------------------------------------
 )
 
 rem echo -------------------------------------------------------
@@ -201,24 +222,29 @@ rem echo 6.APP_KIX
 rem echo    %APP_KIX%
 rem echo    %KIX_DIR%
 rem echo -------------------------------------------------------
-if exist %APP_KIX% (
-    rem echo Файл %APP_KIX% существует
-    set KIX_DIR=.
+if "%APP_KIX%" == "" (
+    echo File APP_KIX not set
 ) else (
-    rem echo Файл %APP_KIX% не существует
-    if exist KIX\%APP_KIX% (
-        rem echo Файл KIX\%APP_KIX% существует
-        set KIX_DIR=KIX
+    if exist %APP_KIX% (
+        rem echo Файл %APP_KIX% существует
+        set KIX_DIR=.
     ) else (
-        rem echo Файл KIX\%APP_KIX% не существует
-        if exist %BAT_DIR%\KIX\%APP_KIX% (
-            rem echo Файл %BAT_DIR%\KIX\%APP_KIX% существует
-            set KIX_DIR=%BAT_DIR%\KIX
+        rem echo Файл %APP_KIX% не существует
+        if exist KIX\%APP_KIX% (
+            rem echo Файл KIX\%APP_KIX% существует
+            set KIX_DIR=KIX
         ) else (
-            echo INFO: File %BAT_DIR%\KIX\%APP_KIX% not exist
-            rem exit /b 1
+            rem echo Файл KIX\%APP_KIX% не существует
+            if exist %BAT_DIR%\KIX\%APP_KIX% (
+                rem echo Файл %BAT_DIR%\KIX\%APP_KIX% существует
+                set KIX_DIR=%BAT_DIR%\KIX
+            ) else (
+                echo INFO: File %BAT_DIR%\KIX\%APP_KIX% not exist
+                rem exit /b 1
+            )
         )
     )
+
 )
 rem echo KIX_DIR: %KIX_DIR%
 rem ===================================================================
