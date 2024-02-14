@@ -3,8 +3,6 @@ rem -------------------------------------------------------------------
 rem __SET__.bat
 rem -------------------------------------------------------------------
 
-rem ===================================================================
-
 rem -------------------------------------------------------------------
 rem Каталог журнала: каталог
 rem     LOG_DIR=
@@ -22,13 +20,13 @@ rem Скрипт APP_KIX: имя+расширение
 rem     APP_KIX=lyrxxx_ШАБЛОН.kix
 rem -------------------------------------------------------------------
 
+:begin
 if "%__SET__%" == "1" (
     goto :eof
 ) else (
     set __SET__=1
 )
 echo __SET__: %__SET__%
-
 if "%SCRIPT_FILENAME%" == "" (
     set SCRIPT_FILENAME=__SET__
 )
@@ -71,6 +69,9 @@ rem echo    %USERNAME%
 rem echo    %PROJECTS_LYR_DIR%
 rem echo    %PROJECTS_DIR%
 rem echo -------------------------------------------------------
+rem CURRENT_DIR - Текущий каталог
+set CURRENT_DIR=%CD%
+rem echo CURRENT_DIR: %CURRENT_DIR%
 set PROJECTS=PROJECTS_BAT
 rem echo PROJECTS: %PROJECTS%
 rem -------------------------------------------------------------------
@@ -221,3 +222,5 @@ if exist %APP_KIX% (
 )
 rem echo KIX_DIR: %KIX_DIR%
 rem ===================================================================
+
+:Exit

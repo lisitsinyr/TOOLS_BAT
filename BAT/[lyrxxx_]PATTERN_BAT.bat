@@ -5,11 +5,6 @@ rem -------------------------------------------------------------------
 chcp 1251
 
 rem echo -------------------------------------------------------
-rem echo 
-rem echo -------------------------------------------------------
-rem CURRENT_DIR - Текущий каталог
-set CURRENT_DIR=%CD%
-rem echo CURRENT_DIR: %CURRENT_DIR%
 rem Файл скрипта: каталог+имя+расширение
 set SCRIPT_FULLFILENAME=%~f0
 rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
@@ -47,7 +42,7 @@ if exist %KIX_DIR%\%APP_KIX% (
     kix32.exe %KIX_DIR%\%APP_KIX% "$P1=%1" "$P2=%2" "$P3=%3" "$P4=%4" "$P5=%5" "$P6=%6" "$P7=%7" "$P8=%8" "$P9=%9"
 ) else (
     rem echo BODY script %SCRIPT_BASEFILENAME% ... 
-    call :PATTERN || exit /b 1
+    call :Check_P1 || exit /b 1
 )
 
 rem far -v %LOG_FULLFILENAME%
@@ -61,9 +56,18 @@ exit /b 0
 rem =================================================
 rem ФУНКЦИИ
 rem =================================================
-
-:PATTERN
-echo ---------------------------
-echo 1.PATTERN:
-echo ---------------------------
+:Check_P1
+echo ---------------------------------------------------------------
+echo Check_P1 [P1]
+echo ---------------------------------------------------------------
+if "%1" == "" (
+    rem set /p P1=P1:
+    set P1=""
+) else (
+    set P1=%1
+)
+if "%P1%" == "" (
+    set P1=""
+)
+echo P1: %P1%
 exit /b 0
