@@ -31,8 +31,6 @@ rem -------------------------------------------------------------------
 call %BAT_DIR%\__SET__.bat
 call %BAT_DIR%\__SET_KIX__.bat
 
-echo APP_KIX_DIR: %APP_KIX_DIR%
-
 :begin
 echo ------------------------------------------------------- >> %LOG_FULLFILENAME%
 echo Start %SCRIPT_BASEFILENAME% ...       >> %LOG_FULLFILENAME%
