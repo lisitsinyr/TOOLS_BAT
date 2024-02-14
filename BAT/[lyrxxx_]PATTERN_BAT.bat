@@ -28,10 +28,15 @@ rem echo BAT_DIR: %BAT_DIR%
 call %BAT_DIR%\__SET__.bat
 
 :begin
-echo ------------------------------------------------------- > %LOG_FULLFILENAME%
-echo START %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 echo ------------------------------------------------------- >> %LOG_FULLFILENAME%
-echo CURRENT_DIR: %CURRENT_DIR% >> %LOG_FULLFILENAME%
+echo Start %SCRIPT_BASEFILENAME% ...       >> %LOG_FULLFILENAME%
+echo ------------------------------------------------------- >> %LOG_FULLFILENAME%
+echo CURRENT_DIR: %CURRENT_DIR%            >> %LOG_FULLFILENAME%
+set DIR_SAVE=%CURRENT_DIR%
+
+rem echo BODY script %SCRIPT_BASEFILENAME% ... 
+
+call :PATTERN || exit /b 1
 
 if exist %KIX_DIR%\%APP_KIX% (
     echo START script %KIX_DIR%\%APP_KIX% ... >> %LOG_FULLFILENAME%
@@ -40,11 +45,20 @@ if exist %KIX_DIR%\%APP_KIX% (
     echo BODY script %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 )
 
-cd /D %CURRENT_DIR%
-echo CURRENT_DIR: %CURRENT_DIR% >> %LOG_FULLFILENAME%
+rem far -v %LOG_FULLFILENAME%
 
-far -v %LOG_FULLFILENAME%
+cd /D %DIR_SAVE%
 
+rem Выход из сценария. Дальше - только функции.
+:Exit
 exit /b 0
 
-:Exit
+rem =================================================
+rem ФУНКЦИИ
+rem =================================================
+
+:PATTERN
+echo ---------------------------
+echo 1.PATTERN:
+echo ---------------------------
+exit /b 0
