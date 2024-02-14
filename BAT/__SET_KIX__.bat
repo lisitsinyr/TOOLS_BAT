@@ -4,6 +4,19 @@ rem __SET_KIX__.bat
 rem -------------------------------------------------------------------
 chcp 1251
 
+:begin
+if "%__SET_KIX__%" == "1" (
+    goto :eof
+) else (
+    set __SET_KIX__=1
+)
+echo __SET_KIX__: %__SET_KIX__%
+
+if "%SCRIPT_FILENAME%" == "" (
+    set SCRIPT_FILENAME=__SET_KIX__
+)
+echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
+
 rem -------------------------------------------------------------------
 rem Каталог BAT_DIR: каталог
 if "%BAT_DIR%" == "" (
