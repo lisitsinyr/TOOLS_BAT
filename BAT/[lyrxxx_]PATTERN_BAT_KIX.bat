@@ -20,8 +20,16 @@ if "%BAT_DIR%" == "" (
     set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
 )
 rem echo BAT_DIR: %BAT_DIR%
+rem -------------------------------------------------------------------
+rem KIX_DIR - каталог APP_KIX
+set KIX_DIR=
+rem -------------------------------------------------------------------
+rem APP_KIX - Скрипт APP_KIX имя+расширение
+set APP_KIX=[lyrxxx_]PATTERN_KIX.kix
+rem -------------------------------------------------------------------
 
 call %BAT_DIR%\__SET__.bat
+call %BAT_DIR%\__SET_KIX__.bat
 
 :begin
 echo ------------------------------------------------------- >> %LOG_FULLFILENAME%
@@ -30,8 +38,12 @@ echo ------------------------------------------------------- >> %LOG_FULLFILENAM
 echo CURRENT_DIR: %CURRENT_DIR%            >> %LOG_FULLFILENAME%
 set DIR_SAVE=%CURRENT_DIR%
 
-rem echo BODY script %SCRIPT_BASEFILENAME% ... 
 call :Check_P1 || exit /b 1
+
+if exist %KIX_DIR%\%APP_KIX% (
+    echo START script %KIX_DIR%\%APP_KIX% ... >> %LOG_FULLFILENAME%
+    kix32.exe %KIX_DIR%\%APP_KIX% "$P1=%1" "$P2=%2" "$P3=%3" "$P4=%4" "$P5=%5" "$P6=%6" "$P7=%7" "$P8=%8" "$P9=%9"
+)
 
 rem far -v %LOG_FULLFILENAME%
 
