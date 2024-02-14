@@ -4,6 +4,12 @@ rem __SET_KIX__.bat
 rem -------------------------------------------------------------------
 chcp 1251
 
+rem Каталог BAT_DIR: каталог
+if "%BAT_DIR%" == "" (
+    set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
+    set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
+)
+echo BAT_DIR: %BAT_DIR%
 rem -------------------------------------------------------------------
 rem KIX_DIR - каталог APP_KIX
 set KIX_DIR=
