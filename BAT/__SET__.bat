@@ -4,6 +4,7 @@ rem __SET__.bat
 rem -------------------------------------------------------------------
 
 rem ===================================================================
+
 rem -------------------------------------------------------------------
 rem Каталог журнала: каталог
 rem     LOG_DIR=
@@ -20,6 +21,18 @@ rem     KIX_DIR=
 rem Скрипт APP_KIX: имя+расширение
 rem     APP_KIX=lyrxxx_ШАБЛОН.kix
 rem -------------------------------------------------------------------
+
+if "%__SET__%" == "1" (
+    goto :eof
+) else (
+    set __SET__=1
+)
+echo __SET__: %__SET__%
+
+if "%SCRIPT_FILENAME%" == "" (
+    set SCRIPT_FILENAME=__SET__
+)
+
 rem echo -------------------------------------------------------
 rem echo 1.Переменные по умолчанию
 rem echo    %LOG_DIR%
@@ -28,36 +41,32 @@ rem echo    %DATETIME_STAMP%
 rem echo    %LOG_FILENAME_FORMAT%
 rem echo    %LOG_OPT%
 rem echo -------------------------------------------------------
-rem LOG_DIR - Каталог журнала: каталог
-set LOG_DIR=D:\PROJECTS_LYR\LOGS
-rem echo LOG_DIR: %LOG_DIR%
-rem -------------------------------------------------------------------
-rem LOG_FILENAME - Файл журнала: имя
+rem LOG_FILENAME - Файл журнала [имя]
 set LOG_FILENAME=%REPO_NAME%_xxxxxxxxxxxxxxxxxx
 set LOG_FILENAME=
 rem echo LOG_FILENAME: %LOG_FILENAME%
 rem -------------------------------------------------------------------
-rem DATETIME_STAMP - формат имени файла журнала
+rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
 set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
-rem echo DATETIME_STAMP: %DATETIME_STAMP%
+rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
 rem -------------------------------------------------------------------
-rem Формат имени файлф журнала: FILENAME,DT,...
+rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DT,...]
 if "%LOG_FILENAME_FORMAT%" == "" (
     set LOG_FILENAME_FORMAT=FILENAME
     rem set LOG_FILENAME_FORMAT=DATETIME
 )
-rem echo LOG_FILENAME_FORMAT: %LOG_FILENAME_FORMAT%
+rem echo LOG_FILENAME_FORMAT [FILENAME,DT,...]: %LOG_FILENAME_FORMAT%
 rem -------------------------------------------------------------------
-rem Параметры журнала
+rem LOG_OPT - Параметры журнала [11]
 if "%LOG_OPT%" == "" (
     set LOG_OPT=11
 )
-rem echo LOG_OPT: %LOG_OPT%
+rem echo LOG_OPT [11]: %LOG_OPT%
 rem -------------------------------------------------------------------
-rem Каталог APP_KIX: каталог
+rem KIX_DIR - каталог APP_KIX
 set KIX_DIR=
 rem -------------------------------------------------------------------
-rem Скрипт APP_KIX: имя+расширение
+rem APP_KIX - Скрипт APP_KIX имя+расширение
 set APP_KIX=[lyrxxx_]PATTERN_KIX.kix
 rem -------------------------------------------------------------------
 
@@ -94,14 +103,13 @@ rem echo -------------------------------------------------------
 rem REPO_NAME - Имя репозитария
 set REPO_NAME=
 rem -------------------------------------------------------------------
-rem REPO - Файл с параметрами репозитария
+rem REPO_INI - Файл с параметрами репозитария
 set REPO_INI=REPO.ini
-rem set REPO_INI=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\REPO.ini
-echo REPO_INI: %REPO_INI%
+echo REPO_INI [REPO.ini]: %REPO_INI%
 rem -------------------------------------------------------------------
 rem Проверка существования файла REPO.ini
 if not exist %REPO_INI% (
-    echo File %REPO_INI% not exist
+    echo INFO: File %REPO_INI% not exist
     rem exit /b 1
 ) else (
     for /f "eol=# delims== tokens=1,2" %%i in (%REPO_INI%) do (
@@ -120,16 +128,16 @@ rem echo    %LOG_FILENAME%
 rem echo    %LOG_OPT1%
 rem echo    %LOG_OPT2%
 rem echo -------------------------------------------------------
-rem Каталог журнала: каталог
+rem LOG_DIR - Каталог журнала [каталог]
 if "%LOG_DIR%" == "" (
-    set LOG_DIR=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\04_BAT\%PROJECTS%\LOGS
+    set LOG_DIR=%PROJECTS_LYR_DIR%\LOGS
 )
 rem echo LOG_DIR: %LOG_DIR%
 if not exist %LOG_DIR% (
     echo ERROR: Dir %LOG_DIR% not exist
     exit /b 1
 )
-rem Файл журнала: имя
+rem LOG_FILENAME - Файл журнала [имя]
 if "%LOG_FILENAME%" == "" (
     if "%LOG_FILENAME_FORMAT%" == "FILENAME" (
         set LOG_FILENAME=%SCRIPT_FILENAME%
@@ -144,51 +152,56 @@ if "%LOG_FILENAME%" == "" (
 )
 rem echo LOG_FILENAME: %LOG_FILENAME%
 rem -------------------------------------------------------------------
-rem Файл журнала: каталог+имя+расширение
+rem LOG_FULLFILENAME - Файл журнала [каталог+имя+расширение]
 if "%REPO_NAME%" == "" (
     set LOG_FULLFILENAME=%LOG_DIR%\%LOG_FILENAME%.log
 ) else (
     set LOG_FULLFILENAME=%LOG_DIR%\%REPO_NAME%_%LOG_FILENAME%.log
 )
-echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
+rem echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
 rem -------------------------------------------------------------------
-rem Параметры журнала LOG_OPT1
+rem LOG_OPT1 - Параметр журнала [1]
 set LOG_OPT1=%LOG_OPT:~0,1%
 if "%LOG_OPT1%" == "" (
     set LOG_OPT1=1
 )
-rem echo LOG_OPT1: %LOG_OPT1%
+rem echo LOG_OPT1 [1]: %LOG_OPT1%
 rem -------------------------------------------------------------------
-rem Параметры журнала LOG_OPT2
+rem LOG_OPT2 - Параметры журнала [1]
 set LOG_OPT2=%LOG_OPT:~1,1%
 if "%LOG_OPT2%" == "" (
     set LOG_OPT2=1
 )
-rem echo LOG_OPT2: %LOG_OPT2%
+rem echo LOG_OPT2 [1]: %LOG_OPT2%
 rem ===================================================================
+
+echo ================================================================= > %LOG_FULLFILENAME%
+echo LOG_FULLFILENAME: %LOG_FULLFILENAME%                              >> %LOG_FULLFILENAME%
+echo ================================================================= >> %LOG_FULLFILENAME%
 
 rem ===================================================================
 rem echo -------------------------------------------------------
 rem echo 5.Каталог библиотеки KIX: каталог
 rem echo    %LIB_KIX%"
 rem echo -------------------------------------------------------
-rem Каталог библиотеки KIX: каталог
+rem LIB_KIX - Каталог библиотеки KIX [каталог]
 if "%LIB_KIX%" == "" (
-    rem echo Каталог LIB_KIX не установлен
+    rem echo INFO: Dir LIB_KIX not set
     if "%COMPUTERNAME%" == "%USERDOMAIN%" (
-        set LIB_KIX=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\01_KIX\%PROJECTS%\TOOLS_KIX\LIB
         set LIB_KIX=D:\TOOLS\TOOLS_KIX\LIB
+        set LIB_KIX=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX\LIB
     ) else (
         set LIB_KIX=\\S73FS01\APPInfo\tools\LIB
     )
 )
 rem echo LIB_KIX: %LIB_KIX%
 if exist %LIB_KIX% (
-    rem echo Каталог %LIB_KIX% существует
+    rem echo Dir %LIB_KIX% exist
 ) else (
-    echo INFO: Каталог %LIB_KIX% не существует
+    echo INFO: Dir %LIB_KIX% not exist
     rem exit /b 1
 )
+
 rem echo -------------------------------------------------------
 rem echo 6.APP_KIX
 rem echo    %APP_KIX%
