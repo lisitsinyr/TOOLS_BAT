@@ -160,12 +160,7 @@ rem echo    %LOG_OPT1%
 rem echo    %LOG_OPT2%
 rem echo -------------------------------------------------------
 
-if "%__SET_LOG__%"=="1" (
-    echo __SET_LOG__: %__SET_LOG__%
-    exit /b 0
-) else (
-    set __SET_LOG__=1
-)
+if "%__SET_LOG__%"=="1" (echo __SET_LOG__: %__SET_LOG__% && exit /b 0) else (set __SET_LOG__=1)
 
 rem LOG_DIR - Каталог журнала [каталог]
 if "%LOG_DIR%"=="" (
@@ -218,6 +213,7 @@ exit /b 0
 rem echo ---------------------------------------------------------------
 rem echo __START_LOG
 rem echo ---------------------------------------------------------------
+if "%__START_LOG__%"=="1" (echo __START_LOG__: %__START_LOG__% && exit /b 0) else (set __START_LOG__=1)
 echo ================================================================= > %LOG_FULLFILENAME%
 echo LOG_FULLFILENAME: %LOG_FULLFILENAME%                              >> %LOG_FULLFILENAME%
 echo ================================================================= >> %LOG_FULLFILENAME%
