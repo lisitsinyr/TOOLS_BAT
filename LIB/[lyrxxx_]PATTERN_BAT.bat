@@ -2,7 +2,10 @@
 rem -------------------------------------------------------------------
 rem [lyrxxx_]PATTERN_BAT.bat
 rem -------------------------------------------------------------------
-chcp 1251
+chcp 1251>NUL
+
+rem You may need to redirect both stdout and stderr:
+rem timeout 2 >NUL 2>NUL
 
 rem echo -------------------------------------------------------
 rem Файл скрипта: каталог+имя+расширение
@@ -16,12 +19,12 @@ set SCRIPT_FILENAME=%~n0
 rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
 rem Каталог BAT_DIR: каталог
 if "%BAT_DIR%" == "" (
-    set BAT_DIR=D:\TOOLS\TOOLS_BAT\BAT
-    set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT\BAT
+    set BAT_DIR=D:\TOOLS\TOOLS_BAT
+    set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
 )
 rem echo BAT_DIR: %BAT_DIR%
 
-call %BAT_DIR%\__SET__.bat
+call %BAT_DIR%\LIB\__SET__.bat
 
 :begin
 echo ------------------------------------------------------- >> %LOG_FULLFILENAME%
