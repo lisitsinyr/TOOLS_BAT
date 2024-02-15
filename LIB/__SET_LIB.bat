@@ -159,7 +159,14 @@ rem echo    %LOG_FILENAME%
 rem echo    %LOG_OPT1%
 rem echo    %LOG_OPT2%
 rem echo -------------------------------------------------------
-if "%__SET_LOG__%"=="1" (exit /b 0) else (set __SET_LOG=1)
+
+if "%__SET_LOG__%"=="1" (
+    echo __SET_LOG__: %__SET_LOG__%
+    exit /b 0
+) else (
+    set __SET_LOG__=1
+)
+
 rem LOG_DIR - Каталог журнала [каталог]
 if "%LOG_DIR%"=="" (
     set LOG_DIR=%PROJECTS_LYR_DIR%\LOGS
