@@ -1,0 +1,58 @@
+@echo off
+rem You can get the file name, but you can also get
+rem the full path, depending what you place between
+
+rem d -- drive
+rem p -- path
+rem n -- file name
+rem x -- extension
+rem f -- full path
+
+rem Use the special %0 variable to get the path to the current file.
+rem в двойных кавычках
+rem BATFilename1="D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\BAT\test.bat"
+set BATFilename1=%0
+echo BATFilename1=%BATFilename1%
+
+rem Use the special %0 variable to get the path to the current file.
+rem без кавычек
+rem f -- full path
+rem BATFilename2=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\BAT\test.bat
+set BATFilename2=%~f0
+echo BATFilename2=%BATFilename2%
+
+rem Use the special %0 variable to get the path to the current file.
+rem p -- path
+rem Pathname=\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\BAT\
+set Pathname=%~p0
+echo Pathname=%Pathname%
+
+rem Use the special %0 variable to get the path to the current file.
+rem d -- drive
+rem Drive=D:
+set Drive=%~d0
+echo Drive=%Drive%
+
+rem Use the special %0 variable to get the path to the current file.
+rem n -- file name
+rem FilenameWithoutExt=test
+set FilenameWithoutExt=%~n0
+echo FilenameWithoutExt=%FilenameWithoutExt%
+
+rem Use the special %0 variable to get the path to the current file.
+rem x -- extension
+rem FileExt=.bat
+set FileExt=%~x0
+echo FileExt=%FileExt%
+
+rem Write %~n0%~x0 to get the filename and extension.
+rem %~n0%~x0
+rem FilenameWithExt1=test.bat
+set FilenameWithExt1=%~n0%~x0
+echo FilenameWithExt1=%FilenameWithExt1%
+
+rem Also possible to write %~nx0 to get the filename and extension.
+rem %~nx0
+rem FilenameWithExt2=test.bat
+set FilenameWithExt2=%~nx0
+echo FilenameWithExt2=%FilenameWithExt2%
