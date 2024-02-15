@@ -74,25 +74,25 @@ echo CURRENT_DIR: %CURRENT_DIR%
 exit /b 0
 
 :__SET_BAT_DIR
-D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\LIB\__SET.bat %*
+D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\LIB\__SET_LIB.bat %*
 exit /b 0
 :__SET_VAR_DEFAULT
-%BAT_DIR%\LIB\__SET.bat %*
+%BAT_DIR%\LIB\__SET_LIB.bat %*
 exit /b 0
 :__SET_VAR_PROJECTS
-%BAT_DIR%\LIB\__SET.bat %*
+%BAT_DIR%\LIB\__SET_LIB.bat %*
 exit /b 0
 :__SET_CHECK_REPO
-%BAT_DIR%\LIB\__SET.bat %*
+%BAT_DIR%\LIB\__SET_LIB.bat %*
 exit /b 0
 :__SET_LOG
-%BAT_DIR%\LIB\__SET.bat %*
+%BAT_DIR%\LIB\__SET_LIB.bat %*
 exit /b 0
 :__START_LOG
-%BAT_DIR%\LIB\__SET.bat %*
+%BAT_DIR%\LIB\__SET_LIB.bat %*
 exit /b 0
 :__STOP_LOG
-%BAT_DIR%\LIB\__SET.bat %*
+%BAT_DIR%\LIB\__SET_LIB.bat %*
 exit /b 0
 
 :__Check_P1
