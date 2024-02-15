@@ -176,7 +176,7 @@ if "%LOG_FILENAME%"=="" (
         if "%LOG_FILENAME_FORMAT%"=="DATETIME" (
             set LOG_FILENAME=%DATETIME_STAMP%
         ) else (
-            echo ERROR: LOG_FILENAME not set
+            echo ERROR: LOG_FILENAME not set 
             exit /b 1
         )
     )
