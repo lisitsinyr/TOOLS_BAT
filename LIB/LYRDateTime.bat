@@ -41,7 +41,7 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo YYYYMMDDHHMMSS ...
     rem echo ---------------------------------------------------------------
-    set YYYYMMDDHHMMSS=""
+    set YYYYMMDDHHMMSS=YYYYMMDDHHMMSS
     echo %YYYYMMDDHHMMSS%
     exit /b 0
 rem endfunction
@@ -54,7 +54,7 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo DateTime ...
     rem echo ---------------------------------------------------------------
-    set DateTime=""
+    set DateTime=DateTime
     echo %DateTime%
     exit /b 0
 rem endfunction
