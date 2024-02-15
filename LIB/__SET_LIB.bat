@@ -31,13 +31,13 @@ echo __SET_VAR_SCRIPT
 echo ---------------------------------------------------------------
 rem Файл скрипта: каталог+имя+расширение
 set SCRIPT_FULLFILENAME=%~f1
-echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
 rem Файл скрипта: имя+расширение
 set SCRIPT_BASEFILENAME=%~n1%~x1
-echo SCRIPT_BASEFILENAME: %SCRIPT_BASEFILENAME%
+rem echo SCRIPT_BASEFILENAME: %SCRIPT_BASEFILENAME%
 rem Файл скрипта: имя
 set SCRIPT_FILENAME=%~n1
-echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
+rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
 exit /b 0
 
 :__SET_BAT_DIR
@@ -49,7 +49,7 @@ if "%BAT_DIR%" == "" (
     set BAT_DIR=D:\TOOLS\TOOLS_BAT
     set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
 )
-echo BAT_DIR: %BAT_DIR%
+rem echo BAT_DIR: %BAT_DIR%
 exit /b 0
 
 :__SET_VAR_DEFAULT
@@ -67,11 +67,11 @@ rem echo -------------------------------------------------------
 rem LOG_FILENAME - Файл журнала [имя]
 set LOG_FILENAME=%REPO_NAME%_xxxxxxxxxxxxxxxxxx
 set LOG_FILENAME=
-echo LOG_FILENAME: %LOG_FILENAME%
+rem echo LOG_FILENAME: %LOG_FILENAME%
 rem -------------------------------------------------------------------
 rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
 set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
-echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
+rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
 rem -------------------------------------------------------------------
 rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DT,...]
 if "%LOG_FILENAME_FORMAT%"=="" (
@@ -84,7 +84,7 @@ rem LOG_OPT - Параметры журнала [11]
 if "%LOG_OPT%"=="" (
     set LOG_OPT=11
 )
-echo LOG_OPT [11]: %LOG_OPT%
+rem echo LOG_OPT [11]: %LOG_OPT%
 exit /b 0
 
 :__SET_VAR_PROJECTS
@@ -131,7 +131,7 @@ set REPO_NAME=
 rem -------------------------------------------------------------------
 rem REPO_INI - Файл с параметрами репозитария
 set REPO_INI=REPO.ini
-echo REPO_INI [REPO.ini]: %REPO_INI%
+rem echo REPO_INI [REPO.ini]: %REPO_INI%
 rem -------------------------------------------------------------------
 rem Проверка существования файла REPO.ini
 if not exist %REPO_INI% (
@@ -145,7 +145,7 @@ if not exist %REPO_INI% (
        rem echo %%i: %%%j%
     )
 )
-echo REPO_NAME: %REPO_NAME%
+rem echo REPO_NAME: %REPO_NAME%
 exit /b 0
 
 :__SET_LOG
