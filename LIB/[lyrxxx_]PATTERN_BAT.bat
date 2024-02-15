@@ -39,7 +39,7 @@ call :__START_LOG || exit /b 1
 
 :begin
 echo ================================================================= >> %LOG_FULLFILENAME%
-echo START SCRIPT_BASEFILENAME ... %CURRENT_DIR% ... >> %LOG_FULLFILENAME%
+echo START %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 echo ================================================================== >> %LOG_FULLFILENAME%
 
 rem BODY script ..............................................
@@ -47,7 +47,7 @@ call :__Check_P1 || exit /b 1
 rem BODY script ..............................................
 
 echo ================================================================= >> %LOG_FULLFILENAME%
-echo STOP SCRIPT_BASEFILENAME ... >> %LOG_FULLFILENAME%
+echo STOP %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
 echo ================================================================== >> %LOG_FULLFILENAME%
 cd /D %DIR_SAVE%
 rem far -v %LOG_FULLFILENAME%
