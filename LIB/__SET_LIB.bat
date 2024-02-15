@@ -7,6 +7,7 @@ chcp 1251>NUL
 
 rem -------------------------------------------------------------------
 rem ФУНКЦИИ
+rem     :__SET_VAR_SCRIPT
 rem     :__SET_BAT_DIR
 rem     :__SET_VAR_DEFAULT
 rem     :__SET_VAR_PROJECTS
@@ -24,6 +25,20 @@ exit /b 0
 rem =================================================
 rem ФУНКЦИИ
 rem =================================================
+:__SET_VAR_SCRIPT
+echo ---------------------------------------------------------------
+echo __SET_VAR_SCRIPT
+echo ---------------------------------------------------------------
+rem Файл скрипта: каталог+имя+расширение
+set SCRIPT_FULLFILENAME=%~f1
+echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+rem Файл скрипта: имя+расширение
+set SCRIPT_BASEFILENAME=%~n1%~x1
+echo SCRIPT_BASEFILENAME: %SCRIPT_BASEFILENAME%
+rem Файл скрипта: имя
+set SCRIPT_FILENAME=%~n1
+echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
+exit /b 0
 
 :__SET_BAT_DIR
 echo ---------------------------------------------------------------

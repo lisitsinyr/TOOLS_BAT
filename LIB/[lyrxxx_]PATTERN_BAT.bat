@@ -21,33 +21,37 @@ rem Скрипт APP_KIX: имя+расширение
 rem     APP_KIX=lyrxxx_ШАБЛОН.kix
 rem -------------------------------------------------------------------
 
+echo ==================================================================
+echo SET ...
+echo ==================================================================
 setlocal enableextensions disabledelayedexpansion
-
-rem call %BAT_DIR%\LIB\__SET__.bat
-
-:begin
-call :__SET_VAR_SCRIPT || exit /b 1
+rem CURRENT_DIR - Текущий каталог
+set CURRENT_DIR=%CD%
+set DIR_SAVE=%CURRENT_DIR%
+set BAT_DIR=D:\TOOLS\TOOLS_BAT
 call :__SET_BAT_DIR || exit /b 1
+call :__SET_VAR_SCRIPT %0 || exit /b 1
 call :__SET_VAR_DEFAULT || exit /b 1
 call :__SET_VAR_PROJECTS || exit /b 1
 call :__SET_CHECK_REPO || exit /b 1
 call :__SET_LOG || exit /b 1
-
 call :__START_LOG || exit /b 1
-echo -------------------------------------------------------
-echo Start %SCRIPT_BASEFILENAME% ...
-echo -------------------------------------------------------
-set DIR_SAVE=%CURRENT_DIR%
 
-rem echo BODY script %SCRIPT_BASEFILENAME% ... 
+:begin
+echo ================================================================= >> %LOG_FULLFILENAME%
+echo START ... %CURRENT_DIR% ... >> %LOG_FULLFILENAME%
+echo ================================================================== >> %LOG_FULLFILENAME%
+
+rem BODY script ..............................................
 call :__Check_P1 || exit /b 1
+rem BODY script ..............................................
 
-rem far -v %LOG_FULLFILENAME%
-
+echo ================================================================= >> %LOG_FULLFILENAME%
+echo STOP ... >> %LOG_FULLFILENAME%
+echo ================================================================== >> %LOG_FULLFILENAME%
 cd /D %DIR_SAVE%
-
+rem far -v %LOG_FULLFILENAME%
 call :__STOP_LOG || exit /b 1
-
 rem Выход из сценария. Дальше - только функции.
 :Exit
 exit /b 0
@@ -55,27 +59,11 @@ exit /b 0
 rem =================================================
 rem ФУНКЦИИ
 rem =================================================
-:__SET_VAR_SCRIPT
-echo ---------------------------------------------------------------
-echo __SET_VAR_SCRIPT
-echo ---------------------------------------------------------------
-rem Файл скрипта: каталог+имя+расширение
-set SCRIPT_FULLFILENAME=%~f0
-echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
-rem Файл скрипта: имя+расширение
-set SCRIPT_BASEFILENAME=%~n0%~x0
-echo SCRIPT_BASEFILENAME: %SCRIPT_BASEFILENAME%
-rem Файл скрипта: имя
-set SCRIPT_FILENAME=%~n0
-echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
-rem CURRENT_DIR - Текущий каталог
-set CURRENT_DIR=%CD%
-echo CURRENT_DIR: %CURRENT_DIR%
-exit /b 0
-
 :__SET_BAT_DIR
-D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\LIB\__SET_LIB.bat %*
+%BAT_DIR%\LIB\__SET_LIB.bat %*
 exit /b 0
+:__SET_VAR_SCRIPT
+%BAT_DIR%\LIB\__SET_LIB.bat %*
 :__SET_VAR_DEFAULT
 %BAT_DIR%\LIB\__SET_LIB.bat %*
 exit /b 0
