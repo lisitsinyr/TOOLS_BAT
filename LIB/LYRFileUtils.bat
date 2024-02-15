@@ -85,6 +85,7 @@ rem beginfunction
     rem echo LYRFileUtils ...
     rem echo ---------------------------------------------------------------
     set LYRFileUtils=%~f1
+    set LYRFileUtils=LYRFileUtils
     echo %LYRFileUtils%
     exit /b 0
 rem endfunction
