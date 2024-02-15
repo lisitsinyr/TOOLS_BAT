@@ -97,7 +97,7 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo ExtractFileDir ...
     rem echo ---------------------------------------------------------------
-    set ExtractFileDir=%~p1
+    set ExtractFileDir=%~d1%~p1
     echo %ExtractFileDir%
     exit /b 0
 rem endfunction
