@@ -27,6 +27,7 @@ rem beginfunction
     rem echo LYRConst ...
     rem echo ---------------------------------------------------------------
     set LYRConst=%1
+    echo %LYRConst%
     exit /b 0
 rem endfunction
 

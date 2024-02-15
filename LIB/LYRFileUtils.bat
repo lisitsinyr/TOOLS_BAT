@@ -85,7 +85,7 @@ rem beginfunction
     rem echo LYRFileUtils ...
     rem echo ---------------------------------------------------------------
     set LYRFileUtils=%~f1
-    echo LYRFileUtils
+    echo %LYRFileUtils%
     exit /b 0
 rem endfunction
 
@@ -98,7 +98,7 @@ rem beginfunction
     rem echo ExtractFileDir ...
     rem echo ---------------------------------------------------------------
     set ExtractFileDir=%~p1
-    echo ExtractFileDir
+    echo %ExtractFileDir%
     exit /b 0
 rem endfunction
 
@@ -111,7 +111,7 @@ rem beginfunction
     rem echo ExtractFileName ...
     rem echo ---------------------------------------------------------------
     set ExtractFileName=%~nx1
-    echo ExtractFileName
+    echo %ExtractFileName%
     exit /b 0
 rem endfunction
 
@@ -124,12 +124,12 @@ rem beginfunction
     rem echo ExtractFileNameWithoutExt ...
     rem echo ---------------------------------------------------------------
     set ExtractFileNameWithoutExt=%~n1
-    echo ExtractFileNameWithoutExt
+    echo %ExtractFileNameWithoutExt%
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :ExtractFileNameWithoutExt [%1]
+rem :ExtractFileExt [%1]
 rem --------------------------------------------------------------------------------
 :ExtractFileExt
 rem beginfunction
@@ -137,7 +137,7 @@ rem beginfunction
     rem echo ExtractFileExt ...
     rem echo ---------------------------------------------------------------
     set ExtractFileExt=%~x1
-    echo ExtractFileExt
+    echo %ExtractFileExt%
     exit /b 0
 rem endfunction
 
