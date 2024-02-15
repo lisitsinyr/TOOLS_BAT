@@ -29,11 +29,11 @@ rem call %BAT_DIR%\LIB\__SET__.bat
 call :__SET_VAR_SCRIPT || exit /b 1
 call :__SET_BAT_DIR || exit /b 1
 call :__SET_VAR_DEFAULT || exit /b 1
-rem call :__SET_VAR_PROJECTS || exit /b 1
-rem call :__SET_CHECK_REPO || exit /b 1
-rem call :__SET_LOG || exit /b 1
+call :__SET_VAR_PROJECTS || exit /b 1
+call :__SET_CHECK_REPO || exit /b 1
+call :__SET_LOG || exit /b 1
 
-rem call :__START_LOG || exit /b 1
+call :__START_LOG || exit /b 1
 echo -------------------------------------------------------
 echo Start %SCRIPT_BASEFILENAME% ...
 echo -------------------------------------------------------
@@ -46,7 +46,7 @@ rem far -v %LOG_FULLFILENAME%
 
 cd /D %DIR_SAVE%
 
-rem call :__STOP_LOG || exit /b 1
+call :__STOP_LOG || exit /b 1
 
 rem Выход из сценария. Дальше - только функции.
 :Exit
@@ -77,23 +77,23 @@ exit /b 0
 D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\LIB\__SET.bat %*
 exit /b 0
 :__SET_VAR_DEFAULT
-D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT\LIB\__SET.bat %*
+%BAT_DIR%\LIB\__SET.bat %*
 exit /b 0
-rem :__SET_VAR_PROJECTS
-rem %BAT_DIR%\LIB\__SET.bat %*
-rem exit /b 0
-rem :__SET_CHECK_REPO
-rem %BAT_DIR%\LIB\__SET.bat %*
-rem exit /b 0
-rem :__SET_LOG
-rem %BAT_DIR%\LIB\__SET.bat %*
-rem exit /b 0
-rem :__START_LOG
-rem %BAT_DIR%\LIB\__SET.bat %*
-rem exit /b 0
-rem :__STOP_LOG
-rem %BAT_DIR%\LIB\__SET.bat %*
-rem exit /b 0
+:__SET_VAR_PROJECTS
+%BAT_DIR%\LIB\__SET.bat %*
+exit /b 0
+:__SET_CHECK_REPO
+%BAT_DIR%\LIB\__SET.bat %*
+exit /b 0
+:__SET_LOG
+%BAT_DIR%\LIB\__SET.bat %*
+exit /b 0
+:__START_LOG
+%BAT_DIR%\LIB\__SET.bat %*
+exit /b 0
+:__STOP_LOG
+%BAT_DIR%\LIB\__SET.bat %*
+exit /b 0
 
 :__Check_P1
 echo ---------------------------------------------------------------
