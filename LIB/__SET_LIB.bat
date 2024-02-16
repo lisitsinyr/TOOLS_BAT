@@ -6,15 +6,75 @@ rem chcp 1251
 chcp 1251>NUL
 
 rem -------------------------------------------------------------------
+rem :__SET_VAR_SCRIPT
+rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
+rem     SCRIPT_FULLFILENAME=
+rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
+rem     SCRIPT_BASEFILENAME=
+rem SCRIPT_FILENAME - Файл скрипта [имя]
+rem     SCRIPT_FILENAME=
+rem -------------------------------------------------------------------
+rem :__SET_SCRIPTS_DIR
+rem SCRIPTS_DIR - Каталог скриптов
+rem     SCRIPTS_DIR=
+rem -------------------------------------------------------------------
+rem :__SET_VAR_DEFAULT
+rem LOG_FILENAME - Файл журнала [имя]
+rem     LOG_FILENAME=
+rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
+rem     DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DT,...]
+rem     LOG_FILENAME_FORMAT=FILENAME
+rem LOG_OPT - Параметры журнала [11]
+rem     LOG_OPT=11
+rem -------------------------------------------------------------------
+rem :__SET_VAR_PROJECTS
+rem PROJECTS -
+rem     PROJECTS=
+rem CURRENT_SYSTEM -
+rem     CURRENT_SYSTEM=
+rem UNAME -
+rem     UNAME=
+rem USERNAME -
+rem     USERNAME=
+rem PROJECTS_LYR_DIR -
+rem     PROJECTS_LYR_DIR=
+rem PROJECTS_DIR -
+rem     PROJECTS_DIR=
+rem CURRENT_DIR - Текущий каталог
+rem     CURRENT_DIR=
+rem -------------------------------------------------------------------
+rem :__SET_CHECK_REPO
+rem REPO_NAME - Имя репозитария
+rem     REPO_NAME=
+rem REPO_INI - Файл с параметрами репозитария
+rem     REPO_INI=REPO.ini
+rem -------------------------------------------------------------------
+rem :__SET_LOG
+rem LOG_DIR - Каталог журнала
+rem     LOG_DIR=
+rem LOG_BASEFILENAME - Файл журнала [имя+расширение]
+rem     LOG_BASEFILENAME=
+rem LOG_FILENAME - Файл журнала [имя]
+rem     LOG_FILENAME=
+rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DT,...]
+rem     LOG_FILENAME_FORMAT=
+rem LOG_OPT - Параметры журнала [11]
+rem     LOG_OPT=11
+rem -------------------------------------------------------------------
+rem KIX_DIR - Каталог с файлами .KIX
+rem     KIX_DIR=
+rem APP_KIX - Скрипт APP_KIX [имя+расширение]
+rem     APP_KIX=lyrxxx_ШАБЛОН.kix
+rem -------------------------------------------------------------------
+
+rem -------------------------------------------------------------------
 rem ФУНКЦИИ
 rem     :__SET_VAR_SCRIPT
-rem     :__SET_SCRIPTS_DIR
 rem     :__SET_VAR_DEFAULT
 rem     :__SET_VAR_PROJECTS
 rem     :__SET_CHECK_REPO
 rem     :__SET_LOG
-rem     :__START_LOG
-rem     :__STOP_LOG
 rem -------------------------------------------------------------------
 
 :begin
@@ -34,32 +94,15 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo __SET_VAR_SCRIPT ...
     rem echo ---------------------------------------------------------------
-    rem Файл скрипта: каталог+имя+расширение
+    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     set SCRIPT_FULLFILENAME=%~f1
     rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
-    rem Файл скрипта: имя+расширение
+    rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
     set SCRIPT_BASEFILENAME=%~n1%~x1
     rem echo SCRIPT_BASEFILENAME: %SCRIPT_BASEFILENAME%
-    rem Файл скрипта: имя
+    rem SCRIPT_FILENAME - Файл скрипта [имя]
     set SCRIPT_FILENAME=%~n1
     rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem :__SET_SCRIPTS_DIR
-rem --------------------------------------------------------------------------------
-:__SET_SCRIPTS_DIR
-rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo __SET_SCRIPTS_DIR
-    rem echo ---------------------------------------------------------------
-    rem Каталог SCRIPTS_DIR: каталог
-    if "%SCRIPTS_DIR%" == "" (
-        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
-    )
-    rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
     exit /b 0
 rem endfunction
 
@@ -71,14 +114,6 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo __SET_VAR_DEFAULT
     rem echo ---------------------------------------------------------------
-    rem echo -------------------------------------------------------
-    rem echo 1.Переменные по умолчанию
-    rem echo    %LOG_DIR%
-    rem echo    %LOG_FILENAME%
-    rem echo    %DATETIME_STAMP%
-    rem echo    %LOG_FILENAME_FORMAT%
-    rem echo    %LOG_OPT%
-    rem echo -------------------------------------------------------
     rem LOG_FILENAME - Файл журнала [имя]
     set LOG_FILENAME=%REPO_NAME%_xxxxxxxxxxxxxxxxxx
     set LOG_FILENAME=
@@ -88,10 +123,10 @@ rem beginfunction
     set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
     rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
     rem -------------------------------------------------------------------
-    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DT,...]
+    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
     if "%LOG_FILENAME_FORMAT%"=="" (
-    set LOG_FILENAME_FORMAT=FILENAME
-    rem set LOG_FILENAME_FORMAT=DATETIME
+        set LOG_FILENAME_FORMAT=FILENAME
+        rem set LOG_FILENAME_FORMAT=DATETIME
     )
     rem echo LOG_FILENAME_FORMAT [FILENAME,DT,...]: %LOG_FILENAME_FORMAT%
     rem -------------------------------------------------------------------
@@ -111,14 +146,6 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo __SET_VAR_PROJECTS
     rem echo ---------------------------------------------------------------
-    rem echo -------------------------------------------------------
-    rem echo 2.Проект [PROJECTS]
-    rem echo    %PROJECTS%
-    rem echo    %UNAME%
-    rem echo    %USERNAME%
-    rem echo    %PROJECTS_LYR_DIR%
-    rem echo    %PROJECTS_DIR%
-    rem echo -------------------------------------------------------
     set PROJECTS=PROJECTS_BAT
     rem echo PROJECTS: %PROJECTS%
     rem -------------------------------------------------------------------
@@ -136,6 +163,10 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set PROJECTS_DIR=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\04_BAT\%PROJECTS%
     rem echo PROJECTS_DIR: %PROJECTS_DIR%
+    rem -------------------------------------------------------------------
+    rem CURRENT_DIR - Текущий каталог
+    set CURRENT_DIR=%CD%
+    rem echo CURRENT_DIR: %CURRENT_DIR%
     exit /b 0
 rem endfunction
 
@@ -147,10 +178,6 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo __SET_CHECK_REPO
     rem echo ---------------------------------------------------------------
-    rem echo -------------------------------------------------------
-    rem echo 3.Наличие репозитария
-    rem echo    %REPO_NAME%
-    rem echo -------------------------------------------------------
     rem REPO_NAME - Имя репозитария
     set REPO_NAME=
     rem -------------------------------------------------------------------
@@ -159,16 +186,16 @@ rem beginfunction
     rem echo REPO_INI [REPO.ini]: %REPO_INI%
     rem -------------------------------------------------------------------
     rem Проверка существования файла REPO.ini
-    if not exist %REPO_INI% (
-        echo INFO: File %REPO_INI% not exist
-        rem exit /b 1
-    ) else (
+    if exist %REPO_INI% (
         for /f "eol=# delims== tokens=1,2" %%i in (%REPO_INI%) do (
             rem В переменной i - ключ
             rem В переменной j - значение
             set %%i=%%j
             rem echo %%i: %%%j%
         )
+    ) else (
+        echo INFO: File %REPO_INI% not exist
+        rem exit /b 1
     )
     rem echo REPO_NAME: %REPO_NAME%
     exit /b 0
@@ -182,13 +209,6 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo __SET_LOG
     rem echo ---------------------------------------------------------------
-    rem echo -------------------------------------------------------
-    rem echo 4.Настройка Каталога журналов и имени журнала 
-    rem echo    %LOG_DIR%
-    rem echo    %LOG_FILENAME%
-    rem echo    %LOG_OPT1%
-    rem echo    %LOG_OPT2%
-    rem echo -------------------------------------------------------
 
     if "%__SET_LOG__%"=="1" (echo __SET_LOG__: %__SET_LOG__% && exit /b 0) else (set __SET_LOG__=1)
 
