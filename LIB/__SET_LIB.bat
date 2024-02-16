@@ -8,7 +8,7 @@ chcp 1251>NUL
 rem -------------------------------------------------------------------
 rem ФУНКЦИИ
 rem     :__SET_VAR_SCRIPT
-rem     :__SET_BAT_DIR
+rem     :__SET_SCRIPTS_DIR
 rem     :__SET_VAR_DEFAULT
 rem     :__SET_VAR_PROJECTS
 rem     :__SET_CHECK_REPO
@@ -47,19 +47,19 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :__SET_BAT_DIR
+rem :__SET_SCRIPTS_DIR
 rem --------------------------------------------------------------------------------
-:__SET_BAT_DIR
+:__SET_SCRIPTS_DIR
 rem beginfunction
     rem echo ---------------------------------------------------------------
-    rem echo __SET_BAT_DIR
+    rem echo __SET_SCRIPTS_DIR
     rem echo ---------------------------------------------------------------
-    rem Каталог BAT_DIR: каталог
-    if "%BAT_DIR%" == "" (
-        set BAT_DIR=D:\TOOLS\TOOLS_BAT
-        set BAT_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
+    rem Каталог SCRIPTS_DIR: каталог
+    if "%SCRIPTS_DIR%" == "" (
+        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
     )
-    rem echo BAT_DIR: %BAT_DIR%
+    rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
     exit /b 0
 rem endfunction
 
