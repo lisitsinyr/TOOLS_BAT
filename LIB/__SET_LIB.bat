@@ -62,10 +62,21 @@ rem     LOG_FILENAME_FORMAT=
 rem LOG_OPT - Параметры журнала [11]
 rem     LOG_OPT=11
 rem -------------------------------------------------------------------
+
+
+rem -------------------------------------------------------------------
 rem KIX_DIR - Каталог с файлами .KIX
 rem     KIX_DIR=
+rem APP_KIX_DIR - каталог APP_KIX
+rem     APP_KIX_DIR=
 rem APP_KIX - Скрипт APP_KIX [имя+расширение]
 rem     APP_KIX=lyrxxx_ШАБЛОН.kix
+rem -------------------------------------------------------------------
+rem LIB_KIX - Каталог библиотеки KIX
+rem     LIB_KIX=
+
+
+
 rem -------------------------------------------------------------------
 
 rem -------------------------------------------------------------------
@@ -75,6 +86,7 @@ rem     :__SET_VAR_DEFAULT
 rem     :__SET_VAR_PROJECTS
 rem     :__SET_CHECK_REPO
 rem     :__SET_LOG
+rem     :__SET_KIX
 rem -------------------------------------------------------------------
 
 :begin
@@ -257,6 +269,80 @@ rem beginfunction
         set LOG_OPT2=1
     )
     rem echo LOG_OPT2 [1]: %LOG_OPT2%
+    exit /b 0
+rem endfunction
+
+
+rem --------------------------------------------------------------------------------
+rem :__SET_KIX
+rem --------------------------------------------------------------------------------
+:__SET_KIX
+rem beginfunction
+    rem echo ---------------------------------------------------------------
+    rem echo __SET_KIX
+    rem echo ---------------------------------------------------------------
+    rem -------------------------------------------------------------------
+    rem KIX_DIR - Каталог с файлами .KIX
+    set KIX_DIR=
+    rem APP_KIX_DIR - каталог APP_KIX
+    set APP_KIX_DIR=
+    rem -------------------------------------------------------------------
+    rem APP_KIX - Скрипт APP_KIX имя+расширение
+    set APP_KIX=[lyrxxx_]PATTERN_KIX.kix
+    rem -------------------------------------------------------------------
+
+    rem echo -------------------------------------------------------
+    rem echo Каталог библиотеки KIX: каталог
+    rem echo    %LIB_KIX%"
+    rem echo -------------------------------------------------------
+    rem LIB_KIX - Каталог библиотеки KIX [каталог]
+    if "%LIB_KIX%"=="" (
+        rem echo INFO: Dir LIB_KIX not set
+
+        if "%COMPUTERNAME%"=="%USERDOMAIN%" (
+            set LIB_KIX=%SCRIPTS_DIR_KIX%\LIB
+        ) else (
+            set LIB_KIX=\\S73FS01\APPInfo\tools\LIB
+        )
+    )
+    rem echo LIB_KIX: %LIB_KIX%
+    if exist %LIB_KIX% (
+        rem echo Dir %LIB_KIX% exist
+    ) else (
+        echo INFO: Dir %LIB_KIX% not exist
+        rem exit /b 1
+    )
+
+    rem echo -------------------------------------------------------
+    rem echo APP_KIX
+    rem echo    %APP_KIX%
+    rem echo    %APP_KIX_DIR%
+    rem echo -------------------------------------------------------
+    if "%APP_KIX%"=="" (
+        echo File APP_KIX not set
+    ) else (
+        if exist %APP_KIX% (
+            rem echo Файл %APP_KIX% существует
+            set APP_KIX_DIR=.
+        ) else (
+            rem echo Файл %APP_KIX% не существует
+            if exist KIX\%APP_KIX% (
+                rem echo Файл KIX\%APP_KIX% существует
+                set APP_KIX_DIR=KIX
+            ) else (
+                rem echo Файл KIX\%APP_KIX% не существует
+                if exist %BAT_DIR%\KIX\%APP_KIX% (
+                    rem echo Файл %BAT_DIR%\KIX\%APP_KIX% существует
+                    set APP_KIX_DIR=%BAT_DIR%\KIX
+                ) else (
+                    echo INFO: File %BAT_DIR%\KIX\%APP_KIX% not exist
+                    rem exit /b 1
+                )
+            )
+        )
+    )
+    echo APP_KIX_DIR: %APP_KIX_DIR%
+
     exit /b 0
 rem endfunction
 
