@@ -111,6 +111,12 @@ rem beginfunction
     rem SCRIPT_FILENAME - Файл скрипта [имя]
     set SCRIPT_FILENAME=%~n1
     rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
+    rem Файл скрипта: каталог
+    set SCRIPT_FILEDIR=
+    rem echo SCRIPT_FILEDIR: %SCRIPT_FILEDIR%
+    rem Файл скрипта: расширение
+    set SCRIPT_FILEEXT=
+    rem echo SCRIPT_FILEEXT: %SCRIPT_FILEEXT%
     exit /b 0
 rem endfunction
 
@@ -143,6 +149,7 @@ rem beginfunction
         set LOG_OPT=11
     )
     rem echo LOG_OPT [11]: %LOG_OPT%
+    echo LOG_OPT [11]: $LOG_OPT
     exit /b 0
 rem endfunction
 
@@ -154,23 +161,26 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     rem echo __SET_VAR_PROJECTS
     rem echo ---------------------------------------------------------------
-    set PROJECTS=PROJECTS_BAT
+    rem set PROJECTS=
     rem echo PROJECTS: %PROJECTS%
     rem -------------------------------------------------------------------
+    rem set PROJECTS_LYR_DIR=
+    rem echo PROJECTS_LYR_DIR: %PROJECTS_LYR_DIR%
+    rem -------------------------------------------------------------------
+    rem set PROJECTS_DIR=
+    rem echo PROJECTS_DIR: %PROJECTS_DIR%
+    rem -------------------------------------------------------------------
+    rem CURRENT_SYSTEM -
     set CURRENT_SYSTEM=%OS%
     rem echo CURRENT_SYSTEM: %CURRENT_SYSTEM%
     rem -------------------------------------------------------------------
+    rem UNAME - COMPUTERNAME
     set UNAME=%COMPUTERNAME%
     rem echo UNAME: %UNAME%
     rem -------------------------------------------------------------------
+    rem USERNAME - USERNAME
     set USERNAME=%USERNAME%
     rem echo USERNAME: %USERNAME%
-    rem -------------------------------------------------------------------
-    set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
-    rem echo PROJECTS_LYR_DIR: %PROJECTS_LYR_DIR%
-    rem -------------------------------------------------------------------
-    set PROJECTS_DIR=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\04_BAT\%PROJECTS%
-    rem echo PROJECTS_DIR: %PROJECTS_DIR%
     rem -------------------------------------------------------------------
     rem CURRENT_DIR - Текущий каталог
     set CURRENT_DIR=%CD%
