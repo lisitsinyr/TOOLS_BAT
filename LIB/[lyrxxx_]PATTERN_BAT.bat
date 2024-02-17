@@ -6,8 +6,10 @@ chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 rem setlocal enableextensions disabledelayedexpansion
-echo ERRORLEVEL: %ERRORLEVEL%
+rem echo ERRORLEVEL: %ERRORLEVEL%
 
+rem PROJECTS - проект
+set PROJECTS=PROJECTS_BAT
 rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
 set SCRIPT_FULLFILENAME=%0
 rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
