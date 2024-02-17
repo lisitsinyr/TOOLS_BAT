@@ -31,6 +31,23 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+:Check_P1
+echo ---------------------------------------------------------------
+echo Check_P1 [P1_Value]
+echo ---------------------------------------------------------------
+if "%1"=="" (
+    set P1=""
+    set /p P1=P1:
+) else (
+    set P1=%1
+    exit /b 0
+)
+if "%P1%"=="" (
+    set P1=""
+)
+echo P1: %P1%
+exit /b 0
+
 :Check_P
 echo ---------------------------------------------------------------
 echo Check_P [P_Name,P_Value]
@@ -39,33 +56,23 @@ set P_Name=%1
 echo P_Name: %P_Name%
 set P_Value=%2
 echo P_Value: %P_Value%
-rem set %P%=TEST3
-if %P_Value%=="" (
-    rem set /p %P_Name%="%P_Name%":
-    set %P_Name%=TEST1
+
+rem echo !%P_Name%!
+
+if "%P_Value%"=="" (
+    set /p Input=%P_Name%[!%P_Name%!]:
 ) else (
     set %P_Name%=%P_Value%
+    exit /b 0
 )
-if %P_Value%=="" (
-    set %P_Name%=TEST2
-)
-echo P_Name: %P_Name%
-exit /b 0
-
-:__Check_P1
-echo ---------------------------------------------------------------
-echo __Check_P1 [P1]
-echo ---------------------------------------------------------------
-if "%1"=="" (
-    rem set /p P1=P1:
-    set P1=""
+rem echo Input: %Input%
+if "%Input%"=="" (
+    set %P_Name%=!%P_Name%!
+    rem set %P_Name%=33333333333333
 ) else (
-    set P1=%1
+    set %P_Name%=%Input%
 )
-if "%P1%"=="" (
-    set P1=""
-)
-echo P1: %P1%
 exit /b 0
 
 rem ===================================================================
+

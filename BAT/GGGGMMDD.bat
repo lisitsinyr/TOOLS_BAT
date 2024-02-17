@@ -8,7 +8,7 @@ chcp 1251>NUL
 
 call :Check_P1 || exit /b 1
 
-mkdir %date:~6,4%%R%%date:~3,2%%R%%date:~0,2%
+mkdir %date:~6,4%%P1%%date:~3,2%%P1%%date:~0,2%
 
 rem Выход из сценария. Дальше - только функции.
 :Exit
@@ -19,16 +19,17 @@ rem ФУНКЦИИ
 rem =================================================
 :Check_P1
 echo ---------------------------------------------------------------
-echo Check_P1 [R]
+echo Check_P1 [P1_Value]
 echo ---------------------------------------------------------------
 if "%1"=="" (
-    rem set /p R=Разделитель:
-    set R=""
+    set P1=""
+    rem set /p P1=P1:
 ) else (
-    set R=%1
+    set P1=%1
+    exit /b 0
 )
 if "%P1%"=="" (
-    set R=""
+    set P1=""
 )
-echo R: %R%
+echo P1: %P1%
 exit /b 0
