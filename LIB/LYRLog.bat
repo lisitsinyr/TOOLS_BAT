@@ -32,7 +32,7 @@ rem beginfunction
     rem echo LYRLog ...
     rem echo ---------------------------------------------------------------
     set LYRLog=LYRLog
-    echo %LYRLog%
+    rem echo %LYRLog%
     exit /b 0
 rem endfunction
 
@@ -53,29 +53,26 @@ rem beginfunction
     rem echo Llevel: %Llevel%
     set Lmessage=%3
     rem echo Lmessage: %Lmessage%
-
-    rem printf -v asctime '%(%Y/%m/%d %H:%M:%S)T' -1
-
-    set asctime=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+    set asctime=%date:~6,4%/%date:~3,2%/%date:~0,2% %TIME:~0,2%:%TIME:~3,2%:%TIME:~6,2%
     set Linfo=
     set S=
+
     if "%Llevel%"=="%INFO%" (
         set Linfo=INFO
     ) else (
     if "%Llevel%"=="%TEXT%" (
         set Linfo=TEXT
     ))
+
     set S_INFO=%asctime% %Lnamesh% %Linfo% %Lmessage%
     set S_TEXT=%Lmessage%
 
     if "%Llevel%"=="%INFO%" (
-        set S=%S_INFO%
+        set LOG_STR=%S_INFO%
     ) else (
     if "%Llevel%"=="%TEXT%" (
-        set S=%S_TEXT%
+        set LOG_STR=%S_TEXT%
     ))
-
-    echo S: %S%
 
     rem case "$Llevel" in
     rem $NOTSET)
@@ -148,21 +145,19 @@ rem beginfunction
     set LValue=%3
     rem echo %LValue%
 
-    rem FormatStr "$LOG_SHFILENAME" "$Llevel" "$LValue"
     call :FormatStr %SCRIPT_BASEFILENAME% %Llevel% %LValue% || exit /b 1
+    rem echo LOG_STR: %LOG_STR%
 
-    rem if [ $Lout -eq 0 ] ; then
-    rem     echo "$LOG_STR"
-    rem elif [ $Lout -eq 1 ] ; then
-    rem     # echo "$LOG_STR" >&3
-    rem     echo "$LOG_STR" >> "$LOG_FILE"
-    rem elif [ $Lout -eq 2 ] ; then
-    rem     # echo "$LOG_STR"
-    rem     # echo "$LOG_STR" >&3
-    rem     echo "$LOG_STR" | tee -a "$LOG_FILE"
-    rem else
-    rem     echo 'ERROR' $Lout
-    rem fi
+    if %Lout% EQU 0 (
+        echo %LOG_STR%
+    )
+    if %Lout% EQU 1 (
+        echo %LOG_STR% >> "%LOG_FULLFILENAME%"
+    )
+    if %Lout% EQU 2 (
+        echo %LOG_STR%
+        echo %LOG_STR% >> "%LOG_FULLFILENAME%"
+    )
 
     exit /b 0
 rem endfunction
@@ -213,26 +208,24 @@ rem beginfunction
     rem ------------------------------------------------------
     rem Открытие файла журнала
     rem ------------------------------------------------------
-    rem if [[ "$LOG_FILE_ADD" -eq 1 ]] ; then
-    rem     LFileName="$LOG_FILE"
-    rem     if [ -r "$LFileName" ] ; then
-    rem         # echo "$LFileName"
-    rem         rm "$LFileName"
-    rem     fi
-    rem     touch "$LFileName"
-    rem fi
-    rem exec 3>>"$LFileName"
+    set LFileName=%LOG_FULLFILENAME%
+    echo LOG_FILE_ADD: %LOG_FILE_ADD%
+    if "%LOG_FILE_ADD%"=="1" (
+        if exist "%LFileName%" (
+            del "%LFileName%"
+        )
+    ) else (
+        if not exist %LFileName% (
+            touch "%LFileName%"
+        )
+    )
 
     if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
-
-    rem echo ================================================================= > %LOG_FULLFILENAME%
-    rem echo LOG_FULLFILENAME: %LOG_FULLFILENAME%                              >> %LOG_FULLFILENAME%
-    rem echo ================================================================= >> %LOG_FULLFILENAME%
 
     rem -------------------------------------------------------------------
     rem AddLog $loAll $INFO "Старт: $(date +"$FORMAT")"
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
-    call :AddLog %loAll% %INFO% "Start: ..." || exit /b 1
+    call :AddLog %loAll% %TEXT% "Start: LOG_FULLFILENAME: %LOG_FULLFILENAME%" || exit /b 1
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
     rem -------------------------------------------------------------------
 
