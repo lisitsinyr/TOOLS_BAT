@@ -208,7 +208,7 @@ rem beginfunction
 
     rem -------------------------------------------------------------------
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
-    call :AddLog %loAll% $INFO "Stop ..."
+    call :AddLog %loAll% %INFO% "Stop ..."
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
     rem -------------------------------------------------------------------
 
