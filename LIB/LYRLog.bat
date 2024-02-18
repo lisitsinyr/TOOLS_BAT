@@ -174,7 +174,6 @@ rem beginfunction
     rem Открытие файла журнала
     rem ------------------------------------------------------
     set LFileName=%LOG_FULLFILENAME%
-    echo LOG_FILE_ADD: %LOG_FILE_ADD%
     if "%LOG_FILE_ADD%"=="1" (
         if exist "%LFileName%" (
             del "%LFileName%"
