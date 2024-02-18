@@ -114,6 +114,12 @@ exit /b 0
 :__SET_LOG
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
+:FormatStr
+%LIB_BAT%\LYRLog.bat %*
+:AddLog
+%LIB_BAT%\LYRLog.bat %*
+:AddLogFile
+%LIB_BAT%\LYRLog.bat %*
 :StartLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
