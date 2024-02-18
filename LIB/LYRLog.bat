@@ -85,7 +85,8 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     set StartLogFile=StartLogFile
     rem echo %StartLogFile%
-    if "%__START_LOG__%"=="1" (echo __START_LOG__: %__START_LOG__% && exit /b 0) else (set __START_LOG__=1)
+    rem if "%__START_LOG__%"=="1" (echo __START_LOG__: %__START_LOG__% && exit /b 0) else (set __START_LOG__=1)
+    if "%__START_LOG__%"=="" (set __START_LOG__=1)
     echo ================================================================= > %LOG_FULLFILENAME%
     echo LOG_FULLFILENAME: %LOG_FULLFILENAME%                              >> %LOG_FULLFILENAME%
     echo ================================================================= >> %LOG_FULLFILENAME%
