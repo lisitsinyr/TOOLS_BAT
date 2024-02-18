@@ -139,6 +139,11 @@ rem =================================================
 rem beginfunction
     set P1=P1_default_11111111111111
     call :Check_P P1 %1 || exit /b 1
-    echo P1: %P1%
+
+    rem echo P1: %P1%
+    call :AddLog %loStandard% %TEXT% "P1: %P1%" || exit /b 1
+    call :AddLog %loTextFile% %TEXT% "P1: %P1%" || exit /b 1
+    call :AddLog %loAll% %TEXT% "P1: %P1%" || exit /b 1
+
     exit /b 0
 rem endfunction
