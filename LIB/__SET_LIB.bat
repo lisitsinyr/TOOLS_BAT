@@ -55,9 +55,9 @@ rem LOG_DT_FORMAT -
 rem     LOG_DT_FORMAT=
 rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
 rem     LOG_FILENAME_FORMAT=
-rem LOG_OPT - Параметры журнала [11]
-rem     LOG_OPT=11
+rem LOG_FILE_ADD - Параметры журнала [1]
 rem     LOG_FILE_ADD=  
+rem LOG_FILE_DT - Параметры журнала [0]
 rem     LOG_FILE_DT=
 rem LOG_DIR - Каталог журнала
 rem     LOG_DIR=
@@ -248,24 +248,13 @@ rem beginfunction
     )
     rem echo LOG_FILENAME_FORMAT [FILENAME,DATETIME,...]: %LOG_FILENAME_FORMAT%
     rem -------------------------------------------------------------------
-    rem LOG_OPT - Параметры журнала [11]
-    set LOG_OPT_DEFAULT=10
-    if "%LOG_OPT%"=="" (
-        set LOG_OPT=%LOG_OPT_DEFAULT%
-    )
-    rem echo LOG_OPT [11]: %LOG_OPT%
-    rem -------------------------------------------------------------------
     rem LOG_FILE_ADD -
-    set LOG_FILE_ADD=0
-    set LOG_FILE_ADD=%LOG_OPT:~0,1%
     if "%LOG_FILE_ADD%"=="" (
         set LOG_FILE_ADD=1
     )
     rem echo LOG_FILE_ADD: %LOG_FILE_ADD%
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT -
-    set LOG_FILE_DT=0
-    set LOG_FILE_DT=%LOG_OPT:~1,1%
     if "%LOG_FILE_DT%"=="" (
         set LOG_FILE_DT=0
     )
