@@ -74,29 +74,23 @@ set LOG_DIR=
 rem -------------------------------------------------------------------
 rem LOG_FILENAME - Файл журнала [имя]
 set LOG_FILENAME=
-
 call :__SET_LOG || exit /b 1
+
+set DIR_SAVE=%CURRENT_DIR%
 
 call :StartLogFile || exit /b 1
 
-echo ================================================================= >> %LOG_FULLFILENAME%
-echo START %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
-echo ================================================================== >> %LOG_FULLFILENAME%
-set DIR_SAVE=%CURRENT_DIR%
-
 call :MAIN || exit /b 1
-
-echo ================================================================= >> %LOG_FULLFILENAME%
-echo STOP %SCRIPT_BASEFILENAME% ... >> %LOG_FULLFILENAME%
-echo ================================================================== >> %LOG_FULLFILENAME%
-
-cd /D %DIR_SAVE%
-rem far -v %LOG_FULLFILENAME%
 
 call :StopLogFile || exit /b 1
 
+rem far -v %LOG_FULLFILENAME%
+
 rem Выход из сценария. Дальше - только функции.
+cd /D %DIR_SAVE%
+
 :Exit
+
 exit /b 0
 
 rem =================================================
@@ -137,13 +131,18 @@ rem ФУНКЦИЯ :MAIN
 rem =================================================
 :MAIN
 rem beginfunction
-    set P1=P1_default_11111111111111
+    set P1=P1_default
     call :Check_P P1 %1 || exit /b 1
 
     rem echo P1: %P1%
     call :AddLog %loStandard% %TEXT% "P1: %P1%" || exit /b 1
     call :AddLog %loTextFile% %TEXT% "P1: %P1%" || exit /b 1
     call :AddLog %loAll% %TEXT% "P1: %P1%" || exit /b 1
+
+    set F=LYRLog.txt
+    call :AddLogFile %loAll% %F%
+    rem -------------------------------------------------------------------
+    call :AddLog %loAll% %INFO% TEST || exit /b 1
 
     exit /b 0
 rem endfunction

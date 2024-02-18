@@ -46,89 +46,52 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     set FormatStr=FormatStr
     rem echo %FormatStr%
-
     set Lnamesh=%1
     rem echo Lnamesh: %Lnamesh%
     set Llevel=%2
     rem echo Llevel: %Llevel%
     set Lmessage=%3
     rem echo Lmessage: %Lmessage%
+
     set asctime=%date:~6,4%/%date:~3,2%/%date:~0,2% %TIME:~0,2%:%TIME:~3,2%:%TIME:~6,2%
-    set Linfo=
-    set S=
 
+    set LOG_STR=set LOG_STR=%asctime% %Lnamesh% %Llevel% NOTSET %Lmessage%
     if "%Llevel%"=="%INFO%" (
-        set Linfo=INFO
-    ) else (
+        set LOG_STR=%asctime% %Lnamesh% INFO %Lmessage%
+    )
+    if "%Llevel%"=="%WARNING%" (
+        set LOG_STR=%asctime% %Lnamesh% WARNING %Lmessage%
+    )
+    if "%Llevel%"=="%ERROR%" (
+        set LOG_STR=%asctime% %Lnamesh% ERROR %Lmessage%
+    )
+    if "%Llevel%"=="%CRITICAL%" (
+        set LOG_STR=%asctime% %Lnamesh% CRITICAL %Lmessage%
+    )
+    if "%Llevel%"=="%DEBUG%" (
+        set LOG_STR=%asctime% %Lnamesh% DEBUG_ %Lmessage%
+    )
     if "%Llevel%"=="%TEXT%" (
-        set Linfo=TEXT
-    ))
-
-    set S_INFO=%asctime% %Lnamesh% %Linfo% %Lmessage%
-    set S_TEXT=%Lmessage%
-
-    if "%Llevel%"=="%INFO%" (
-        set LOG_STR=%S_INFO%
-    ) else (
-    if "%Llevel%"=="%TEXT%" (
-        set LOG_STR=%S_TEXT%
-    ))
-
-    rem case "$Llevel" in
-    rem $NOTSET)
-    rem     Linfo='NOTSET'
-    rem     printf -v LOG_STR "%-s [%-15s] %2d %-10s %-s" "$asctime" "$Lnamesh" "$Llevel" "$Linfo" "$Lmessage"
-    rem     ;;
-    rem $DEBUG)
-    rem     Linfo='DEBUG'
-    rem     printf -v LOG_STR "%-s [%-15s] %2d %-10s %-s" "$asctime" "$Lnamesh" "$Llevel" "$Linfo" "$Lmessage"
-    rem     ;;
-    rem $INFO)
-    rem     Linfo='INFO'
-    rem     printf -v LOG_STR "%-s [%-15s] %2d %-10s %-s" "$asctime" "$Lnamesh" "$Llevel" "$Linfo" "$Lmessage"
-    rem     ;;
-    rem $WARNING)
-    rem     Linfo='WARNING'
-    rem     printf -v LOG_STR "%-s [%-15s] %2d %-10s %-s" "$asctime" "$Lnamesh" "$Llevel" "$Linfo" "$Lmessage"
-    rem     ;;
-    rem $ERROR)
-    rem     Linfo='ERROR'
-    rem     printf -v LOG_STR "%-s [%-15s] %2d %-10s %-s" "$asctime" "$Lnamesh" "$Llevel" "$Linfo" "$Lmessage"
-    rem     ;;
-    rem $CRITICAL)
-    rem     Linfo='CRITICAL'
-    rem     printf -v LOG_STR "%-s [%-15s] %2d %-10s %-s" "$asctime" "$Lnamesh" "$Llevel" "$Linfo" "$Lmessage"
-    rem     ;;
-    rem $DEBUGTEXT)
-    rem     Linfo='DEBUGTEXT'
-    rem     printf -v LOG_STR "%-s" "$Lmessage"
-    rem     ;;
-    rem $BEGIN)
-    rem     Linfo='BEGIN'
-    rem     printf -v LOG_STR "%-s" "$Lmessage"
-    rem     ;;
-    rem $END)
-    rem     Linfo='END'
-    rem     printf -v LOG_STR "%-s" "$Lmessage"
-    rem     ;;
-    rem $PROCESS)
-    rem     Linfo='PROCESS'
-    rem     printf -v LOG_STR "%-s" "$Lmessage"
-    rem     ;;
-    rem $TEXT)
-    rem     Linfo='TEXT'
-    rem     printf -v LOG_STR "%-s" "$Lmessage"
-    rem     ;;
-    rem *)
-    rem     Linfo=''
-    rem     ;;
-    rem esac
+        set LOG_STR=%Lmessage%
+    )
+    if "%Llevel%"=="%DEBUGTEXT%" (
+        set LOG_STR=%Lmessage%
+    )
+    if "%Llevel%"=="%BEGIN%" (
+        set LOG_STR=%Lmessage%
+    )
+    if "%Llevel%"=="%END%" (
+        set LOG_STR=%Lmessage%
+    )
+    if "%Llevel%"=="%PROCESS%" (
+        set LOG_STR=%Lmessage%
+    )
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :AddLog [%1] Aout: int, Alevel: int, Value: str
+rem :AddLog Aout: Alevel: Value:
 rem --------------------------------------------------------------------------------
 :AddLog
 rem beginfunction
@@ -136,14 +99,13 @@ rem beginfunction
     rem echo AddLog ...
     rem echo ---------------------------------------------------------------
     set AddLog=AddLog
-    rem echo %AddLog%
-
+    rem echo AddLog: %AddLog%
     set Lout=%1
-    rem echo %Lout%
+    rem echo Lout: %Lout%
     set Llevel=%2
-    rem echo %Llevel%
+    rem echo Llevel: %Llevel%
     set LValue=%3
-    rem echo %LValue%
+    rem echo LValue: %LValue%
 
     call :FormatStr %SCRIPT_BASEFILENAME% %Llevel% %LValue% || exit /b 1
     rem echo LOG_STR: %LOG_STR%
@@ -163,7 +125,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :AddLogFile [%1] Aout: int, AFileName: str
+rem :AddLogFile Aout: AFileName:
 rem --------------------------------------------------------------------------------
 :AddLogFile
 rem beginfunction
@@ -172,24 +134,27 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     set AddLogFile=AddLogFile
     rem echo %AddLogFile%
+    set Lout=%1
+    rem echo Lout: %Lout%
+    set LFileName=%2
+    rem echo LFileName: %LFileName%
 
-    rem Lout=$1
-    rem LFileName="$2"
-    rem if [ -r "$LFileName" ] ; then
-    rem     # чтения файла построчно
-    rem     # while IFS= read -r LValue; do
-    rem     #     AddLog $Lout $TEXT "$LValue"
-    rem     # done < "$LFileName"
-
-    rem     # Использование дескриптора файла
-    rem     # Вы также можете предоставить ввод в цикл, используя дескриптор файла:
-    rem     while IFS= read -r -u9 LValue; do
-    rem         AddLog $Lout $TEXT "$LValue"
-    rem     done 9< "$LFileName"
-    rem     exec 9>&-
-    rem else
-    rem     echo 'ERROR' "$LFileName"
-    rem fi
+    if exist %LFileName% (
+        for /f %%s in (%LFileName%) do (
+            if %Lout% EQU 0 (
+                echo %%s
+            )
+            if %Lout% EQU 1 (
+                echo %%s >> "%LOG_FULLFILENAME%"
+            )
+            if %Lout% EQU 2 (
+                echo %%s
+                echo %%s >> "%LOG_FULLFILENAME%"
+            )
+        )
+    ) else (
+        call :AddLog %loAll% %ERROR% "FileName: %LFileName%" || exit /b 1
+    )
 
     exit /b 0
 rem endfunction
@@ -223,9 +188,8 @@ rem beginfunction
     if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
 
     rem -------------------------------------------------------------------
-    rem AddLog $loAll $INFO "Старт: $(date +"$FORMAT")"
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
-    call :AddLog %loAll% %TEXT% "Start: LOG_FULLFILENAME: %LOG_FULLFILENAME%" || exit /b 1
+    call :AddLog %loAll% %INFO% "Start: LOG_FULLFILENAME: %LOG_FULLFILENAME%" || exit /b 1
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
     rem -------------------------------------------------------------------
 
@@ -244,7 +208,9 @@ rem beginfunction
     rem echo %StopLogFile%
 
     rem -------------------------------------------------------------------
-    rem AddLog $loAll $INFO "Стоп: $(date +"$FORMAT")"
+    call :AddLog %loAll% %TEXT% %S01% || exit /b 1
+    call :AddLog %loAll% $INFO "Stop ..."
+    call :AddLog %loAll% %TEXT% %S01% || exit /b 1
     rem -------------------------------------------------------------------
 
     exit /b 0
