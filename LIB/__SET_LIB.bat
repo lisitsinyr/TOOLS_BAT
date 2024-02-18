@@ -230,7 +230,8 @@ rem beginfunction
     rem echo __SET_LOG
     rem echo ---------------------------------------------------------------
 
-    if "%__SET_LOG__%"=="1" (echo __SET_LOG__: %__SET_LOG__% && exit /b 0) else (set __SET_LOG__=1)
+    rem if "%__SET_LOG__%"=="1" (echo __SET_LOG__: %__SET_LOG__% && exit /b 0) else (set __SET_LOG__=1)
+    if "%__SET_LOG__%"=="1" (exit /b 0) else (set __SET_LOG__=1)
     rem if "%__SET_LOG__%"=="" (set __SET_LOG__=1)
 
     rem ------------------------------------------------------
