@@ -49,18 +49,19 @@ echo P1: %P1%
 exit /b 0
 
 :Check_P
-echo ---------------------------------------------------------------
-echo Check_P [P_Name,P_Value]
-echo ---------------------------------------------------------------
+rem echo ---------------------------------------------------------------
+rem echo Check_P [P_Name,P_Value]
+rem echo ---------------------------------------------------------------
 set P_Name=%1
-echo P_Name: %P_Name%
+rem echo P_Name: %P_Name%
 set P_Value=%2
-echo P_Value: %P_Value%
+rem echo P_Value: %P_Value%
 
 rem echo !%P_Name%!
 
 if "%P_Value%"=="" (
-    set /p Input=%P_Name%[!%P_Name%!]:
+    set Input=
+    rem set /p Input=%P_Name%[!%P_Name%!]:
 ) else (
     set %P_Name%=%P_Value%
     exit /b 0
