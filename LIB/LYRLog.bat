@@ -37,7 +37,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :FormatStr [%1] Anamesh: str, Alevel: int, Amessage: str
+rem :FormatStr Alevel: Amessage:
 rem --------------------------------------------------------------------------------
 :FormatStr
 rem beginfunction
@@ -46,30 +46,39 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     set FormatStr=FormatStr
     rem echo %FormatStr%
-    set Lnamesh=%1
-    rem echo Lnamesh: %Lnamesh%
-    set Llevel=%2
+    set Llevel=%1
     rem echo Llevel: %Llevel%
-    set Lmessage=%3
-    rem echo Lmessage: %Lmessage%
+    set Lmessage=%2 %3 %4 %5 %6 %7 %8 %9
+    rem echo.Lmessage: %Lmessage%
 
-    set asctime=%date:~6,4%/%date:~3,2%/%date:~0,2% %TIME:~0,2%:%TIME:~3,2%:%TIME:~6,2%
+    set YYYY=%date:~6,4%
+    set MM=%date:~3,2%
+    set DD=%date:~0,2%
+    set HH=%TIME:~0,2%
+    set MM=%TIME:~3,2%
+    set SS=%TIME:~6,2%
+    rem --------------------------------
+    set FORMAT=%YYYY%-%MM%-%DD% %HH%:%MM%:%SS%
+    rem echo.%FORMAT%
+    rem --------------------------------
 
-    set LOG_STR=set LOG_STR=%asctime% %Lnamesh% %Llevel% NOTSET %Lmessage%
+    set asctime=%FORMAT%
+    set LOG_STR=set LOG_STR=%asctime% %Llevel% NOTSET %Lmessage%
+
     if "%Llevel%"=="%INFO%" (
-        set LOG_STR=%asctime% %Lnamesh% INFO %Lmessage%
+        set LOG_STR=%asctime% INFO %Lmessage%
     )
     if "%Llevel%"=="%WARNING%" (
-        set LOG_STR=%asctime% %Lnamesh% WARNING %Lmessage%
+        set LOG_STR=%asctime% WARNING %Lmessage%
     )
     if "%Llevel%"=="%ERROR%" (
-        set LOG_STR=%asctime% %Lnamesh% ERROR %Lmessage%
+        set LOG_STR=%asctime% ERROR %Lmessage%
     )
     if "%Llevel%"=="%CRITICAL%" (
-        set LOG_STR=%asctime% %Lnamesh% CRITICAL %Lmessage%
+        set LOG_STR=%asctime% CRITICAL %Lmessage%
     )
     if "%Llevel%"=="%DEBUG%" (
-        set LOG_STR=%asctime% %Lnamesh% DEBUG_ %Lmessage%
+        set LOG_STR=%asctime% DEBUG %Lmessage%
     )
     if "%Llevel%"=="%TEXT%" (
         set LOG_STR=%Lmessage%
@@ -104,11 +113,8 @@ rem beginfunction
     rem echo Lout: %Lout%
     set Llevel=%2
     rem echo Llevel: %Llevel%
-    set LValue=%3
-    rem echo LValue: %LValue%
 
-    call :FormatStr %SCRIPT_BASEFILENAME% %Llevel% %LValue% || exit /b 1
-    rem echo LOG_STR: %LOG_STR%
+    call :FormatStr %Llevel% %3 %4 %5 %6 %7 %8 %9 || exit /b 1
 
     if %Lout% EQU 0 (
         echo %LOG_STR%
@@ -153,7 +159,7 @@ rem beginfunction
             )
         )
     ) else (
-        call :AddLog %loAll% %ERROR% "FileName: %LFileName%" || exit /b 1
+        call :AddLog %loAll% %ERROR% FileName: %LFileName% || exit /b 1
     )
 
     exit /b 0
@@ -168,7 +174,9 @@ rem beginfunction
     rem echo StartLogFile ...
     rem echo ---------------------------------------------------------------
     set StartLogFile=StartLogFile
-    rem echo %StartLogFile%
+    rem echo.%StartLogFile%
+
+    if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
 
     rem ------------------------------------------------------
     rem Открытие файла журнала
@@ -183,12 +191,9 @@ rem beginfunction
             touch "%LFileName%"
         )
     )
-
-    if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
-
     rem -------------------------------------------------------------------
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
-    call :AddLog %loAll% %INFO% "Start: LOG_FULLFILENAME: %LOG_FULLFILENAME%" || exit /b 1
+    call :AddLog %loAll% %INFO% Start: %SCRIPT_BASEFILENAME% ... || exit /b 1
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
     rem -------------------------------------------------------------------
 
@@ -208,7 +213,7 @@ rem beginfunction
 
     rem -------------------------------------------------------------------
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
-    call :AddLog %loAll% %INFO% "Stop ..."
+    call :AddLog %loAll% %INFO% Stop: %SCRIPT_BASEFILENAME% || exit /b 1
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
     rem -------------------------------------------------------------------
 

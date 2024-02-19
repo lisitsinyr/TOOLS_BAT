@@ -6,8 +6,6 @@ chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
-setlocal enableextensions
-
 :begin
 rem -------------------------------------------------------------------
 rem PROJECTS - имя проекта
@@ -134,15 +132,13 @@ rem beginfunction
     set P1=P1_default
     call :Check_P P1 %1 || exit /b 1
 
-    rem echo P1: %P1%
-    call :AddLog %loStandard% %TEXT% "P1: %P1%" || exit /b 1
-    call :AddLog %loTextFile% %TEXT% "P1: %P1%" || exit /b 1
-    call :AddLog %loAll% %TEXT% "P1: %P1%" || exit /b 1
+    rem call :AddLog %loStandard% %TEXT% "P1: %P1%" || exit /b 1
+    rem call :AddLog %loTextFile% %TEXT% "P1: %P1%" || exit /b 1
+    call :AddLog %loAll% %TEXT% P1: %P1% || exit /b 1
+    call :AddLog %loAll% %INFO% P1: %P1% || exit /b 1
 
-    set F=LYRLog.txt
-    call :AddLogFile %loAll% %F%
-    rem -------------------------------------------------------------------
-    call :AddLog %loAll% %INFO% TEST || exit /b 1
+    rem set F=LYRLog.txt
+    rem call :AddLogFile %loAll% %F%
 
     exit /b 0
 rem endfunction

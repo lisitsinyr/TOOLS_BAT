@@ -148,16 +148,14 @@ rem beginfunction
     rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
 
     rem -------------------------------------------------------------------
-    set S01="================================================================="
-    rem --------------------------------
-    rem set FORMAT='%Y-%m-%d %H:%M:%S %N'
+    set S01=------------------------------------------------------
     rem --------------------------------
     set loStandard=0
     set loTextFile=1
     set loAll=2
     rem --------------------------------
     set NOTSET=0
-    set DEBUG1=1
+    set DEBUG=1
     set INFO=2
     set WARNING=3
     set ERROR=4
