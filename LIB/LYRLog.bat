@@ -66,19 +66,19 @@ rem beginfunction
     set LOG_STR=set LOG_STR=%asctime% %Llevel% NOTSET %Lmessage%
 
     if "%Llevel%"=="%INFO%" (
-        set LOG_STR=%asctime% INFO %Lmessage%
+        set LOG_STR=%asctime% INFO       %Lmessage%
     )
     if "%Llevel%"=="%WARNING%" (
-        set LOG_STR=%asctime% WARNING %Lmessage%
+        set LOG_STR=%asctime% WARNING    %Lmessage%
     )
     if "%Llevel%"=="%ERROR%" (
-        set LOG_STR=%asctime% ERROR %Lmessage%
+        set LOG_STR=%asctime% ERROR      %Lmessage%
     )
     if "%Llevel%"=="%CRITICAL%" (
-        set LOG_STR=%asctime% CRITICAL %Lmessage%
+        set LOG_STR=%asctime% CRITICAL   %Lmessage%
     )
     if "%Llevel%"=="%DEBUG%" (
-        set LOG_STR=%asctime% DEBUG %Lmessage%
+        set LOG_STR=%asctime% DEBUG      %Lmessage%
     )
     if "%Llevel%"=="%TEXT%" (
         set LOG_STR=%Lmessage%
