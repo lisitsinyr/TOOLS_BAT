@@ -172,8 +172,8 @@ rem beginfunction
     set ctlsWARNING=W
     set ctlsERROR=E
     set ctlsCRITICAL=C
-    set ctlsBEGIN='<'
-    set ctlsEND='>'
+    set ctlsBEGIN="<"
+    set ctlsEND=">"
     set ctlsPROCESS=P
     set ctlsDEBUGTEXT=T
     set ctlsTEXT='T'
