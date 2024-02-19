@@ -165,6 +165,18 @@ rem beginfunction
     set END=22
     set PROCESS=23
     set TEXT=24
+    rem # --------------------------------
+    set ctlsNOTSET=' '
+    set ctlsDEBUG=D
+    set ctlsINFO=I
+    set ctlsWARNING=W
+    set ctlsERROR=E
+    set ctlsCRITICAL=C
+    set ctlsBEGIN='<'
+    set ctlsEND='>'
+    set ctlsPROCESS=P
+    set ctlsDEBUGTEXT=T
+    set ctlsTEXT='T'
 
     exit /b 0
 rem endfunction

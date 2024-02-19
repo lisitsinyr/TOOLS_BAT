@@ -37,6 +37,54 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem :SHORTLevel Alevel:
+rem --------------------------------------------------------------------------------
+:SHORTLevel
+rem beginfunction
+    rem echo ---------------------------------------------------------------
+    rem echo SHORTLevel ...
+    rem echo ---------------------------------------------------------------
+    set SHORTLevel=SHORTLevel
+    rem echo SHORTLevel: %SHORTLevel%
+
+    set Llevel=%1
+    rem echo Llevel: %Llevel%
+
+    set SHORTLevelName=
+    if "%Llevel%"=="%INFO%" (
+        set SHORTLevelName=%ctlsINFO%
+    )
+    if "%Llevel%"=="%WARNING%" (
+        set SHORTLevelName=%ctlsWARNING%
+    )
+    if "%Llevel%"=="%ERROR%" (
+        set SHORTLevelName=%ctlsERROR%
+    )
+    if "%Llevel%"=="%CRITICAL%" (
+        set SHORTLevelName=%ctlsCRITICAL%
+    )
+    if "%Llevel%"=="%DEBUG%" (
+        set SHORTLevelName=%ctlsDEBUG%
+    )
+    if "%Llevel%"=="%TEXT%" (
+        set SHORTLevelName=%ctlsTEXT%
+    )
+    if "%Llevel%"=="%DEBUGTEXT%" (
+        set SHORTLevelName=%ctlsDEBUGTEXT%
+    )
+    if "%Llevel%"=="%BEGIN%" (
+        set SHORTLevelName=%ctlsBEGIN%
+    )
+    if "%Llevel%"=="%END%" (
+        set SHORTLevelName=%ctlsEND%
+    )
+    if "%Llevel%"=="%PROCESS%" (
+        set SHORTLevelName=%ctlsPROCESS%
+    )
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem :FormatStr Alevel: Amessage:
 rem --------------------------------------------------------------------------------
 :FormatStr
@@ -46,6 +94,7 @@ rem beginfunction
     rem echo ---------------------------------------------------------------
     set FormatStr=FormatStr
     rem echo %FormatStr%
+
     set Llevel=%1
     rem echo Llevel: %Llevel%
     set Lmessage=%2 %3 %4 %5 %6 %7 %8 %9
@@ -62,38 +111,41 @@ rem beginfunction
     rem echo.%FORMAT%
     rem --------------------------------
 
+    call :SHORTLevel %Llevel% || exit /b 1
+    rem echo SHORTLevelName: %SHORTLevelName%
+
     set asctime=%FORMAT%
-    set LOG_STR=set LOG_STR=%asctime% %Llevel% NOTSET %Lmessage%
+    set LOG_STR=set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
 
     if "%Llevel%"=="%INFO%" (
-        set LOG_STR=%asctime% INFO       %Lmessage%
+        set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%WARNING%" (
-        set LOG_STR=%asctime% WARNING    %Lmessage%
+        set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%ERROR%" (
-        set LOG_STR=%asctime% ERROR      %Lmessage%
+        set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%CRITICAL%" (
-        set LOG_STR=%asctime% CRITICAL   %Lmessage%
+        set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%DEBUG%" (
-        set LOG_STR=%asctime% DEBUG      %Lmessage%
+        set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%TEXT%" (
         set LOG_STR=%Lmessage%
     )
     if "%Llevel%"=="%DEBUGTEXT%" (
-        set LOG_STR=%Lmessage%
+        set LOG_STR=%SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%BEGIN%" (
-        set LOG_STR=%Lmessage%
+        set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%END%" (
-        set LOG_STR=%Lmessage%
+        set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%PROCESS%" (
-        set LOG_STR=%Lmessage%
+        set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
 
     exit /b 0
