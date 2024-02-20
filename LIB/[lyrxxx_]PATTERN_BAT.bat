@@ -62,7 +62,7 @@ rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FIL
 set LOG_FILENAME_FORMAT=
 rem -------------------------------------------------------------------
 rem LOG_FILE_ADD - Параметры журнала [1]
-set LOG_FILE_ADD=1
+set LOG_FILE_ADD=0
 rem -------------------------------------------------------------------
 rem LOG_FILE_DT - Параметры журнала [0]
 set LOG_FILE_DT=0

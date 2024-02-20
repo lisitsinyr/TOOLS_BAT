@@ -166,7 +166,7 @@ rem beginfunction
     set PROCESS=23
     set TEXT=24
     rem # --------------------------------
-    set ctlsNOTSET=' '
+    set ctlsNOTSET=" "
     set ctlsDEBUG=D
     set ctlsINFO=I
     set ctlsWARNING=W
@@ -176,7 +176,7 @@ rem beginfunction
     set ctlsEND=">"
     set ctlsPROCESS=P
     set ctlsDEBUGTEXT=T
-    set ctlsTEXT='T'
+    set ctlsTEXT=T
 
     exit /b 0
 rem endfunction
