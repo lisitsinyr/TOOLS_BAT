@@ -104,10 +104,11 @@ rem beginfunction
     rem  -------------------------------------------------------------------
     rem  DEBUG 1-включить DEBUG 0-выключить DEBUG
     set DEBUG=%1
-    echo DEBUG: %DEBUG%
+    rem echo DEBUG: %DEBUG%
 
+    set FNAME=procedure %0
     if "%DEBUG%"=="1" (
-        echo DEBUG: __SET_VAR_DEFAULT ...
+        echo DEBUG: %FNAME% ...
     )
 
     rem -------------------------------------------------------------------
@@ -160,8 +161,9 @@ rem procedure __SET_VAR_SCRIPT (FULLFILENAME)
 rem --------------------------------------------------------------------------------
 :__SET_VAR_SCRIPT
 rem beginfunction
+    set FNAME=procedure %0
     if "%DEBUG%"=="1" (
-        echo DEBUG: __SET_VAR_SCRIPT ...
+        echo DEBUG: %FNAME% ...
     )
     rem -------------------------------------------------------------------
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
@@ -192,8 +194,9 @@ rem procedure __SET_VAR_PROJECTS ()
 rem --------------------------------------------------------------------------------
 :__SET_VAR_PROJECTS
 rem beginfunction
+    set FNAME=procedure %0
     if "%DEBUG%"=="1" (
-        echo DEBUG: __SET_VAR_PROJECTS ...
+        echo DEBUG: %FNAME% ...
     )
     rem -------------------------------------------------------------------
     rem PROJECTS - проект
@@ -231,8 +234,9 @@ rem procedure __SET_CHECK_REPO ()
 rem --------------------------------------------------------------------------------
 :__SET_CHECK_REPO
 rem beginfunction
+    set FNAME=procedure %0
     if "%DEBUG%"=="1" (
-        echo DEBUG: __SET_CHECK_REPO ...
+        echo DEBUG: %FNAME% ...
     )
     rem -------------------------------------------------------------------
     rem REPO_NAME - Имя репозитария
@@ -263,8 +267,9 @@ rem procedure __SET_LOG ()
 rem --------------------------------------------------------------------------------
 :__SET_LOG
 rem beginfunction
+    set FNAME=procedure %0
     if "%DEBUG%"=="1" (
-        echo DEBUG: __SET_LOG ...
+        echo DEBUG: %FNAME% ...
     )
 
     rem if "%__SET_LOG__%"=="1" (echo __SET_LOG__: %__SET_LOG__% && exit /b 0) else (set __SET_LOG__=1)

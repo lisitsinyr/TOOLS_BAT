@@ -19,15 +19,15 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem :LYRConst [%1]
+rem procedure LYRConst ()
 rem --------------------------------------------------------------------------------
 :LYRConst
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo LYRConst ...
-    rem echo ---------------------------------------------------------------
-    set LYRConst=LYRConst
-    echo %LYRConst%
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
+
     exit /b 0
 rem endfunction
 

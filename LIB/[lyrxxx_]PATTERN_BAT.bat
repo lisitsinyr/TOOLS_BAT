@@ -10,7 +10,7 @@ setlocal enabledelayedexpansion
 rem --------------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
-    call :MAIN_INIT %0 || exit /b 1
+    call :MAIN_INIT %0 1 || exit /b 1
     call :MAIN_SET || exit /b 1
     call :StartLogFile || exit /b 1
     rem set DIR_SAVE=%CURRENT_DIR%
@@ -62,11 +62,19 @@ exit /b 0
 exit /b 0
 
 rem -----------------------------------------------
-rem procedure MAIN_INIT (FULLFILENAME)
+rem procedure MAIN_INIT (FULLFILENAME, DEBUG)
 rem -----------------------------------------------
 :MAIN_INIT
 rem beginfunction
-    echo procedure MAIN_INIT ...
+    rem  -------------------------------------------------------------------
+    rem  DEBUG 1-включить DEBUG 0-выключить DEBUG
+    set DEBUG=%2
+    echo DEBUG: %DEBUG%
+
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     rem -------------------------------------------------------------------
     rem PROJECTS - имя проекта
     set PROJECTS=PROJECTS_BAT
@@ -115,7 +123,10 @@ rem procedure MAIN_SET ()
 rem -----------------------------------------------
 :MAIN_SET
 rem beginfunction
-    echo procedure MAIN_SET ...
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
 
     call :__SET_VAR_DEFAULT 1 || exit /b 1
     call :__SET_VAR_SCRIPT %SCRIPT_FULLFILENAME% || exit /b 1
@@ -149,7 +160,10 @@ rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
-    echo procedure MAIN_CHECK_PARAMETR ...
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
 
     set P1=P1_default
     call :Check_P P1 %1 || exit /b 1
@@ -171,7 +185,10 @@ rem procedure MAIN_SYNTAX ()
 rem --------------------------------------------------------------------------------
 :MAIN_SYNTAX
 rem beginfunction
-    echo procedure MAIN_SYNTAX ...
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
 
     exit /b 0
 
@@ -182,7 +199,10 @@ rem procedure MAIN ()
 rem =================================================
 :MAIN
 rem beginfunction
-    echo procedure MAIN ...
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
 
     exit /b 0
 rem endfunction

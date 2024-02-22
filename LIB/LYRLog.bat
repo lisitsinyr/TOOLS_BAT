@@ -24,26 +24,26 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem :LYRLog [%1]
+rem procedure LYRLog ()
 rem --------------------------------------------------------------------------------
 :LYRLog
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo LYRLog ...
-    rem echo ---------------------------------------------------------------
-    set LYRLog=LYRLog
-    rem echo %LYRLog%
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :SHORTLevel Alevel:
+rem procedure SHORTLevel (Alevel)
 rem --------------------------------------------------------------------------------
 :SHORTLevel
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo SHORTLevel ...
-    rem echo ---------------------------------------------------------------
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     set SHORTLevel=SHORTLevel
     rem echo SHORTLevel: %SHORTLevel%
 
@@ -85,13 +85,14 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :FormatStr Alevel: Amessage:
+rem procedure FormatStr (Alevel, Amessage)
 rem --------------------------------------------------------------------------------
 :FormatStr
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo FormatStr ...
-    rem echo ---------------------------------------------------------------
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     set FormatStr=FormatStr
     rem echo %FormatStr%
 
@@ -152,15 +153,14 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :AddLog Aout: Alevel: Value:
+rem procedure AddLog (Aout, Alevel, Value)
 rem --------------------------------------------------------------------------------
 :AddLog
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo AddLog ...
-    rem echo ---------------------------------------------------------------
-    set AddLog=AddLog
-    rem echo AddLog: %AddLog%
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     set Lout=%1
     rem echo Lout: %Lout%
     set Llevel=%2
@@ -183,15 +183,14 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :AddLogFile Aout: AFileName:
+rem procedure AddLogFile (Aout, AFileName)
 rem --------------------------------------------------------------------------------
 :AddLogFile
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo AddLogFile ...
-    rem echo ---------------------------------------------------------------
-    set AddLogFile=AddLogFile
-    rem echo %AddLogFile%
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     set Lout=%1
     rem echo Lout: %Lout%
     set LFileName=%2
@@ -218,15 +217,14 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :StartLogFile [%1] AFileName: str
+rem procedure StartLogFile (AFileName)
 rem --------------------------------------------------------------------------------
 :StartLogFile
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo StartLogFile ...
-    rem echo ---------------------------------------------------------------
-    set StartLogFile=StartLogFile
-    rem echo.%StartLogFile%
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
 
     if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
 
@@ -253,15 +251,14 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :StopLogFile [%1]
+rem procedure StopLogFile ()
 rem --------------------------------------------------------------------------------
 :StopLogFile
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo StopLogFile ...
-    rem echo ---------------------------------------------------------------
-    set StopLogFile=StopLogFile
-    rem echo %StopLogFile%
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
 
     rem -------------------------------------------------------------------
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1

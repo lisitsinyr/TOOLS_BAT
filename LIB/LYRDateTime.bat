@@ -25,11 +25,10 @@ rem :LYRDateTime
 rem --------------------------------------------------------------------------------
 :LYRDateTime
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo LYRDateTime ...
-    rem echo ---------------------------------------------------------------
-    set LYRDateTime=LYRDateTime
-    echo %LYRDateTime%
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     exit /b 0
 rem endfunction
 
@@ -38,9 +37,10 @@ rem :YYYYMMDDHHMMSS
 rem --------------------------------------------------------------------------------
 :YYYYMMDDHHMMSS
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo YYYYMMDDHHMMSS ...
-    rem echo ---------------------------------------------------------------
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     set YYYYMMDDHHMMSS=YYYYMMDDHHMMSS
     echo %YYYYMMDDHHMMSS%
     exit /b 0
@@ -51,9 +51,10 @@ rem :DateTime
 rem --------------------------------------------------------------------------------
 :DateTime
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo DateTime ...
-    rem echo ---------------------------------------------------------------
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     set DateTime=DateTime
     echo %DateTime%
     exit /b 0

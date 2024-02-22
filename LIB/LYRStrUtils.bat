@@ -19,15 +19,14 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem :LYRStrUtils
+rem procedure LYRStrUtils ()
 rem --------------------------------------------------------------------------------
 :LYRStrUtils
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo LYRStrUtils ...
-    rem echo ---------------------------------------------------------------
-    set LYRStrUtils=LYRStrUtils
-    echo %LYRStrUtils%
+    set FNAME=procedure %0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
     exit /b 0
 rem endfunction
 
