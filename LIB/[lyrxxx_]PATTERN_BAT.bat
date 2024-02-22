@@ -62,7 +62,7 @@ exit /b 0
 exit /b 0
 
 rem -----------------------------------------------
-rem procedure MAIN_INIT ()
+rem procedure MAIN_INIT (FULLFILENAME)
 rem -----------------------------------------------
 :MAIN_INIT
 rem beginfunction
@@ -145,7 +145,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem  procedure MAIN_CHECK_PARAMETR ()
+rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
@@ -167,7 +167,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem  procedure MAIN_SYNTAX ()
+rem procedure MAIN_SYNTAX ()
 rem --------------------------------------------------------------------------------
 :MAIN_SYNTAX
 rem beginfunction

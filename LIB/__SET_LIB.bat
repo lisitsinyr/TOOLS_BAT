@@ -97,37 +97,6 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem :__SET_VAR_SCRIPT [%1]
-rem --------------------------------------------------------------------------------
-:__SET_VAR_SCRIPT
-rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo __SET_VAR_SCRIPT ...
-    rem echo ---------------------------------------------------------------
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-    set SCRIPT_FULLFILENAME=%~f1
-    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
-    rem -------------------------------------------------------------------
-    rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
-    set SCRIPT_BASEFILENAME=%~n1%~x1
-    rem echo SCRIPT_BASEFILENAME: %SCRIPT_BASEFILENAME%
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FILENAME - Файл скрипта [имя]
-    set SCRIPT_FILENAME=%~n1
-    rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
-    rem -------------------------------------------------------------------
-    rem Файл скрипта: каталог
-    set SCRIPT_FILEDIR=
-    rem echo SCRIPT_FILEDIR: %SCRIPT_FILEDIR%
-    rem -------------------------------------------------------------------
-    rem Файл скрипта: расширение
-    set SCRIPT_FILEEXT=
-    rem echo SCRIPT_FILEEXT: %SCRIPT_FILEEXT%
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem procedure __SET_VAR_DEFAULT (DEBUG)
 rem --------------------------------------------------------------------------------
 :__SET_VAR_DEFAULT
@@ -136,8 +105,9 @@ rem beginfunction
     rem  DEBUG 1-включить DEBUG 0-выключить DEBUG
     set DEBUG=%1
     echo DEBUG: %DEBUG%
+
     if "%DEBUG%"=="1" (
-        echo DEBUG: __SET_VAR_SCRIPT ...
+        echo DEBUG: __SET_VAR_DEFAULT ...
     )
 
     rem -------------------------------------------------------------------
@@ -186,13 +156,45 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :__SET_VAR_PROJECTS
+rem procedure __SET_VAR_SCRIPT (FULLFILENAME)
+rem --------------------------------------------------------------------------------
+:__SET_VAR_SCRIPT
+rem beginfunction
+    if "%DEBUG%"=="1" (
+        echo DEBUG: __SET_VAR_SCRIPT ...
+    )
+    rem -------------------------------------------------------------------
+    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
+    set SCRIPT_FULLFILENAME=%~f1
+    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+    rem -------------------------------------------------------------------
+    rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
+    set SCRIPT_BASEFILENAME=%~n1%~x1
+    rem echo SCRIPT_BASEFILENAME: %SCRIPT_BASEFILENAME%
+    rem -------------------------------------------------------------------
+    rem SCRIPT_FILENAME - Файл скрипта [имя]
+    set SCRIPT_FILENAME=%~n1
+    rem echo SCRIPT_FILENAME: %SCRIPT_FILENAME%
+    rem -------------------------------------------------------------------
+    rem Файл скрипта: каталог
+    set SCRIPT_FILEDIR=
+    rem echo SCRIPT_FILEDIR: %SCRIPT_FILEDIR%
+    rem -------------------------------------------------------------------
+    rem Файл скрипта: расширение
+    set SCRIPT_FILEEXT=
+    rem echo SCRIPT_FILEEXT: %SCRIPT_FILEEXT%
+    exit /b 0
+rem endfunction
+
+
+rem --------------------------------------------------------------------------------
+rem procedure __SET_VAR_PROJECTS ()
 rem --------------------------------------------------------------------------------
 :__SET_VAR_PROJECTS
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo __SET_VAR_PROJECTS
-    rem echo ---------------------------------------------------------------
+    if "%DEBUG%"=="1" (
+        echo DEBUG: __SET_VAR_PROJECTS ...
+    )
     rem -------------------------------------------------------------------
     rem PROJECTS - проект
     rem set PROJECTS=
@@ -225,13 +227,13 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :__SET_CHECK_REPO
+rem procedure __SET_CHECK_REPO ()
 rem --------------------------------------------------------------------------------
 :__SET_CHECK_REPO
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo __SET_CHECK_REPO
-    rem echo ---------------------------------------------------------------
+    if "%DEBUG%"=="1" (
+        echo DEBUG: __SET_CHECK_REPO ...
+    )
     rem -------------------------------------------------------------------
     rem REPO_NAME - Имя репозитария
     set REPO_NAME=
@@ -257,13 +259,13 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :__SET_LOG
+rem procedure __SET_LOG ()
 rem --------------------------------------------------------------------------------
 :__SET_LOG
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo __SET_LOG
-    rem echo ---------------------------------------------------------------
+    if "%DEBUG%"=="1" (
+        echo DEBUG: __SET_LOG ...
+    )
 
     rem if "%__SET_LOG__%"=="1" (echo __SET_LOG__: %__SET_LOG__% && exit /b 0) else (set __SET_LOG__=1)
     if "%__SET_LOG__%"=="1" (exit /b 0) else (set __SET_LOG__=1)
