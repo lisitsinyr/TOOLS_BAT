@@ -106,9 +106,9 @@ rem beginfunction
     set DEBUG=%1
     rem echo DEBUG: %DEBUG%
 
-    set FNAME=procedure :__SET_VAR_DEFAULT
+    set FUNCNAME=:__SET_VAR_DEFAULT
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     rem -------------------------------------------------------------------
@@ -130,7 +130,7 @@ rem beginfunction
     set loAll=2
     rem --------------------------------
     set NOTSET=0
-    set DEBUG=1
+    set DEBUGT=1
     set INFO=2
     set WARNING=3
     set ERROR=4
@@ -142,7 +142,7 @@ rem beginfunction
     set TEXT=24
     rem # --------------------------------
     set ctlsNOTSET=" "
-    set ctlsDEBUG=D
+    set ctlsDEBUGT=D
     set ctlsINFO=I
     set ctlsWARNING=W
     set ctlsERROR=E
@@ -161,10 +161,11 @@ rem procedure __SET_VAR_SCRIPT (FULLFILENAME)
 rem --------------------------------------------------------------------------------
 :__SET_VAR_SCRIPT
 rem beginfunction
-    set FNAME=procedure :__SET_VAR_SCRIPT
+    set FUNCNAME=:__SET_VAR_SCRIPT
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     rem -------------------------------------------------------------------
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     set SCRIPT_FULLFILENAME=%~f1
@@ -194,10 +195,11 @@ rem procedure __SET_VAR_PROJECTS ()
 rem --------------------------------------------------------------------------------
 :__SET_VAR_PROJECTS
 rem beginfunction
-    set FNAME=procedure :__SET_VAR_PROJECTS
+    set FUNCNAME=:__SET_VAR_PROJECTS
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     rem -------------------------------------------------------------------
     rem PROJECTS - проект
     rem set PROJECTS=
@@ -234,10 +236,11 @@ rem procedure __SET_CHECK_REPO ()
 rem --------------------------------------------------------------------------------
 :__SET_CHECK_REPO
 rem beginfunction
-    set FNAME=procedure :__SET_CHECK_REPO
+    set FUNCNAME=:__SET_CHECK_REPO
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     rem -------------------------------------------------------------------
     rem REPO_NAME - Имя репозитария
     set REPO_NAME=
@@ -267,9 +270,9 @@ rem procedure __SET_LOG ()
 rem --------------------------------------------------------------------------------
 :__SET_LOG
 rem beginfunction
-    set FNAME=procedure :__SET_LOG
+    set FUNCNAME=:__SET_LOG
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     rem if "%__SET_LOG__%"=="1" (echo __SET_LOG__: %__SET_LOG__% && exit /b 0) else (set __SET_LOG__=1)
@@ -348,9 +351,9 @@ rem :__SET_KIX
 rem --------------------------------------------------------------------------------
 :__SET_KIX
 rem beginfunction
-    set FNAME=procedure :__SET_KIX
+    set FUNCNAME=:__SET_KIX
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     rem -------------------------------------------------------------------

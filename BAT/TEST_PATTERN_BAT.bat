@@ -1,16 +1,16 @@
 @echo off
 rem -------------------------------------------------------------------
-rem [lyrxxx_]PATTERN_BAT.bat
+rem TEST_PATTERN_BAT.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
-:begin
 rem --------------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
-    call :MAIN_INIT %0 1 || exit /b 1
+:begin
+    call :MAIN_INIT %0 0 || exit /b 1
     call :MAIN_SET || exit /b 1
     call :StartLogFile || exit /b 1
     rem set DIR_SAVE=%CURRENT_DIR%
@@ -33,6 +33,7 @@ rem ФУНКЦИИ LIB
 rem =================================================
 :__SET_VAR_SCRIPT
 %LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
 :__SET_VAR_DEFAULT
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
@@ -47,10 +48,13 @@ exit /b 0
 exit /b 0
 :FormatStr
 %LIB_BAT%\LYRLog.bat %*
+exit /b 0
 :AddLog
 %LIB_BAT%\LYRLog.bat %*
+exit /b 0
 :AddLogFile
 %LIB_BAT%\LYRLog.bat %*
+exit /b 0
 :StartLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
@@ -71,10 +75,11 @@ rem beginfunction
     set DEBUG=%2
     echo DEBUG: %DEBUG%
 
-    set FNAME=procedure %0
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     rem -------------------------------------------------------------------
     rem PROJECTS - имя проекта
     set PROJECTS=PROJECTS_BAT
@@ -123,12 +128,12 @@ rem procedure MAIN_SET ()
 rem -----------------------------------------------
 :MAIN_SET
 rem beginfunction
-    set FNAME=procedure %0
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    call :__SET_VAR_DEFAULT 1 || exit /b 1
+    call :__SET_VAR_DEFAULT %DEBUG% || exit /b 1
     call :__SET_VAR_SCRIPT %SCRIPT_FULLFILENAME% || exit /b 1
     call :__SET_VAR_PROJECTS || exit /b 1
     call :__SET_CHECK_REPO || exit /b 1
@@ -160,9 +165,9 @@ rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
-    set FNAME=procedure %0
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     set P1=P1_default
@@ -177,7 +182,6 @@ rem beginfunction
     rem call :AddLogFile %loAll% %F%
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -185,13 +189,12 @@ rem procedure MAIN_SYNTAX ()
 rem --------------------------------------------------------------------------------
 :MAIN_SYNTAX
 rem beginfunction
-    set FNAME=procedure %0
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     exit /b 0
-
 rem endfunction
 
 rem =================================================
@@ -199,9 +202,9 @@ rem procedure MAIN ()
 rem =================================================
 :MAIN
 rem beginfunction
-    set FNAME=procedure %0
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     exit /b 0

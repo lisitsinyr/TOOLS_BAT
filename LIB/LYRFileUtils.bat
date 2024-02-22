@@ -77,73 +77,75 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem :LYRFileUtils [%1]
+rem procedure LYRFileUtils ()
 rem --------------------------------------------------------------------------------
 :LYRFileUtils
 rem beginfunction
-    set FNAME=procedure :LYRFileUtils
+    set FUNCNAME=:LYRFileUtils
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
-    set LYRFileUtils=%~f1
-    set LYRFileUtils=LYRFileUtils
-    echo %LYRFileUtils%
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :LYRFileUtils [%1]
+rem procedure ExtractFileDir (FullFilename)
 rem --------------------------------------------------------------------------------
 :ExtractFileDir
 rem beginfunction
-    set FNAME=procedure :ExtractFileDir
+    set FUNCNAME=:ExtractFileDir
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     set ExtractFileDir=%~d1%~p1
-    echo %ExtractFileDir%
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :ExtractFileName [%1]
+rem procedure ExtractFileName (Filename)
 rem --------------------------------------------------------------------------------
 :ExtractFileName
 rem beginfunction
-    set FNAME=procedure :ExtractFileName
+    set FUNCNAME=:ExtractFileName
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     set ExtractFileName=%~nx1
-    echo %ExtractFileName%
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :ExtractFileNameWithoutExt [%1]
+rem procedure ExtractFileNameWithoutExt (FileName)
 rem --------------------------------------------------------------------------------
 :ExtractFileNameWithoutExt
 rem beginfunction
-    set FNAME=procedure :ExtractFileNameWithoutExt
+    set FUNCNAME=:ExtractFileNameWithoutExt
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     set ExtractFileNameWithoutExt=%~n1
-    echo %ExtractFileNameWithoutExt%
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :ExtractFileExt [%1]
+rem procedure ExtractFileExt (FileName)
 rem --------------------------------------------------------------------------------
 :ExtractFileExt
 rem beginfunction
-    set FNAME=procedure :ExtractFileExt
+    set FUNCNAME=:ExtractFileExt
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     set ExtractFileExt=%~x1
-    echo %ExtractFileExt%
+
     exit /b 0
 rem endfunction
 

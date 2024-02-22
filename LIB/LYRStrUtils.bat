@@ -21,12 +21,13 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRStrUtils ()
 rem --------------------------------------------------------------------------------
-:LYRStrUtilsLIB
+:LYRStrUtils
 rem beginfunction
-    set FNAME=procedure %0
+    set FUNCNAME=:LYRStrUtils
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     exit /b 0
 rem endfunction
 

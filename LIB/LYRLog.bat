@@ -28,10 +28,11 @@ rem procedure LYRLog ()
 rem --------------------------------------------------------------------------------
 :LYRLog
 rem beginfunction
-    set FNAME=procedure :LYRLog
+    set FUNCNAME=:LYRLog
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     exit /b 0
 rem endfunction
 
@@ -40,10 +41,11 @@ rem procedure SHORTLevel (Alevel)
 rem --------------------------------------------------------------------------------
 :SHORTLevel
 rem beginfunction
-    set FNAME=procedure :SHORTLevel
+    set FUNCNAME=:SHORTLevel
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     set SHORTLevel=SHORTLevel
     rem echo SHORTLevel: %SHORTLevel%
 
@@ -63,7 +65,7 @@ rem beginfunction
     if "%Llevel%"=="%CRITICAL%" (
         set SHORTLevelName=%ctlsCRITICAL%
     )
-    if "%Llevel%"=="%DEBUG%" (
+    if "%Llevel%"=="%DEBUGT%" (
         set SHORTLevelName=%ctlsDEBUG%
     )
     if "%Llevel%"=="%TEXT%" (
@@ -89,10 +91,11 @@ rem procedure FormatStr (Alevel, Amessage)
 rem --------------------------------------------------------------------------------
 :FormatStr
 rem beginfunction
-    set FNAME=procedure :FormatStr
+    set FUNCNAME=:FormatStr
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     set FormatStr=FormatStr
     rem echo %FormatStr%
 
@@ -130,7 +133,7 @@ rem beginfunction
     if "%Llevel%"=="%CRITICAL%" (
         set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
-    if "%Llevel%"=="%DEBUG%" (
+    if "%Llevel%"=="%DEBUGT%" (
         set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
     )
     if "%Llevel%"=="%TEXT%" (
@@ -157,10 +160,11 @@ rem procedure AddLog (Aout, Alevel, Value)
 rem --------------------------------------------------------------------------------
 :AddLog
 rem beginfunction
-    set FNAME=procedure :AddLog
+    set FUNCNAME=:AddLog
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     set Lout=%1
     rem echo Lout: %Lout%
     set Llevel=%2
@@ -187,10 +191,11 @@ rem procedure AddLogFile (Aout, AFileName)
 rem --------------------------------------------------------------------------------
 :AddLogFile
 rem beginfunction
-    set FNAME=procedure :AddLogFile
+    set FUNCNAME=:AddLogFile
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
+
     set Lout=%1
     rem echo Lout: %Lout%
     set LFileName=%2
@@ -221,9 +226,9 @@ rem procedure StartLogFile (AFileName)
 rem --------------------------------------------------------------------------------
 :StartLogFile
 rem beginfunction
-    set FNAME=procedure :StartLogFile
+    set FUNCNAME=:StartLogFile
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
@@ -255,9 +260,9 @@ rem procedure StopLogFile ()
 rem --------------------------------------------------------------------------------
 :StopLogFile
 rem beginfunction
-    set FNAME=procedure :StopLogFile
+    set FUNCNAME=:StopLogFile
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     rem -------------------------------------------------------------------
