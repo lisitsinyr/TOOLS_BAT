@@ -26,9 +26,9 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRLog ()
 rem --------------------------------------------------------------------------------
-:LYRLogLIB
+:LYRLog
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :LYRLog
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -40,7 +40,7 @@ rem procedure SHORTLevel (Alevel)
 rem --------------------------------------------------------------------------------
 :SHORTLevel
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :SHORTLevel
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -89,7 +89,7 @@ rem procedure FormatStr (Alevel, Amessage)
 rem --------------------------------------------------------------------------------
 :FormatStr
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :FormatStr
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -157,7 +157,7 @@ rem procedure AddLog (Aout, Alevel, Value)
 rem --------------------------------------------------------------------------------
 :AddLog
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :AddLog
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -187,7 +187,7 @@ rem procedure AddLogFile (Aout, AFileName)
 rem --------------------------------------------------------------------------------
 :AddLogFile
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :AddLogFile
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -221,7 +221,7 @@ rem procedure StartLogFile (AFileName)
 rem --------------------------------------------------------------------------------
 :StartLogFile
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :StartLogFile
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -255,7 +255,7 @@ rem procedure StopLogFile ()
 rem --------------------------------------------------------------------------------
 :StopLogFile
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :StopLogFile
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )

@@ -21,9 +21,9 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRConst ()
 rem --------------------------------------------------------------------------------
-:LYRConstLIB
+:LYRConst
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :LYRConst
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )

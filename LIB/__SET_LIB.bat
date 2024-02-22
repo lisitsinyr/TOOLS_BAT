@@ -106,7 +106,7 @@ rem beginfunction
     set DEBUG=%1
     rem echo DEBUG: %DEBUG%
 
-    set FNAME=procedure %0
+    set FNAME=procedure :__SET_VAR_DEFAULT
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -161,7 +161,7 @@ rem procedure __SET_VAR_SCRIPT (FULLFILENAME)
 rem --------------------------------------------------------------------------------
 :__SET_VAR_SCRIPT
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :__SET_VAR_SCRIPT
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -194,7 +194,7 @@ rem procedure __SET_VAR_PROJECTS ()
 rem --------------------------------------------------------------------------------
 :__SET_VAR_PROJECTS
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :__SET_VAR_PROJECTS
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -234,7 +234,7 @@ rem procedure __SET_CHECK_REPO ()
 rem --------------------------------------------------------------------------------
 :__SET_CHECK_REPO
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :__SET_CHECK_REPO
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -267,7 +267,7 @@ rem procedure __SET_LOG ()
 rem --------------------------------------------------------------------------------
 :__SET_LOG
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :__SET_LOG
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -343,15 +343,16 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-
 rem --------------------------------------------------------------------------------
 rem :__SET_KIX
 rem --------------------------------------------------------------------------------
 :__SET_KIX
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo __SET_KIX
-    rem echo ---------------------------------------------------------------
+    set FNAME=procedure :__SET_KIX
+    if "%DEBUG%"=="1" (
+        echo DEBUG: %FNAME% ...
+    )
+
     rem -------------------------------------------------------------------
     rem KIX_DIR - Каталог с файлами .KIX
     set KIX_DIR=

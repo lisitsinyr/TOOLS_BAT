@@ -21,9 +21,9 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRSupport ()
 rem --------------------------------------------------------------------------------
-:LYRSupportLIB
+:LYRSupport
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :LYRSupport
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -35,7 +35,7 @@ rem procedure Check_P1 ()
 rem --------------------------------------------------------------------------------
 :Check_P1
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :Check_P1
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -58,7 +58,7 @@ rem procedure Check_P ()
 rem --------------------------------------------------------------------------------
 :Check_P
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :Check_P
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )

@@ -33,6 +33,7 @@ rem ФУНКЦИИ LIB
 rem =================================================
 :__SET_VAR_SCRIPT
 %LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
 :__SET_VAR_DEFAULT
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
@@ -47,10 +48,13 @@ exit /b 0
 exit /b 0
 :FormatStr
 %LIB_BAT%\LYRLog.bat %*
+exit /b 0
 :AddLog
 %LIB_BAT%\LYRLog.bat %*
+exit /b 0
 :AddLogFile
 %LIB_BAT%\LYRLog.bat %*
+exit /b 0
 :StartLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0

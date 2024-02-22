@@ -79,9 +79,9 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem :LYRFileUtils [%1]
 rem --------------------------------------------------------------------------------
-:LYRFileUtilsLIB
+:LYRFileUtils
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :LYRFileUtils
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -96,7 +96,7 @@ rem :LYRFileUtils [%1]
 rem --------------------------------------------------------------------------------
 :ExtractFileDir
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :ExtractFileDir
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -110,7 +110,7 @@ rem :ExtractFileName [%1]
 rem --------------------------------------------------------------------------------
 :ExtractFileName
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :ExtractFileName
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -124,7 +124,7 @@ rem :ExtractFileNameWithoutExt [%1]
 rem --------------------------------------------------------------------------------
 :ExtractFileNameWithoutExt
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :ExtractFileNameWithoutExt
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
@@ -138,7 +138,7 @@ rem :ExtractFileExt [%1]
 rem --------------------------------------------------------------------------------
 :ExtractFileExt
 rem beginfunction
-    set FNAME=procedure %0
+    set FNAME=procedure :ExtractFileExt
     if "%DEBUG%"=="1" (
         echo DEBUG: %FNAME% ...
     )
