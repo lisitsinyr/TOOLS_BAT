@@ -128,13 +128,17 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :__SET_VAR_DEFAULT
+rem procedure __SET_VAR_DEFAULT (DEBUG)
 rem --------------------------------------------------------------------------------
 :__SET_VAR_DEFAULT
 rem beginfunction
-    rem echo ---------------------------------------------------------------
-    rem echo __SET_VAR_DEFAULT
-    rem echo ---------------------------------------------------------------
+    rem  -------------------------------------------------------------------
+    rem  DEBUG 1-включить DEBUG 0-выключить DEBUG
+    set DEBUG=%1
+    echo DEBUG: %DEBUG%
+    if "%DEBUG%"=="1" (
+        echo DEBUG: __SET_VAR_SCRIPT ...
+    )
 
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT_DEFAULT -
@@ -295,7 +299,7 @@ rem beginfunction
     if "%LOG_DIR%"=="" (
         set LOG_DIR=%PROJECTS_LYR_DIR%\LOGS
     )
-    rem echo LOG_DIR: %LOG_DIR%
+    echo LOG_DIR: %LOG_DIR%
     if not exist %LOG_DIR% (
         echo ERROR: Dir %LOG_DIR% not exist
         exit /b 1
@@ -319,7 +323,7 @@ rem beginfunction
            set LOG_FILENAME=%DATETIME_STAMP%_%LOG_FILENAME%
         )
     )
-    echo LOG_FILENAME: %LOG_FILENAME%
+    rem echo LOG_FILENAME: %LOG_FILENAME%
     rem -------------------------------------------------------------------
     rem LOG_FULLFILENAME - Файл журнала [каталог+имя+расширение]
     if "%REPO_NAME%"=="" (
