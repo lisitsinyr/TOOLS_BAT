@@ -113,7 +113,7 @@ rem beginfunction
 
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT_DEFAULT -
-    rem LOG_DT_FORMAT_DEFAULT=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+    rem LOG_DT_FORMAT_DEFAULT='%Y%m%d'
     set LOG_DT_FORMAT_DEFAULT=%date:~6,4%%date:~3,2%%date:~0,2%
     rem echo LOG_DT_FORMAT_DEFAULT: $LOG_DT_FORMAT_DEFAULT
 
@@ -186,6 +186,7 @@ rem beginfunction
     rem Файл скрипта: расширение
     set SCRIPT_FILEEXT=
     rem echo SCRIPT_FILEEXT: %SCRIPT_FILEEXT%
+
     exit /b 0
 rem endfunction
 
@@ -228,6 +229,7 @@ rem beginfunction
     rem CURRENT_DIR - Текущий каталог
     set CURRENT_DIR=%CD%
     rem echo CURRENT_DIR: %CURRENT_DIR%
+
     exit /b 0
 rem endfunction
 
@@ -262,6 +264,7 @@ rem beginfunction
         rem exit /b 1
     )
     rem echo REPO_NAME: %REPO_NAME%
+
     exit /b 0
 rem endfunction
 
@@ -343,6 +346,11 @@ rem beginfunction
     )
     rem echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
 
+    rem ------------------------------------------------------
+    rem LOG_STR
+    rem ------------------------------------------------------
+    LOG_STR=""
+
     exit /b 0
 rem endfunction
 
@@ -365,7 +373,6 @@ rem beginfunction
     rem APP_KIX - Скрипт APP_KIX имя+расширение
     set APP_KIX=[lyrxxx_]PATTERN_KIX.kix
     rem -------------------------------------------------------------------
-
     rem echo -------------------------------------------------------
     rem echo Каталог библиотеки KIX: каталог
     rem echo    %LIB_KIX%"
@@ -387,7 +394,6 @@ rem beginfunction
         echo INFO: Dir %LIB_KIX% not exist
         rem exit /b 1
     )
-
     rem echo -------------------------------------------------------
     rem echo APP_KIX
     rem echo    %APP_KIX%

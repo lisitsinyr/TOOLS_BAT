@@ -70,9 +70,7 @@ rem beginfunction
     rem echo P_Name: %P_Name%
     set P_Value=%2
     rem echo P_Value: %P_Value%
-
     rem echo !%P_Name%!
-
     if "%P_Value%"=="" (
         set Input=
         rem set /p Input=%P_Name%[!%P_Name%!]:

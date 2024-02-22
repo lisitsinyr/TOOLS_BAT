@@ -45,6 +45,7 @@ rem beginfunction
 
     set YYYYMMDDHHMMSS=YYYYMMDDHHMMSS
     echo %YYYYMMDDHHMMSS%
+
     exit /b 0
 rem endfunction
 
@@ -60,5 +61,6 @@ rem beginfunction
 
     set DateTime=DateTime
     echo %DateTime%
+
     exit /b 0
 rem endfunction

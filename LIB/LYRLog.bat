@@ -48,10 +48,8 @@ rem beginfunction
 
     set SHORTLevel=SHORTLevel
     rem echo SHORTLevel: %SHORTLevel%
-
     set Llevel=%1
     rem echo Llevel: %Llevel%
-
     set SHORTLevelName=
     if "%Llevel%"=="%INFO%" (
         set SHORTLevelName=%ctlsINFO%
@@ -83,6 +81,7 @@ rem beginfunction
     if "%Llevel%"=="%PROCESS%" (
         set SHORTLevelName=%ctlsPROCESS%
     )
+
     exit /b 0
 rem endfunction
 
@@ -98,12 +97,10 @@ rem beginfunction
 
     set FormatStr=FormatStr
     rem echo %FormatStr%
-
     set Llevel=%1
     rem echo Llevel: %Llevel%
     set Lmessage=%2 %3 %4 %5 %6 %7 %8 %9
     rem echo.Lmessage: %Lmessage%
-
     set YYYY=%date:~6,4%
     set MM=%date:~3,2%
     set DD=%date:~0,2%
@@ -114,10 +111,8 @@ rem beginfunction
     set FORMAT=%YYYY%-%MM%-%DD% %HH%:%MM%:%SS%
     rem echo.%FORMAT%
     rem --------------------------------
-
     call :SHORTLevel %Llevel% || exit /b 1
     rem echo SHORTLevelName: %SHORTLevelName%
-
     set asctime=%FORMAT%
     set LOG_STR=set LOG_STR=%asctime% %SHORTLevelName% %Lmessage%
 
@@ -169,9 +164,7 @@ rem beginfunction
     rem echo Lout: %Lout%
     set Llevel=%2
     rem echo Llevel: %Llevel%
-
     call :FormatStr %Llevel% %3 %4 %5 %6 %7 %8 %9 || exit /b 1
-
     if %Lout% EQU 0 (
         echo %LOG_STR%
     )
@@ -200,7 +193,6 @@ rem beginfunction
     rem echo Lout: %Lout%
     set LFileName=%2
     rem echo LFileName: %LFileName%
-
     if exist %LFileName% (
         for /f %%s in (%LFileName%) do (
             if %Lout% EQU 0 (
@@ -232,7 +224,6 @@ rem beginfunction
     )
 
     if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
-
     rem ------------------------------------------------------
     rem Открытие файла журнала
     rem ------------------------------------------------------
