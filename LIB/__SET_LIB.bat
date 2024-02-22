@@ -349,7 +349,7 @@ rem beginfunction
     rem ------------------------------------------------------
     rem LOG_STR
     rem ------------------------------------------------------
-    LOG_STR=""
+    set LOG_STR=
 
     exit /b 0
 rem endfunction
