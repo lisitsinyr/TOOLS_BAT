@@ -146,7 +146,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD - Параметры журнала [0]
     set LOG_FILE_ADD=0
-    echo LOG_FILE_ADD: %LOG_FILE_ADD%
+    rem echo LOG_FILE_ADD: %LOG_FILE_ADD%
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT - Параметры журнала [0]
     set LOG_FILE_DT=0

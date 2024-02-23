@@ -273,7 +273,7 @@ rem beginfunction
     if "%LOG_FILE_ADD%"=="" (
         set LOG_FILE_ADD=1
     )
-    echo LOG_FILE_ADD: %LOG_FILE_ADD%
+    rem echo LOG_FILE_ADD: %LOG_FILE_ADD%
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT -
     if "%LOG_FILE_DT%"=="" (
