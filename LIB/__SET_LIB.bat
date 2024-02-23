@@ -122,37 +122,6 @@ rem beginfunction
     set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
     rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
 
-    rem -------------------------------------------------------------------
-    set S01=------------------------------------------------------
-    rem --------------------------------
-    set loStandard=0
-    set loTextFile=1
-    set loAll=2
-    rem --------------------------------
-    set NOTSET=0
-    set DEBUGT=1
-    set INFO=2
-    set WARNING=3
-    set ERROR=4
-    set CRITICAL=5
-    set DEBUGTEXT=11
-    set BEGIN=21
-    set END=22
-    set PROCESS=23
-    set TEXT=24
-    rem # --------------------------------
-    set ctlsNOTSET=" "
-    set ctlsDEBUGT=D
-    set ctlsINFO=I
-    set ctlsWARNING=W
-    set ctlsERROR=E
-    set ctlsCRITICAL=C
-    set ctlsBEGIN="<"
-    set ctlsEND=">"
-    set ctlsPROCESS=P
-    set ctlsDEBUGTEXT=T
-    set ctlsTEXT=T
-
     exit /b 0
 rem endfunction
 

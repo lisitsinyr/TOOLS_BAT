@@ -37,6 +37,45 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure SETVarLog ()
+rem --------------------------------------------------------------------------------
+:SETVarLog
+rem beginfunction
+    rem -------------------------------------------------------------------
+    set S01=------------------------------------------------------
+    rem --------------------------------
+    set loStandard=0
+    set loTextFile=1
+    set loAll=2
+    rem --------------------------------
+    set NOTSET=0
+    set DEBUGT=1
+    set INFO=2
+    set WARNING=3
+    set ERROR=4
+    set CRITICAL=5
+    set DEBUGTEXT=11
+    set BEGIN=21
+    set END=22
+    set PROCESS=23
+    set TEXT=24
+    rem # --------------------------------
+    set ctlsNOTSET=" "
+    set ctlsDEBUGT=D
+    set ctlsINFO=I
+    set ctlsWARNING=W
+    set ctlsERROR=E
+    set ctlsCRITICAL=C
+    set ctlsBEGIN="<"
+    set ctlsEND=">"
+    set ctlsPROCESS=P
+    set ctlsDEBUGTEXT=T
+    set ctlsTEXT=T
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure SHORTLevel (Alevel)
 rem --------------------------------------------------------------------------------
 :SHORTLevel
@@ -224,6 +263,9 @@ rem beginfunction
     )
 
     if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
+
+    call :SETVarLog
+
     rem ------------------------------------------------------
     rem Открытие файла журнала
     rem ------------------------------------------------------
