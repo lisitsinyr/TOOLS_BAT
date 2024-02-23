@@ -298,6 +298,8 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
+    if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
+
     rem -------------------------------------------------------------------
     call :AddLog %loAll% %TEXT% %S01% || exit /b 1
     call :AddLog %loAll% %INFO% Stop: %SCRIPT_BASEFILENAME% || exit /b 1
