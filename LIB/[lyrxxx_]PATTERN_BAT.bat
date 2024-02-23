@@ -144,8 +144,9 @@ rem beginfunction
     rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
     set LOG_FILENAME_FORMAT=
     rem -------------------------------------------------------------------
-    rem LOG_FILE_ADD - Параметры журнала [1]
+    rem LOG_FILE_ADD - Параметры журнала [0]
     set LOG_FILE_ADD=0
+    echo LOG_FILE_ADD: %LOG_FILE_ADD%
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT - Параметры журнала [0]
     set LOG_FILE_DT=0

@@ -55,7 +55,7 @@ rem LOG_DT_FORMAT -
 rem     LOG_DT_FORMAT=
 rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
 rem     LOG_FILENAME_FORMAT=
-rem LOG_FILE_ADD - Параметры журнала [1]
+rem LOG_FILE_ADD - Параметры журнала [0]
 rem     LOG_FILE_ADD=  
 rem LOG_FILE_DT - Параметры журнала [0]
 rem     LOG_FILE_DT=
@@ -273,7 +273,7 @@ rem beginfunction
     if "%LOG_FILE_ADD%"=="" (
         set LOG_FILE_ADD=1
     )
-    rem echo LOG_FILE_ADD: %LOG_FILE_ADD%
+    echo LOG_FILE_ADD: %LOG_FILE_ADD%
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT -
     if "%LOG_FILE_DT%"=="" (

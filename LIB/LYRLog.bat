@@ -139,7 +139,7 @@ rem beginfunction
     set Llevel=%1
     rem echo Llevel: %Llevel%
     set Lmessage=%2 %3 %4 %5 %6 %7 %8 %9
-    rem echo.Lmessage: %Lmessage%
+    rem echo Lmessage: %Lmessage%
     set YYYY=%date:~6,4%
     set MM=%date:~3,2%
     set DD=%date:~0,2%
@@ -272,7 +272,7 @@ rem beginfunction
     rem Открытие файла журнала
     rem ------------------------------------------------------
     set LFileName=%LOG_FULLFILENAME%
-    if "%LOG_FILE_ADD%"=="1" (
+    if "%LOG_FILE_ADD%"=="0" (
         if exist "%LFileName%" (
             del "%LFileName%"
         )
