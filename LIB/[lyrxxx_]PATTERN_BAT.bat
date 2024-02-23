@@ -73,7 +73,7 @@ rem beginfunction
     rem  -------------------------------------------------------------------
     rem  DEBUG 1-включить DEBUG 0-выключить DEBUG
     set DEBUG=%2
-    echo DEBUG: %DEBUG%
+    rem echo DEBUG: %DEBUG%
 
     set FUNCNAME=%0
     if "%DEBUG%"=="1" (

@@ -63,6 +63,10 @@ rem LOG_DIR - Каталог журнала
 rem     LOG_DIR=
 rem LOG_FILENAME - Файл журнала [имя]
 rem     LOG_FILENAME=
+rem LOG_FILESCRIPT - Файл первого скрипта [имя]
+rem     LOG_FILESCRIPT=
+rem LOG_STR -
+rem     LOG_STR=
 rem -------------------------------------------------------------------
 
 rem -------------------------------------------------------------------
@@ -281,7 +285,7 @@ rem beginfunction
     if "%LOG_DIR%"=="" (
         set LOG_DIR=%PROJECTS_LYR_DIR%\LOGS
     )
-    echo LOG_DIR: %LOG_DIR%
+    rem echo LOG_DIR: %LOG_DIR%
     if not exist %LOG_DIR% (
         echo ERROR: Dir %LOG_DIR% not exist
         exit /b 1
@@ -314,6 +318,11 @@ rem beginfunction
         set LOG_FULLFILENAME=%LOG_DIR%\%REPO_NAME%_%LOG_FILENAME%.log
     )
     rem echo LOG_FULLFILENAME: %LOG_FULLFILENAME%
+
+    rem ------------------------------------------------------
+    rem LOG_FILESCRIPT - Файл первого скрипта [имя]
+    rem ------------------------------------------------------
+    set LOG_FILESCRIPT=
 
     rem ------------------------------------------------------
     rem LOG_STR
