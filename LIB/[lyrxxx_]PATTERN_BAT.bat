@@ -213,10 +213,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    rem set SLEEP=10
-    rem timeout /T %SLEEP%
-
-    call :Pause %SLEEP% || exit /b 1
+    rem call :Pause %SLEEP% || exit /b 1
 
     rem call :PressAnyKey || exit /b 1
 
