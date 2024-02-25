@@ -128,7 +128,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem SLEEP - Number
     set SLEEP=
-    echo SLEEP: %SLEEP%
+    rem echo SLEEP: %SLEEP%
 
     exit /b 0
 rem endfunction
