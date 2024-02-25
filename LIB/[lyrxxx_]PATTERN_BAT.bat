@@ -64,7 +64,12 @@ exit /b 0
 :Check_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 rem -----------------------------------------------
 rem procedure MAIN_INIT (FULLFILENAME, DEBUG)
 rem -----------------------------------------------
@@ -207,6 +212,13 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
+
+    rem set SLEEP=10
+    rem timeout /T %SLEEP%
+
+    call :Pause %SLEEP% || exit /b 1
+
+    rem call :PressAnyKey || exit /b 1
 
     exit /b 0
 rem endfunction

@@ -32,6 +32,45 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure PressAnyKey ()
+rem --------------------------------------------------------------------------------
+:PressAnyKey
+rem beginfunction
+    set FUNCNAME=:PressAnyKey
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+
+    rem echo "Press any key to continue" && pause
+    
+    pause
+
+    exit /b 0
+rem endfunction
+   
+
+rem --------------------------------------------------------------------------------
+rem procedure Pause (SLEEP)
+rem --------------------------------------------------------------------------------
+:Pause
+rem beginfunction
+    set FUNCNAME=:Pause
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+
+    rem echo Pause: %1
+
+    if "%1%"=="" (
+        timeout 0
+    ) else (
+        timeout %1
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure Check_P1 ()
 rem --------------------------------------------------------------------------------
 :Check_P1
@@ -56,14 +95,15 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+
 rem --------------------------------------------------------------------------------
 rem procedure Check_P ()
 rem --------------------------------------------------------------------------------
 :Check_P
 rem beginfunction
-    set FNAME=procedure :Check_P
+    set FUNCNAME=:Check_P
     if "%DEBUG%"=="1" (
-        echo DEBUG: %FNAME% ...
+        echo DEBUG: procedure %FUNCNAME% ...
     )
 
     set P_Name=%1

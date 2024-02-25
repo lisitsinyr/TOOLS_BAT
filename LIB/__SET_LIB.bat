@@ -125,6 +125,10 @@ rem beginfunction
     rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
     set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
     rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
+    rem -------------------------------------------------------------------
+    rem SLEEP - Number
+    set SLEEP=1
+    echo SLEEP: %SLEEP%
 
     exit /b 0
 rem endfunction
