@@ -127,7 +127,7 @@ rem beginfunction
     rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: %DATETIME_STAMP%
     rem -------------------------------------------------------------------
     rem SLEEP - Number
-    set SLEEP=1
+    set SLEEP=
     echo SLEEP: %SLEEP%
 
     exit /b 0
