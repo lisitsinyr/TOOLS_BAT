@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem [lyrxxx_]PATTERN_BAT.bat
+rem [lyrxxx_]PATTERN.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -214,7 +214,6 @@ rem beginfunction
     )
 
     rem call :Pause %SLEEP% || exit /b 1
-
     rem call :PressAnyKey || exit /b 1
 
     exit /b 0
