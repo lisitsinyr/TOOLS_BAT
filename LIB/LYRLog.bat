@@ -262,7 +262,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
+    rem if "%__START_LOG__%"=="1" (exit /b 0) else (set __START_LOG__=1)
 
     call :SETVarLog
 
@@ -275,8 +275,9 @@ rem beginfunction
     if "%LOG_FILE_ADD%"=="0" (
         if exist "%LFileName%" (
             del "%LFileName%"
+        ) else (
+            touch "%LFileName%"
         )
-        touch "%LFileName%"
     ) else (
         if not exist %LFileName% (
             touch "%LFileName%"
