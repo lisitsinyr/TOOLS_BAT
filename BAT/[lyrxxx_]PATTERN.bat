@@ -160,7 +160,9 @@ rem beginfunction
     set LOG_DIR=
     rem -------------------------------------------------------------------
     rem LOG_FILENAME - Файл журнала [имя]
-    set LOG_FILENAME=
+    if "%LOG_FILENAME%"=="" (
+        set LOG_FILENAME=
+    )
     call :__SET_LOG || exit /b 1
 
     exit /b 0
