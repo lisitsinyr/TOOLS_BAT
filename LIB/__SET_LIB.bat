@@ -255,7 +255,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    rem if "%__SET_LOG__%"=="1" (exit /b 0) else (set __SET_LOG__=1)
+    if "%__SET_LOG__%"=="1" (exit /b 0) else (set __SET_LOG__=1)
 
     rem ------------------------------------------------------
     rem LOG_DT_FORMAT -
@@ -319,9 +319,6 @@ rem beginfunction
         )
     )
     echo LOG_FILENAME: %LOG_FILENAME%
-
-    pause
-
     rem -------------------------------------------------------------------
     rem LOG_FULLFILENAME - Файл журнала [каталог+имя+расширение]
     if "%REPO_NAME%"=="" (
