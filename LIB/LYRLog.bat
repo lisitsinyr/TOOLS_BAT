@@ -276,6 +276,7 @@ rem beginfunction
         if exist "%LFileName%" (
             del "%LFileName%"
         )
+        touch "%LFileName%"
     ) else (
         if not exist %LFileName% (
             touch "%LFileName%"
