@@ -255,7 +255,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    if "%__SET_LOG__%"=="1" (exit /b 0) else (set __SET_LOG__=1)
+    rem if "%__SET_LOG__%"=="1" (exit /b 0) else (set __SET_LOG__=1)
 
     rem ------------------------------------------------------
     rem LOG_DT_FORMAT -
@@ -273,7 +273,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD -
     if "%LOG_FILE_ADD%"=="" (
-        set LOG_FILE_ADD=1
+        set LOG_FILE_ADD=0
     )
     rem echo LOG_FILE_ADD: %LOG_FILE_ADD%
     rem -------------------------------------------------------------------
@@ -300,6 +300,7 @@ rem beginfunction
     )
     rem -------------------------------------------------------------------
     rem LOG_FILENAME - Файл журнала [имя]
+    echo LOG_FILENAME: %LOG_FILENAME%
     if "%LOG_FILENAME%"=="" (
         if "%LOG_FILENAME_FORMAT%"=="FILENAME" (
             set LOG_FILENAME=%SCRIPT_FILENAME%
@@ -317,7 +318,10 @@ rem beginfunction
            set LOG_FILENAME=%DATETIME_STAMP%_%LOG_FILENAME%
         )
     )
-    rem echo LOG_FILENAME: %LOG_FILENAME%
+    echo LOG_FILENAME: %LOG_FILENAME%
+
+    pause
+
     rem -------------------------------------------------------------------
     rem LOG_FULLFILENAME - Файл журнала [каталог+имя+расширение]
     if "%REPO_NAME%"=="" (
