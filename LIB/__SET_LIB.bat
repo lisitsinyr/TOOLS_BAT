@@ -255,8 +255,6 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    rem if "%__SET_LOG__%"=="1" (exit /b 0) else (set __SET_LOG__=1)
-
     rem ------------------------------------------------------
     rem LOG_DT_FORMAT -
     if "%LOG_DT_FORMAT%"=="" (
@@ -290,6 +288,7 @@ rem beginfunction
     rem echo LOG_DIR: %LOG_DIR%
     if not exist %LOG_DIR% (
         echo INFO: Dir %LOG_DIR% not exist
+        echo INFO: Каталог "$LOG_DIR" не существует...
         echo INFO: Create %LOG_DIR%
         mkdir %LOG_DIR%
         rem echo ERRORLEVEL: %ERRORLEVEL%
@@ -298,7 +297,6 @@ rem beginfunction
             exit /b 1
         )
     )
-
     rem -------------------------------------------------------------------
     rem LOG_FILENAME - Файл журнала [имя]
     if "%LOG_FILENAME%"=="" (
