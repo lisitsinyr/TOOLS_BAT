@@ -212,19 +212,6 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
-rem --------------------------------------------------------------------------------
-:MAIN_FUNC
-rem beginfunction
-    set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
-    )
-
-    exit /b 0
-rem endfunction
-
 rem =================================================
 rem procedure MAIN ()
 rem =================================================
@@ -239,6 +226,19 @@ rem beginfunction
 
     rem call :Pause %SLEEP% || exit /b 1
     rem call :PressAnyKey || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
 
     exit /b 0
 rem endfunction
