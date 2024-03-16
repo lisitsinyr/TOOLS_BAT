@@ -10,9 +10,9 @@ setlocal enabledelayedexpansion
     call :Check_P1 %1 || exit /b 1
     call :Check_P2 %2 || exit /b 1
     call :ExtractFileName %P1% || exit /b 1
-    rem echo ExtractFileName: %ExtractFileName%
+    echo ExtractFileName: %ExtractFileName%
     call :ExtractFileNameWithoutExt %P1% || exit /b 1
-    rem echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
+    echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
 
     rem P1 - каталог
     if exist %P1%\ (
@@ -26,7 +26,7 @@ setlocal enabledelayedexpansion
             set RARName=%P1%.rar
         )
     )
-    rem echo RARName: %RARName%
+    echo RARName: %RARName%
 
     rem P1 - каталог
     if exist %P1%\ (
