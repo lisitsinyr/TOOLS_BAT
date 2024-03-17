@@ -45,7 +45,6 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-
     call :ExtractFileName "%P1%" || exit /b 1
     rem echo ExtractFileName: %ExtractFileName%
     call :ExtractFileNameWithoutExt "%P1%" || exit /b 1
@@ -56,24 +55,13 @@ rem beginfunction
     rem echo FileAttr: %FileAttr%
 
     if "%FOLDER%"=="D" (
-        set RARName=%ExtractFileName%.rar
+        set RARCMD=rar a -r "%ExtractFileName%.rar" "%ExtractFileName%\*.*"
     )
     if "%FOLDER%"=="F" (
-        set RARName=%ExtractFileNameWithoutExt%.rar
+        set RARCMD=rar a "%ExtractFileNameWithoutExt%.rar" "%P1%"
     )
     if "%FOLDER%"=="" (
-        set RARName=%P1%.rar
-    )
-    echo RARName: %RARName%
-
-    if "%FOLDER%"=="D" (
-        set RARCMD=rar a -r "%RARName%" "%ExtractFileName%\*.*"
-    )
-    if "%FOLDER%"=="F" (
-        set RARCMD=rar a "%RARName%" "%P1%"
-    )
-    if "%FOLDER%"=="" (
-        set RARCMD=rar a -r "%RARName%" "%P2%"
+        set RARCMD=rar a -r "%P1%.rar" "%P2%"
     )
     echo RARCMD: %RARCMD%
 
