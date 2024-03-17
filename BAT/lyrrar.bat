@@ -11,32 +11,76 @@ setlocal enabledelayedexpansion
     set LIB_BAT=%SCRIPTS_DIR%\LIB
 
     rem set PN_CAPTION=Ввод значения
-    set RARName=RARName_default
-    set RARName=
-    rem echo RARName: %RARName%    
+    set P1=P1_default
+    set P1=
+    rem echo P1: %P1%
+    call :CurrentDir || exit /b 1
+    rem  echo CurrentDir: %CurrentDir%
 
-    call :Check_P RARName %1 || exit /b 1
-    echo RARName: %RARName%    
-    rem call :Check_P RARName "ssss ffff" || exit /b 1
-    rem echo RARName: %RARName%    
-
+    rem set PN_CAPTION=Ввод значения
+    set P2=P2_default
+    set P2=
     call :Check_P P2 %2 || exit /b 1
     echo P2: %P2%    
 
-    call :ExtractFileName "%RARName%" || exit /b 1
-    echo ExtractFileName: %ExtractFileName%
-
-    call :ExtractFileNameWithoutExt "%RARName%" || exit /b 1
-    echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
-
-    call :FullFileName "%ExtractFileName%" || exit /b 1
-    echo FullFileName: %FullFileName%
-
-    call :FileAttr "%FullFileName%" || exit /b 1
-    echo FileAttr: %FileAttr%
+    call :Check_P P1 %1 || exit /b 1
+    rem echo P1: %P1%    
+    if "%P1%"=="" (
+        echo ERROR: Параметр P1 не задан...
+        echo Использование: lyrrar.bat [архив] [файлы...]
+    ) else (
+        call :MAIN_FUNC
+    )
 
 :Exit
 exit /b 0
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+
+
+    call :ExtractFileName "%P1%" || exit /b 1
+    rem echo ExtractFileName: %ExtractFileName%
+    call :ExtractFileNameWithoutExt "%P1%" || exit /b 1
+    rem echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
+    call :FullFileName "%ExtractFileName%" || exit /b 1
+    rem echo FullFileName: %FullFileName%
+    call :FileAttr "%FullFileName%" || exit /b 1
+    rem echo FileAttr: %FileAttr%
+
+    if "%FOLDER%"=="D" (
+        set RARName=%ExtractFileName%.rar
+    )
+    if "%FOLDER%"=="F" (
+        set RARName=%ExtractFileNameWithoutExt%.rar
+    )
+    if "%FOLDER%"=="" (
+        set RARName=%P1%.rar
+    )
+    echo RARName: %RARName%
+
+    if "%FOLDER%"=="D" (
+        set RARCMD=rar a -r "%RARName%" "%ExtractFileName%\*.*"
+    )
+    if "%FOLDER%"=="F" (
+        set RARCMD=rar a "%RARName%" "%P1%"
+    )
+    if "%FOLDER%"=="" (
+        set RARCMD=rar a -r "%RARName%" "%P2%"
+    )
+    echo RARCMD: %RARCMD%
+
+    %RARCMD%
+
+    exit /b 0
+rem endfunction
 
 rem =================================================
 rem ФУНКЦИИ LIB
@@ -62,3 +106,7 @@ exit /b 0
 :FileAttr
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+:CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+rem =================================================

@@ -129,11 +129,9 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    echo _1: %1
+    rem echo _1: %1
 
     set ExtractFileName=%~nx1
-
-    echo ExtractFileName: %ExtractFileName%
 
     exit /b 0
 rem endfunction
@@ -178,14 +176,36 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    echo _1: %1
+    rem echo _1: %1
 
     set FileAttr=%~a1
-    echo FileAttr: %FileAttr%
+    rem echo FileAttr: %FileAttr%
 
-    set FOLDER=
-    if /i "%FileAttr:~0,1%"=="d" ( set FOLDER="d" )
-    echo FOLDER: %FOLDER%
+    if "%FileAttr%"=="" (
+        set FOLDER=
+    ) else (
+        if /i "%FileAttr:~0,1%"=="d" (
+           set FOLDER=D
+        ) else (
+           set FOLDER=F
+        )
+    )
+    rem echo FOLDER: %FOLDER%
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure CurrentDir ()
+rem --------------------------------------------------------------------------------
+:CurrentDir
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+
+    set CurrentDir=%cd%
 
     exit /b 0
 rem endfunction
