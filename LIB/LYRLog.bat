@@ -28,7 +28,7 @@ rem procedure LYRLog ()
 rem --------------------------------------------------------------------------------
 :LYRLog
 rem beginfunction
-    set FUNCNAME=:LYRLog
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
@@ -80,7 +80,7 @@ rem procedure SHORTLevel (Alevel)
 rem --------------------------------------------------------------------------------
 :SHORTLevel
 rem beginfunction
-    set FUNCNAME=:SHORTLevel
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
@@ -129,7 +129,7 @@ rem procedure FormatStr (Alevel, Amessage)
 rem --------------------------------------------------------------------------------
 :FormatStr
 rem beginfunction
-    set FUNCNAME=:FormatStr
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
@@ -194,7 +194,7 @@ rem procedure AddLog (Aout, Alevel, Value)
 rem --------------------------------------------------------------------------------
 :AddLog
 rem beginfunction
-    set FUNCNAME=:AddLog
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
@@ -223,7 +223,7 @@ rem procedure AddLogFile (Aout, AFileName)
 rem --------------------------------------------------------------------------------
 :AddLogFile
 rem beginfunction
-    set FUNCNAME=:AddLogFile
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
@@ -257,7 +257,7 @@ rem procedure StartLogFile (AFileName)
 rem --------------------------------------------------------------------------------
 :StartLogFile
 rem beginfunction
-    set FUNCNAME=:StartLogFile
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
@@ -294,7 +294,7 @@ rem procedure StopLogFile ()
 rem --------------------------------------------------------------------------------
 :StopLogFile
 rem beginfunction
-    set FUNCNAME=:StopLogFile
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )

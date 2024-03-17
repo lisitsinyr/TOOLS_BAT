@@ -10,12 +10,14 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
 
+    call :CurrentDir || exit /b 1
+    rem  echo CurrentDir: %CurrentDir%
+
     rem set PN_CAPTION=Ввод значения
     set P1=P1_default
     set P1=
-    rem echo P1: %P1%
-    call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    call :Check_P P1 %1 || exit /b 1
+    rem echo P1: %P1%    
 
     rem set PN_CAPTION=Ввод значения
     set P2=P2_default
@@ -23,8 +25,6 @@ setlocal enabledelayedexpansion
     call :Check_P P2 %2 || exit /b 1
     rem echo P2: %P2%    
 
-    call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
     if "%P1%"=="" (
         echo ERROR: Параметр P1 не задан...
         echo Использование: lyrrar.bat [архив] [файлы...]
@@ -58,13 +58,13 @@ rem beginfunction
     rem echo FullFileName: %FullFileName%
 
     if "%FOLDER%"=="D" (
-        set RARCMD=rar a -r "%ExtractFileName%.rar" "%ExtractFileName%\*.*"
+        set RARCMD=rar a -r "%ExtractFileName%" "%ExtractFileName%"
     )
     if "%FOLDER%"=="F" (
-        set RARCMD=rar a "%ExtractFileNameWithoutExt%.rar" "%P1%"
+        set RARCMD=rar a "%ExtractFileNameWithoutExt%" "%P1%"
     )
     if "%FOLDER%"=="" (
-        set RARCMD=rar a -r "%P1%.rar" "%P2%"
+        set RARCMD=rar a -r "%P1%" "%P2%"
     )
     echo RARCMD: %RARCMD%
 

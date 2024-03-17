@@ -77,7 +77,7 @@ rem procedure Check_P ()
 rem --------------------------------------------------------------------------------
 :Check_P
 rem beginfunction
-    set FUNCNAME=:Check_P
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )

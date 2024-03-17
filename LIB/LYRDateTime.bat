@@ -25,7 +25,7 @@ rem :LYRDateTime
 rem --------------------------------------------------------------------------------
 :LYRDateTime
 rem beginfunction
-    set FUNCNAME=:LYRDateTime
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
@@ -38,7 +38,7 @@ rem :YYYYMMDDHHMMSS
 rem --------------------------------------------------------------------------------
 :YYYYMMDDHHMMSS
 rem beginfunction
-    set FUNCNAME=:YYYYMMDDHHMMSS
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
@@ -54,7 +54,7 @@ rem :DateTime
 rem --------------------------------------------------------------------------------
 :DateTime
 rem beginfunction
-    set FUNCNAME=:DateTime
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )

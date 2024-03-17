@@ -23,7 +23,7 @@ rem procedure LYRStrUtils ()
 rem --------------------------------------------------------------------------------
 :LYRStrUtils
 rem beginfunction
-    set FUNCNAME=:LYRStrUtils
+    set FUNCNAME=%0
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )

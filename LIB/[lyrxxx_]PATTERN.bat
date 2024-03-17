@@ -185,8 +185,11 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
+    rem set PN_CAPTION=Ввод значения
     set P1=P1_default
-    call :Check_PN P1 %1 || exit /b 1
+    set P1=
+    call :Check_P P1 %1 || exit /b 1
+    rem echo P1: %P1%    
 
     rem call :AddLog %loStandard% %TEXT% "P1: %P1%" || exit /b 1
     rem call :AddLog %loTextFile% %TEXT% "P1: %P1%" || exit /b 1
