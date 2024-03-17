@@ -7,112 +7,58 @@ chcp 1251>NUL
 setlocal enabledelayedexpansion
 
 :begin
-    call :Check_P1 %1 || exit /b 1
-    call :Check_P2 %2 || exit /b 1
-    call :ExtractFileName %P1% || exit /b 1
+    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
+    set LIB_BAT=%SCRIPTS_DIR%\LIB
+
+    rem set PN_CAPTION=¬‚Ó‰ ÁÌ‡˜ÂÌËˇ
+    set RARName=RARName_default
+    set RARName=
+    rem echo RARName: %RARName%    
+
+    call :Check_P RARName %1 || exit /b 1
+    echo RARName: %RARName%    
+    rem call :Check_P RARName "ssss ffff" || exit /b 1
+    rem echo RARName: %RARName%    
+
+    call :Check_P P2 %2 || exit /b 1
+    echo P2: %P2%    
+
+    call :ExtractFileName "%RARName%" || exit /b 1
     echo ExtractFileName: %ExtractFileName%
-    call :ExtractFileNameWithoutExt %P1% || exit /b 1
+
+    call :ExtractFileNameWithoutExt "%RARName%" || exit /b 1
     echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
 
-    rem P1 - –∫–∞—Ç–∞–ª–æ–≥
-    if exist %P1%\ (
-        set RARName=%ExtractFileName%.rar
-    ) else (
-        rem P1 - —Ñ–∞–π–ª
-        if exist %P1% (
-            set RARName=%ExtractFileNameWithoutExt%.rar
-        ) else (
-            rem P1 - –∞—Ä—Ö–∏–≤
-            set RARName=%P1%.rar
-        )
-    )
-    echo RARName: %RARName%
+    call :FullFileName "%ExtractFileName%" || exit /b 1
+    echo FullFileName: %FullFileName%
 
-    rem P1 - –∫–∞—Ç–∞–ª–æ–≥
-    if exist %P1%\ (
-        set RARCMD=rar a -r %RARName% %ExtractFileName%\*.* 
-    ) else (
-        rem P1 - —Ñ–∞–π–ª
-        if exist %P1% (
-            set RARCMD=rar a "%RARName%" "%P1%"
-        ) else (
-            rem P1 - –∞—Ä—Ö–∏–≤
-            set RARCMD=rar a -r "%RARName%" "%P2%"
-        )
-    )
-    echo RARCMD: %RARCMD%
+    call :FileAttr "%FullFileName%" || exit /b 1
+    echo FileAttr: %FileAttr%
 
-    %RARCMD%
-    
 :Exit
 exit /b 0
 
-rem --------------------------------------------------------------------------------
-rem Check_P1 [P1_Value]
-rem --------------------------------------------------------------------------------
-:Check_P1
-rem beginfunction
-    set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
-    )
-
-    if "%1"=="" (
-        set P1=
-    ) else (
-        set P1=%1
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem Check_P2 [P2_Value]
-rem --------------------------------------------------------------------------------
-:Check_P2
-rem beginfunction
-    set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
-    )
-
-    if "%1"=="" (
-        set P2=
-    ) else (
-        set P2=%1
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure ExtractFileName (Filename)
-rem --------------------------------------------------------------------------------
+rem =================================================
+rem ‘”Õ ÷»» LIB
+rem =================================================
+:Check_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:ExtractFileDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FullFileName
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :ExtractFileName
-rem beginfunction
-    set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
-    )
-
-    rem echo _: %~nx1
-
-    set ExtractFileName=%~nx1
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure ExtractFileNameWithoutExt (FileName)
-rem --------------------------------------------------------------------------------
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :ExtractFileNameWithoutExt
-rem beginfunction
-    set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
-    )
-
-    set ExtractFileNameWithoutExt=%~n1
-
-    exit /b 0
-rem endfunction
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileExt
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FileAttr
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0

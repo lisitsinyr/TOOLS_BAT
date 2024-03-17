@@ -14,7 +14,7 @@ rem ----------------------------------------------------------------------------
     call :MAIN_SET || exit /b 1
     call :StartLogFile || exit /b 1
     rem set DIR_SAVE=%CURRENT_DIR%
-    rem call :MAIN_CHECK_PARAMETR || exit /b 1
+    call :MAIN_CHECK_PARAMETR || exit /b 1
     rem call :MAIN_SYNTAX || exit /b 1
     call :MAIN || exit /b 1
     call :StopLogFile || exit /b 1
@@ -57,7 +57,7 @@ exit /b 0
 :StopLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
-:Check_P
+:Check_PN
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Pause
@@ -186,7 +186,7 @@ rem beginfunction
     )
 
     set P1=P1_default
-    call :Check_P P1 %1 || exit /b 1
+    call :Check_PN P1 %1 || exit /b 1
 
     rem call :AddLog %loStandard% %TEXT% "P1: %P1%" || exit /b 1
     rem call :AddLog %loTextFile% %TEXT% "P1: %P1%" || exit /b 1
