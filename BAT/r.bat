@@ -47,12 +47,15 @@ rem beginfunction
 
     call :ExtractFileName "%P1%" || exit /b 1
     echo ExtractFileName: %ExtractFileName%
+
     call :ExtractFileNameWithoutExt "%P1%" || exit /b 1
     echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
-    call :FullFileName "%ExtractFileName%" || exit /b 1
-    echo FullFileName: %FullFileName%
-    call :FileAttr "%FullFileName%" || exit /b 1
+
+    call :FileAttr "%P1%" || exit /b 1
     echo FileAttr: %FileAttr%
+    
+    call :FullFileName "%P1%" || exit /b 1
+    echo FullFileName: %FullFileName%
 
     if "%FOLDER%"=="D" (
         set RARCMD=rar a -r "%ExtractFileName%.rar" "%ExtractFileName%\*.*"

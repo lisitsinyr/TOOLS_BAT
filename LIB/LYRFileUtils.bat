@@ -176,7 +176,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    rem echo _1: %1
+    rem echo _1: %~1
 
     set FileAttr=%~a1
     rem echo FileAttr: %FileAttr%
