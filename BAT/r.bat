@@ -21,7 +21,7 @@ setlocal enabledelayedexpansion
     set P2=P2_default
     set P2=
     call :Check_P P2 %2 || exit /b 1
-    echo P2: %P2%    
+    rem echo P2: %P2%    
 
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: %P1%    
@@ -46,16 +46,16 @@ rem beginfunction
     )
 
     call :ExtractFileName "%P1%" || exit /b 1
-    echo ExtractFileName: %ExtractFileName%
+    rem echo ExtractFileName: %ExtractFileName%
 
     call :ExtractFileNameWithoutExt "%P1%" || exit /b 1
-    echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
+    rem echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
 
     call :FileAttr "%P1%" || exit /b 1
-    echo FileAttr: %FileAttr%
+    rem echo FileAttr: %FileAttr%
     
     call :FullFileName "%P1%" || exit /b 1
-    echo FullFileName: %FullFileName%
+    rem echo FullFileName: %FullFileName%
 
     if "%FOLDER%"=="D" (
         set RARCMD=rar a -r "%ExtractFileName%.rar" "%ExtractFileName%\*.*"

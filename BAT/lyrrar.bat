@@ -21,7 +21,7 @@ setlocal enabledelayedexpansion
     set P2=P2_default
     set P2=
     call :Check_P P2 %2 || exit /b 1
-    echo P2: %P2%    
+    rem echo P2: %P2%    
 
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: %P1%    
