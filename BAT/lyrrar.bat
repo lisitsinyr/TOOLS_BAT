@@ -23,11 +23,6 @@ setlocal enabledelayedexpansion
         echo ERROR: Параметр P1 не задан...
         echo Использование: lyrrar.bat [архив] [файлы...]
     ) else (
-        set PN_CAPTION=Файлы
-        set P2=*.*
-        call :Check_P P2 %2 || exit /b 1
-        rem echo P2: %P2%    
-
         call :MAIN_FUNC
     )
 
@@ -63,6 +58,11 @@ rem beginfunction
         set RARCMD=rar a "%ExtractFileNameWithoutExt%.rar" "%P1%"
     )
     if "%FOLDER%"=="" (
+        set PN_CAPTION=Файлы
+        set P2=*.*
+        call :Check_P P2 %2 || exit /b 1
+        rem echo P2: %P2%    
+
         set RARCMD=rar a -r "%P1%.rar" "%P2%"
     )
     echo RARCMD: %RARCMD%
