@@ -13,15 +13,15 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    rem set PN_CAPTION=Р’РІРѕРґ Р·РЅР°С‡РµРЅРёСЏ
+    rem set PN_CAPTION=Ввод значения
     set P1=P1_default
     set P1=
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: %P1%    
 
     if "%P1%"=="" (
-        echo ERROR: РџР°СЂР°РјРµС‚СЂ P1 РЅРµ Р·Р°РґР°РЅ...
-        echo РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ: rard.bat [РїР°РїРєР°]
+        echo ERROR: Параметр P1 не задан...
+        echo Использование: rard.bat [папка]
     ) else (
         call :MAIN_FUNC
     )
@@ -48,7 +48,7 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
-rem Р¤РЈРќРљР¦РР LIB
+rem ФУНКЦИИ LIB
 rem =================================================
 :Check_P
 %LIB_BAT%\LYRSupport.bat %*
