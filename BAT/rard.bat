@@ -39,7 +39,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     
-    set RARCMD=rar a -r "%P1%" "%P1%"
+    set RARCMD=rar a -r "%P1%.rar" "%P1%"
     echo RARCMD: %RARCMD%
 
     %RARCMD%
