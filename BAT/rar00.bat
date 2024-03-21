@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem rard.bat
+rem rar00.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -13,18 +13,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    rem set PN_CAPTION=Ввод значения
-    set P1=P1_default
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
-
-    if "%P1%"=="" (
-        echo ERROR: Параметр P1 не задан...
-        echo Использование: rard.bat [папка]
-    ) else (
-        call :MAIN_FUNC
-    )
+    call :MAIN_FUNC
 
 :Exit
 exit /b 0
@@ -38,17 +27,25 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-    
-    set RARCMD=rar a -r "%P1%.rar" "%P1%"
-    echo RARCMD: %RARCMD%
 
-    %RARCMD%
+    call rard.bat "01"
+    call rard.bat "02"
+    call rard.bat "03"
+    call rard.bat "04"
+    call rard.bat "05"
+    call rard.bat "06"
+    call rard.bat "07"
+    call rard.bat "08"
+    call rard.bat "09"
+    call rard.bat "10"
+    call rard.bat "11"
+    call rard.bat "12"
 
     exit /b 0
 rem endfunction
 
 rem =================================================
-rem ФУНКЦИИ LIB
+rem Р¤РЈРќРљР¦РР LIB
 rem =================================================
 :Check_P
 %LIB_BAT%\LYRSupport.bat %*
