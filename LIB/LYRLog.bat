@@ -274,10 +274,10 @@ rem beginfunction
         if exist "%LFileName%" (
             del "%LFileName%"
         )
-        touch "%LFileName%"
+        touch -f "%LFileName%"
     ) else (
         if not exist %LFileName% (
-            touch "%LFileName%"
+            touch -f "%LFileName%"
         )
     )
     rem -------------------------------------------------------------------
