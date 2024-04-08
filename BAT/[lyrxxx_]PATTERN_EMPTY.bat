@@ -23,7 +23,7 @@ setlocal enabledelayedexpansion
     set P2=P2_default
     set P2=
     call :Check_P P2 %2 || exit /b 1
-    echo P2: %P2%    
+    rem echo P2: %P2%    
 
     if "%P1%"=="" (
         echo ERROR: Параметр P1 не задан...
