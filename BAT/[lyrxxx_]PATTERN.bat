@@ -10,6 +10,9 @@ rem ----------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
 :begin
+    set BATNAME=%~nx0
+    echo Старт %BATNAME% ...
+
     call :MAIN_INIT %0 0 || exit /b 1
     call :MAIN_SET || exit /b 1
     call :StartLogFile || exit /b 1
@@ -25,7 +28,7 @@ exit /b 0
 rem --------------------------------------------------------------------------------
 
 rem =================================================
-rem Р¤РЈРќРљР¦РР LIB
+rem ФУНКЦИИ LIB
 rem =================================================
 :__SET_VAR_SCRIPT
 %LIB_BAT%\__SET_LIB.bat %*
@@ -57,7 +60,7 @@ exit /b 0
 :StopLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
-:Check_PN
+:Check_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Pause
@@ -73,7 +76,7 @@ rem -----------------------------------------------
 :MAIN_INIT
 rem beginfunction
     rem  -------------------------------------------------------------------
-    rem  DEBUG 1-РІРєР»СЋС‡РёС‚СЊ DEBUG 0-РІС‹РєР»СЋС‡РёС‚СЊ DEBUG
+    rem  DEBUG 1-включить DEBUG 0-выключить DEBUG
     set DEBUG=%2
     rem echo DEBUG: %DEBUG%
     set FUNCNAME=%0
@@ -82,16 +85,16 @@ rem beginfunction
     )
 
     rem -------------------------------------------------------------------
-    rem PROJECTS - РёРјСЏ РїСЂРѕРµРєС‚Р°
+    rem PROJECTS - имя проекта
     rem -------------------------------------------------------------------
     set PROJECTS=PROJECTS_BAT
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR - РєР°С‚Р°Р»РѕРі РїСЂРѕРµРєС‚РѕРІ
+    rem PROJECTS_LYR_DIR - каталог проектов
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ
+    rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     if "%SCRIPTS_DIR%" == "" (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
@@ -99,7 +102,7 @@ rem beginfunction
         set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     )
     rem -------------------------------------------------------------------
-    rem SCRIPT_FULLFILENAME - Р¤Р°Р№Р» СЃРєСЂРёРїС‚Р° [РєР°С‚Р°Р»РѕРі+РёРјСЏ+СЂР°СЃС€РёСЂРµРЅРёРµ]
+    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_FULLFILENAME=%1
     rem echo PROJECTS_LYR_DIR: %PROJECTS_LYR_DIR%
@@ -107,25 +110,25 @@ rem beginfunction
     rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
   
     rem -------------------------------------------------------------------
-    rem PROJECTS_DIR - РєР°С‚Р°Р»РѕРі РїСЂРѕРµРєС‚Р°
+    rem PROJECTS_DIR - каталог проекта
     rem -------------------------------------------------------------------
     set PROJECTS_DIR=%PROJECTS_LYR_DIR%\CHECK_LIST\03_SCRIPT\04_BAT\%PROJECTS%
     rem echo PROJECTS_DIR: %PROJECTS_DIR%
 
     rem -------------------------------------------------------------------
-    rem LIB_BAT - РєР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё СЃРєСЂРёРїС‚РѕРІ
+    rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
     if "%LIB_BAT%" == "" (
         set LIB_BAT=%SCRIPTS_DIR%\LIB
         rem echo LIB_BAT: %LIB_BAT%
     )
     if not exist %LIB_BAT%\ (
-        echo ERROR: РљР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё LYR $LIB_BAT РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚...
+        echo ERROR: Каталог библиотеки LYR $LIB_BAT не существует...
         exit /b 0
     )
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR_KIX - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ KIX
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
     if "%SCRIPTS_DIR_KIX%" == "" (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
@@ -155,20 +158,20 @@ rem beginfunction
     rem LOG_DT_FORMAT -
     rem set LOG_DT_FORMAT=
     rem -------------------------------------------------------------------
-    rem LOG_FILENAME_FORMAT - Р¤РѕСЂРјР°С‚ РёРјРµРЅРё С„Р°Р№Р»Р° Р¶СѓСЂРЅР°Р»Р° [FILENAME,DATETIME,...]
+    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
     rem set LOG_FILENAME_FORMAT=
     rem -------------------------------------------------------------------
-    rem LOG_FILE_ADD - РџР°СЂР°РјРµС‚СЂС‹ Р¶СѓСЂРЅР°Р»Р° [0]
+    rem LOG_FILE_ADD - Параметры журнала [0]
     if "%LOG_FILE_ADD%"=="" set LOG_FILE_ADD=0
     rem echo LOG_FILE_ADD: %LOG_FILE_ADD%
     rem -------------------------------------------------------------------
-    rem LOG_FILE_DT - РџР°СЂР°РјРµС‚СЂС‹ Р¶СѓСЂРЅР°Р»Р° [0]
+    rem LOG_FILE_DT - Параметры журнала [0]
     if "%LOG_FILE_DT%"=="" set LOG_FILE_DT=0
     rem  -------------------------------------------------------------------
-    rem LOG_DIR - РљР°С‚Р°Р»РѕРі Р¶СѓСЂРЅР°Р»Р° [РєР°С‚Р°Р»РѕРі]
+    rem LOG_DIR - Каталог журнала [каталог]
     rem set LOG_DIR=
     rem -------------------------------------------------------------------
-    rem LOG_FILENAME - Р¤Р°Р№Р» Р¶СѓСЂРЅР°Р»Р° [РёРјСЏ]
+    rem LOG_FILENAME - Файл журнала [имя]
     rem set LOG_FILENAME=
     call :__SET_LOG || exit /b 1
 
@@ -185,7 +188,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    rem set PN_CAPTION=Р’РІРѕРґ Р·РЅР°С‡РµРЅРёСЏ
+    rem set PN_CAPTION=Ввод значения
     set P1=P1_default
     set P1=
     call :Check_P P1 %1 || exit /b 1

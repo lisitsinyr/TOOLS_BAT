@@ -7,6 +7,9 @@ chcp 1251>NUL
 setlocal enabledelayedexpansion
 
 :begin
+    set BATNAME=%~nx0
+    echo Старт %BATNAME% ...
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
 

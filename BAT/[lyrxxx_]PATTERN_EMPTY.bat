@@ -7,27 +7,30 @@ chcp 1251>NUL
 setlocal enabledelayedexpansion
 
 :begin
+    set BATNAME=%~nx0
+    echo Старт %BATNAME% ...
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
 
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    rem set PN_CAPTION=Р’РІРѕРґ Р·РЅР°С‡РµРЅРёСЏ
+    rem set PN_CAPTION=Ввод значения
     set P1=P1_default
     set P1=
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: %P1%    
 
-    rem set PN_CAPTION=Р’РІРѕРґ Р·РЅР°С‡РµРЅРёСЏ
+    rem set PN_CAPTION=Ввод значения
     set P2=P2_default
     set P2=
     call :Check_P P2 %2 || exit /b 1
     rem echo P2: %P2%    
 
     if "%P1%"=="" (
-        echo ERROR: РџР°СЂР°РјРµС‚СЂ P1 РЅРµ Р·Р°РґР°РЅ...
-        echo РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ: lyrrar.bat [Р°СЂС…РёРІ] [С„Р°Р№Р»С‹...]
+        echo ERROR: Параметр P1 не задан...
+        echo Использование: %BATNAME% P1 [P2] [...]
     ) else (
         call :MAIN_FUNC
     )
@@ -49,7 +52,7 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
-rem Р¤РЈРќРљР¦РР LIB
+rem ФУНКЦИИ LIB
 rem =================================================
 :Check_P
 %LIB_BAT%\LYRSupport.bat %*
