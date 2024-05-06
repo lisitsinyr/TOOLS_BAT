@@ -20,9 +20,26 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem Available commands:
+rem   about              Shows information about Poetry.
+rem   add                Adds a new dependency to pyproject.toml.
 rem   build              Builds a package, as a tarball and a wheel by default.
+rem   check              Validates the content of the pyproject.toml file and its consistency with the poetry.lock file.
+rem   config             Manages configuration settings.
+rem   export             Exports the lock file to alternative formats.
+rem   help               Displays help for a command.
+rem   init               Creates a basic pyproject.toml file in the current directory.
+rem   install            Installs the project dependencies.
+rem   list               Lists commands.
+rem   lock               Locks the project dependencies.
+rem   new                Creates a new Python project at <path>.
 rem   publish            Publishes a package to a remote repository.
+rem   remove             Removes a package from the project dependencies.
+rem   run                Runs a command in the appropriate environment.
 rem   search             Searches for packages on remote repositories.
+rem   shell              Spawns a shell within the virtual environment.
+rem   show               Shows information about packages.
+rem   update             Update the dependencies as according to the pyproject.toml file.
+rem   version            Shows the version of the project or bumps it when a valid bump rule is provided.
 rem 
 rem  cache
 rem   cache clear        Clears a Poetry cache by name.
@@ -64,11 +81,11 @@ setlocal enabledelayedexpansion
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
-    set PN_CAPTION=new,init,list,version,about,help,config,show,add,remove,update,install,lock,export,check,run,shell,...
-    set COMMAND=list
-    rem set COMMAND=
-    call :Check_P COMMAND %1 || exit /b 1
-    rem echo COMMAND: %COMMAND%
+    
+    call :read_choiceCOMMAND01
+    
+    call :read_COMMAND
+    echo COMMAND: %COMMAND%
 
     if "%COMMAND%"=="" (
         echo ERROR: Параметр COMMAND не задан...
@@ -76,10 +93,114 @@ setlocal enabledelayedexpansion
     ) else (
         call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
     )
+
     rem echo Использование: %BATNAME% [P1] [P2] [...]
     rem call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
 :Exit
 exit /b 0
+
+rem --------------------------------------------------------------------------------
+rem procedure read_COMMAND ()
+rem --------------------------------------------------------------------------------
+:read_COMMAND
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+
+    set PN_CAPTION=new,init,list,version,about,help,config,show,add,remove,update,install,lock,export,check,run,shell,publish,search,build,...
+    set COMMAND=list
+    rem set COMMAND=
+    call :Check_P COMMAND %1 || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure read_choiceCOMMAND01 ()
+rem --------------------------------------------------------------------------------
+:read_choiceCOMMAND01
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Available commands:
+    echo 01.about              Shows information about Poetry.
+    echo 02.add                Adds a new dependency to pyproject.toml.
+    echo 03.build              Builds a package, as a tarball and a wheel by default.
+    echo 04.check              Validates the content of the pyproject.toml file and its consistency with the poetry.lock file.
+    echo 05.config             Manages configuration settings.
+    echo 06.export             Exports the lock file to alternative formats.
+    echo 07.help               Displays help for a command.
+    echo 08.init               Creates a basic pyproject.toml file in the current directory.
+    echo 09.install            Installs the project dependencies.
+    echo 10.list               Lists commands.
+    echo 11.lock               Locks the project dependencies.
+    echo 12.new                Creates a new Python project at path.
+    echo 13.publish            Publishes a package to a remote repository.
+    echo 14.remove             Removes a package from the project dependencies.
+    echo 15.run                Runs a command in the appropriate environment.
+    echo 16.search             Searches for packages on remote repositories.
+    echo 17.shell              Spawns a shell within the virtual environment.
+    echo 18.show               Shows information about packages.
+    echo 19.update             Update the dependencies as according to the pyproject.toml file.
+    echo 20.version            Shows the version of the project or bumps it when a valid bump rule is provided.
+
+    echo 99.                   Quit
+
+    set /p CHOICE=PN_CAPTION[99][99]:
+
+    echo %CHOICE%
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure read_choiceCOMMAND02 ()
+rem --------------------------------------------------------------------------------
+:read_choiceCOMMAND02
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo cache
+    echo 01.cache clear        Clears a Poetry cache by name.
+    echo 02.cache list         List Poetry's caches.
+    echo 
+    echo debug
+    echo 03.debug info         Shows debug information.
+    echo 04.debug resolve      Debugs dependency resolution.
+    echo 
+    echo env
+    echo 05.env info           Displays information about the current environment.
+    echo 06.env list           Lists all virtualenvs associated with the current project.
+    echo 07.env remove         Remove virtual environments associated with the project.
+    echo 08.env use            Activates or creates a new virtualenv for the current project.
+    echo 
+    echo self
+    echo 09.self add           Add additional packages to Poetry's runtime environment.
+    echo 10.self install       Install locked packages (incl. addons) required by this Poetry installation.
+    echo 11.self lock          Lock the Poetry installation's system requirements.
+    echo 12.self remove        Remove additional packages from Poetry's runtime environment.
+    echo 13.self show          Show packages from Poetry's runtime environment.
+    echo 14.self show plugins  Shows information about the currently installed plugins.
+    echo 15.self update        Updates Poetry to the latest version.
+    echo 
+    echo source
+    echo 16.source add         Add source configuration for project.
+    echo 17.source remove      Remove source configured for the project.
+    echo 18.source show        Show information about sources configured for the project.
+    echo 99.                   Quit
+
+    set /p CHOICE=PN_CAPTION[99][99]:
+
+    echo %CHOICE%
+
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()
@@ -143,9 +264,15 @@ rem beginfunction
     if "%COMMAND%"=="shell" (
         call :poetry_shell %1 %2 %3 %4 %5 %6 %7 %8 %9
     ) else (
+    if "%COMMAND%"=="publish" (
+        call :poetry_publish %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="search" (
+        call :poetry_search %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
         echo ERROR: Параметр COMMAND не реализован...
         call :PressAnyKey || exit /b 1
-    )))))))))))))))))
+    )))))))))))))))))))
     exit /b 0
 rem endfunction
 
@@ -409,6 +536,51 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     echo Spawns a shell within the virtual environment.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_publish ()
+rem   publish            Publishes a package to a remote repository.
+rem --------------------------------------------------------------------------------
+:poetry_publish
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Publishes a package to a remote repository.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_search ()
+rem   search             Searches for packages on remote repositories.
+rem --------------------------------------------------------------------------------
+:poetry_search
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Searches for packages on remote repositories.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_build ()
+rem   build              Builds a package, as a tarball and a wheel by default.
+rem --------------------------------------------------------------------------------
+:poetry_build
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Builds a package, as a tarball and a wheel by default.
     call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     exit /b 0
 rem endfunction
