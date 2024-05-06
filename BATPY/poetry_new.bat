@@ -31,7 +31,7 @@ setlocal enabledelayedexpansion
     rem echo P2: %P2%    
 
     if "%P1%"=="" (
-        echo ERROR: Параметр P1 (project) не задан...
+        echo ERROR: Параметр P1 project не задан...
         echo Использование: %BATNAME% P1 [P2] [...]
     ) else (
         call :MAIN_FUNC new %1 %2 %3 %4 %5 %6 %7 %8 %9
