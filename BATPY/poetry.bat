@@ -18,7 +18,7 @@ setlocal enabledelayedexpansion
     rem  echo CurrentDir: %CurrentDir%
 
     set PN_CAPTION=Ввод значения
-    set COMMAND=[new,init,...]
+    set COMMAND=new,init,...
     rem set COMMAND=
     call :Check_P COMMAND %1 || exit /b 1
     rem echo COMMAND: %COMMAND%
@@ -50,11 +50,12 @@ rem beginfunction
     if "%COMMAND%"=="new" (
         call :poetry_new %1 %2 %3 %4 %5 %6 %7 %8 %9
     ) else (
-    if "%COMMAND%"=="init" (
-        call :poetry_init %1 %2 %3 %4 %5 %6 %7 %8 %9
-    ) else (
-        echo ERROR: Параметр COMMAND не реализован...
-        call :PressAnyKey || exit /b 1
+        if "%COMMAND%"=="init" (
+            call :poetry_init %1 %2 %3 %4 %5 %6 %7 %8 %9
+        ) else (
+            echo ERROR: Параметр COMMAND не реализован...
+            call :PressAnyKey || exit /b 1
+        )
     )
     exit /b 0
 rem endfunction
@@ -68,7 +69,19 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
+
+    set PN_CAPTION=Ввод значения
+    set PROJECTpath=test
+    call :Check_P PROJECTpath %2 || exit /b 1
+    if "%PROJECTpath%"=="" (
+        echo ERROR: Параметр PROJECTpath не задан...
+        echo Использование: %BATNAME% new PROJECTpath
+    ) else (
+        echo PROJECTpath: %PROJECTpath%
+    )
+
     C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    
     call :PressAnyKey || exit /b 1
     exit /b 0
 rem endfunction
@@ -82,18 +95,9 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-    rem set PN_CAPTION=Ввод значения
-    rem set PROJECT=test
-    rem set PROJECT=
-    rem call :Check_P PROJECT %2 || exit /b 1
-    rem if "%PROJECT%"=="" (
-    rem     echo ERROR: Параметр PROJECT не задан...
-    rem     echo Использование: %BATNAME% COMMAND PROJECT
-    rem ) else (
-    rem     echo PROJECT: %PROJECT%
-    rem )
 
     C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    
     call :PressAnyKey || exit /b 1
     exit /b 0
 rem endfunction
