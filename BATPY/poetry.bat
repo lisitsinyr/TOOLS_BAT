@@ -65,18 +65,18 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-    rem echo COMMAND: %COMMAND%
-    set PN_CAPTION=Ввод значения
-    set PROJECT=test
+    rem set PN_CAPTION=Ввод значения
+    rem set PROJECT=test
     rem set PROJECT=
-    call :Check_P PROJECT %2 || exit /b 1
-    if "%PROJECT%"=="" (
-        echo ERROR: Параметр PROJECT не задан...
-        echo Использование: %BATNAME% COMMAND PROJECT
-    ) else (
-        echo PROJECT: %PROJECT%
-        C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %PROJECT%
-    )
+    rem call :Check_P PROJECT %2 || exit /b 1
+    rem if "%PROJECT%"=="" (
+    rem     echo ERROR: Параметр PROJECT не задан...
+    rem     echo Использование: %BATNAME% COMMAND PROJECT
+    rem ) else (
+    rem     echo PROJECT: %PROJECT%
+    rem )
+
+    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     call :PressAnyKey || exit /b 1
     exit /b 0
 rem endfunction
