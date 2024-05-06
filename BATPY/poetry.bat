@@ -83,9 +83,9 @@ setlocal enabledelayedexpansion
     rem  echo CurrentDir: %CurrentDir%
     
     call :read_choiceCOMMAND01
-    
-    call :read_COMMAND
-    echo COMMAND: %COMMAND%
+    rem call :read_COMMAND
+
+    rem echo COMMAND: %COMMAND%
 
     if "%COMMAND%"=="" (
         echo ERROR: Параметр COMMAND не задан...
@@ -147,12 +147,69 @@ rem beginfunction
     echo 18.show               Shows information about packages.
     echo 19.update             Update the dependencies as according to the pyproject.toml file.
     echo 20.version            Shows the version of the project or bumps it when a valid bump rule is provided.
-
     echo 99.                   Quit
-
     set /p CHOICE=PN_CAPTION[99][99]:
-
     echo %CHOICE%
+    if "%CHOICE%"=="12" (
+        set COMMAND=new
+    ) else (
+    if "%CHOICE%"=="08" (
+        set COMMAND=init
+    ) else (
+    if "%CHOICE%"=="10" (
+        set COMMAND=list
+    ) else (
+    if "%CHOICE%"=="20" (
+        set COMMAND=version
+    ) else (
+    if "%CHOICE%"=="01" (
+        set COMMAND=about
+    ) else (
+    if "%CHOICE%"=="07" (
+        set COMMAND=help
+    ) else (
+    if "%CHOICE%"=="05" (
+        set COMMAND=config
+    ) else (
+    if "%CHOICE%"=="18" (
+        set COMMAND=show
+    ) else (
+    if "%CHOICE%"=="02" (
+        set COMMAND=add
+    ) else (
+    if "%CHOICE%"=="14" (
+        set COMMAND=remove
+    ) else (
+    if "%CHOICE%"=="19" (
+        set COMMAND=update
+    ) else (
+    if "%CHOICE%"=="09" (
+        set COMMAND=install
+    ) else (
+    if "%CHOICE%"=="11" (
+        set COMMAND=lock
+    ) else (
+    if "%CHOICE%"=="06" (
+        set COMMAND=export
+    ) else (
+    if "%CHOICE%"=="04" (
+        set COMMAND=check
+    ) else (
+    if "%CHOICE%"=="15" (
+        set COMMAND=run
+    ) else (
+    if "%CHOICE%"=="17" (
+        set COMMAND=shell
+    ) else (
+    if "%CHOICE%"=="13" (
+        set COMMAND=publish
+    ) else (
+    if "%CHOICE%"=="16" (
+        set COMMAND=search
+    ) else (
+        echo ERROR: Параметр CHOICE не реализован...
+        call :PressAnyKey || exit /b 1
+    )))))))))))))))))))
 
     exit /b 0
 rem endfunction
@@ -211,7 +268,7 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-    echo COMMAND: %COMMAND%
+    rem echo COMMAND: %COMMAND%
 
     if "%COMMAND%"=="new" (
         call :poetry_new %1 %2 %3 %4 %5 %6 %7 %8 %9
