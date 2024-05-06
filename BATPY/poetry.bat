@@ -20,7 +20,6 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem Available commands:
-rem   add                Adds a new dependency to pyproject.toml.
 rem   build              Builds a package, as a tarball and a wheel by default.
 rem   check              Validates the content of the pyproject.toml file and its consistency with the poetry.lock file.
 rem   export             Exports the lock file to alternative formats.
@@ -31,7 +30,6 @@ rem   remove             Removes a package from the project dependencies.
 rem   run                Runs a command in the appropriate environment.
 rem   search             Searches for packages on remote repositories.
 rem   shell              Spawns a shell within the virtual environment.
-rem   show               Shows information about packages.
 rem   update             Update the dependencies as according to the pyproject.toml file.
 rem 
 rem  cache
@@ -74,7 +72,7 @@ setlocal enabledelayedexpansion
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
-    set PN_CAPTION=new,init,list,version,about,help,config...
+    set PN_CAPTION=new,init,list,version,about,help,config,show,add...
     set COMMAND=list
     rem set COMMAND=
     call :Check_P COMMAND %1 || exit /b 1
@@ -123,9 +121,15 @@ rem beginfunction
     if "%COMMAND%"=="config" (
         call :poetry_config %1 %2 %3 %4 %5 %6 %7 %8 %9
     ) else (
+    if "%COMMAND%"=="show" (
+        call :poetry_show %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="add" (
+        call :poetry_add %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
         echo ERROR: Параметр COMMAND не реализован...
         call :PressAnyKey || exit /b 1
-    )))))))
+    ))))))))
     exit /b 0
 rem endfunction
 
@@ -139,9 +143,7 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-
     echo Creates a new Python project at path.
-
     set PN_CAPTION=Ввод значения
     set PROJECTpath=test
     call :Check_P PROJECTpath %2 || exit /b 1
@@ -151,9 +153,7 @@ rem beginfunction
     ) else (
         echo PROJECTpath: %PROJECTpath%
     )
-    rem C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %PROJECTpath% %3 %4 %5 %6 %7 %8 %9
-   
-    call :PressAnyKey || exit /b 1
+    rem call :run_poetry %COMMAND% %PROJECTpath% %3 %4 %5 %6 %7 %8 %9
     exit /b 0
 rem endfunction
 
@@ -168,8 +168,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     echo Creates a basic pyproject.toml file in the current directory.
-    rem C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
-    call :PressAnyKey || exit /b 1
+    rem call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     exit /b 0
 rem endfunction
 
@@ -184,8 +183,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     echo Lists commands.
-    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
-    call :PressAnyKey || exit /b 1
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     exit /b 0
 rem endfunction
 
@@ -200,8 +198,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     echo Shows the version of the project or bumps it when a valid bump rule is provided.
-    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
-    call :PressAnyKey || exit /b 1
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     exit /b 0
 rem endfunction
 
@@ -216,8 +213,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     echo Shows information about Poetry.
-    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
-    call :PressAnyKey || exit /b 1
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     exit /b 0
 rem endfunction
 
@@ -232,8 +228,7 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     echo Displays help for a command.
-    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
-    call :PressAnyKey || exit /b 1
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     exit /b 0
 rem endfunction
 
@@ -248,6 +243,49 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     echo Manages configuration settings.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_show ()
+rem   show               Shows information about packages.
+rem --------------------------------------------------------------------------------
+:poetry_show
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Shows information about packages.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_add ()
+rem   add                Adds a new dependency to pyproject.toml.
+rem --------------------------------------------------------------------------------
+:poetry_add
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Adds a new dependency to pyproject.toml.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure run_poetry ()
+rem --------------------------------------------------------------------------------
+:run_poetry
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
     C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     call :PressAnyKey || exit /b 1
     exit /b 0
