@@ -17,27 +17,21 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    rem set PN_CAPTION=Ввод значения
-    set P1=P1_default
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
+    set PN_CAPTION=Ввод значения
+    set COMMAND=init
+    rem set COMMAND=
+    call :Check_P COMMAND %1 || exit /b 1
+    rem echo COMMAND: %COMMAND%
 
-    rem set PN_CAPTION=Ввод значения
-    set P2=P2_default
-    set P2=
-    call :Check_P P2 %2 || exit /b 1
-    rem echo P2: %P2%    
+    if "%COMMAND%"=="" (
+        echo ERROR: Параметр COMMAND не задан...
+        echo Использование: %BATNAME% COMMAND [P2] [...]
+    ) else (
+        call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
+    )
 
-    rem if "%P1%"=="" (
-    rem     echo ERROR: Параметр P1 не задан...
-    rem     echo Использование: %BATNAME% P1 [P2] [...]
-    rem ) else (
-    rem     call :MAIN_FUNC
-    rem )
-
-    echo Использование: %BATNAME% [P1] [P2] [...]
-    call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
+    rem echo Использование: %BATNAME% [P1] [P2] [...]
+    rem call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 :Exit
 exit /b 0
@@ -51,9 +45,39 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
+    echo COMMAND: %COMMAND%
 
-    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %1 %2 %3 %4 %5 %6 %7 %8 %9
+    if "%COMMAND%"=="init" (
+        call :poetry_init %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+        echo ERROR: Параметр COMMAND не реализован...
+        call :PressAnyKey || exit /b 1
+    )
+    exit /b 0
+rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure poetry_init ()
+rem --------------------------------------------------------------------------------
+:poetry_init
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    rem echo COMMAND: %COMMAND%
+    set PN_CAPTION=Ввод значения
+    set PROJECT=test
+    rem set PROJECT=
+    call :Check_P PROJECT %2 || exit /b 1
+    if "%PROJECT%"=="" (
+        echo ERROR: Параметр PROJECT не задан...
+        echo Использование: %BATNAME% COMMAND PROJECT
+    ) else (
+        echo PROJECT: %PROJECT%
+        rem C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %PROJECT%
+    )
+    call :PressAnyKey || exit /b 1
     exit /b 0
 rem endfunction
 
@@ -61,6 +85,9 @@ rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
 :Check_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:PressAnyKey
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :ExtractFileDir
