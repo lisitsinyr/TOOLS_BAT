@@ -18,7 +18,7 @@ setlocal enabledelayedexpansion
     rem  echo CurrentDir: %CurrentDir%
 
     set PN_CAPTION=Ввод значения
-    set COMMAND=init
+    set COMMAND=[new,init,...]
     rem set COMMAND=
     call :Check_P COMMAND %1 || exit /b 1
     rem echo COMMAND: %COMMAND%
@@ -47,12 +47,29 @@ rem beginfunction
     )
     echo COMMAND: %COMMAND%
 
+    if "%COMMAND%"=="new" (
+        call :poetry_new %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
     if "%COMMAND%"=="init" (
         call :poetry_init %1 %2 %3 %4 %5 %6 %7 %8 %9
     ) else (
         echo ERROR: Параметр COMMAND не реализован...
         call :PressAnyKey || exit /b 1
     )
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_new ()
+rem --------------------------------------------------------------------------------
+:poetry_new
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    call :PressAnyKey || exit /b 1
     exit /b 0
 rem endfunction
 
