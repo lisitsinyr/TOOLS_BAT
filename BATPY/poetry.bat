@@ -21,16 +21,8 @@ rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for norma
 rem 
 rem Available commands:
 rem   build              Builds a package, as a tarball and a wheel by default.
-rem   check              Validates the content of the pyproject.toml file and its consistency with the poetry.lock file.
-rem   export             Exports the lock file to alternative formats.
-rem   install            Installs the project dependencies.
-rem   lock               Locks the project dependencies.
 rem   publish            Publishes a package to a remote repository.
-rem   remove             Removes a package from the project dependencies.
-rem   run                Runs a command in the appropriate environment.
 rem   search             Searches for packages on remote repositories.
-rem   shell              Spawns a shell within the virtual environment.
-rem   update             Update the dependencies as according to the pyproject.toml file.
 rem 
 rem  cache
 rem   cache clear        Clears a Poetry cache by name.
@@ -72,7 +64,7 @@ setlocal enabledelayedexpansion
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
-    set PN_CAPTION=new,init,list,version,about,help,config,show,add...
+    set PN_CAPTION=new,init,list,version,about,help,config,show,add,remove,update,install,lock,export,check,run,shell,...
     set COMMAND=list
     rem set COMMAND=
     call :Check_P COMMAND %1 || exit /b 1
@@ -127,9 +119,33 @@ rem beginfunction
     if "%COMMAND%"=="add" (
         call :poetry_add %1 %2 %3 %4 %5 %6 %7 %8 %9
     ) else (
+    if "%COMMAND%"=="remove" (
+        call :poetry_remove %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="update" (
+        call :poetry_update %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="install" (
+        call :poetry_install %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="lock" (
+        call :poetry_lock %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="export" (
+        call :poetry_export %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="check" (
+        call :poetry_check %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="run" (
+        call :poetry_run %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
+    if "%COMMAND%"=="shell" (
+        call :poetry_shell %1 %2 %3 %4 %5 %6 %7 %8 %9
+    ) else (
         echo ERROR: Параметр COMMAND не реализован...
         call :PressAnyKey || exit /b 1
-    ))))))))
+    )))))))))))))))))
     exit /b 0
 rem endfunction
 
@@ -273,6 +289,126 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
     echo Adds a new dependency to pyproject.toml.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_remove ()
+rem   remove             Removes a package from the project dependencies.
+rem --------------------------------------------------------------------------------
+:poetry_remove
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Removes a package from the project dependencies.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_remove ()
+rem   update             Update the dependencies as according to the pyproject.toml file.
+rem --------------------------------------------------------------------------------
+:poetry_update
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Update the dependencies as according to the pyproject.toml file.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_install ()
+rem   install            Installs the project dependencies.
+rem --------------------------------------------------------------------------------
+:poetry_install
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Installs the project dependencies.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_lock ()
+rem   lock               Locks the project dependencies.
+rem --------------------------------------------------------------------------------
+:poetry_lock
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Locks the project dependencies.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_export ()
+rem   export             Exports the lock file to alternative formats.
+rem --------------------------------------------------------------------------------
+:poetry_export
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Exports the lock file to alternative formats.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_check ()
+rem   check              Validates the content of the pyproject.toml file and its consistency with the poetry.lock file.
+rem --------------------------------------------------------------------------------
+:poetry_check
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Validates the content of the pyproject.toml file and its consistency with the poetry.lock file.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_run ()
+rem   run                Runs a command in the appropriate environment.
+rem --------------------------------------------------------------------------------
+:poetry_run
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Runs a command in the appropriate environment.
+    call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure poetry_shell ()
+rem   shell              Spawns a shell within the virtual environment.
+rem --------------------------------------------------------------------------------
+:poetry_shell
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+    echo Spawns a shell within the virtual environment.
     call :run_poetry %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
     exit /b 0
 rem endfunction
