@@ -80,7 +80,7 @@ rem beginfunction
         echo PROJECTpath: %PROJECTpath%
     )
 
-    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %PROJECTpath% %3 %4 %5 %6 %7 %8 %9
     
     call :PressAnyKey || exit /b 1
     exit /b 0
