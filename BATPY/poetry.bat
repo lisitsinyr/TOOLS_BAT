@@ -75,7 +75,7 @@ rem beginfunction
         echo Использование: %BATNAME% COMMAND PROJECT
     ) else (
         echo PROJECT: %PROJECT%
-        rem C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %PROJECT%
+        C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %PROJECT%
     )
     call :PressAnyKey || exit /b 1
     exit /b 0
