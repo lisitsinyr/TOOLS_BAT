@@ -20,7 +20,7 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem -------------------------------------------------------------------
-rem   init - Creates a basic pyproject.toml file in the current directory.
+rem   init - Creates a basic pyproject.toml file in the current directory
 rem -------------------------------------------------------------------
 rem   Options
 rem   --name: Name of the package.
@@ -45,21 +45,18 @@ setlocal enabledelayedexpansion
 
     echo Creates a basic pyproject.toml file in the current directory ...
     set COMMAND=init
-    rem echo COMMAND: %COMMAND%
-
-    echo Удаление файла pyproject.toml
-    del pyproject.toml
+    set APPRUN=poetry -vvv %COMMAND%
 
     set P1=
     call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
    
     if "%P1%"=="" (
-        call :run_poetry %1 %2 %3 %4 %5 %6 %7 %8 %9
-        rem call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
+        call :MAIN_FUNC
     ) else (
-        call :run_poetry %1 %2 %3 %4 %5 %6 %7 %8 %9
+        set APPRUN=poetry %*
     )
+    echo APPRUN: %APPRUN%
+    %APPRUN%
 
 :Exit
 exit /b 0
@@ -74,53 +71,61 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set name=test
-    set description=description
-    set author=lisitsinyr ^<lisitsinyr@gmail.com^>
-    set python="^3.12"
-    set dependency=
-    set dev-dependency=
+    set tomlFile=pyproject.toml
+    if exist "%tomlFile%" (
+        echo Удаление файла %tomlFile%
+        del %tomlFile%
+    )
 
+    set name=test
     set PN_CAPTION=Name of the package
     call :Read_P name %1 || exit /b 1
     rem echo name: %name%
+    if not "%name%"=="" (
+        set APPRUN=%APPRUN% --name %name%
+    )
+
+    set description=description
     set PN_CAPTION=Description of the package
     call :Read_P description %1 || exit /b 1
     rem echo description: %description%
+    if not "%description%"=="" (
+        set APPRUN=%APPRUN% --description "%description%"
+    )
+    
+    set author="lisitsinyr <lisitsinyr@gmail.com>"
     set PN_CAPTION=Author of the package
-    call :Read_P author %1 || exit /b 1
+    rem call :Read_P author %1 || exit /b 1
     rem echo author: %author%
+    rem if not "%author%"=="" (
+    rem     set APPRUN=%APPRUN% --author %author%
+    rem )
+    
+    set python=
     set PN_CAPTION=Compatible Python versions
     call :Read_P python %1 || exit /b 1
     rem echo python: %python%
+    if not "%python%"=="" (
+        set APPRUN=%APPRUN% --python %python%
+    )
+    
+    set dependency=
     set PN_CAPTION=Package to require with a version constraint
-    call :Read_P dependency %1 || exit /b 1
+    rem call :Read_P dependency %1 || exit /b 1
     rem echo dependency: %dependency%
+    if not "%dependency%"=="" (
+        set APPRUN=%APPRUN% --dependency %dependency%
+    )
+    
+    set dev-dependency=
     set PN_CAPTION=Development requirements
-    call :Read_P dev-dependency %1 || exit /b 1
+    rem call :Read_P dev-dependency %1 || exit /b 1
     rem echo dev-dependency: %dev-dependency%
-
-    call :run_poetry "--name %name%" "--description %description%" "--author %author%" "--python %python%" "--dependency %dependency%" "--dev-dependency %dev-dependency%"
+    if not "%dev-dependency%"=="" (
+        set APPRUN=%APPRUN% --dev-dependency %dev-dependency%
+    )
 :Exit
 exit /b 0
-
-rem --------------------------------------------------------------------------------
-rem procedure run_poetry ()
-rem --------------------------------------------------------------------------------
-:run_poetry
-rem beginfunction
-    set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
-    )
-
-    rem C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
-    poetry.exe %COMMAND% %1 %2 %3 %4 %5 %6 %7 %8 %9
-
-    rem call :PressAnyKey || exit /b 1
-
-    exit /b 0
-rem endfunction
 
 rem =================================================
 rem ФУНКЦИИ LIB

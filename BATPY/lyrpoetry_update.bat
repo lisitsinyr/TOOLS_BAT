@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem lyrpoetry_init.bat
+rem lyrpoetry_install.bat
 rem     Запуск poetry из глобального виртуального пространства
 rem Poetry (version 1.8.2)
 rem 
@@ -20,14 +20,18 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem -------------------------------------------------------------------
-rem   new - Creates a new Python project at <path>
+rem   update - Update the dependencies as according to the pyproject.toml file.
+rem            In order to get the latest versions of the dependencies and to update
+rem            the poetry.lock file, you should use the update command.
 rem -------------------------------------------------------------------
 rem   Options
-rem    --name: Set the resulting package name.
-rem    --src: Use the src layout for the project.
-rem    --readme: Specify the readme file extension.
-rem      Default is md. If you intend to publish to PyPI keep the recommendations
-rem      for a PyPI-friendly README in mind.
+rem   --without: The dependency groups to ignore.
+rem   --with: The optional dependency groups to include.
+rem   --only: The only dependency groups to include.
+rem   --dry-run : Outputs the operations but will not execute anything (implicitly enables –verbose).
+rem   --no-dev : Do not update the development dependencies. (Deprecated, use --only main or --without dev instead)
+rem   --lock : Do not perform install (only update the lockfile).
+rem   --sync: Synchronize the environment with the locked packages and the specified groups.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -42,9 +46,9 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Creates a new Python project at ^<path^> ...
-    set COMMAND=new
-    set APPRUN=poetry %COMMAND%
+    echo Update the dependencies as according to the pyproject.toml file ...
+    set COMMAND=update
+    set APPRUN=poetry -v %COMMAND%
 
     set P1=
     call :Check_P P1 %1 || exit /b 1
@@ -56,7 +60,6 @@ setlocal enabledelayedexpansion
     )
     echo APPRUN: %APPRUN%
     %APPRUN%
-    rem call :PressAnyKey || exit /b 1
 
 :Exit
 exit /b 0
@@ -71,48 +74,54 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set folder=folder folder
-    set PN_CAPTION=Folder
-    call :Read_P folder || exit /b 1
-    rem echo folder: %folder%
-
-    if "%folder%"=="" (
-        set tomlFile=pyproject.toml
-        if exist "%tomlFile%" (
-            echo Удаление файла %tomlFile%
-            del %tomlFile%
-        )
-    ) else (
-        if exist "%folder%"\ (
-            echo ERROR: Каталог "%folder%" существует...
-            echo Удаление каталога "%folder%"
-            rmdir "%folder%" /s
-        )
-        set APPRUN=%APPRUN% "%folder%"
+    set without=
+    set PN_CAPTION=without
+    call :Read_P without %1 || exit /b 1
+    rem echo without: %without%
+    if not "%without%"=="" (
+        set APPRUN=%APPRUN% --without %without%
     )
-
-    set name=test
-    set PN_CAPTION=Name of the package
-    call :Read_P name || exit /b 1
-    rem echo name: %name%
-    if not "%name%"=="" (
-        set APPRUN=%APPRUN% --name %name%
+    set with=
+    set PN_CAPTION=with
+    call :Read_P with %1 || exit /b 1
+    rem echo with: %with%
+    if not "%with%"=="" (
+        set APPRUN=%APPRUN% --with %with%
     )
-
-    set src=
-    set PN_CAPTION=Use the src layout for the project
-    call :Read_P src || exit /b 1
-    rem echo src: %src%
-    if not "%src%"=="" (
-        set APPRUN=%APPRUN% --src
+    set only=
+    set PN_CAPTION=only
+    call :Read_P only %1 || exit /b 1
+    rem echo only: %only%
+    if not "%only%"=="" (
+        set APPRUN=%APPRUN% --only %only%
     )
-
-    set readme=md
-    set PN_CAPTION= Specify the readme file extension
-    call :Read_P readme || exit /b 1
-    rem echo readme: %readme%
-    if not "%readme%"=="" (
-        set APPRUN=%APPRUN% --readme %readme%
+    set dry-run=
+    set PN_CAPTION=dry-run
+    call :Read_P dry-run %1 || exit /b 1
+    rem echo dry-run: %dry-run%
+    if not "%dry-run%"=="" (
+        set APPRUN=%APPRUN% --dry-run %dry-run%
+    )
+    set no-dev=
+    set PN_CAPTION=no-dev
+    call :Read_P no-dev %1 || exit /b 1
+    rem echo no-dev: %no-dev%
+    if not "%no-dev%"=="" (
+        set APPRUN=%APPRUN% --no-dev %no-dev%
+    )
+    set lock=
+    set PN_CAPTION=lock
+    call :Read_P lock %1 || exit /b 1
+    rem echo lock: %lock%
+    if not "%lock%"=="" (
+        set APPRUN=%APPRUN% --lock %lock%
+    )
+    set sync=
+    set PN_CAPTION=sync
+    call :Read_P sync %1 || exit /b 1
+    rem echo sync: %sync%
+    if not "%sync%"=="" (
+        set APPRUN=%APPRUN% --sync %sync%
     )
 :Exit
 exit /b 0
