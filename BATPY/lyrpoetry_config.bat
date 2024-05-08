@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem lyrpoetry_new.bat
+rem lyrpoetry_config.bat
 rem     Запуск poetry из глобального виртуального пространства
 rem Poetry (version 1.8.2)
 rem 
@@ -20,14 +20,15 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem -------------------------------------------------------------------
-rem   new - Creates a new Python project at <path>
+rem   config - Manages configuration settings.
+rem            The config command allows you to edit poetry config settings and repositories.
 rem -------------------------------------------------------------------
+rem   Usage
+rem   poetry config [options] [setting-key] [setting-value1] ... [setting-valueN]
 rem   Options
-rem    --name: Set the resulting package name.
-rem    --src: Use the src layout for the project.
-rem    --readme: Specify the readme file extension.
-rem      Default is md. If you intend to publish to PyPI keep the recommendations
-rem      for a PyPI-friendly README in mind.
+rem   --unset: Remove the configuration element named by setting-key.
+rem   --list: Show the list of current config variables.
+rem   --local: Set/Get settings that are specific to a project (in the local configuration file poetry.toml).
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -42,9 +43,9 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Creates a new Python project at ^<path^> ...
-    set COMMAND=new
-    set APPRUN=poetry %COMMAND%
+    echo Manages configuration settings ...
+    set COMMAND=config
+    set APPRUN=poetry -v %COMMAND%
 
     set P1=
     call :Check_P P1 %1 || exit /b 1
@@ -56,7 +57,6 @@ setlocal enabledelayedexpansion
     )
     echo APPRUN: %APPRUN%
     %APPRUN%
-    rem call :PressAnyKey || exit /b 1
 
 :Exit
 exit /b 0
@@ -71,48 +71,19 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set folder=folder folder
-    set PN_CAPTION=Folder
-    call :Read_P folder || exit /b 1
-    rem echo folder: %folder%
-
-    if "%folder%"=="" (
-        set tomlFile=pyproject.toml
-        if exist "%tomlFile%" (
-            echo Удаление файла %tomlFile%
-            del %tomlFile%
-        )
-    ) else (
-        if exist "%folder%"\ (
-            echo ERROR: Каталог "%folder%" существует...
-            echo Удаление каталога "%folder%"
-            rmdir "%folder%" /s
-        )
-        set APPRUN=%APPRUN% "%folder%"
+    set dry-run=
+    set PN_CAPTION=dry-run
+    call :Read_P dry-run %1 || exit /b 1
+    rem echo dry-run: %dry-run%
+    if not "%dry-run%"=="" (
+        set APPRUN=%APPRUN% --dry-run %dry-run%
     )
-
-    set name=test
-    set PN_CAPTION=Name of the package
-    call :Read_P name || exit /b 1
-    rem echo name: %name%
-    if not "%name%"=="" (
-        set APPRUN=%APPRUN% --name %name%
-    )
-
-    set src=
-    set PN_CAPTION=Use the src layout for the project
-    call :Read_P src || exit /b 1
-    rem echo src: %src%
-    if not "%src%"=="" (
-        set APPRUN=%APPRUN% --src
-    )
-
-    set readme=md
-    set PN_CAPTION=Specify the readme file extension
-    call :Read_P readme || exit /b 1
-    rem echo readme: %readme%
-    if not "%readme%"=="" (
-        set APPRUN=%APPRUN% --readme %readme%
+    set lock=
+    set PN_CAPTION=lock
+    call :Read_P lock %1 || exit /b 1
+    rem echo lock: %lock%
+    if not "%lock%"=="" (
+        set APPRUN=%APPRUN% --lock %lock%
     )
 :Exit
 exit /b 0
