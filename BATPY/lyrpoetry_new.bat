@@ -20,15 +20,14 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem -------------------------------------------------------------------
-rem   init - Creates a basic pyproject.toml file in the current directory.
+rem   new - Creates a new Python project at <path>.
 rem -------------------------------------------------------------------
 rem   Options
-rem   --name: Name of the package.
-rem   --description: Description of the package.
-rem   --author: Author of the package.
-rem   --python Compatible Python versions.
-rem   --dependency: Package to require with a version constraint. Should be in format foo:1.0.0.
-rem   --dev-dependency: Development requirements, see --dependency.
+rem    --name: Set the resulting package name.
+rem    --src: Use the src layout for the project.
+rem    --readme: Specify the readme file extension.
+rem      Default is md. If you intend to publish to PyPI keep the recommendations
+rem      for a PyPI-friendly README in mind.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -44,7 +43,7 @@ setlocal enabledelayedexpansion
     rem  echo CurrentDir: %CurrentDir%
 
     echo Creates a basic pyproject.toml file in the current directory ...
-    set COMMAND=init
+    set COMMAND=new
     rem echo COMMAND: %COMMAND%
 
     echo Удаление файла pyproject.toml
@@ -55,8 +54,8 @@ setlocal enabledelayedexpansion
     rem echo P1: %P1%    
    
     if "%P1%"=="" (
-        call :run_poetry %1 %2 %3 %4 %5 %6 %7 %8 %9
-        rem call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
+        rem call :run_poetry %1 %2 %3 %4 %5 %6 %7 %8 %9
+        call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
     ) else (
         call :run_poetry %1 %2 %3 %4 %5 %6 %7 %8 %9
     )
@@ -74,33 +73,29 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set name=test
-    set description=description
-    set author=lisitsinyr ^<lisitsinyr@gmail.com^>
-    set python="^3.12"
-    set dependency=
-    set dev-dependency=
 
+    set folder=folder folder
+    set name=test
+    set src=test2
+    set readme=
+
+    set PN_CAPTION=Folder
+    call :Read_P folder %1 || exit /b 1
+    rem echo folder: %folder%
     set PN_CAPTION=Name of the package
     call :Read_P name %1 || exit /b 1
     rem echo name: %name%
-    set PN_CAPTION=Description of the package
-    call :Read_P description %1 || exit /b 1
-    rem echo description: %description%
-    set PN_CAPTION=Author of the package
-    call :Read_P author %1 || exit /b 1
-    rem echo author: %author%
-    set PN_CAPTION=Compatible Python versions
-    call :Read_P python %1 || exit /b 1
-    rem echo python: %python%
-    set PN_CAPTION=Package to require with a version constraint
-    call :Read_P dependency %1 || exit /b 1
-    rem echo dependency: %dependency%
-    set PN_CAPTION=Development requirements
-    call :Read_P dev-dependency %1 || exit /b 1
-    rem echo dev-dependency: %dev-dependency%
+    set PN_CAPTION=Use the src layout for the project
+    call :Read_P src %1 || exit /b 1
+    rem echo src: %src%
+    set PN_CAPTION= Specify the readme file extension
+    call :Read_P readme %1 || exit /b 1
+    rem echo readme: %readme%
 
-    call :run_poetry "--name %name%" "--description %description%" "--author %author%" "--python %python%" "--dependency %dependency%" "--dev-dependency %dev-dependency%"
+    rem call :run_poetry folder --name %name% --src --readme %readme%
+
+    call :run_poetry "%folder%" --name %name% --src
+
 :Exit
 exit /b 0
 
@@ -115,7 +110,15 @@ rem beginfunction
     )
 
     rem C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
-    poetry.exe %COMMAND% %1 %2 %3 %4 %5 %6 %7 %8 %9
+
+    set APPRUN=poetry.exe %COMMAND% %1 %2 %3 %4 %5 %6 %7 %8 %9
+
+    rem set RARCMD=rar a -r "%P1%.rar" "%P2%"
+
+    echo APPRUN: %APPRUN%
+    %APPRUN%
+
+    rem poetry.exe %COMMAND% %1 %2 %3 %4 %5 %6 %7 %8 %9
 
     rem call :PressAnyKey || exit /b 1
 
