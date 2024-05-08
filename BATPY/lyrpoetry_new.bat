@@ -44,21 +44,18 @@ setlocal enabledelayedexpansion
 
     echo Creates a basic pyproject.toml file in the current directory ...
     set COMMAND=new
-    rem echo COMMAND: %COMMAND%
-
-    echo Удаление файла pyproject.toml
-    del pyproject.toml
+    set APPRUN=poetry %COMMAND%
 
     set P1=
     call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
    
     if "%P1%"=="" (
-        rem call :run_poetry %1 %2 %3 %4 %5 %6 %7 %8 %9
-        call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
+        call :MAIN_FUNC
     ) else (
-        call :run_poetry %1 %2 %3 %4 %5 %6 %7 %8 %9
+        set APPRUN=poetry %*
     )
+    echo APPRUN: %APPRUN%
+    %APPRUN%
 
 :Exit
 exit /b 0
@@ -73,57 +70,51 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-
     set folder=folder folder
-    set name=test
-    set src=test2
-    set readme=
-
     set PN_CAPTION=Folder
-    call :Read_P folder %1 || exit /b 1
+    call :Read_P folder || exit /b 1
     rem echo folder: %folder%
-    set PN_CAPTION=Name of the package
-    call :Read_P name %1 || exit /b 1
-    rem echo name: %name%
-    set PN_CAPTION=Use the src layout for the project
-    call :Read_P src %1 || exit /b 1
-    rem echo src: %src%
-    set PN_CAPTION= Specify the readme file extension
-    call :Read_P readme %1 || exit /b 1
-    rem echo readme: %readme%
 
-    rem call :run_poetry folder --name %name% --src --readme %readme%
+    if "%folder%"=="" (
 
-    call :run_poetry "%folder%" --name %name% --src
+        set tomlFile= pyproject.toml
+        if exist "%tomlFile%" (
+            echo Удаление файла %tomlFile%
+            del %tomlFile%
+        )
+        
+    ) else (
 
-:Exit
-exit /b 0
+        if exist "%folder%"\ (
+            echo ERROR: Каталог "%folder%" существует...
+            echo Удаление каталога "%folder%"
+            rmdir "%folder%" /s
+        )
+        set APPRUN=%APPRUN% "%folder%"
 
-rem --------------------------------------------------------------------------------
-rem procedure run_poetry ()
-rem --------------------------------------------------------------------------------
-:run_poetry
-rem beginfunction
-    set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    rem C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %COMMAND% %2 %3 %4 %5 %6 %7 %8 %9
+    set name=test
+    set PN_CAPTION=Name of the package
+    call :Read_P name || exit /b 1
+    rem echo name: %name%
+    set APPRUN=%APPRUN% --name %name%
 
-    set APPRUN=poetry.exe %COMMAND% %1 %2 %3 %4 %5 %6 %7 %8 %9
+    set src=
+    set PN_CAPTION=Use the src layout for the project
+    call :Read_P src || exit /b 1
+    rem echo src: %src%
+    if not "%src%"=="" (
+        set APPRUN=%APPRUN% --src
+    )
 
-    rem set RARCMD=rar a -r "%P1%.rar" "%P2%"
-
-    echo APPRUN: %APPRUN%
-    %APPRUN%
-
-    rem poetry.exe %COMMAND% %1 %2 %3 %4 %5 %6 %7 %8 %9
-
-    rem call :PressAnyKey || exit /b 1
-
-    exit /b 0
-rem endfunction
+    set readme=md
+    set PN_CAPTION= Specify the readme file extension
+    call :Read_P readme || exit /b 1
+    rem echo readme: %readme%
+    set APPRUN=%APPRUN% --readme %readme%
+:Exit
+exit /b 0
 
 rem =================================================
 rem ФУНКЦИИ LIB
