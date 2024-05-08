@@ -128,6 +128,10 @@ rem beginfunction
     )
 
     echo Available commands ^(экранирование^):
+    echo 12.new      Creates a new Python project at path.
+    echo 08.init     Creates a basic pyproject.toml file in the current directory.
+    echo 09.install  Installs the project dependencies.
+
     echo 01.about    Shows information about Poetry.
     echo 02.add      Adds a new dependency to pyproject.toml.
     echo 03.build    Builds a package, as a tarball and a wheel by default.
@@ -135,11 +139,8 @@ rem beginfunction
     echo 05.config   Manages configuration settings.
     echo 06.export   Exports the lock file to alternative formats.
     echo 07.help     Displays help for a command.
-    echo 08.init     Creates a basic pyproject.toml file in the current directory.
-    echo 09.install  Installs the project dependencies.
     echo 10.list     Lists commands.
     echo 11.lock     Locks the project dependencies.
-    echo 12.new      Creates a new Python project at path.
     echo 13.publish  Publishes a package to a remote repository.
     echo 14.remove   Removes a package from the project dependencies.
     echo 15.run      Runs a command in the appropriate environment.
