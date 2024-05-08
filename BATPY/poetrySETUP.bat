@@ -1,8 +1,7 @@
 @echo off
 rem -------------------------------------------------------------------
-rem poetry_new.bat
+rem poetrySETUP.bat
 rem     Запуск poetry из глобального виртуального пространства
-rem     create our new project
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -14,31 +13,11 @@ setlocal enabledelayedexpansion
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
-
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    rem set PN_CAPTION=Ввод значения
-    set P1=P1_default
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
-
-    rem set PN_CAPTION=Ввод значения
-    set P2=P2_default
-    set P2=
-    call :Check_P P2 %2 || exit /b 1
-    rem echo P2: %P2%    
-
-    if "%P1%"=="" (
-        echo ERROR: Параметр P1 project не задан...
-        echo Использование: %BATNAME% P1 [P2] [...]
-    ) else (
-        call :MAIN_FUNC new %1 %2 %3 %4 %5 %6 %7 %8 %9
-    )
-
-    rem echo Использование: %BATNAME% [P1] [P2] [...]
-    rem call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
+    call lyrpoetry_config.bat var value
+    ...
 
 :Exit
 exit /b 0
@@ -53,15 +32,34 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    C:\Users\lyr\AppData\Local\Programs\Python\Python312\Scripts\poetry.exe %1 %2 %3 %4 %5 %6 %7 %8 %9
-
-    exit /b 0
-rem endfunction
+    set dry-run=
+    set PN_CAPTION=dry-run
+    call :Read_P dry-run %1 || exit /b 1
+    rem echo dry-run: %dry-run%
+    if not "%dry-run%"=="" (
+        set APPRUN=%APPRUN% --dry-run %dry-run%
+    )
+    set lock=
+    set PN_CAPTION=lock
+    call :Read_P lock %1 || exit /b 1
+    rem echo lock: %lock%
+    if not "%lock%"=="" (
+        set APPRUN=%APPRUN% --lock %lock%
+    )
+    
+:Exit
+exit /b 0
 
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
 :Check_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:PressAnyKey
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :ExtractFileDir

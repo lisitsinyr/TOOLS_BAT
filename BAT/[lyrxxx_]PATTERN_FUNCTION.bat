@@ -33,4 +33,72 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem function read_choice ()
+rem --------------------------------------------------------------------------------
+:read_choice
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+
+    echo Available commands ^(экранирование^):
+    echo 01.install  Installs the project dependencies.
+    echo 02.install  Installs the project dependencies.
+    echo 03.install  Installs the project dependencies.
+    echo 04.install  Installs the project dependencies.
+    echo 05.install  Installs the project dependencies.
+    echo 06.install  Installs the project dependencies.
+    echo 07.install  Installs the project dependencies.
+    echo 08.install  Installs the project dependencies.
+    echo 09.install  Installs the project dependencies.
+    echo 10.install  Installs the project dependencies.
+    echo 99.         Quit
+
+    set /p CHOICE=PN_CAPTION[99][99]:
+    echo %CHOICE%
+    if "%CHOICE%"=="01" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="02" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="03" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="04" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="05" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="06" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="07" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="08" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="09" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="10" (
+        set COMMAND=
+    ) else (
+    if "%CHOICE%"=="99" (
+        set COMMAND=
+    ) else (
+        echo ERROR: Параметр CHOICE не реализован...
+        rem call :PressAnyKey || exit /b 1
+    )
+    )))))))))))
+
+    set read_choice=%CHOICE%
+
+    exit /b 0
+rem endfunction
+
 rem ===================================================================
