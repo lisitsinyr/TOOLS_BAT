@@ -20,18 +20,21 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem -------------------------------------------------------------------
-rem   update - Update the dependencies as according to the pyproject.toml file.
-rem            In order to get the latest versions of the dependencies and to update
-rem            the poetry.lock file, you should use the update command.
+rem   add - Adds a new dependency to pyproject.toml.
+rem         The add command adds required packages to your pyproject.toml and installs them.
 rem -------------------------------------------------------------------
 rem   Options
-rem   --without: The dependency groups to ignore.
-rem   --with: The optional dependency groups to include.
-rem   --only: The only dependency groups to include.
-rem   --dry-run : Outputs the operations but will not execute anything (implicitly enables –verbose).
-rem   --no-dev : Do not update the development dependencies. (Deprecated, use --only main or --without dev instead)
-rem   --lock : Do not perform install (only update the lockfile).
-rem   --sync: Synchronize the environment with the locked packages and the specified groups.
+rem   --group (-G): The group to add the dependency to.
+rem   --dev (-D): Add package as development dependency. (Deprecated, use -G dev instead)
+rem   --editable (-e): Add vcs/path dependencies as editable.
+rem   --extras (-E): Extras to activate for the dependency. (multiple values allowed)
+rem   --optional: Add as an optional dependency.
+rem   --python: Python version for which the dependency must be installed.
+rem   --platform: Platforms for which the dependency must be installed.
+rem   --source: Name of the source to use to install the package.
+rem   --allow-prereleases: Accept prereleases.
+rem   --dry-run: Output the operations but do not execute anything (implicitly enables –verbose).
+rem   --lock: Do not perform install (only update the lockfile).
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -46,7 +49,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Update the dependencies as according to the pyproject.toml file ...
+    echo Adds a new dependency to pyproject.toml ...
     set COMMAND=add
     set APPRUN=poetry -v %COMMAND%
 
@@ -74,15 +77,71 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
+    set group=
+    set PN_CAPTION=The group to add the dependency to
+    call :Read_P group %1 || exit /b 1
+    rem echo group: %group%
+    if not "%group%"=="" (
+        set APPRUN=%APPRUN% --xxxx %group%
+    )
+    set editable=
+    set PN_CAPTION=Add vcs/path dependencies as editable
+    call :Read_P editable %1 || exit /b 1
+    rem echo editable: %editable%
+    if not "%editable%"=="" (
+        set APPRUN=%APPRUN% --editable %editable%
+    )
+    set extras=
+    set PN_CAPTION=Extras to activate for the dependency. (multiple values allowed)
+    call :Read_P extras %1 || exit /b 1
+    rem echo extras: %extras%
+    if not "%extras%"=="" (
+        set APPRUN=%APPRUN% --extras %extras%
+    )
+    set optional=
+    set PN_CAPTION=Add as an optional dependency
+    call :Read_P optional %1 || exit /b 1
+    rem echo optional: %optional%
+    if not "%optional%"=="" (
+        set APPRUN=%APPRUN% --optional %optional%
+    )
+    set python=
+    set PN_CAPTION=Python version for which the dependency must be installed
+    call :Read_P python %1 || exit /b 1
+    rem echo python: %python%
+    if not "%python%"=="" (
+        set APPRUN=%APPRUN% --python %python%
+    )
+    set platform=
+    set PN_CAPTION=Platforms for which the dependency must be installed
+    call :Read_P platform %1 || exit /b 1
+    rem echo platform: %platform%
+    if not "%platform%"=="" (
+        set APPRUN=%APPRUN% --platform %platform%
+    )
+    set source=
+    set PN_CAPTION=Name of the source to use to install the package
+    call :Read_P source %1 || exit /b 1
+    rem echo source: %source%
+    if not "%source%"=="" (
+        set APPRUN=%APPRUN% --source %source%
+    )
+    set allow-prereleases=
+    set PN_CAPTION=Accept prereleases
+    call :Read_P allow-prereleases %1 || exit /b 1
+    rem echo allow-prereleases: %allow-prereleases%
+    if not "%allow-prereleases%"=="" (
+        set APPRUN=%APPRUN% --allow-prereleases %allow-prereleases%
+    )
     set dry-run=
-    set PN_CAPTION=dry-run
+    set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set APPRUN=%APPRUN% --dry-run %dry-run%
     )
     set lock=
-    set PN_CAPTION=lock
+    set PN_CAPTION=Do not perform install (only update the lockfile)
     call :Read_P lock %1 || exit /b 1
     rem echo lock: %lock%
     if not "%lock%"=="" (

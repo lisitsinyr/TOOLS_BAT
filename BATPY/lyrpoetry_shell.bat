@@ -46,8 +46,8 @@ setlocal enabledelayedexpansion
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
-        rem call :MAIN_FUNC
-        set APPRUN=poetry %*
+        call :MAIN_FUNC
+        rem set APPRUN=poetry %*
     ) else (
         set APPRUN=poetry %*
     )

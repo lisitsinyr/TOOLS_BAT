@@ -23,6 +23,8 @@ rem -------------------------------------------------------------------
 rem   search - Searches for packages on remote repositories.
 rem            This command searches for packages on a remote index.
 rem -------------------------------------------------------------------
+rem   This command searches for packages on a remote index.
+rem     poetry search requests pendulum
 rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
@@ -38,7 +40,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Searches for packages on remote repositories ...
     set COMMAND=search
     set APPRUN=poetry -v %COMMAND%
 
@@ -46,8 +48,8 @@ setlocal enabledelayedexpansion
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
-        rem call :MAIN_FUNC
-        set APPRUN=poetry %*
+        call :MAIN_FUNC
+        rem set APPRUN=poetry %*
     ) else (
         set APPRUN=poetry %*
     )
@@ -67,21 +69,14 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
+    set tokens=
     set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    call :Read_P tokens %1 || exit /b 1
+    rem echo tokens: %tokens%
+    if not "%tokens%"=="" (
+        set APPRUN=%APPRUN% %tokens%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
+
 :Exit
 exit /b 0
 

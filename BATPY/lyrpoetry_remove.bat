@@ -42,7 +42,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Update the dependencies as according to the pyproject.toml file ...
+    echo Removes a package from the project dependencies ...
     set COMMAND=remove
     set APPRUN=poetry -v %COMMAND%
 
@@ -69,16 +69,29 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-
+    set group=
+    set PN_CAPTION=The group to remove the dependency from
+    call :Read_P group %1 || exit /b 1
+    rem echo group: %group%
+    if not "%group%"=="" (
+        set APPRUN=%APPRUN% --group %group%
+    )
+    set dev=
+    set PN_CAPTION=Removes a package from the development dependencies. (Deprecated, use -G dev instead)
+    call :Read_P dev %1 || exit /b 1
+    rem echo dev: %dev%
+    if not "%dev%"=="" (
+        set APPRUN=%APPRUN% --dev %dev%
+    )
     set dry-run=
-    set PN_CAPTION=dry-run
+    set PN_CAPTION=Outputs the operations but will not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set APPRUN=%APPRUN% --dry-run %dry-run%
     )
     set lock=
-    set PN_CAPTION=lock
+    set PN_CAPTION=Do not perform operations (only update the lockfile)
     call :Read_P lock %1 || exit /b 1
     rem echo lock: %lock%
     if not "%lock%"=="" (

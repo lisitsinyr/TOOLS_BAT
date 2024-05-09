@@ -2,6 +2,34 @@
 rem -------------------------------------------------------------------
 rem poetrySETUP.bat
 rem     Запуск poetry из глобального виртуального пространства
+rem 
+rem -----------------------------------------------------
+rem Config Directory
+rem -----------------------------------------------------
+rem Linux: $XDG_CONFIG_HOME/pypoetry or ~/.config/pypoetry
+rem Windows: %APPDATA%\pypoetry
+rem MacOS: ~/Library/Application Support/pypoetry
+rem You can override the Config directory by setting the POETRY_CONFIG_DIR environment variable.
+rem -----------------------------------------------------
+rem Data Directory
+rem -----------------------------------------------------
+rem Linux: $XDG_DATA_HOME/pypoetry or ~/.local/share/pypoetry
+rem Windows: %APPDATA%\pypoetry
+rem MacOS: ~/Library/Application Support/pypoetry
+rem You can override the Data directory by setting the POETRY_DATA_DIR or POETRY_HOME environment variables. If POETRY_HOME is set, it will be given higher priority.
+rem C:\Users\lyr\AppData\Roaming\pypoetry\config.toml
+rem [virtualenvs]
+rem in-project = true
+rem 
+rem -----------------------------------------------------
+rem Cache Directory
+rem -----------------------------------------------------
+rem Linux: $XDG_CACHE_HOME/pypoetry or ~/.cache/pypoetry
+rem Windows: %LOCALAPPDATA%\pypoetry
+rem MacOS: ~/Library/Caches/pypoetry
+rem You can override the Cache directory by setting the POETRY_CACHE_DIR environment variable.
+rem C:\Users\lyr\AppData\Local\pypoetry\Cache\cache
+rem C:\Users\lyr\AppData\Local\pypoetry\Cache\virtualenvs
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 

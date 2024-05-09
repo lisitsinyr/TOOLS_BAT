@@ -39,7 +39,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Validates the content of the pyproject.toml file and its consistency with the poetry.lock file ...
     set COMMAND=check
     set APPRUN=poetry -v %COMMAND%
 
@@ -67,20 +67,14 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
-    )
     set lock=
-    set PN_CAPTION=lock
+    set PN_CAPTION=Verifies that poetry.lock exists for the current pyproject.toml
     call :Read_P lock %1 || exit /b 1
     rem echo lock: %lock%
     if not "%lock%"=="" (
         set APPRUN=%APPRUN% --lock %lock%
     )
+
 :Exit
 exit /b 0
 

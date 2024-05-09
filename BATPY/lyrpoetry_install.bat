@@ -21,8 +21,8 @@ rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for norma
 rem 
 rem -------------------------------------------------------------------
 rem   install - Installs the project dependencies.
-rem          The install command reads the pyproject.toml file from the current project,
-rem          resolves the dependencies, and installs them
+rem             The install command reads the pyproject.toml file from the current project,
+rem             resolves the dependencies, and installs them
 rem -------------------------------------------------------------------
 rem   Options
 rem   --without: The dependency groups to ignore.

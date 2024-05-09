@@ -23,6 +23,16 @@ rem -------------------------------------------------------------------
 rem   run - Runs a command in the appropriate environment.
 rem         The run command executes the given command inside the project’s virtualenv.
 rem -------------------------------------------------------------------
+rem   The run command executes the given command inside the project’s virtualenv.
+rem     poetry run python -V
+rem   
+rem   It can also execute one of the scripts defined in pyproject.toml.
+rem   So, if you have a script defined like this:
+rem   [tool.poetry.scripts]
+rem   my-script = "my_module:main"
+rem   
+rem   You can execute it like so:
+rem     poetry run my-script    
 rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
@@ -38,7 +48,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Runs a command in the appropriate environment ...
     set COMMAND=run
     set APPRUN=poetry -v %COMMAND%
 
@@ -46,8 +56,8 @@ setlocal enabledelayedexpansion
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
-        rem call :MAIN_FUNC
-        set APPRUN=poetry %*
+        call :MAIN_FUNC
+        rem set APPRUN=poetry %*
     ) else (
         set APPRUN=poetry %*
     )
@@ -67,21 +77,13 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set command=
+    set PN_CAPTION=command
+    call :Read_P command %1 || exit /b 1
+    rem echo command: %command%
+    if not "%command%"=="" (
+        set APPRUN=%APPRUN% %command%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
 :Exit
 exit /b 0
 

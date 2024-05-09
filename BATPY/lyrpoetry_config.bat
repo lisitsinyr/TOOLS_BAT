@@ -70,21 +70,46 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
+rem   --unset: Remove the configuration element named by setting-key.
+rem   --list: Show the list of current config variables.
+rem   --local: Set/Get settings that are specific to a project (in the local configuration file poetry.toml).
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set unset=
+    set PN_CAPTION=Remove the configuration element named by setting-key
+    call :Read_P unset %1 || exit /b 1
+    rem echo unset: %unset%
+    if not "%unset%"=="" (
+        set APPRUN=%APPRUN% --unset
     )
-    set lock=
+    set list=
     set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+    call :Read_P list %1 || exit /b 1
+    rem echo list: %list%
+    if not "%list%"=="" (
+        set APPRUN=%APPRUN% --list
     )
+    set local=
+    set PN_CAPTION=Set/Get settings that are specific to a project (in the local configuration file poetry.toml)
+    call :Read_P local %1 || exit /b 1
+    rem echo local: %local%
+    if not "%local%"=="" (
+        set APPRUN=%APPRUN% --local
+    )
+    set setting-key=
+    set PN_CAPTION=setting-key
+    call :Read_P setting-key %1 || exit /b 1
+    rem echo setting-key: %setting-key%
+    if not "%setting-key%"=="" (
+        set APPRUN=%APPRUN% --local %setting-key%
+    )
+    set setting-value1=
+    set PN_CAPTION=setting-value1
+    call :Read_P setting-value1 %1 || exit /b 1
+    rem echo setting-value1: %setting-value1%
+    if not "%setting-value1%"=="" (
+        set APPRUN=%APPRUN% --local %setting-value1%
+    )
+
 :Exit
 exit /b 0
 

@@ -20,7 +20,7 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem -------------------------------------------------------------------
-rem   build - Builds a package, as a tarball and a wheel by default.
+rem   build - Builds a package, as a tarball and a wheel by default ...
 rem           The build command builds the source and wheels archives.
 rem -------------------------------------------------------------------
 rem   Options
@@ -40,7 +40,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Update the dependencies as according to the pyproject.toml file ...
+    echo Builds a package, as a tarball and a wheel by default ...
     set COMMAND=build
     set APPRUN=poetry -v %COMMAND%
 
@@ -67,20 +67,19 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set format=
+    set PN_CAPTION=Limit the format to either wheel or sdist
+    call :Read_P format %1 || exit /b 1
+    rem echo format: %format%
+    if not "%format%"=="" (
+        set APPRUN=%APPRUN% --format %format%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+    set output=
+    set PN_CAPTION=Set output directory for build artifacts. Default is dist
+    call :Read_P output %1 || exit /b 1
+    rem echo output: %output%
+    if not "%output%"=="" (
+        set APPRUN=%APPRUN% --output %output%
     )
 :Exit
 exit /b 0

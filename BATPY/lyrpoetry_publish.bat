@@ -21,7 +21,7 @@ rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for norma
 rem 
 rem -------------------------------------------------------------------
 rem   publish - Publishes a package to a remote repository.
-rem           The build command builds the source and wheels archives.
+rem             The build command builds the source and wheels archives.
 rem -------------------------------------------------------------------
 rem   Options
 rem   --repository (-r): The repository to register the package to (default: pypi). Should match a repository name set by the config command.
@@ -75,20 +75,70 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
+    set repository=
+    set PN_CAPTION=The repository to register the package to (default: pypi). Should match a repository name set by the config command
+    call :Read_P repository %1 || exit /b 1
+    rem echo repository: %repository%
+    if not "%repository%"=="" (
+        set APPRUN=%APPRUN% --repository %repository%
+    )
+    set username=
+    set PN_CAPTION=The username to access the repository
+    call :Read_P username %1 || exit /b 1
+    rem echo username: %username%
+    if not "%username%"=="" (
+        set APPRUN=%APPRUN% --username %username%
+    )
+    set password=
+    set PN_CAPTION=The password to access the repository
+    call :Read_P password %1 || exit /b 1
+    rem echo password: %password%
+    if not "%password%"=="" (
+        set APPRUN=%APPRUN% --password %password%
+    )
+    set cert=
+    set PN_CAPTION=Certificate authority to access the repository
+    call :Read_P cert %1 || exit /b 1
+    rem echo cert: %cert%
+    if not "%cert%"=="" (
+        set APPRUN=%APPRUN% --cert %cert%
+    )
+    set client-cert=
+    set PN_CAPTION=Client certificate to access the repository
+    call :Read_P client-cert %1 || exit /b 1
+    rem echo client-cert: %client-cert%
+    if not "%client-cert%"=="" (
+        set APPRUN=%APPRUN% --client-cert %client-cert%
+    )
+    set dist-dir=
+    set PN_CAPTION=Dist directory where built artifact are stored. Default is dist
+    call :Read_P dist-dir %1 || exit /b 1
+    rem echo dist-dir: %dist-dir%
+    if not "%dist-dir%"=="" (
+        set APPRUN=%APPRUN% --dist-dir %dist-dir%
+    )
+    set build=
+    set PN_CAPTION=Build the package before publishing
+    call :Read_P build %1 || exit /b 1
+    rem echo build: %build%
+    if not "%build%"=="" (
+        set APPRUN=%APPRUN% --build %build%
+    )
     set dry-run=
-    set PN_CAPTION=dry-run
+    set PN_CAPTION=Perform all actions except upload the package
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set APPRUN=%APPRUN% --dry-run %dry-run%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+    set skip-existing=
+    set PN_CAPTION=Ignore errors from files already existing in the repository
+    call :Read_P skip-existing %1 || exit /b 1
+    rem echo skip-existing: %skip-existing%
+    if not "%skip-existing%"=="" (
+        set APPRUN=%APPRUN% --skip-existing %skip-existing%
     )
+
 :Exit
 exit /b 0
 

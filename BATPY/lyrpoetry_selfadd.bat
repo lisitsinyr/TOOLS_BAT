@@ -48,7 +48,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Add additional packages to Poetry's runtime environment ...
     set COMMAND=self add
     set APPRUN=poetry -v %COMMAND%
 
@@ -56,8 +56,8 @@ setlocal enabledelayedexpansion
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
-        rem call :MAIN_FUNC
-        set APPRUN=poetry %*
+        call :MAIN_FUNC
+        rem set APPRUN=poetry %*
     ) else (
         set APPRUN=poetry %*
     )

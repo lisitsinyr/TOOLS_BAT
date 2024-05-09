@@ -24,11 +24,11 @@ rem   env info - Displays information about the current environment.
 rem              Displaying the environment information
 rem -------------------------------------------------------------------
 rem   Usage 
-rem     poetry env info
+rem   poetry env info
 rem   If you only want to know the path to the virtual environment, you can pass the --path option to env info:
-rem     poetry env info --path
+rem   poetry env info --path
 rem   If you only want to know the path to the python executable (useful for running mypy from a global environment without installing it in the virtual environment), you can pass the --executable option to env info:
-rem     poetry env info --executable
+rem   poetry env info --executable
 rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
@@ -44,7 +44,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Displays information about the current environment ...
     set COMMAND=env info
     set APPRUN=poetry -v %COMMAND%
 
@@ -52,8 +52,8 @@ setlocal enabledelayedexpansion
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
-        rem call :MAIN_FUNC
-        set APPRUN=poetry %*
+        call :MAIN_FUNC
+        rem set APPRUN=poetry %*
     ) else (
         set APPRUN=poetry %*
     )
@@ -73,19 +73,19 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set pathenv=
+    set PN_CAPTION=pathenv
+    call :Read_P pathenv %1 || exit /b 1
+    rem echo pathenv: %pathenv%
+    if not "%pathenv%"=="" (
+        set APPRUN=%APPRUN% --path
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+    set executable=
+    set PN_CAPTION=executable
+    call :Read_P executable %1 || exit /b 1
+    rem echo executable: %executable%
+    if not "%executable%"=="" (
+        set APPRUN=%APPRUN% --executable
     )
     
 :Exit

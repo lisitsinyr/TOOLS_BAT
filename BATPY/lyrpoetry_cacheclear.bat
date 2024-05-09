@@ -43,7 +43,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Clears a Poetry cache by name ...
     set COMMAND=cache clear
     set APPRUN=poetry -v %COMMAND%
 
@@ -51,8 +51,8 @@ setlocal enabledelayedexpansion
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
-        rem call :MAIN_FUNC
-        set APPRUN=poetry %*
+        call :MAIN_FUNC
+        rem set APPRUN=poetry %*
     ) else (
         set APPRUN=poetry %*
     )
@@ -72,19 +72,12 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
-    )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+    set namepackage=
+    set PN_CAPTION=namepackage
+    call :Read_P namepackage %1 || exit /b 1
+    rem echo namepackage: %namepackage%
+    if not "%namepackage%"=="" (
+        set APPRUN=%APPRUN% --namepackage %namepackage%
     )
     
 :Exit

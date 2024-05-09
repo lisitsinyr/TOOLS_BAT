@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem lyrpoetry_envlist.bat
+rem lyrpoetry_envremove.bat
 rem     Запуск poetry из глобального виртуального пространства
 rem Poetry (version 1.8.2)
 rem 
@@ -20,14 +20,19 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem -------------------------------------------------------------------
-rem   env list - Lists all virtualenvs associated with the current project.
-rem              Listing the environments associated with the projec
+rem   env remove - Remove virtual environments associated with the project.
+rem                Deleting the environments
 rem -------------------------------------------------------------------
 rem   Usage 
-rem   You can also list all the virtual environments associated with the current project with the env list command:
-rem     poetry env list
-rem   You can pass the option --full-path to display the full path to the environments:
-rem     poetry env list --full-path
+rem   Finally, you can delete existing virtual environments by using env remove:
+rem     poetry env remove /full/path/to/python
+rem     poetry env remove python3.7
+rem     poetry env remove 3.7
+rem     poetry env remove test-O3eWbxRl-py3.7
+rem   You can delete more than one environment at a time.
+rem     poetry env remove python3.6 python3.7 python3.8
+rem   Use the --all option to delete all virtual environments at once.
+rem     poetry env remove --all
 rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
@@ -43,16 +48,16 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
-    set COMMAND=env list
+    echo Remove virtual environments associated with the project ...
+    set COMMAND=env remove
     set APPRUN=poetry -v %COMMAND%
 
     set P1=
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
-        rem call :MAIN_FUNC
-        set APPRUN=poetry %*
+        call :MAIN_FUNC
+        rem set APPRUN=poetry %*
     ) else (
         set APPRUN=poetry %*
     )
@@ -72,21 +77,21 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
-    )
-    set lock=
-    set PN_CAPTION=lock
+    set namevenv=
+    set PN_CAPTION=namevenv
     call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+    rem echo namevenv: %namevenv%
+    if not "%namevenv%"=="" (
+        set APPRUN=%APPRUN% %namevenv%
     )
-    
+
+    set all=
+    set PN_CAPTION=all
+    call :Read_P all %1 || exit /b 1
+    rem echo all: %dall%
+    if not "%all%"=="" (
+        set APPRUN=%APPRUN% --all
+    )
 :Exit
 exit /b 0
 

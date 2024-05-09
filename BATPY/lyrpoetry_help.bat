@@ -20,10 +20,18 @@ rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (d
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
 rem -------------------------------------------------------------------
-rem   help - Displays help for a command.
+rem     help - Displays help for a command.
 rem          The help command displays global help, or help for a specific command.
 rem -------------------------------------------------------------------
-rem   Options
+rem     Uses
+rem     To display global help:
+rem         poetry help
+rem     To display help for a specific command, for instance show:
+rem         poetry help show
+rem     The --help option can also be passed to any command to get help for a specific command.
+rem         For instance:
+rem         poetry show --help
+rem     Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -38,16 +46,31 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Displays help for a command ...
     set COMMAND=help
-    set APPRUN=poetry -v %COMMAND%
+
+    set OPTION=
+    rem Options:
+    rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+    rem   -q, --quiet                Do not output any message.
+    rem   -V, --version              Display this application version.
+    rem       --ansi                 Force ANSI output.
+    rem       --no-ansi              Disable ANSI output.
+    rem   -n, --no-interaction       Do not ask any interactive question.
+    rem       --no-plugins           Disables plugins.
+    rem       --no-cache             Disables Poetry source caches.
+    rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+    rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+    set OPTION=%OPTION% -v
+    
+    set APPRUN=poetry %OPTION% %COMMAND%
 
     set P1=
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
-        rem call :MAIN_FUNC
-        set APPRUN=poetry %*
+        call :MAIN_FUNC
+        rem set APPRUN=poetry %*
     ) else (
         set APPRUN=poetry %*
     )
@@ -67,21 +90,14 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set command=
+    set PN_CAPTION=command
+    call :Read_P command %1 || exit /b 1
+    rem echo command: %command%
+    if not "%command%"=="" (
+        set APPRUN=%APPRUN% %command%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
+
 :Exit
 exit /b 0
 
