@@ -25,9 +25,9 @@ rem                The source add command adds source configuration to the proje
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   For example, to add the pypi-test source, you can run:
-rem   poetry source add pypi-test https://test.pypi.org/simple/
+rem     poetry source add pypi-test https://test.pypi.org/simple/
 rem   You cannot use the name pypi for a custom repository as it is reserved for use by the default PyPI source. However, you can set the priority of PyPI:
-rem   poetry source add --priority=explicit pypi
+rem     poetry source add --priority=explicit pypi
 rem   Options
 rem   --default: Set this source as the default (disable PyPI). Deprecated in favor of --priority.
 rem   --secondary: Set this source as a secondary source. Deprecated in favor of --priority.
@@ -46,7 +46,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Add source configuration for project ...
     set COMMAND=source add
     set APPRUN=poetry -v %COMMAND%
 
@@ -75,21 +75,28 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set default=
+    set PN_CAPTION=Set this source as the default (disable PyPI). Deprecated in favor of --priority
+    call :Read_P default %1 || exit /b 1
+    rem echo default: %default%
+    if not "%default%"=="" (
+        set APPRUN=%APPRUN% --default %default%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+    set secondary=
+    set PN_CAPTION=Set this source as a secondary source. Deprecated in favor of --priority
+    call :Read_P secondary %1 || exit /b 1
+    rem echo secondary: %secondary%
+    if not "%secondary%"=="" (
+        set APPRUN=%APPRUN% --secondary %secondary%
     )
-    
+    set priority=
+    set PN_CAPTION=Set the priority of this source. Accepted values are: default, secondary, supplemental, and explicit. Refer to the dedicated sections in Repositories for more information
+    call :Read_P priority %1 || exit /b 1
+    rem echo priority: %priority%
+    if not "%priority%"=="" (
+        set APPRUN=%APPRUN% --priority %priority%
+    )
+
 :Exit
 exit /b 0
 

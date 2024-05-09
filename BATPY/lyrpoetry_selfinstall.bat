@@ -25,7 +25,7 @@ rem                  The self install command ensures all additional packages sp
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The self install command ensures all additional packages specified are installed in the current runtime environment.
-rem   poetry self install --sync
+rem     poetry self install --sync
 rem   Options
 rem   --sync: Synchronize the environment with the locked packages and the specified groups.
 rem   --dry-run: Output the operations but do not execute anything (implicitly enables –verbose).
@@ -43,7 +43,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Install locked packages (incl. addons) required by this Poetry installation ...
     set COMMAND=self install
     set APPRUN=poetry -v %COMMAND%
 
@@ -71,20 +71,20 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
+    set sync=
+    set PN_CAPTION=Synchronize the environment with the locked packages and the specified groups
+    call :Read_P sync %1 || exit /b 1
+    rem echo sync: %sync%
+    if not "%sync%"=="" (
+        set APPRUN=%APPRUN% --sync
+    )
 
     set dry-run=
-    set PN_CAPTION=dry-run
+    set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set APPRUN=%APPRUN% --dry-run %dry-run%
-    )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
     )
     
 :Exit

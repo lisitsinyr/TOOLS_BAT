@@ -21,13 +21,13 @@ rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for norma
 rem 
 rem -------------------------------------------------------------------
 rem   source show - Show information about sources configured for the project.
-rem                The source show command displays information on all configured sources for the project.
+rem                 The source show command displays information on all configured sources for the project.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The source show command displays information on all configured sources for the project.
-rem   poetry source show
+rem     poetry source show
 rem   Optionally, you can show information of one or more sources by specifying their names.
-rem   poetry source show pypi-test
+rem     poetry source show pypi-test
 rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
@@ -43,7 +43,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Show information about sources configured for the project ...
     set COMMAND=source show
     set APPRUN=poetry -v %COMMAND%
 
@@ -72,21 +72,14 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set command=
+    set PN_CAPTION=command
+    call :Read_P command %1 || exit /b 1
+    rem echo command: %command%
+    if not "%command%"=="" (
+        set APPRUN=%APPRUN% %command%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
+
 :Exit
 exit /b 0
 

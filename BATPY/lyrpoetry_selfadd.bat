@@ -25,9 +25,9 @@ rem              The self add command installs Poetry plugins and make them avai
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   For example, to install the poetry-plugin-export plugin, you can run:
-rem   poetry self add poetry-plugin-export
+rem     poetry self add poetry-plugin-export
 rem   To update to the latest poetry-core version, you can run:
-rem   poetry self add poetry-core@latest
+rem     poetry self add poetry-core@latest
 rem   Options
 rem   --editable (-e): Add vcs/path dependencies as editable.
 rem   --extras (-E): Extras to activate for the dependency. (multiple values allowed)
@@ -76,22 +76,42 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-
+    set editable=
+    set PN_CAPTION=Add vcs/path dependencies as editable
+    call :Read_P editable %1 || exit /b 1
+    rem echo editable: %editable%
+    if not "%editable%"=="" (
+        set APPRUN=%APPRUN% --editable %editable%
+    )
+    set extras=
+    set PN_CAPTION=Extras to activate for the dependency. (multiple values allowed)
+    call :Read_P extras %1 || exit /b 1
+    rem echo extras: %extras%
+    if not "%extras%"=="" (
+        set APPRUN=%APPRUN% --extras %extras%
+    )
+    set allow-prereleases=
+    set PN_CAPTION=Accept prereleases
+    call :Read_P allow-prereleases %1 || exit /b 1
+    rem echo allow-prereleases: %allow-prereleases%
+    if not "%allow-prereleases%"=="" (
+        set APPRUN=%APPRUN% --allow-prereleases %allow-prereleases%
+    )
+    set source=
+    set PN_CAPTION=Name of the source to use to install the package
+    call :Read_P source %1 || exit /b 1
+    rem echo source: %source%
+    if not "%source%"=="" (
+        set APPRUN=%APPRUN% --source %source%
+    )
     set dry-run=
-    set PN_CAPTION=dry-run
+    set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set APPRUN=%APPRUN% --dry-run %dry-run%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
+
 :Exit
 exit /b 0
 

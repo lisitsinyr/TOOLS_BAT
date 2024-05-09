@@ -21,11 +21,11 @@ rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for norma
 rem 
 rem -------------------------------------------------------------------
 rem   source remove - Remove source configured for the project.
-rem                The source remove command removes a configured source from your pyproject.toml.
+rem                   The source remove command removes a configured source from your pyproject.toml.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The source remove command removes a configured source from your pyproject.toml.
-rem   poetry source remove pypi-test
+rem     poetry source remove pypi-test
 rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
@@ -41,7 +41,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Remove source configured for the project ...
     set COMMAND=source remove
     set APPRUN=poetry -v %COMMAND%
 
@@ -70,21 +70,14 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set command=
+    set PN_CAPTION=command
+    call :Read_P command %1 || exit /b 1
+    rem echo command: %command%
+    if not "%command%"=="" (
+        set APPRUN=%APPRUN% %command%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
+
 :Exit
 exit /b 0
 

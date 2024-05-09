@@ -48,7 +48,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Update the dependencies as according to the pyproject.toml file ...
+    echo Shows information about packages ...
     set COMMAND=show
     set APPRUN=poetry -v %COMMAND%
 
@@ -75,21 +75,77 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
+    set without=
+    set PN_CAPTION=The dependency groups to ignore
+    call :Read_P without %1 || exit /b 1
+    rem echo without: %without%
+    if not "%without%"=="" (
+        set APPRUN=%APPRUN% --without %without%
+    )
+    set why=
+    set PN_CAPTION=When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
+    call :Read_P why %1 || exit /b 1
+    rem echo why: %why%
+    if not "%why%"=="" (
+        set APPRUN=%APPRUN% --why %why%
+    )
+    set with=
+    set PN_CAPTION=The optional dependency groups to include
+    call :Read_P with %1 || exit /b 1
+    rem echo with: %with%
+    if not "%with%"=="" (
+        set APPRUN=%APPRUN% --with %with%
+    )
+    set only=
+    set PN_CAPTION=The only dependency groups to include
+    call :Read_P only %1 || exit /b 1
+    rem echo only: %only%
+    if not "%only%"=="" (
+        set APPRUN=%APPRUN% --only %only%
+    )
+    set no-dev=
+    set PN_CAPTION=Do not list the dev dependencies. (Deprecated, use --only main or --without dev instead)
+    call :Read_P no-dev %1 || exit /b 1
+    rem echo no-dev: %no-dev%
+    if not "%no-dev%"=="" (
+        set APPRUN=%APPRUN% --no-dev %no-dev%
+    )
+    set tree=
+    set PN_CAPTION=List the dependencies as a tree
+    call :Read_P tree %1 || exit /b 1
+    rem echo tree: %tree%
+    if not "%tree%"=="" (
+        set APPRUN=%APPRUN% --tree %tree%
+    )
+    set latest=
+    set PN_CAPTION=Show the latest version
+    call :Read_P latest %1 || exit /b 1
+    rem echo latest: %latest%
+    if not "%latest%"=="" (
+        set APPRUN=%APPRUN% --latest %latest%
+    )
+    set outdated=
+    set PN_CAPTION=Show the latest version but only for packages that are outdated
+    call :Read_P outdated %1 || exit /b 1
+    rem echo outdated: %outdated%
+    if not "%outdated%"=="" (
+        set APPRUN=%APPRUN% --outdated %outdated%
+    )
+    set all=
+    set PN_CAPTION=Show all packages (even those not compatible with current system)
+    call :Read_P all %1 || exit /b 1
+    rem echo all: %all%
+    if not "%all%"=="" (
+        set APPRUN=%APPRUN% --all %all%
+    )
+    set top-level=
+    set PN_CAPTION=Only show explicitly defined packages
+    call :Read_P top-level %1 || exit /b 1
+    rem echo top-level: %top-level%
+    if not "%top-level%"=="" (
+        set APPRUN=%APPRUN% --top-level %top-level%
+    )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
-    )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
 :Exit
 exit /b 0
 

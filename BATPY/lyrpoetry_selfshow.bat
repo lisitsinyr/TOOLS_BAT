@@ -24,8 +24,8 @@ rem   self show - Show packages from Poetry's runtime environment.
 rem               The self show command behaves similar to the show command, but working within Poetry’s runtime environment. This lists all packages installed within the Poetry install environment.
 rem -------------------------------------------------------------------
 rem   Usage 
-To show only additional packages that have been added via self add and their dependencies use self show --addons.
-rem   poetry self show
+rem   To show only additional packages that have been added via self add and their dependencies use self show --addons.
+rem     poetry self show
 rem   Options
 rem   --addons: List only add-on packages installed.
 rem   --tree: List the dependencies as a tree.
@@ -45,7 +45,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Show packages from Poetry's runtime environment ...
     set COMMAND=self show
     set APPRUN=poetry -v %COMMAND%
 
@@ -73,22 +73,35 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
+    set addons=
+    set PN_CAPTION=List only add-on packages installed
+    call :Read_P addons %1 || exit /b 1
+    rem echo addons: %addons%
+    if not "%addons%"=="" (
+        set APPRUN=%APPRUN% --addons %addons%
+    )
+    set tree=
+    set PN_CAPTION=List the dependencies as a tree
+    call :Read_P tree %1 || exit /b 1
+    rem echo tree: %tree%
+    if not "%tree%"=="" (
+        set APPRUN=%APPRUN% --tree %tree%
+    )
+    set latest=
+    set PN_CAPTION=Show the latest version
+    call :Read_P latest %1 || exit /b 1
+    rem echo latest: %latest%
+    if not "%latest%"=="" (
+        set APPRUN=%APPRUN% --latest %latest%
+    )
+    set outdated=
+    set PN_CAPTION=Show the latest version but only for packages that are outdated
+    call :Read_P outdated %1 || exit /b 1
+    rem echo outdated: %outdated%
+    if not "%outdated%"=="" (
+        set APPRUN=%APPRUN% --outdated %outdated%
+    )
 
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
-    )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
 :Exit
 exit /b 0
 

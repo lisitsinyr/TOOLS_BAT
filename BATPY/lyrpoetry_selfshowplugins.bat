@@ -25,7 +25,7 @@ rem                       The self show plugins command lists all the currently 
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The self show plugins command lists all the currently installed plugins.
-rem   poetry self show plugins
+rem     poetry self show plugins
 rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
@@ -41,7 +41,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Shows information about the currently installed plugins ...
     set COMMAND=self show plugins
     set APPRUN=poetry -v %COMMAND%
 
@@ -69,22 +69,6 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
-    )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
 :Exit
 exit /b 0
 

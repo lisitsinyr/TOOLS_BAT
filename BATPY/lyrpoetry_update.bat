@@ -123,6 +123,7 @@ rem beginfunction
     if not "%sync%"=="" (
         set APPRUN=%APPRUN% --sync %sync%
     )
+
 :Exit
 exit /b 0
 

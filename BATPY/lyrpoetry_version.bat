@@ -41,7 +41,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Shows the version of the project or bumps it when a valid bump rule is provided ...
     set COMMAND=version
     set APPRUN=poetry -v %COMMAND%
 
@@ -69,22 +69,28 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-
+    set next-phase=
+    set PN_CAPTION=Increment the phase of the current version
+    call :Read_P next-phase %1 || exit /b 1
+    rem echo next-phase: %next-phase%
+    if not "%next-phase%"=="" (
+        set APPRUN=%APPRUN% --next-phase %next-phase%
+    )
+    set short=
+    set PN_CAPTION=Output the version number only
+    call :Read_P short %1 || exit /b 1
+    rem echo short: %short%
+    if not "%short%"=="" (
+        set APPRUN=%APPRUN% --short %short%
+    )
     set dry-run=
-    set PN_CAPTION=dry-run
+    set PN_CAPTION=Do not update pyproject.toml file
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set APPRUN=%APPRUN% --dry-run %dry-run%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
+
 :Exit
 exit /b 0
 

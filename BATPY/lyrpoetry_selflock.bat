@@ -25,7 +25,7 @@ rem               The self lock command reads this Poetry installation’s system 
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The self lock command reads this Poetry installation’s system pyproject.toml file. The system dependencies are locked in the corresponding poetry.lock file.
-rem   poetry self lock
+rem     poetry self lock
 rem   Options
 rem   --check: Verify that poetry.lock is consistent with pyproject.toml. (Deprecated)
 rem   --no-update: Do not update locked versions, only refresh lock file.
@@ -43,7 +43,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Lock the Poetry installation's system requirements ...
     set COMMAND=self lock
     set APPRUN=poetry -v %COMMAND%
 
@@ -71,20 +71,19 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+    set check=
+    set PN_CAPTION=Verify that poetry.lock is consistent with pyproject.toml. (Deprecated
+    call :Read_P check %1 || exit /b 1
+    rem echo check: %check%
+    if not "%check%"=="" (
+        set APPRUN=%APPRUN% --check %check%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+    set no-update=
+    set PN_CAPTION=Do not update locked versions, only refresh lock file
+    call :Read_P no-update %1 || exit /b 1
+    rem echo no-update: %no-update%
+    if not "%no-update%"=="" (
+        set APPRUN=%APPRUN% --no-update %no-update%
     )
     
 :Exit

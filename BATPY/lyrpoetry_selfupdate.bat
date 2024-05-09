@@ -25,7 +25,7 @@ rem                 The self update command updates Poetry version in its curren
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The self update command updates Poetry version in its current runtime environment.
-rem   poetry self update
+rem     poetry self update
 rem   Options
 rem   --preview: Allow the installation of pre-release versions.
 rem   --dry-run: Output the operations but do not execute anything (implicitly enables –verbose).
@@ -43,7 +43,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Updates Poetry to the latest version ...
     set COMMAND=self update
     set APPRUN=poetry -v %COMMAND%
 
@@ -71,20 +71,20 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
+    set preview=
+    set PN_CAPTION=Allow the installation of pre-release versions
+    call :Read_P preview %1 || exit /b 1
+    rem echo preview: %preview%
+    if not "%preview%"=="" (
+        set APPRUN=%APPRUN% --preview %preview%
+    )
 
     set dry-run=
-    set PN_CAPTION=dry-run
+    set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set APPRUN=%APPRUN% --dry-run %dry-run%
-    )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
     )
     
 :Exit

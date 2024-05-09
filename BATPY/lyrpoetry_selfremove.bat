@@ -25,7 +25,7 @@ rem                 The self remove command removes an installed addon package.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The self remove command removes an installed addon package.
-rem   poetry self remove poetry-plugin-export
+rem     poetry self remove poetry-plugin-export
 rem   Options
 rem   --dry-run: Outputs the operations but will not execute anything (implicitly enables –verbose).
 rem -------------------------------------------------------------------
@@ -42,7 +42,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
-    echo Publishes a package to a remote repository ...
+    echo Remove additional packages from Poetry's runtime environment ...
     set COMMAND=self remove
     set APPRUN=poetry -v %COMMAND%
 
@@ -72,20 +72,13 @@ rem beginfunction
     )
 
     set dry-run=
-    set PN_CAPTION=dry-run
+    set PN_CAPTION=Outputs the operations but will not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set APPRUN=%APPRUN% --dry-run %dry-run%
     )
-    set lock=
-    set PN_CAPTION=lock
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
-    )
-    
+
 :Exit
 exit /b 0
 
