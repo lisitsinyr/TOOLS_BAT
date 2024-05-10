@@ -1,32 +1,35 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_sourceremove.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   source remove - Remove source configured for the project.
-rem                   The source remove command removes a configured source from your pyproject.toml.
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+
+Description:
+  Remove source configured for the project.
+  The source remove command removes a configured source from your pyproject.toml.
+
+Usage:
+  source remove [options] [--] <name>
+
+Arguments:
+  name                       Source repository name.
+
+Options:
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The source remove command removes a configured source from your pyproject.toml.
 rem     poetry source remove pypi-test
-rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -75,7 +78,7 @@ rem beginfunction
     call :Read_P command %1 || exit /b 1
     rem echo command: %command%
     if not "%command%"=="" (
-        set APPRUN=%APPRUN% %command%
+        set OPTION=%OPTION% %command%
     )
 
 :Exit

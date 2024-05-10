@@ -1,27 +1,31 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_envuse.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   env use - Activates or creates a new virtualenv for the current project.
-rem             Switching between environments
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+
+Description:
+  Activates or creates a new virtualenv for the current project.
+  Switching between environments
+
+Usage:
+  env use [options] [--] <python>
+
+Arguments:
+  python                     The python executable to use.
+
+Options:
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   For this specific purpose, you can use the env use command to tell Poetry which Python version to use for the current project.
@@ -32,7 +36,6 @@ rem   You can even just use the minor Python version in this case:
 rem     poetry env use 3.7
 rem   If you want to disable the explicitly activated virtual environment, you can use the special system Python version to retrieve the default behavior:
 rem     poetry env use system
-rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -81,7 +84,7 @@ rem beginfunction
     call :Read_P lock %1 || exit /b 1
     rem echo namevenv: %namevenv%
     if not "%namevenv%"=="" (
-        set APPRUN=%APPRUN% %namevenv%
+        set OPTION=%OPTION% %namevenv%
     )
 
 :Exit

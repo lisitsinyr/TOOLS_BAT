@@ -1,34 +1,43 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_selfupdate.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
+rem -------------------------------------------------------------------
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+
+Description:
+  Updates Poetry to the latest version.
+  The self update command updates Poetry version in its current runtime environment.
+
+Usage:
+  self update [options] [--] [<version>]
+
+Arguments:
+  version                    The version to update to. [default: "latest"]
+
+Options:
+      --preview              Allow the installation of pre-release versions.
+      --dry-run              Output the operations but do not execute anything (implicitly enables --verbose).
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+
+Help:
+  The self update command updates Poetry version in its current runtime environment.
+  
 rem -------------------------------------------------------------------
 rem   self update - Updates Poetry to the latest version.
-rem                 The self update command updates Poetry version in its current runtime environment.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The self update command updates Poetry version in its current runtime environment.
 rem     poetry self update
-rem   Options
-rem   --preview: Allow the installation of pre-release versions.
-rem   --dry-run: Output the operations but do not execute anything (implicitly enables –verbose).
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -76,7 +85,7 @@ rem beginfunction
     call :Read_P preview %1 || exit /b 1
     rem echo preview: %preview%
     if not "%preview%"=="" (
-        set APPRUN=%APPRUN% --preview %preview%
+        set OPTION=%OPTION% --preview %preview%
     )
 
     set dry-run=
@@ -84,7 +93,7 @@ rem beginfunction
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+        set OPTION=%OPTION% --dry-run %dry-run%
     )
     
 :Exit

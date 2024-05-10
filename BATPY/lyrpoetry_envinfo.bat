@@ -2,34 +2,34 @@
 rem -------------------------------------------------------------------
 rem lyrpoetry_envinfo.bat
 rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
-rem -------------------------------------------------------------------
-rem   env info - Displays information about the current environment.
-rem              Displaying the environment information
+
+Description:
+  Displays information about the current environment.
+  Displaying the environment information
+
+Usage:
+  env info [options]
+
+Options:
+  -p, --path                 Only display the environment's path.
+  -e, --executable           Only display the environment's python executable path.
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 rem   Usage 
-rem   poetry env info
+rem     poetry env info
 rem   If you only want to know the path to the virtual environment, you can pass the --path option to env info:
-rem   poetry env info --path
+rem     poetry env info --path
 rem   If you only want to know the path to the python executable (useful for running mypy from a global environment without installing it in the virtual environment), you can pass the --executable option to env info:
-rem   poetry env info --executable
-rem   Options
+rem     poetry env info --executable
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -78,14 +78,14 @@ rem beginfunction
     call :Read_P pathenv %1 || exit /b 1
     rem echo pathenv: %pathenv%
     if not "%pathenv%"=="" (
-        set APPRUN=%APPRUN% --path
+        set OPTION=%OPTION% --path
     )
     set executable=
     set PN_CAPTION=executable
     call :Read_P executable %1 || exit /b 1
     rem echo executable: %executable%
     if not "%executable%"=="" (
-        set APPRUN=%APPRUN% --executable
+        set OPTION=%OPTION% --executable
     )
     
 :Exit

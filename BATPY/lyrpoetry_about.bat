@@ -1,11 +1,16 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_about.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
+rem -------------------------------------------------------------------
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+rem
+rem Description:
+rem   Shows information about Poetry.
+rem   The about command displays global information about Poetry, including the current version and version of poetry-core
 rem 
 rem Usage:
-rem   command [options] [arguments]
+rem   about [options]
 rem 
 rem Options:
 rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
@@ -19,11 +24,6 @@ rem       --no-cache             Disables Poetry source caches.
 rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem 
-rem -------------------------------------------------------------------
-rem   about - Shows information about Poetry.
-rem           The about command displays global information about Poetry, including the current version and version of poetry-core
-rem -------------------------------------------------------------------
-rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -40,19 +40,22 @@ setlocal enabledelayedexpansion
 
     echo Shows information about Poetry ...
     set COMMAND=about
-    set APPRUN=poetry -v %COMMAND%
+    set APP=poetry
+    set OPTION=-v
+    set ARGS=
+    set APPRUN=
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    for %%a in (%*) do set /a N+=1
+    echo N: %N%
+
+    if "%N%"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=poetry %*
+        set APPRUN=%APP% %COMMAND% %OPTION% %ARGS%
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=%APP% %*
     )
     echo APPRUN: %APPRUN%
-    %APPRUN%
+    rem %APPRUN%
 
 :Exit
 exit /b 0
@@ -76,6 +79,9 @@ rem =================================================
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey

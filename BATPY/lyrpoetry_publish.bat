@@ -1,38 +1,47 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_publishbuild.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   publish - Publishes a package to a remote repository.
-rem             The build command builds the source and wheels archives.
+rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-rem   Options
-rem   --repository (-r): The repository to register the package to (default: pypi). Should match a repository name set by the config command.
-rem   --username (-u): The username to access the repository.
-rem   --password (-p): The password to access the repository.
-rem   --cert: Certificate authority to access the repository.
-rem   --client-cert: Client certificate to access the repository.
-rem   --dist-dir: Dist directory where built artifact are stored. Default is dist.
-rem   --build: Build the package before publishing.
-rem   --dry-run: Perform all actions except upload the package.
-rem   --skip-existing: Ignore errors from files already existing in the repository.
+
+Description:
+  Publishes a package to a remote repository.
+  The build command builds the source and wheels archives.
+
+Usage:
+  publish [options]
+
+Options:
+  -r, --repository=REPOSITORY    The repository to publish the package to.
+  -u, --username=USERNAME        The username to access the repository.
+  -p, --password=PASSWORD        The password to access the repository.
+      --cert=CERT                Certificate authority to access the repository.
+      --client-cert=CLIENT-CERT  Client certificate to access the repository.
+      --dist-dir=DIST-DIR        Dist directory where built artifact are stored. Default is `dist`. [default: "dist"]
+      --build                    Build the package before publishing.
+      --dry-run                  Perform all actions except upload the package.
+      --skip-existing            Ignore errors from files already existing in the repository.
+  -h, --help                     Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                    Do not output any message.
+  -V, --version                  Display this application version.
+      --ansi                     Force ANSI output.
+      --no-ansi                  Disable ANSI output.
+  -n, --no-interaction           Do not ask any interactive question.
+      --no-plugins               Disables plugins.
+      --no-cache                 Disables Poetry source caches.
+  -C, --directory=DIRECTORY      The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+
+Help:
+  The publish command builds and uploads the package to a remote repository.
+  
+  By default, it will upload to PyPI but if you pass the --repository option it will
+  upload to it instead.
+  
+  The --repository option should match the name of a configured repository using
+  the config command.
+  
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -80,63 +89,63 @@ rem beginfunction
     call :Read_P repository %1 || exit /b 1
     rem echo repository: %repository%
     if not "%repository%"=="" (
-        set APPRUN=%APPRUN% --repository %repository%
+        set OPTION=%OPTION% --repository %repository%
     )
     set username=
     set PN_CAPTION=The username to access the repository
     call :Read_P username %1 || exit /b 1
     rem echo username: %username%
     if not "%username%"=="" (
-        set APPRUN=%APPRUN% --username %username%
+        set OPTION=%OPTION% --username %username%
     )
     set password=
     set PN_CAPTION=The password to access the repository
     call :Read_P password %1 || exit /b 1
     rem echo password: %password%
     if not "%password%"=="" (
-        set APPRUN=%APPRUN% --password %password%
+        set OPTION=%OPTION% --password %password%
     )
     set cert=
     set PN_CAPTION=Certificate authority to access the repository
     call :Read_P cert %1 || exit /b 1
     rem echo cert: %cert%
     if not "%cert%"=="" (
-        set APPRUN=%APPRUN% --cert %cert%
+        set OPTION=%OPTION% --cert %cert%
     )
     set client-cert=
     set PN_CAPTION=Client certificate to access the repository
     call :Read_P client-cert %1 || exit /b 1
     rem echo client-cert: %client-cert%
     if not "%client-cert%"=="" (
-        set APPRUN=%APPRUN% --client-cert %client-cert%
+        set OPTION=%OPTION% --client-cert %client-cert%
     )
     set dist-dir=
     set PN_CAPTION=Dist directory where built artifact are stored. Default is dist
     call :Read_P dist-dir %1 || exit /b 1
     rem echo dist-dir: %dist-dir%
     if not "%dist-dir%"=="" (
-        set APPRUN=%APPRUN% --dist-dir %dist-dir%
+        set OPTION=%OPTION% --dist-dir %dist-dir%
     )
     set build=
     set PN_CAPTION=Build the package before publishing
     call :Read_P build %1 || exit /b 1
     rem echo build: %build%
     if not "%build%"=="" (
-        set APPRUN=%APPRUN% --build %build%
+        set OPTION=%OPTION% --build %build%
     )
     set dry-run=
     set PN_CAPTION=Perform all actions except upload the package
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+        set OPTION=%OPTION% --dry-run %dry-run%
     )
     set skip-existing=
     set PN_CAPTION=Ignore errors from files already existing in the repository
     call :Read_P skip-existing %1 || exit /b 1
     rem echo skip-existing: %skip-existing%
     if not "%skip-existing%"=="" (
-        set APPRUN=%APPRUN% --skip-existing %skip-existing%
+        set OPTION=%OPTION% --skip-existing %skip-existing%
     )
 
 :Exit

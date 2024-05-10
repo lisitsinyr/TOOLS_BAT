@@ -1,29 +1,41 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_help.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem     help - Displays help for a command.
-rem          The help command displays global help, or help for a specific command.
+rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-rem     Uses
+
+Description:
+  Displays help for a command.
+  The help command displays global help, or help for a specific command.
+
+Usage:
+  help [options] [--] [<command_name>]
+
+Arguments:
+  command_name               The command name [default: "help"]
+
+Options:
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+
+Help:
+  The help command displays help for a given command:
+  
+    poetry help list
+  
+  To display the list of available commands, please use the list command.
+  
+rem -------------------------------------------------------------------
+rem     Usage
 rem     To display global help:
 rem         poetry help
 rem     To display help for a specific command, for instance show:
@@ -31,7 +43,6 @@ rem         poetry help show
 rem     The --help option can also be passed to any command to get help for a specific command.
 rem         For instance:
 rem         poetry show --help
-rem     Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -95,7 +106,7 @@ rem beginfunction
     call :Read_P command %1 || exit /b 1
     rem echo command: %command%
     if not "%command%"=="" (
-        set APPRUN=%APPRUN% %command%
+        set OPTION=%OPTION% %command%
     )
 
 :Exit

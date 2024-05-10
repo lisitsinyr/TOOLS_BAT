@@ -1,27 +1,31 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_run.bat
-rem     «апуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   run - Runs a command in the appropriate environment.
-rem         The run command executes the given command inside the projectТs virtualenv.
+rem «апуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+
+Description:
+  Runs a command in the appropriate environment.
+  The run command executes the given command inside the projectТs virtualenv.
+
+Usage:
+  run [options] [--] <args>...
+
+Arguments:
+  args                       The command and arguments/options to run.
+
+Options:
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 rem   The run command executes the given command inside the projectТs virtualenv.
 rem     poetry run python -V
@@ -82,7 +86,7 @@ rem beginfunction
     call :Read_P command %1 || exit /b 1
     rem echo command: %command%
     if not "%command%"=="" (
-        set APPRUN=%APPRUN% %command%
+        set OPTION=%OPTION% %command%
     )
 :Exit
 exit /b 0

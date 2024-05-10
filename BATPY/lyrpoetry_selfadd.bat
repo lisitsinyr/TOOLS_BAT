@@ -1,39 +1,60 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_selfadd.bat
-rem     «апуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   self add - Add additional packages to Poetry's runtime environment.
-rem              The self add command installs Poetry plugins and make them available at runtime. Additionally, it can also be used to upgrade PoetryТs own dependencies or inject additional packages into the runtime environment
+rem «апуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+
+Description:
+  Add additional packages to Poetry's runtime environment.
+  The self add command installs Poetry plugins and make them available at runtime. Additionally, it can also be used to upgrade PoetryТs own dependencies or inject additional packages into the runtime environment
+
+Usage:
+  self add [options] [--] <name>...
+
+Arguments:
+  name                       The packages to add.
+
+Options:
+  -e, --editable             Add vcs/path dependencies as editable.
+  -E, --extras=EXTRAS        Extras to activate for the dependency. (multiple values allowed)
+      --source=SOURCE        Name of the source to use to install the package.
+      --allow-prereleases    Accept prereleases.
+      --dry-run              Output the operations but do not execute anything (implicitly enables --verbose).
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+
+Help:
+  The self add command installs additional packages to Poetry's runtime environment.
+  
+  This is managed in the C:\Users\lyr\AppData\Roaming\pypoetry\pyproject.toml file.
+  
+  If you do not specify a version constraint, poetry will choose a suitable one based on the available package versions.
+  
+  You can specify a package in the following forms:
+    - A single name (requests)
+    - A name and a constraint (requests@^2.23.0)
+    - A git url (git+https://github.com/python-poetry/poetry.git)
+    - A git url with a revision (git+https://github.com/python-poetry/poetry.git#develop)
+    - A git SSH url (git+ssh://github.com/python-poetry/poetry.git)
+    - A git SSH url with a revision (git+ssh://github.com/python-poetry/poetry.git#develop)
+    - A file path (../my-package/my-package.whl)
+    - A directory (../my-package/)
+    - A url (https://example.com/packages/my-package-0.1.0.tar.gz)
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   For example, to install the poetry-plugin-export plugin, you can run:
 rem     poetry self add poetry-plugin-export
 rem   To update to the latest poetry-core version, you can run:
 rem     poetry self add poetry-core@latest
-rem   Options
-rem   --editable (-e): Add vcs/path dependencies as editable.
-rem   --extras (-E): Extras to activate for the dependency. (multiple values allowed)
-rem   --allow-prereleases: Accept prereleases.
-rem   --source: Name of the source to use to install the package.
-rem   --dry-run: Output the operations but do not execute anything (implicitly enables Цverbose).
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -81,35 +102,35 @@ rem beginfunction
     call :Read_P editable %1 || exit /b 1
     rem echo editable: %editable%
     if not "%editable%"=="" (
-        set APPRUN=%APPRUN% --editable %editable%
+        set OPTION=%OPTION% --editable %editable%
     )
     set extras=
     set PN_CAPTION=Extras to activate for the dependency. (multiple values allowed)
     call :Read_P extras %1 || exit /b 1
     rem echo extras: %extras%
     if not "%extras%"=="" (
-        set APPRUN=%APPRUN% --extras %extras%
+        set OPTION=%OPTION% --extras %extras%
     )
     set allow-prereleases=
     set PN_CAPTION=Accept prereleases
     call :Read_P allow-prereleases %1 || exit /b 1
     rem echo allow-prereleases: %allow-prereleases%
     if not "%allow-prereleases%"=="" (
-        set APPRUN=%APPRUN% --allow-prereleases %allow-prereleases%
+        set OPTION=%OPTION% --allow-prereleases %allow-prereleases%
     )
     set source=
     set PN_CAPTION=Name of the source to use to install the package
     call :Read_P source %1 || exit /b 1
     rem echo source: %source%
     if not "%source%"=="" (
-        set APPRUN=%APPRUN% --source %source%
+        set OPTION=%OPTION% --source %source%
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything (implicitly enables Цverbose)
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+        set OPTION=%OPTION% --dry-run %dry-run%
     )
 
 :Exit

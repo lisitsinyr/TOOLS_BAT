@@ -1,33 +1,33 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_new.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   new - Creates a new Python project at <path>
+rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-rem   Options
-rem    --name: Set the resulting package name.
-rem    --src: Use the src layout for the project.
-rem    --readme: Specify the readme file extension.
-rem      Default is md. If you intend to publish to PyPI keep the recommendations
-rem      for a PyPI-friendly README in mind.
+
+Description:
+  Creates a new Python project at <path>.
+
+Usage:
+  new [options] [--] <path>
+
+Arguments:
+  path                       The path to create the project at.
+
+Options:
+      --name=NAME            Set the resulting package name.
+      --src                  Use the src layout for the project.
+      --readme=README        Specify the readme file format. One of md (default) or rst
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -88,7 +88,7 @@ rem beginfunction
             echo Удаление каталога "%folder%"
             rmdir "%folder%" /s
         )
-        set APPRUN=%APPRUN% "%folder%"
+        set OPTION=%OPTION% "%folder%"
     )
 
     set name=test
@@ -96,7 +96,7 @@ rem beginfunction
     call :Read_P name || exit /b 1
     rem echo name: %name%
     if not "%name%"=="" (
-        set APPRUN=%APPRUN% --name %name%
+        set OPTION=%OPTION% --name %name%
     )
 
     set src=
@@ -104,7 +104,7 @@ rem beginfunction
     call :Read_P src || exit /b 1
     rem echo src: %src%
     if not "%src%"=="" (
-        set APPRUN=%APPRUN% --src
+        set OPTION=%OPTION% --src
     )
 
     set readme=md
@@ -112,7 +112,7 @@ rem beginfunction
     call :Read_P readme || exit /b 1
     rem echo readme: %readme%
     if not "%readme%"=="" (
-        set APPRUN=%APPRUN% --readme %readme%
+        set OPTION=%OPTION% --readme %readme%
     )
 :Exit
 exit /b 0

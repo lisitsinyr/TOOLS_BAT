@@ -1,29 +1,38 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_debugresolve.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   debug resolve - Debugs dependency resolution.
+rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-rem   Usage 
-rem   Options
+
+Description:
+  Debugs dependency resolution.
+
+Usage:
+  debug resolve [options] [--] [<package>...]
+
+Arguments:
+  package                    The packages to resolve.
+
+Options:
+  -E, --extras=EXTRAS        Extras to activate for the dependency. (multiple values allowed)
+      --python=PYTHON        Python version(s) to use for resolution.
+      --tree                 Display the dependency tree.
+      --install              Show what would be installed for the current system.
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+
+Help:
+  The init command creates a basic pyproject.toml file in the current directory.
+
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 

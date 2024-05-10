@@ -1,39 +1,45 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_show.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   show - Shows information about packages.
-rem          To list all the available packages, you can use the show command.
+rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-rem   Options
-rem   --without: The dependency groups to ignore.
-rem   --why: When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages.
-rem   --with: The optional dependency groups to include.
-rem   --only: The only dependency groups to include.
-rem   --no-dev: Do not list the dev dependencies. (Deprecated, use --only main or --without dev instead)
-rem   --tree: List the dependencies as a tree.
-rem   --latest (-l): Show the latest version.
-rem   --outdated (-o): Show the latest version but only for packages that are outdated.
-rem   --all (-a): Show all packages (even those not compatible with current system).
-rem   --top-level (-T): Only show explicitly defined packages.
+
+Description:
+  Shows information about packages.
+  To list all the available packages, you can use the show command.
+
+Usage:
+  show [options] [--] [<package>]
+
+Arguments:
+  package                    The package to inspect
+
+Options:
+      --without=WITHOUT      The dependency groups to ignore. (multiple values allowed)
+      --with=WITH            The optional dependency groups to include. (multiple values allowed)
+      --only=ONLY            The only dependency groups to include. (multiple values allowed)
+      --no-dev               Do not list the development dependencies. (Deprecated)
+  -t, --tree                 List the dependencies as a tree.
+      --why                  When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
+  -l, --latest               Show the latest version.
+  -o, --outdated             Show the latest version but only for packages that are outdated.
+  -a, --all                  Show all packages (even those not compatible with current system).
+  -T, --top-level            Show only top-level dependencies.
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+
+Help:
+  The show command displays detailed information about a package, or
+  lists all packages available.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -80,70 +86,70 @@ rem beginfunction
     call :Read_P without %1 || exit /b 1
     rem echo without: %without%
     if not "%without%"=="" (
-        set APPRUN=%APPRUN% --without %without%
+        set OPTION=%OPTION% --without %without%
     )
     set why=
     set PN_CAPTION=When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
     call :Read_P why %1 || exit /b 1
     rem echo why: %why%
     if not "%why%"=="" (
-        set APPRUN=%APPRUN% --why %why%
+        set OPTION=%OPTION% --why %why%
     )
     set with=
     set PN_CAPTION=The optional dependency groups to include
     call :Read_P with %1 || exit /b 1
     rem echo with: %with%
     if not "%with%"=="" (
-        set APPRUN=%APPRUN% --with %with%
+        set OPTION=%OPTION% --with %with%
     )
     set only=
     set PN_CAPTION=The only dependency groups to include
     call :Read_P only %1 || exit /b 1
     rem echo only: %only%
     if not "%only%"=="" (
-        set APPRUN=%APPRUN% --only %only%
+        set OPTION=%OPTION% --only %only%
     )
     set no-dev=
     set PN_CAPTION=Do not list the dev dependencies. (Deprecated, use --only main or --without dev instead)
     call :Read_P no-dev %1 || exit /b 1
     rem echo no-dev: %no-dev%
     if not "%no-dev%"=="" (
-        set APPRUN=%APPRUN% --no-dev %no-dev%
+        set OPTION=%OPTION% --no-dev %no-dev%
     )
     set tree=
     set PN_CAPTION=List the dependencies as a tree
     call :Read_P tree %1 || exit /b 1
     rem echo tree: %tree%
     if not "%tree%"=="" (
-        set APPRUN=%APPRUN% --tree %tree%
+        set OPTION=%OPTION% --tree %tree%
     )
     set latest=
     set PN_CAPTION=Show the latest version
     call :Read_P latest %1 || exit /b 1
     rem echo latest: %latest%
     if not "%latest%"=="" (
-        set APPRUN=%APPRUN% --latest %latest%
+        set OPTION=%OPTION% --latest %latest%
     )
     set outdated=
     set PN_CAPTION=Show the latest version but only for packages that are outdated
     call :Read_P outdated %1 || exit /b 1
     rem echo outdated: %outdated%
     if not "%outdated%"=="" (
-        set APPRUN=%APPRUN% --outdated %outdated%
+        set OPTION=%OPTION% --outdated %outdated%
     )
     set all=
     set PN_CAPTION=Show all packages (even those not compatible with current system)
     call :Read_P all %1 || exit /b 1
     rem echo all: %all%
     if not "%all%"=="" (
-        set APPRUN=%APPRUN% --all %all%
+        set OPTION=%OPTION% --all %all%
     )
     set top-level=
     set PN_CAPTION=Only show explicitly defined packages
     call :Read_P top-level %1 || exit /b 1
     rem echo top-level: %top-level%
     if not "%top-level%"=="" (
-        set APPRUN=%APPRUN% --top-level %top-level%
+        set OPTION=%OPTION% --top-level %top-level%
     )
 
 :Exit

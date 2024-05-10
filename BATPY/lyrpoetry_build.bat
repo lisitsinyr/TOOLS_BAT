@@ -1,13 +1,20 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_build.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
+rem -------------------------------------------------------------------
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+rem 
+rem Description:
+rem   Builds a package, as a tarball and a wheel by default.
+rem   The build command builds the source and wheels archives.
 rem 
 rem Usage:
-rem   command [options] [arguments]
+rem   build [options]
 rem 
 rem Options:
+rem   -f, --format=FORMAT        Limit the format to either sdist or wheel.
+rem   -o, --output=OUTPUT        Set output directory for build artifacts. Default is `dist`. [default: "dist"]
 rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
 rem   -q, --quiet                Do not output any message.
 rem   -V, --version              Display this application version.
@@ -18,14 +25,6 @@ rem       --no-plugins           Disables plugins.
 rem       --no-cache             Disables Poetry source caches.
 rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
-rem -------------------------------------------------------------------
-rem   build - Builds a package, as a tarball and a wheel by default ...
-rem           The build command builds the source and wheels archives.
-rem -------------------------------------------------------------------
-rem   Options
-rem   --format (-f): Limit the format to either wheel or sdist.
-rem   --output (-o): Set output directory for build artifacts. Default is dist.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -42,18 +41,23 @@ setlocal enabledelayedexpansion
 
     echo Builds a package, as a tarball and a wheel by default ...
     set COMMAND=build
-    set APPRUN=poetry -v %COMMAND%
+    set APP=poetry
+    set OPTION=-v
+    set ARGS=
 
     set P1=
     call :Check_P P1 %1 || exit /b 1
    
     if "%P1%"=="" (
         call :MAIN_FUNC
+        set APPRUN=%APP% %COMMAND% %OPTION% %ARGS%
+        echo APPRUN: %APPRUN%
+        %APPRUN%
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=%APP% %*
+        echo APPRUN: %APPRUN%
+        %APPRUN%
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
 
 :Exit
 exit /b 0
@@ -72,14 +76,14 @@ rem beginfunction
     call :Read_P format %1 || exit /b 1
     rem echo format: %format%
     if not "%format%"=="" (
-        set APPRUN=%APPRUN% --format %format%
+        set OPTION=%OPTION% --format %format%
     )
     set output=
     set PN_CAPTION=Set output directory for build artifacts. Default is dist
     call :Read_P output %1 || exit /b 1
     rem echo output: %output%
     if not "%output%"=="" (
-        set APPRUN=%APPRUN% --output %output%
+        set OPTION=%OPTION% --output %output%
     )
 :Exit
 exit /b 0

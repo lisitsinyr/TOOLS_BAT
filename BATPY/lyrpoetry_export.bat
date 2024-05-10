@@ -1,32 +1,39 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_export.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   export - Exports the lock file to alternative formats.
-rem            This command exports the lock file to other formats.
+rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-rem   Options
-rem   --next-phase: Increment the phase of the current version.
-rem   --short (-s): Output the version number only.
-rem   --dry-run: Do not update pyproject.toml file.
+
+Description:
+  Exports the lock file to alternative formats.
+  This command exports the lock file to other formats.
+
+Usage:
+  export [options]
+
+Options:
+  -f, --format=FORMAT        Format to export to. Currently, only constraints.txt and requirements.txt are supported. [default: "requirements.txt"]
+  -o, --output=OUTPUT        The name of the output file.
+      --without-hashes       Exclude hashes from the exported file.
+      --without-urls         Exclude source repository urls from the exported file.
+      --dev                  Include development dependencies. (Deprecated)
+      --without=WITHOUT      The dependency groups to ignore. (multiple values allowed)
+      --with=WITH            The optional dependency groups to include. (multiple values allowed)
+      --only=ONLY            The only dependency groups to include. (multiple values allowed)
+  -E, --extras=EXTRAS        Extra sets of dependencies to include. (multiple values allowed)
+      --all-extras           Include all sets of extra dependencies.
+      --with-credentials     Include credentials for extra indices.
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -75,21 +82,21 @@ rem beginfunction
     call :Read_P next-phase %1 || exit /b 1
     rem echo next-phase: %next-phase%
     if not "%next-phase%"=="" (
-        set APPRUN=%APPRUN% --next-phase %next-phase%
+        set OPTION=%OPTION% --next-phase %next-phase%
     )
     set short=
     set PN_CAPTION=Output the version number only
     call :Read_P short %1 || exit /b 1
     rem echo short: %short%
     if not "%short%"=="" (
-        set APPRUN=%APPRUN% --short %short%
+        set OPTION=%OPTION% --short %short%
     )
     set dry-run=
     set PN_CAPTION=Do not update pyproject.toml file
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+        set OPTION=%OPTION% --dry-run %dry-run%
     )
 
 :Exit

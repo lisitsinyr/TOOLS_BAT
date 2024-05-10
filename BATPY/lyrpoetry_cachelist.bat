@@ -1,11 +1,16 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_cachelist.bat
-rem     «апуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
+rem -------------------------------------------------------------------
+rem «апуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+rem 
+rem Description:
+rem   List Poetry's caches.
+rem   The cache list command lists PoetryТs available caches.
 rem 
 rem Usage:
-rem   command [options] [arguments]
+rem   cache list [options]
 rem 
 rem Options:
 rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
@@ -18,15 +23,10 @@ rem       --no-plugins           Disables plugins.
 rem       --no-cache             Disables Poetry source caches.
 rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
-rem -------------------------------------------------------------------
-rem   cache list - List Poetry's caches.
-rem                The cache list command lists PoetryТs available caches.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The cache list command lists PoetryТs available caches.
-rem   poetry cache list
-rem   Options
+rem     poetry cache list
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 

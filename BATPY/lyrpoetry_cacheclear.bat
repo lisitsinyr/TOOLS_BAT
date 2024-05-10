@@ -1,13 +1,22 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_cacheclear.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
+rem -------------------------------------------------------------------
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+rem 
+rem Description:
+rem   Clears a Poetry cache by name.
+rem   The cache clear command removes packages from a cached repository.
 rem 
 rem Usage:
-rem   command [options] [arguments]
+rem   cache clear [options] [--] <cache>
+rem 
+rem Arguments:
+rem   cache                      The name of the cache to clear.
 rem 
 rem Options:
+rem       --all                  Clear all entries in the cache.
 rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
 rem   -q, --quiet                Do not output any message.
 rem   -V, --version              Display this application version.
@@ -18,17 +27,12 @@ rem       --no-plugins           Disables plugins.
 rem       --no-cache             Disables Poetry source caches.
 rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
 rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
-rem -------------------------------------------------------------------
-rem   cache clear - Clears a Poetry cache by name.
-rem                 The cache clear command removes packages from a cached repository.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   For example, to clear the whole cache of packages from the pypi repository, run:
-rem   poetry cache clear pypi --all
+rem     poetry cache clear pypi --all
 rem   To only remove a specific package from a cache, you have to specify the cache entry in the following form
-rem   poetry cache clear pypi:requests:2.24.0
-rem   Options
+rem     poetry cache clear pypi:requests:2.24.0
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -77,7 +81,7 @@ rem beginfunction
     call :Read_P namepackage %1 || exit /b 1
     rem echo namepackage: %namepackage%
     if not "%namepackage%"=="" (
-        set APPRUN=%APPRUN% --namepackage %namepackage%
+        set OPTION=%OPTION% --namepackage %namepackage%
     )
     
 :Exit

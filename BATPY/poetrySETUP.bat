@@ -65,14 +65,14 @@ rem beginfunction
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+        set OPTION=%OPTION% --dry-run %dry-run%
     )
     set lock=
     set PN_CAPTION=lock
     call :Read_P lock %1 || exit /b 1
     rem echo lock: %lock%
     if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+        set OPTION=%OPTION% --lock %lock%
     )
     
 :Exit

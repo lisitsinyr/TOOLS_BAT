@@ -1,34 +1,49 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_config.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   config - Manages configuration settings.
-rem            The config command allows you to edit poetry config settings and repositories.
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+
+Description:
+  Manages configuration settings.
+  The config command allows you to edit poetry config settings and repositories.
+
+Usage:
+  config [options] [--] [<key> [<value>...]]
+
+Arguments:
+  key                        Setting key.
+  value                      Setting value.
+
+Options:
+      --list                 List configuration settings.
+      --unset                Unset configuration setting.
+      --local                Set/Get from the project's local configuration.
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+
+Help:
+  This command allows you to edit the poetry config settings and repositories.
+  
+  To add a repository:
+  
+      poetry config repositories.foo https://bar.com/simple/
+  
+  To remove a repository (repo is a short alias for repositories):
+  
+      poetry config --unset repo.foo
 rem -------------------------------------------------------------------
 rem   Usage
-rem   poetry config [options] [setting-key] [setting-value1] ... [setting-valueN]
-rem   Options
-rem   --unset: Remove the configuration element named by setting-key.
-rem   --list: Show the list of current config variables.
-rem   --local: Set/Get settings that are specific to a project (in the local configuration file poetry.toml).
+rem     poetry config [options] [setting-key] [setting-value1] ... [setting-valueN]
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -79,35 +94,35 @@ rem   --local: Set/Get settings that are specific to a project (in the local con
     call :Read_P unset %1 || exit /b 1
     rem echo unset: %unset%
     if not "%unset%"=="" (
-        set APPRUN=%APPRUN% --unset
+        set OPTION=%OPTION% --unset
     )
     set list=
     set PN_CAPTION=lock
     call :Read_P list %1 || exit /b 1
     rem echo list: %list%
     if not "%list%"=="" (
-        set APPRUN=%APPRUN% --list
+        set OPTION=%OPTION% --list
     )
     set local=
     set PN_CAPTION=Set/Get settings that are specific to a project (in the local configuration file poetry.toml)
     call :Read_P local %1 || exit /b 1
     rem echo local: %local%
     if not "%local%"=="" (
-        set APPRUN=%APPRUN% --local
+        set OPTION=%OPTION% --local
     )
     set setting-key=
     set PN_CAPTION=setting-key
     call :Read_P setting-key %1 || exit /b 1
     rem echo setting-key: %setting-key%
     if not "%setting-key%"=="" (
-        set APPRUN=%APPRUN% --local %setting-key%
+        set OPTION=%OPTION% --local %setting-key%
     )
     set setting-value1=
     set PN_CAPTION=setting-value1
     call :Read_P setting-value1 %1 || exit /b 1
     rem echo setting-value1: %setting-value1%
     if not "%setting-value1%"=="" (
-        set APPRUN=%APPRUN% --local %setting-value1%
+        set OPTION=%OPTION% --local %setting-value1%
     )
 
 :Exit

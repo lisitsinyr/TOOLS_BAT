@@ -1,27 +1,32 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_envremove.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
 rem -------------------------------------------------------------------
-rem   env remove - Remove virtual environments associated with the project.
-rem                Deleting the environments
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+
+Description:
+  Remove virtual environments associated with the project.
+  Deleting the environments
+
+Usage:
+  env remove [options] [--] [<python>...]
+
+Arguments:
+  python                     The python executables associated with, or names of the virtual environments which are to be removed.
+
+Options:
+      --all                  Remove all managed virtual environments associated with the project.
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   Finally, you can delete existing virtual environments by using env remove:
@@ -33,7 +38,6 @@ rem   You can delete more than one environment at a time.
 rem     poetry env remove python3.6 python3.7 python3.8
 rem   Use the --all option to delete all virtual environments at once.
 rem     poetry env remove --all
-rem   Options
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -82,7 +86,7 @@ rem beginfunction
     call :Read_P lock %1 || exit /b 1
     rem echo namevenv: %namevenv%
     if not "%namevenv%"=="" (
-        set APPRUN=%APPRUN% %namevenv%
+        set OPTION=%OPTION% %namevenv%
     )
 
     set all=
@@ -90,7 +94,7 @@ rem beginfunction
     call :Read_P all %1 || exit /b 1
     rem echo all: %dall%
     if not "%all%"=="" (
-        set APPRUN=%APPRUN% --all
+        set OPTION=%OPTION% --all
     )
 :Exit
 exit /b 0

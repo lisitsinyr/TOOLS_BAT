@@ -1,27 +1,41 @@
 @echo off
 rem -------------------------------------------------------------------
 rem lyrpoetry_lock.bat
-rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
+rem -------------------------------------------------------------------
+rem Запуск poetry из глобального виртуального пространства
+rem -------------------------------------------------------------------
+
+Description:
+  Locks the project dependencies.
+  This command locks (without installing) the dependencies specified in pyproject.toml.
+
+Usage:
+  lock [options]
+
+Options:
+      --no-update            Do not update locked versions, only refresh lock file.
+      --check                Check that the poetry.lock file corresponds to the current version of pyproject.toml. (Deprecated) Use poetry check --lock instead.
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+
+Help:
+  
+  The lock command reads the pyproject.toml file from the
+  current directory, processes it, and locks the dependencies in the poetry.lock
+  file.
+  
+  poetry lock
+  
 rem -------------------------------------------------------------------
 rem   lock - Locks the project dependencies.
-rem          This command locks (without installing) the dependencies specified in pyproject.toml.
 rem -------------------------------------------------------------------
 rem   Options
 rem   --check: Verify that poetry.lock is consistent with pyproject.toml. (Deprecated) Use poetry check --lock instead.
@@ -74,14 +88,14 @@ rem beginfunction
     call :Read_P check %1 || exit /b 1
     rem echo check: %check%
     if not "%check%"=="" (
-        set APPRUN=%APPRUN% --check %check%
+        set OPTION=%OPTION% --check %check%
     )
     set no-update=
     set PN_CAPTION=Do not update locked versions, only refresh lock file
     call :Read_P no-update %1 || exit /b 1
     rem echo no-update: %no-update%
     if not "%no-update%"=="" (
-        set APPRUN=%APPRUN% --no-update %no-update%
+        set OPTION=%OPTION% --no-update %no-update%
     )
     
 :Exit

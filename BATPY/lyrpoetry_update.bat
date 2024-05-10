@@ -2,36 +2,35 @@
 rem -------------------------------------------------------------------
 rem lyrpoetry_install.bat
 rem     Запуск poetry из глобального виртуального пространства
-rem Poetry (version 1.8.2)
-rem 
-rem Usage:
-rem   command [options] [arguments]
-rem 
-rem Options:
-rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-rem   -q, --quiet                Do not output any message.
-rem   -V, --version              Display this application version.
-rem       --ansi                 Force ANSI output.
-rem       --no-ansi              Disable ANSI output.
-rem   -n, --no-interaction       Do not ask any interactive question.
-rem       --no-plugins           Disables plugins.
-rem       --no-cache             Disables Poetry source caches.
-rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-rem 
-rem -------------------------------------------------------------------
-rem   update - Update the dependencies as according to the pyproject.toml file.
-rem            In order to get the latest versions of the dependencies and to update
-rem            the poetry.lock file, you should use the update command.
-rem -------------------------------------------------------------------
-rem   Options
-rem   --without: The dependency groups to ignore.
-rem   --with: The optional dependency groups to include.
-rem   --only: The only dependency groups to include.
-rem   --dry-run : Outputs the operations but will not execute anything (implicitly enables –verbose).
-rem   --no-dev : Do not update the development dependencies. (Deprecated, use --only main or --without dev instead)
-rem   --lock : Do not perform install (only update the lockfile).
-rem   --sync: Synchronize the environment with the locked packages and the specified groups.
+
+Description:
+  Update the dependencies as according to the pyproject.toml file.
+  In order to get the latest versions of the dependencies and to update the poetry.lock file, you should use the update command.
+
+Usage:
+  update [options] [--] [<packages>...]
+
+Arguments:
+  packages                   The packages to update
+
+Options:
+      --without=WITHOUT      The dependency groups to ignore. (multiple values allowed)
+      --with=WITH            The optional dependency groups to include. (multiple values allowed)
+      --only=ONLY            The only dependency groups to include. (multiple values allowed)
+      --no-dev               Do not update the development dependencies. (Deprecated)
+      --sync                 Synchronize the environment with the locked packages and the specified groups.
+      --dry-run              Output the operations but do not execute anything (implicitly enables --verbose).
+      --lock                 Do not perform operations (only update the lockfile).
+  -h, --help                 Display help for the given command. When no command is given display help for the list command.
+  -q, --quiet                Do not output any message.
+  -V, --version              Display this application version.
+      --ansi                 Force ANSI output.
+      --no-ansi              Disable ANSI output.
+  -n, --no-interaction       Do not ask any interactive question.
+      --no-plugins           Disables plugins.
+      --no-cache             Disables Poetry source caches.
+  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -79,49 +78,49 @@ rem beginfunction
     call :Read_P without %1 || exit /b 1
     rem echo without: %without%
     if not "%without%"=="" (
-        set APPRUN=%APPRUN% --without %without%
+        set OPTION=%OPTION% --without %without%
     )
     set with=
     set PN_CAPTION=with
     call :Read_P with %1 || exit /b 1
     rem echo with: %with%
     if not "%with%"=="" (
-        set APPRUN=%APPRUN% --with %with%
+        set OPTION=%OPTION% --with %with%
     )
     set only=
     set PN_CAPTION=only
     call :Read_P only %1 || exit /b 1
     rem echo only: %only%
     if not "%only%"=="" (
-        set APPRUN=%APPRUN% --only %only%
+        set OPTION=%OPTION% --only %only%
     )
     set dry-run=
     set PN_CAPTION=dry-run
     call :Read_P dry-run %1 || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
-        set APPRUN=%APPRUN% --dry-run %dry-run%
+        set OPTION=%OPTION% --dry-run %dry-run%
     )
     set no-dev=
     set PN_CAPTION=no-dev
     call :Read_P no-dev %1 || exit /b 1
     rem echo no-dev: %no-dev%
     if not "%no-dev%"=="" (
-        set APPRUN=%APPRUN% --no-dev %no-dev%
+        set OPTION=%OPTION% --no-dev %no-dev%
     )
     set lock=
     set PN_CAPTION=lock
     call :Read_P lock %1 || exit /b 1
     rem echo lock: %lock%
     if not "%lock%"=="" (
-        set APPRUN=%APPRUN% --lock %lock%
+        set OPTION=%OPTION% --lock %lock%
     )
     set sync=
     set PN_CAPTION=sync
     call :Read_P sync %1 || exit /b 1
     rem echo sync: %sync%
     if not "%sync%"=="" (
-        set APPRUN=%APPRUN% --sync %sync%
+        set OPTION=%OPTION% --sync %sync%
     )
 
 :Exit
