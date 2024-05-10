@@ -60,38 +60,40 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
+
+    rem echo I want to go out with a bang^^!
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: %CurrentDir%
 
     echo Adds a new dependency to pyproject.toml ...
     set COMMAND=add
+
     set APP=poetry
     set OPTION=-v
     set ARGS=
+    set APPRUN=
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: %Read_N%
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        set APPRUN=%APP% %COMMAND% %OPTION% %ARGS%
+        rem set APPRUN=%APP% %COMMAND% %OPTION% %ARGS%
+        set APPRUN=!APP! !COMMAND! !OPTION! !ARGS!
     ) else (
-        set APPRUN=%APP% %*
+        set APPRUN=!APP! %*
     )
+    echo APPRUN: !APPRUN!
 
-    if not "%names%"=="" (
-        set ARGS=%ARGS% %names%
-    )
-
-
-    if "%ARGS%"=="" (
-        echo ERROR: Names not difined ...
+    rem Проверка на обязательные аргументы
+    if "!Read_N!"=="" if "!names!"=="" (
+        echo ERROR: names not difined ...
     ) else (
-        echo APPRUN: %APPRUN%
         rem %APPRUN%
     )
 
@@ -104,13 +106,13 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
+    if "!DEBUG!"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set group=
+    set group=test
     set PN_CAPTION=The group to add the dependency to
-    call :Read_P group %1 || exit /b 1
+    call :Read_P group !group! || exit /b 1
     rem echo group: %group%
     if not "%group%"=="" (
         set OPTION=%OPTION% --group %group%
@@ -123,7 +125,7 @@ rem beginfunction
         set OPTION=%OPTION% --editable %editable%
     )
     set extras=
-    set PN_CAPTION=Extras to activate for the dependency. [multiple values allowed]
+    set PN_CAPTION=Extras to activate for the dependency. ^^(multiple values allowed^^)
     call :Read_P extras %1 || exit /b 1
     rem echo extras: %extras%
     if not "%extras%"=="" (
@@ -197,6 +199,9 @@ rem =================================================
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey

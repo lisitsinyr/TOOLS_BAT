@@ -110,9 +110,9 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Read_P ()
+rem procedure Read_P_old ()
 rem --------------------------------------------------------------------------------
-:Read_P
+:Read_P_old
 rem beginfunction
     set FUNCNAME=%0
     if "%DEBUG%"=="1" (
@@ -141,6 +141,43 @@ rem beginfunction
         rem set %P_Name%=33333333333333
     ) else (
         set %P_Name%=%Input%
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure Read_P ()
+rem --------------------------------------------------------------------------------
+:Read_P
+rem beginfunction
+    set FUNCNAME=%0
+    if "!DEBUG!"=="1" (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set P_Name=%1
+    rem echo P_Name: !P_Name!
+    set P_Value=%~2
+    rem echo P_Value: !P_Value!
+    rem echo _: !%P_Name%!
+
+    set Input=
+    if "!P_Value!"=="" (
+        if not "!PN_CAPTION!"=="" (
+            set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
+        )
+    ) else (
+        set !P_Name!=!P_Value!
+        exit /b 0
+    )
+    rem echo Input: !Input!
+
+    if "!Input!"=="" (
+        set !P_Name!=!%P_Name%!
+        rem set %P_Name%=33333333333333
+    ) else (
+        set !P_Name!=!Input!
     )
 
     exit /b 0

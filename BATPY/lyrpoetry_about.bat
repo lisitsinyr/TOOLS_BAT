@@ -45,20 +45,17 @@ setlocal enabledelayedexpansion
     set ARGS=
     set APPRUN=
 
-    for %%a in (%*) do set /a N+=1
-    echo N: %N%
-
     call :Read_N %* || exit /b 1
-    echo Read_N: %Read_N%
+    rem echo Read_N: %Read_N%
 
-    if "%N%"=="" (
+    if "%Read_N%"=="" (
         call :MAIN_FUNC
         set APPRUN=%APP% %COMMAND% %OPTION% %ARGS%
     ) else (
         set APPRUN=%APP% %*
     )
     echo APPRUN: %APPRUN%
-    rem %APPRUN%
+    %APPRUN%
 
 :Exit
 exit /b 0
