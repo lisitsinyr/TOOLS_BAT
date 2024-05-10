@@ -110,9 +110,9 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set group=test
+    set group=
     set PN_CAPTION=The group to add the dependency to
-    call :Read_P group !group! || exit /b 1
+    call :Read_P group test || exit /b 1
     rem echo group: %group%
     if not "%group%"=="" (
         set OPTION=%OPTION% --group %group%
