@@ -73,28 +73,24 @@ setlocal enabledelayedexpansion
     set COMMAND=add
 
     set APP=poetry
-    set OPTION=-v
+    set OPTION= -v
     set ARGS=
     set APPRUN=
+    set OK=yes
 
     rem Количество аргументов
     call :Read_N %* || exit /b 1
-    rem echo Read_N: %Read_N%
+    rem echo Read_N: !Read_N!
 
     if "!Read_N!"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=%APP% %COMMAND% %OPTION% %ARGS%
-        set APPRUN=!APP! !COMMAND! !OPTION! !ARGS!
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
         set APPRUN=!APP! %*
     )
     echo APPRUN: !APPRUN!
-
-    rem Проверка на обязательные аргументы
-    if "!Read_N!"=="" if "!names!"=="" (
-        echo ERROR: names not difined ...
-    ) else (
-        rem %APPRUN%
+    if defined OK (
+        !APPRUN!
     )
 
 :Exit
@@ -113,7 +109,7 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set group=test
+    set group=
     set PN_CAPTION=The group to add the dependency to
     call :Read_P group "" || exit /b 1
     rem echo group: %group%
@@ -128,7 +124,7 @@ rem beginfunction
         set OPTION=%OPTION% --editable %editable%
     )
     set extras=
-    set PN_CAPTION=Extras to activate for the dependency. ^^(multiple values allowed^^)
+    set PN_CAPTION=Extras to activate for the dependency. ^(multiple values allowed^)
     call :Read_P extras "" || exit /b 1
     rem echo extras: %extras%
     if not "%extras%"=="" (
@@ -170,7 +166,7 @@ rem beginfunction
         set OPTION=%OPTION% --allow-prereleases %allow-prereleases%
     )
     set dry-run=
-    set PN_CAPTION=Output the operations but do not execute anything [implicitly enables -verbose]
+    set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables -verbose^)
     call :Read_P dry-run "" || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
@@ -191,8 +187,12 @@ rem beginfunction
     set PN_CAPTION=names
     call :Read_P names "" || exit /b 1
     rem echo names: %names%
-    if not "%names%"=="" (
+    rem Проверка на обязательные аргументы
+    if defined names (
         set ARGS=%ARGS% %names%
+    ) else (
+        echo ERROR: names not defined ...
+        set OK=
     )
 
 :Exit
@@ -205,9 +205,6 @@ rem =================================================
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_P
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_P_old
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_N

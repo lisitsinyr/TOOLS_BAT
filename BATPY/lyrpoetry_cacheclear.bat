@@ -40,28 +40,36 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Clears a Poetry cache by name ...
     set COMMAND=cache clear
-    set APPRUN=poetry -v %COMMAND%
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=poetry %*
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0
@@ -94,6 +102,9 @@ rem =================================================
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey

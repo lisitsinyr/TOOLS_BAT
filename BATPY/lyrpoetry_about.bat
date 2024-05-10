@@ -34,28 +34,33 @@ setlocal enabledelayedexpansion
     echo Старт %BATNAME% ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Shows information about Poetry ...
     set COMMAND=about
+    
     set APP=poetry
-    set OPTION=-v
+    set OPTION= -v
     set ARGS=
     set APPRUN=
+    set OK=yes
 
+    rem Количество аргументов
     call :Read_N %* || exit /b 1
-    rem echo Read_N: %Read_N%
+    rem echo Read_N: !Read_N!
 
-    if "%Read_N%"=="" (
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        set APPRUN=%APP% %COMMAND% %OPTION% %ARGS%
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=%APP% %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

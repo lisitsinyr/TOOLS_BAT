@@ -81,6 +81,15 @@ rem =================================================
 :Check_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 :ExtractFileDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0

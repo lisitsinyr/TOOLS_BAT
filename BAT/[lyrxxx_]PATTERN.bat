@@ -60,14 +60,42 @@ exit /b 0
 :StopLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+
 :Check_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:Pause
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey
 %LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:ExtractFileDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FullFileName
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileName
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileNameWithoutExt
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileExt
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FileAttr
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 
 rem -----------------------------------------------
