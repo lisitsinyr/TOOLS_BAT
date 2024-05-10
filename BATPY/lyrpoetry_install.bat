@@ -63,7 +63,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Installs the project dependencies ...
     set COMMAND=install
@@ -117,8 +117,8 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set without=
@@ -131,85 +131,85 @@ rem beginfunction
     set with=
     set PN_CAPTION=with
     call :Read_P with "" || exit /b 1
-    rem echo with: %with%
-    if not "%with%"=="" (
+    rem echo with: !with%
+    if not "!with!"=="" (
         set OPTION=!OPTION! --with %with%
     )
     set only=
     set PN_CAPTION=only
     call :Read_P only "" || exit /b 1
-    rem echo only: %only%
-    if not "%only%"=="" (
+    rem echo only: !only%
+    if not "!only!"=="" (
         set OPTION=!OPTION! --only %only%
     )
     set only-root=
     set PN_CAPTION=only-root
     call :Read_P only-root "" || exit /b 1
-    rem echo only-root: %only-root%
-    if not "%only-root%"=="" (
+    rem echo only-root: !only-root%
+    if not "!only-root!"=="" (
         set OPTION=!OPTION! --only-root %only-root%
     )
     set sync=
     set PN_CAPTION=sync
     call :Read_P sync "" || exit /b 1
-    rem echo sync: %sync%
-    if not "%sync%"=="" (
+    rem echo sync: !sync%
+    if not "!sync!"=="" (
         set OPTION=!OPTION! --sync %sync%
     )
     set no-root=
     set PN_CAPTION=no-root
     call :Read_P no-root "" || exit /b 1
-    rem echo no-root: %no-root%
-    if not "%no-root%"=="" (
+    rem echo no-root: !no-root%
+    if not "!no-root!"=="" (
         set OPTION=!OPTION! --no-root %no-root%
     )
     set no-directory=
     set PN_CAPTION=no-directory
     call :Read_P no-directory "" || exit /b 1
-    rem echo no-directory: %no-directory%
-    if not "%no-directory%"=="" (
+    rem echo no-directory: !no-directory%
+    if not "!no-directory!"=="" (
         set OPTION=!OPTION! --no-directory %no-directory%
     )
     set dry-run=
     set PN_CAPTION=dry-run
     call :Read_P dry-run "" || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
+    rem echo dry-run: !dry-run%
+    if not "!dry-run!"=="" (
         set OPTION=!OPTION! --dry-run %dry-run%
     )
     set extra=
     set PN_CAPTION=extra
     call :Read_P extra "" || exit /b 1
-    rem echo extra: %extra%
-    if not "%extra%"=="" (
+    rem echo extra: !extra%
+    if not "!extra!"=="" (
         set OPTION=!OPTION! --extra %extra%
     )
     set all-extras=
     set PN_CAPTION=all-extras
     call :Read_P all-extras "" || exit /b 1
-    rem echo all-extras: %all-extras%
-    if not "%all-extras%"=="" (
+    rem echo all-extras: !all-extras%
+    if not "!all-extras!"=="" (
         set OPTION=!OPTION! --all-extras %all-extras%
     )
     set compile=
     set PN_CAPTION=compile
     call :Read_P compile "" || exit /b 1
-    rem echo compile: %compile%
-    if not "%compile%"=="" (
+    rem echo compile: !compile%
+    if not "!compile!"=="" (
         set OPTION=!OPTION! --compile %compile%
     )
     set no-dev=
     set PN_CAPTION=no-dev
     call :Read_P no-dev "" || exit /b 1
-    rem echo no-dev: %no-dev%
-    if not "%no-dev%"=="" (
+    rem echo no-dev: !no-dev%
+    if not "!no-dev!"=="" (
         set OPTION=!OPTION! --no-dev %no-dev%
     )
     set remove-untracked=
     set PN_CAPTION=remove-untracked
     call :Read_P remove-untracked "" || exit /b 1
-    rem echo remove-untracked: %remove-untracked%
-    if not "%remove-untracked%"=="" (
+    rem echo remove-untracked: !remove-untracked%
+    if not "!remove-untracked!"=="" (
         set OPTION=!OPTION! --remove-untracked %remove-untracked%
     )
     

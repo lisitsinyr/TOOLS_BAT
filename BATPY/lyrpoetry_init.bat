@@ -45,7 +45,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Creates a basic pyproject.toml file in the current directory ...
     set COMMAND=init
@@ -99,12 +99,12 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set tomlFile=pyproject.toml
-    if exist "%tomlFile%" (
+    if exist "!tomlFile!" (
         echo Удаление файла %tomlFile%
         del %tomlFile%
     )
@@ -112,49 +112,49 @@ rem beginfunction
     set name=test
     set PN_CAPTION=Name of the package
     call :Read_P name %1 || exit /b 1
-    rem echo name: %name%
-    if not "%name%"=="" (
-        set OPTION=%OPTION% --name %name%
+    rem echo name: !name%
+    if not "!name!"=="" (
+        set OPTION=!OPTION! --name %name%
     )
 
     set description=description
     set PN_CAPTION=Description of the package
     call :Read_P description %1 || exit /b 1
-    rem echo description: %description%
-    if not "%description%"=="" (
-        set OPTION=%OPTION% --description "%description%"
+    rem echo description: !description%
+    if not "!description!"=="" (
+        set OPTION=!OPTION! --description "!description!"
     )
     
     set author="lisitsinyr <lisitsinyr@gmail.com>"
     set PN_CAPTION=Author of the package
     rem call :Read_P author %1 || exit /b 1
-    rem echo author: %author%
-    rem if not "%author%"=="" (
-    rem     set OPTION=%OPTION% --author %author%
+    rem echo author: !author%
+    rem if not "!author!"=="" (
+    rem     set OPTION=!OPTION! --author %author%
     rem )
     
     set python=
     set PN_CAPTION=Compatible Python versions
     call :Read_P python %1 || exit /b 1
-    rem echo python: %python%
-    if not "%python%"=="" (
-        set OPTION=%OPTION% --python %python%
+    rem echo python: !python%
+    if not "!python!"=="" (
+        set OPTION=!OPTION! --python %python%
     )
     
     set dependency=
     set PN_CAPTION=Package to require with a version constraint
     rem call :Read_P dependency %1 || exit /b 1
-    rem echo dependency: %dependency%
-    if not "%dependency%"=="" (
-        set OPTION=%OPTION% --dependency %dependency%
+    rem echo dependency: !dependency%
+    if not "!dependency!"=="" (
+        set OPTION=!OPTION! --dependency %dependency%
     )
    
     set dev-dependency=
     set PN_CAPTION=Development requirements
     rem call :Read_P dev-dependency %1 || exit /b 1
-    rem echo dev-dependency: %dev-dependency%
-    if not "%dev-dependency%"=="" (
-        set OPTION=%OPTION% --dev-dependency %dev-dependency%
+    rem echo dev-dependency: !dev-dependency%
+    if not "!dev-dependency!"=="" (
+        set OPTION=!OPTION! --dev-dependency %dev-dependency%
     )
 :Exit
 exit /b 0

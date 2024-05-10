@@ -67,13 +67,13 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Adds a new dependency to pyproject.toml ...
     set COMMAND=add
 
     set APP=poetry
-    set OPTION= -v
+    set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
     set OK=yes
@@ -131,72 +131,72 @@ rem beginfunction
     set group=
     set PN_CAPTION=The group to add the dependency to
     call :Read_P group "" || exit /b 1
-    rem echo group: %group%
-    if not "%group%"=="" (
-        set OPTION=%OPTION% --group %group%
+    rem echo group: !group!
+    if not "!group!"=="" (
+        set OPTION=!OPTION! --group !group!
     )
     set editable=
     set PN_CAPTION=Add vcs/path dependencies as editable
     call :Read_P editable "" || exit /b 1
-    rem echo editable: %editable%
-    if not "%editable%"=="" (
-        set OPTION=%OPTION% --editable %editable%
+    rem echo editable: !editable!
+    if not "!editable!"=="" (
+        set OPTION=!OPTION! --editable !editable!
     )
     set extras=
     set PN_CAPTION=Extras to activate for the dependency. ^(multiple values allowed^)
     call :Read_P extras "" || exit /b 1
-    rem echo extras: %extras%
-    if not "%extras%"=="" (
-        set OPTION=%OPTION% --extras %extras%
+    rem echo extras: !extras!
+    if not "!extras!"=="" (
+        set OPTION=!OPTION! --extras !extras!
     )
     set optional=
     set PN_CAPTION=Add as an optional dependency
     call :Read_P optional "" || exit /b 1
-    rem echo optional: %optional%
-    if not "%optional%"=="" (
-        set OPTION=%OPTION% --optional %optional%
+    rem echo optional: !optional!
+    if not "!optional!"=="" (
+        set OPTION=!OPTION! --optional !optional!
     )
     set python=
     set PN_CAPTION=Python version for which the dependency must be installed
     call :Read_P python "" || exit /b 1
-    rem echo python: %python%
-    if not "%python%"=="" (
-        set OPTION=%OPTION% --python %python%
+    rem echo python: !python!
+    if not "!python!"=="" (
+        set OPTION=!OPTION! --python !python!
     )
     set platform=
     set PN_CAPTION=Platforms for which the dependency must be installed
     call :Read_P platform "" || exit /b 1
-    rem echo platform: %platform%
-    if not "%platform%"=="" (
-        set OPTION=%OPTION% --platform %platform%
+    rem echo platform: !platform!
+    if not "!platform!"=="" (
+        set OPTION=!OPTION! --platform !platform!
     )
     set source=
     set PN_CAPTION=Name of the source to use to install the package
     call :Read_P source "" || exit /b 1
-    rem echo source: %source%
-    if not "%source%"=="" (
-        set OPTION=%OPTION% --source %source%
+    rem echo source: !source!
+    if not "!source!"=="" (
+        set OPTION=!OPTION! --source !source!
     )
     set allow-prereleases=
     set PN_CAPTION=Accept prereleases
     call :Read_P allow-prereleases "" || exit /b 1
-    rem echo allow-prereleases: %allow-prereleases%
-    if not "%allow-prereleases%"=="" (
-        set OPTION=%OPTION% --allow-prereleases %allow-prereleases%
+    rem echo allow-prereleases: !allow-prereleases!
+    if not "!allow-prereleases!"=="" (
+        set OPTION=!OPTION! --allow-prereleases !allow-prereleases!
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables -verbose^)
     call :Read_P dry-run "" || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set OPTION=%OPTION% --dry-run %dry-run%
+    rem echo dry-run: !dry-run!
+    if not "!dry-run!"=="" (
+        set OPTION=!OPTION! --dry-run !dry-run!
     )
     set lock=
     set PN_CAPTION=Do not perform install [only update the lockfile]
     call :Read_P lock "" || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set OPTION=%OPTION% --lock %lock%
+    rem echo lock: !lock!
+    if not "!lock!"=="" (
+        set OPTION=!OPTION! --lock !lock!
     )
 
     rem -------------------------------------

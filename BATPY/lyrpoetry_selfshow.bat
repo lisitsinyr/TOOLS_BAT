@@ -57,7 +57,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Show packages from Poetry's runtime environment ...
     set COMMAND=self show
@@ -111,36 +111,40 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set addons=
     set PN_CAPTION=List only add-on packages installed
     call :Read_P addons %1 || exit /b 1
-    rem echo addons: %addons%
-    if not "%addons%"=="" (
-        set OPTION=%OPTION% --addons %addons%
+    rem echo addons: !addons%
+    if not "!addons!"=="" (
+        set OPTION=!OPTION! --addons %addons%
     )
     set tree=
     set PN_CAPTION=List the dependencies as a tree
     call :Read_P tree %1 || exit /b 1
-    rem echo tree: %tree%
-    if not "%tree%"=="" (
-        set OPTION=%OPTION% --tree %tree%
+    rem echo tree: !tree%
+    if not "!tree!"=="" (
+        set OPTION=!OPTION! --tree %tree%
     )
     set latest=
     set PN_CAPTION=Show the latest version
     call :Read_P latest %1 || exit /b 1
-    rem echo latest: %latest%
-    if not "%latest%"=="" (
-        set OPTION=%OPTION% --latest %latest%
+    rem echo latest: !latest%
+    if not "!latest!"=="" (
+        set OPTION=!OPTION! --latest %latest%
     )
     set outdated=
     set PN_CAPTION=Show the latest version but only for packages that are outdated
     call :Read_P outdated %1 || exit /b 1
-    rem echo outdated: %outdated%
-    if not "%outdated%"=="" (
-        set OPTION=%OPTION% --outdated %outdated%
+    rem echo outdated: !outdated%
+    if not "!outdated!"=="" (
+        set OPTION=!OPTION! --outdated %outdated%
     )
 
 :Exit

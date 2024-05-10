@@ -50,7 +50,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Runs a command in the appropriate environment ...
     set COMMAND=run
@@ -104,16 +104,19 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set command=
     set PN_CAPTION=command
     call :Read_P command %1 || exit /b 1
-    rem echo command: %command%
-    if not "%command%"=="" (
-        set OPTION=%OPTION% %command%
+    rem echo command: !command%
+    if not "!command!"=="" (
+        set OPTION=!OPTION! %command%
     )
 :Exit
 exit /b 0

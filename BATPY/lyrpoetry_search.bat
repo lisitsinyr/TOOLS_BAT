@@ -41,7 +41,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Searches for packages on remote repositories ...
     set COMMAND=search
@@ -95,16 +95,19 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set tokens=
     set PN_CAPTION=dry-run
     call :Read_P tokens %1 || exit /b 1
-    rem echo tokens: %tokens%
-    if not "%tokens%"=="" (
-        set OPTION=%OPTION% %tokens%
+    rem echo tokens: !tokens%
+    if not "!tokens!"=="" (
+        set OPTION=!OPTION! %tokens%
     )
 
 :Exit

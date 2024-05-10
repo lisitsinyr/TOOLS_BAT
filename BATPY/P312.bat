@@ -15,28 +15,28 @@ setlocal enabledelayedexpansion
     set LIB_BAT=%SCRIPTS_DIR%\LIB
 
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     rem set PN_CAPTION=Ввод значения
     set P1=P1_default
     set P1=
     call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
+    rem echo P1: !P1%    
 
     rem set PN_CAPTION=Ввод значения
     set P2=P2_default
     set P2=
     call :Check_P P2 %2 || exit /b 1
-    rem echo P2: %P2%    
+    rem echo P2: !P2%    
 
-    rem if "%P1%"=="" (
+    rem if "!P1!"=="" (
     rem     echo ERROR: Параметр P1 не задан...
-    rem     echo Использование: %BATNAME% P1 [P2] [...]
+    rem     echo Использование: !BATNAME% P1 [P2] [...]
     rem ) else (
     rem     call :MAIN_FUNC
     rem )
 
-    echo Использование: %BATNAME% [P1] [P2] [...]
+    echo Использование: !BATNAME% [P1] [P2] [...]
     call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 :Exit
@@ -48,7 +48,7 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
+    if "!DEBUG!"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
 

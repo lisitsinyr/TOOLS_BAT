@@ -67,7 +67,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Add additional packages to Poetry's runtime environment ...
     set COMMAND=self add
@@ -121,43 +121,48 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set editable=
     set PN_CAPTION=Add vcs/path dependencies as editable
     call :Read_P editable %1 || exit /b 1
-    rem echo editable: %editable%
-    if not "%editable%"=="" (
-        set OPTION=%OPTION% --editable %editable%
+    rem echo editable: !editable%
+    if not "!editable!"=="" (
+        set OPTION=!OPTION! --editable %editable%
     )
     set extras=
     set PN_CAPTION=Extras to activate for the dependency. (multiple values allowed)
     call :Read_P extras %1 || exit /b 1
-    rem echo extras: %extras%
-    if not "%extras%"=="" (
-        set OPTION=%OPTION% --extras %extras%
+    rem echo extras: !extras%
+    if not "!extras!"=="" (
+        set OPTION=!OPTION! --extras %extras%
     )
     set allow-prereleases=
     set PN_CAPTION=Accept prereleases
     call :Read_P allow-prereleases %1 || exit /b 1
-    rem echo allow-prereleases: %allow-prereleases%
-    if not "%allow-prereleases%"=="" (
-        set OPTION=%OPTION% --allow-prereleases %allow-prereleases%
+    rem echo allow-prereleases: !allow-prereleases%
+    if not "!allow-prereleases!"=="" (
+        set OPTION=!OPTION! --allow-prereleases %allow-prereleases%
     )
     set source=
     set PN_CAPTION=Name of the source to use to install the package
     call :Read_P source %1 || exit /b 1
-    rem echo source: %source%
-    if not "%source%"=="" (
-        set OPTION=%OPTION% --source %source%
+    rem echo source: !source%
+    if not "!source!"=="" (
+        set OPTION=!OPTION! --source %source%
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set OPTION=%OPTION% --dry-run %dry-run%
+    rem echo dry-run: !dry-run%
+    if not "!dry-run!"=="" (
+        set OPTION=!OPTION! --dry-run %dry-run%
     )
 
 :Exit

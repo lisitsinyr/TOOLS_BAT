@@ -40,7 +40,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Creates a new Python project at ^<path^> ...
     set COMMAND=new
@@ -94,52 +94,52 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set folder=folder folder
     set PN_CAPTION=Folder
     call :Read_P folder || exit /b 1
-    rem echo folder: %folder%
+    rem echo folder: !folder%
 
-    if "%folder%"=="" (
+    if "!folder!"=="" (
         set tomlFile=pyproject.toml
-        if exist "%tomlFile%" (
+        if exist "!tomlFile!" (
             echo Удаление файла %tomlFile%
             del %tomlFile%
         )
     ) else (
-        if exist "%folder%"\ (
-            echo ERROR: Каталог "%folder%" существует...
-            echo Удаление каталога "%folder%"
-            rmdir "%folder%" /s
+        if exist "!folder!"\ (
+            echo ERROR: Каталог "!folder!" существует...
+            echo Удаление каталога "!folder!"
+            rmdir "!folder!" /s
         )
-        set OPTION=%OPTION% "%folder%"
+        set OPTION=!OPTION! "!folder!"
     )
 
     set name=test
     set PN_CAPTION=Name of the package
     call :Read_P name || exit /b 1
-    rem echo name: %name%
-    if not "%name%"=="" (
-        set OPTION=%OPTION% --name %name%
+    rem echo name: !name%
+    if not "!name!"=="" (
+        set OPTION=!OPTION! --name %name%
     )
 
     set src=
     set PN_CAPTION=Use the src layout for the project
     call :Read_P src || exit /b 1
-    rem echo src: %src%
-    if not "%src%"=="" (
-        set OPTION=%OPTION% --src
+    rem echo src: !src%
+    if not "!src!"=="" (
+        set OPTION=!OPTION! --src
     )
 
     set readme=md
     set PN_CAPTION=Specify the readme file extension
     call :Read_P readme || exit /b 1
-    rem echo readme: %readme%
-    if not "%readme%"=="" (
-        set OPTION=%OPTION% --readme %readme%
+    rem echo readme: !readme%
+    if not "!readme!"=="" (
+        set OPTION=!OPTION! --readme %readme%
     )
 :Exit
 exit /b 0

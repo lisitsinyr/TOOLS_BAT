@@ -37,13 +37,13 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Builds a package, as a tarball and a wheel by default ...
     set COMMAND=build
 
     set APP=poetry
-    set OPTION= -v
+    set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
     set OK=yes
@@ -104,16 +104,16 @@ rem beginfunction
     set format=
     set PN_CAPTION=Limit the format to either sdist or wheel
     call :Read_P format %1 || exit /b 1
-    rem echo format: %format%
-    if not "%format%"=="" (
-        set OPTION=%OPTION% --format %format%
+    rem echo format: !format!
+    if not "!format!"=="" (
+        set OPTION=!OPTION! --format !format!
     )
     set output=
     set PN_CAPTION=Set output directory for build artifacts. Default is `dist`. [default: "dist"]
     call :Read_P output %1 || exit /b 1
-    rem echo output: %output%
-    if not "%output%"=="" (
-        set OPTION=%OPTION% --output %output%
+    rem echo output: !output!
+    if not "!output!"=="" (
+        set OPTION=!OPTION! --output !output!
     )
 
     rem -------------------------------------

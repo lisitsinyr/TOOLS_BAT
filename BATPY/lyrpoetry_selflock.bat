@@ -47,7 +47,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Lock the Poetry installation's system requirements ...
     set COMMAND=self lock
@@ -101,22 +101,26 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set check=
     set PN_CAPTION=Verify that poetry.lock is consistent with pyproject.toml. (Deprecated
     call :Read_P check %1 || exit /b 1
-    rem echo check: %check%
-    if not "%check%"=="" (
-        set OPTION=%OPTION% --check %check%
+    rem echo check: !check%
+    if not "!check!"=="" (
+        set OPTION=!OPTION! --check %check%
     )
     set no-update=
     set PN_CAPTION=Do not update locked versions, only refresh lock file
     call :Read_P no-update %1 || exit /b 1
-    rem echo no-update: %no-update%
-    if not "%no-update%"=="" (
-        set OPTION=%OPTION% --no-update %no-update%
+    rem echo no-update: !no-update%
+    if not "!no-update!"=="" (
+        set OPTION=!OPTION! --no-update %no-update%
     )
     
 :Exit

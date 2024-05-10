@@ -51,7 +51,7 @@ setlocal enabledelayedexpansion
     set COMMAND=cache clear
 
     set APP=poetry
-    set OPTION= -v
+    set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
     set OK=yes
@@ -99,16 +99,16 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set all=
     set PN_CAPTION=Clear all entries in the cache
     call :Read_P all "" || exit /b 1
-    rem echo all: %all%
-    if not "%all%"=="" (
-        set OPTION=%OPTION% --all
+    rem echo all: !all!
+    if not "!all!"=="" (
+        set OPTION=!OPTION! --all
     )
 
     rem -------------------------------------
@@ -117,10 +117,10 @@ rem beginfunction
     set cache=
     set PN_CAPTION=The name of the cache to clear
     call :Read_P cache "" || exit /b 1
-    rem echo cache: %cache%
+    rem echo cache: !cache!
     rem Проверка на обязательные аргументы
     if defined cache (
-        set ARGS=%ARGS% %cache%
+        set ARGS=!ARGS! !cache!
     ) else (
         echo ERROR: cache not defined ...
         set OK=

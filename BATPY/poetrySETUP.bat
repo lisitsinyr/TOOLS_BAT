@@ -7,14 +7,14 @@ rem -----------------------------------------------------
 rem Config Directory
 rem -----------------------------------------------------
 rem Linux: $XDG_CONFIG_HOME/pypoetry or ~/.config/pypoetry
-rem Windows: %APPDATA%\pypoetry
+rem Windows: !APPDATA%\pypoetry
 rem MacOS: ~/Library/Application Support/pypoetry
 rem You can override the Config directory by setting the POETRY_CONFIG_DIR environment variable.
 rem -----------------------------------------------------
 rem Data Directory
 rem -----------------------------------------------------
 rem Linux: $XDG_DATA_HOME/pypoetry or ~/.local/share/pypoetry
-rem Windows: %APPDATA%\pypoetry
+rem Windows: !APPDATA%\pypoetry
 rem MacOS: ~/Library/Application Support/pypoetry
 rem You can override the Data directory by setting the POETRY_DATA_DIR or POETRY_HOME environment variables. If POETRY_HOME is set, it will be given higher priority.
 rem C:\Users\lyr\AppData\Roaming\pypoetry\config.toml
@@ -25,7 +25,7 @@ rem -----------------------------------------------------
 rem Cache Directory
 rem -----------------------------------------------------
 rem Linux: $XDG_CACHE_HOME/pypoetry or ~/.cache/pypoetry
-rem Windows: %LOCALAPPDATA%\pypoetry
+rem Windows: !LOCALAPPDATA%\pypoetry
 rem MacOS: ~/Library/Caches/pypoetry
 rem You can override the Cache directory by setting the POETRY_CACHE_DIR environment variable.
 rem C:\Users\lyr\AppData\Local\pypoetry\Cache\cache
@@ -42,7 +42,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     call lyrpoetry_config.bat var value
     ...
@@ -56,23 +56,23 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
+    if "!DEBUG!"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
     set dry-run=
     set PN_CAPTION=dry-run
     call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set OPTION=%OPTION% --dry-run %dry-run%
+    rem echo dry-run: !dry-run%
+    if not "!dry-run!"=="" (
+        set OPTION=!OPTION! --dry-run %dry-run%
     )
     set lock=
     set PN_CAPTION=lock
     call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set OPTION=%OPTION% --lock %lock%
+    rem echo lock: !lock%
+    if not "!lock!"=="" (
+        set OPTION=!OPTION! --lock %lock%
     )
     
 :Exit

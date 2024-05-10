@@ -43,7 +43,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Update the dependencies as according to the pyproject.toml file ...
     set COMMAND=update
@@ -97,58 +97,61 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set without=
     set PN_CAPTION=without
     call :Read_P without %1 || exit /b 1
-    rem echo without: %without%
-    if not "%without%"=="" (
-        set OPTION=%OPTION% --without %without%
+    rem echo without: !without%
+    if not "!without!"=="" (
+        set OPTION=!OPTION! --without %without%
     )
     set with=
     set PN_CAPTION=with
     call :Read_P with %1 || exit /b 1
-    rem echo with: %with%
-    if not "%with%"=="" (
-        set OPTION=%OPTION% --with %with%
+    rem echo with: !with%
+    if not "!with!"=="" (
+        set OPTION=!OPTION! --with %with%
     )
     set only=
     set PN_CAPTION=only
     call :Read_P only %1 || exit /b 1
-    rem echo only: %only%
-    if not "%only%"=="" (
-        set OPTION=%OPTION% --only %only%
+    rem echo only: !only%
+    if not "!only!"=="" (
+        set OPTION=!OPTION! --only %only%
     )
     set dry-run=
     set PN_CAPTION=dry-run
     call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set OPTION=%OPTION% --dry-run %dry-run%
+    rem echo dry-run: !dry-run%
+    if not "!dry-run!"=="" (
+        set OPTION=!OPTION! --dry-run %dry-run%
     )
     set no-dev=
     set PN_CAPTION=no-dev
     call :Read_P no-dev %1 || exit /b 1
-    rem echo no-dev: %no-dev%
-    if not "%no-dev%"=="" (
-        set OPTION=%OPTION% --no-dev %no-dev%
+    rem echo no-dev: !no-dev%
+    if not "!no-dev!"=="" (
+        set OPTION=!OPTION! --no-dev %no-dev%
     )
     set lock=
     set PN_CAPTION=lock
     call :Read_P lock %1 || exit /b 1
-    rem echo lock: %lock%
-    if not "%lock%"=="" (
-        set OPTION=%OPTION% --lock %lock%
+    rem echo lock: !lock%
+    if not "!lock!"=="" (
+        set OPTION=!OPTION! --lock %lock%
     )
     set sync=
     set PN_CAPTION=sync
     call :Read_P sync %1 || exit /b 1
-    rem echo sync: %sync%
-    if not "%sync%"=="" (
-        set OPTION=%OPTION% --sync %sync%
+    rem echo sync: !sync%
+    if not "!sync!"=="" (
+        set OPTION=!OPTION! --sync %sync%
     )
 
 :Exit

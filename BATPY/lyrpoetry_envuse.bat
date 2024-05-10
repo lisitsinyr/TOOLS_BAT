@@ -48,7 +48,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Activates or creates a new virtualenv for the current project ...
     set COMMAND=env use
@@ -102,16 +102,16 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set namevenv=
     set PN_CAPTION=namevenv
     call :Read_P lock %1 || exit /b 1
-    rem echo namevenv: %namevenv%
-    if not "%namevenv%"=="" (
-        set OPTION=%OPTION% %namevenv%
+    rem echo namevenv: !namevenv%
+    if not "!namevenv!"=="" (
+        set OPTION=!OPTION! %namevenv%
     )
 
 :Exit

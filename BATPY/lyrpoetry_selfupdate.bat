@@ -50,7 +50,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Updates Poetry to the latest version ...
     set COMMAND=self update
@@ -104,23 +104,27 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set preview=
     set PN_CAPTION=Allow the installation of pre-release versions
     call :Read_P preview %1 || exit /b 1
-    rem echo preview: %preview%
-    if not "%preview%"=="" (
-        set OPTION=%OPTION% --preview %preview%
+    rem echo preview: !preview%
+    if not "!preview!"=="" (
+        set OPTION=!OPTION! --preview %preview%
     )
 
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set OPTION=%OPTION% --dry-run %dry-run%
+    rem echo dry-run: !dry-run%
+    if not "!dry-run!"=="" (
+        set OPTION=!OPTION! --dry-run %dry-run%
     )
     
 :Exit

@@ -54,7 +54,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=%SCRIPTS_DIR%\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir%
 
     echo Publishes a package to a remote repository ...
     set COMMAND=publish
@@ -108,72 +108,72 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set repository=
     set PN_CAPTION=The repository to register the package to (default: pypi). Should match a repository name set by the config command
     call :Read_P repository %1 || exit /b 1
-    rem echo repository: %repository%
-    if not "%repository%"=="" (
-        set OPTION=%OPTION% --repository %repository%
+    rem echo repository: !repository%
+    if not "!repository!"=="" (
+        set OPTION=!OPTION! --repository %repository%
     )
     set username=
     set PN_CAPTION=The username to access the repository
     call :Read_P username %1 || exit /b 1
-    rem echo username: %username%
-    if not "%username%"=="" (
-        set OPTION=%OPTION% --username %username%
+    rem echo username: !username%
+    if not "!username!"=="" (
+        set OPTION=!OPTION! --username %username%
     )
     set password=
     set PN_CAPTION=The password to access the repository
     call :Read_P password %1 || exit /b 1
-    rem echo password: %password%
-    if not "%password%"=="" (
-        set OPTION=%OPTION% --password %password%
+    rem echo password: !password%
+    if not "!password!"=="" (
+        set OPTION=!OPTION! --password %password%
     )
     set cert=
     set PN_CAPTION=Certificate authority to access the repository
     call :Read_P cert %1 || exit /b 1
-    rem echo cert: %cert%
-    if not "%cert%"=="" (
-        set OPTION=%OPTION% --cert %cert%
+    rem echo cert: !cert%
+    if not "!cert!"=="" (
+        set OPTION=!OPTION! --cert %cert%
     )
     set client-cert=
     set PN_CAPTION=Client certificate to access the repository
     call :Read_P client-cert %1 || exit /b 1
-    rem echo client-cert: %client-cert%
-    if not "%client-cert%"=="" (
-        set OPTION=%OPTION% --client-cert %client-cert%
+    rem echo client-cert: !client-cert%
+    if not "!client-cert!"=="" (
+        set OPTION=!OPTION! --client-cert %client-cert%
     )
     set dist-dir=
     set PN_CAPTION=Dist directory where built artifact are stored. Default is dist
     call :Read_P dist-dir %1 || exit /b 1
-    rem echo dist-dir: %dist-dir%
-    if not "%dist-dir%"=="" (
-        set OPTION=%OPTION% --dist-dir %dist-dir%
+    rem echo dist-dir: !dist-dir%
+    if not "!dist-dir!"=="" (
+        set OPTION=!OPTION! --dist-dir %dist-dir%
     )
     set build=
     set PN_CAPTION=Build the package before publishing
     call :Read_P build %1 || exit /b 1
-    rem echo build: %build%
-    if not "%build%"=="" (
-        set OPTION=%OPTION% --build %build%
+    rem echo build: !build%
+    if not "!build!"=="" (
+        set OPTION=!OPTION! --build %build%
     )
     set dry-run=
     set PN_CAPTION=Perform all actions except upload the package
     call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: %dry-run%
-    if not "%dry-run%"=="" (
-        set OPTION=%OPTION% --dry-run %dry-run%
+    rem echo dry-run: !dry-run%
+    if not "!dry-run!"=="" (
+        set OPTION=!OPTION! --dry-run %dry-run%
     )
     set skip-existing=
     set PN_CAPTION=Ignore errors from files already existing in the repository
     call :Read_P skip-existing %1 || exit /b 1
-    rem echo skip-existing: %skip-existing%
-    if not "%skip-existing%"=="" (
-        set OPTION=%OPTION% --skip-existing %skip-existing%
+    rem echo skip-existing: !skip-existing%
+    if not "!skip-existing!"=="" (
+        set OPTION=!OPTION! --skip-existing %skip-existing%
     )
 
 :Exit

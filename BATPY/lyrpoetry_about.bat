@@ -44,7 +44,7 @@ setlocal enabledelayedexpansion
     set COMMAND=about
     
     set APP=poetry
-    set OPTION= -v
+    set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
     set OK=yes
