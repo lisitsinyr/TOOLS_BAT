@@ -94,6 +94,24 @@ setlocal enabledelayedexpansion
 exit /b 0
 
 rem --------------------------------------------------------------------------------
+rem procedure Check_tomlFile ()
+rem --------------------------------------------------------------------------------
+:Check_tomlFile
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    rem Проверка существования файла pyproject.toml
+    set tomlFile=pyproject.toml
+    if not exist "!tomlFile!" (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC
@@ -105,103 +123,103 @@ rem beginfunction
 
     set without=
     set PN_CAPTION=without
-    call :Read_P without %1 || exit /b 1
-    rem echo without: %without%
-    if not "%without%"=="" (
-        set OPTION=%OPTION% --without %without%
+    call :Read_P without "" || exit /b 1
+    rem echo without: !without!
+    if not "!without!"=="" (
+        set OPTION=!OPTION! --without !without!
     )
     set with=
     set PN_CAPTION=with
-    call :Read_P with %1 || exit /b 1
+    call :Read_P with "" || exit /b 1
     rem echo with: %with%
     if not "%with%"=="" (
-        set OPTION=%OPTION% --with %with%
+        set OPTION=!OPTION! --with %with%
     )
     set only=
     set PN_CAPTION=only
-    call :Read_P only %1 || exit /b 1
+    call :Read_P only "" || exit /b 1
     rem echo only: %only%
     if not "%only%"=="" (
-        set OPTION=%OPTION% --only %only%
+        set OPTION=!OPTION! --only %only%
     )
     set only-root=
     set PN_CAPTION=only-root
-    call :Read_P only-root %1 || exit /b 1
+    call :Read_P only-root "" || exit /b 1
     rem echo only-root: %only-root%
     if not "%only-root%"=="" (
-        set OPTION=%OPTION% --only-root %only-root%
+        set OPTION=!OPTION! --only-root %only-root%
     )
     set sync=
     set PN_CAPTION=sync
-    call :Read_P sync %1 || exit /b 1
+    call :Read_P sync "" || exit /b 1
     rem echo sync: %sync%
     if not "%sync%"=="" (
-        set OPTION=%OPTION% --sync %sync%
+        set OPTION=!OPTION! --sync %sync%
     )
     set no-root=
     set PN_CAPTION=no-root
-    call :Read_P no-root %1 || exit /b 1
+    call :Read_P no-root "" || exit /b 1
     rem echo no-root: %no-root%
     if not "%no-root%"=="" (
-        set OPTION=%OPTION% --no-root %no-root%
+        set OPTION=!OPTION! --no-root %no-root%
     )
     set no-directory=
     set PN_CAPTION=no-directory
-    call :Read_P no-directory %1 || exit /b 1
+    call :Read_P no-directory "" || exit /b 1
     rem echo no-directory: %no-directory%
     if not "%no-directory%"=="" (
-        set OPTION=%OPTION% --no-directory %no-directory%
+        set OPTION=!OPTION! --no-directory %no-directory%
     )
     set dry-run=
     set PN_CAPTION=dry-run
-    call :Read_P dry-run %1 || exit /b 1
+    call :Read_P dry-run "" || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
-        set OPTION=%OPTION% --dry-run %dry-run%
+        set OPTION=!OPTION! --dry-run %dry-run%
     )
     set extra=
     set PN_CAPTION=extra
-    call :Read_P extra %1 || exit /b 1
+    call :Read_P extra "" || exit /b 1
     rem echo extra: %extra%
     if not "%extra%"=="" (
-        set OPTION=%OPTION% --extra %extra%
+        set OPTION=!OPTION! --extra %extra%
     )
     set all-extras=
     set PN_CAPTION=all-extras
-    call :Read_P all-extras %1 || exit /b 1
+    call :Read_P all-extras "" || exit /b 1
     rem echo all-extras: %all-extras%
     if not "%all-extras%"=="" (
-        set OPTION=%OPTION% --all-extras %all-extras%
+        set OPTION=!OPTION! --all-extras %all-extras%
     )
     set compile=
     set PN_CAPTION=compile
-    call :Read_P compile %1 || exit /b 1
+    call :Read_P compile "" || exit /b 1
     rem echo compile: %compile%
     if not "%compile%"=="" (
-        set OPTION=%OPTION% --compile %compile%
+        set OPTION=!OPTION! --compile %compile%
     )
     set no-dev=
     set PN_CAPTION=no-dev
-    call :Read_P no-dev %1 || exit /b 1
+    call :Read_P no-dev "" || exit /b 1
     rem echo no-dev: %no-dev%
     if not "%no-dev%"=="" (
-        set OPTION=%OPTION% --no-dev %no-dev%
+        set OPTION=!OPTION! --no-dev %no-dev%
     )
     set remove-untracked=
     set PN_CAPTION=remove-untracked
-    call :Read_P remove-untracked %1 || exit /b 1
+    call :Read_P remove-untracked "" || exit /b 1
     rem echo remove-untracked: %remove-untracked%
     if not "%remove-untracked%"=="" (
-        set OPTION=%OPTION% --remove-untracked %remove-untracked%
+        set OPTION=!OPTION! --remove-untracked %remove-untracked%
     )
     
     
     set xxxx=
     set PN_CAPTION=xxxx
-    call :Read_P xxxx %1 || exit /b 1
-    rem echo xxxx: %xxxx%
-    if not "%xxxx%"=="" (
-        set OPTION=%OPTION% --xxxx %xxxx%
+    call :Read_P xxxx "" || exit /b 1
+    rem echo xxxx: !xxxx!
+    if not "!xxxx!"=="" (
+        set OPTION=!OPTION! --xxxx !xxxx!
     )
 
 :Exit

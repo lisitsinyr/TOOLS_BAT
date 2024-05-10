@@ -76,14 +76,79 @@ setlocal enabledelayedexpansion
 exit /b 0
 
 rem --------------------------------------------------------------------------------
+rem procedure Check_tomlFile ()
+rem --------------------------------------------------------------------------------
+:Check_tomlFile
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    rem Проверка существования файла pyproject.toml
+    set tomlFile=pyproject.toml
+    if not exist "!tomlFile!" (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if "!DEBUG!"=="1" (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
+    set extras=
+    set PN_CAPTION=Extras to activate for the dependency. ^(multiple values allowed^)
+    call :Read_P extras "" || exit /b 1
+    rem echo extras: !extras!
+    if defined extras (
+        set OPTION=!OPTION! --extras=!extras!
+    )
+    set python=
+    set PN_CAPTION=Python version(s) to use for resolution
+    call :Read_P python "" || exit /b 1
+    rem echo python: !python!
+    if defined python (
+        set OPTION=!OPTION! --python=!python!
+    )
+    set tree=
+    set PN_CAPTION=Display the dependency tree
+    call :Read_P tree "" || exit /b 1
+    rem echo tree: !tree!
+    if defined tree (
+        set OPTION=!OPTION! --tree
+    )
+    set install=
+    set PN_CAPTION=Show what would be installed for the current system
+    call :Read_P install "" || exit /b 1
+    rem echo install: !install!
+    if defined install (
+        set OPTION=!OPTION! --install
+    )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
+    set package=
+    set PN_CAPTION=names
+    call :Read_P package "" || exit /b 1
+    rem echo package: %package%
+    if defined package (
+        set ARGS=!ARGS! !package!
+    ) else (
+        echo ERROR: package not defined ...
+        set OK=
+    )
+
 :Exit
 exit /b 0
 

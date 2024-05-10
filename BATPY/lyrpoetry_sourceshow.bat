@@ -75,6 +75,24 @@ setlocal enabledelayedexpansion
 exit /b 0
 
 rem --------------------------------------------------------------------------------
+rem procedure Check_tomlFile ()
+rem --------------------------------------------------------------------------------
+:Check_tomlFile
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    rem Проверка существования файла pyproject.toml
+    set tomlFile=pyproject.toml
+    if not exist "!tomlFile!" (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC

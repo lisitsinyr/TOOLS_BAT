@@ -48,29 +48,43 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
+    call :Check_tomlFile
 
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
+    if defined OK (
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
-    echo APPRUN: !APPRUN!
+:Exit
+exit /b 0
 
+rem --------------------------------------------------------------------------------
+rem procedure Check_tomlFile ()
+rem --------------------------------------------------------------------------------
+:Check_tomlFile
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
     rem Проверка существования файла pyproject.toml
     set tomlFile=pyproject.toml
     if not exist "!tomlFile!" (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
     )
-
-    if defined OK (
-        !APPRUN!
-    )
-
 :Exit
 exit /b 0
 
@@ -80,23 +94,33 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set format=
-    set PN_CAPTION=Limit the format to either wheel or sdist
+    set PN_CAPTION=Limit the format to either sdist or wheel
     call :Read_P format %1 || exit /b 1
     rem echo format: %format%
     if not "%format%"=="" (
         set OPTION=%OPTION% --format %format%
     )
     set output=
-    set PN_CAPTION=Set output directory for build artifacts. Default is dist
+    set PN_CAPTION=Set output directory for build artifacts. Default is `dist`. [default: "dist"]
     call :Read_P output %1 || exit /b 1
     rem echo output: %output%
     if not "%output%"=="" (
         set OPTION=%OPTION% --output %output%
     )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
+
 :Exit
 exit /b 0
 
