@@ -158,15 +158,15 @@ rem beginfunction
 
     set P_Name=%1
     rem !P_Name! - имя переменной
-    echo P_Name: !P_Name!
+    rem echo P_Name: !P_Name!
     rem %P_Name% - имя переменной
-    echo P_Name: %P_Name%
+    rem echo P_Name: %P_Name%
     rem !%P_Name%! - значение переменной по умолчанию
-    echo P_Value: !%P_Name%!
+    rem echo P_Value: !%P_Name%!
 
     rem - значение переменной
     set P_Value=%~2
-    echo P_Value: !P_Value!
+    rem echo P_Value: !P_Value!
 
     set Input=
     if "!P_Value!"=="" (
