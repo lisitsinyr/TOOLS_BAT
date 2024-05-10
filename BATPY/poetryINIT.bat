@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem poetrySETUP.bat
+rem poetryINIT.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
@@ -61,7 +61,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call lyrpoetry_config.bat var value
+    call lyrpoetry_init.bat
     ...
 
 :Exit
