@@ -146,4 +146,19 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure Read_N ()
+rem --------------------------------------------------------------------------------
+:Read_N
+rem beginfunction
+    set FUNCNAME=%0
+    if "%DEBUG%"=="1" (
+        echo DEBUG: procedure %FUNCNAME% ...
+    )
+
+    for %%a in (%*) do set /a Read_N+=1
+
+    exit /b 0
+rem endfunction
+
 rem ===================================================================

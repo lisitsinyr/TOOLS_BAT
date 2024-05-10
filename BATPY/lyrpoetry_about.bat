@@ -48,6 +48,9 @@ setlocal enabledelayedexpansion
     for %%a in (%*) do set /a N+=1
     echo N: %N%
 
+    call :Read_N %* || exit /b 1
+    echo Read_N: %Read_N%
+
     if "%N%"=="" (
         call :MAIN_FUNC
         set APPRUN=%APP% %COMMAND% %OPTION% %ARGS%
