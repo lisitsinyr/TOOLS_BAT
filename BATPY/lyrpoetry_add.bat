@@ -115,7 +115,7 @@ rem beginfunction
     rem -------------------------------------
     set group=test
     set PN_CAPTION=The group to add the dependency to
-    call :Read_P group "" || exit /b 1
+    call :Read_P group "ddddddddddd" || exit /b 1
     rem echo group: %group%
     if not "%group%"=="" (
         set OPTION=%OPTION% --group %group%

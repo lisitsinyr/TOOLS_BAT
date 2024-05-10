@@ -157,11 +157,14 @@ rem beginfunction
     )
 
     set P_Name=%1
+    rem !P_Name! - имя переменной
     echo P_Name: !P_Name!
-    echo 1: %P_Name%
-    echo 2: !%P_Name%!
-    echo 3: %!P_Name!%
+    rem %P_Name% - имя переменной
+    echo P_Name: %P_Name%
+    rem !%P_Name%! - значение переменной по умолчанию
+    echo P_Value: !%P_Name%!
 
+    rem - значение переменной
     set P_Value=%~2
     echo P_Value: !P_Value!
 
@@ -178,6 +181,7 @@ rem beginfunction
         exit /b 0
     )
     rem echo Input: !Input!
+    echo ggggggggggggggggg
 
     if "!Input!"=="" (
         rem [!%P_Name%!] - значение переменной по умолчанию
