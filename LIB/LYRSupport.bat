@@ -83,64 +83,33 @@ rem beginfunction
     )
 
     set P_Name=%1
+    rem !P_Name! - имя переменной
+    rem echo P_Name: !P_Name!
+    rem %P_Name% - имя переменной
     rem echo P_Name: %P_Name%
+    rem !%P_Name%! - значение переменной по умолчанию
+    rem echo P_Value: !%P_Name%!
+
+    rem - значение переменной
     set P_Value=%~2
-    rem echo P_Value: %P_Value%
-    rem echo _: !%P_Name%!
+    rem echo P_Value: !P_Value!
 
     set Input=
-    if "%P_Value%"=="" (
-        if not "%PN_CAPTION%"=="" (
-            set /p Input=%PN_CAPTION%[%P_Name%][!%P_Name%!]:
+    if "!P_Value!"=="" (
+        if not "!PN_CAPTION!"=="" (
+            set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
         )
     ) else (
-        set %P_Name%=%P_Value%
+        set %P_Name%=!P_Value!
         exit /b 0
     )
-    rem echo Input: %Input%
+    rem echo Input: !Input!
 
     if "%Input%"=="" (
+        rem [!%P_Name%!] - значение переменной по умолчанию
         set %P_Name%=!%P_Name%!
-        rem set %P_Name%=33333333333333
     ) else (
-        set %P_Name%=%Input%
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure Read_P_old ()
-rem --------------------------------------------------------------------------------
-:Read_P_old
-rem beginfunction
-    set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
-    )
-
-    set P_Name=%1
-    rem echo P_Name: %P_Name%
-    set P_Value=%~2
-    rem echo P_Value: %P_Value%
-    rem echo _: !%P_Name%!
-
-    set Input=
-    if "%P_Value%"=="" (
-        if not "%PN_CAPTION%"=="" (
-            set /p Input=%PN_CAPTION%[%P_Name%][!%P_Name%!]:
-        )
-    ) else (
-        set %P_Name%=%P_Value%
-        exit /b 0
-    )
-    rem echo Input: %Input%
-
-    if "%Input%"=="" (
-        set %P_Name%=!%P_Name%!
-        rem set %P_Name%=33333333333333
-    ) else (
-        set %P_Name%=%Input%
+        set %P_Name%=!Input!
     )
 
     exit /b 0
@@ -181,7 +150,6 @@ rem beginfunction
         exit /b 0
     )
     rem echo Input: !Input!
-    echo ggggggggggggggggg
 
     if "!Input!"=="" (
         rem [!%P_Name%!] - значение переменной по умолчанию
