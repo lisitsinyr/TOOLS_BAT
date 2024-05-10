@@ -47,12 +47,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Locks the project dependencies ...
     set COMMAND=lock
@@ -113,21 +113,21 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set check=
-    set PN_CAPTION=Verify that poetry.lock is consistent with pyproject.toml. (Deprecated) Use poetry check --lock instead
-    call :Read_P check %1 || exit /b 1
-    rem echo check: !check%
-    if not "!check!"=="" (
-        set OPTION=!OPTION! --check %check%
-    )
     set no-update=
     set PN_CAPTION=Do not update locked versions, only refresh lock file
-    call :Read_P no-update %1 || exit /b 1
-    rem echo no-update: !no-update%
+    call :Read_P no-update "" || exit /b 1
+    rem echo no-update: !no-update!
     if not "!no-update!"=="" (
-        set OPTION=!OPTION! --no-update %no-update%
+        set OPTION=!OPTION! --no-update
     )
-
+    set check=
+    set PN_CAPTION=Check that the poetry.lock file corresponds to the current version of pyproject.toml. ^(Deprecated^) Use poetry check --lock instead.
+    call :Read_P check "" || exit /b 1
+    rem echo check: !check!
+    if not "!check!"=="" (
+        set OPTION=!OPTION! --check
+    )
+    
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------

@@ -58,12 +58,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Installs the project dependencies ...
     set COMMAND=install
@@ -125,95 +125,95 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set without=
-    set PN_CAPTION=without
+    set PN_CAPTION=The dependency groups to ignore. ^(multiple values allowed^)
     call :Read_P without "" || exit /b 1
     rem echo without: !without!
     if not "!without!"=="" (
         set OPTION=!OPTION! --without !without!
     )
     set with=
-    set PN_CAPTION=with
+    set PN_CAPTION=The optional dependency groups to include. ^(multiple values allowed^)
     call :Read_P with "" || exit /b 1
-    rem echo with: !with%
+    rem echo with: !with!
     if not "!with!"=="" (
-        set OPTION=!OPTION! --with %with%
+        set OPTION=!OPTION! --with !with!
     )
     set only=
-    set PN_CAPTION=only
+    set PN_CAPTION=The only dependency groups to include. ^(multiple values allowed^)
     call :Read_P only "" || exit /b 1
-    rem echo only: !only%
+    rem echo only: !only!
     if not "!only!"=="" (
-        set OPTION=!OPTION! --only %only%
-    )
-    set only-root=
-    set PN_CAPTION=only-root
-    call :Read_P only-root "" || exit /b 1
-    rem echo only-root: !only-root%
-    if not "!only-root!"=="" (
-        set OPTION=!OPTION! --only-root %only-root%
-    )
-    set sync=
-    set PN_CAPTION=sync
-    call :Read_P sync "" || exit /b 1
-    rem echo sync: !sync%
-    if not "!sync!"=="" (
-        set OPTION=!OPTION! --sync %sync%
-    )
-    set no-root=
-    set PN_CAPTION=no-root
-    call :Read_P no-root "" || exit /b 1
-    rem echo no-root: !no-root%
-    if not "!no-root!"=="" (
-        set OPTION=!OPTION! --no-root %no-root%
-    )
-    set no-directory=
-    set PN_CAPTION=no-directory
-    call :Read_P no-directory "" || exit /b 1
-    rem echo no-directory: !no-directory%
-    if not "!no-directory!"=="" (
-        set OPTION=!OPTION! --no-directory %no-directory%
-    )
-    set dry-run=
-    set PN_CAPTION=dry-run
-    call :Read_P dry-run "" || exit /b 1
-    rem echo dry-run: !dry-run%
-    if not "!dry-run!"=="" (
-        set OPTION=!OPTION! --dry-run %dry-run%
-    )
-    set extra=
-    set PN_CAPTION=extra
-    call :Read_P extra "" || exit /b 1
-    rem echo extra: !extra%
-    if not "!extra!"=="" (
-        set OPTION=!OPTION! --extra %extra%
-    )
-    set all-extras=
-    set PN_CAPTION=all-extras
-    call :Read_P all-extras "" || exit /b 1
-    rem echo all-extras: !all-extras%
-    if not "!all-extras!"=="" (
-        set OPTION=!OPTION! --all-extras %all-extras%
-    )
-    set compile=
-    set PN_CAPTION=compile
-    call :Read_P compile "" || exit /b 1
-    rem echo compile: !compile%
-    if not "!compile!"=="" (
-        set OPTION=!OPTION! --compile %compile%
+        set OPTION=!OPTION! --only !only!
     )
     set no-dev=
-    set PN_CAPTION=no-dev
+    set PN_CAPTION=Do not install the development dependencies. (Deprecated)
     call :Read_P no-dev "" || exit /b 1
-    rem echo no-dev: !no-dev%
+    rem echo no-dev: !no-dev!
     if not "!no-dev!"=="" (
-        set OPTION=!OPTION! --no-dev %no-dev%
+        set OPTION=!OPTION! --no-dev
+    )
+    set sync=
+    set PN_CAPTION=Synchronize the environment with the locked packages and the specified groups
+    call :Read_P sync "" || exit /b 1
+    rem echo sync: !sync!
+    if not "!sync!"=="" (
+        set OPTION=!OPTION! --sync
+    )
+    set no-root=
+    set PN_CAPTION=Do not install the root package (the current project)
+    call :Read_P no-root "" || exit /b 1
+    rem echo no-root: !no-root!
+    if not "!no-root!"=="" (
+        set OPTION=!OPTION! --no-root
+    )
+    set no-directory=
+    set PN_CAPTION=Do not install any directory path dependencies; useful to install dependencies without source code, e.g. for caching of Docker layers
+    call :Read_P no-directory "" || exit /b 1
+    rem echo no-directory: !no-directory!
+    if not "!no-directory!"=="" (
+        set OPTION=!OPTION! --no-directory
+    )
+    set dry-run=
+    set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
+    call :Read_P dry-run "" || exit /b 1
+    rem echo dry-run: !dry-run!
+    if not "!dry-run!"=="" (
+        set OPTION=!OPTION! --dry-run
     )
     set remove-untracked=
-    set PN_CAPTION=remove-untracked
+    set PN_CAPTION=Removes packages not present in the lock file. ^(Deprecated^)
     call :Read_P remove-untracked "" || exit /b 1
-    rem echo remove-untracked: !remove-untracked%
+    rem echo remove-untracked: !remove-untracked!
     if not "!remove-untracked!"=="" (
-        set OPTION=!OPTION! --remove-untracked %remove-untracked%
+        set OPTION=!OPTION! --remove-untracked
+    )
+    set extras=
+    set PN_CAPTION=Extra sets of dependencies to install. ^(multiple values allowed^)
+    call :Read_P extras "" || exit /b 1
+    rem echo extras: !extras!
+    if not "!extras!"=="" (
+        set OPTION=!OPTION! --extras !extras!
+    )
+    set all-extras=
+    set PN_CAPTION=Install all extra dependencies
+    call :Read_P all-extras "" || exit /b 1
+    rem echo all-extras: !all-extras!
+    if not "!all-extras!"=="" (
+        set OPTION=!OPTION! --all-extras
+    )
+    set only-root=
+    set PN_CAPTION=Exclude all dependencies
+    call :Read_P only-root "" || exit /b 1
+    rem echo only-root: !only-root!
+    if not "!only-root!"=="" (
+        set OPTION=!OPTION! --only-root
+    )
+    set compile=
+    set PN_CAPTION=Compile Python source files to bytecode. ^(This option has no effect if modern-installation is disabled because the old installer always compiles.^)
+    call :Read_P compile "" || exit /b 1
+    rem echo compile: !compile!
+    if not "!compile!"=="" (
+        set OPTION=!OPTION! --compile
     )
 
     rem -------------------------------------

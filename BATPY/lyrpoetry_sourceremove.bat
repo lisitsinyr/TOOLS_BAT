@@ -37,12 +37,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Remove source configured for the project ...
     set COMMAND=source remove
@@ -103,18 +103,21 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set command=
-    set PN_CAPTION=command
-    call :Read_P command %1 || exit /b 1
-    rem echo command: !command%
-    if not "!command!"=="" (
-        set OPTION=!OPTION! %command%
-    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set name=
+    set PN_CAPTION=Source repository name
+    call :Read_P name "" || exit /b 1
+    rem echo name: !name!
+    if defined packages (
+        set ARGS=!ARGS! !name!
+    ) else (
+        echo ERROR: name not defined ...
+    )
+
 :Exit
 exit /b 0
 

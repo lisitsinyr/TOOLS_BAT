@@ -44,12 +44,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Remove additional packages from Poetry's runtime environment ...
     set COMMAND=self remove
@@ -111,17 +111,27 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set dry-run=
-    set PN_CAPTION=Outputs the operations but will not execute anything (implicitly enables –verbose)
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: !dry-run%
+    set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
+    call :Read_P dry-run "" || exit /b 1
+    rem echo dry-run: !dry-run!
     if not "!dry-run!"=="" (
-        set OPTION=!OPTION! --dry-run %dry-run%
+        set OPTION=!OPTION! --dry-run
     )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set packages=
+    set PN_CAPTION=The packages to remove
+    call :Read_P packages "" || exit /b 1
+    rem echo packages: !packages!
+    if defined packages (
+        set ARGS=!ARGS! !packages!
+    ) else (
+        echo ERROR: packages not defined ...
+    )
+    
 :Exit
 exit /b 0
 

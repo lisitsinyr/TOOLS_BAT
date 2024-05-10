@@ -37,12 +37,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Displays information about the current environment ...
     set COMMAND=env info
@@ -104,16 +104,16 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set pathenv=
-    set PN_CAPTION=pathenv
+    set PN_CAPTION=Only display the environment's path
     call :Read_P pathenv %1 || exit /b 1
-    rem echo pathenv: !pathenv%
+    rem echo pathenv: !pathenv!
     if not "!pathenv!"=="" (
         set OPTION=!OPTION! --path
     )
     set executable=
-    set PN_CAPTION=executable
+    set PN_CAPTION=Only display the environment's python executable path
     call :Read_P executable %1 || exit /b 1
-    rem echo executable: !executable%
+    rem echo executable: !executable!
     if not "!executable!"=="" (
         set OPTION=!OPTION! --executable
     )

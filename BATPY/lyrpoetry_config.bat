@@ -51,12 +51,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Manages configuration settings ...
     set COMMAND=config
@@ -120,21 +120,21 @@ rem beginfunction
     set list=
     set PN_CAPTION=List configuration settings
     call :Read_P list "" || exit /b 1
-    rem echo list: !list%
+    rem echo list: !list!
     if not "!list!"=="" (
         set OPTION=!OPTION! --list
     )
     set unset=
     set PN_CAPTION=Unset configuration setting
     call :Read_P unset "" || exit /b 1
-    rem echo unset: !unset%
+    rem echo unset: !unset!
     if not "!unset!"=="" (
         set OPTION=!OPTION! --unset
     )
     set local=
     set PN_CAPTION=Set/Get from the project's local configuration
     call :Read_P local "" || exit /b 1
-    rem echo local: !local%
+    rem echo local: !local!
     if not "!local!"=="" (
         set OPTION=!OPTION! --local
     )
@@ -144,22 +144,21 @@ rem beginfunction
     rem -------------------------------------
     rem Проверка на обязательные аргументы
     set key=
-    set PN_CAPTION=setting-key
+    set PN_CAPTION=Setting key
     call :Read_P key "" || exit /b 1
     rem echo key: !key%
     if not "!key!"=="" (
-        set OPTION=%ARGS% %key%
+        set OPTION=!ARGS! !key!
     ) else (
         echo ERROR: key not defined ...
         set OK=yes
     )
-    
     set value=
-    set PN_CAPTION=setting-value
-    call :Read_P value %1 || exit /b 1
-    rem echo value: !value%
+    set PN_CAPTION=Setting value
+    call :Read_P value "" || exit /b 1
+    rem echo value: !value!
     if not "!value!"=="" (
-        set OPTION=%ARGS% %value%
+        set OPTION=!ARGS! !value!
     ) else (
         echo ERROR: value not defined ...
         set OK=yes

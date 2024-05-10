@@ -41,12 +41,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Exports the lock file to alternative formats ...
     set COMMAND=export
@@ -109,24 +109,24 @@ rem beginfunction
     rem -------------------------------------
     set next-phase=
     set PN_CAPTION=Increment the phase of the current version
-    call :Read_P next-phase %1 || exit /b 1
-    rem echo next-phase: !next-phase%
+    call :Read_P next-phase "" || exit /b 1
+    rem echo next-phase: !next-phase!
     if not "!next-phase!"=="" (
-        set OPTION=!OPTION! --next-phase %next-phase%
+        set OPTION=!OPTION! --next-phase !next-phase!
     )
     set short=
     set PN_CAPTION=Output the version number only
-    call :Read_P short %1 || exit /b 1
-    rem echo short: !short%
+    call :Read_P short "" || exit /b 1
+    rem echo short: !short!
     if not "!short!"=="" (
-        set OPTION=!OPTION! --short %short%
+        set OPTION=!OPTION! --short !short!
     )
     set dry-run=
     set PN_CAPTION=Do not update pyproject.toml file
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: !dry-run%
+    call :Read_P dry-run "" || exit /b 1
+    rem echo dry-run: !dry-run!
     if not "!dry-run!"=="" (
-        set OPTION=!OPTION! --dry-run %dry-run%
+        set OPTION=!OPTION! --dry-run !dry-run!
     )
 
     rem -------------------------------------

@@ -45,12 +45,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Runs a command in the appropriate environment ...
     set COMMAND=run
@@ -111,18 +111,21 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set command=
-    set PN_CAPTION=command
-    call :Read_P command %1 || exit /b 1
-    rem echo command: !command%
-    if not "!command!"=="" (
-        set OPTION=!OPTION! %command%
-    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set args=
+    set PN_CAPTION=The command and arguments/options to run
+    call :Read_P args "" || exit /b 1
+    rem echo args: !args!
+    if defined args (
+        set ARGS=!ARGS! !args!
+    ) else (
+        echo ERROR: args not defined ...
+    )
+
 :Exit
 exit /b 0
 

@@ -43,12 +43,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Lists commands ...
     set COMMAND=list
@@ -114,6 +114,17 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set namespace=
+    set PN_CAPTION=The namespace name
+    call :Read_P namespace "" || exit /b 1
+    rem echo namespace: !namespace!
+    if defined namespace (
+        set ARGS=!ARGS! !namespace!
+    ) else (
+        echo ERROR: names not defined ...
+        set OK=
+    )
+
 :Exit
 exit /b 0
 

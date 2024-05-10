@@ -52,12 +52,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Show packages from Poetry's runtime environment ...
     set COMMAND=self show
@@ -120,37 +120,47 @@ rem beginfunction
     rem -------------------------------------
     set addons=
     set PN_CAPTION=List only add-on packages installed
-    call :Read_P addons %1 || exit /b 1
-    rem echo addons: !addons%
+    call :Read_P addons "" || exit /b 1
+    rem echo addons: !addons!
     if not "!addons!"=="" (
-        set OPTION=!OPTION! --addons %addons%
+        set OPTION=!OPTION! --addons
     )
     set tree=
     set PN_CAPTION=List the dependencies as a tree
-    call :Read_P tree %1 || exit /b 1
-    rem echo tree: !tree%
+    call :Read_P tree "" || exit /b 1
+    rem echo tree: !tree!
     if not "!tree!"=="" (
-        set OPTION=!OPTION! --tree %tree%
+        set OPTION=!OPTION! --tree
     )
     set latest=
     set PN_CAPTION=Show the latest version
-    call :Read_P latest %1 || exit /b 1
-    rem echo latest: !latest%
+    call :Read_P latest "" || exit /b 1
+    rem echo latest: !latest!
     if not "!latest!"=="" (
-        set OPTION=!OPTION! --latest %latest%
+        set OPTION=!OPTION! --latest
     )
     set outdated=
     set PN_CAPTION=Show the latest version but only for packages that are outdated
-    call :Read_P outdated %1 || exit /b 1
-    rem echo outdated: !outdated%
+    call :Read_P outdated "" || exit /b 1
+    rem echo outdated: !outdated!
     if not "!outdated!"=="" (
-        set OPTION=!OPTION! --outdated %outdated%
+        set OPTION=!OPTION! --outdated
     )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set packages=
+    set PN_CAPTION=The package to inspect
+    call :Read_P packages "" || exit /b 1
+    rem echo packages: !packages!
+    if defined packages (
+        set ARGS=!ARGS! !packages!
+    ) else (
+        echo ERROR: packages not defined ...
+    )
+    
 :Exit
 exit /b 0
 

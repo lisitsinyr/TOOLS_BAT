@@ -50,12 +50,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Displays help for a command ...
     set COMMAND=help
@@ -118,10 +118,10 @@ rem beginfunction
     rem -------------------------------------
     set command=
     set PN_CAPTION=command
-    call :Read_P command %1 || exit /b 1
+    call :Read_P command "" || exit /b 1
     rem echo command: !command%
     if not "!command!"=="" (
-        set OPTION=!OPTION! %command%
+        set OPTION=!OPTION! !command!
     )
 
     rem -------------------------------------

@@ -43,12 +43,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Add source configuration for project ...
     set COMMAND=source add
@@ -110,31 +110,50 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set default=
-    set PN_CAPTION=Set this source as the default (disable PyPI). Deprecated in favor of --priority
-    call :Read_P default %1 || exit /b 1
-    rem echo default: !default%
+    set PN_CAPTION=Set this source as the default (disable PyPI). A default source will also be the fallback source if you add other sources. ^(Deprecated, use --priority^)
+    call :Read_P default "" || exit /b 1
+    rem echo default: !default!
     if not "!default!"=="" (
-        set OPTION=!OPTION! --default %default%
+        set OPTION=!OPTION! --default
     )
     set secondary=
-    set PN_CAPTION=Set this source as a secondary source. Deprecated in favor of --priority
-    call :Read_P secondary %1 || exit /b 1
-    rem echo secondary: !secondary%
+    set PN_CAPTION=Set this source as secondary. ^(Deprecated, use --priority^)
+    call :Read_P secondary "" || exit /b 1
+    rem echo secondary: !secondary!
     if not "!secondary!"=="" (
-        set OPTION=!OPTION! --secondary %secondary%
+        set OPTION=!OPTION! --secondary
     )
     set priority=
-    set PN_CAPTION=Set the priority of this source. Accepted values are: default, secondary, supplemental, and explicit. Refer to the dedicated sections in Repositories for more information
-    call :Read_P priority %1 || exit /b 1
-    rem echo priority: !priority%
+    set PN_CAPTION=Set the priority of this source. One of: default, primary, secondary, supplemental, explicit. Defaults to primary.
+    call :Read_P priority "" || exit /b 1
+    rem echo priority: !priority!
     if not "!priority!"=="" (
-        set OPTION=!OPTION! --priority %priority%
+        set OPTION=!OPTION! --priority=%priority%
     )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set name=
+    set PN_CAPTION=Source repository name
+    call :Read_P name "" || exit /b 1
+    rem echo name: !name!
+    if defined name (
+        set ARGS=!ARGS! !name!
+    ) else (
+        echo ERROR: name not defined ...
+    )
+    set url=
+    set PN_CAPTION=Source repository URL. Required, except for PyPI, for which it is not allowed
+    call :Read_P url "" || exit /b 1
+    rem echo url: !url!
+    if defined url (
+        set ARGS=!ARGS! !url!
+    ) else (
+        echo ERROR: url not defined ...
+    )
+
 :Exit
 exit /b 0
 

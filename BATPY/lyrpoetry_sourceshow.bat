@@ -39,12 +39,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Show information about sources configured for the project ...
     set COMMAND=source show
@@ -105,18 +105,18 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set command=
-    set PN_CAPTION=command
-    call :Read_P command %1 || exit /b 1
-    rem echo command: !command%
-    if not "!command!"=="" (
-        set OPTION=!OPTION! %command%
-    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set source=
+    set PN_CAPTION=Source^(s^) to show information for. Defaults to showing all sources
+    call :Read_P source "" || exit /b 1
+    rem echo source: !source!
+    if not "!source!"=="" (
+        set OPTION=!ARGS! %source%
+    )
 :Exit
 exit /b 0
 

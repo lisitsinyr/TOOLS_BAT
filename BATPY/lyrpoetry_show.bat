@@ -47,12 +47,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Shows information about packages ...
     set COMMAND=show
@@ -114,80 +114,90 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set without=
-    set PN_CAPTION=The dependency groups to ignore
-    call :Read_P without %1 || exit /b 1
-    rem echo without: !without%
+    set PN_CAPTION=The dependency groups to ignore. ^(multiple values allowed^)
+    call :Read_P without "" || exit /b 1
+    rem echo without: !without!
     if not "!without!"=="" (
-        set OPTION=!OPTION! --without %without%
-    )
-    set why=
-    set PN_CAPTION=When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
-    call :Read_P why %1 || exit /b 1
-    rem echo why: !why%
-    if not "!why!"=="" (
-        set OPTION=!OPTION! --why %why%
+        set OPTION=!OPTION! --without=!without!
     )
     set with=
-    set PN_CAPTION=The optional dependency groups to include
-    call :Read_P with %1 || exit /b 1
-    rem echo with: !with%
+    set PN_CAPTION=The optional dependency groups to include. ^(multiple values allowed^)
+    call :Read_P with "" || exit /b 1
+    rem echo with: !with!
     if not "!with!"=="" (
-        set OPTION=!OPTION! --with %with%
+        set OPTION=!OPTION! --with=!with!
     )
     set only=
-    set PN_CAPTION=The only dependency groups to include
-    call :Read_P only %1 || exit /b 1
-    rem echo only: !only%
+    set PN_CAPTION=he only dependency groups to include. ^(multiple values allowed^)
+    call :Read_P only "" || exit /b 1
+    rem echo only: !only!
     if not "!only!"=="" (
-        set OPTION=!OPTION! --only %only%
+        set OPTION=!OPTION! --only=!only!
     )
     set no-dev=
-    set PN_CAPTION=Do not list the dev dependencies. (Deprecated, use --only main or --without dev instead)
-    call :Read_P no-dev %1 || exit /b 1
-    rem echo no-dev: !no-dev%
+    set PN_CAPTION=Do not list the development dependencies. ^(Deprecated^)
+    call :Read_P no-dev "" || exit /b 1
+    rem echo no-dev: !no-dev!
     if not "!no-dev!"=="" (
         set OPTION=!OPTION! --no-dev %no-dev%
     )
     set tree=
     set PN_CAPTION=List the dependencies as a tree
-    call :Read_P tree %1 || exit /b 1
-    rem echo tree: !tree%
+    call :Read_P tree "" || exit /b 1
+    rem echo tree: !tree!
     if not "!tree!"=="" (
-        set OPTION=!OPTION! --tree %tree%
+        set OPTION=!OPTION! --tree
+    )
+    set why=
+    set PN_CAPTION=When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
+    call :Read_P why "" || exit /b 1
+    rem echo why: !why!
+    if not "!why!"=="" (
+        set OPTION=!OPTION! --why
     )
     set latest=
     set PN_CAPTION=Show the latest version
-    call :Read_P latest %1 || exit /b 1
-    rem echo latest: !latest%
+    call :Read_P latest "" || exit /b 1
+    rem echo latest: !latest!
     if not "!latest!"=="" (
-        set OPTION=!OPTION! --latest %latest%
+        set OPTION=!OPTION! --latest
     )
     set outdated=
     set PN_CAPTION=Show the latest version but only for packages that are outdated
-    call :Read_P outdated %1 || exit /b 1
-    rem echo outdated: !outdated%
+    call :Read_P outdated "" || exit /b 1
+    rem echo outdated: !outdated!
     if not "!outdated!"=="" (
-        set OPTION=!OPTION! --outdated %outdated%
+        set OPTION=!OPTION! --outdated
     )
     set all=
     set PN_CAPTION=Show all packages (even those not compatible with current system)
-    call :Read_P all %1 || exit /b 1
-    rem echo all: !all%
+    call :Read_P all "" || exit /b 1
+    rem echo all: !all!
     if not "!all!"=="" (
-        set OPTION=!OPTION! --all %all%
+        set OPTION=!OPTION! --all
     )
     set top-level=
     set PN_CAPTION=Only show explicitly defined packages
-    call :Read_P top-level %1 || exit /b 1
-    rem echo top-level: !top-level%
+    call :Read_P top-level "" || exit /b 1
+    rem echo top-level: !top-level!
     if not "!top-level!"=="" (
-        set OPTION=!OPTION! --top-level %top-level%
+        set OPTION=!OPTION! --top-level
     )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set packages=
+    set PN_CAPTION=The package to inspect
+    call :Read_P packages "" || exit /b 1
+    rem echo packages: !packages!
+    if defined packages (
+        set ARGS=!ARGS! !packages!
+    ) else (
+        echo ERROR: packages not defined ...
+    )
+    
 :Exit
 exit /b 0
 

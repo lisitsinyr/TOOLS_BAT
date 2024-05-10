@@ -40,12 +40,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Debugs dependency resolution ...
     set COMMAND=debug resolve
@@ -142,7 +142,7 @@ rem beginfunction
     set package=
     set PN_CAPTION=names
     call :Read_P package "" || exit /b 1
-    rem echo package: !package%
+    rem echo package: !package!
     if defined package (
         set ARGS=!ARGS! !package!
     ) else (

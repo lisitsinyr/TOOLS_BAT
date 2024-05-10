@@ -45,12 +45,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Updates Poetry to the latest version ...
     set COMMAND=self update
@@ -113,23 +113,33 @@ rem beginfunction
     rem -------------------------------------
     set preview=
     set PN_CAPTION=Allow the installation of pre-release versions
-    call :Read_P preview %1 || exit /b 1
-    rem echo preview: !preview%
+    call :Read_P preview "" || exit /b 1
+    rem echo preview: !preview!
     if not "!preview!"=="" (
-        set OPTION=!OPTION! --preview %preview%
+        set OPTION=!OPTION! --preview
     )
     set dry-run=
-    set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: !dry-run%
+    set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables –verbose^)
+    call :Read_P dry-run "" || exit /b 1
+    rem echo dry-run: !dry-run!
     if not "!dry-run!"=="" (
-        set OPTION=!OPTION! --dry-run %dry-run%
+        set OPTION=!OPTION! --dry-run
     )
     
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set version=
+    set PN_CAPTION=The package to inspect
+    call :Read_P version "" || exit /b 1
+    rem echo version: !version!
+    if defined version (
+        set ARGS=!ARGS! !version!
+    ) else (
+        echo ERROR: version not defined ...
+    )
+    
 :Exit
 exit /b 0
 

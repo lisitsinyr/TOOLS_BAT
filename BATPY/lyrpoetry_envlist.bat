@@ -37,12 +37,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Lists all virtualenvs associated with the current project ...
     set COMMAND=env list
@@ -104,9 +104,9 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set full-path=
-    set PN_CAPTION=full-path
+    set PN_CAPTION=Output the full paths of the virtualenvs
     call :Read_P full-path %1 || exit /b 1
-    rem echo full-path: !full-path%
+    rem echo full-path: !full-path!
     if not "!full-path!"=="" (
         set OPTION=!OPTION! --full-path
     )

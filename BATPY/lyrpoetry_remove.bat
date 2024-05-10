@@ -41,12 +41,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Removes a package from the project dependencies ...
     set COMMAND=remove
@@ -109,37 +109,47 @@ rem beginfunction
     rem -------------------------------------
     set group=
     set PN_CAPTION=The group to remove the dependency from
-    call :Read_P group %1 || exit /b 1
-    rem echo group: !group%
+    call :Read_P group "" || exit /b 1
+    rem echo group: !group!
     if not "!group!"=="" (
-        set OPTION=!OPTION! --group %group%
+        set OPTION=!OPTION! --group=!group!
     )
     set dev=
-    set PN_CAPTION=Removes a package from the development dependencies. (Deprecated, use -G dev instead)
-    call :Read_P dev %1 || exit /b 1
-    rem echo dev: !dev%
+    set PN_CAPTION=Remove a package from the development dependencies. ^(Deprecated^) Use --group=dev instead
+    call :Read_P dev "" || exit /b 1
+    rem echo dev: !dev!
     if not "!dev!"=="" (
-        set OPTION=!OPTION! --dev %dev%
+        set OPTION=!OPTION! --dev
     )
     set dry-run=
-    set PN_CAPTION=Outputs the operations but will not execute anything (implicitly enables –verbose)
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: !dry-run%
+    set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
+    call :Read_P dry-run "" || exit /b 1
+    rem echo dry-run: !dry-run!
     if not "!dry-run!"=="" (
-        set OPTION=!OPTION! --dry-run %dry-run%
+        set OPTION=!OPTION! --dry-run
     )
     set lock=
     set PN_CAPTION=Do not perform operations (only update the lockfile)
-    call :Read_P lock %1 || exit /b 1
-    rem echo lock: !lock%
+    call :Read_P lock "" || exit /b 1
+    rem echo lock: !lock!
     if not "!lock!"=="" (
-        set OPTION=!OPTION! --lock %lock%
+        set OPTION=!OPTION! --lock
     )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set packages=
+    set PN_CAPTION=The path to create the project at
+    call :Read_P packages "" || exit /b 1
+    rem echo packages: !packages!
+    if defined packages (
+        set ARGS=!ARGS! !packages!
+    ) else (
+        echo ERROR: packages not defined ...
+    )
+
 :Exit
 exit /b 0
 

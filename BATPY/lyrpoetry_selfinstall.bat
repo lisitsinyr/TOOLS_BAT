@@ -41,12 +41,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Ñòàðò %BATNAME% ...
+    echo Ñòàðò !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Install locked packages (incl. addons) required by this Poetry installation ...
     set COMMAND=self install
@@ -109,17 +109,17 @@ rem beginfunction
     rem -------------------------------------
     set sync=
     set PN_CAPTION=Synchronize the environment with the locked packages and the specified groups
-    call :Read_P sync %1 || exit /b 1
-    rem echo sync: !sync%
+    call :Read_P sync "" || exit /b 1
+    rem echo sync: !sync!
     if not "!sync!"=="" (
         set OPTION=!OPTION! --sync
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
-    call :Read_P dry-run %1 || exit /b 1
-    rem echo dry-run: !dry-run%
+    call :Read_P dry-run "" || exit /b 1
+    rem echo dry-run: !dry-run!
     if not "!dry-run!"=="" (
-        set OPTION=!OPTION! --dry-run %dry-run%
+        set OPTION=!OPTION! --dry-run
     )
     
     rem -------------------------------------

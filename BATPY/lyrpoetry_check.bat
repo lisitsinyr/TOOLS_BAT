@@ -31,12 +31,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Validates the content of the pyproject.toml file and its consistency with the poetry.lock file ...
     set COMMAND=check
@@ -107,10 +107,11 @@ rem beginfunction
     set lock=
     set PN_CAPTION=Checks that poetry.lock exists for the current version of pyproject.toml
     call :Read_P lock "" || exit /b 1
-    rem echo lock: !lock%
+    rem echo lock: !lock!
     if not "!lock!"=="" (
         set OPTION=!OPTION! --lock
     )
+
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------

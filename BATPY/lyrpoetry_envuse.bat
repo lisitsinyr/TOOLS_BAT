@@ -43,12 +43,12 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     echo Activates or creates a new virtualenv for the current project ...
     set COMMAND=env use
@@ -109,18 +109,19 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set namevenv=
-    set PN_CAPTION=namevenv
-    call :Read_P lock %1 || exit /b 1
-    rem echo namevenv: !namevenv%
-    if not "!namevenv!"=="" (
-        set OPTION=!OPTION! %namevenv%
-    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set python=
+    set PN_CAPTION=The python executable to use
+    call :Read_P python "" || exit /b 1
+    rem echo python: !python!
+    if not "!python!"=="" (
+        set ARGS=!ARGS! !python!
+    )
+
 :Exit
 exit /b 0
 
