@@ -4,32 +4,32 @@ rem lyrpoetry_selfshowplugins.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Shows information about the currently installed plugins.
-
-Usage:
-  self show plugins [options]
-
-Options:
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  The self show plugins command lists all installed Poetry plugins.
-  
-  Plugins can be added and removed using the self add and self remove commands respectively.
-  
-  This command does not list packages that do not provide a Poetry plugin.
-
+rem 
+rem Description:
+rem   Shows information about the currently installed plugins.
+rem 
+rem Usage:
+rem   self show plugins [options]
+rem 
+rem Options:
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   The self show plugins command lists all installed Poetry plugins.
+rem   
+rem   Plugins can be added and removed using the self add and self remove commands respectively.
+rem   
+rem   This command does not list packages that do not provide a Poetry plugin.
+rem 
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   The self show plugins command lists all the currently installed plugins.
@@ -50,19 +50,28 @@ setlocal enabledelayedexpansion
 
     echo Shows information about the currently installed plugins ...
     set COMMAND=self show plugins
-    set APPRUN=poetry -v %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=poetry %*
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

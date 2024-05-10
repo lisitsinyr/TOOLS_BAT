@@ -67,6 +67,7 @@ setlocal enabledelayedexpansion
         set APPRUN=!APP! %*
     )
     echo APPRUN: !APPRUN!
+
     if defined OK (
         !APPRUN!
     )
@@ -84,12 +85,27 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set namepackage=
-    set PN_CAPTION=namepackage
-    call :Read_P namepackage %1 || exit /b 1
-    rem echo namepackage: %namepackage%
-    if not "%namepackage%"=="" (
-        set OPTION=%OPTION% --namepackage %namepackage%
+    set all=
+    set PN_CAPTION=Clear all entries in the cache
+    call :Read_P all "" || exit /b 1
+    rem echo all: %all%
+    if not "%all%"=="" (
+        set OPTION=%OPTION% --all
+    )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    set cache=
+    set PN_CAPTION=The name of the cache to clear
+    call :Read_P cache "" || exit /b 1
+    rem echo cache: %cache%
+    rem Проверка на обязательные аргументы
+    if defined cache (
+        set ARGS=%ARGS% %cache%
+    ) else (
+        echo ERROR: cache not defined ...
+        set OK=
     )
     
 :Exit

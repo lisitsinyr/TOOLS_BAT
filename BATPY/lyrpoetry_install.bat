@@ -2,55 +2,55 @@
 rem -------------------------------------------------------------------
 rem lyrpoetry_install.bat
 rem     Запуск poetry из глобального виртуального пространства
-
-Description:
-  Installs the project dependencies.
-  The install command reads the pyproject.toml file from the current project, resolves the dependencies, and installs them
-
-Usage:
-  install [options]
-
-Options:
-      --without=WITHOUT      The dependency groups to ignore. (multiple values allowed)
-      --with=WITH            The optional dependency groups to include. (multiple values allowed)
-      --only=ONLY            The only dependency groups to include. (multiple values allowed)
-      --no-dev               Do not install the development dependencies. (Deprecated)
-      --sync                 Synchronize the environment with the locked packages and the specified groups.
-      --no-root              Do not install the root package (the current project).
-      --no-directory         Do not install any directory path dependencies; useful to install dependencies without source code, e.g. for caching of Docker layers)
-      --dry-run              Output the operations but do not execute anything (implicitly enables --verbose).
-      --remove-untracked     Removes packages not present in the lock file. (Deprecated)
-  -E, --extras=EXTRAS        Extra sets of dependencies to install. (multiple values allowed)
-      --all-extras           Install all extra dependencies.
-      --only-root            Exclude all dependencies.
-      --compile              Compile Python source files to bytecode. (This option has no effect if modern-installation is disabled because the old installer always compiles.)
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  The install command reads the poetry.lock file from
-  the current directory, processes it, and downloads and installs all the
-  libraries and dependencies outlined in that file. If the file does not
-  exist it will look for pyproject.toml and do the same.
-  
-  poetry install
-  
-  By default, the above command will also install the current project. To install only the
-  dependencies and not including the current project, run the command with the
-  --no-root option like below:
-  
-   poetry install --no-root
-  
-  If you want to use Poetry only for dependency management but not for packaging,
-  you can set the "package-mode" to false in your pyproject.toml file.
+rem 
+rem Description:
+rem   Installs the project dependencies.
+rem   The install command reads the pyproject.toml file from the current project, resolves the dependencies, and installs them
+rem 
+rem Usage:
+rem   install [options]
+rem 
+rem Options:
+rem       --without=WITHOUT      The dependency groups to ignore. (multiple values allowed)
+rem       --with=WITH            The optional dependency groups to include. (multiple values allowed)
+rem       --only=ONLY            The only dependency groups to include. (multiple values allowed)
+rem       --no-dev               Do not install the development dependencies. (Deprecated)
+rem       --sync                 Synchronize the environment with the locked packages and the specified groups.
+rem       --no-root              Do not install the root package (the current project).
+rem       --no-directory         Do not install any directory path dependencies; useful to install dependencies without source code, e.g. for caching of Docker layers)
+rem       --dry-run              Output the operations but do not execute anything (implicitly enables --verbose).
+rem       --remove-untracked     Removes packages not present in the lock file. (Deprecated)
+rem   -E, --extras=EXTRAS        Extra sets of dependencies to install. (multiple values allowed)
+rem       --all-extras           Install all extra dependencies.
+rem       --only-root            Exclude all dependencies.
+rem       --compile              Compile Python source files to bytecode. (This option has no effect if modern-installation is disabled because the old installer always compiles.)
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   The install command reads the poetry.lock file from
+rem   the current directory, processes it, and downloads and installs all the
+rem   libraries and dependencies outlined in that file. If the file does not
+rem   exist it will look for pyproject.toml and do the same.
+rem   
+rem   poetry install
+rem   
+rem   By default, the above command will also install the current project. To install only the
+rem   dependencies and not including the current project, run the command with the
+rem   --no-root option like below:
+rem   
+rem    poetry install --no-root
+rem   
+rem   If you want to use Poetry only for dependency management but not for packaging,
+rem   you can set the "package-mode" to false in your pyproject.toml file.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -67,18 +67,28 @@ setlocal enabledelayedexpansion
 
     echo Installs the project dependencies ...
     set COMMAND=install
-    set APPRUN=poetry -v %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

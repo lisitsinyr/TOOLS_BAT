@@ -4,26 +4,26 @@ rem lyrpoetry_envlist.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Lists all virtualenvs associated with the current project.
-  Listing the environments associated with the projec
-
-Usage:
-  env list [options]
-
-Options:
-      --full-path            Output the full paths of the virtualenvs.
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Description:
+rem   Lists all virtualenvs associated with the current project.
+rem   Listing the environments associated with the projec
+rem 
+rem Usage:
+rem   env list [options]
+rem 
+rem Options:
+rem       --full-path            Output the full paths of the virtualenvs.
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   You can also list all the virtual environments associated with the current project with the env list command:
@@ -46,19 +46,28 @@ setlocal enabledelayedexpansion
 
     echo Lists all virtualenvs associated with the current project ...
     set COMMAND=env list
-    set APPRUN=poetry -v %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=poetry %*
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

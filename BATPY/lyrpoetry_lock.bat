@@ -4,36 +4,36 @@ rem lyrpoetry_lock.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Locks the project dependencies.
-  This command locks (without installing) the dependencies specified in pyproject.toml.
-
-Usage:
-  lock [options]
-
-Options:
-      --no-update            Do not update locked versions, only refresh lock file.
-      --check                Check that the poetry.lock file corresponds to the current version of pyproject.toml. (Deprecated) Use poetry check --lock instead.
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  
-  The lock command reads the pyproject.toml file from the
-  current directory, processes it, and locks the dependencies in the poetry.lock
-  file.
-  
-  poetry lock
-  
+rem 
+rem Description:
+rem   Locks the project dependencies.
+rem   This command locks (without installing) the dependencies specified in pyproject.toml.
+rem 
+rem Usage:
+rem   lock [options]
+rem 
+rem Options:
+rem       --no-update            Do not update locked versions, only refresh lock file.
+rem       --check                Check that the poetry.lock file corresponds to the current version of pyproject.toml. (Deprecated) Use poetry check --lock instead.
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   
+rem   The lock command reads the pyproject.toml file from the
+rem   current directory, processes it, and locks the dependencies in the poetry.lock
+rem   file.
+rem   
+rem   poetry lock
+rem   
 rem -------------------------------------------------------------------
 rem   lock - Locks the project dependencies.
 rem -------------------------------------------------------------------
@@ -56,19 +56,28 @@ setlocal enabledelayedexpansion
 
     echo Locks the project dependencies ...
     set COMMAND=lock
-    set APPRUN=poetry -v %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=poetry %*
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

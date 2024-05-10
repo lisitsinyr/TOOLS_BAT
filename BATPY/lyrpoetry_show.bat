@@ -4,42 +4,42 @@ rem lyrpoetry_show.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Shows information about packages.
-  To list all the available packages, you can use the show command.
-
-Usage:
-  show [options] [--] [<package>]
-
-Arguments:
-  package                    The package to inspect
-
-Options:
-      --without=WITHOUT      The dependency groups to ignore. (multiple values allowed)
-      --with=WITH            The optional dependency groups to include. (multiple values allowed)
-      --only=ONLY            The only dependency groups to include. (multiple values allowed)
-      --no-dev               Do not list the development dependencies. (Deprecated)
-  -t, --tree                 List the dependencies as a tree.
-      --why                  When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
-  -l, --latest               Show the latest version.
-  -o, --outdated             Show the latest version but only for packages that are outdated.
-  -a, --all                  Show all packages (even those not compatible with current system).
-  -T, --top-level            Show only top-level dependencies.
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  The show command displays detailed information about a package, or
-  lists all packages available.
+rem 
+rem Description:
+rem   Shows information about packages.
+rem   To list all the available packages, you can use the show command.
+rem 
+rem Usage:
+rem   show [options] [--] [<package>]
+rem 
+rem Arguments:
+rem   package                    The package to inspect
+rem 
+rem Options:
+rem       --without=WITHOUT      The dependency groups to ignore. (multiple values allowed)
+rem       --with=WITH            The optional dependency groups to include. (multiple values allowed)
+rem       --only=ONLY            The only dependency groups to include. (multiple values allowed)
+rem       --no-dev               Do not list the development dependencies. (Deprecated)
+rem   -t, --tree                 List the dependencies as a tree.
+rem       --why                  When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
+rem   -l, --latest               Show the latest version.
+rem   -o, --outdated             Show the latest version but only for packages that are outdated.
+rem   -a, --all                  Show all packages (even those not compatible with current system).
+rem   -T, --top-level            Show only top-level dependencies.
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   The show command displays detailed information about a package, or
+rem   lists all packages available.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -56,18 +56,28 @@ setlocal enabledelayedexpansion
 
     echo Shows information about packages ...
     set COMMAND=show
-    set APPRUN=poetry -v %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

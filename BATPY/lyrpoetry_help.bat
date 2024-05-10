@@ -4,36 +4,36 @@ rem lyrpoetry_help.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Displays help for a command.
-  The help command displays global help, or help for a specific command.
-
-Usage:
-  help [options] [--] [<command_name>]
-
-Arguments:
-  command_name               The command name [default: "help"]
-
-Options:
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  The help command displays help for a given command:
-  
-    poetry help list
-  
-  To display the list of available commands, please use the list command.
-  
+rem 
+rem Description:
+rem   Displays help for a command.
+rem   The help command displays global help, or help for a specific command.
+rem 
+rem Usage:
+rem   help [options] [--] [<command_name>]
+rem 
+rem Arguments:
+rem   command_name               The command name [default: "help"]
+rem 
+rem Options:
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   The help command displays help for a given command:
+rem   
+rem     poetry help list
+rem   
+rem   To display the list of available commands, please use the list command.
+rem   
 rem -------------------------------------------------------------------
 rem     Usage
 rem     To display global help:
@@ -59,34 +59,28 @@ setlocal enabledelayedexpansion
 
     echo Displays help for a command ...
     set COMMAND=help
-
-    set OPTION=
-    rem Options:
-    rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
-    rem   -q, --quiet                Do not output any message.
-    rem   -V, --version              Display this application version.
-    rem       --ansi                 Force ANSI output.
-    rem       --no-ansi              Disable ANSI output.
-    rem   -n, --no-interaction       Do not ask any interactive question.
-    rem       --no-plugins           Disables plugins.
-    rem       --no-cache             Disables Poetry source caches.
-    rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-    rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-    set OPTION=%OPTION% -v
     
-    set APPRUN=poetry %OPTION% %COMMAND%
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=poetry %*
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

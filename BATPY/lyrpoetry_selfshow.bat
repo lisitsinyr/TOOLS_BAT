@@ -4,43 +4,43 @@ rem lyrpoetry_selfshow.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Show packages from Poetry's runtime environment.
-  The self show command behaves similar to the show command, but working within Poetry’s runtime environment. This lists all packages installed within the Poetry install environment.
-
-Usage:
-  self show [options] [--] [<package>]
-
-Arguments:
-  package                    The package to inspect
-
-Options:
-      --addons               List only add-on packages installed.
-  -t, --tree                 List the dependencies as a tree.
-  -l, --latest               Show the latest version.
-  -o, --outdated             Show the latest version but only for packages that are outdated.
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  The self show command behaves similar to the show command, but
-  working within Poetry's runtime environment. This lists all packages installed within
-  the Poetry install environment.
-  
-  To show only additional packages that have been added via self add and their
-  dependencies use self show --addons.
-  
-  This is managed in the C:\Users\lyr\AppData\Roaming\pypoetry\pyproject.toml file.
-  
+rem 
+rem Description:
+rem   Show packages from Poetry's runtime environment.
+rem   The self show command behaves similar to the show command, but working within Poetry’s runtime environment. This lists all packages installed within the Poetry install environment.
+rem 
+rem Usage:
+rem   self show [options] [--] [<package>]
+rem 
+rem Arguments:
+rem   package                    The package to inspect
+rem 
+rem Options:
+rem       --addons               List only add-on packages installed.
+rem   -t, --tree                 List the dependencies as a tree.
+rem   -l, --latest               Show the latest version.
+rem   -o, --outdated             Show the latest version but only for packages that are outdated.
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   The self show command behaves similar to the show command, but
+rem   working within Poetry's runtime environment. This lists all packages installed within
+rem   the Poetry install environment.
+rem   
+rem   To show only additional packages that have been added via self add and their
+rem   dependencies use self show --addons.
+rem   
+rem   This is managed in the C:\Users\lyr\AppData\Roaming\pypoetry\pyproject.toml file.
+rem   
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   To show only additional packages that have been added via self add and their dependencies use self show --addons.
@@ -61,19 +61,28 @@ setlocal enabledelayedexpansion
 
     echo Show packages from Poetry's runtime environment ...
     set COMMAND=self show
-    set APPRUN=poetry -v %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=poetry %*
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

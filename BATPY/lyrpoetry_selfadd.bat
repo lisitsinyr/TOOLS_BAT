@@ -4,51 +4,51 @@ rem lyrpoetry_selfadd.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Add additional packages to Poetry's runtime environment.
-  The self add command installs Poetry plugins and make them available at runtime. Additionally, it can also be used to upgrade Poetry’s own dependencies or inject additional packages into the runtime environment
-
-Usage:
-  self add [options] [--] <name>...
-
-Arguments:
-  name                       The packages to add.
-
-Options:
-  -e, --editable             Add vcs/path dependencies as editable.
-  -E, --extras=EXTRAS        Extras to activate for the dependency. (multiple values allowed)
-      --source=SOURCE        Name of the source to use to install the package.
-      --allow-prereleases    Accept prereleases.
-      --dry-run              Output the operations but do not execute anything (implicitly enables --verbose).
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  The self add command installs additional packages to Poetry's runtime environment.
-  
-  This is managed in the C:\Users\lyr\AppData\Roaming\pypoetry\pyproject.toml file.
-  
-  If you do not specify a version constraint, poetry will choose a suitable one based on the available package versions.
-  
-  You can specify a package in the following forms:
-    - A single name (requests)
-    - A name and a constraint (requests@^2.23.0)
-    - A git url (git+https://github.com/python-poetry/poetry.git)
-    - A git url with a revision (git+https://github.com/python-poetry/poetry.git#develop)
-    - A git SSH url (git+ssh://github.com/python-poetry/poetry.git)
-    - A git SSH url with a revision (git+ssh://github.com/python-poetry/poetry.git#develop)
-    - A file path (../my-package/my-package.whl)
-    - A directory (../my-package/)
-    - A url (https://example.com/packages/my-package-0.1.0.tar.gz)
+rem 
+rem Description:
+rem   Add additional packages to Poetry's runtime environment.
+rem   The self add command installs Poetry plugins and make them available at runtime. Additionally, it can also be used to upgrade Poetry’s own dependencies or inject additional packages into the runtime environment
+rem 
+rem Usage:
+rem   self add [options] [--] <name>...
+rem 
+rem Arguments:
+rem   name                       The packages to add.
+rem 
+rem Options:
+rem   -e, --editable             Add vcs/path dependencies as editable.
+rem   -E, --extras=EXTRAS        Extras to activate for the dependency. (multiple values allowed)
+rem       --source=SOURCE        Name of the source to use to install the package.
+rem       --allow-prereleases    Accept prereleases.
+rem       --dry-run              Output the operations but do not execute anything (implicitly enables --verbose).
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   The self add command installs additional packages to Poetry's runtime environment.
+rem   
+rem   This is managed in the C:\Users\lyr\AppData\Roaming\pypoetry\pyproject.toml file.
+rem   
+rem   If you do not specify a version constraint, poetry will choose a suitable one based on the available package versions.
+rem   
+rem   You can specify a package in the following forms:
+rem     - A single name (requests)
+rem     - A name and a constraint (requests@^2.23.0)
+rem     - A git url (git+https://github.com/python-poetry/poetry.git)
+rem     - A git url with a revision (git+https://github.com/python-poetry/poetry.git#develop)
+rem     - A git SSH url (git+ssh://github.com/python-poetry/poetry.git)
+rem     - A git SSH url with a revision (git+ssh://github.com/python-poetry/poetry.git#develop)
+rem     - A file path (../my-package/my-package.whl)
+rem     - A directory (../my-package/)
+rem     - A url (https://example.com/packages/my-package-0.1.0.tar.gz)
 rem -------------------------------------------------------------------
 rem   Usage 
 rem   For example, to install the poetry-plugin-export plugin, you can run:
@@ -71,19 +71,28 @@ setlocal enabledelayedexpansion
 
     echo Add additional packages to Poetry's runtime environment ...
     set COMMAND=self add
-    set APPRUN=poetry -v %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
-        rem set APPRUN=poetry %*
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

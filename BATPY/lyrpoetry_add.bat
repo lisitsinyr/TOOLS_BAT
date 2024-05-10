@@ -89,6 +89,7 @@ setlocal enabledelayedexpansion
         set APPRUN=!APP! %*
     )
     echo APPRUN: !APPRUN!
+
     if defined OK (
         !APPRUN!
     )

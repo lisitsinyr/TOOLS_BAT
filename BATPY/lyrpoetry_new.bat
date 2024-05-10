@@ -4,30 +4,30 @@ rem lyrpoetry_new.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Creates a new Python project at <path>.
-
-Usage:
-  new [options] [--] <path>
-
-Arguments:
-  path                       The path to create the project at.
-
-Options:
-      --name=NAME            Set the resulting package name.
-      --src                  Use the src layout for the project.
-      --readme=README        Specify the readme file format. One of md (default) or rst
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Description:
+rem   Creates a new Python project at <path>.
+rem 
+rem Usage:
+rem   new [options] [--] <path>
+rem 
+rem Arguments:
+rem   path                       The path to create the project at.
+rem 
+rem Options:
+rem       --name=NAME            Set the resulting package name.
+rem       --src                  Use the src layout for the project.
+rem       --readme=README        Specify the readme file format. One of md (default) or rst
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -44,19 +44,28 @@ setlocal enabledelayedexpansion
 
     echo Creates a new Python project at ^<path^> ...
     set COMMAND=new
-    set APPRUN=poetry %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
-    rem call :PressAnyKey || exit /b 1
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

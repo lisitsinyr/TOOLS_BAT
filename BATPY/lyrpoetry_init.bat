@@ -4,35 +4,35 @@ rem lyrpoetry_init.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Creates a basic pyproject.toml file in the current directory.
-
-Usage:
-  init [options]
-
-Options:
-      --name=NAME                      Name of the package.
-      --description=DESCRIPTION        Description of the package.
-      --author=AUTHOR                  Author name of the package.
-      --python=PYTHON                  Compatible Python versions.
-      --dependency=DEPENDENCY          Package to require, with an optional version constraint, e.g. requests:^2.10.0 or requests=2.11.1. (multiple values allowed)
-      --dev-dependency=DEV-DEPENDENCY  Package to require for development, with an optional version constraint, e.g. requests:^2.10.0 or requests=2.11.1. (multiple values allowed)
-  -l, --license=LICENSE                License of the package.
-  -h, --help                           Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                          Do not output any message.
-  -V, --version                        Display this application version.
-      --ansi                           Force ANSI output.
-      --no-ansi                        Disable ANSI output.
-  -n, --no-interaction                 Do not ask any interactive question.
-      --no-plugins                     Disables plugins.
-      --no-cache                       Disables Poetry source caches.
-  -C, --directory=DIRECTORY            The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose                 Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  The init command creates a basic pyproject.toml file in the current directory.
-  
+rem 
+rem Description:
+rem   Creates a basic pyproject.toml file in the current directory.
+rem 
+rem Usage:
+rem   init [options]
+rem 
+rem Options:
+rem       --name=NAME                      Name of the package.
+rem       --description=DESCRIPTION        Description of the package.
+rem       --author=AUTHOR                  Author name of the package.
+rem       --python=PYTHON                  Compatible Python versions.
+rem       --dependency=DEPENDENCY          Package to require, with an optional version constraint, e.g. requests:^2.10.0 or requests=2.11.1. (multiple values allowed)
+rem       --dev-dependency=DEV-DEPENDENCY  Package to require for development, with an optional version constraint, e.g. requests:^2.10.0 or requests=2.11.1. (multiple values allowed)
+rem   -l, --license=LICENSE                License of the package.
+rem   -h, --help                           Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                          Do not output any message.
+rem   -V, --version                        Display this application version.
+rem       --ansi                           Force ANSI output.
+rem       --no-ansi                        Disable ANSI output.
+rem   -n, --no-interaction                 Do not ask any interactive question.
+rem       --no-plugins                     Disables plugins.
+rem       --no-cache                       Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY            The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose                 Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   The init command creates a basic pyproject.toml file in the current directory.
+rem   
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -49,18 +49,28 @@ setlocal enabledelayedexpansion
 
     echo Creates a basic pyproject.toml file in the current directory ...
     set COMMAND=init
-    set APPRUN=poetry -vvv %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

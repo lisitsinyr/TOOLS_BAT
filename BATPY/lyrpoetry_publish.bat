@@ -4,44 +4,44 @@ rem lyrpoetry_publishbuild.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Publishes a package to a remote repository.
-  The build command builds the source and wheels archives.
-
-Usage:
-  publish [options]
-
-Options:
-  -r, --repository=REPOSITORY    The repository to publish the package to.
-  -u, --username=USERNAME        The username to access the repository.
-  -p, --password=PASSWORD        The password to access the repository.
-      --cert=CERT                Certificate authority to access the repository.
-      --client-cert=CLIENT-CERT  Client certificate to access the repository.
-      --dist-dir=DIST-DIR        Dist directory where built artifact are stored. Default is `dist`. [default: "dist"]
-      --build                    Build the package before publishing.
-      --dry-run                  Perform all actions except upload the package.
-      --skip-existing            Ignore errors from files already existing in the repository.
-  -h, --help                     Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                    Do not output any message.
-  -V, --version                  Display this application version.
-      --ansi                     Force ANSI output.
-      --no-ansi                  Disable ANSI output.
-  -n, --no-interaction           Do not ask any interactive question.
-      --no-plugins               Disables plugins.
-      --no-cache                 Disables Poetry source caches.
-  -C, --directory=DIRECTORY      The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  The publish command builds and uploads the package to a remote repository.
-  
-  By default, it will upload to PyPI but if you pass the --repository option it will
-  upload to it instead.
-  
-  The --repository option should match the name of a configured repository using
-  the config command.
-  
+rem 
+rem Description:
+rem   Publishes a package to a remote repository.
+rem   The build command builds the source and wheels archives.
+rem 
+rem Usage:
+rem   publish [options]
+rem 
+rem Options:
+rem   -r, --repository=REPOSITORY    The repository to publish the package to.
+rem   -u, --username=USERNAME        The username to access the repository.
+rem   -p, --password=PASSWORD        The password to access the repository.
+rem       --cert=CERT                Certificate authority to access the repository.
+rem       --client-cert=CLIENT-CERT  Client certificate to access the repository.
+rem       --dist-dir=DIST-DIR        Dist directory where built artifact are stored. Default is `dist`. [default: "dist"]
+rem       --build                    Build the package before publishing.
+rem       --dry-run                  Perform all actions except upload the package.
+rem       --skip-existing            Ignore errors from files already existing in the repository.
+rem   -h, --help                     Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                    Do not output any message.
+rem   -V, --version                  Display this application version.
+rem       --ansi                     Force ANSI output.
+rem       --no-ansi                  Disable ANSI output.
+rem   -n, --no-interaction           Do not ask any interactive question.
+rem       --no-plugins               Disables plugins.
+rem       --no-cache                 Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY      The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   The publish command builds and uploads the package to a remote repository.
+rem   
+rem   By default, it will upload to PyPI but if you pass the --repository option it will
+rem   upload to it instead.
+rem   
+rem   The --repository option should match the name of a configured repository using
+rem   the config command.
+rem   
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -58,18 +58,28 @@ setlocal enabledelayedexpansion
 
     echo Publishes a package to a remote repository ...
     set COMMAND=publish
-    set APPRUN=poetry -v %COMMAND%
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0

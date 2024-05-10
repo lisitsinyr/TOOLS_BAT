@@ -40,18 +40,35 @@ setlocal enabledelayedexpansion
 
     echo Validates the content of the pyproject.toml file and its consistency with the poetry.lock file ...
     set COMMAND=check
-    set APPRUN=poetry -v %COMMAND%
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+    
+    rem Проверка существования файла pyproject.toml
+    set tomlFile=pyproject.toml
+    if not exist "!tomlFile!" (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0
@@ -67,11 +84,11 @@ rem beginfunction
     )
 
     set lock=
-    set PN_CAPTION=Verifies that poetry.lock exists for the current pyproject.toml
-    call :Read_P lock %1 || exit /b 1
+    set PN_CAPTION=Checks that poetry.lock exists for the current version of pyproject.toml
+    call :Read_P lock "" || exit /b 1
     rem echo lock: %lock%
     if not "%lock%"=="" (
-        set OPTION=%OPTION% --lock %lock%
+        set OPTION=%OPTION% --lock
     )
 
 :Exit

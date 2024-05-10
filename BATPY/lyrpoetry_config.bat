@@ -4,43 +4,43 @@ rem lyrpoetry_config.bat
 rem -------------------------------------------------------------------
 rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
-
-Description:
-  Manages configuration settings.
-  The config command allows you to edit poetry config settings and repositories.
-
-Usage:
-  config [options] [--] [<key> [<value>...]]
-
-Arguments:
-  key                        Setting key.
-  value                      Setting value.
-
-Options:
-      --list                 List configuration settings.
-      --unset                Unset configuration setting.
-      --local                Set/Get from the project's local configuration.
-  -h, --help                 Display help for the given command. When no command is given display help for the list command.
-  -q, --quiet                Do not output any message.
-  -V, --version              Display this application version.
-      --ansi                 Force ANSI output.
-      --no-ansi              Disable ANSI output.
-  -n, --no-interaction       Do not ask any interactive question.
-      --no-plugins           Disables plugins.
-      --no-cache             Disables Poetry source caches.
-  -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
-  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
-
-Help:
-  This command allows you to edit the poetry config settings and repositories.
-  
-  To add a repository:
-  
-      poetry config repositories.foo https://bar.com/simple/
-  
-  To remove a repository (repo is a short alias for repositories):
-  
-      poetry config --unset repo.foo
+rem 
+rem Description:
+rem   Manages configuration settings.
+rem   The config command allows you to edit poetry config settings and repositories.
+rem 
+rem Usage:
+rem   config [options] [--] [<key> [<value>...]]
+rem 
+rem Arguments:
+rem   key                        Setting key.
+rem   value                      Setting value.
+rem 
+rem Options:
+rem       --list                 List configuration settings.
+rem       --unset                Unset configuration setting.
+rem       --local                Set/Get from the project's local configuration.
+rem   -h, --help                 Display help for the given command. When no command is given display help for the list command.
+rem   -q, --quiet                Do not output any message.
+rem   -V, --version              Display this application version.
+rem       --ansi                 Force ANSI output.
+rem       --no-ansi              Disable ANSI output.
+rem   -n, --no-interaction       Do not ask any interactive question.
+rem       --no-plugins           Disables plugins.
+rem       --no-cache             Disables Poetry source caches.
+rem   -C, --directory=DIRECTORY  The working directory for the Poetry command (defaults to the current working directory).
+rem   -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+rem 
+rem Help:
+rem   This command allows you to edit the poetry config settings and repositories.
+rem   
+rem   To add a repository:
+rem   
+rem       poetry config repositories.foo https://bar.com/simple/
+rem   
+rem   To remove a repository (repo is a short alias for repositories):
+rem   
+rem       poetry config --unset repo.foo
 rem -------------------------------------------------------------------
 rem   Usage
 rem     poetry config [options] [setting-key] [setting-value1] ... [setting-valueN]
@@ -60,18 +60,28 @@ setlocal enabledelayedexpansion
 
     echo Manages configuration settings ...
     set COMMAND=config
-    set APPRUN=poetry -v %COMMAND%
 
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-   
-    if "%P1%"=="" (
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if "!Read_N!"=="" (
         call :MAIN_FUNC
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=poetry %*
+        set APPRUN=!APP! %*
     )
-    echo APPRUN: %APPRUN%
-    %APPRUN%
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
 
 :Exit
 exit /b 0
@@ -85,44 +95,54 @@ rem beginfunction
     if "%DEBUG%"=="1" (
         echo DEBUG: procedure %FUNCNAME% ...
     )
-rem   --unset: Remove the configuration element named by setting-key.
-rem   --list: Show the list of current config variables.
-rem   --local: Set/Get settings that are specific to a project (in the local configuration file poetry.toml).
 
-    set unset=
-    set PN_CAPTION=Remove the configuration element named by setting-key
-    call :Read_P unset %1 || exit /b 1
-    rem echo unset: %unset%
-    if not "%unset%"=="" (
-        set OPTION=%OPTION% --unset
-    )
     set list=
-    set PN_CAPTION=lock
-    call :Read_P list %1 || exit /b 1
+    set PN_CAPTION=List configuration settings
+    call :Read_P list "" || exit /b 1
     rem echo list: %list%
     if not "%list%"=="" (
         set OPTION=%OPTION% --list
     )
+    set unset=
+    set PN_CAPTION=Unset configuration setting
+    call :Read_P unset "" || exit /b 1
+    rem echo unset: %unset%
+    if not "%unset%"=="" (
+        set OPTION=%OPTION% --unset
+    )
     set local=
-    set PN_CAPTION=Set/Get settings that are specific to a project (in the local configuration file poetry.toml)
-    call :Read_P local %1 || exit /b 1
+    set PN_CAPTION=Set/Get from the project's local configuration
+    call :Read_P local "" || exit /b 1
     rem echo local: %local%
     if not "%local%"=="" (
         set OPTION=%OPTION% --local
     )
-    set setting-key=
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
+
+    set key=
     set PN_CAPTION=setting-key
-    call :Read_P setting-key %1 || exit /b 1
-    rem echo setting-key: %setting-key%
-    if not "%setting-key%"=="" (
-        set OPTION=%OPTION% --local %setting-key%
+    call :Read_P key "" || exit /b 1
+    rem echo key: %key%
+    if not "%key%"=="" (
+        set OPTION=%ARGS% %key%
+    ) else (
+        echo ERROR: key not defined ...
+        set OK=yes
     )
-    set setting-value1=
-    set PN_CAPTION=setting-value1
-    call :Read_P setting-value1 %1 || exit /b 1
-    rem echo setting-value1: %setting-value1%
-    if not "%setting-value1%"=="" (
-        set OPTION=%OPTION% --local %setting-value1%
+    
+    set value=
+    set PN_CAPTION=setting-value
+    call :Read_P value %1 || exit /b 1
+    rem echo value: %value%
+    if not "%value%"=="" (
+        set OPTION=%ARGS% %value%
+    ) else (
+        echo ERROR: value not defined ...
+        set OK=yes
     )
 
 :Exit
