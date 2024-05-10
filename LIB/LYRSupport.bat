@@ -158,13 +158,19 @@ rem beginfunction
 
     set P_Name=%1
     echo P_Name: !P_Name!
+    echo 1: %P_Name%
+    echo 2: !%P_Name%!
+    echo 3: %!P_Name!%
+
     set P_Value=%~2
     echo P_Value: !P_Value!
-    rem echo _: !%P_Name%!
 
     set Input=
     if "!P_Value!"=="" (
         if not "!PN_CAPTION!"=="" (
+            rem !PN_CAPTION! - PN_CAPTION
+            rem [!P_Name!]   - имя переменной
+            rem [!%P_Name%!] - значение переменной по умолчанию
             set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
         )
     ) else (
@@ -174,8 +180,8 @@ rem beginfunction
     rem echo Input: !Input!
 
     if "!Input!"=="" (
+        rem [!%P_Name%!] - значение переменной по умолчанию
         set %P_Name%=!%P_Name%!
-        rem set %P_Name%=33333333333333
     ) else (
         set %P_Name%=!Input!
     )

@@ -110,80 +110,86 @@ rem beginfunction
         echo DEBUG: procedure %FUNCNAME% ...
     )
 
-    set group=
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
+    set group=test
     set PN_CAPTION=The group to add the dependency to
-    call :Read_P group test || exit /b 1
+    call :Read_P group "" || exit /b 1
     rem echo group: %group%
     if not "%group%"=="" (
         set OPTION=%OPTION% --group %group%
     )
     set editable=
     set PN_CAPTION=Add vcs/path dependencies as editable
-    call :Read_P editable %1 || exit /b 1
+    call :Read_P editable "" || exit /b 1
     rem echo editable: %editable%
     if not "%editable%"=="" (
         set OPTION=%OPTION% --editable %editable%
     )
     set extras=
     set PN_CAPTION=Extras to activate for the dependency. ^^(multiple values allowed^^)
-    call :Read_P extras %1 || exit /b 1
+    call :Read_P extras "" || exit /b 1
     rem echo extras: %extras%
     if not "%extras%"=="" (
         set OPTION=%OPTION% --extras %extras%
     )
     set optional=
     set PN_CAPTION=Add as an optional dependency
-    call :Read_P optional %1 || exit /b 1
+    call :Read_P optional "" || exit /b 1
     rem echo optional: %optional%
     if not "%optional%"=="" (
         set OPTION=%OPTION% --optional %optional%
     )
     set python=
     set PN_CAPTION=Python version for which the dependency must be installed
-    call :Read_P python %1 || exit /b 1
+    call :Read_P python "" || exit /b 1
     rem echo python: %python%
     if not "%python%"=="" (
         set OPTION=%OPTION% --python %python%
     )
     set platform=
     set PN_CAPTION=Platforms for which the dependency must be installed
-    call :Read_P platform %1 || exit /b 1
+    call :Read_P platform "" || exit /b 1
     rem echo platform: %platform%
     if not "%platform%"=="" (
         set OPTION=%OPTION% --platform %platform%
     )
     set source=
     set PN_CAPTION=Name of the source to use to install the package
-    call :Read_P source %1 || exit /b 1
+    call :Read_P source "" || exit /b 1
     rem echo source: %source%
     if not "%source%"=="" (
         set OPTION=%OPTION% --source %source%
     )
     set allow-prereleases=
     set PN_CAPTION=Accept prereleases
-    call :Read_P allow-prereleases %1 || exit /b 1
+    call :Read_P allow-prereleases "" || exit /b 1
     rem echo allow-prereleases: %allow-prereleases%
     if not "%allow-prereleases%"=="" (
         set OPTION=%OPTION% --allow-prereleases %allow-prereleases%
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything [implicitly enables -verbose]
-    call :Read_P dry-run %1 || exit /b 1
+    call :Read_P dry-run "" || exit /b 1
     rem echo dry-run: %dry-run%
     if not "%dry-run%"=="" (
         set OPTION=%OPTION% --dry-run %dry-run%
     )
     set lock=
     set PN_CAPTION=Do not perform install [only update the lockfile]
-    call :Read_P lock %1 || exit /b 1
+    call :Read_P lock "" || exit /b 1
     rem echo lock: %lock%
     if not "%lock%"=="" (
         set OPTION=%OPTION% --lock %lock%
     )
 
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
     set names=
     set PN_CAPTION=names
-    call :Read_P names %1 || exit /b 1
+    call :Read_P names "" || exit /b 1
     rem echo names: %names%
     if not "%names%"=="" (
         set ARGS=%ARGS% %names%
@@ -199,6 +205,9 @@ rem =================================================
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P_old
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_N
