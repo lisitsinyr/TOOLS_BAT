@@ -123,6 +123,10 @@ rem beginfunction
         set OPTION=!OPTION! --no-update %no-update%
     )
     
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

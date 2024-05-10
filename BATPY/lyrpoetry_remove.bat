@@ -135,6 +135,11 @@ rem beginfunction
     if not "!lock!"=="" (
         set OPTION=!OPTION! --lock %lock%
     )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

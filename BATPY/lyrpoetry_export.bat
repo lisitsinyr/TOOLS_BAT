@@ -104,6 +104,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set next-phase=
     set PN_CAPTION=Increment the phase of the current version
     call :Read_P next-phase %1 || exit /b 1
@@ -126,6 +129,10 @@ rem beginfunction
         set OPTION=!OPTION! --dry-run %dry-run%
     )
 
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

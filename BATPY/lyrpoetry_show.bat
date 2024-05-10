@@ -184,6 +184,10 @@ rem beginfunction
         set OPTION=!OPTION! --top-level %top-level%
     )
 
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

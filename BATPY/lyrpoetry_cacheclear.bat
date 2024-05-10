@@ -103,6 +103,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set all=
     set PN_CAPTION=Clear all entries in the cache
     call :Read_P all "" || exit /b 1
@@ -114,11 +117,11 @@ rem beginfunction
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
+    rem Проверка на обязательные аргументы
     set cache=
     set PN_CAPTION=The name of the cache to clear
     call :Read_P cache "" || exit /b 1
     rem echo cache: !cache!
-    rem Проверка на обязательные аргументы
     if defined cache (
         set ARGS=!ARGS! !cache!
     ) else (

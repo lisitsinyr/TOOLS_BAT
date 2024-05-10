@@ -56,6 +56,8 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
+    call :Delete_tomlFile
+
     rem Количество аргументов
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
@@ -94,6 +96,19 @@ rem beginfunction
 exit /b 0
 
 rem --------------------------------------------------------------------------------
+rem procedure Delete_tomlFile ()
+rem --------------------------------------------------------------------------------
+:Delete_tomlFile
+rem beginfunction
+    set tomlFile=pyproject.toml
+    if exist "!tomlFile!" (
+        echo Удаление файла %tomlFile%
+        del %tomlFile%
+    )
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC
@@ -103,12 +118,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set tomlFile=pyproject.toml
-    if exist "!tomlFile!" (
-        echo Удаление файла %tomlFile%
-        del %tomlFile%
-    )
-
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set name=test
     set PN_CAPTION=Name of the package
     call :Read_P name %1 || exit /b 1
@@ -156,6 +168,11 @@ rem beginfunction
     if not "!dev-dependency!"=="" (
         set OPTION=!OPTION! --dev-dependency %dev-dependency%
     )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

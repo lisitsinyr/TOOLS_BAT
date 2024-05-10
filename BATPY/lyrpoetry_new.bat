@@ -118,6 +118,9 @@ rem beginfunction
         set OPTION=!OPTION! "!folder!"
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set name=test
     set PN_CAPTION=Name of the package
     call :Read_P name || exit /b 1
@@ -141,6 +144,11 @@ rem beginfunction
     if not "!readme!"=="" (
         set OPTION=!OPTION! --readme %readme%
     )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

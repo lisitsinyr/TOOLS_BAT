@@ -112,6 +112,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set repository=
     set PN_CAPTION=The repository to register the package to (default: pypi). Should match a repository name set by the config command
     call :Read_P repository %1 || exit /b 1
@@ -176,6 +179,10 @@ rem beginfunction
         set OPTION=!OPTION! --skip-existing %skip-existing%
     )
 
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

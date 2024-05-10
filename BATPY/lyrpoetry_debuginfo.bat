@@ -91,6 +91,16 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
+
 :Exit
 exit /b 0
 

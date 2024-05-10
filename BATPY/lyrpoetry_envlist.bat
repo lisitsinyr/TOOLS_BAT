@@ -100,6 +100,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set full-path=
     set PN_CAPTION=full-path
     call :Read_P full-path %1 || exit /b 1
@@ -108,6 +111,10 @@ rem beginfunction
         set OPTION=!OPTION! --full-path
     )
 
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

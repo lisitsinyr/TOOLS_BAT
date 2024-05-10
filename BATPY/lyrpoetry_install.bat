@@ -121,6 +121,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set without=
     set PN_CAPTION=without
     call :Read_P without "" || exit /b 1
@@ -212,15 +215,11 @@ rem beginfunction
     if not "!remove-untracked!"=="" (
         set OPTION=!OPTION! --remove-untracked %remove-untracked%
     )
-    
-    
-    set xxxx=
-    set PN_CAPTION=xxxx
-    call :Read_P xxxx "" || exit /b 1
-    rem echo xxxx: !xxxx!
-    if not "!xxxx!"=="" (
-        set OPTION=!OPTION! --xxxx !xxxx!
-    )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 
 :Exit
 exit /b 0

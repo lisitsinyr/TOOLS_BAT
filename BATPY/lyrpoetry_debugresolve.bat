@@ -102,6 +102,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------

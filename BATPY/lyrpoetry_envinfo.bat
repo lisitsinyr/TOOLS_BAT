@@ -100,6 +100,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set pathenv=
     set PN_CAPTION=pathenv
     call :Read_P pathenv %1 || exit /b 1
@@ -114,6 +117,11 @@ rem beginfunction
     if not "!executable!"=="" (
         set OPTION=!OPTION! --executable
     )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
     
 :Exit
 exit /b 0

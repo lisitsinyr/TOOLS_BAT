@@ -118,6 +118,10 @@ rem beginfunction
         set OPTION=!OPTION! --dry-run %dry-run%
     )
 
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

@@ -114,6 +114,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set list=
     set PN_CAPTION=List configuration settings
     call :Read_P list "" || exit /b 1
@@ -140,7 +143,6 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
-
     set key=
     set PN_CAPTION=setting-key
     call :Read_P key "" || exit /b 1

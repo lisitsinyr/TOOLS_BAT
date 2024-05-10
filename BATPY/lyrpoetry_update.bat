@@ -154,6 +154,10 @@ rem beginfunction
         set OPTION=!OPTION! --sync %sync%
     )
 
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

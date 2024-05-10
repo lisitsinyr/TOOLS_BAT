@@ -114,7 +114,6 @@ rem beginfunction
     if not "!sync!"=="" (
         set OPTION=!OPTION! --sync
     )
-
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
     call :Read_P dry-run %1 || exit /b 1
@@ -123,6 +122,10 @@ rem beginfunction
         set OPTION=!OPTION! --dry-run %dry-run%
     )
     
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

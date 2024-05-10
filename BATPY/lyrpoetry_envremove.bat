@@ -108,6 +108,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set namevenv=
     set PN_CAPTION=namevenv
     call :Read_P lock %1 || exit /b 1
@@ -123,6 +126,11 @@ rem beginfunction
     if not "!all!"=="" (
         set OPTION=!OPTION! --all
     )
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 :Exit
 exit /b 0
 

@@ -101,6 +101,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set lock=
     set PN_CAPTION=Checks that poetry.lock exists for the current version of pyproject.toml
     call :Read_P lock "" || exit /b 1
@@ -108,6 +111,10 @@ rem beginfunction
     if not "!lock!"=="" (
         set OPTION=!OPTION! --lock
     )
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 
 :Exit
 exit /b 0
