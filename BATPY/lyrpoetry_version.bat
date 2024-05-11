@@ -111,25 +111,12 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set short=
-    set PN_CAPTION=Output the version number only(y/n)
-    call :Read_F short "" || exit /b 1
-    rem echo short: !short!
-    rem set res=true
-    rem if not "%a%" == "value1" if not "%a%" == "value2" if not "%a%" == "value3" set res=false
-    rem if "%res%"=="true" (
-    rem     echo Условие выполнено
-    rem ) else (
-    rem     echo Условие не выполнено
-    rem )
-
+    set PN_CAPTION=Output the version number only
+    call :Read_F short "yN" || exit /b 1
+    echo short: !short!
     if defined short (
         set OPTION=!OPTION! --short
     )
-
-    rem if not "!short!"=="" (
-    rem     set OPTION=!OPTION! --short
-    rem )
-
 
     set dry-run=
     set PN_CAPTION=Do not update pyproject.toml file
@@ -153,7 +140,7 @@ rem beginfunction
     set version=
     set PN_CAPTION=The version number or the rule to update the version
     call :Read_P version "" || exit /b 1
-    rem echo version: !version!
+    echo version: !version!
     if defined version (
         set ARGS=!ARGS! !version!
     ) else (
