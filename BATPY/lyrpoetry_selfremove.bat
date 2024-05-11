@@ -112,9 +112,9 @@ rem beginfunction
     rem -------------------------------------
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_P dry-run "" || exit /b 1
+    call :Read_F dry-run "" || exit /b 1
     rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
+    if defined dry-run! (
         set OPTION=!OPTION! --dry-run
     )
 
@@ -130,6 +130,7 @@ rem beginfunction
         set ARGS=!ARGS! !packages!
     ) else (
         echo ERROR: packages not defined ...
+        set OK=
     )
     
 :Exit

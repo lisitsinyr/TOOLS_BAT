@@ -115,6 +115,7 @@ rem beginfunction
         set ARGS=!ARGS! !tokens!
     ) else (
         echo ERROR: tokens not defined ...
+        set OK=
     )
     
 :Exit

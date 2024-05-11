@@ -131,37 +131,37 @@ rem beginfunction
     rem -------------------------------------
     set editable=
     set PN_CAPTION=Add vcs/path dependencies as editable
-    call :Read_P editable "" || exit /b 1
+    call :Read_F editable "yN" || exit /b 1
     rem echo editable: !editable!
-    if not "!editable!"=="" (
+    if defined editable (
         set OPTION=!OPTION! --editable
     )
     set extras=
     set PN_CAPTION=Extras to activate for the dependency. ^(multiple values allowed^)
     call :Read_P extras "" || exit /b 1
     rem echo extras: !extras!
-    if not "!extras!"=="" (
+    if defined extras (
         set OPTION=!OPTION! --extras=!extras!
     )
     set source=
     set PN_CAPTION=Name of the source to use to install the package
     call :Read_P source "" || exit /b 1
     rem echo source: !source!
-    if not "!source!"=="" (
+    if defined source (
         set OPTION=!OPTION! --source=!source!
     )
     set allow-prereleases=
     set PN_CAPTION=Accept prereleases
-    call :Read_P allow-prereleases "" || exit /b 1
+    call :Read_F allow-prereleases "yN" || exit /b 1
     rem echo allow-prereleases: !allow-prereleases!
-    if not "!allow-prereleases!"=="" (
+    if defined allow-prereleases (
         set OPTION=!OPTION! --allow-prereleases
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_P dry-run "" || exit /b 1
+    call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
+    if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
 
@@ -177,6 +177,7 @@ rem beginfunction
         set ARGS=!ARGS! !name!
     ) else (
         echo ERROR: name not defined ...
+        set OK=
     )
     
 :Exit

@@ -108,49 +108,49 @@ rem beginfunction
     set PN_CAPTION=The dependency groups to ignore. ^(multiple values allowed^)
     call :Read_P without "" || exit /b 1
     rem echo without: !without!
-    if not "!without!"=="" (
+    if defined without (
         set OPTION=!OPTION! --without=%without%
     )
     set with=
     set PN_CAPTION=The optional dependency groups to include. ^(multiple values allowed^)
     call :Read_P with "" || exit /b 1
     rem echo with: !with!
-    if not "!with!"=="" (
+    if defined with (
         set OPTION=!OPTION! --with=%with%
     )
     set only=
     set PN_CAPTION=The only dependency groups to include. ^(multiple values allowed^)
     call :Read_P only "" || exit /b 1
     rem echo only: !only!
-    if not "!only!"=="" (
+    if defined only (
         set OPTION=!OPTION! --only=%only%
     )
     set no-dev=
     set PN_CAPTION=Do not update the development dependencies. ^(Deprecated^)
-    call :Read_P no-dev "" || exit /b 1
+    call :Read_F no-dev "yN" || exit /b 1
     rem echo no-dev: !no-dev!
-    if not "!no-dev!"=="" (
+    if defined no-dev (
         set OPTION=!OPTION! --no-dev
     )
     set sync=
     set PN_CAPTION=Synchronize the environment with the locked packages and the specified groups
-    call :Read_P sync "" || exit /b 1
+    call :Read_F sync "yN" || exit /b 1
     rem echo sync: !sync!
-    if not "!sync!"=="" (
+    if defined sync (
         set OPTION=!OPTION! --sync
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_P dry-run "" || exit /b 1
+    call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
+    if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
     set lock=
     set PN_CAPTION=Do not perform operations ^(only update the lockfile^)
-    call :Read_P lock "" || exit /b 1
+    call :Read_F lock "yN" || exit /b 1
     rem echo lock: !lock!
-    if not "!lock!"=="" (
+    if defined lock (
         set OPTION=!OPTION! --lock
     )
 
@@ -166,6 +166,7 @@ rem beginfunction
         set ARGS=!ARGS! !packages!
     ) else (
         echo ERROR: packages not defined ...
+        set OK=
     )
 
 :Exit

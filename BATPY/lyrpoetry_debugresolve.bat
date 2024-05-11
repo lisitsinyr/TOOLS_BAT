@@ -56,20 +56,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -122,14 +126,14 @@ rem beginfunction
     )
     set tree=
     set PN_CAPTION=Display the dependency tree
-    call :Read_P tree "" || exit /b 1
+    call :Read_F tree "yN" || exit /b 1
     rem echo tree: !tree!
     if defined tree (
         set OPTION=!OPTION! --tree
     )
     set install=
     set PN_CAPTION=Show what would be installed for the current system
-    call :Read_P install "" || exit /b 1
+    call :Read_F install "yN" || exit /b 1
     rem echo install: !install!
     if defined install (
         set OPTION=!OPTION! --install

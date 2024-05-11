@@ -118,8 +118,11 @@ rem beginfunction
     set PN_CAPTION=The python executable to use
     call :Read_P python "" || exit /b 1
     rem echo python: !python!
-    if not "!python!"=="" (
+    if defined python (
         set ARGS=!ARGS! !python!
+    ) else (
+        echo ERROR: python defined ...
+        set OK=
     )
 
 :Exit

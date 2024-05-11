@@ -55,20 +55,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -114,8 +118,10 @@ rem beginfunction
     set PN_CAPTION=Source^(s^) to show information for. Defaults to showing all sources
     call :Read_P source "" || exit /b 1
     rem echo source: !source!
-    if not "!source!"=="" (
+    if defined source (
         set OPTION=!ARGS! %source%
+    ) else (
+        echo ERROR: source not defined ...
     )
 :Exit
 exit /b 0

@@ -126,7 +126,7 @@ rem beginfunction
         set ARGS=!ARGS! !cache!
     ) else (
         echo ERROR: cache not defined ...
-        set OK=check
+        set OK=
     )
     
 :Exit

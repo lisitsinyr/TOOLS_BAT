@@ -117,14 +117,14 @@ rem beginfunction
     set PN_CAPTION=The dependency groups to ignore. ^(multiple values allowed^)
     call :Read_P without "" || exit /b 1
     rem echo without: !without!
-    if not "!without!"=="" (
+    if defined without (
         set OPTION=!OPTION! --without=!without!
     )
     set with=
     set PN_CAPTION=The optional dependency groups to include. ^(multiple values allowed^)
     call :Read_P with "" || exit /b 1
     rem echo with: !with!
-    if not "!with!"=="" (
+    if defined with (
         set OPTION=!OPTION! --with=!with!
     )
     set only=
@@ -136,51 +136,51 @@ rem beginfunction
     )
     set no-dev=
     set PN_CAPTION=Do not list the development dependencies. ^(Deprecated^)
-    call :Read_P no-dev "" || exit /b 1
+    call :Read_F no-dev "yN" || exit /b 1
     rem echo no-dev: !no-dev!
-    if not "!no-dev!"=="" (
-        set OPTION=!OPTION! --no-dev %no-dev%
+    if defined no-dev (
+        set OPTION=!OPTION! --no-dev
     )
     set tree=
     set PN_CAPTION=List the dependencies as a tree
-    call :Read_P tree "" || exit /b 1
+    call :Read_F tree "yN" || exit /b 1
     rem echo tree: !tree!
-    if not "!tree!"=="" (
+    if defined tree (
         set OPTION=!OPTION! --tree
     )
     set why=
     set PN_CAPTION=When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
-    call :Read_P why "" || exit /b 1
+    call :Read_F why "yN" || exit /b 1
     rem echo why: !why!
-    if not "!why!"=="" (
+    if defined why (
         set OPTION=!OPTION! --why
     )
     set latest=
     set PN_CAPTION=Show the latest version
-    call :Read_P latest "" || exit /b 1
+    call :Read_F latest "yN" || exit /b 1
     rem echo latest: !latest!
-    if not "!latest!"=="" (
+    if defined latest (
         set OPTION=!OPTION! --latest
     )
     set outdated=
     set PN_CAPTION=Show the latest version but only for packages that are outdated
-    call :Read_P outdated "" || exit /b 1
+    call :Read_F outdated "yN" || exit /b 1
     rem echo outdated: !outdated!
-    if not "!outdated!"=="" (
+    if defined outdated (
         set OPTION=!OPTION! --outdated
     )
     set all=
     set PN_CAPTION=Show all packages (even those not compatible with current system)
-    call :Read_P all "" || exit /b 1
+    call :Read_F all "yN" || exit /b 1
     rem echo all: !all!
-    if not "!all!"=="" (
+    if defined all (
         set OPTION=!OPTION! --all
     )
     set top-level=
     set PN_CAPTION=Only show explicitly defined packages
-    call :Read_P top-level "" || exit /b 1
+    call :Read_F top-level "yN" || exit /b 1
     rem echo top-level: !top-level!
-    if not "!top-level!"=="" (
+    if defined top-level (
         set OPTION=!OPTION! --top-level
     )
 
@@ -196,6 +196,7 @@ rem beginfunction
         set ARGS=!ARGS! !packages!
     ) else (
         echo ERROR: packages not defined ...
+        set OK=
     )
     
 :Exit

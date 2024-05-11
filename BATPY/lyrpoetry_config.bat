@@ -119,23 +119,23 @@ rem beginfunction
     rem -------------------------------------
     set list=
     set PN_CAPTION=List configuration settings
-    call :Read_P list "" || exit /b 1
+    call :Read_F list "yN" || exit /b 1
     rem echo list: !list!
-    if not "!list!"=="" (
+    if defined list (
         set OPTION=!OPTION! --list
     )
     set unset=
     set PN_CAPTION=Unset configuration setting
-    call :Read_P unset "" || exit /b 1
+    call :Read_F unset "yN" || exit /b 1
     rem echo unset: !unset!
-    if not "!unset!"=="" (
+    if defined unset (
         set OPTION=!OPTION! --unset
     )
     set local=
     set PN_CAPTION=Set/Get from the project's local configuration
-    call :Read_P local "" || exit /b 1
+    call :Read_F local "yN" || exit /b 1
     rem echo local: !local!
-    if not "!local!"=="" (
+    if defined local (
         set OPTION=!OPTION! --local
     )
 

@@ -111,23 +111,23 @@ rem beginfunction
     rem -------------------------------------
     set default=
     set PN_CAPTION=Set this source as the default (disable PyPI). A default source will also be the fallback source if you add other sources. ^(Deprecated, use --priority^)
-    call :Read_P default "" || exit /b 1
+    call :Read_F default "yN" || exit /b 1
     rem echo default: !default!
-    if not "!default!"=="" (
+    if defined default (
         set OPTION=!OPTION! --default
     )
     set secondary=
     set PN_CAPTION=Set this source as secondary. ^(Deprecated, use --priority^)
-    call :Read_P secondary "" || exit /b 1
+    call :Read_F secondary "yN" || exit /b 1
     rem echo secondary: !secondary!
-    if not "!secondary!"=="" (
+    if defined secondary (
         set OPTION=!OPTION! --secondary
     )
     set priority=
     set PN_CAPTION=Set the priority of this source. One of: default, primary, secondary, supplemental, explicit. Defaults to primary.
     call :Read_P priority "" || exit /b 1
     rem echo priority: !priority!
-    if not "!priority!"=="" (
+    if defined priority (
         set OPTION=!OPTION! --priority=%priority%
     )
 

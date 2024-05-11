@@ -61,20 +61,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -111,19 +115,11 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set namevenv=
-    set PN_CAPTION=namevenv
-    call :Read_P lock %1 || exit /b 1
-    rem echo namevenv: !namevenv%
-    if not "!namevenv!"=="" (
-        set OPTION=!OPTION! !namevenv!
-    )
-
     set all=
-    set PN_CAPTION=all
-    call :Read_P all %1 || exit /b 1
+    set PN_CAPTION=Remove all managed virtual environments associated with the project
+    call :Read_F all "yN" || exit /b 1
     rem echo all: !dall%
-    if not "!all!"=="" (
+    if defined all (
         set OPTION=!OPTION! --all
     )
 
@@ -131,6 +127,14 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set python=
+    set PN_CAPTION=The python executables associated with, or names of the virtual environments which are to be removed
+    call :Read_P python "" || exit /b 1
+    rem echo python: !python!
+    if defined python (
+        set OPTION=!ARGS! !python!
+    )
+
 :Exit
 exit /b 0
 

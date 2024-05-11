@@ -51,23 +51,24 @@ setlocal enabledelayedexpansion
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
-    
-    rem Проверка существования файла pyproject.toml
-    set tomlFile=pyproject.toml
-    if not exist "!tomlFile!" (
-        echo ERROR: Файл !tomlFile! не существует ...
-        set OK=
-    )
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -106,9 +107,9 @@ rem beginfunction
     rem -------------------------------------
     set lock=
     set PN_CAPTION=Checks that poetry.lock exists for the current version of pyproject.toml
-    call :Read_P lock "" || exit /b 1
+    call :Read_M lock "yN" || exit /b 1
     rem echo lock: !lock!
-    if not "!lock!"=="" (
+    if defined lock (
         set OPTION=!OPTION! --lock
     )
 

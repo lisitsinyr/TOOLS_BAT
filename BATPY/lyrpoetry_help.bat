@@ -116,18 +116,21 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set command=
-    set PN_CAPTION=command
-    call :Read_P command "" || exit /b 1
-    rem echo command: !command%
-    if not "!command!"=="" (
-        set OPTION=!OPTION! !command!
-    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set command_name=
+    set PN_CAPTION=command
+    call :Read_P command_name "" || exit /b 1
+    rem echo command_name: !command_name!
+    if not "!command_name!"=="" (
+        set OPTION=!ARGS! !command_name!
+    ) else (
+        echo ERROR: command_name not defined ...
+        set OK=
+    )
 :Exit
 exit /b 0
 

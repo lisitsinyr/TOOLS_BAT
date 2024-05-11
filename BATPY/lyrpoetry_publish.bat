@@ -65,20 +65,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -119,63 +123,63 @@ rem beginfunction
     set PN_CAPTION=The repository to publish the package to
     call :Read_P repository "" || exit /b 1
     rem echo repository: !repository!
-    if not "!repository!"=="" (
+    if defined repository (
         set OPTION=!OPTION! --repository=!repository!
     )
     set username=
     set PN_CAPTION=The username to access the repository
     call :Read_P username "" || exit /b 1
     rem echo username: !username!
-    if not "!username!"=="" (
+    if defined username (
         set OPTION=!OPTION! --username=!username!
     )
     set password=
     set PN_CAPTION=The password to access the repository
     call :Read_P password "" || exit /b 1
     rem echo password: !password!
-    if not "!password!"=="" (
+    if defined password (
         set OPTION=!OPTION! --password=!password!
     )
     set cert=
     set PN_CAPTION=Certificate authority to access the repository
     call :Read_P cert "" || exit /b 1
     rem echo cert: !cert!
-    if not "!cert!"=="" (
+    if defined cert (
         set OPTION=!OPTION! --cert=!cert!
     )
     set client-cert=
     set PN_CAPTION=Client certificate to access the repository
     call :Read_P client-cert "" || exit /b 1
     rem echo client-cert: !client-cert!
-    if not "!client-cert!"=="" (
+    if defined client-cert (
         set OPTION=!OPTION! --client-cert=!client-cert!
     )
     set dist-dir=
     set PN_CAPTION=Dist directory where built artifact are stored. Default is `dist`. [default: "dist"]
     call :Read_P dist-dir "" || exit /b 1
     rem echo dist-dir: !dist-dir!
-    if not "!dist-dir!"=="" (
+    if defined dist-dir (
         set OPTION=!OPTION! --dist-dir=!dist-dir!
     )
     set build=
     set PN_CAPTION=Build the package before publishing
-    call :Read_P build "" || exit /b 1
+    call :Read_F build "yN" || exit /b 1
     rem echo build: !build!
-    if not "!build!"=="" (
+    if defined build (
         set OPTION=!OPTION! --build
     )
     set dry-run=
     set PN_CAPTION=Perform all actions except upload the package
-    call :Read_P dry-run "" || exit /b 1
+    call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
+    if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
     set skip-existing=
     set PN_CAPTION=Ignore errors from files already existing in the repository
-    call :Read_P skip-existing "" || exit /b 1
+    call :Read_F skip-existing "yN" || exit /b 1
     rem echo skip-existing: !skip-existing!
-    if not "!skip-existing!"=="" (
+    if defined skip-existing (
         set OPTION=!OPTION! --skip-existing
     )
 

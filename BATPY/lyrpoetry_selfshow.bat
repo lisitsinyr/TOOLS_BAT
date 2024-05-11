@@ -120,30 +120,30 @@ rem beginfunction
     rem -------------------------------------
     set addons=
     set PN_CAPTION=List only add-on packages installed
-    call :Read_P addons "" || exit /b 1
+    call :Read_F addons "yN" || exit /b 1
     rem echo addons: !addons!
-    if not "!addons!"=="" (
+    if defined addons (
         set OPTION=!OPTION! --addons
     )
     set tree=
     set PN_CAPTION=List the dependencies as a tree
-    call :Read_P tree "" || exit /b 1
+    call :Read_F tree "yN" || exit /b 1
     rem echo tree: !tree!
-    if not "!tree!"=="" (
+    if defined tree (
         set OPTION=!OPTION! --tree
     )
     set latest=
     set PN_CAPTION=Show the latest version
-    call :Read_P latest "" || exit /b 1
+    call :Read_F latest "" || exit /b 1
     rem echo latest: !latest!
-    if not "!latest!"=="" (
+    if defined latest (
         set OPTION=!OPTION! --latest
     )
     set outdated=
     set PN_CAPTION=Show the latest version but only for packages that are outdated
-    call :Read_P outdated "" || exit /b 1
+    call :Read_F outdated "yN" || exit /b 1
     rem echo outdated: !outdated!
-    if not "!outdated!"=="" (
+    if defined outdated (
         set OPTION=!OPTION! --outdated
     )
 
@@ -159,6 +159,7 @@ rem beginfunction
         set ARGS=!ARGS! !packages!
     ) else (
         echo ERROR: packages not defined ...
+        set OK=
     )
     
 :Exit

@@ -74,20 +74,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -128,91 +132,91 @@ rem beginfunction
     set PN_CAPTION=The dependency groups to ignore. ^(multiple values allowed^)
     call :Read_P without "" || exit /b 1
     rem echo without: !without!
-    if not "!without!"=="" (
-        set OPTION=!OPTION! --without !without!
+    if defined without (
+        set OPTION=!OPTION! --without=!without!
     )
     set with=
     set PN_CAPTION=The optional dependency groups to include. ^(multiple values allowed^)
     call :Read_P with "" || exit /b 1
     rem echo with: !with!
-    if not "!with!"=="" (
-        set OPTION=!OPTION! --with !with!
+    if defined with (
+        set OPTION=!OPTION! --with=!with!
     )
     set only=
     set PN_CAPTION=The only dependency groups to include. ^(multiple values allowed^)
     call :Read_P only "" || exit /b 1
     rem echo only: !only!
-    if not "!only!"=="" (
-        set OPTION=!OPTION! --only !only!
+    if defined only (
+        set OPTION=!OPTION! --only=!only!
     )
     set no-dev=
     set PN_CAPTION=Do not install the development dependencies. (Deprecated)
-    call :Read_P no-dev "" || exit /b 1
+    call :Read_F no-dev "yN" || exit /b 1
     rem echo no-dev: !no-dev!
-    if not "!no-dev!"=="" (
+    if defined no-dev (
         set OPTION=!OPTION! --no-dev
     )
     set sync=
     set PN_CAPTION=Synchronize the environment with the locked packages and the specified groups
-    call :Read_P sync "" || exit /b 1
+    call :Read_F sync "yN" || exit /b 1
     rem echo sync: !sync!
-    if not "!sync!"=="" (
+    if defined sync (
         set OPTION=!OPTION! --sync
     )
     set no-root=
     set PN_CAPTION=Do not install the root package (the current project)
-    call :Read_P no-root "" || exit /b 1
+    call :Read_F no-root "yN" || exit /b 1
     rem echo no-root: !no-root!
-    if not "!no-root!"=="" (
+    if defined no-root (
         set OPTION=!OPTION! --no-root
     )
     set no-directory=
     set PN_CAPTION=Do not install any directory path dependencies; useful to install dependencies without source code, e.g. for caching of Docker layers
-    call :Read_P no-directory "" || exit /b 1
+    call :Read_F no-directory "yN" || exit /b 1
     rem echo no-directory: !no-directory!
-    if not "!no-directory!"=="" (
+    if defined no-directory (
         set OPTION=!OPTION! --no-directory
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_P dry-run "" || exit /b 1
+    call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
+    if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
     set remove-untracked=
     set PN_CAPTION=Removes packages not present in the lock file. ^(Deprecated^)
-    call :Read_P remove-untracked "" || exit /b 1
+    call :Read_F remove-untracked "yN" || exit /b 1
     rem echo remove-untracked: !remove-untracked!
-    if not "!remove-untracked!"=="" (
+    if defined remove-untracked (
         set OPTION=!OPTION! --remove-untracked
     )
     set extras=
     set PN_CAPTION=Extra sets of dependencies to install. ^(multiple values allowed^)
     call :Read_P extras "" || exit /b 1
     rem echo extras: !extras!
-    if not "!extras!"=="" (
-        set OPTION=!OPTION! --extras !extras!
+    if defined extras (
+        set OPTION=!OPTION! --extras=!extras!
     )
     set all-extras=
     set PN_CAPTION=Install all extra dependencies
-    call :Read_P all-extras "" || exit /b 1
+    call :Read_F all-extras "yN" || exit /b 1
     rem echo all-extras: !all-extras!
-    if not "!all-extras!"=="" (
+    if defined all-extras (
         set OPTION=!OPTION! --all-extras
     )
     set only-root=
     set PN_CAPTION=Exclude all dependencies
-    call :Read_P only-root "" || exit /b 1
+    call :Read_F only-root "yN" || exit /b 1
     rem echo only-root: !only-root!
-    if not "!only-root!"=="" (
+    if defined only-root (
         set OPTION=!OPTION! --only-root
     )
     set compile=
     set PN_CAPTION=Compile Python source files to bytecode. ^(This option has no effect if modern-installation is disabled because the old installer always compiles.^)
-    call :Read_P compile "" || exit /b 1
+    call :Read_F compile "yN" || exit /b 1
     rem echo compile: !compile!
-    if not "!compile!"=="" (
+    if defined compile (
         set OPTION=!OPTION! --compile
     )
 

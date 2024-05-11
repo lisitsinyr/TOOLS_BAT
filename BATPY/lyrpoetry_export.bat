@@ -57,20 +57,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -107,26 +111,82 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set next-phase=
-    set PN_CAPTION=Increment the phase of the current version
-    call :Read_P next-phase "" || exit /b 1
-    rem echo next-phase: !next-phase!
-    if not "!next-phase!"=="" (
-        set OPTION=!OPTION! --next-phase !next-phase!
+    set format=
+    set PN_CAPTION=Format to export to. Currently, only constraints.txt and requirements.txt are supported. [default: "requirements.txt"]
+    call :Read_P format "" || exit /b 1
+    rem echo format: !format!
+    if not "!format!"=="" (
+        set OPTION=!OPTION! --format=!format!
     )
-    set short=
-    set PN_CAPTION=Output the version number only
-    call :Read_P short "" || exit /b 1
-    rem echo short: !short!
-    if not "!short!"=="" (
-        set OPTION=!OPTION! --short !short!
+    set output=
+    set PN_CAPTION=The name of the output file
+    call :Read_P output "" || exit /b 1
+    rem echo output: !output!
+    if not "!output!"=="" (
+        set OPTION=!OPTION! --output=!output!
     )
-    set dry-run=
-    set PN_CAPTION=Do not update pyproject.toml file
-    call :Read_P dry-run "" || exit /b 1
-    rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
-        set OPTION=!OPTION! --dry-run !dry-run!
+    set without-hashes=
+    set PN_CAPTION=Exclude hashes from the exported file
+    call :Read_F without-hashes "yN" || exit /b 1
+    rem echo without-hashes: !without-hashes!
+    if not "!without-hashes!"=="" (
+        set OPTION=!OPTION! --without-hashes
+    )
+    set without-urls=
+    set PN_CAPTION=Exclude source repository urls from the exported file
+    call :Read_F without-urls "yN" || exit /b 1
+    rem echo without-urls: !without-urls!
+    if not "!without-urls!"=="" (
+        set OPTION=!OPTION! --without-urls
+    )
+    set dev=
+    set PN_CAPTION=Include development dependencies. ^(Deprecated^)
+    call :Read_F dev "yN" || exit /b 1
+    rem echo dev: !dev!
+    if not "!dev!"=="" (
+        set OPTION=!OPTION! --dev
+    )
+    set without=
+    set PN_CAPTION=The dependency groups to ignore. ^(multiple values allowed^)
+    call :Read_P without "" || exit /b 1
+    rem echo without: !without!
+    if not "!without!"=="" (
+        set OPTION=!OPTION! --without=!without!
+    )
+    set with=
+    set PN_CAPTION=The optional dependency groups to include. ^(multiple values allowed^)
+    call :Read_P with "" || exit /b 1
+    rem echo with: !with!
+    if not "!with!"=="" (
+        set OPTION=!OPTION! --with=!with!
+    )
+    set only=
+    set PN_CAPTION=The only dependency groups to include. ^(multiple values allowed^)
+    call :Read_P only "" || exit /b 1
+    rem echo only: !only!
+    if not "!only!"=="" (
+        set OPTION=!OPTION! --only=!only!
+    )
+    set extras=
+    set PN_CAPTION=Extra sets of dependencies to include. ^(multiple values allowed^)
+    call :Read_P extras "" || exit /b 1
+    rem echo extras: !extras!
+    if not "!extras!"=="" (
+        set OPTION=!OPTION! --extras=!extras!
+    )
+    set all-extras=
+    set PN_CAPTION=Include all sets of extra dependencies
+    call :Read_F all-extras "yN" || exit /b 1
+    rem echo all-extras: !all-extras!
+    if not "!all-extras!"=="" (
+        set OPTION=!OPTION! --all-extras
+    )
+    set with-credentials=
+    set PN_CAPTION=Include credentials for extra indices
+    call :Read_F with-credentials "yN" || exit /b 1
+    rem echo with-credentials: !with-credentials!
+    if not "!with-credentials!"=="" (
+        set OPTION=!OPTION! --with-credentials
     )
 
     rem -------------------------------------

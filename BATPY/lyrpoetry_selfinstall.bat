@@ -109,16 +109,16 @@ rem beginfunction
     rem -------------------------------------
     set sync=
     set PN_CAPTION=Synchronize the environment with the locked packages and the specified groups
-    call :Read_P sync "" || exit /b 1
+    call :Read_F sync "yN" || exit /b 1
     rem echo sync: !sync!
-    if not "!sync!"=="" (
+    if defined sync (
         set OPTION=!OPTION! --sync
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything (implicitly enables –verbose)
-    call :Read_P dry-run "" || exit /b 1
+    call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
+    if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
     

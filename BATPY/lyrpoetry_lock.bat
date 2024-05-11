@@ -63,20 +63,22 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
-
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -115,16 +117,16 @@ rem beginfunction
     rem -------------------------------------
     set no-update=
     set PN_CAPTION=Do not update locked versions, only refresh lock file
-    call :Read_P no-update "" || exit /b 1
+    call :Read_F no-update "yN" || exit /b 1
     rem echo no-update: !no-update!
-    if not "!no-update!"=="" (
+    if defined no-update (
         set OPTION=!OPTION! --no-update
     )
     set check=
     set PN_CAPTION=Check that the poetry.lock file corresponds to the current version of pyproject.toml. ^(Deprecated^) Use poetry check --lock instead.
-    call :Read_P check "" || exit /b 1
+    call :Read_F check "yN" || exit /b 1
     rem echo check: !check!
-    if not "!check!"=="" (
+    if defined check (
         set OPTION=!OPTION! --check
     )
     

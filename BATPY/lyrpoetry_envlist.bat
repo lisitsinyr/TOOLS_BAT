@@ -53,20 +53,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -105,9 +109,9 @@ rem beginfunction
     rem -------------------------------------
     set full-path=
     set PN_CAPTION=Output the full paths of the virtualenvs
-    call :Read_P full-path %1 || exit /b 1
+    call :Read_F full-path "yN" || exit /b 1
     rem echo full-path: !full-path!
-    if not "!full-path!"=="" (
+    if defined full-path (
         set OPTION=!OPTION! --full-path
     )
 

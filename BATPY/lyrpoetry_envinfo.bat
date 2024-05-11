@@ -53,20 +53,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -105,16 +109,16 @@ rem beginfunction
     rem -------------------------------------
     set pathenv=
     set PN_CAPTION=Only display the environment's path
-    call :Read_P pathenv %1 || exit /b 1
+    call :Read_F pathenv "yN" || exit /b 1
     rem echo pathenv: !pathenv!
-    if not "!pathenv!"=="" (
+    if defined pathenv (
         set OPTION=!OPTION! --path
     )
     set executable=
     set PN_CAPTION=Only display the environment's python executable path
-    call :Read_P executable %1 || exit /b 1
+    call :Read_F executable "yN" || exit /b 1
     rem echo executable: !executable!
-    if not "!executable!"=="" (
+    if defined executable (
         set OPTION=!OPTION! --executable
     )
 

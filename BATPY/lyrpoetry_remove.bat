@@ -57,20 +57,24 @@ setlocal enabledelayedexpansion
     set APPRUN=
     set OK=yes
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -111,28 +115,28 @@ rem beginfunction
     set PN_CAPTION=The group to remove the dependency from
     call :Read_P group "" || exit /b 1
     rem echo group: !group!
-    if not "!group!"=="" (
+    if defined group (
         set OPTION=!OPTION! --group=!group!
     )
     set dev=
     set PN_CAPTION=Remove a package from the development dependencies. ^(Deprecated^) Use --group=dev instead
-    call :Read_P dev "" || exit /b 1
+    call :Read_F dev "yN" || exit /b 1
     rem echo dev: !dev!
-    if not "!dev!"=="" (
+    if defined dev (
         set OPTION=!OPTION! --dev
     )
     set dry-run=
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_P dry-run "" || exit /b 1
+    call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
+    if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
     set lock=
     set PN_CAPTION=Do not perform operations (only update the lockfile)
-    call :Read_P lock "" || exit /b 1
+    call :Read_F lock "yN" || exit /b 1
     rem echo lock: !lock!
-    if not "!lock!"=="" (
+    if defined lock (
         set OPTION=!OPTION! --lock
     )
 
