@@ -64,16 +64,24 @@ setlocal enabledelayedexpansion
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    if "!Read_N!"=="" (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
+    call :Check_tomlFile
 
     if defined OK (
-        !APPRUN!
+        rem Количество аргументов
+        call :Read_N %* || exit /b 1
+        rem echo Read_N: !Read_N!
+
+        if "!Read_N!"=="" (
+            call :MAIN_FUNC
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
 :Exit
@@ -117,19 +125,18 @@ rem beginfunction
     if defined short (
         set OPTION=!OPTION! --short
     )
-
     set dry-run=
     set PN_CAPTION=Do not update pyproject.toml file
-    call :Read_P dry-run "" || exit /b 1
+    call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
-    if not "!dry-run!"=="" (
+    if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
     set next-phase=
     set PN_CAPTION=Increment the phase of the current version
-    call :Read_P next-phase "" || exit /b 1
+    call :Read_F next-phase "yN" || exit /b 1
     rem echo next-phase: !next-phase!
-    if not "!next-phase!"=="" (
+    if defined next-phase (
         set OPTION=!OPTION! --next-phase
     )
 

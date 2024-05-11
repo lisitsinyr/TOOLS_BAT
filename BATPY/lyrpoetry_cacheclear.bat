@@ -108,9 +108,9 @@ rem beginfunction
     rem -------------------------------------
     set all=
     set PN_CAPTION=Clear all entries in the cache
-    call :Read_P all "" || exit /b 1
+    call :Read_F all "yN" || exit /b 1
     rem echo all: !all!
-    if not "!all!"=="" (
+    if defined all (
         set OPTION=!OPTION! --all
     )
 
@@ -126,7 +126,7 @@ rem beginfunction
         set ARGS=!ARGS! !cache!
     ) else (
         echo ERROR: cache not defined ...
-        set OK=
+        set OK=check
     )
     
 :Exit
@@ -139,6 +139,9 @@ rem =================================================
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_N

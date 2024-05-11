@@ -185,7 +185,8 @@ rem beginfunction
     set %P_Name%=!%P_Name%!
     if not "!P_List!"=="" (
         set message=!PN_CAPTION!
-        choice /Cs /C !P_List! /D N /T 10 /M "!message!"
+        rem choice /Cs /C !P_List! /D N /T 10 /M "!message!"
+        choice /C !P_List! /D N /T 10 /M "!message!"
         if !ERRORLEVEL!==1 (
             set %P_Name%=!ERRORLEVEL!
         ) else (

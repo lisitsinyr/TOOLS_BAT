@@ -67,6 +67,7 @@ setlocal enabledelayedexpansion
             !APPRUN!
         )
     )
+
 :Exit
 exit /b 0
 
@@ -105,14 +106,14 @@ rem beginfunction
     set PN_CAPTION=Limit the format to either sdist or wheel
     call :Read_P format %1 || exit /b 1
     rem echo format: !format!
-    if not "!format!"=="" (
+    if defined format (
         set OPTION=!OPTION! --format !format!
     )
     set output=
     set PN_CAPTION=Set output directory for build artifacts. Default is `dist`. [default: "dist"]
     call :Read_P output %1 || exit /b 1
     rem echo output: !output!
-    if not "!output!"=="" (
+    if defined output (
         set OPTION=!OPTION! --output !output!
     )
 
@@ -131,6 +132,9 @@ rem =================================================
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_N
