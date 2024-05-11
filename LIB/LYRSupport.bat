@@ -95,6 +95,9 @@ rem beginfunction
     set Input=
     if "!P_Value!"=="" (
         if not "!PN_CAPTION!"=="" (
+            rem !PN_CAPTION! - PN_CAPTION
+            rem [!P_Name!]   - имя переменной
+            rem [!%P_Name%!] - значение переменной по умолчанию
             set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
         )
     ) else (
@@ -103,7 +106,7 @@ rem beginfunction
     )
     rem echo Input: !Input!
 
-    if "%Input%"=="" (
+    if "!Input!"=="" (
         rem [!%P_Name%!] - значение переменной по умолчанию
         set %P_Name%=!%P_Name%!
     ) else (
@@ -154,6 +157,38 @@ rem beginfunction
         set %P_Name%=!%P_Name%!
     ) else (
         set %P_Name%=!Input!
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure Read_F ()
+rem --------------------------------------------------------------------------------
+:Read_F
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set P_Name=%1
+    rem !P_Name! имя переменной
+    rem echo имя переменной: !P_Name!
+    rem !%P_Name%! значение переменной по умолчанию
+    rem echo значение переменной по умолчанию: !%P_Name%!
+
+    rem список создаваемых вариантов
+    set P_List=%~2
+    rem echo P_List: !P_List!
+
+    set Input=
+    if not "!P_List!"=="" (
+        set message=!PN_CAPTION!
+        choice /Cs /C P_List /D N /T 10 /M "!message!"
+    ) else (
+        set %P_Name%=!%P_Name%!
+        exit /b 0
     )
 
     exit /b 0
