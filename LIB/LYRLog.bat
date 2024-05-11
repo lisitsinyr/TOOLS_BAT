@@ -279,15 +279,15 @@ rem beginfunction
         if exist "!LFileName!" (
             del "!LFileName!"
         )
-        set touchRUN=touch -f "%LFileName%"
+        set touchRUN=touch -f "!LFileName!"
         set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
-        echo %touchRUN%
+        echo !touchRUN!
         %touchRUN%
     ) else (
         if not exist "!LFileName!" (
-            set touchRUN=touch -f "%LFileName%"
+            set touchRUN=touch -f "!LFileName!"
             set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
-            echo %touchRUN%
+            echo !touchRUN!
             %touchRUN%
         )
     )
