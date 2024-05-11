@@ -108,7 +108,7 @@ rem beginfunction
     rem  -------------------------------------------------------------------
     rem  DEBUG 1-включить DEBUG "" -выключить DEBUG
     set DEBUG=%1
-    rem echo DEBUG: !DEBUG!
+    echo DEBUG: !DEBUG!
 
     set FUNCNAME=%0
     if defined DEBUG (
