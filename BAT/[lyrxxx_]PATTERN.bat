@@ -13,10 +13,6 @@ rem ----------------------------------------------------------------------------
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
-    rem  -------------------------------------------------------------------
-    rem  DEBUG 1-включить DEBUG 0-выключить DEBUG
-    set DEBUG=%2
-    rem echo DEBUG: !DEBUG!
     set DEBUG=
 
     call :MAIN_INIT %0 0 || exit /b 1

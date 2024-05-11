@@ -105,11 +105,6 @@ rem procedure __SET_VAR_DEFAULT (DEBUG)
 rem --------------------------------------------------------------------------------
 :__SET_VAR_DEFAULT
 rem beginfunction
-    rem  -------------------------------------------------------------------
-    rem  DEBUG 1-включить DEBUG "" -выключить DEBUG
-    set DEBUG=%1
-    echo DEBUG: !DEBUG!
-
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
