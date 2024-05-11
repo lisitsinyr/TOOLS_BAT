@@ -280,17 +280,17 @@ rem beginfunction
             del "!LFileName!"
         )
         set touchRUN=touch -f "!LFileName!"
-        set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
+        set touchRUN=D:\TOOLS\EXE\touch.exe "%LFileName%"
         echo !touchRUN!
-        rem !touchRUN!
-        D:\TOOLS\EXE\touch.exe "!LFileName!"
+        %touchRUN%
+        rem D:\TOOLS\EXE\touch.exe "!LFileName!"
     ) else (
         if not exist "!LFileName!" (
             set touchRUN=touch -f "!LFileName!"
-            set touchRUN="D:\TOOLS\EXE\touch.exe" "!LFileName!"
+            set touchRUN=D:\TOOLS\EXE\touch.exe "%LFileName%"
             echo !touchRUN!
-            rem !touchRUN!
-            D:\TOOLS\EXE\touch.exe "!LFileName!"
+            %touchRUN%
+            rem D:\TOOLS\EXE\touch.exe "!LFileName!"
         )
     )
     rem -------------------------------------------------------------------
