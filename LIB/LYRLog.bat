@@ -279,10 +279,12 @@ rem beginfunction
         if exist "!LFileName!" (
             del "!LFileName!"
         )
-        touch -f "!LFileName!"
+        rem touch -f "!LFileName!"
+        D:\TOOLS\EXE\touch.exe "!LFileName!"
     ) else (
         if not exist "!LFileName!" (
-            touch -f "!LFileName!"
+            rem touch -f "!LFileName!"
+            D:\TOOLS\EXE\touch.exe "!LFileName!"
         )
     )
     rem -------------------------------------------------------------------
