@@ -280,10 +280,12 @@ rem beginfunction
             del "!LFileName!"
         )
         rem touch -f "!LFileName!"
+        echo  D:\TOOLS\EXE\touch.exe "!LFileName!"
         D:\TOOLS\EXE\touch.exe "!LFileName!"
     ) else (
         if not exist "!LFileName!" (
             rem touch -f "!LFileName!"
+            echo  D:\TOOLS\EXE\touch.exe "!LFileName!"
             D:\TOOLS\EXE\touch.exe "!LFileName!"
         )
     )
