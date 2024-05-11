@@ -182,13 +182,15 @@ rem beginfunction
     set P_List=%~2
     rem echo P_List: !P_List!
 
-    set Input=
+    set %P_Name%=!%P_Name%!
     if not "!P_List!"=="" (
         set message=!PN_CAPTION!
         choice /Cs /C P_List /D N /T 10 /M "!message!"
-    ) else (
-        set %P_Name%=!%P_Name%!
-        exit /b 0
+        if !ERRORLEVEL!==1 (
+            set %P_Name%=!ERRORLEVEL!
+        ) else (
+            set %P_Name%=
+        )
     )
 
     exit /b 0
