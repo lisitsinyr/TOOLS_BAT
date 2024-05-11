@@ -10,8 +10,6 @@ rem     :LYRSupport
 rem -------------------------------------------------------------------
 
 :begin
-    set PN_CAPTION=
-
 rem Выход из сценария. Дальше - только функции.
 :Exit
 exit /b 0
@@ -26,8 +24,8 @@ rem ----------------------------------------------------------------------------
 :LYRSupport
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     exit /b 0
@@ -39,8 +37,8 @@ rem ----------------------------------------------------------------------------
 :PressAnyKey
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     rem echo "Press any key to continue" && pause
@@ -57,8 +55,8 @@ rem ----------------------------------------------------------------------------
 :Pause
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     rem echo Pause: %1
@@ -78,8 +76,8 @@ rem ----------------------------------------------------------------------------
 :Check_P
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set P_Name=%1
@@ -121,7 +119,7 @@ rem ----------------------------------------------------------------------------
 :Read_P
 rem beginfunction
     set FUNCNAME=%0
-    if "!DEBUG!"=="1" (
+    if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
@@ -167,8 +165,8 @@ rem ----------------------------------------------------------------------------
 :Read_N
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     for %%a in (%*) do set /a Read_N+=1

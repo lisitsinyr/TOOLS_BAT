@@ -8,19 +8,19 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
 
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
-    rem set PN_CAPTION=Ввод значения
+    set PN_CAPTION=Ввод значения P1
     set P1=P1_default
     set P1=
     call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
+    rem echo P1: !P1!
 
     call :MAIN_FUNC
 
@@ -33,8 +33,8 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     mkdir %date:~6,4%%P1%%date:~3,2%%P1%%date:~0,2%

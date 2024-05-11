@@ -8,7 +8,7 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     rem windiff.exe %1 %2
     rem WinMergeU.exe %1 %2

@@ -8,13 +8,13 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
 
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
     rem set PN_CAPTION=Ввод значения
     set P1=P1_default
@@ -22,9 +22,9 @@ setlocal enabledelayedexpansion
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: %P1%    
 
-    if "%P1%"=="" (
+    if "!P1!"=="" (
         echo ERROR: Параметр P1 не задан...
-        echo Использование: %BATNAME% архив [файлы]
+        echo Использование: !BATNAME! архив [файлы]
     ) else (
         call :MAIN_FUNC
     )
@@ -38,39 +38,39 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :ExtractFileName "%P1%" || exit /b 1
-    rem echo ExtractFileName: %ExtractFileName%
+    call :ExtractFileName "!P1!" || exit /b 1
+    rem echo ExtractFileName: !ExtractFileName!
 
-    call :ExtractFileNameWithoutExt "%P1%" || exit /b 1
-    rem echo ExtractFileNameWithoutExt: %ExtractFileNameWithoutExt%
+    call :ExtractFileNameWithoutExt "!P1!" || exit /b 1
+    rem echo ExtractFileNameWithoutExt: !ExtractFileNameWithoutExt!
 
-    call :FileAttr "%P1%" || exit /b 1
-    rem echo FileAttr: %FileAttr%
+    call :FileAttr "!P1!" || exit /b 1
+    rem echo FileAttr: !FileAttr!
     
-    call :FullFileName "%P1%" || exit /b 1
-    rem echo FullFileName: %FullFileName%
+    call :FullFileName "!P1!" || exit /b 1
+    rem echo FullFileName: !FullFileName!
 
-    if "%FOLDER%"=="D" (
-        set RARCMD=rar a -r "%ExtractFileName%.rar" "%ExtractFileName%"
+    if "!FOLDER!"=="D" (
+        set RARCMD=rar a -r "!ExtractFileName!.rar" "!ExtractFileName!"
     )
-    if "%FOLDER%"=="F" (
-        set RARCMD=rar a "%ExtractFileNameWithoutExt%.rar" "%P1%"
+    if "!FOLDER!"=="F" (
+        set RARCMD=rar a "!ExtractFileNameWithoutExt!.rar" "!P1!"
     )
-    if "%FOLDER%"=="" (
+    if "!FOLDER!"=="" (
         set PN_CAPTION=Файлы
         set P2=*.*
         call :Check_P P2 %2 || exit /b 1
-        rem echo P2: %P2%    
+        rem echo P2: !P2!    
 
-        set RARCMD=rar a -r "%P1%.rar" "%P2%"
+        set RARCMD=rar a -r "!P1!.rar" "!P2!"
     )
-    echo RARCMD: %RARCMD%
+    echo RARCMD: !RARCMD!
 
-    %RARCMD%
+    !RARCMD!
 
     exit /b 0
 rem endfunction

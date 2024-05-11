@@ -8,29 +8,31 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт %BATNAME% ...
+    echo Старт !BATNAME! ...
+    
+    set DEBUG=
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    set LIB_BAT=%SCRIPTS_DIR%\LIB
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
 
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: %CurrentDir%
+    rem  echo CurrentDir: !CurrentDir!
 
-    rem set PN_CAPTION=Ввод значения
+    set PN_CAPTION=Ввод значения P1
     set P1=P1_default
     set P1=
     call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
+    rem echo P1: !P1!
 
-    rem set PN_CAPTION=Ввод значения
+    set PN_CAPTION=Ввод значения P2
     set P2=P2_default
     set P2=
     call :Check_P P2 %2 || exit /b 1
-    rem echo P2: %P2%    
+    rem echo P2: !P2!
 
-    if "%P1%"=="" (
+    if "!P1!"=="" (
         echo ERROR: Параметр P1 не задан...
-        echo Использование: %BATNAME% P1 [P2] [...]
+        echo Использование: !BATNAME! P1 [P2] [...]
     ) else (
         call :MAIN_FUNC
     )
@@ -44,8 +46,8 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     exit /b 0

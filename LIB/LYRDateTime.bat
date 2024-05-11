@@ -26,8 +26,8 @@ rem ----------------------------------------------------------------------------
 :LYRDateTime
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     exit /b 0
@@ -39,12 +39,12 @@ rem ----------------------------------------------------------------------------
 :YYYYMMDDHHMMSS
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set YYYYMMDDHHMMSS=YYYYMMDDHHMMSS
-    echo %YYYYMMDDHHMMSS%
+    echo !YYYYMMDDHHMMSS!
 
     exit /b 0
 rem endfunction
@@ -55,12 +55,12 @@ rem ----------------------------------------------------------------------------
 :DateTime
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set DateTime=DateTime
-    echo %DateTime%
+    echo !DateTime!
 
     exit /b 0
 rem endfunction

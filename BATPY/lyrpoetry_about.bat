@@ -33,7 +33,7 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
-    set DEBUG=yes
+    set DEBUG=
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
@@ -77,6 +77,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     rem Проверка существования файла pyproject.toml
     set tomlFile=pyproject.toml
     if not exist "!tomlFile!" (

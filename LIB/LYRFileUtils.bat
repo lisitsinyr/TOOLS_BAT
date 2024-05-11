@@ -82,8 +82,8 @@ rem ----------------------------------------------------------------------------
 :LYRFileUtils
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     exit /b 0
@@ -95,8 +95,8 @@ rem ----------------------------------------------------------------------------
 :ExtractFileDir
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set ExtractFileDir=%~d1%~p1
@@ -110,8 +110,8 @@ rem ----------------------------------------------------------------------------
 :FullFileName
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set FullFileName=%~f1
@@ -125,8 +125,8 @@ rem ----------------------------------------------------------------------------
 :ExtractFileName
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     rem echo _1: %1
@@ -142,8 +142,8 @@ rem ----------------------------------------------------------------------------
 :ExtractFileNameWithoutExt
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set ExtractFileNameWithoutExt=%~n1
@@ -157,8 +157,8 @@ rem ----------------------------------------------------------------------------
 :ExtractFileExt
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set ExtractFileExt=%~x1
@@ -172,25 +172,25 @@ rem ----------------------------------------------------------------------------
 :FileAttr
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     rem echo _1: %~1
 
     set FileAttr=%~a1
-    rem echo FileAttr: %FileAttr%
+    rem echo FileAttr: !FileAttr!
 
-    if "%FileAttr%"=="" (
+    if "!FileAttr!"=="" (
         set FOLDER=
     ) else (
-        if /i "%FileAttr:~0,1%"=="d" (
-           set FOLDER=D
+        if /i "!FileAttr:~0,1!"=="d" (
+            set FOLDER=D
         ) else (
-           set FOLDER=F
+            set FOLDER=F
         )
     )
-    rem echo FOLDER: %FOLDER%
+    rem echo FOLDER: !FOLDER!
 
     exit /b 0
 rem endfunction
@@ -201,8 +201,8 @@ rem ----------------------------------------------------------------------------
 :CurrentDir
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     set CurrentDir=%cd%

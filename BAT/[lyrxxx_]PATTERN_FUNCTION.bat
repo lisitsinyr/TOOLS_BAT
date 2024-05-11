@@ -25,9 +25,9 @@ rem procedure FUNC_01 ()
 rem --------------------------------------------------------------------------------
 :FUNC_01
 rem beginfunction
-    set FUNCNAME=:FUNC_01
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     exit /b 0
@@ -39,8 +39,8 @@ rem ----------------------------------------------------------------------------
 :read_choice
 rem beginfunction
     set FUNCNAME=%0
-    if "%DEBUG%"=="1" (
-        echo DEBUG: procedure %FUNCNAME% ...
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
     echo Available commands ^(экранирование^):
@@ -57,38 +57,38 @@ rem beginfunction
     echo 99.         Quit
 
     set /p CHOICE=PN_CAPTION[99][99]:
-    echo %CHOICE%
-    if "%CHOICE%"=="01" (
+    echo !CHOICE!
+    if "!CHOICE!"=="01" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="02" (
+    if "!CHOICE!"=="02" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="03" (
+    if "!CHOICE!"=="03" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="04" (
+    if "!CHOICE!"=="04" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="05" (
+    if "!CHOICE!"=="05" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="06" (
+    if "!CHOICE!"=="06" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="07" (
+    if "!CHOICE!"=="07" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="08" (
+    if "!CHOICE!"=="08" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="09" (
+    if "!CHOICE!"=="09" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="10" (
+    if "!CHOICE!"=="10" (
         set COMMAND=
     ) else (
-    if "%CHOICE%"=="99" (
+    if "!CHOICE!"=="99" (
         set COMMAND=
     ) else (
         echo ERROR: Параметр CHOICE не реализован...
@@ -96,7 +96,7 @@ rem beginfunction
     )
     )))))))))))
 
-    set read_choice=%CHOICE%
+    set read_choice=!CHOICE!
 
     exit /b 0
 rem endfunction
