@@ -63,7 +63,7 @@ setlocal enabledelayedexpansion
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    if "!Read_N!"=="" (
+    if defined Read_N (
         call :MAIN_FUNC
         set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
