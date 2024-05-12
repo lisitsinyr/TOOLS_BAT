@@ -7,6 +7,12 @@ chcp 1251>NUL
 rem -------------------------------------------------------------------
 rem ФУНКЦИИ
 rem     :LYRSupport
+rem     :PressAnyKey
+rem     :Pause
+rem     :Check_P
+rem     :Read_P
+rem     :Read_F
+rem     :Read_N
 rem -------------------------------------------------------------------
 
 :begin

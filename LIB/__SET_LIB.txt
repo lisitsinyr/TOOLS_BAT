@@ -1,8 +1,34 @@
 ﻿01.НАЗВАНИЕ
-    ***
+    __SET_LIB.bat
 
 02.СИНТАКСИС
-    *** [параметры] ***
+rem ФУНКЦИИ
+rem     :__SET_LIB
+rem     :__SET_VAR_SCRIPT
+rem     :__SET_VAR_DEFAULT
+rem     :__SET_VAR_PROJECTS
+rem     :__SET_CHECK_REPO
+rem     :__SET_LOG
+rem     :__SET_KIX
+
+:__SET_VAR_SCRIPT
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+:__SET_VAR_DEFAULT
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+:__SET_VAR_PROJECTS
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+:__SET_CHECK_REPO
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+:__SET_LOG
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+:__SET_KIX
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
 
 03.ОПИСАНИЕ
     ***

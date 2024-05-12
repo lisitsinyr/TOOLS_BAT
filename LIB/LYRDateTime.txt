@@ -1,8 +1,18 @@
 ﻿01.НАЗВАНИЕ
-    ***
+    LYRDateTime.bat
 
 02.СИНТАКСИС
-    *** [параметры] ***
+rem ФУНКЦИИ
+rem     :LYRDateTime
+rem     :YYYYMMDDHHMMSS
+rem     :DateTime
+
+:YYYYMMDDHHMMSS
+%LIB_BAT%\LYRDateTime.bat %*
+exit /b 0
+:DateTime
+%LIB_BAT%\LYRDateTime.bat %*
+exit /b 0
 
 03.ОПИСАНИЕ
     ***

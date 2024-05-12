@@ -1,8 +1,34 @@
 ﻿01.НАЗВАНИЕ
-    ***
+    LYRSupport.bat
 
 02.СИНТАКСИС
-    *** [параметры] ***
+rem ФУНКЦИИ
+rem     :LYRSupport
+rem     :PressAnyKey
+rem     :Pause
+rem     :Check_P
+rem     :Read_P
+rem     :Read_F
+rem     :Read_N
+
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Check_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 
 03.ОПИСАНИЕ
     ***

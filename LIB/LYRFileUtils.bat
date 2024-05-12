@@ -11,6 +11,8 @@ rem     :ExtractFileDir
 rem     :ExtractFileName
 rem     :ExtractFileNameWithoutExt
 rem     :ExtractFileExt
+rem     :FileAttr
+rem     :CurrentDir
 rem -------------------------------------------------------------------
 rem d -- drive
 rem p -- path

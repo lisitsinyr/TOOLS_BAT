@@ -1,8 +1,30 @@
 ﻿01.НАЗВАНИЕ
-    ***
+    LYRLog.bat
 
 02.СИНТАКСИС
-    *** [параметры] ***
+rem ФУНКЦИИ
+rem     :LYRLog
+rem     :FormatStr
+rem     :AddLog
+rem     :AddLogFile
+rem     :StartLogFile
+rem     :StopLogFile
+
+:FormatStr
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:AddLog
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:AddLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:StartLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:StopLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
 
 03.ОПИСАНИЕ
     ***
