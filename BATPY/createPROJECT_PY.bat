@@ -26,6 +26,8 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    set OK=yes
+
     rem Количество аргументов
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!

@@ -51,7 +51,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
-    if "!SCRIPTS_DIR%!" == "" (
+    if "!SCRIPTS_DIR!" == "" (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
         set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
         set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
@@ -60,7 +60,7 @@ rem beginfunction
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_FULLFILENAME=%1
-    rem echo PROJECTS_LYR_DIR: %PROJECTS_LYR_DIR%
+    rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
     rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
   
