@@ -16,20 +16,22 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
-    call :MAIN_FUNC
+    call :MAIN || exit /b 1
 
 :Exit
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set OK=yes
 
     call rard.bat "01"
     call rard.bat "02"

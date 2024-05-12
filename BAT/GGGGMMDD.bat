@@ -22,20 +22,22 @@ setlocal enabledelayedexpansion
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: !P1!
 
-    call :MAIN_FUNC
+    call :MAIN || exit /b 1
 
 :Exit
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set OK=yes
 
     mkdir %date:~6,4%%P1%%date:~3,2%%P1%%date:~0,2%
 

@@ -11,20 +11,17 @@ rem
 rem --------------------------------------------------------------------------------
 :begin
     set BATNAME=%~nx0
-    echo Старт !BATNAME! ...
+    echo Start !BATNAME! ...
 
     set DEBUG=
 
-    call :MAIN_INIT %0 0 || exit /b 1
+    call :MAIN_INIT %0 || exit /b 1
     call :MAIN_SET || exit /b 1
     call :StartLogFile || exit /b 1
-    rem set DIR_SAVE=!CURRENT_DIR!
-    call :MAIN_CHECK_PARAMETR %1 || exit /b 1
-    rem call :MAIN_SYNTAX || exit /b 1
-    call :MAIN || exit /b 1
+    call :MAIN_SYNTAX || exit /b 1
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
     call :StopLogFile || exit /b 1
-    rem far -v !LOG_FULLFILENAME!
-    rem cd /D !DIR_SAVE!
 :Exit
 exit /b 0
 rem --------------------------------------------------------------------------------
@@ -143,6 +140,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set PN_CAPTION=Ввод значения P1
     set P1=P1_default
     set P1=
@@ -153,6 +153,11 @@ rem beginfunction
     rem call :AddLog !loTextFile! !TEXT! "P1: !P1!" || exit /b 1
     call :AddLog !loAll! !TEXT! P1: !P1! || exit /b 1
     call :AddLog !loAll! !INFO! P1: !P1! || exit /b 1
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
 
     rem set F=LYRLog.txt
     rem call :AddLogFile !loAll! !F!
@@ -182,6 +187,8 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set OK=yes
 
     call :MAIN_FUNC || exit /b 1
 

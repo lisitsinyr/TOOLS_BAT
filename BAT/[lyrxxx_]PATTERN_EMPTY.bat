@@ -14,31 +14,81 @@ setlocal enabledelayedexpansion
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
-
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+   
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    
+    if "!P1!"=="" (
+        echo ERROR: Параметр P1 не задан...
+        echo Использование: !BATNAME! P1 [P2] [...]
+    ) else (
+        call :MAIN %* || exit /b 1
+    )
+    
+    rem call :StopLogFile || exit /b 1
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CHECK_PARAMETR ()
+rem --------------------------------------------------------------------------------
+:MAIN_CHECK_PARAMETR
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
     set PN_CAPTION=Ввод значения P1
     set P1=P1_default
     set P1=
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: !P1!
 
-    set PN_CAPTION=Ввод значения P2
-    set P2=P2_default
-    set P2=
-    call :Check_P P2 %2 || exit /b 1
-    rem echo P2: !P2!
+    rem call :AddLog !loStandard! !TEXT! "P1: !P1!" || exit /b 1
+    rem call :AddLog !loTextFile! !TEXT! "P1: !P1!" || exit /b 1
+    call :AddLog !loAll! !TEXT! P1: !P1! || exit /b 1
+    call :AddLog !loAll! !INFO! P1: !P1! || exit /b 1
 
-    if "!P1!"=="" (
-        echo ERROR: Параметр P1 не задан...
-        echo Использование: !BATNAME! P1 [P2] [...]
-    ) else (
-        call :MAIN_FUNC
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
+
+    rem set F=LYRLog.txt
+    rem call :AddLogFile !loAll! !F!
+
+    exit /b 0
+rem endfunction
+
+rem =================================================
+rem procedure MAIN ()
+rem =================================================
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
 
-:Exit
-exit /b 0
+    set OK=yes
+
+    call :MAIN_FUNC || exit /b 1
+
+    rem call :Pause !SLEEP! || exit /b 1
+    rem call :PressAnyKey || exit /b 1
+
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()

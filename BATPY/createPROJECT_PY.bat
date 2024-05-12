@@ -21,18 +21,41 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
+    set DEBUG=
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
-    set OK=yes
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
+    rem call :StopLogFile || exit /b 1
 
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN ()
+rem --------------------------------------------------------------------------------
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set OK=yes
+    
     rem Количество аргументов
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    call :MAIN_FUNC %*
+    call :MAIN %* || exit /b 1
 
     if defined OK (
         echo Создание проекта !name! ...
@@ -55,14 +78,18 @@ setlocal enabledelayedexpansion
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN_CHECK_PARAMETR
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
 
     rem -------------------------------------
     rem ARGS
@@ -79,8 +106,8 @@ rem beginfunction
         set OK=
     )
 
-:Exit
-exit /b 0
+    exit /b 0
+rem endfunction
 
 rem =================================================
 rem ФУНКЦИИ LIB

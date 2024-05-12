@@ -26,21 +26,23 @@ setlocal enabledelayedexpansion
         echo ERROR: Параметр P1 не задан...
         echo Использование: !BATNAME! архив [файлы]
     ) else (
-        call :MAIN_FUNC
+        call :MAIN || exit /b 1
     )
 
 :Exit
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set OK=yes
 
     call :ExtractFileName "!P1!" || exit /b 1
     rem echo ExtractFileName: !ExtractFileName!

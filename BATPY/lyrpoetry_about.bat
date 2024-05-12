@@ -40,6 +40,29 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
+    rem call :StopLogFile || exit /b 1
+
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN ()
+rem --------------------------------------------------------------------------------
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set OK=yes
+
     echo Shows information about Poetry ...
     set COMMAND=about
     
@@ -54,7 +77,6 @@ setlocal enabledelayedexpansion
     rem echo Read_N: !Read_N!
 
     if defined Read_N (
-        call :MAIN_FUNC
         set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
         set APPRUN=!APP! %*
@@ -69,9 +91,9 @@ setlocal enabledelayedexpansion
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN_CHECK_PARAMETR
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
@@ -87,8 +109,8 @@ rem beginfunction
     rem -------------------------------------
     rem Проверка на обязательные аргументы
 
-:Exit
-exit /b 0
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure Check_tomlFile ()

@@ -26,21 +26,23 @@ setlocal enabledelayedexpansion
         echo ERROR: Параметр P1 не задан...
         echo Использование: !BATNAME! папка
     ) else (
-        call :MAIN_FUNC
+        call :MAIN || exit /b 1
     )
 
 :Exit
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set OK=yes
     
     set RARCMD=rar a -r "!P1!.rar" "!P1!"
     echo RARCMD: !RARCMD!
