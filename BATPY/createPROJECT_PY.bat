@@ -73,10 +73,15 @@ rem beginfunction
                     call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
                 )
             ) else (
+
                 rem --------------------------
                 rem POETRY
                 rem --------------------------
                 call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
+
+                rem call lyrpoetry_init.bat --name=!ProjectName!
+
+
             )
         ) else (
             rem --------------------------
