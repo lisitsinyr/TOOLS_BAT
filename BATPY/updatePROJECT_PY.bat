@@ -78,21 +78,23 @@ rem beginfunction
         call :CheckFile src\test\__init__.py
         call :CheckFile tests\__init__.py
 
-        call :CheckFile UPDATE_!ProjectName!.bat
+        set DIR_TO=!CurrentDir!
+        rem echo DIR_TO: !DIR_TO!
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
         rem echo DIR_FROM: !DIR_FROM!
-        set DIR_TO=!CurrentDir!
-        rem echo DIR_TO: !DIR_TO!
-        rem echo COPY: %DIR_FROM%\lyrgit_push_main.bat
         copy "!DIR_FROM!\lyrgit_push_main.bat" "!DIR_TO!" > NUL
-        rem echo "COPY: %DIR_FROM%\lyrgit_init.bat"
         copy "!DIR_FROM!\lyrgit_init.bat" "!DIR_TO!"      > NUL
 
-        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\
+        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY
         rem echo DIR_FROM: !DIR_FROM!
-        rem echo COPY: %DIR_FROM%\.gitignore
         copy "!DIR_FROM!\.gitignore" "!DIR_TO!" > NUL
+
+        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\BATPY
+        rem echo DIR_FROM: !DIR_FROM!
+        copy "!DIR_FROM!\updatePROJECT_PY.bat" "!DIR_TO!" > NUL
+
+        call :CheckFile UPDATE_!ProjectName!.bat
 
         set LFileName=README.md
         call :CheckFile !LFileName!

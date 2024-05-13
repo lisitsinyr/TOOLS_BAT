@@ -52,24 +52,27 @@ rem beginfunction
 
     if defined OK (
 
-        echo Создание проекта !name! ...
-        if exist "!name!"\ (
-            echo ERROR: Каталог "!name!" существует...
+        echo Создание проекта !ProjectName! ...
+        if exist "!ProjectName!"\ (
+            echo ERROR: Каталог "!ProjectName!" существует...
             set delete=
             set PN_CAPTION=Удалить?
             call :Read_F delete "yN" || exit /b 1
             if defined delete (
-                echo Удаление каталога "!folder!"
-                rmdir "!name!" /s
+                echo Удаление каталога "!ProjectName!"
+                rmdir "!ProjectName!" /s
+                rem --------------------------
+                rem POETRY
+                rem --------------------------
+                call lyrpoetry_new.bat
             )
         ) else (
-            mkdir "!name!"
+            rem --------------------------
+            rem POETRY
+            rem --------------------------
+            call lyrpoetry_new.bat
         )
-        
-        rem --------------------------
-        rem POETRY
-        rem --------------------------
-        rem call lyrpoetry_new.bat
+        cd "!ProjectName!"
 
         rem --------------------------
         rem Структура каталогов
@@ -108,12 +111,12 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     set PN_CAPTION=Имя проекта
-    set name=
-    call :Read_P name %1 || exit /b 1
-    rem echo name: !name!
+    set ProjectName=
+    call :Read_P ProjectName %1 || exit /b 1
+    rem echo ProjectName: !ProjectName!
 
-    if not defined name (
-        echo ERROR: name not defined ...
+    if not defined ProjectName (
+        echo ERROR: ProjectName not defined ...
         set OK=
     ) else (
         set OK=yes
