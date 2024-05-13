@@ -58,7 +58,7 @@ rem beginfunction
 
         echo Создание проекта !ProjectName! ...
         echo Directory: !Directory!
-        if defined !Directory! (
+        if defined Directory (
             if exist "!Directory!"\ (
                 echo ERROR: Каталог проекта "!Directory!" существует...
                 set delete=
@@ -70,13 +70,13 @@ rem beginfunction
                     rem --------------------------
                     rem POETRY
                     rem --------------------------
-                    call lyrpoetry_new.bat --name=!ProjectName! --src !Directory!
+                    call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
                 )
             ) else (
                 rem --------------------------
                 rem POETRY
                 rem --------------------------
-                call lyrpoetry_new.bat --name=!ProjectName! --src !Directory!
+                call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
             )
             cd "!Directory!"
         ) else (
