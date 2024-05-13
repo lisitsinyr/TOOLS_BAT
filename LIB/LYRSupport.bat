@@ -88,31 +88,37 @@ rem beginfunction
 
     set P_Name=%1
     rem !P_Name! - имя переменной
-    rem echo P_Name: !P_Name!
+    echo P_Name: !P_Name!
     rem %P_Name% - имя переменной
     rem echo P_Name: %P_Name%
+
     rem !%P_Name%! - значение переменной по умолчанию
-    rem echo P_Value: !%P_Name%!
+    echo P_Value_default: !%P_Name%!
 
     rem - значение переменной
     set P_Value=%~2
     rem echo P_Value: !P_Value!
 
+    rem !PN_CAPTION! - PN_CAPTION
+    rem [!P_Name!]   - имя переменной
+    rem [!%P_Name%!] - значение переменной по умолчанию
+
     set Input=
-    if "!P_Value!"=="" (
-        if not "!PN_CAPTION!"=="" (
-            rem !PN_CAPTION! - PN_CAPTION
-            rem [!P_Name!]   - имя переменной
-            rem [!%P_Name%!] - значение переменной по умолчанию
-            set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
-        )
+    if not defined P_Value (
+
+        rem if not "!%P_Name%!"=="" (
+        rem     set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
+        rem )
+        set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
+
     ) else (
+
         set %P_Name%=!P_Value!
         exit /b 0
     )
     rem echo Input: !Input!
 
-    if "!Input!"=="" (
+    if not defined Input (
         rem [!%P_Name%!] - значение переменной по умолчанию
         set %P_Name%=!%P_Name%!
     ) else (

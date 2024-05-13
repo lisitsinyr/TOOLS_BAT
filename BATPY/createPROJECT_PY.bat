@@ -28,6 +28,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1
@@ -49,13 +50,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set OK=yes
-    
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
     if defined OK (
+
         echo Создание проекта !name! ...
         if exist "!name!"\ (
             echo ERROR: Каталог "!name!" существует...
@@ -69,7 +65,10 @@ rem beginfunction
         ) else (
             mkdir "!name!"
         )
+
         rem call lyrpoetry_new.bat
+
+        rem ...
     )
 
 :Exit
@@ -85,6 +84,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
@@ -92,16 +95,17 @@ rem beginfunction
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
-    rem Проверка на обязательные аргументы
     set name=
-    set PN_CAPTION=Имя проекта
+    if "%~1"=="" (
+        set PN_CAPTION=Имя проекта
+    )
     call :Read_P name %1 || exit /b 1
     rem echo name: !name!
-    if defined name (
-        set OK=yes
-    ) else (
+    if not defined name (
         echo ERROR: name not defined ...
         set OK=
+    ) else (
+        set OK=yes
     )
 
     exit /b 0
