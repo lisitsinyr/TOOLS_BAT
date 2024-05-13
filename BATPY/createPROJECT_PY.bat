@@ -78,7 +78,6 @@ rem beginfunction
                 rem --------------------------
                 call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
             )
-            cd "!Directory!"
         ) else (
             rem --------------------------
             rem POETRY
@@ -89,12 +88,14 @@ rem beginfunction
         rem --------------------------
         rem Структура каталогов
         rem --------------------------
+        cd "!Directory!"
         call updatePROJECT_PY.bat !ProjectName!
 
         rem --------------------------
         rem GIT
         rem --------------------------
-        call lyrgit_init.bat "!Directory!"
+        rem call lyrgit_init.bat "!Directory!"
+        call lyrgit_init.bat .\
     )
 
 :Exit
