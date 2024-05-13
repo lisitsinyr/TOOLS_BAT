@@ -145,16 +145,13 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set PN_CAPTION=Ввод значения P1
+    if "%~1"=="" (
+        set PN_CAPTION=Ввод значения
+    )
     set P1=P1_default
     set P1=
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: !P1!
-
-    rem call :AddLog !loStandard! !TEXT! "P1: !P1!" || exit /b 1
-    rem call :AddLog !loTextFile! !TEXT! "P1: !P1!" || exit /b 1
-    call :AddLog !loAll! !TEXT! P1: !P1! || exit /b 1
-    call :AddLog !loAll! !INFO! P1: !P1! || exit /b 1
 
     rem -------------------------------------
     rem ARGS
@@ -163,6 +160,17 @@ rem beginfunction
 
     rem set F=LYRLog.txt
     rem call :AddLogFile !loAll! !F!
+
+    if not defined P1 (
+        echo ERROR: Параметр P1 не задан...
+        echo Использование: !BATNAME! P1 [P2] [...]
+        set OK=
+    ) else (
+        rem call :AddLog !loStandard! !TEXT! "P1: !P1!" || exit /b 1
+        rem call :AddLog !loTextFile! !TEXT! "P1: !P1!" || exit /b 1
+        call :AddLog !loAll! !TEXT! P1: !P1! || exit /b 1
+        call :AddLog !loAll! !INFO! P1: !P1! || exit /b 1
+    )
 
     exit /b 0
 rem endfunction
@@ -190,9 +198,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set OK=yes
-
-    call :MAIN_FUNC || exit /b 1
+    if defined OK (
+        call :MAIN_FUNC || exit /b 1
+    )
 
     rem call :Pause !SLEEP! || exit /b 1
     rem call :PressAnyKey || exit /b 1
