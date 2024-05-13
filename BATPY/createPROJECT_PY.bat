@@ -89,12 +89,12 @@ rem beginfunction
         rem --------------------------
         rem Структура каталогов
         rem --------------------------
-        rem call updatePROJECT_PY.bat
+        call updatePROJECT_PY.bat
 
         rem --------------------------
         rem GIT
         rem --------------------------
-        rem call lyrgit_init.bat
+        call lyrgit_init.bat
     )
 
 :Exit

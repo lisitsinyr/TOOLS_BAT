@@ -54,7 +54,7 @@ rem beginfunction
         echo ProjectName: !ProjectName!
 
         call :CheckDir .devcontainer
-        call :CheckDir .git
+        rem call :CheckDir .git
         call :CheckDir .idea
         call :CheckDir .venv
         call :CheckDir .vscode
