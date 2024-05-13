@@ -53,26 +53,33 @@ rem beginfunction
     if defined OK (
 
         echo Создание проекта !ProjectName! ...
-        if exist "!ProjectName!"\ (
-            echo ERROR: Каталог "!ProjectName!" существует...
-            set delete=
-            set PN_CAPTION=Удалить?
-            call :Read_F delete "yN" || exit /b 1
-            if defined delete (
-                echo Удаление каталога "!ProjectName!"
-                rmdir "!ProjectName!" /s
+        if defined !Directory! (
+            if exist "!Directory!"\ (
+                echo ERROR: Каталог проекта "!Directory!" существует...
+                set delete=
+                set PN_CAPTION=Удалить?
+                call :Read_F delete "yN" || exit /b 1
+                if defined delete (
+                    echo Удаление каталога проекта "!Directory!"
+                    rmdir "!Directory!" /s
+                    rem --------------------------
+                    rem POETRY
+                    rem --------------------------
+                    call lyrpoetry_new.bat --name=!ProjectName! -src !Directory!
+                )
+            ) else (
                 rem --------------------------
                 rem POETRY
                 rem --------------------------
-                call lyrpoetry_new.bat
+                call lyrpoetry_new.bat --name=!ProjectName! -src !Directory!
             )
-        ) else (
+            cd "!Directory!"
+        ) else
             rem --------------------------
             rem POETRY
             rem --------------------------
-            call lyrpoetry_new.bat
+            call lyrpoetry_new.bat --name=!ProjectName! -src
         )
-        cd "!ProjectName!"
 
         rem --------------------------
         rem Структура каталогов
@@ -83,7 +90,6 @@ rem beginfunction
         rem GIT
         rem --------------------------
         rem call lyrgit_init.bat
-
     )
 
 :Exit
@@ -114,6 +120,11 @@ rem beginfunction
     set ProjectName=
     call :Read_P ProjectName %1 || exit /b 1
     rem echo ProjectName: !ProjectName!
+
+    set PN_CAPTION=Каталог проекта
+    set Directory=
+    call :Read_P Directory %1 || exit /b 1
+    rem echo Directory: !Directory!
 
     if not defined ProjectName (
         echo ERROR: ProjectName not defined ...
