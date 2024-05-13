@@ -49,6 +49,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1
@@ -101,22 +102,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set OK=yes
-
     echo Creates a basic pyproject.toml file in the current directory ...
     set COMMAND=init
     
-    set APP=poetry
-    set OPTION= -v
-    set ARGS=
-    set APPRUN=
-    set OK=yes
-
     call :Delete_tomlFile
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
 
     if defined Read_N (
         call :MAIN_FUNC
@@ -142,6 +131,15 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set APP=poetry
+    set OPTION= -v --no-ansi
+    set ARGS=
+    set APPRUN=
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
 
     rem -------------------------------------
     rem OPTION

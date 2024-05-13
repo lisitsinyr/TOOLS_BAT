@@ -18,6 +18,7 @@ setlocal enabledelayedexpansion
 
     set DEBUG=
 
+    set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1

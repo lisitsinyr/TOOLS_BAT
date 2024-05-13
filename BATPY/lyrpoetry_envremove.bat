@@ -54,6 +54,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1
@@ -93,24 +94,12 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set OK=yes
-
     echo Remove virtual environments associated with the project ...
     set COMMAND=env remove
     
-    set APP=poetry
-    set OPTION= -v
-    set ARGS=
-    set APPRUN=
-    set OK=yes
-
     call :Check_tomlFile
 
     if defined OK (
-        rem Количество аргументов
-        call :Read_N %* || exit /b 1
-        rem echo Read_N: !Read_N!
-
         if defined Read_N (
             call :MAIN_FUNC
             set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
@@ -136,6 +125,15 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set APP=poetry
+    set OPTION= -v --no-ansi
+    set ARGS=
+    set APPRUN=
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
 
     rem -------------------------------------
     rem OPTION

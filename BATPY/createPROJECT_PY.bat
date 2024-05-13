@@ -95,12 +95,11 @@ rem beginfunction
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
+    set PN_CAPTION=Имя проекта
     set name=
-    if "%~1"=="" (
-        set PN_CAPTION=Имя проекта
-    )
     call :Read_P name %1 || exit /b 1
     rem echo name: !name!
+
     if not defined name (
         echo ERROR: name not defined ...
         set OK=
