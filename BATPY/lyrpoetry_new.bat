@@ -100,7 +100,7 @@ rem beginfunction
     if not defined Read_N (
         set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=!APP! !COMMAND! %*
+        set APPRUN=!APP! !COMMAND!!OPTION! %*
     )
     echo APPRUN: !APPRUN!
 
