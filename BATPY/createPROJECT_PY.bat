@@ -94,7 +94,7 @@ rem beginfunction
         rem --------------------------
         rem GIT
         rem --------------------------
-        call lyrgit_init.bat
+        call lyrgit_init.bat "!Directory!"
     )
 
 :Exit
