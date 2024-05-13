@@ -87,8 +87,7 @@ rem beginfunction
     echo Creates a new Python project at ^<path^> ...
     set COMMAND=new
     
-    if defined Read_N (
-        call :MAIN_FUNC
+    if not defined Read_N (
         set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
         set APPRUN=!APP! %*
@@ -119,21 +118,21 @@ rem beginfunction
 
     rem Количество аргументов
     call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
+    echo Read_N: !Read_N!
 
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set name=
+    set name=test
     set PN_CAPTION=Set the resulting package name
     call :Read_P name "" || exit /b 1
     rem echo name: !name!
     if defined name (
         set OPTION=!OPTION! --name=!name!
     )
-    set src=
+    set src=Y
     set PN_CAPTION=Use the src layout for the project
-    call :Read_F src "Yn" || exit /b 1
+    call :Read_F src "YN" 0 || exit /b 1
     rem echo src: !src!
     if defined src (
         set OPTION=!OPTION! --src

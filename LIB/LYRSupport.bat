@@ -142,28 +142,33 @@ rem beginfunction
     rem echo P_Name: !P_Name!
     rem %P_Name% - имя переменной
     rem echo P_Name: %P_Name%
+
     rem !%P_Name%! - значение переменной по умолчанию
-    rem echo P_Value: !%P_Name%!
+    rem echo P_Value_default: !%P_Name%!
 
     rem - значение переменной
     set P_Value=%~2
     rem echo P_Value: !P_Value!
 
+    rem !PN_CAPTION! - PN_CAPTION
+    rem [!P_Name!]   - имя переменной
+    rem [!%P_Name%!] - значение переменной по умолчанию
+
     set Input=
-    if "!P_Value!"=="" (
-        if not "!PN_CAPTION!"=="" (
-            rem !PN_CAPTION! - PN_CAPTION
-            rem [!P_Name!]   - имя переменной
-            rem [!%P_Name%!] - значение переменной по умолчанию
+    if not defined P_Value (
+
+        if defined PN_CAPTION (
             set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
         )
+
     ) else (
+
         set %P_Name%=!P_Value!
         exit /b 0
     )
     rem echo Input: !Input!
 
-    if "!Input!"=="" (
+    if not defined Input (
         rem [!%P_Name%!] - значение переменной по умолчанию
         set %P_Name%=!%P_Name%!
     ) else (
@@ -187,17 +192,21 @@ rem beginfunction
     rem !P_Name! имя переменной
     rem echo имя переменной: !P_Name!
     rem !%P_Name%! значение переменной по умолчанию
-    rem echo значение переменной по умолчанию: !%P_Name%!
+    echo Deault: !%P_Name%!
 
     rem список создаваемых вариантов
     set P_List=%~2
     rem echo P_List: !P_List!
+    rem timeout
+    set timeout=%3
+    if not defined timeout (
+        set timeout=10
+    )
+    rem echo timeout: !timeout!
 
     set %P_Name%=!%P_Name%!
     if not "!P_List!"=="" (
-        set message=!PN_CAPTION!
-        rem choice /Cs /C !P_List! /D N /T 10 /M "!message!"
-        choice /C !P_List! /D N /T 10 /M "!message!"
+        choice /C !P_List! /D !%P_Name%! /T !timeout! /M "!PN_CAPTION!"
         if !ERRORLEVEL!==1 (
             set %P_Name%=!ERRORLEVEL!
         ) else (
