@@ -88,8 +88,9 @@ rem beginfunction
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
     )
-:Exit
-exit /b 0
+    
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
@@ -104,20 +105,21 @@ rem beginfunction
     echo Lock the Poetry installation's system requirements ...
     set COMMAND=self lock
     
-    if defined Read_N (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
-
     if defined OK (
-        !APPRUN!
+        if not defined Read_N (
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! !COMMAND!!OPTION! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
-:Exit
-exit /b 0
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_CHECK_PARAMETR ()
@@ -151,8 +153,9 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
-:Exit
-exit /b 0
+    
+    exit /b 0
+rem endfunction
 
 rem =================================================
 rem ФУНКЦИИ LIB

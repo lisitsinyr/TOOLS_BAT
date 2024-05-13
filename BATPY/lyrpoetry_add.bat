@@ -88,8 +88,8 @@ setlocal enabledelayedexpansion
     call :MAIN %* || exit /b 1
     rem call :StopLogFile || exit /b 1
 
-:Exit
-exit /b 0
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
@@ -107,11 +107,10 @@ rem beginfunction
     call :Check_tomlFile
 
     if defined OK (
-        if defined Read_N (
-            call :MAIN_FUNC
+        if not defined Read_N (
             set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
         ) else (
-            set APPRUN=!APP! %*
+            set APPRUN=!APP! !COMMAND!!OPTION! %*
         )
         echo APPRUN: !APPRUN!
 
@@ -120,8 +119,8 @@ rem beginfunction
         )
     )
 
-:Exit
-exit /b 0
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_CHECK_PARAMETR ()
@@ -229,8 +228,8 @@ rem beginfunction
         set OK=
     )
 
-:Exit
-exit /b 0
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure Check_tomlFile ()
@@ -247,8 +246,9 @@ rem beginfunction
         echo ERROR: ‘айл !tomlFile! не существует ...
         set OK=
     )
-:Exit
-exit /b 0
+    
+    exit /b 0
+rem endfunction
 
 rem =================================================
 rem ‘”Ќ ÷»» LIB

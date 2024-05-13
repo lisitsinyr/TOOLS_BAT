@@ -68,8 +68,8 @@ setlocal enabledelayedexpansion
     call :MAIN %* || exit /b 1
     rem call :StopLogFile || exit /b 1
 
-:Exit
-exit /b 0
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure Check_tomlFile ()
@@ -86,8 +86,9 @@ rem beginfunction
         echo ERROR: ‘‡ÈÎ !tomlFile! ÌÂ ÒÛ˘ÂÒÚ‚ÛÂÚ ...
         set OK=
     )
-:Exit
-exit /b 0
+    
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
@@ -102,20 +103,21 @@ rem beginfunction
     echo Clears a Poetry cache by name ...
     set COMMAND=cache clear
 
-    if defined Read_N (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
-
     if defined OK (
-        !APPRUN!
+        if not defined Read_N (
+            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+        ) else (
+            set APPRUN=!APP! !COMMAND!!OPTION! %*
+        )
+        echo APPRUN: !APPRUN!
+
+        if defined OK (
+            !APPRUN!
+        )
     )
 
-:Exit
-exit /b 0
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_CHECK_PARAMETR ()
@@ -153,8 +155,8 @@ rem beginfunction
         set OK=
     )
     
-:Exit
-exit /b 0
+    exit /b 0
+rem endfunction
 
 rem =================================================
 rem ‘”Õ ÷»» LIB

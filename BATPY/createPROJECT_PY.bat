@@ -41,8 +41,8 @@ setlocal enabledelayedexpansion
     call :MAIN %* || exit /b 1
     rem call :StopLogFile || exit /b 1
 
-:Exit
-exit /b 0
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
@@ -77,17 +77,25 @@ rem beginfunction
                 rem --------------------------
                 rem POETRY
                 rem --------------------------
-                call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-
-                rem call lyrpoetry_init.bat --name=!ProjectName!
-
-
+                set tomlFile="!Directory!"\pyproject.toml
+                call :Check_tomlFile
+                if defined OK (
+                    call lyrpoetry_init.bat --name=!ProjectName!
+                ) else (
+                    call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
+                )
             )
         ) else (
             rem --------------------------
             rem POETRY
             rem --------------------------
-            call lyrpoetry_new.bat --name=!ProjectName! --src
+            set tomlFile=pyproject.toml
+            call :Check_tomlFile
+            if defined OK (
+                call lyrpoetry_init.bat --name=!ProjectName!
+            ) else (
+                call lyrpoetry_new.bat --name=!ProjectName! --src
+            )
         )
 
         rem --------------------------
@@ -103,8 +111,29 @@ rem beginfunction
         call lyrgit_init.bat .\
     )
 
-:Exit
-exit /b 0
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure Check_tomlFile ()
+rem --------------------------------------------------------------------------------
+:Check_tomlFile
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    rem Проверка существования файла pyproject.toml
+    rem set tomlFile=pyproject.toml
+    if not exist "!tomlFile!" (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    ) else (
+        set OK=yes
+    )
+    
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_CHECK_PARAMETR ()
