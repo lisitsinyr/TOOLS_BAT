@@ -10,27 +10,24 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
+    set DEBUG=
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
-
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
-    set PN_CAPTION=Ввод значения P1
-    set P1=P1_default
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-    rem echo P1: !P1!    
-
-    if "!P1!"=="" (
-        echo ERROR: Параметр P1 не задан...
-        echo Использование: !BATNAME! папка
-    ) else (
-        call :MAIN || exit /b 1
-    )
-
-:Exit
-exit /b 0
+    set OK=yes
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
+    rem call :StopLogFile || exit /b 1
+    
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
@@ -42,12 +39,40 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set OK=yes
-    
-    set RARCMD=rar a -r "!P1!.rar" "!P1!"
-    echo RARCMD: !RARCMD!
+    if defined OK (
+        !RARCMD!
+    )
 
-    !RARCMD!
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CHECK_PARAMETR ()
+rem --------------------------------------------------------------------------------
+:MAIN_CHECK_PARAMETR
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set RARCMD=
+
+    if "%~1"=="" (
+        set PN_CAPTION=Ввод значения
+    )
+    set directory=
+    call :Check_P directory %1 || exit /b 1
+    rem echo directory: !directory!
+
+    if "!directory!"=="" (
+        echo ERROR: Параметр directory не задан...
+        echo Использование: !BATNAME! папка
+        set OK=
+    ) else (
+        set RARCMD=rar a -r "!directory!.rar" "!directory!"
+        echo RARCMD: !RARCMD!
+    )
 
     exit /b 0
 rem endfunction

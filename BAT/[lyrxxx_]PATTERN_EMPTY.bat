@@ -17,6 +17,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1
@@ -78,8 +79,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set OK=yes
 
     call :MAIN_FUNC || exit /b 1
 

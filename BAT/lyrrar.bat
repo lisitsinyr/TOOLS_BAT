@@ -10,6 +10,8 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
+    set DEBUG=
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
@@ -56,8 +58,10 @@ rem beginfunction
 
     set RARCMD=
 
-    rem set PN_CAPTION=Ввод значения
-    set archive=
+    if "%~1"=="" (
+        set PN_CAPTION=Ввод значения
+    )
+    set archive=test
     call :Check_P archive %1 || exit /b 1
     rem echo archive: !archive!
 

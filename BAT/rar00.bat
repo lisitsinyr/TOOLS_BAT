@@ -10,12 +10,14 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
+    set DEBUG=
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
-
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    set OK=yes
     call :MAIN || exit /b 1
 
     exit /b 0
@@ -30,8 +32,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set OK=yes
 
     call rard.bat "01"
     call rard.bat "02"

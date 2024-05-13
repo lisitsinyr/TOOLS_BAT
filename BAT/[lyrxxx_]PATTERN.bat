@@ -15,6 +15,7 @@ rem ----------------------------------------------------------------------------
 
     set DEBUG=
 
+    set OK=yes
     call :MAIN_INIT %0 || exit /b 1
     call :MAIN_SET || exit /b 1
     call :StartLogFile || exit /b 1

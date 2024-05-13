@@ -17,6 +17,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1
@@ -38,8 +39,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set OK=yes
-
     mkdir %date:~6,4%%P1%%date:~3,2%%P1%%date:~0,2%
 
     exit /b 0
@@ -55,8 +54,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem set PN_CAPTION=¬вод значени€ P1
-    set P1=P1_default
+    rem if "%~1"=="" (
+    rem     set PN_CAPTION=¬вод значени€
+    rem )
     set P1=
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: !P1!
