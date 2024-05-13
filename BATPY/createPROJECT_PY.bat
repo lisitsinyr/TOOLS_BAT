@@ -59,10 +59,10 @@ rem beginfunction
         echo Создание проекта !ProjectName! ...
         echo Directory: !Directory!
         if exist "!Directory!"\ (
-            echo ERROR: Каталог проекта "!Directory!" существует...
-            set delete=
+            echo INFO: Каталог проекта "!Directory!" существует...
+            set delete=N
             set PN_CAPTION=Удалить?
-            call :Read_F delete "yN" || exit /b 1
+            call :Read_F delete "yN" 5 || exit /b 1
             if defined delete (
                 echo Удаление каталога проекта "!Directory!"
                 rmdir "!Directory!" /s
@@ -72,7 +72,9 @@ rem beginfunction
             set tomlFile="!Directory!"\pyproject.toml
             call :Check_tomlFile
             if defined OK (
+                cd "!Directory!"
                 call lyrpoetry_init.bat --name=!ProjectName!
+                cd ..\
             ) else (
                 call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
             )
@@ -92,7 +94,11 @@ rem beginfunction
         rem --------------------------
         rem GIT
         rem --------------------------
-        call lyrgit_init.bat .\
+        if exist ".git"\ (
+            echo INFO: Repository exist ...
+        ) else (
+            call lyrgit_init.bat .\
+        )
     )
 
     exit /b 0
