@@ -51,7 +51,8 @@ setlocal enabledelayedexpansion
 
     rem Количество аргументов
     call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
+    echo Read_N: !Read_N!
+
     set APP=poetry
     set OPTION= -v --no-ansi
     set ARGS=
@@ -117,11 +118,11 @@ rem beginfunction
     
     call :Delete_tomlFile
 
-    if defined Read_N (
+    if not defined Read_N (
         call :MAIN_FUNC
         set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
-        set APPRUN=!APP! %*
+        set APPRUN=!APP! !COMMAND!!OPTION! %*
     )
     echo APPRUN: !APPRUN!
 
