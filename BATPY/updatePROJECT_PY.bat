@@ -26,7 +26,7 @@ setlocal enabledelayedexpansion
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir!
+    echo CurrentDir: !CurrentDir!
 
     set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
@@ -51,32 +51,85 @@ rem beginfunction
     )
 
     if defined OK (
+        echo ProjectName: !ProjectName!
 
-        echo Создание проекта !name! ...
-        if exist "!name!"\ (
-            echo ERROR: Каталог "!name!" существует...
+        call :CheckDir .devcontainer
+        call :CheckDir .git
+        call :CheckDir .idea
+        call :CheckDir .venv
+        call :CheckDir .vscode
+        call :CheckDir BUILD
+        call :CheckDir CONFIG
+        call :CheckDir DATA
+        call :CheckDir DIST
+        call :CheckDir DOC
+        call :CheckDir EXE
+        call :CheckDir LOG
+        call :CheckDir NOTEBOOKS
+        call :CheckDir OUT
+        call :CheckDir SRC
+        call :CheckDir SRC\!ProjectName!
+        call :CheckDir TESTS
+        call :CheckDir WORK
 
-            set PN_CAPTION=Удалить?
-            set delete=
-            call :Read_F delete "yN" || exit /b 1
-            if defined delete (
-                echo Удаление каталога "!folder!"
-                rmdir "!name!" /s
-                mkdir "!name!"
-            )
-        ) else (
-            mkdir "!name!"
+        call :CheckFile .gitmodules
+        call :CheckFile .pypirc
+        call :CheckFile LICENSE
+        call :CheckFile src\test\__init__.py
+        call :CheckFile tests\__init__.py
+
+        call :CheckFile UPDATE_!ProjectName!.bat
+
+        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
+        rem echo DIR_FROM: !DIR_FROM!
+        set DIR_TO=!CurrentDir!
+        rem echo DIR_TO: !DIR_TO!
+        rem echo COPY: %DIR_FROM%\lyrgit_push_main.bat
+        copy "!DIR_FROM!\lyrgit_push_main.bat" "!DIR_TO!" > NUL
+        rem echo "COPY: %DIR_FROM%\lyrgit_init.bat"
+        copy "!DIR_FROM!\lyrgit_init.bat" "!DIR_TO!"      > NUL
+
+        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\
+        rem echo DIR_FROM: !DIR_FROM!
+        rem echo COPY: %DIR_FROM%\.gitignore
+        copy "!DIR_FROM!\.gitignore" "!DIR_TO!" > NUL
+
+        set LFileName=README.md
+        call :CheckFile !LFileName!
+        call :FileSize !LFileName!
+        if !FileSize!==0 (
+            echo !ProjectName! >> !LFileName!
+            echo ---------- >> !LFileName!
+            echo You can use [GitHub-flavored Markdown]^(https://guides.github.com/features/mastering-markdown/^) >> !LFileName!
         )
 
+        set LFileName=POETRY.ini
+        call :CheckFile !LFileName!
+        call :FileSize !LFileName!
+        if !FileSize!==0 (
+            echo # Это простой файл с настройками >> !LFileName!
+            echo PROJECT_NAME=!ProjectName! >> !LFileName!
+        )
 
+        set LFileName=PROJECT.ini
+        call :CheckFile !LFileName!
+        call :FileSize !LFileName!
+        if !FileSize!==0 (
+            echo # Это простой файл с настройками >> !LFileName!
+            echo PROJECT_NAME=!ProjectName! >> !LFileName!
+        )
 
-
-
-
+        set LFileName=REPO.ini
+        call :CheckFile !LFileName!
+        call :FileSize !LFileName!
+        if !FileSize!==0 (
+            echo # Это простой файл с настройками >> !LFileName!
+            echo REPO_NAME=!ProjectName! >> !LFileName!
+        )
     )
 
-:Exit
-exit /b 0
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_CHECK_PARAMETR ()
@@ -100,12 +153,12 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     set PN_CAPTION=Имя проекта
-    set name=
-    call :Read_P name %1 || exit /b 1
+    set ProjectName=test
+    call :Read_P ProjectName %1 || exit /b 1
     rem echo name: !name!
 
-    if not defined name (
-        echo ERROR: name not defined ...
+    if not defined ProjectName (
+        echo ERROR: ProjectName not defined ...
         set OK=
     ) else (
         set OK=yes
@@ -148,6 +201,15 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :FileAttr
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FileSize
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir

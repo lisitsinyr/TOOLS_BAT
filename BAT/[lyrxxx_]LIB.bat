@@ -51,6 +51,15 @@ exit /b 0
 :FileAttr
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+:FileSize
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckFile
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :CurrentDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0

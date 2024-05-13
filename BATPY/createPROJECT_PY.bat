@@ -65,10 +65,22 @@ rem beginfunction
         ) else (
             mkdir "!name!"
         )
-
+        
+        rem --------------------------
+        rem POETRY
+        rem --------------------------
         rem call lyrpoetry_new.bat
 
-        rem ...
+        rem --------------------------
+        rem Структура каталогов
+        rem --------------------------
+        rem call updatePROJECT_PY.bat
+
+        rem --------------------------
+        rem GIT
+        rem --------------------------
+        rem call lyrgit_init.bat
+
     )
 
 :Exit

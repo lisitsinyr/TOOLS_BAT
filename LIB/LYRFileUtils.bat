@@ -178,8 +178,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem echo _1: %~1
-
     set FileAttr=%~a1
     rem echo FileAttr: !FileAttr!
 
@@ -198,6 +196,85 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure FileSize (FileName)
+rem --------------------------------------------------------------------------------
+:FileSize
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set FILENAME=%~1
+    rem echo FILENAME: !FILENAME!
+    set FileSize=0
+    if defined FILENAME (
+        if exist "!FILENAME!" (
+            set FileSize=%~z1
+        )
+    )
+    rem echo FileSize: !FileSize!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure CheckDir (DIRECTORY)
+rem --------------------------------------------------------------------------------
+:CheckDir
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIRECTORY=%~1
+    if defined DIRECTORY (
+        if not exist "!DIRECTORY!\" (
+            mkdir "!DIRECTORY!"
+            if not "!ERRORLEVEL!"=="0" (
+                echo ERROR: Dir !DIRECTORY! not created...
+                set CheckDir=
+                exit /b 1
+            )
+        )
+        set CheckDir=!DIRECTORY!
+    ) else (
+        set CheckDir=
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure CheckFile (FILENAME)
+rem --------------------------------------------------------------------------------
+:CheckFile
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set FILENAME=%~1
+    rem echo FILENAME: !FILENAME!
+    if defined FILENAME (
+        if not exist "!FILENAME!" (
+            rem set touchRUN=touch -f "!FILENAME!"
+            rem set touchRUN=D:\TOOLS\EXE\touch.exe "!FILENAME!"
+            rem echo !touchRUN!
+            rem %touchRUN%
+            D:\TOOLS\EXE\touch.exe "!FILENAME!"
+        )
+        set CheckFile="!FILENAME!"
+    ) else (
+        set CheckFile=
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure CurrentDir ()
 rem --------------------------------------------------------------------------------
 :CurrentDir
@@ -207,7 +284,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set CurrentDir=%cd%
+    set CurrentDir=!cd!
 
     exit /b 0
 rem endfunction
