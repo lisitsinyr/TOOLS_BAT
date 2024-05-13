@@ -28,6 +28,10 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     echo CurrentDir: !CurrentDir!
 
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
     set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
@@ -143,10 +147,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
@@ -157,7 +157,7 @@ rem beginfunction
     set PN_CAPTION=Имя проекта
     set ProjectName=test
     call :Read_P ProjectName %1 || exit /b 1
-    rem echo name: !name!
+    rem echo ProjectName: !ProjectName!
 
     if not defined ProjectName (
         echo ERROR: ProjectName not defined ...

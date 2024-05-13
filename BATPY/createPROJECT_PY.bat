@@ -89,7 +89,7 @@ rem beginfunction
         rem --------------------------
         rem Структура каталогов
         rem --------------------------
-        call updatePROJECT_PY.bat
+        call updatePROJECT_PY.bat !ProjectName!
 
         rem --------------------------
         rem GIT
