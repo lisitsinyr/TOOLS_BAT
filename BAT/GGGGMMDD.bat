@@ -54,9 +54,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem if "%~1"=="" (
-    rem     set PN_CAPTION=Ввод значения
-    rem )
+    rem set PN_CAPTION=Разделитель
     set P1=
     call :Check_P P1 %1 || exit /b 1
     rem echo P1: !P1!

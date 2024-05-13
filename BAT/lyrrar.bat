@@ -58,12 +58,8 @@ rem beginfunction
 
     set RARCMD=
 
-    rem if "%~1"=="" (
-    rem     set PN_CAPTION=¬вод значени€
-    rem )
     set PN_CAPTION=¬вод значени€ archive
-
-    set archive=test
+    set archive=
     call :Check_P archive %1 || exit /b 1
     rem echo archive: !archive!
 

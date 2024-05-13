@@ -58,9 +58,7 @@ rem beginfunction
 
     set RARCMD=
 
-    if "%~1"=="" (
-        set PN_CAPTION=¬вод значени€
-    )
+    set PN_CAPTION=¬вод значени€ directory
     set directory=
     call :Check_P directory %1 || exit /b 1
     rem echo directory: !directory!
