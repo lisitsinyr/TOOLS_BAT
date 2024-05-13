@@ -47,6 +47,10 @@ setlocal enabledelayedexpansion
     rem Количество аргументов
     call :Read_N %* || exit /b 1
     echo Read_N: !Read_N!
+    set APP=poetry
+    set OPTION= -v --no-ansi
+    set ARGS=
+    set APPRUN=
 
     set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
@@ -116,11 +120,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
 
     rem -------------------------------------
     rem OPTION
