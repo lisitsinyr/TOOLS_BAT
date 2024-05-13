@@ -28,6 +28,10 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
     set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
@@ -74,7 +78,7 @@ rem beginfunction
                 call lyrpoetry_new.bat --name=!ProjectName! -src !Directory!
             )
             cd "!Directory!"
-        ) else
+        ) else (
             rem --------------------------
             rem POETRY
             rem --------------------------
@@ -105,10 +109,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
@@ -122,9 +122,9 @@ rem beginfunction
     rem echo ProjectName: !ProjectName!
 
     set PN_CAPTION=Каталог проекта
-    set Directory=
+    set Directory=folder folder
     call :Read_P Directory %1 || exit /b 1
-    rem echo Directory: !Directory!
+    echo Directory: !Directory!
 
     if not defined ProjectName (
         echo ERROR: ProjectName not defined ...

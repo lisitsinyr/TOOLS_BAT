@@ -44,12 +44,18 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    echo Read_N: !Read_N!
+
     set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1
     rem call :MAIN_SYNTAX || exit /b 1
-    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    if not defined Read_N (
+        call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    )
     call :MAIN %* || exit /b 1
     rem call :StopLogFile || exit /b 1
 
@@ -115,10 +121,6 @@ rem beginfunction
     set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    echo Read_N: !Read_N!
 
     rem -------------------------------------
     rem OPTION
