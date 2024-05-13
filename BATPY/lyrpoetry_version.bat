@@ -53,6 +53,14 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+    set APP=poetry
+    set OPTION= -v --no-ansi
+    set ARGS=
+    set APPRUN=
+
     set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
@@ -124,15 +132,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
 
     rem -------------------------------------
     rem OPTION
