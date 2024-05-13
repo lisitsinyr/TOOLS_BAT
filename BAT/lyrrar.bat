@@ -12,25 +12,20 @@ setlocal enabledelayedexpansion
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
-
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
-    rem set PN_CAPTION=Ввод значения
-    set P1=P1_default
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-    rem echo P1: %P1%    
+    set OK=yes
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
+    rem call :StopLogFile || exit /b 1
 
-    if "!P1!"=="" (
-        echo ERROR: Параметр P1 не задан...
-        echo Использование: !BATNAME! архив [файлы]
-    ) else (
-        call :MAIN || exit /b 1
-    )
-
-:Exit
-exit /b 0
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
@@ -41,38 +36,60 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set OK=yes
-
-    call :ExtractFileName "!P1!" || exit /b 1
-    rem echo ExtractFileName: !ExtractFileName!
-
-    call :ExtractFileNameWithoutExt "!P1!" || exit /b 1
-    rem echo ExtractFileNameWithoutExt: !ExtractFileNameWithoutExt!
-
-    call :FileAttr "!P1!" || exit /b 1
-    rem echo FileAttr: !FileAttr!
     
-    call :FullFileName "!P1!" || exit /b 1
-    rem echo FullFileName: !FullFileName!
-
-    if "!FOLDER!"=="D" (
-        set RARCMD=rar a -r "!ExtractFileName!.rar" "!ExtractFileName!"
+    if defined OK (
+        !RARCMD!
     )
-    if "!FOLDER!"=="F" (
-        set RARCMD=rar a "!ExtractFileNameWithoutExt!.rar" "!P1!"
-    )
-    if "!FOLDER!"=="" (
-        set PN_CAPTION=Файлы
-        set P2=*.*
-        call :Check_P P2 %2 || exit /b 1
-        rem echo P2: !P2!    
 
-        set RARCMD=rar a -r "!P1!.rar" "!P2!"
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CHECK_PARAMETR ()
+rem --------------------------------------------------------------------------------
+:MAIN_CHECK_PARAMETR
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set RARCMD=
+
+    rem set PN_CAPTION=Ввод значения
+    set archive=
+    call :Check_P archive %1 || exit /b 1
+    rem echo archive: !archive!
+
+    if not defined archive (
+        echo ERROR: Параметр archive не задан...
+        echo Использование: !BATNAME! архив [файлы]
+        set OK=
+    ) else (
+        call :ExtractFileName "!archive!" || exit /b 1
+        rem echo ExtractFileName: !ExtractFileName!
+        call :ExtractFileNameWithoutExt "!archive!" || exit /b 1
+        rem echo ExtractFileNameWithoutExt: !ExtractFileNameWithoutExt!
+        call :FileAttr "!archive!" || exit /b 1
+        rem echo FileAttr: !FileAttr!
+        rem echo FOLDER: !FOLDER!
+        call :FullFileName "!archive!" || exit /b 1
+        rem echo FullFileName: !FullFileName!
+        if "!FOLDER!"=="D" (
+            set RARCMD=rar a -r "!ExtractFileName!.rar" "!ExtractFileName!"
+        )
+        if "!FOLDER!"=="F" (
+            set RARCMD=rar a "!ExtractFileNameWithoutExt!.rar" "!archive!"
+        )
+        if not defined FOLDER (
+            set PN_CAPTION=Файлы
+            set files=*.*
+            call :Check_P files !files! || exit /b 1
+            rem echo files: !files!    
+            set RARCMD=rar a -r "!archive!.rar" "!files!"
+        )
     )
     echo RARCMD: !RARCMD!
-
-    !RARCMD!
 
     exit /b 0
 rem endfunction

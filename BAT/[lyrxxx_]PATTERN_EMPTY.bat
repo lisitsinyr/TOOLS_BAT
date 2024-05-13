@@ -21,19 +21,18 @@ setlocal enabledelayedexpansion
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1
     rem call :MAIN_SYNTAX || exit /b 1
-   
     call :MAIN_CHECK_PARAMETR %* || exit /b 1
-    
-    if "!P1!"=="" (
+    rem call :StopLogFile || exit /b 1
+
+    if not defined P1 (
         echo ERROR: Параметр P1 не задан...
         echo Использование: !BATNAME! P1 [P2] [...]
     ) else (
         call :MAIN %* || exit /b 1
     )
-    
-    rem call :StopLogFile || exit /b 1
-:Exit
-exit /b 0
+
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_CHECK_PARAMETR ()

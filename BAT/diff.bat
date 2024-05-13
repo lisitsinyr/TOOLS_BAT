@@ -14,7 +14,7 @@ setlocal enabledelayedexpansion
     rem WinMergeU.exe %1 %2
     wincmp3.exe %1 %2
 
-:Exit
-exit /b 0
+    exit /b 0
+:end
 
 rem ===================================================================

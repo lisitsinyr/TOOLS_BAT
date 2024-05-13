@@ -10,22 +10,23 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
+    set DEBUG=
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
-
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
-    rem set PN_CAPTION=Ввод значения P1
-    set P1=P1_default
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-    rem echo P1: !P1!
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
+    rem call :StopLogFile || exit /b 1
 
-    call :MAIN || exit /b 1
-
-:Exit
-exit /b 0
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
@@ -40,6 +41,25 @@ rem beginfunction
     set OK=yes
 
     mkdir %date:~6,4%%P1%%date:~3,2%%P1%%date:~0,2%
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CHECK_PARAMETR ()
+rem --------------------------------------------------------------------------------
+:MAIN_CHECK_PARAMETR
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem set PN_CAPTION=Ввод значения P1
+    set P1=P1_default
+    set P1=
+    call :Check_P P1 %1 || exit /b 1
+    rem echo P1: !P1!
 
     exit /b 0
 rem endfunction

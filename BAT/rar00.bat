@@ -18,8 +18,8 @@ setlocal enabledelayedexpansion
 
     call :MAIN || exit /b 1
 
-:Exit
-exit /b 0
+    exit /b 0
+:end
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
