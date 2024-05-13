@@ -54,10 +54,53 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
+    set DEBUG=
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
+
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
+    rem call :StopLogFile || exit /b 1
+
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
+rem procedure Check_tomlFile ()
+rem --------------------------------------------------------------------------------
+:Check_tomlFile
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    rem Проверка существования файла pyproject.toml
+    set tomlFile=pyproject.toml
+    if not exist "!tomlFile!" (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN ()
+rem --------------------------------------------------------------------------------
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set OK=yes
 
     echo Show packages from Poetry's runtime environment ...
     set COMMAND=self show
@@ -88,27 +131,9 @@ setlocal enabledelayedexpansion
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure Check_tomlFile ()
+rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
-:Check_tomlFile
-rem beginfunction
-    set FUNCNAME=%0
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    rem Проверка существования файла pyproject.toml
-    set tomlFile=pyproject.toml
-    if not exist "!tomlFile!" (
-        echo ERROR: Файл !tomlFile! не существует ...
-        set OK=
-    )
-:Exit
-exit /b 0
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
-rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN_CHECK_PARAMETR
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (

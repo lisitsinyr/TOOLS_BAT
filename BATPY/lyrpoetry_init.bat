@@ -42,37 +42,20 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
+    set DEBUG=
+
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
-    echo Creates a basic pyproject.toml file in the current directory ...
-    set COMMAND=init
-    
-    set APP=poetry
-    set OPTION= -v
-    set ARGS=
-    set APPRUN=
-    set OK=yes
-
-    call :Delete_tomlFile
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    if defined Read_N (
-        call :MAIN_FUNC
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    ) else (
-        set APPRUN=!APP! %*
-    )
-    echo APPRUN: !APPRUN!
-
-    if defined OK (
-        !APPRUN!
-    )
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
+    rem call :StopLogFile || exit /b 1
 
 :Exit
 exit /b 0
@@ -109,9 +92,51 @@ rem beginfunction
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set OK=yes
+
+    echo Creates a basic pyproject.toml file in the current directory ...
+    set COMMAND=init
+    
+    set APP=poetry
+    set OPTION= -v
+    set ARGS=
+    set APPRUN=
+    set OK=yes
+
+    call :Delete_tomlFile
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    if defined Read_N (
+        call :MAIN_FUNC
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+    ) else (
+        set APPRUN=!APP! %*
+    )
+    echo APPRUN: !APPRUN!
+
+    if defined OK (
+        !APPRUN!
+    )
+
+:Exit
+exit /b 0
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CHECK_PARAMETR ()
+rem --------------------------------------------------------------------------------
+:MAIN_CHECK_PARAMETR
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (

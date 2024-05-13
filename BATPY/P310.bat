@@ -13,44 +13,33 @@ setlocal enabledelayedexpansion
 
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     set LIB_BAT=!SCRIPTS_DIR!\LIB
-
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
-    rem set PN_CAPTION=Ввод значения
-    set P1=P1_default
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
-    rem echo P1: !P1%    
+    set DEBUG=
 
-    rem set PN_CAPTION=Ввод значения
-    set P2=P2_default
-    set P2=
-    call :Check_P P2 %2 || exit /b 1
-    rem echo P2: !P2%    
-
-    rem if "!P1!"=="" (
-    rem     echo ERROR: Параметр P1 не задан...
-    rem     echo Использование: !BATNAME% P1 [P2] [...]
-    rem ) else (
-    rem     call :MAIN_FUNC
-    rem )
-
-    echo Использование: !BATNAME% [P1] [P2] [...]
-    call :MAIN_FUNC %1 %2 %3 %4 %5 %6 %7 %8 %9
+    rem call :MAIN_INIT %0 || exit /b 1
+    rem call :MAIN_SET || exit /b 1
+    rem call :StartLogFile || exit /b 1
+    rem call :MAIN_SYNTAX || exit /b 1
+    rem call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN %* || exit /b 1
+    rem call :StopLogFile || exit /b 1
 
 :Exit
 exit /b 0
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
+:MAIN
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    echo Использование: !BATNAME% [P1] [P2] [...]
 
     cmd /k "d:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\VENV\P310\Scripts\activate.bat"
 

@@ -55,8 +55,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    call :MAIN %* || exit /b 1
-
     if defined OK (
         echo Создание проекта !name! ...
         if exist "!name!"\ (
