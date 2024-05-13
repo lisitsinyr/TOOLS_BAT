@@ -58,56 +58,40 @@ rem beginfunction
 
         echo Создание проекта !ProjectName! ...
         echo Directory: !Directory!
-        if defined Directory (
-            if exist "!Directory!"\ (
-                echo ERROR: Каталог проекта "!Directory!" существует...
-                set delete=
-                set PN_CAPTION=Удалить?
-                call :Read_F delete "yN" || exit /b 1
-                if defined delete (
-                    echo Удаление каталога проекта "!Directory!"
-                    rmdir "!Directory!" /s
-                    rem --------------------------
-                    rem POETRY
-                    rem --------------------------
-                    call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-                )
-            ) else (
+        if exist "!Directory!"\ (
+            echo ERROR: Каталог проекта "!Directory!" существует...
+            set delete=
+            set PN_CAPTION=Удалить?
+            call :Read_F delete "yN" || exit /b 1
+            if defined delete (
+                echo Удаление каталога проекта "!Directory!"
+                rmdir "!Directory!" /s
+                mkdir "!Directory!"
+            )
 
-                rem --------------------------
-                rem POETRY
-                rem --------------------------
-                set tomlFile="!Directory!"\pyproject.toml
-                call :Check_tomlFile
-                if defined OK (
-                    call lyrpoetry_init.bat --name=!ProjectName!
-                ) else (
-                    call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-                )
+            set tomlFile="!Directory!"\pyproject.toml
+            call :Check_tomlFile
+            if defined OK (
+                call lyrpoetry_init.bat --name=!ProjectName!
+            ) else (
+                call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
             )
         ) else (
             rem --------------------------
             rem POETRY
             rem --------------------------
-            set tomlFile=pyproject.toml
-            call :Check_tomlFile
-            if defined OK (
-                call lyrpoetry_init.bat --name=!ProjectName!
-            ) else (
-                call lyrpoetry_new.bat --name=!ProjectName! --src
-            )
+            call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
         )
 
+        cd "!Directory!"
         rem --------------------------
         rem Структура каталогов
         rem --------------------------
-        cd "!Directory!"
         call updatePROJECT_PY.bat !ProjectName!
 
         rem --------------------------
         rem GIT
         rem --------------------------
-        rem call lyrgit_init.bat "!Directory!"
         call lyrgit_init.bat .\
     )
 
@@ -156,17 +140,18 @@ rem beginfunction
     set ProjectName=test
     call :Read_P ProjectName %1 || exit /b 1
     rem echo ProjectName: !ProjectName!
+    if not defined ProjectName (
+        echo ERROR: ProjectName not defined ...
+        set OK=
+    )
 
     set PN_CAPTION=Каталог проекта
     set Directory=folder folder
     call :Read_P Directory %1 || exit /b 1
     echo Directory: !Directory!
-
-    if not defined ProjectName (
-        echo ERROR: ProjectName not defined ...
+    if not defined Directory (
+        echo ERROR: Directory not defined ...
         set OK=
-    ) else (
-        set OK=yes
     )
 
     exit /b 0
