@@ -122,9 +122,16 @@ exit /b 0
 :__SET_CHECK_REPO
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
+:__SET_CHECK_PROJECT
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
 :__SET_LOG
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
+:__SET_KIX
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+
 rem =================================================
 rem LYRConst.bat
 rem =================================================
@@ -156,6 +163,15 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :FileAttr
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FileSize
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir
@@ -195,6 +211,9 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey
