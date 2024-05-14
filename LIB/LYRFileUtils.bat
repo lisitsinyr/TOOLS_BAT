@@ -219,9 +219,9 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CheckDir (DIRECTORY)
+rem procedure CreateDir (DIRECTORY)
 rem --------------------------------------------------------------------------------
-:CheckDir
+:CreateDir
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
@@ -234,22 +234,22 @@ rem beginfunction
             mkdir "!DIRECTORY!"
             if not "!ERRORLEVEL!"=="0" (
                 echo ERROR: Dir !DIRECTORY! not created...
-                set CheckDir=
+                set CreateDir=
                 exit /b 1
             )
         )
-        set CheckDir=!DIRECTORY!
+        set CreateDir=!DIRECTORY!
     ) else (
-        set CheckDir=
+        set CreateDir=
     )
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CheckFile (FILENAME)
+rem procedure CreateFile (FILENAME)
 rem --------------------------------------------------------------------------------
-:CheckFile
+:CreateFile
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
@@ -266,9 +266,31 @@ rem beginfunction
             rem %touchRUN%
             D:\TOOLS\EXE\touch.exe "!FILENAME!"
         )
-        set CheckFile="!FILENAME!"
+        set CreateFile="!FILENAME!"
     ) else (
-        set CheckFile=
+        set CreateFile=
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure CheckFile (FILENAME)
+rem --------------------------------------------------------------------------------
+:CheckFile
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set CheckFile=
+    set FILENAME=%~1
+    rem echo FILENAME: !FILENAME!
+    if defined FILENAME (
+        if exist "!FILENAME!" (
+            set CheckFile="!FILENAME!"
+        )
     )
 
     exit /b 0

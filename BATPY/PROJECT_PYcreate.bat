@@ -74,12 +74,15 @@ rem beginfunction
                 )
 
                 set tomlFile="!Directory!"\pyproject.toml
-                call :Check_tomlFile
-                if defined OK (
+                call :CheckFile tomlFile
+                if defined CheckFile (
+                    set OK=yes
                     cd /D "!Directory!"
                     call lyrpoetry_init.bat --name=!ProjectName!
                     cd ..\
                 ) else (
+                    set OK=
+                    echo ERROR: Файл !tomlFile! не существует ...
                     call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
                     cd /D "!Directory!"
                     call lyrpoetry_init.bat --name=!ProjectName!
@@ -112,27 +115,6 @@ rem beginfunction
         )
     )
 
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure Check_tomlFile ()
-rem --------------------------------------------------------------------------------
-:Check_tomlFile
-rem beginfunction
-    set FUNCNAME=%0
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    rem Проверка существования файла pyproject.toml
-    rem set tomlFile=pyproject.toml
-    if not exist "!tomlFile!" (
-        echo ERROR: Файл !tomlFile! не существует ...
-        set OK=
-    ) else (
-        set OK=yes
-    )
-    
     exit /b 0
 rem endfunction
 
@@ -352,7 +334,10 @@ exit /b 0
 :FileSize
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
-:CheckDir
+:CreateDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CheckFile

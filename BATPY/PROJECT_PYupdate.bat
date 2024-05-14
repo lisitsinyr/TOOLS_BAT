@@ -59,70 +59,70 @@ rem beginfunction
         echo ProjectName: !ProjectName!
 
         set LDir=.devcontainer
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
 
         set LDir=.idea
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=.venv
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=.vscode
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=BUILD
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=CONFIG
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=DATA
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=DIST
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=DOC
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=EXE
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=LOG
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=NOTEBOOKS
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=OUT
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=SRC
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=SRC\!ProjectName!
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=TESTS
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
         set LDir=WORK
-        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
-        call :CheckDir !LDir!
+        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+        call :CreateDir !LDir!
 
         set LFileName=.gitmodules
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
         set LFileName=.pypirc
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
         set LFileName=src\test\__init__.py
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
         set LFileName=tests\__init__.py
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
 
         set DIR_TO=!CurrentDir!
         rem echo DIR_TO: !DIR_TO!
@@ -130,34 +130,34 @@ rem beginfunction
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
         rem echo DIR_FROM: !DIR_FROM!
         set LFileName=lyrgit_push_main.bat
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
         set LFileName=lyrgit_init.bat
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY
         rem echo DIR_FROM: !DIR_FROM!
         set LFileName=.gitignore
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
         set LFileName=LICENSE
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\BATPY
         rem echo DIR_FROM: !DIR_FROM!
         set LFileName=PROJECT_PYupdate.bat
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
         
         set LFileName=UPDATE_!ProjectName!.bat
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
 
         set LFileName=README.md
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
         call :FileSize !LFileName!
         if !FileSize!==0 (
             echo !ProjectName! >> !LFileName!
@@ -166,8 +166,8 @@ rem beginfunction
         )
 
         set LFileName=POETRY.ini
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
         call :FileSize !LFileName!
         if !FileSize!==0 (
             echo # Это простой файл с настройками >> !LFileName!
@@ -175,8 +175,8 @@ rem beginfunction
         )
 
         set LFileName=PROJECT.ini
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
         call :FileSize !LFileName!
         if !FileSize!==0 (
             echo # Это простой файл с настройками >> !LFileName!
@@ -184,8 +184,8 @@ rem beginfunction
         )
 
         set LFileName=REPO.ini
-        call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        call :CheckFile !LFileName!
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        call :CreateFile !LFileName!
         call :FileSize !LFileName!
         if !FileSize!==0 (
             echo # Это простой файл с настройками >> !LFileName!
@@ -403,7 +403,10 @@ exit /b 0
 :FileSize
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
-:CheckDir
+:CreateDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CheckFile

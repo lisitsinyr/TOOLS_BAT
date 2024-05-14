@@ -69,6 +69,7 @@ setlocal enabledelayedexpansion
     call :CurrentDir || exit /b 1
     rem  echo CurrentDir: !CurrentDir!
 
+    set OK=yes
     rem Количество аргументов
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
@@ -76,19 +77,27 @@ setlocal enabledelayedexpansion
     set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
+    set tomlFile=pyproject.toml
+    call :CheckFile tomlFile
+    if not defined CheckFile (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
 
-    set OK=yes
     rem call :MAIN_INIT %0 || exit /b 1
     rem call :MAIN_SET || exit /b 1
     rem call :StartLogFile || exit /b 1
     rem call :MAIN_SYNTAX || exit /b 1
-    if not defined Read_N (
+    if defined OK if not defined Read_N (
         call :MAIN_CHECK_PARAMETR %* || exit /b 1
     )
-    call :MAIN %* || exit /b 1
+    if defined OK (
+        call :MAIN %* || exit /b 1
+    )
     rem call :StopLogFile || exit /b 1
 
     exit /b 0
+
 :end
 
 rem --------------------------------------------------------------------------------
@@ -104,20 +113,14 @@ rem beginfunction
     echo Adds a new dependency to pyproject.toml ...
     set COMMAND=add
 
-    call :Check_tomlFile
-
-    if defined OK (
-        if not defined Read_N (
-            set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-        ) else (
-            set APPRUN=!APP! !COMMAND!!OPTION! %*
-        )
-        echo APPRUN: !APPRUN!
-
-        if defined OK (
-            !APPRUN!
-        )
+    if not defined Read_N (
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+    ) else (
+        set APPRUN=!APP! !COMMAND!!OPTION! %*
     )
+    echo APPRUN: !APPRUN!
+
+    !APPRUN!
 
     exit /b 0
 rem endfunction
@@ -142,14 +145,14 @@ rem beginfunction
     if defined group (
         set OPTION=!OPTION! --group !group!
     )
-    set dev=
+    set dev=N
     set PN_CAPTION=Add as a development dependency. (Deprecated) Use --group=dev instead
     call :Read_F dev "yN" || exit /b 1
     rem echo dev: !dev!
     if defined editable (
         set OPTION=!OPTION! --dev
     )
-    set editable=
+    set editable=N
     set PN_CAPTION=Add vcs/path dependencies as editable
     call :Read_F editable "yN" || exit /b 1
     rem echo editable: !editable!
@@ -163,7 +166,7 @@ rem beginfunction
     if defined extras  (
         set OPTION=!OPTION! --extras !extras!
     )
-    set optional=
+    set optional=N
     set PN_CAPTION=Add as an optional dependency
     call :Read_F optional "yN" || exit /b 1
     rem echo optional: !optional!
@@ -191,21 +194,21 @@ rem beginfunction
     if defined source (
         set OPTION=!OPTION! --source !source!
     )
-    set allow-prereleases=
+    set allow-prereleases=N
     set PN_CAPTION=Accept prereleases
     call :Read_F allow-prereleases "yN" || exit /b 1
     rem echo allow-prereleases: !allow-prereleases!
     if defined allow-prereleases (
         set OPTION=!OPTION! --allow-prereleases
     )
-    set dry-run=
+    set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables -verbose^)
     call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
-    set lock=
+    set lock=N
     set PN_CAPTION=Do not perform install [only update the lockfile]
     call :Read_F lock "yN" || exit /b 1
     rem echo lock: !lock!
@@ -218,7 +221,7 @@ rem beginfunction
     rem -------------------------------------
     rem Проверка на обязательные аргументы
     set names=
-    set PN_CAPTION=names
+    set PN_CAPTION=The packages to add
     call :Read_P names "" || exit /b 1
     rem echo names: !names!
     if defined names (
@@ -231,43 +234,48 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-rem --------------------------------------------------------------------------------
-rem procedure Check_tomlFile ()
-rem --------------------------------------------------------------------------------
-:Check_tomlFile
-rem beginfunction
-    set FUNCNAME=%0
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    rem Проверка существования файла pyproject.toml
-    set tomlFile=pyproject.toml
-    if not exist "!tomlFile!" (
-        echo ERROR: Файл !tomlFile! не существует ...
-        set OK=
-    )
-    
-    exit /b 0
-rem endfunction
-
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
-:Check_P
-%LIB_BAT%\LYRSupport.bat %*
+rem __SET_LIB.bat
+rem =================================================
+:__SET_VAR_SCRIPT
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:Read_P
-%LIB_BAT%\LYRSupport.bat %*
+:__SET_VAR_DEFAULT
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:Read_F
-%LIB_BAT%\LYRSupport.bat %*
+:__SET_VAR_PROJECTS
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:Read_N
-%LIB_BAT%\LYRSupport.bat %*
+:__SET_CHECK_REPO
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:PressAnyKey
-%LIB_BAT%\LYRSupport.bat %*
+:__SET_CHECK_PROJECT
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
+:__SET_LOG
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+:__SET_KIX
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRConst.bat
+rem =================================================
+rem =================================================
+rem LYRDateTime.bat
+rem =================================================
+:YYYYMMDDHHMMSS
+%LIB_BAT%\LYRDateTime.bat %*
+exit /b 0
+:DateTime
+%LIB_BAT%\LYRDateTime.bat %*
+exit /b 0
+rem =================================================
+rem LYRFileUtils.bat
+rem =================================================
 :ExtractFileDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
@@ -286,7 +294,61 @@ exit /b 0
 :FileAttr
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+:FileSize
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateFile
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckFile
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :CurrentDir
 %LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+rem =================================================
+rem LYRLog.bat
+rem =================================================
+:FormatStr
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:AddLog
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:AddLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:StartLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:StopLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+rem =================================================
+rem LYRStrUtils.bat
+rem =================================================
+rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Check_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

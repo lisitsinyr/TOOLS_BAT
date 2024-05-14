@@ -61,7 +61,10 @@ exit /b 0
 :FileSize
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
-:CheckDir
+:CreateDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CheckFile
