@@ -147,7 +147,7 @@ rem beginfunction
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\BATPY
         rem echo DIR_FROM: !DIR_FROM!
-        set LFileName=updatePROJECT_PY.bat
+        set LFileName=PROJECT_PYupdate.bat
         call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
