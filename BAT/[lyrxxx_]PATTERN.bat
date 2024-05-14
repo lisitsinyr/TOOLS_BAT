@@ -14,20 +14,23 @@ rem ----------------------------------------------------------------------------
     echo Start !BATNAME! ...
 
     set DEBUG=
-
-    call :CurrentDir || exit /b 1
-    rem  echo CurrentDir: !CurrentDir!
-
     set OK=yes
+
     call :MAIN_INIT %0 || exit /b 1
-    call :MAIN_SET || exit /b 1
+    call :__SET_MAIN %0 || exit /b 1
+    echo CURRENT_DIR: !CURRENT_DIR!
     call :StartLogFile || exit /b 1
-    call :MAIN_SYNTAX || exit /b 1
-    call :MAIN_CHECK_PARAMETR %* || exit /b 1
-    call :MAIN %* || exit /b 1
+    call :MAIN_SET || exit /b 1
+    if defined OK if not defined Read_N (
+        call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    )
+    if defined OK (
+        call :MAIN %* || exit /b 1
+    )
     call :StopLogFile || exit /b 1
 
     exit /b 0
+
 :end
 rem --------------------------------------------------------------------------------
 
@@ -40,42 +43,19 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    rem -------------------------------------------------------------------
-    rem PROJECTS - имя проекта
-    rem -------------------------------------------------------------------
-    set PROJECTS=PROJECTS_BAT
-
-    rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR - каталог проектов
-    rem -------------------------------------------------------------------
-    set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
-    if "!SCRIPTS_DIR!" == "" (
+    if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
         set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
         set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     )
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-    rem -------------------------------------------------------------------
-    set SCRIPT_FULLFILENAME=%1
-    rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
-    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
-  
-    rem -------------------------------------------------------------------
-    rem PROJECTS_DIR - каталог проекта
-    rem -------------------------------------------------------------------
-    set PROJECTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\!PROJECTS!
-    rem echo PROJECTS_DIR: !PROJECTS_DIR!
-
     rem -------------------------------------------------------------------
     rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
-    if "!LIB_BAT!" == "" (
+    if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\LIB
         rem echo LIB_BAT: !LIB_BAT!
     )
@@ -83,11 +63,10 @@ rem beginfunction
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 0
     )
-
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
-    if "!SCRIPTS_DIR_KIX!" == "" (
+    if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
@@ -95,11 +74,12 @@ rem beginfunction
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
     exit /b 0
+
 rem endfunction
 
-rem -----------------------------------------------
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_SET ()
-rem -----------------------------------------------
+rem --------------------------------------------------------------------------------
 :MAIN_SET
 rem beginfunction
     set FUNCNAME=%0
@@ -107,33 +87,24 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :__SET_VAR_DEFAULT !DEBUG! || exit /b 1
-    call :__SET_VAR_SCRIPT !SCRIPT_FULLFILENAME! || exit /b 1
-    call :__SET_VAR_PROJECTS || exit /b 1
-    call :__SET_CHECK_REPO || exit /b 1
-    call :__SET_CHECK_PROJECT || exit /b 1
-    rem -------------------------------------------------------------------
-    rem LOG_DT_FORMAT -
-    rem set LOG_DT_FORMAT=
-    rem -------------------------------------------------------------------
-    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
-    rem set LOG_FILENAME_FORMAT=
-    rem -------------------------------------------------------------------
-    rem LOG_FILE_ADD - Параметры журнала [0]
-    if "!LOG_FILE_ADD!"=="" set LOG_FILE_ADD=0
-    rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
-    rem -------------------------------------------------------------------
-    rem LOG_FILE_DT - Параметры журнала [0]
-    if "!LOG_FILE_DT!"=="" set LOG_FILE_DT=0
-    rem  -------------------------------------------------------------------
-    rem LOG_DIR - Каталог журнала [каталог]
-    rem set LOG_DIR=
-    rem -------------------------------------------------------------------
-    rem LOG_FILENAME - Файл журнала [имя]
-    rem set LOG_FILENAME=
-    call :__SET_LOG || exit /b 1
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    set APP=poetry
+    set OPTION= -v --no-ansi
+    set ARGS=
+    set APPRUN=
+
+    set tomlFile=pyproject.toml
+    call :CheckFile tomlFile
+    if not defined CheckFile (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
 
     exit /b 0
+
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -153,8 +124,8 @@ rem beginfunction
         set PN_CAPTION=Ввод значения
     )
     set P1=P1_default
-    set P1=
-    call :Check_P P1 %1 || exit /b 1
+    rem call :Check_P P1 %1 || exit /b 1
+    call :Check_P P1 P1_default || exit /b 1
     rem echo P1: !P1!
 
     rem -------------------------------------
@@ -177,19 +148,7 @@ rem beginfunction
     )
 
     exit /b 0
-rem endfunction
 
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_SYNTAX ()
-rem --------------------------------------------------------------------------------
-:MAIN_SYNTAX
-rem beginfunction
-    set FUNCNAME=%0
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    exit /b 0
 rem endfunction
 
 rem =================================================
@@ -202,14 +161,13 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    if defined OK (
-        call :MAIN_FUNC || exit /b 1
-    )
+    call :MAIN_FUNC || exit /b 1
 
     rem call :Pause !SLEEP! || exit /b 1
     rem call :PressAnyKey || exit /b 1
 
     exit /b 0
+
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -230,6 +188,9 @@ rem ФУНКЦИИ LIB
 rem =================================================
 rem __SET_LIB.bat
 rem =================================================
+:__SET_MAIN
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
 :__SET_VAR_SCRIPT
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
