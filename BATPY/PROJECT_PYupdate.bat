@@ -140,10 +140,10 @@ rem beginfunction
         rem echo DIR_FROM: !DIR_FROM!
         set LFileName=.gitignore
         call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!"
+        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
         set LFileName=LICENSE
         call :AddLog !loAll! !TEXT! CheckFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!"
+        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\BATPY
         rem echo DIR_FROM: !DIR_FROM!

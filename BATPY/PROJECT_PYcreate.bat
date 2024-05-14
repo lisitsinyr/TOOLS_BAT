@@ -76,12 +76,12 @@ rem beginfunction
                 set tomlFile="!Directory!"\pyproject.toml
                 call :Check_tomlFile
                 if defined OK (
-                    cd "!Directory!"
+                    cd /D "!Directory!"
                     call lyrpoetry_init.bat --name=!ProjectName!
                     cd ..\
                 ) else (
                     call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-                    cd "!Directory!"
+                    cd /D "!Directory!"
                     call lyrpoetry_init.bat --name=!ProjectName!
                     cd ..\
                 )
@@ -90,13 +90,13 @@ rem beginfunction
                 rem POETRY
                 rem --------------------------
                 call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-                cd "!Directory!"
+                cd /D "!Directory!"
                 call lyrpoetry_init.bat --name=!ProjectName!
                 cd ..\
             )
         )
 
-        cd "!Directory!"
+        cd /D "!Directory!"
         rem --------------------------
         rem Структура каталогов
         rem --------------------------

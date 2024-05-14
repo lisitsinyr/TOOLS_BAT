@@ -15,6 +15,9 @@ rem ----------------------------------------------------------------------------
 
     set DEBUG=
 
+    call :CurrentDir || exit /b 1
+    rem  echo CurrentDir: !CurrentDir!
+
     set OK=yes
     call :MAIN_INIT %0 || exit /b 1
     call :MAIN_SET || exit /b 1
