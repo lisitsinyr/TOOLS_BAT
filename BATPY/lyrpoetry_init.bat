@@ -118,7 +118,7 @@ rem beginfunction
     echo Creates a basic pyproject.toml file in the current directory ...
     set COMMAND=init
     
-    call :Delete_tomlFile
+    rem call :Delete_tomlFile
 
     if defined OK (
         if not defined Read_N (
