@@ -270,7 +270,7 @@ rem beginfunction
     set PROJECT_NAME=
     rem -------------------------------------------------------------------
     rem PROJECT_INI - Файл с параметрами проекта
-    set PROJECT_INI=REPO.ini
+    set PROJECT_INI=PROJECT.ini
     rem echo PROJECT_INI [PROJECT.ini]: !PROJECT_INI!
     rem -------------------------------------------------------------------
     rem Проверка существования файла PROJECT.ini

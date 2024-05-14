@@ -33,15 +33,14 @@ setlocal enabledelayedexpansion
     rem echo Read_N: !Read_N!
 
     set OK=yes
-    rem call :MAIN_INIT %0 || exit /b 1
-    rem call :MAIN_SET || exit /b 1
-    call :__SET_CHECK_PROJECT || exit /b 1
-    echo PROJECT_NAME: !PROJECT_NAME!
-    rem call :StartLogFile || exit /b 1
+    rem echo OK: !OK!
+    call :MAIN_INIT %0 || exit /b 1
+    call :MAIN_SET || exit /b 1
+    call :StartLogFile || exit /b 1
     rem call :MAIN_SYNTAX || exit /b 1
     call :MAIN_CHECK_PARAMETR %* || exit /b 1
     call :MAIN %* || exit /b 1
-    rem call :StopLogFile || exit /b 1
+    call :StopLogFile || exit /b 1
 
 :Exit
 exit /b 0
@@ -59,50 +58,105 @@ rem beginfunction
     if defined OK (
         echo ProjectName: !ProjectName!
 
-        call :CheckDir .devcontainer
-        rem call :CheckDir .git
-        call :CheckDir .idea
-        call :CheckDir .venv
-        call :CheckDir .vscode
-        call :CheckDir BUILD
-        call :CheckDir CONFIG
-        call :CheckDir DATA
-        call :CheckDir DIST
-        call :CheckDir DOC
-        call :CheckDir EXE
-        call :CheckDir LOG
-        call :CheckDir NOTEBOOKS
-        call :CheckDir OUT
-        call :CheckDir SRC
-        call :CheckDir SRC\!ProjectName!
-        call :CheckDir TESTS
-        call :CheckDir WORK
+        set LDir=.devcontainer
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
 
-        call :CheckFile .gitmodules
-        call :CheckFile .pypirc
-        call :CheckFile LICENSE
-        call :CheckFile src\test\__init__.py
-        call :CheckFile tests\__init__.py
+        set LDir=.idea
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=.venv
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=.vscode
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=BUILD
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=CONFIG
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=DATA
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=DIST
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=DOC
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=EXE
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=LOG
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=NOTEBOOKS
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=OUT
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=SRC
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=SRC\!ProjectName!
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=TESTS
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+        set LDir=WORK
+        call :AddLog !loAll! !TEXT! CheckDir !LDir! || exit /b 1
+        call :CheckDir !LDir!
+
+        set LFileName=.gitmodules
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        call :CheckFile !LFileName!
+        set LFileName=.pypirc
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        call :CheckFile !LFileName!
+        set LFileName=LICENSE
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        call :CheckFile !LFileName!
+        set LFileName=src\test\__init__.py
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        call :CheckFile !LFileName!
+        set LFileName=tests\__init__.py
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        call :CheckFile !LFileName!
 
         set DIR_TO=!CurrentDir!
         rem echo DIR_TO: !DIR_TO!
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
         rem echo DIR_FROM: !DIR_FROM!
-        copy "!DIR_FROM!\lyrgit_push_main.bat" "!DIR_TO!" > NUL
-        copy "!DIR_FROM!\lyrgit_init.bat" "!DIR_TO!"      > NUL
+        set LFileName=lyrgit_push_main.bat
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+        set LFileName=lyrgit_init.bat
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY
         rem echo DIR_FROM: !DIR_FROM!
-        copy "!DIR_FROM!\.gitignore" "!DIR_TO!" > NUL
+        set LFileName=.gitignore
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\BATPY
         rem echo DIR_FROM: !DIR_FROM!
-        copy "!DIR_FROM!\updatePROJECT_PY.bat" "!DIR_TO!" > NUL
+        set LFileName=updatePROJECT_PY.bat
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
-        call :CheckFile UPDATE_!ProjectName!.bat
+        set LFileName=UPDATE_!ProjectName!.bat
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
+        call :CheckFile !LFileName!
 
         set LFileName=README.md
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
         call :CheckFile !LFileName!
         call :FileSize !LFileName!
         if !FileSize!==0 (
@@ -112,6 +166,7 @@ rem beginfunction
         )
 
         set LFileName=POETRY.ini
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
         call :CheckFile !LFileName!
         call :FileSize !LFileName!
         if !FileSize!==0 (
@@ -120,6 +175,7 @@ rem beginfunction
         )
 
         set LFileName=PROJECT.ini
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
         call :CheckFile !LFileName!
         call :FileSize !LFileName!
         if !FileSize!==0 (
@@ -128,6 +184,7 @@ rem beginfunction
         )
 
         set LFileName=REPO.ini
+        call :AddLog !loAll! !TEXT! CheckDir !LFileName! || exit /b 1
         call :CheckFile !LFileName!
         call :FileSize !LFileName!
         if !FileSize!==0 (
@@ -139,6 +196,111 @@ rem beginfunction
     exit /b 0
 :end
 
+rem -----------------------------------------------
+rem procedure MAIN_INIT (FULLFILENAME, DEBUG)
+rem -----------------------------------------------
+:MAIN_INIT
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem -------------------------------------------------------------------
+    rem PROJECTS - имя проекта
+    rem -------------------------------------------------------------------
+    set PROJECTS=PROJECTS_BAT
+
+    rem -------------------------------------------------------------------
+    rem PROJECTS_LYR_DIR - каталог проектов
+    rem -------------------------------------------------------------------
+    set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR - Каталог скриптов
+    rem -------------------------------------------------------------------
+    if "!SCRIPTS_DIR!" == "" (
+        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
+        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
+    )
+    rem -------------------------------------------------------------------
+    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
+    rem -------------------------------------------------------------------
+    set SCRIPT_FULLFILENAME=%1
+    rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
+    rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
+    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+  
+    rem -------------------------------------------------------------------
+    rem PROJECTS_DIR - каталог проекта
+    rem -------------------------------------------------------------------
+    set PROJECTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\!PROJECTS!
+    rem echo PROJECTS_DIR: !PROJECTS_DIR!
+
+    rem -------------------------------------------------------------------
+    rem LIB_BAT - каталог библиотеки скриптов
+    rem -------------------------------------------------------------------
+    if "!LIB_BAT!" == "" (
+        set LIB_BAT=!SCRIPTS_DIR!\LIB
+        rem echo LIB_BAT: !LIB_BAT!
+    )
+    if not exist !LIB_BAT!\ (
+        echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
+        exit /b 0
+    )
+
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
+    rem -------------------------------------------------------------------
+    if "!SCRIPTS_DIR_KIX!" == "" (
+        set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
+        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
+        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
+    )
+    rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure MAIN_SET ()
+rem -----------------------------------------------
+:MAIN_SET
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :__SET_VAR_DEFAULT !DEBUG! || exit /b 1
+    call :__SET_VAR_SCRIPT !SCRIPT_FULLFILENAME! || exit /b 1
+    call :__SET_VAR_PROJECTS || exit /b 1
+    call :__SET_CHECK_REPO || exit /b 1
+    call :__SET_CHECK_PROJECT || exit /b 1
+    rem -------------------------------------------------------------------
+    rem LOG_DT_FORMAT -
+    rem set LOG_DT_FORMAT=
+    rem -------------------------------------------------------------------
+    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
+    rem set LOG_FILENAME_FORMAT=
+    rem -------------------------------------------------------------------
+    rem LOG_FILE_ADD - Параметры журнала [0]
+    if "!LOG_FILE_ADD!"=="" set LOG_FILE_ADD=0
+    rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
+    rem -------------------------------------------------------------------
+    rem LOG_FILE_DT - Параметры журнала [0]
+    if "!LOG_FILE_DT!"=="" set LOG_FILE_DT=0
+    rem  -------------------------------------------------------------------
+    rem LOG_DIR - Каталог журнала [каталог]
+    rem set LOG_DIR=
+    rem -------------------------------------------------------------------
+    rem LOG_FILENAME - Файл журнала [имя]
+    rem set LOG_FILENAME=
+    call :__SET_LOG || exit /b 1
+
+    exit /b 0
+rem endfunction
+
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
@@ -149,6 +311,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo OK: !OK!
+
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
@@ -156,19 +320,24 @@ rem beginfunction
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
-    set PN_CAPTION=Имя проекта
-    set ProjectName=test
-    call :Read_P ProjectName %1 || exit /b 1
-    rem echo ProjectName: !ProjectName!
+    if not defined PROJECT_NAME (
+        set PN_CAPTION=Имя проекта
+        set ProjectName=test
+        call :Read_P ProjectName %1 || exit /b 1
+        rem echo ProjectName: !ProjectName!
 
-    if not defined ProjectName (
-        echo ERROR: ProjectName not defined ...
-        set OK=
+        if not defined ProjectName (
+            echo ERROR: ProjectName not defined ...
+            set OK=
+        ) else (
+            set OK=yes
+        )
     ) else (
-        set OK=yes
+        set ProjectName=!PROJECT_NAME!
     )
 
     exit /b 0
+
 rem endfunction
 
 rem =================================================

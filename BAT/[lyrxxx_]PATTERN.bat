@@ -108,6 +108,7 @@ rem beginfunction
     call :__SET_VAR_SCRIPT !SCRIPT_FULLFILENAME! || exit /b 1
     call :__SET_VAR_PROJECTS || exit /b 1
     call :__SET_CHECK_REPO || exit /b 1
+    call :__SET_CHECK_PROJECT || exit /b 1
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT -
     rem set LOG_DT_FORMAT=
