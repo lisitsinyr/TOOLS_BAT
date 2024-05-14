@@ -15,9 +15,16 @@ exit /b 0
 :__SET_CHECK_REPO
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
+:__SET_CHECK_PROJECT
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
 :__SET_LOG
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
+:__SET_KIX
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+
 rem =================================================
 rem LYRConst.bat
 rem =================================================

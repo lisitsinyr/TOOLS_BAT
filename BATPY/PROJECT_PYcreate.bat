@@ -1,16 +1,17 @@
 @echo off
 rem -------------------------------------------------------------------
-rem createPROJECT_PY.bat
+rem PROJECT_PYcreate.bat
 rem -------------------------------------------------------------------
 rem 
 rem Description:
-rem   Создание проекта
+rem   Создание проекта PROJECT_PY
 rem 
 rem Usage:
-rem   createPROJECT_PY <name>
+rem   setupPROJECT_PY.bat <ProjectName> <directory>
 rem 
 rem Arguments:
-rem   name - Имя проекта
+rem   name - имя проекта
+rem   ProjectName - каталог проекта
 rem 
 rem -------------------------------------------------------------------
 chcp 1251>NUL
@@ -56,6 +57,9 @@ rem beginfunction
 
     if defined OK (
 
+        if exist "PROJECT.ini" (
+        )
+
         echo Создание проекта !ProjectName! ...
         echo Directory: !Directory!
         if exist "!Directory!"\ (
@@ -89,7 +93,7 @@ rem beginfunction
         rem --------------------------
         rem Структура каталогов
         rem --------------------------
-        call updatePROJECT_PY.bat !ProjectName!
+        call PROJECT_PYupdate.bat !ProjectName!
 
         rem --------------------------
         rem GIT
@@ -166,21 +170,45 @@ rem endfunction
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
-:Check_P
-%LIB_BAT%\LYRSupport.bat %*
+rem __SET_LIB.bat
+rem =================================================
+:__SET_VAR_SCRIPT
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:Read_P
-%LIB_BAT%\LYRSupport.bat %*
+:__SET_VAR_DEFAULT
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:Read_F
-%LIB_BAT%\LYRSupport.bat %*
+:__SET_VAR_PROJECTS
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:Read_N
-%LIB_BAT%\LYRSupport.bat %*
+:__SET_CHECK_REPO
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:PressAnyKey
-%LIB_BAT%\LYRSupport.bat %*
+:__SET_CHECK_PROJECT
+%LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
+:__SET_LOG
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+:__SET_KIX
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRConst.bat
+rem =================================================
+rem =================================================
+rem LYRDateTime.bat
+rem =================================================
+:YYYYMMDDHHMMSS
+%LIB_BAT%\LYRDateTime.bat %*
+exit /b 0
+:DateTime
+%LIB_BAT%\LYRDateTime.bat %*
+exit /b 0
+rem =================================================
+rem LYRFileUtils.bat
+rem =================================================
 :ExtractFileDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
@@ -199,7 +227,55 @@ exit /b 0
 :FileAttr
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+:FileSize
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckFile
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :CurrentDir
 %LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+rem =================================================
+rem LYRLog.bat
+rem =================================================
+:FormatStr
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:AddLog
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:AddLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:StartLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+:StopLogFile
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
+rem =================================================
+rem LYRStrUtils.bat
+rem =================================================
+rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Check_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

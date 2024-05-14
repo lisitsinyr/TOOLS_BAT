@@ -88,6 +88,7 @@ rem     :__SET_VAR_SCRIPT
 rem     :__SET_VAR_DEFAULT
 rem     :__SET_VAR_PROJECTS
 rem     :__SET_CHECK_REPO
+rem     :__SET_CHECK_PROJECT
 rem     :__SET_LOG
 rem     :__SET_KIX
 rem -------------------------------------------------------------------
@@ -250,6 +251,41 @@ rem beginfunction
         rem exit /b 1
     )
     rem echo REPO_NAME: !REPO_NAME!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure __SET_CHECK_PROJECT ()
+rem --------------------------------------------------------------------------------
+:__SET_CHECK_PROJECT
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem -------------------------------------------------------------------
+    rem PROJECT_NAME - Имя проекта
+    set PROJECT_NAME=
+    rem -------------------------------------------------------------------
+    rem PROJECT_INI - Файл с параметрами проекта
+    set PROJECT_INI=REPO.ini
+    rem echo PROJECT_INI [PROJECT.ini]: !PROJECT_INI!
+    rem -------------------------------------------------------------------
+    rem Проверка существования файла PROJECT.ini
+    if exist !PROJECT_INI! (
+        for /f "eol=# delims== tokens=1,2" %%i in (%PROJECT_INI%) do (
+            rem В переменной i - ключ
+            rem В переменной j - значение
+            set %%i=%%j
+            rem echo %%i: %%%j%
+        )
+    ) else (
+        echo INFO: File !PROJECT_INI! not exist
+        rem exit /b 1
+    )
+    rem echo PROJECT_NAME: !PROJECT_NAME!
 
     exit /b 0
 rem endfunction
