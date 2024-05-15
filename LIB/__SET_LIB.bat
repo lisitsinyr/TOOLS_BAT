@@ -148,7 +148,7 @@ rem beginfunction
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_FULLFILENAME=%1
-    echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
   
     call :__SET_VAR_DEFAULT || exit /b 1
     call :__SET_VAR_SCRIPT !SCRIPT_FULLFILENAME! || exit /b 1
