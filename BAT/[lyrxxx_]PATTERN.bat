@@ -17,25 +17,19 @@ rem ----------------------------------------------------------------------------
     set OK=yes
 
     call :MAIN_INIT %0 || exit /b 1
-    call :__SET_TEST || exit /b 1
     call :__SET_MAIN %0 || exit /b 1
-
     echo CURRENT_DIR: !CURRENT_DIR!
-
     call :StartLogFile || exit /b 1
     call :MAIN_SET || exit /b 1
     if defined OK if not defined Read_N (
         call :MAIN_CHECK_PARAMETR %* || exit /b 1
     )
     if defined OK (
-        set DEBUG=yes
         call :MAIN %* || exit /b 1
-        set DEBUG=
     )
     call :StopLogFile || exit /b 1
 
     exit /b 0
-
 :end
 rem --------------------------------------------------------------------------------
 
@@ -49,6 +43,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
@@ -80,7 +75,6 @@ rem beginfunction
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -98,22 +92,18 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
-    set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
-    if not defined CheckFile (
-        echo ERROR: Файл !tomlFile! не существует ...
-        set OK=
-    )
-
-    set OK=yes
+    rem set APP=poetry
+    rem set OPTION= -v --no-ansi
+    rem set ARGS=
+    rem set APPRUN=
+    rem set tomlFile=pyproject.toml
+    rem call :CheckFile tomlFile
+    rem if not defined CheckFile (
+    rem     echo ERROR: Файл !tomlFile! не существует ...
+    rem     set OK=
+    rem )
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -142,10 +132,6 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
-
-    rem set F=LYRLog.txt
-    rem call :AddLogFile !loAll! !F!
-
     if not defined P1 (
         echo ERROR: Параметр P1 не задан...
         echo Использование: !BATNAME! P1 [P2] [...]
@@ -158,7 +144,6 @@ rem beginfunction
     )
 
     exit /b 0
-
 rem endfunction
 
 rem =================================================
@@ -178,7 +163,6 @@ rem beginfunction
     rem call :PressAnyKey || exit /b 1
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
