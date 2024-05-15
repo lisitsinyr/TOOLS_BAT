@@ -148,7 +148,7 @@ rem beginfunction
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_FULLFILENAME=%1
-    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+    echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
   
     call :__SET_VAR_DEFAULT || exit /b 1
     call :__SET_VAR_SCRIPT !SCRIPT_FULLFILENAME! || exit /b 1
@@ -163,11 +163,15 @@ rem beginfunction
     rem set LOG_FILENAME_FORMAT=
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD - Параметры журнала [0]
-    if not defined LOG_FILE_ADD set /a LOG_FILE_ADD=0
+    if not defined LOG_FILE_ADD (
+        set LOG_FILE_ADD=0
+    )
     rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT - Параметры журнала [0]
-    if not defined LOG_FILE_DT set /a LOG_FILE_DT=0
+    if not defined LOG_FILE_DT (
+        set LOG_FILE_DT=0
+    )
     rem  -------------------------------------------------------------------
     rem LOG_DIR - Каталог журнала [каталог]
     rem set LOG_DIR=
@@ -203,7 +207,7 @@ rem beginfunction
     rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: !DATETIME_STAMP!
     rem -------------------------------------------------------------------
     rem SLEEP - Number
-    set /a SLEEP=
+    set /a SLEEP=0
     rem echo SLEEP: !SLEEP!
 
     exit /b 0
