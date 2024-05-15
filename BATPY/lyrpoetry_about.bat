@@ -119,7 +119,7 @@ rem beginfunction
     call :CheckFile tomlFile
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
-        set OK=
+        set OK=yes
     )
 
     exit /b 0

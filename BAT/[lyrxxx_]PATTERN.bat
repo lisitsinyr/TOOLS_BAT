@@ -17,15 +17,20 @@ rem ----------------------------------------------------------------------------
     set OK=yes
 
     call :MAIN_INIT %0 || exit /b 1
+    call :__SET_TEST || exit /b 1
     call :__SET_MAIN %0 || exit /b 1
+
     echo CURRENT_DIR: !CURRENT_DIR!
+
     call :StartLogFile || exit /b 1
     call :MAIN_SET || exit /b 1
     if defined OK if not defined Read_N (
         call :MAIN_CHECK_PARAMETR %* || exit /b 1
     )
     if defined OK (
+        set DEBUG=yes
         call :MAIN %* || exit /b 1
+        set DEBUG=
     )
     call :StopLogFile || exit /b 1
 
@@ -40,6 +45,7 @@ rem -----------------------------------------------
 :MAIN_INIT
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -83,6 +89,7 @@ rem ----------------------------------------------------------------------------
 :MAIN_SET
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -103,6 +110,8 @@ rem beginfunction
         set OK=
     )
 
+    set OK=yes
+
     exit /b 0
 
 rem endfunction
@@ -113,6 +122,7 @@ rem ----------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN_CHECK_PARAMETR
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -157,6 +167,7 @@ rem =================================================
 :MAIN
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -176,9 +187,19 @@ rem ----------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    call :FileAttr "[lyrxxx_]PATTERN.bat" || exit /b 1
+    call :AddLog !loAll! !TEXT! FileAttr: !FileAttr! || exit /b 1
+
+    call :FileSize "[lyrxxx_]PATTERN.bat" || exit /b 1
+    call :AddLog !loAll! !TEXT! FileSize: !FileSize! || exit /b 1
+
+    call :CurrentDir || exit /b 1
+    call :AddLog !loAll! !TEXT! CurrentDir: !CurrentDir! || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -188,6 +209,9 @@ rem ‘”Õ ÷»» LIB
 rem =================================================
 rem __SET_LIB.bat
 rem =================================================
+:__SET_TEST
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
 :__SET_MAIN
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0

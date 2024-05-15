@@ -24,9 +24,11 @@ rem ----------------------------------------------------------------------------
 :LYRStrUtils
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=LYRStrUtils
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     exit /b 0
 rem endfunction

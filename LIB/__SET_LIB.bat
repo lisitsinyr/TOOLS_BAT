@@ -108,9 +108,26 @@ rem ----------------------------------------------------------------------------
 :__SET_LIB
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_LIB
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure __SET_TEST ()
+rem -----------------------------------------------
+:__SET_TEST
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SET_TEST
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
 
     exit /b 0
 rem endfunction
@@ -121,9 +138,11 @@ rem -----------------------------------------------
 :__SET_MAIN
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_MAIN
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
@@ -131,7 +150,7 @@ rem beginfunction
     set SCRIPT_FULLFILENAME=%1
     rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
   
-    call :__SET_VAR_DEFAULT !DEBUG! || exit /b 1
+    call :__SET_VAR_DEFAULT || exit /b 1
     call :__SET_VAR_SCRIPT !SCRIPT_FULLFILENAME! || exit /b 1
     call :__SET_VAR_PROJECTS || exit /b 1
     rem call :__SET_CHECK_REPO || exit /b 1
@@ -144,11 +163,11 @@ rem beginfunction
     rem set LOG_FILENAME_FORMAT=
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD - Параметры журнала [0]
-    if not defined LOG_FILE_ADD set LOG_FILE_ADD=0
+    if not defined LOG_FILE_ADD set /a LOG_FILE_ADD=0
     rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT - Параметры журнала [0]
-    if not defined LOG_FILE_DT set LOG_FILE_DT=0
+    if not defined LOG_FILE_DT set /a LOG_FILE_DT=0
     rem  -------------------------------------------------------------------
     rem LOG_DIR - Каталог журнала [каталог]
     rem set LOG_DIR=
@@ -166,9 +185,11 @@ rem ----------------------------------------------------------------------------
 :__SET_VAR_DEFAULT
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_VAR_DEFAULT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT_DEFAULT -
@@ -182,7 +203,7 @@ rem beginfunction
     rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: !DATETIME_STAMP!
     rem -------------------------------------------------------------------
     rem SLEEP - Number
-    set SLEEP=
+    set /a SLEEP=
     rem echo SLEEP: !SLEEP!
 
     exit /b 0
@@ -194,9 +215,11 @@ rem ----------------------------------------------------------------------------
 :__SET_VAR_SCRIPT
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_VAR_SCRIPT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
@@ -229,9 +252,11 @@ rem ----------------------------------------------------------------------------
 :__SET_VAR_PROJECTS
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_VAR_PROJECTS
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
     rem PROJECTS - проект
@@ -271,9 +296,11 @@ rem ----------------------------------------------------------------------------
 :__SET_CHECK_REPO
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_CHECK_REPO
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
     rem REPO_NAME - Имя репозитария
@@ -306,9 +333,11 @@ rem ----------------------------------------------------------------------------
 :__SET_CHECK_PROJECT
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_CHECK_PROJECT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
     rem PROJECT_NAME - Имя проекта
@@ -341,9 +370,11 @@ rem ----------------------------------------------------------------------------
 :__SET_LOG
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_LOG
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem ------------------------------------------------------
     rem LOG_DT_FORMAT -
@@ -361,13 +392,13 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD -
     if "!LOG_FILE_ADD!"=="" (
-        set LOG_FILE_ADD=0
+        set /a LOG_FILE_ADD=0
     )
     rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT -
     if "!LOG_FILE_DT!"=="" (
-        set LOG_FILE_DT=0
+        set /a LOG_FILE_DT=0
     )
     rem echo LOG_FILE_DT: !LOG_FILE_DT!
     rem -------------------------------------------------------------------
@@ -432,9 +463,11 @@ rem ----------------------------------------------------------------------------
 :__SET_KIX
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=__SET_KIX
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
     rem KIX_DIR - Каталог с файлами .KIX

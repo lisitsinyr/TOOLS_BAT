@@ -24,9 +24,11 @@ rem ----------------------------------------------------------------------------
 :LYRConst
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=LYRConst
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     exit /b 0
 rem endfunction

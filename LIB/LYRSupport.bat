@@ -30,9 +30,11 @@ rem ----------------------------------------------------------------------------
 :LYRSupport
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=LYRSupport
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     exit /b 0
 rem endfunction
@@ -43,9 +45,11 @@ rem ----------------------------------------------------------------------------
 :PressAnyKey
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=PressAnyKey
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem echo "Press any key to continue" && pause
     
@@ -54,23 +58,25 @@ rem beginfunction
     exit /b 0
 rem endfunction
    
-
 rem --------------------------------------------------------------------------------
 rem procedure Pause (SLEEP)
 rem --------------------------------------------------------------------------------
 :Pause
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=_Pause
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    rem echo Pause: %1
+    set /a LPause=%1
+    rem echo LPause: !LPause!
 
-    if "%1%"=="" (
+    if not defined LPause (
         timeout 0
     ) else (
-        timeout %1
+        timeout !LPause!
     )
 
     exit /b 0
@@ -82,9 +88,11 @@ rem ----------------------------------------------------------------------------
 :Check_P
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=Check_P
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     set P_Name=%1
     rem !P_Name! - имя переменной
@@ -133,9 +141,11 @@ rem ----------------------------------------------------------------------------
 :Read_P
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=Read_P
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     set P_Name=%1
     rem !P_Name! - имя переменной
@@ -184,9 +194,11 @@ rem ----------------------------------------------------------------------------
 :Read_F
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=Read_F
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     set P_Name=%1
     rem !P_Name! имя переменной
@@ -223,9 +235,11 @@ rem ----------------------------------------------------------------------------
 :Read_N
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=Read_N
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     for %%a in (%*) do set /a Read_N+=1
 
