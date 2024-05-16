@@ -46,9 +46,6 @@ rem -------------------------------------------------------------------
 rem -------------------------------------------------------------------
 rem ФУНКЦИИ
 rem     :__SET_LIB
-rem     :__SET_VAR_SCRIPT
-rem     :__SET_VAR_DEFAULT
-rem     :__SET_VAR_PROJECTS
 rem     :__SET_CHECK_REPO
 rem     :__SET_CHECK_PROJECT
 rem     :__SET_LOG
@@ -184,56 +181,56 @@ rem beginfunction
     set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
-    rem LOG_DT_FORMAT -
-    rem set LOG_DT_FORMAT=
-    rem -------------------------------------------------------------------
-    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
-    rem set LOG_FILENAME_FORMAT=
-    rem -------------------------------------------------------------------
     rem LOG_FILE_ADD - Параметры журнала [0]
+    rem -------------------------------------------------------------------
     if not defined LOG_FILE_ADD (
         set /a LOG_FILE_ADD=0
     )
     rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
+
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT - Параметры журнала [0]
+    rem -------------------------------------------------------------------
     if not defined LOG_FILE_DT (
         set /a LOG_FILE_DT=0
     )
-    rem  -------------------------------------------------------------------
-    rem LOG_DIR - Каталог журнала [каталог]
-    rem set LOG_DIR=
-    rem -------------------------------------------------------------------
-    rem LOG_FILENAME - Файл журнала [имя]
-    rem set LOG_FILENAME=
 
     rem ------------------------------------------------------
     rem LOG_DT_FORMAT -
+    rem -------------------------------------------------------------------
     if not defined LOG_DT_FORMAT (
         set LOG_DT_FORMAT=!LOG_DT_FORMAT_DEFAULT!
     )
     rem echo LOG_DT_FORMAT: !LOG_DT_FORMAT!
+
     rem -------------------------------------------------------------------
     rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
+    rem -------------------------------------------------------------------
     if not defined LOG_FILENAME_FORMAT (
         set LOG_FILENAME_FORMAT=FILENAME
         rem set LOG_FILENAME_FORMAT=DATETIME
     )
     rem echo LOG_FILENAME_FORMAT [FILENAME,DATETIME,...]: !LOG_FILENAME_FORMAT!
+
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD -
+    rem -------------------------------------------------------------------
     if not defined LOG_FILE_ADD (
         set /a LOG_FILE_ADD=0
     )
     rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
+
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT -
+    rem -------------------------------------------------------------------
     if not defined LOG_FILE_DT (
         set /a LOG_FILE_DT=0
     )
     rem echo LOG_FILE_DT: !LOG_FILE_DT!
+
     rem -------------------------------------------------------------------
     rem LOG_DIR - Каталог журнала [каталог]
+    rem -------------------------------------------------------------------
     if not defined LOG_DIR (
         set LOG_DIR=!PROJECTS_LYR_DIR!\LOG
     )
@@ -249,8 +246,10 @@ rem beginfunction
             exit /b 1
         )
     )
+
     rem -------------------------------------------------------------------
     rem LOG_FILENAME - Файл журнала [имя]
+    rem -------------------------------------------------------------------
     if not defined LOG_FILENAME (
         if "!LOG_FILENAME_FORMAT!"=="FILENAME" (
             set LOG_FILENAME=!SCRIPT_FILENAME!
@@ -272,18 +271,9 @@ rem beginfunction
 
     rem -------------------------------------------------------------------
     rem LOG_FULLFILENAME - Файл журнала [каталог+имя+расширение]
+    rem -------------------------------------------------------------------
     set LOG_FULLFILENAME=!LOG_DIR!\!LOG_FILENAME!.log
     rem echo LOG_FULLFILENAME: !%LOG_FULLFILENAME!
-
-    rem ------------------------------------------------------
-    rem LOG_FILESCRIPT - Файл первого скрипта [имя]
-    rem ------------------------------------------------------
-    set LOG_FILESCRIPT=
-
-    rem ------------------------------------------------------
-    rem LOG_STR
-    rem ------------------------------------------------------
-    set LOG_STR=
 
     exit /b 0
 rem endfunction
