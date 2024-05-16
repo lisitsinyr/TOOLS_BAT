@@ -184,6 +184,9 @@ rem ‘”Õ ÷»» LIB
 rem =================================================
 rem __SET_LIB.bat
 rem =================================================
+:__SET_MAIN
+%LIB_BAT%\__SET_LIB.bat %*
+exit /b 0
 :__SET_VAR_SCRIPT
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
