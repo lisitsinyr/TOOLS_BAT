@@ -309,13 +309,13 @@ rem beginfunction
         )
         rem set touchRUN=touch -f "!LFileName!"
         rem set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
-        echo !touchRUN!
+        echo touchRUN: !touchRUN!
         %touchRUN% "!LFileName!"
     ) else (
         if not exist "!LFileName!" (
             rem set touchRUN=touch -f "!LFileName!"
             rem set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
-            echo !touchRUN!
+            echo touchRUN: !touchRUN!
             %touchRUN% "!LFileName!"
         )
     )
