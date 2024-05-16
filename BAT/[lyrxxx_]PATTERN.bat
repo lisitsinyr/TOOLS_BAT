@@ -74,6 +74,19 @@ rem beginfunction
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
+    rem -------------------------------------------------------------------
+    rem PROJECTS - проект
+    rem set PROJECTS=
+    rem echo PROJECTS: !PROJECTS!
+    rem -------------------------------------------------------------------
+    rem PROJECTS_LYR_DIR -
+    rem set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
+    rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
+    rem -------------------------------------------------------------------
+    rem PROJECTS_DIR -
+    rem set PROJECTS_DIR=
+    rem echo PROJECTS_DIR: !PROJECTS_DIR!
+
     exit /b 0
 rem endfunction
 

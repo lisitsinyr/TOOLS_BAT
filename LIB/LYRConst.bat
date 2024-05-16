@@ -30,6 +30,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set touchRUN=D:\TOOLS\EXE\touch.exe
+
     exit /b 0
 rem endfunction
 

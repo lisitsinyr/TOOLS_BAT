@@ -164,13 +164,13 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD - Параметры журнала [0]
     if not defined LOG_FILE_ADD (
-        set LOG_FILE_ADD=0
+        set /a LOG_FILE_ADD=0
     )
     rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT - Параметры журнала [0]
     if not defined LOG_FILE_DT (
-        set LOG_FILE_DT=0
+        set /a LOG_FILE_DT=0
     )
     rem  -------------------------------------------------------------------
     rem LOG_DIR - Каталог журнала [каталог]
@@ -210,6 +210,7 @@ rem beginfunction
     set /a SLEEP=0
     rem echo SLEEP: !SLEEP!
 
+    call :LYRConst || exit /b 1
     exit /b 0
 rem endfunction
 
@@ -264,15 +265,15 @@ rem beginfunction
 
     rem -------------------------------------------------------------------
     rem PROJECTS - проект
-    rem set PROJECTS=
+    set PROJECTS=
     rem echo PROJECTS: !PROJECTS!
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_DIR -
-    rem set PROJECTS_LYR_DIR=
+    set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
     rem -------------------------------------------------------------------
     rem PROJECTS_DIR -
-    rem set PROJECTS_DIR=
+    set PROJECTS_DIR=
     rem echo PROJECTS_DIR: !PROJECTS_DIR!
     rem -------------------------------------------------------------------
     rem CURRENT_SYSTEM -
@@ -382,32 +383,32 @@ rem beginfunction
 
     rem ------------------------------------------------------
     rem LOG_DT_FORMAT -
-    if "!LOG_DT_FORMAT!"=="" (
+    if not defined LOG_DT_FORMAT (
         set LOG_DT_FORMAT=!LOG_DT_FORMAT_DEFAULT!
     )
     rem echo LOG_DT_FORMAT: !LOG_DT_FORMAT!
     rem -------------------------------------------------------------------
     rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
-    if "!LOG_FILENAME_FORMAT!"=="" (
+    if not defined LOG_FILENAME_FORMAT (
         set LOG_FILENAME_FORMAT=FILENAME
         rem set LOG_FILENAME_FORMAT=DATETIME
     )
     rem echo LOG_FILENAME_FORMAT [FILENAME,DATETIME,...]: !LOG_FILENAME_FORMAT!
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD -
-    if "!LOG_FILE_ADD!"=="" (
+    if not defined LOG_FILE_ADD (
         set /a LOG_FILE_ADD=0
     )
     rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT -
-    if "!LOG_FILE_DT!"=="" (
+    if not defined LOG_FILE_DT (
         set /a LOG_FILE_DT=0
     )
     rem echo LOG_FILE_DT: !LOG_FILE_DT!
     rem -------------------------------------------------------------------
     rem LOG_DIR - Каталог журнала [каталог]
-    if "!LOG_DIR!"=="" (
+    if not defined LOG_DIR (
         set LOG_DIR=!PROJECTS_LYR_DIR!\LOG
     )
     rem echo LOG_DIR: !LOG_DIR!
@@ -417,27 +418,27 @@ rem beginfunction
         echo INFO: Create !LOG_DIR!
         mkdir "!LOG_DIR!"
         rem echo ERRORLEVEL: !ERRORLEVEL!
-        if not "!ERRORLEVEL!"=="0" (
+        if not !ERRORLEVEL!==0 (
             echo ERROR: Dir !LOG_DIR! not created...
             exit /b 1
         )
     )
     rem -------------------------------------------------------------------
     rem LOG_FILENAME - Файл журнала [имя]
-    if "!LOG_FILENAME!"=="" (
+    if not defined LOG_FILENAME (
         if "!LOG_FILENAME_FORMAT!"=="FILENAME" (
             set LOG_FILENAME=!SCRIPT_FILENAME!
         ) else (
             if "!LOG_FILENAME_FORMAT!"=="DATETIME" (
                 set LOG_FILENAME=!DATETIME_STAMP!
             ) else (
-                echo ERROR: LOG_FILENAME_FORMAT not set 
+                echo ERROR: LOG_FILENAME_FORMAT not set...
                 exit /b 1
             )
         )
     )
     if "!LOG_FILENAME_FORMAT!"=="FILENAME" (
-        if "!LOG_FILE_DT!"=="1" (
+        if LOG_FILE_DT==1 (
            set LOG_FILENAME=!DATETIME_STAMP!_!LOG_FILENAME!
         )
     )
@@ -487,7 +488,7 @@ rem beginfunction
     rem echo    %LIB_KIX%"
     rem echo -------------------------------------------------------
     rem LIB_KIX - Каталог библиотеки KIX [каталог]
-    if "!LIB_KIX!"=="" (
+    if not defined LIB_KIX (
         rem echo INFO: Dir LIB_KIX not set
 
         if "!COMPUTERNAME!"=="!USERDOMAIN!" (
@@ -498,7 +499,7 @@ rem beginfunction
     )
     rem echo LIB_KIX: !LIB_KIX!
     if exist !LIB_KIX! (
-        rem echo Dir !LIB_KIX! exist ...
+        echo Dir !LIB_KIX! exist ...
     ) else (
         echo INFO: Dir !LIB_KIX! not exist ...
         rem exit /b 1
@@ -508,8 +509,8 @@ rem beginfunction
     rem echo    !APP_KIX!
     rem echo    !APP_KIX_DIR!
     rem echo -------------------------------------------------------
-    if "!APP_KIX!"=="" (
-        echo File APP_KIX not set
+    if not defined APP_KIX (
+        echo File APP_KIX not set...
     ) else (
         if exist !APP_KIX! (
             rem echo Файл !APP_KIX! существует ...
@@ -537,4 +538,12 @@ rem beginfunction
 rem endfunction
 
 rem ===================================================================
-:Exit
+
+rem =================================================
+rem ФУНКЦИИ LIB
+rem =================================================
+rem __SET_LIB.bat
+rem =================================================
+:LYRConst
+%LIB_BAT%\LYRConst.bat %*
+exit /b 0

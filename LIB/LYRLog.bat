@@ -303,7 +303,7 @@ rem beginfunction
     rem Открытие файла журнала
     rem ------------------------------------------------------
     set LFileName=!LOG_FULLFILENAME!
-    if "!LOG_FILE_ADD!"=="0" (
+    if LOG_FILE_ADD==0 (
         if exist "!LFileName!" (
             del "!LFileName!"
         )

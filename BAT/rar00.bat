@@ -92,17 +92,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    rem set APP=poetry
-    rem set OPTION= -v --no-ansi
-    rem set ARGS=
-    rem set APPRUN=
-    rem set tomlFile=pyproject.toml
-    rem call :CheckFile tomlFile
-    rem if not defined CheckFile (
-    rem     echo ERROR: Файл !tomlFile! не существует ...
-    rem     set OK=
-    rem )
-
     exit /b 0
 rem endfunction
 
