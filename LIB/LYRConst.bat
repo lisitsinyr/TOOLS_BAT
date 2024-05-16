@@ -5,17 +5,6 @@ rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 rem -------------------------------------------------------------------
-rem ФУНКЦИИ
-rem     :LYRConst
-rem -------------------------------------------------------------------
-
-:begin
-rem Выход из сценария. Дальше - только функции.
-:Exit
-exit /b 0
-
-
-rem -------------------------------------------------------------------
 rem :__SET_VAR_SCRIPT
 rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
 rem     SCRIPT_FULLFILENAME=
@@ -55,14 +44,15 @@ rem CURRENT_DIR - Текущий каталог
 rem     CURRENT_DIR=
 
 rem -------------------------------------------------------------------
-rem :__SET_CHECK_REPO
+rem :SET_CHECK_REPO
+
 rem REPO_NAME - Имя репозитария
 rem     REPO_NAME=
 rem REPO_INI - Файл с параметрами репозитария
 rem     REPO_INI=REPO.ini
 
 rem -------------------------------------------------------------------
-rem :__SET_CHECK_PROJECT
+rem :SET_CHECK_PROJECT
 rem PROJECT_NAME - проекта
 rem     REPO_NAME=
 rem PROJECT_INI - Файл с параметрами проекта
@@ -100,10 +90,30 @@ rem LIB_KIX - Каталог библиотеки KIX
 rem     LIB_KIX=
 rem -------------------------------------------------------------------
 
+rem -------------------------------------------------------------------
+rem ФУНКЦИИ
+rem :LYRConst
+
+rem :SET_LIB
+rem :SET_CHECK_REPO
+rem :SET_CHECK_PROJECT
+rem :SET_KIX
+
+rem :__SET_VAR_DEFAULT
+rem :__SET_VAR_PROJECTS
+rem :__SET_VAR_SCRIPT
+rem :__SET_LOG
+
+rem -------------------------------------------------------------------
+
+:begin
+rem Выход из сценария. Дальше - только функции.
+:Exit
+exit /b 0
+
 rem =================================================
 rem ФУНКЦИИ
 rem =================================================
-
 rem --------------------------------------------------------------------------------
 rem procedure LYRConst ()
 rem --------------------------------------------------------------------------------
@@ -116,34 +126,93 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure SET_LIB ()
+rem -----------------------------------------------
+:SET_LIB
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=SET_LIB
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+ 
+    call :__SET_VAR_DEFAULT || exit /b 1
+    call :__SET_VAR_PROJECTS || exit /b 1
+    call :__SET_VAR_SCRIPT %1 || exit /b 1
+    call :__SET_LOG || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure __SET_VAR_DEFAULT ()
+rem --------------------------------------------------------------------------------
+:__SET_VAR_DEFAULT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SET_VAR_DEFAULT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
     set touchRUN=touch -f
     set touchRUN=D:\TOOLS\EXE\touch.exe
 
     rem -------------------------------------------------------------------
+    rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
+    rem -------------------------------------------------------------------
+    set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+    rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: !DATETIME_STAMP!
+
+    rem -------------------------------------------------------------------
+    rem SLEEP - Number
+    rem -------------------------------------------------------------------
+    set /a SLEEP=0
+    rem echo SLEEP: !SLEEP!
+
+    rem -------------------------------------------------------------------
     rem REPO_NAME - Имя репозитария
+    rem -------------------------------------------------------------------
     set REPO_NAME=
+
     rem -------------------------------------------------------------------
     rem REPO_INI - Файл с параметрами репозитария
+    rem -------------------------------------------------------------------
     set REPO_INI=REPO.ini
     rem echo REPO_INI [REPO.ini]: !REPO_INI!
 
     rem -------------------------------------------------------------------
     rem PROJECT_NAME - Имя проекта
+    rem -------------------------------------------------------------------
     set PROJECT_NAME=
+
     rem -------------------------------------------------------------------
     rem PROJECT_INI - Файл с параметрами проекта
+    rem -------------------------------------------------------------------
     set PROJECT_INI=PROJECT.ini
     rem echo PROJECT_INI [PROJECT.ini]: !PROJECT_INI!
 
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-    rem -------------------------------------------------------------------
-    set SCRIPT_FULLFILENAME=%1
-    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+    exit /b 0
+rem endfunction
 
-    rem --------------------------------------------------------------------------------
-    rem procedure __SET_VAR_PROJECTS ()
-    rem --------------------------------------------------------------------------------
+rem --------------------------------------------------------------------------------
+rem procedure __SET_VAR_PROJECTS ()
+rem --------------------------------------------------------------------------------
+:__SET_VAR_PROJECTS
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SET_VAR_PROJECTS
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
     rem -------------------------------------------------------------------
     rem PROJECTS - проект
     rem -------------------------------------------------------------------
@@ -186,10 +255,26 @@ rem beginfunction
     set CURRENT_DIR=%CD%
     rem echo CURRENT_DIR: !CURRENT_DIR!
 
-    rem --------------------------------------------------------------------------------
-    rem procedure __SET_VAR_SCRIPT (FULLFILENAME)
-    rem --------------------------------------------------------------------------------
+    exit /b 0
+rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure __SET_VAR_SCRIPT (%1 - FULLFILENAME)
+rem --------------------------------------------------------------------------------
+:__SET_VAR_SCRIPT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SET_VAR_SCRIPT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
+    rem -------------------------------------------------------------------
+    set SCRIPT_FULLFILENAME=%1
+    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
     rem -------------------------------------------------------------------
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
@@ -219,10 +304,22 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set SCRIPT_FILEEXT=
     rem echo SCRIPT_FILEEXT: !SCRIPT_FILEEXT!
-   
-    rem --------------------------------------------------------------------------------
-    rem procedure __SET_VAR_DEFAULT (DEBUG)
-    rem --------------------------------------------------------------------------------
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure __SET_LOG ()
+rem --------------------------------------------------------------------------------
+:__SET_LOG
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SET_LOG
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
     rem -------------------------------------------------------------------
     rem LOG_DIR - Каталог журнала [каталог]
     rem -------------------------------------------------------------------
@@ -259,52 +356,6 @@ rem beginfunction
     rem LOG_DT_FORMAT_DEFAULT='%Y%m%d'
     set LOG_DT_FORMAT_DEFAULT=%date:~6,4%%date:~3,2%%date:~0,2%
     rem echo LOG_DT_FORMAT_DEFAULT: !LOG_DT_FORMAT_DEFAULT!
-
-    rem -------------------------------------------------------------------
-    rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
-    rem -------------------------------------------------------------------
-    set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
-    rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: !DATETIME_STAMP!
-
-    rem -------------------------------------------------------------------
-    rem SLEEP - Number
-    rem -------------------------------------------------------------------
-    set /a SLEEP=0
-    rem echo SLEEP: !SLEEP!
-
-    call :__SET_LOG || exit /b 1
-
-    exit /b 0
-rem endfunction
-
-rem -----------------------------------------------
-rem procedure __SET_MAIN ()
-rem -----------------------------------------------
-rem :__SET_MAIN
-rem rem beginfunction
-rem     set FUNCNAME=%0
-rem     set FUNCNAME=__SET_MAIN
-rem     if defined DEBUG (
-rem         echo DEBUG: procedure !FUNCNAME! ...
-rem     )
-rem     set !FUNCNAME!=
-rem  
-rem     call :LYRConst %1 || exit /b 1
-rem 
-rem     exit /b 0
-rem rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure __SET_LOG ()
-rem --------------------------------------------------------------------------------
-:__SET_LOG
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_LOG
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD - Параметры журнала [0]
@@ -405,12 +456,72 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :__SET_KIX
+rem procedure __SET_CHECK_REPO ()
 rem --------------------------------------------------------------------------------
-:__SET_KIX
+:SET_CHECK_REPO
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=__SET_KIX
+    set FUNCNAME=__SET_CHECK_REPO
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem Проверка существования файла REPO.ini
+    if exist !REPO_INI! (
+        for /f "eol=# delims== tokens=1,2" %%i in (%REPO_INI%) do (
+            rem В переменной i - ключ
+            rem В переменной j - значение
+            set %%i=%%j
+            rem echo %%i: %%%j%
+        )
+    ) else (
+        echo INFO: File !REPO_INI! not exist
+        rem exit /b 1
+    )
+    rem echo REPO_NAME: !REPO_NAME!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure SET_CHECK_PROJECT ()
+rem --------------------------------------------------------------------------------
+:SET_CHECK_PROJECT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SET_CHECK_PROJECT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem Проверка существования файла PROJECT.ini
+    if exist !PROJECT_INI! (
+        for /f "eol=# delims== tokens=1,2" %%i in (%PROJECT_INI%) do (
+            rem В переменной i - ключ
+            rem В переменной j - значение
+            set %%i=%%j
+            rem echo %%i: %%%j%
+        )
+    ) else (
+        echo INFO: File !PROJECT_INI! not exist
+        rem exit /b 1
+    )
+    rem echo PROJECT_NAME: !PROJECT_NAME!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem :SET_KIX ()
+rem --------------------------------------------------------------------------------
+:SET_KIX
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=SET_KIX
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )

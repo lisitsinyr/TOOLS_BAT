@@ -59,8 +59,8 @@ rem ----------------------------------------------------------------------------
     set DEBUG=
     set OK=yes
 
-    call :MAIN_INIT %0 || exit /b 1
-    call :__SET_MAIN %0 || exit /b 1
+    call :MAIN_INIT || exit /b 1
+    call :SET_LIB %0 || exit /b 1
     echo CURRENT_DIR: !CURRENT_DIR!
     call :StartLogFile || exit /b 1
     call :MAIN_SET || exit /b 1
@@ -241,7 +241,7 @@ rem ‘”Õ ÷»» LIB
 rem =================================================
 rem __SET_LIB.bat
 rem =================================================
-:__SET_MAIN
+:
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
 :__SET_VAR_SCRIPT
@@ -253,10 +253,11 @@ exit /b 0
 :__SET_VAR_PROJECTS
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:__SET_CHECK_REPO
+:SET_CHECK_REPO
+
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:__SET_CHECK_PROJECT
+:SET_CHECK_PROJECT
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
 :__SET_LOG

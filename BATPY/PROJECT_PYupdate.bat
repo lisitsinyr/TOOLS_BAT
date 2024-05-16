@@ -27,8 +27,8 @@ rem ----------------------------------------------------------------------------
     set DEBUG=
     set OK=yes
 
-    call :MAIN_INIT %0 || exit /b 1
-    call :__SET_MAIN %0 || exit /b 1
+    call :MAIN_INIT || exit /b 1
+    call :SET_LIB %0 || exit /b 1
     echo CURRENT_DIR: !CURRENT_DIR!
     call :StartLogFile || exit /b 1
     call :MAIN_SET || exit /b 1
@@ -336,8 +336,9 @@ rem beginfunction
     call :__SET_VAR_DEFAULT !DEBUG! || exit /b 1
     call :__SET_VAR_SCRIPT !SCRIPT_FULLFILENAME! || exit /b 1
     call :__SET_VAR_PROJECTS || exit /b 1
-    call :__SET_CHECK_REPO || exit /b 1
-    call :__SET_CHECK_PROJECT || exit /b 1
+    call :SET_CHECK_REPO
+ || exit /b 1
+    call :SET_CHECK_PROJECT || exit /b 1
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT -
     rem set LOG_DT_FORMAT=
@@ -415,10 +416,11 @@ exit /b 0
 :__SET_VAR_PROJECTS
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:__SET_CHECK_REPO
+:SET_CHECK_REPO
+
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
-:__SET_CHECK_PROJECT
+:SET_CHECK_PROJECT
 %LIB_BAT%\__SET_LIB.bat %*
 exit /b 0
 :__SET_LOG
