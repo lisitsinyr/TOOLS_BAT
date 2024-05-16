@@ -29,6 +29,9 @@ chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
+rem --------------------------------------------------------------------------------
+rem 
+rem --------------------------------------------------------------------------------
 :begin
     set BATNAME=%~nx0
     echo Start !BATNAME! ...
@@ -59,9 +62,11 @@ rem -----------------------------------------------
 :MAIN_INIT
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
@@ -93,7 +98,6 @@ rem beginfunction
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -102,6 +106,7 @@ rem ----------------------------------------------------------------------------
 :MAIN_SET
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -115,15 +120,7 @@ rem beginfunction
     set ARGS=
     set APPRUN=
 
-    set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
-    if not defined CheckFile (
-        echo ERROR: Файл !tomlFile! не существует ...
-        set OK=yes
-    )
-
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -132,6 +129,7 @@ rem ----------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN_CHECK_PARAMETR
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -166,7 +164,6 @@ rem beginfunction
     ) else (
         set APPRUN=!APP! !COMMAND!!OPTION! %*
     )
-
     echo APPRUN: !APPRUN!
     !APPRUN!
 

@@ -92,17 +92,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    rem set APP=poetry
-    rem set OPTION= -v --no-ansi
-    rem set ARGS=
-    rem set APPRUN=
-    rem set tomlFile=pyproject.toml
-    rem call :CheckFile tomlFile
-    rem if not defined CheckFile (
-    rem     echo ERROR: Файл !tomlFile! не существует ...
-    rem     set OK=
-    rem )
-
     exit /b 0
 rem endfunction
 
@@ -120,28 +109,11 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    if "%~1"=="" (
-        set PN_CAPTION=Ввод значения
-    )
-    set P1=P1_default
-    rem call :Check_P P1 %1 || exit /b 1
-    call :Check_P P1 P1_default || exit /b 1
-    rem echo P1: !P1!
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
-    if not defined P1 (
-        echo ERROR: Параметр P1 не задан...
-        echo Использование: !BATNAME! P1 [P2] [...]
-        set OK=
-    ) else (
-        rem call :AddLog !loStandard! !TEXT! "P1: !P1!" || exit /b 1
-        rem call :AddLog !loTextFile! !TEXT! "P1: !P1!" || exit /b 1
-        call :AddLog !loAll! !TEXT! P1: !P1! || exit /b 1
-        call :AddLog !loAll! !INFO! P1: !P1! || exit /b 1
-    )
 
     exit /b 0
 rem endfunction
@@ -159,9 +131,6 @@ rem beginfunction
 
     call :MAIN_FUNC || exit /b 1
 
-    rem call :Pause !SLEEP! || exit /b 1
-    rem call :PressAnyKey || exit /b 1
-
     exit /b 0
 rem endfunction
 
@@ -175,15 +144,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    call :FileAttr "[lyrxxx_]PATTERN.bat" || exit /b 1
-    call :AddLog !loAll! !TEXT! FileAttr: !FileAttr! || exit /b 1
-
-    call :FileSize "[lyrxxx_]PATTERN.bat" || exit /b 1
-    call :AddLog !loAll! !TEXT! FileSize: !FileSize! || exit /b 1
-
-    call :CurrentDir || exit /b 1
-    call :AddLog !loAll! !TEXT! CurrentDir: !CurrentDir! || exit /b 1
 
     exit /b 0
 rem endfunction
