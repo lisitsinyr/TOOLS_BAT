@@ -6,44 +6,6 @@ rem chcp 1251
 chcp 1251>NUL
 
 rem -------------------------------------------------------------------
-rem :__SET_VAR_SCRIPT
-rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-rem     SCRIPT_FULLFILENAME=
-rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
-rem     SCRIPT_BASEFILENAME=
-rem SCRIPT_FILENAME - Файл скрипта [имя]
-rem     SCRIPT_FILENAME=
-rem -------------------------------------------------------------------
-rem :__SET_SCRIPTS_DIR
-rem SCRIPTS_DIR - Каталог скриптов
-rem     SCRIPTS_DIR=
-rem -------------------------------------------------------------------
-rem :__SET_VAR_DEFAULT
-rem LOG_FILENAME - Файл журнала [имя]
-rem     LOG_FILENAME=
-rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
-rem     DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
-rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DT,...]
-rem     LOG_FILENAME_FORMAT=FILENAME
-rem LOG_OPT - Параметры журнала [11]
-rem     LOG_OPT=11
-rem -------------------------------------------------------------------
-rem :__SET_VAR_PROJECTS
-rem PROJECTS -
-rem     PROJECTS=
-rem CURRENT_SYSTEM -
-rem     CURRENT_SYSTEM=
-rem UNAME -
-rem     UNAME=
-rem USERNAME -
-rem     USERNAME=
-rem PROJECTS_LYR_DIR -
-rem     PROJECTS_LYR_DIR=
-rem PROJECTS_DIR -
-rem     PROJECTS_DIR=
-rem CURRENT_DIR - Текущий каталог
-rem     CURRENT_DIR=
-rem -------------------------------------------------------------------
 rem :__SET_CHECK_REPO
 rem REPO_NAME - Имя репозитария
 rem     REPO_NAME=
@@ -118,21 +80,6 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure __SET_TEST ()
-rem -----------------------------------------------
-:__SET_TEST
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_TEST
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    exit /b 0
-rem endfunction
-
-rem -----------------------------------------------
 rem procedure MAIN_SET ()
 rem -----------------------------------------------
 :__SET_MAIN
@@ -143,125 +90,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-    rem -------------------------------------------------------------------
-    set SCRIPT_FULLFILENAME=%1
-    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
-  
-    call :LYRConst || exit /b 1
-
-    call :__SET_VAR_DEFAULT || exit /b 1
-    call :__SET_VAR_SCRIPT !SCRIPT_FULLFILENAME! || exit /b 1
-    call :__SET_VAR_PROJECTS || exit /b 1
-    rem call :__SET_CHECK_REPO || exit /b 1
-    rem call :__SET_CHECK_PROJECT || exit /b 1
-    rem -------------------------------------------------------------------
-    rem LOG_DT_FORMAT -
-    rem set LOG_DT_FORMAT=
-    rem -------------------------------------------------------------------
-    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
-    rem set LOG_FILENAME_FORMAT=
-    rem -------------------------------------------------------------------
-    rem LOG_FILE_ADD - Параметры журнала [0]
-    if not defined LOG_FILE_ADD (
-        set /a LOG_FILE_ADD=0
-    )
-    rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
-    rem -------------------------------------------------------------------
-    rem LOG_FILE_DT - Параметры журнала [0]
-    if not defined LOG_FILE_DT (
-        set /a LOG_FILE_DT=0
-    )
-    rem  -------------------------------------------------------------------
-    rem LOG_DIR - Каталог журнала [каталог]
-    rem set LOG_DIR=
-    rem -------------------------------------------------------------------
-    rem LOG_FILENAME - Файл журнала [имя]
-    rem set LOG_FILENAME=
+ 
+    call :LYRConst %1 || exit /b 1
     call :__SET_LOG || exit /b 1
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure __SET_VAR_DEFAULT (DEBUG)
-rem --------------------------------------------------------------------------------
-:__SET_VAR_DEFAULT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_VAR_DEFAULT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem LOG_DT_FORMAT_DEFAULT -
-    rem LOG_DT_FORMAT_DEFAULT='%Y%m%d'
-    set LOG_DT_FORMAT_DEFAULT=%date:~6,4%%date:~3,2%%date:~0,2%
-    rem echo LOG_DT_FORMAT_DEFAULT: !LOG_DT_FORMAT_DEFAULT!
-
-    rem -------------------------------------------------------------------
-    rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
-    set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
-    rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: !DATETIME_STAMP!
-    rem -------------------------------------------------------------------
-    rem SLEEP - Number
-    set /a SLEEP=0
-    rem echo SLEEP: !SLEEP!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure __SET_VAR_SCRIPT (FULLFILENAME)
-rem --------------------------------------------------------------------------------
-:__SET_VAR_SCRIPT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_VAR_SCRIPT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-    set SCRIPT_FULLFILENAME=%~f1
-    rem echo SCRIPT_FULLFILENAME: !SCRIPT_FULLFILENAME!
-    rem -------------------------------------------------------------------
-    rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
-    set SCRIPT_BASEFILENAME=%~n1%~x1
-    rem echo SCRIPT_BASEFILENAME: !SCRIPT_BASEFILENAME!
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FILENAME - Файл скрипта [имя]
-    set SCRIPT_FILENAME=%~n1
-    rem echo SCRIPT_FILENAME: !SCRIPT_FILENAME!
-    rem -------------------------------------------------------------------
-    rem Файл скрипта: каталог
-    set SCRIPT_FILEDIR=
-    rem echo SCRIPT_FILEDIR: !SCRIPT_FILEDIR!
-    rem -------------------------------------------------------------------
-    rem Файл скрипта: расширение
-    set SCRIPT_FILEEXT=
-    rem echo SCRIPT_FILEEXT: !SCRIPT_FILEEXT!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure __SET_VAR_PROJECTS ()
-rem --------------------------------------------------------------------------------
-:__SET_VAR_PROJECTS
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_VAR_PROJECTS
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
 
     exit /b 0
 rem endfunction
@@ -351,6 +182,30 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem LOG_DT_FORMAT -
+    rem set LOG_DT_FORMAT=
+    rem -------------------------------------------------------------------
+    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
+    rem set LOG_FILENAME_FORMAT=
+    rem -------------------------------------------------------------------
+    rem LOG_FILE_ADD - Параметры журнала [0]
+    if not defined LOG_FILE_ADD (
+        set /a LOG_FILE_ADD=0
+    )
+    rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
+    rem -------------------------------------------------------------------
+    rem LOG_FILE_DT - Параметры журнала [0]
+    if not defined LOG_FILE_DT (
+        set /a LOG_FILE_DT=0
+    )
+    rem  -------------------------------------------------------------------
+    rem LOG_DIR - Каталог журнала [каталог]
+    rem set LOG_DIR=
+    rem -------------------------------------------------------------------
+    rem LOG_FILENAME - Файл журнала [имя]
+    rem set LOG_FILENAME=
 
     rem ------------------------------------------------------
     rem LOG_DT_FORMAT -
