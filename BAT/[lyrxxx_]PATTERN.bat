@@ -16,6 +16,11 @@ rem ----------------------------------------------------------------------------
     set DEBUG=
     set OK=yes
 
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR - Каталог скриптов
+    rem LIB_BAT - каталог библиотеки скриптов
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
+    rem -------------------------------------------------------------------
     call :MAIN_INIT %0 || exit /b 1
     call :__SET_MAIN %0 || exit /b 1
     echo CURRENT_DIR: !CURRENT_DIR!
@@ -73,19 +78,6 @@ rem beginfunction
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
-
-    rem -------------------------------------------------------------------
-    rem PROJECTS - проект
-    rem set PROJECTS=
-    rem echo PROJECTS: !PROJECTS!
-    rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR -
-    rem set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
-    rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
-    rem -------------------------------------------------------------------
-    rem PROJECTS_DIR -
-    rem set PROJECTS_DIR=
-    rem echo PROJECTS_DIR: !PROJECTS_DIR!
 
     exit /b 0
 rem endfunction
