@@ -277,6 +277,23 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem -----------------------------------------------
+rem procedure __SET_MAIN ()
+rem -----------------------------------------------
+rem :__SET_MAIN
+rem rem beginfunction
+rem     set FUNCNAME=%0
+rem     set FUNCNAME=__SET_MAIN
+rem     if defined DEBUG (
+rem         echo DEBUG: procedure !FUNCNAME! ...
+rem     )
+rem     set !FUNCNAME!=
+rem  
+rem     call :LYRConst %1 || exit /b 1
+rem 
+rem     exit /b 0
+rem rem endfunction
+
 rem --------------------------------------------------------------------------------
 rem procedure __SET_LOG ()
 rem --------------------------------------------------------------------------------
