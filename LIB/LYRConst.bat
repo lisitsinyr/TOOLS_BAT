@@ -198,6 +198,15 @@ rem beginfunction
     set PROJECT_INI=PROJECT.ini
     rem echo PROJECT_INI [PROJECT.ini]: !PROJECT_INI!
 
+    rem -------------------------------------------------------------------
+    rem POETRY - 
+    rem -------------------------------------------------------------------
+    set APP=poetry
+    set OPTION= -v --no-ansi --version
+    set OPTION= -v --ansi --version
+    set ARGS=
+    set APPRUN=
+
     exit /b 0
 rem endfunction
 

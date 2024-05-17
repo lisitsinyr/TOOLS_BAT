@@ -173,9 +173,9 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set dry-run=
+    set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_F dry-run "" || exit /b 1
+    call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run! (
         set OPTION=!OPTION! --dry-run

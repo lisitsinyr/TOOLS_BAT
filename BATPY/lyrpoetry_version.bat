@@ -180,21 +180,21 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set short=
+    set short=N
     set PN_CAPTION=Output the version number only
     call :Read_F short "yN" || exit /b 1
     echo short: !short!
     if defined short (
         set OPTION=!OPTION! --short
     )
-    set dry-run=
+    set dry-run=N
     set PN_CAPTION=Do not update pyproject.toml file
     call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
-    set next-phase=
+    set next-phase=N
     set PN_CAPTION=Increment the phase of the current version
     call :Read_F next-phase "yN" || exit /b 1
     rem echo next-phase: !next-phase!

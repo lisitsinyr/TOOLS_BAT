@@ -124,6 +124,16 @@ rem beginfunction
     set ARGS=
     set APPRUN=
 
+    set tomlFile=pyproject.toml
+    call :CheckFile tomlFile
+    if not defined CheckFile (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
+
+    exit /b 0
+rem endfunction
+
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
 rem --------------------------------------------------------------------------------

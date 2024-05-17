@@ -191,7 +191,7 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set editable=
+    set editable=N
     set PN_CAPTION=Add vcs/path dependencies as editable
     call :Read_F editable "yN" || exit /b 1
     rem echo editable: !editable!
@@ -219,7 +219,7 @@ rem beginfunction
     if defined allow-prereleases (
         set OPTION=!OPTION! --allow-prereleases
     )
-    set dry-run=
+    set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
     call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!

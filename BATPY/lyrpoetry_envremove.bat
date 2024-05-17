@@ -133,6 +133,7 @@ rem beginfunction
     set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
+
     set tomlFile=pyproject.toml
     call :CheckFile tomlFile
     if not defined CheckFile (
@@ -197,7 +198,7 @@ rem beginfunction
     call :Read_P python "" || exit /b 1
     rem echo python: !python!
     if defined python (
-        set OPTION=!ARGS! !python!
+        set ARGS=!ARGS! !python!
     )
 
     exit /b 0

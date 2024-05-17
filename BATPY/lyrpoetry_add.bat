@@ -175,6 +175,7 @@ rem beginfunction
     rem -------------------------------------
     set group=
     set PN_CAPTION=The group to add the dependency to
+    set PN_CAPTION=Группа, в которую нужно добавить зависимость
     call :Read_P group "" || exit /b 1
     rem echo group: !group!
     if defined group (
@@ -182,6 +183,7 @@ rem beginfunction
     )
     set dev=N
     set PN_CAPTION=Add as a development dependency. (Deprecated) Use --group=dev instead
+    set PN_CAPTION=Добавить в качестве зависимости от разработки. (Deprecated) Use --group=dev instead
     call :Read_F dev "yN" || exit /b 1
     rem echo dev: !dev!
     if defined editable (
@@ -189,6 +191,7 @@ rem beginfunction
     )
     set editable=N
     set PN_CAPTION=Add vcs/path dependencies as editable
+    set PN_CAPTION=Добавьте зависимости vcs/path в качестве редактируемых
     call :Read_F editable "yN" || exit /b 1
     rem echo editable: !editable!
     if defined editable (
@@ -196,6 +199,7 @@ rem beginfunction
     )
     set extras=
     set PN_CAPTION=Extras to activate for the dependency. ^(multiple values allowed^)
+    set PN_CAPTION=Дополнительные функции, которые необходимо активировать для зависимости. ^(multiple values allowed^)
     call :Read_P extras "" || exit /b 1
     rem echo extras: !extras!
     if defined extras  (
@@ -203,6 +207,7 @@ rem beginfunction
     )
     set optional=N
     set PN_CAPTION=Add as an optional dependency
+    set PN_CAPTION=Добавить в качестве необязательной зависимости
     call :Read_F optional "yN" || exit /b 1
     rem echo optional: !optional!
     if defined optional (
@@ -210,6 +215,7 @@ rem beginfunction
     )
     set python=
     set PN_CAPTION=Python version for which the dependency must be installed
+    set PN_CAPTION=Версия Python, для которой должна быть установлена зависимость
     call :Read_P python "" || exit /b 1
     rem echo python: !python!
     if defined python (
@@ -217,6 +223,7 @@ rem beginfunction
     )
     set platform=
     set PN_CAPTION=Platforms for which the dependency must be installed
+    set PN_CAPTION=Платформы, для которых должна быть установлена зависимость
     call :Read_P platform "" || exit /b 1
     rem echo platform: !platform!
     if defined platform (
@@ -224,6 +231,7 @@ rem beginfunction
     )
     set source=
     set PN_CAPTION=Name of the source to use to install the package
+    set PN_CAPTION=Имя источника, используемого для установки пакета
     call :Read_P source "" || exit /b 1
     rem echo source: !source!
     if defined source (
@@ -231,6 +239,7 @@ rem beginfunction
     )
     set allow-prereleases=N
     set PN_CAPTION=Accept prereleases
+    set PN_CAPTION=Принимать предварительные релизы
     call :Read_F allow-prereleases "yN" || exit /b 1
     rem echo allow-prereleases: !allow-prereleases!
     if defined allow-prereleases (
@@ -238,6 +247,7 @@ rem beginfunction
     )
     set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables -verbose^)
+    set PN_CAPTION=Выводите операции, но ничего не выполняйте ^(implicitly enables -verbose^)
     call :Read_F dry-run "yN" || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
@@ -245,6 +255,7 @@ rem beginfunction
     )
     set lock=N
     set PN_CAPTION=Do not perform install [only update the lockfile]
+    set PN_CAPTION=Не выполняйте установку [only update the lockfile]
     call :Read_F lock "yN" || exit /b 1
     rem echo lock: !lock!
     if defined lock (
@@ -257,6 +268,7 @@ rem beginfunction
     rem Проверка на обязательные аргументы
     set names=
     set PN_CAPTION=The packages to add
+    set PN_CAPTION=Пакеты для добавления
     call :Read_P names "" || exit /b 1
     rem echo names: !names!
     if defined names (
@@ -279,7 +291,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    echo Adds a new dependency to pyproject.toml ...
+    set CAPTION=Adds a new dependency to pyproject.toml ...
+    set CAPTION=Добавляет новую зависимость к pyproject.toml...
+    echo !CAPTION!
     set COMMAND=add
 
     if not defined Read_N (

@@ -204,42 +204,42 @@ rem beginfunction
     if defined no-dev (
         set OPTION=!OPTION! --no-dev
     )
-    set tree=
+    set tree=N
     set PN_CAPTION=List the dependencies as a tree
     call :Read_F tree "yN" || exit /b 1
     rem echo tree: !tree!
     if defined tree (
         set OPTION=!OPTION! --tree
     )
-    set why=
+    set why=N
     set PN_CAPTION=When showing the full list, or a --tree for a single package, display whether they are a direct dependency or required by other packages
     call :Read_F why "yN" || exit /b 1
     rem echo why: !why!
     if defined why (
         set OPTION=!OPTION! --why
     )
-    set latest=
+    set latest=N
     set PN_CAPTION=Show the latest version
     call :Read_F latest "yN" || exit /b 1
     rem echo latest: !latest!
     if defined latest (
         set OPTION=!OPTION! --latest
     )
-    set outdated=
+    set outdated=N
     set PN_CAPTION=Show the latest version but only for packages that are outdated
     call :Read_F outdated "yN" || exit /b 1
     rem echo outdated: !outdated!
     if defined outdated (
         set OPTION=!OPTION! --outdated
     )
-    set all=
+    set all=N
     set PN_CAPTION=Show all packages (even those not compatible with current system)
     call :Read_F all "yN" || exit /b 1
     rem echo all: !all!
     if defined all (
         set OPTION=!OPTION! --all
     )
-    set top-level=
+    set top-level=N
     set PN_CAPTION=Only show explicitly defined packages
     call :Read_F top-level "yN" || exit /b 1
     rem echo top-level: !top-level!

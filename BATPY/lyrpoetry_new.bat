@@ -119,10 +119,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
+    exit /b 0
+rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure MAIN ()
@@ -134,7 +132,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    echo Creates a new Python project at ^<path^> ...
+    set CAPTION=Creates a new Python project at ^<path^> ...
+    set CAPTION=Создает новый проект на Python at ^<path^> ...
+    echo !CAPTION!
     set COMMAND=new
     
     if not defined Read_N (
@@ -163,6 +163,7 @@ rem beginfunction
     rem -------------------------------------
     set name=test
     set PN_CAPTION=Set the resulting package name
+    set PN_CAPTION=Задайте имя результирующего пакета
     call :Read_P name "" || exit /b 1
     rem echo name: !name!
     if defined name (
@@ -170,6 +171,7 @@ rem beginfunction
     )
     set src=Y
     set PN_CAPTION=Use the src layout for the project
+    set PN_CAPTION=Используйте макет src для проекта
     call :Read_F src "YN" 0 || exit /b 1
     rem echo src: !src!
     if defined src (
@@ -177,7 +179,8 @@ rem beginfunction
     )
     set readme=md
     set PN_CAPTION=Specify the readme file extension
-    call :Read_P readme "" || exit /b 1
+    set PN_CAPTION=Укажите расширение файла readme
+    call :Read_P readme !readme! || exit /b 1
     rem echo readme: !readme!
     if not "!readme!"=="" (
         set OPTION=!OPTION! --readme=!readme!
@@ -189,17 +192,19 @@ rem beginfunction
     rem Проверка на обязательные аргументы
     set folder=folder folder
     set PN_CAPTION=The path to create the project at
+    set PN_CAPTION=Путь для создания проекта находится по адресу
     call :Read_P folder "" || exit /b 1
     rem echo path: !path!
     if defined folder (
         set ARGS=!ARGS! "!folder!"
         if exist "!folder!"\ (
-            echo ERROR: Каталог "!folder!" существует...
+            echo INFO: Каталог "!folder!" существует...
             echo Удаление каталога "!folder!"
             rmdir "!folder!" /s
         )
     ) else (
-        echo ERROR: folder not defined ...
+        set ARGS=!ARGS! "."
+        echo INFO: folder not defined ...
         set tomlFile=pyproject.toml
         if exist "!tomlFile!" (
             echo Удаление файла %tomlFile%

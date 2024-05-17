@@ -161,6 +161,9 @@ rem beginfunction
         set APPRUN=!APP! !COMMAND!!OPTION! %*
     )
     echo APPRUN: !APPRUN!
+
+    rem call :PressAnyKey %* || exit /b 1
+
     !APPRUN!
 
     exit /b 0
@@ -184,12 +187,12 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
-    set command_name=
+    set command_name=show
     set PN_CAPTION=command
     call :Read_P command_name "" || exit /b 1
     rem echo command_name: !command_name!
     if not "!command_name!"=="" (
-        set OPTION=!ARGS! !command_name!
+        set ARGS=!ARGS! !command_name!
     ) else (
         echo ERROR: command_name not defined ...
         set OK=

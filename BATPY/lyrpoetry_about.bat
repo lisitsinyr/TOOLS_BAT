@@ -6,7 +6,7 @@ rem Запуск poetry из глобального виртуального пространства
 rem -------------------------------------------------------------------
 rem
 rem Description:
-rem   Shows information about Poetry.
+rem   Shows information about Poetry
 rem   The about command displays global information about Poetry, including the current version and version of poetry-core
 rem 
 rem Usage:
@@ -115,11 +115,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     exit /b 0
 rem endfunction
 
@@ -156,7 +151,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    echo Shows information about Poetry ...
+    set CAPTION=Shows information about Poetry ...
+    set CAPTION=Показывает информацию о Poetry ...
+    echo !CAPTION!
     set COMMAND=about
 
     if not defined Read_N (

@@ -139,6 +139,7 @@ rem beginfunction
     set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
+
     set tomlFile=pyproject.toml
     call :CheckFile tomlFile
     if not defined CheckFile (
@@ -217,7 +218,7 @@ rem beginfunction
     call :Read_P key "" || exit /b 1
     rem echo key: !key%
     if not "!key!"=="" (
-        set OPTION=!ARGS! !key!
+        set ARGS=!ARGS! !key!
     ) else (
         echo ERROR: key not defined ...
         set OK=yes
@@ -227,7 +228,7 @@ rem beginfunction
     call :Read_P value "" || exit /b 1
     rem echo value: !value!
     if not "!value!"=="" (
-        set OPTION=!ARGS! !value!
+        set ARGS=!ARGS! !value!
     ) else (
         echo ERROR: value not defined ...
         set OK=yes

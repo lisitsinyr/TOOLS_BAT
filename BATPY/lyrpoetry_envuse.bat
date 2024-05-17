@@ -132,6 +132,13 @@ rem beginfunction
     set ARGS=
     set APPRUN=
     
+    set tomlFile=pyproject.toml
+    call :CheckFile tomlFile
+    if not defined CheckFile (
+        echo ERROR: Файл !tomlFile! не существует ...
+        set OK=
+    )
+
     exit /b 0
 rem endfunction
 
@@ -179,7 +186,7 @@ rem beginfunction
     rem Проверка на обязательные аргументы
     set python=
     set PN_CAPTION=The python executable to use
-    call :Read_P python "" || exit /b 1
+    call :Read_P python "D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\VENV\P312\Scripts\python.exe" || exit /b 1
     rem echo python: !python!
     if defined python (
         set ARGS=!ARGS! !python!

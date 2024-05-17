@@ -185,7 +185,7 @@ rem beginfunction
     call :Read_P source "" || exit /b 1
     rem echo source: !source!
     if defined source (
-        set OPTION=!ARGS! %source%
+        set ARGS=!ARGS! %source%
     ) else (
         echo ERROR: source not defined ...
     )

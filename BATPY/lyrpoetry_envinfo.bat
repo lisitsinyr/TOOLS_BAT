@@ -125,6 +125,7 @@ rem beginfunction
     set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
+
     set tomlFile=pyproject.toml
     call :CheckFile tomlFile
     if not defined CheckFile (

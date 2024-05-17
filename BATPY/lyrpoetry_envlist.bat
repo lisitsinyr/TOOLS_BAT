@@ -125,8 +125,8 @@ rem beginfunction
     set OPTION= -v --no-ansi
     set ARGS=
     set APPRUN=
-    set tomlFile=pyproject.toml
 
+    set tomlFile=pyproject.toml
     call :CheckFile tomlFile
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...

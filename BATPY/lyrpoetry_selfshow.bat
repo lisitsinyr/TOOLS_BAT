@@ -181,14 +181,14 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set addons=
+    set addons=N
     set PN_CAPTION=List only add-on packages installed
     call :Read_F addons "yN" || exit /b 1
     rem echo addons: !addons!
     if defined addons (
         set OPTION=!OPTION! --addons
     )
-    set tree=
+    set tree=N
     set PN_CAPTION=List the dependencies as a tree
     call :Read_F tree "yN" || exit /b 1
     rem echo tree: !tree!
@@ -202,7 +202,7 @@ rem beginfunction
     if defined latest (
         set OPTION=!OPTION! --latest
     )
-    set outdated=
+    set outdated=N
     set PN_CAPTION=Show the latest version but only for packages that are outdated
     call :Read_F outdated "yN" || exit /b 1
     rem echo outdated: !outdated!
