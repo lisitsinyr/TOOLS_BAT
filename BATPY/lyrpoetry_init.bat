@@ -106,6 +106,10 @@ rem beginfunction
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
     exit /b 0
 rem endfunction
 
@@ -120,10 +124,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
     set tomlFile=pyproject.toml
     call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
@@ -131,20 +131,6 @@ rem beginfunction
         set OK=
     )
 
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure Delete_tomlFile ()
-rem --------------------------------------------------------------------------------
-:Delete_tomlFile
-rem beginfunction
-    set tomlFile=pyproject.toml
-    if exist "!tomlFile!" (
-        echo Удаление файла %tomlFile%
-        del %tomlFile%
-    )
-    
     exit /b 0
 rem endfunction
 
@@ -161,8 +147,6 @@ rem beginfunction
     echo Creates a basic pyproject.toml file in the current directory ...
     set COMMAND=init
     
-    rem call :Delete_tomlFile
-
     if not defined Read_N (
         set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     ) else (
