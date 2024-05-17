@@ -121,13 +121,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -173,16 +168,16 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set pathenv=
+    set pathenv=Y
     set PN_CAPTION=Only display the environment's path
-    call :Read_F pathenv "yN" || exit /b 1
+    call :Read_F pathenv "yN" 0 || exit /b 1
     rem echo pathenv: !pathenv!
     if defined pathenv (
         set OPTION=!OPTION! --path
     )
-    set executable=
+    set executable=Y
     set PN_CAPTION=Only display the environment's python executable path
-    call :Read_F executable "yN" || exit /b 1
+    call :Read_F executable "yN" 0 || exit /b 1
     rem echo executable: !executable!
     if defined executable (
         set OPTION=!OPTION! --executable

@@ -126,11 +126,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     exit /b 0
 rem endfunction
 
@@ -173,14 +168,14 @@ rem beginfunction
     rem -------------------------------------
     set no-update=N
     set PN_CAPTION=Do not update locked versions, only refresh lock file
-    call :Read_F no-update "yN" || exit /b 1
+    call :Read_F no-update "yN" 0 || exit /b 1
     rem echo no-update: !no-update!
     if defined no-update (
         set OPTION=!OPTION! --no-update
     )
-    set check=N
+    set check=Y
     set PN_CAPTION=Check that the poetry.lock file corresponds to the current version of pyproject.toml. ^(Deprecated^) Use poetry check --lock instead.
-    call :Read_F check "yN" || exit /b 1
+    call :Read_F check "yN" 0 || exit /b 1
     rem echo check: !check!
     if defined check (
         set OPTION=!OPTION! --check

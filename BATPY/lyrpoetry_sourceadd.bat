@@ -127,11 +127,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     exit /b 0
 rem endfunction
 
@@ -172,16 +167,16 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set default=N
+    set default=Y
     set PN_CAPTION=Set this source as the default (disable PyPI). A default source will also be the fallback source if you add other sources. ^(Deprecated, use --priority^)
-    call :Read_F default "yN" || exit /b 1
+    call :Read_F default "yN" 0 || exit /b 1
     rem echo default: !default!
     if defined default (
         set OPTION=!OPTION! --default
     )
     set secondary=N
     set PN_CAPTION=Set this source as secondary. ^(Deprecated, use --priority^)
-    call :Read_F secondary "yN" || exit /b 1
+    call :Read_F secondary "yN" 0 || exit /b 1
     rem echo secondary: !secondary!
     if defined secondary (
         set OPTION=!OPTION! --secondary

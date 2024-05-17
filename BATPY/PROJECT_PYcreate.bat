@@ -136,7 +136,7 @@ rem beginfunction
                 )
 
                 set tomlFile="!Directory!"\pyproject.toml
-                call :CheckFile tomlFile
+                call :CheckFile !tomlFile! || exit /b 1
                 if defined CheckFile (
                     set OK=yes
                     cd /D "!Directory!"

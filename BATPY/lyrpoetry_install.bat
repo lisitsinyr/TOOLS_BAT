@@ -142,13 +142,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -215,44 +210,44 @@ rem beginfunction
     if defined only (
         set OPTION=!OPTION! --only=!only!
     )
-    set no-dev=
+    set no-dev=Y
     set PN_CAPTION=Do not install the development dependencies. (Deprecated)
-    call :Read_F no-dev "yN" || exit /b 1
+    call :Read_F no-dev "yN" 0 || exit /b 1
     rem echo no-dev: !no-dev!
     if defined no-dev (
         set OPTION=!OPTION! --no-dev
     )
-    set sync=
+    set sync=N
     set PN_CAPTION=Synchronize the environment with the locked packages and the specified groups
-    call :Read_F sync "yN" || exit /b 1
+    call :Read_F sync "yN" 0 || exit /b 1
     rem echo sync: !sync!
     if defined sync (
         set OPTION=!OPTION! --sync
     )
-    set no-root=
+    set no-root=Y
     set PN_CAPTION=Do not install the root package (the current project)
-    call :Read_F no-root "yN" || exit /b 1
+    call :Read_F no-root "yN" 0 || exit /b 1
     rem echo no-root: !no-root!
     if defined no-root (
         set OPTION=!OPTION! --no-root
     )
-    set no-directory=
+    set no-directory=Y
     set PN_CAPTION=Do not install any directory path dependencies; useful to install dependencies without source code, e.g. for caching of Docker layers
-    call :Read_F no-directory "yN" || exit /b 1
+    call :Read_F no-directory "yN" 0 || exit /b 1
     rem echo no-directory: !no-directory!
     if defined no-directory (
         set OPTION=!OPTION! --no-directory
     )
-    set dry-run=
+    set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_F dry-run "yN" || exit /b 1
+    call :Read_F dry-run "yN" 0 || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
-    set remove-untracked=
+    set remove-untracked=N
     set PN_CAPTION=Removes packages not present in the lock file. ^(Deprecated^)
-    call :Read_F remove-untracked "yN" || exit /b 1
+    call :Read_F remove-untracked "yN" 0 || exit /b 1
     rem echo remove-untracked: !remove-untracked!
     if defined remove-untracked (
         set OPTION=!OPTION! --remove-untracked
@@ -264,23 +259,23 @@ rem beginfunction
     if defined extras (
         set OPTION=!OPTION! --extras=!extras!
     )
-    set all-extras=
+    set all-extras=Y
     set PN_CAPTION=Install all extra dependencies
-    call :Read_F all-extras "yN" || exit /b 1
+    call :Read_F all-extras "yN" 0 || exit /b 1
     rem echo all-extras: !all-extras!
     if defined all-extras (
         set OPTION=!OPTION! --all-extras
     )
-    set only-root=
+    set only-root=N
     set PN_CAPTION=Exclude all dependencies
-    call :Read_F only-root "yN" || exit /b 1
+    call :Read_F only-root "yN" 0 || exit /b 1
     rem echo only-root: !only-root!
     if defined only-root (
         set OPTION=!OPTION! --only-root
     )
-    set compile=
+    set compile=N
     set PN_CAPTION=Compile Python source files to bytecode. ^(This option has no effect if modern-installation is disabled because the old installer always compiles.^)
-    call :Read_F compile "yN" || exit /b 1
+    call :Read_F compile "yN" 0 || exit /b 1
     rem echo compile: !compile!
     if defined compile (
         set OPTION=!OPTION! --compile

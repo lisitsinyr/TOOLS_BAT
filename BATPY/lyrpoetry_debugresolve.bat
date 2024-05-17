@@ -124,13 +124,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -190,16 +185,16 @@ rem beginfunction
     if defined python (
         set OPTION=!OPTION! --python=!python!
     )
-    set tree=
+    set tree=Y
     set PN_CAPTION=Display the dependency tree
-    call :Read_F tree "yN" || exit /b 1
+    call :Read_F tree "yN" 0 || exit /b 1
     rem echo tree: !tree!
     if defined tree (
         set OPTION=!OPTION! --tree
     )
-    set install=
+    set install=Y
     set PN_CAPTION=Show what would be installed for the current system
-    call :Read_F install "yN" || exit /b 1
+    call :Read_F install "yN" 0 || exit /b 1
     rem echo install: !install!
     if defined install (
         set OPTION=!OPTION! --install

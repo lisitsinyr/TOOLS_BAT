@@ -125,13 +125,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -184,23 +179,23 @@ rem beginfunction
     if defined group (
         set OPTION=!OPTION! --group=!group!
     )
-    set dev=
+    set dev=N
     set PN_CAPTION=Remove a package from the development dependencies. ^(Deprecated^) Use --group=dev instead
-    call :Read_F dev "yN" || exit /b 1
+    call :Read_F dev "yN" 0 || exit /b 1
     rem echo dev: !dev!
     if defined dev (
         set OPTION=!OPTION! --dev
     )
-    set dry-run=
+    set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_F dry-run "yN" || exit /b 1
+    call :Read_F dry-run "yN" 0 || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
-    set lock=
+    set lock=Y
     set PN_CAPTION=Do not perform operations (only update the lockfile)
-    call :Read_F lock "yN" || exit /b 1
+    call :Read_F lock "yN" 0 || exit /b 1
     rem echo lock: !lock!
     if defined lock (
         set OPTION=!OPTION! --lock

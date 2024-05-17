@@ -135,13 +135,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -187,23 +182,23 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set list=
+    set list=Y
     set PN_CAPTION=List configuration settings
-    call :Read_F list "yN" || exit /b 1
+    call :Read_F list "yN" 0 || exit /b 1
     rem echo list: !list!
     if defined list (
         set OPTION=!OPTION! --list
     )
-    set unset=
+    set unset=N
     set PN_CAPTION=Unset configuration setting
-    call :Read_F unset "yN" || exit /b 1
+    call :Read_F unset "yN" 0 || exit /b 1
     rem echo unset: !unset!
     if defined unset (
         set OPTION=!OPTION! --unset
     )
-    set local=
+    set local=Y
     set PN_CAPTION=Set/Get from the project's local configuration
-    call :Read_F local "yN" || exit /b 1
+    call :Read_F local "yN" 0 || exit /b 1
     rem echo local: !local!
     if defined local (
         set OPTION=!OPTION! --local
@@ -220,7 +215,7 @@ rem beginfunction
     if not "!key!"=="" (
         set ARGS=!ARGS! !key!
     ) else (
-        echo ERROR: key not defined ...
+        echo INFO: key not defined ...
         set OK=yes
     )
     set value=
@@ -230,7 +225,7 @@ rem beginfunction
     if not "!value!"=="" (
         set ARGS=!ARGS! !value!
     ) else (
-        echo ERROR: value not defined ...
+        echo INFO: value not defined ...
         set OK=yes
     )
 

@@ -144,13 +144,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -184,7 +179,7 @@ rem beginfunction
     set dev=N
     set PN_CAPTION=Add as a development dependency. (Deprecated) Use --group=dev instead
     set PN_CAPTION=Добавить в качестве зависимости от разработки. (Deprecated) Use --group=dev instead
-    call :Read_F dev "yN" || exit /b 1
+    call :Read_F dev "yN" 0 || exit /b 1
     rem echo dev: !dev!
     if defined editable (
         set OPTION=!OPTION! --dev
@@ -192,7 +187,7 @@ rem beginfunction
     set editable=N
     set PN_CAPTION=Add vcs/path dependencies as editable
     set PN_CAPTION=Добавьте зависимости vcs/path в качестве редактируемых
-    call :Read_F editable "yN" || exit /b 1
+    call :Read_F editable "yN" 0 || exit /b 1
     rem echo editable: !editable!
     if defined editable (
         set OPTION=!OPTION! --editable
@@ -208,7 +203,7 @@ rem beginfunction
     set optional=N
     set PN_CAPTION=Add as an optional dependency
     set PN_CAPTION=Добавить в качестве необязательной зависимости
-    call :Read_F optional "yN" || exit /b 1
+    call :Read_F optional "yN" 0 || exit /b 1
     rem echo optional: !optional!
     if defined optional (
         set OPTION=!OPTION! --optional
@@ -240,7 +235,7 @@ rem beginfunction
     set allow-prereleases=N
     set PN_CAPTION=Accept prereleases
     set PN_CAPTION=Принимать предварительные релизы
-    call :Read_F allow-prereleases "yN" || exit /b 1
+    call :Read_F allow-prereleases "yN" 0 || exit /b 1
     rem echo allow-prereleases: !allow-prereleases!
     if defined allow-prereleases (
         set OPTION=!OPTION! --allow-prereleases
@@ -248,7 +243,7 @@ rem beginfunction
     set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables -verbose^)
     set PN_CAPTION=Выводите операции, но ничего не выполняйте ^(implicitly enables -verbose^)
-    call :Read_F dry-run "yN" || exit /b 1
+    call :Read_F dry-run "yN" 0 || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run
@@ -256,7 +251,7 @@ rem beginfunction
     set lock=N
     set PN_CAPTION=Do not perform install [only update the lockfile]
     set PN_CAPTION=Не выполняйте установку [only update the lockfile]
-    call :Read_F lock "yN" || exit /b 1
+    call :Read_F lock "yN" 0 || exit /b 1
     rem echo lock: !lock!
     if defined lock (
         set OPTION=!OPTION! --lock
@@ -275,7 +270,7 @@ rem beginfunction
         set ARGS=!ARGS! !names!
     ) else (
         echo ERROR: names not defined ...
-        set OK=
+        set OK=yes
     )
 
     exit /b 0

@@ -146,11 +146,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     exit /b 0
 rem endfunction
 
@@ -191,9 +186,9 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set editable=N
+    set editable=Y
     set PN_CAPTION=Add vcs/path dependencies as editable
-    call :Read_F editable "yN" || exit /b 1
+    call :Read_F editable "yN" 0 || exit /b 1
     rem echo editable: !editable!
     if defined editable (
         set OPTION=!OPTION! --editable
@@ -212,16 +207,16 @@ rem beginfunction
     if defined source (
         set OPTION=!OPTION! --source=!source!
     )
-    set allow-prereleases=
+    set allow-prereleases=N
     set PN_CAPTION=Accept prereleases
-    call :Read_F allow-prereleases "yN" || exit /b 1
+    call :Read_F allow-prereleases "yN" 0 || exit /b 1
     rem echo allow-prereleases: !allow-prereleases!
     if defined allow-prereleases (
         set OPTION=!OPTION! --allow-prereleases
     )
     set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_F dry-run "yN" || exit /b 1
+    call :Read_F dry-run "yN" 0 || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run

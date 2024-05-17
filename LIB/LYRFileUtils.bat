@@ -325,6 +325,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+    rem echo !FUNCNAME!: !%FUNCNAME%!
 
     set FILENAME=%~1
     rem echo FILENAME: !FILENAME!

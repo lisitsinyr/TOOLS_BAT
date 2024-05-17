@@ -128,13 +128,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -182,21 +177,21 @@ rem beginfunction
     rem -------------------------------------
     set short=N
     set PN_CAPTION=Output the version number only
-    call :Read_F short "yN" || exit /b 1
+    call :Read_F short "yN" 0 || exit /b 1
     echo short: !short!
     if defined short (
         set OPTION=!OPTION! --short
     )
     set dry-run=N
     set PN_CAPTION=Do not update pyproject.toml file
-    call :Read_F dry-run "yN" || exit /b 1
+    call :Read_F dry-run "yN" 0 || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
-    set next-phase=N
+    set next-phase=Y
     set PN_CAPTION=Increment the phase of the current version
-    call :Read_F next-phase "yN" || exit /b 1
+    call :Read_F next-phase "yN" 0 || exit /b 1
     rem echo next-phase: !next-phase!
     if defined next-phase (
         set OPTION=!OPTION! --next-phase

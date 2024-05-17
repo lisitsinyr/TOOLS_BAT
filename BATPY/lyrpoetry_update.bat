@@ -122,11 +122,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     exit /b 0
 rem endfunction
 
@@ -190,28 +185,28 @@ rem beginfunction
     )
     set no-dev=N
     set PN_CAPTION=Do not update the development dependencies. ^(Deprecated^)
-    call :Read_F no-dev "yN" || exit /b 1
+    call :Read_F no-dev "yN" 0 || exit /b 1
     rem echo no-dev: !no-dev!
     if defined no-dev (
         set OPTION=!OPTION! --no-dev
     )
-    set sync=N
+    set sync=Y
     set PN_CAPTION=Synchronize the environment with the locked packages and the specified groups
-    call :Read_F sync "yN" || exit /b 1
+    call :Read_F sync "yN" 0 || exit /b 1
     rem echo sync: !sync!
     if defined sync (
         set OPTION=!OPTION! --sync
     )
     set dry-run=N
     set PN_CAPTION=Output the operations but do not execute anything ^(implicitly enables --verbose^)
-    call :Read_F dry-run "yN" || exit /b 1
+    call :Read_F dry-run "yN" 0 || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
-    set lock=N
+    set lock=Y
     set PN_CAPTION=Do not perform operations ^(only update the lockfile^)
-    call :Read_F lock "yN" || exit /b 1
+    call :Read_F lock "yN" 0 || exit /b 1
     rem echo lock: !lock!
     if defined lock (
         set OPTION=!OPTION! --lock

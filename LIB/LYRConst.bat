@@ -145,6 +145,7 @@ rem beginfunction
     call :__SET_VAR_PROJECTS || exit /b 1
     call :__SET_VAR_SCRIPT %1 || exit /b 1
     call :__SET_LOG || exit /b 1
+    call :__SET_POETRY || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -197,15 +198,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set PROJECT_INI=PROJECT.ini
     rem echo PROJECT_INI [PROJECT.ini]: !PROJECT_INI!
-
-    rem -------------------------------------------------------------------
-    rem POETRY - 
-    rem -------------------------------------------------------------------
-    set APP=poetry
-    set OPTION= -v --no-ansi --version
-    set OPTION= -v --ansi --version
-    set ARGS=
-    set APPRUN=
 
     exit /b 0
 rem endfunction
@@ -596,6 +588,29 @@ rem beginfunction
     )
     echo APP_KIX_DIR: !APP_KIX_DIR!
 
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem :SET_POETRY ()
+rem --------------------------------------------------------------------------------
+:__SET_POETRY
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=SET_KIX
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem POETRY - 
+    rem -------------------------------------------------------------------
+    set APP=poetry
+    set OPTION= -v --no-ansi
+    set OPTION= -v --ansi
+    set ARGS=
+    set APPRUN=
     exit /b 0
 rem endfunction
 

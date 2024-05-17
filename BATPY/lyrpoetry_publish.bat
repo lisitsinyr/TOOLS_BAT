@@ -133,13 +133,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -227,23 +222,23 @@ rem beginfunction
     if defined dist-dir (
         set OPTION=!OPTION! --dist-dir=!dist-dir!
     )
-    set build=
+    set build=Y
     set PN_CAPTION=Build the package before publishing
-    call :Read_F build "yN" || exit /b 1
+    call :Read_F build "yN" 0 || exit /b 1
     rem echo build: !build!
     if defined build (
         set OPTION=!OPTION! --build
     )
-    set dry-run=
+    set dry-run=Y
     set PN_CAPTION=Perform all actions except upload the package
-    call :Read_F dry-run "yN" || exit /b 1
+    call :Read_F dry-run "yN" 0 || exit /b 1
     rem echo dry-run: !dry-run!
     if defined dry-run (
         set OPTION=!OPTION! --dry-run
     )
-    set skip-existing=
+    set skip-existing=N
     set PN_CAPTION=Ignore errors from files already existing in the repository
-    call :Read_F skip-existing "yN" || exit /b 1
+    call :Read_F skip-existing "yN" 0 || exit /b 1
     rem echo skip-existing: !skip-existing!
     if defined skip-existing (
         set OPTION=!OPTION! --skip-existing

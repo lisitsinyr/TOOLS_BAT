@@ -129,13 +129,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -181,9 +176,9 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set all=
+    set all=N
     set PN_CAPTION=Remove all managed virtual environments associated with the project
-    call :Read_F all "yN" || exit /b 1
+    call :Read_F all "yN" 0 || exit /b 1
     rem echo all: !dall%
     if defined all (
         set OPTION=!OPTION! --all

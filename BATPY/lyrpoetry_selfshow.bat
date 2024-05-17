@@ -136,11 +136,6 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     exit /b 0
 rem endfunction
 
@@ -181,30 +176,30 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set addons=N
+    set addons=Y
     set PN_CAPTION=List only add-on packages installed
-    call :Read_F addons "yN" || exit /b 1
+    call :Read_F addons "yN" 0 || exit /b 1
     rem echo addons: !addons!
     if defined addons (
         set OPTION=!OPTION! --addons
     )
-    set tree=N
+    set tree=Y
     set PN_CAPTION=List the dependencies as a tree
-    call :Read_F tree "yN" || exit /b 1
+    call :Read_F tree "yN" 0 || exit /b 1
     rem echo tree: !tree!
     if defined tree (
         set OPTION=!OPTION! --tree
     )
-    set latest=
+    set latest=Y
     set PN_CAPTION=Show the latest version
-    call :Read_F latest "" || exit /b 1
+    call :Read_F latest "yN" 0 || exit /b 1
     rem echo latest: !latest!
     if defined latest (
         set OPTION=!OPTION! --latest
     )
-    set outdated=N
+    set outdated=Y
     set PN_CAPTION=Show the latest version but only for packages that are outdated
-    call :Read_F outdated "yN" || exit /b 1
+    call :Read_F outdated "yN" 0 || exit /b 1
     rem echo outdated: !outdated!
     if defined outdated (
         set OPTION=!OPTION! --outdated

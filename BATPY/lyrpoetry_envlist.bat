@@ -121,13 +121,8 @@ rem beginfunction
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set ARGS=
-    set APPRUN=
-
     set tomlFile=pyproject.toml
-    call :CheckFile tomlFile
+    call :CheckFile !tomlFile! || exit /b 1
     if not defined CheckFile (
         echo ERROR: Файл !tomlFile! не существует ...
         set OK=
@@ -173,9 +168,9 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set full-path=
+    set full-path=Y
     set PN_CAPTION=Output the full paths of the virtualenvs
-    call :Read_F full-path "yN" || exit /b 1
+    call :Read_F full-path "yN" 0 || exit /b 1
     rem echo full-path: !full-path!
     if defined full-path (
         set OPTION=!OPTION! --full-path
