@@ -15,18 +15,24 @@ rem ----------------------------------------------------------------------------
     echo Start !BATNAME! ...
 
     set DEBUG=
-    set OK=yes
 
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem LIB_BAT - каталог библиотеки скриптов
     rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
-    call :MAIN_INIT || exit /b 1
+    call :MAIN_INIT %* || exit /b 1
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
     call :SET_LIB %0 || exit /b 1
-    echo CURRENT_DIR: !CURRENT_DIR!
+    rem echo CURRENT_DIR: !CURRENT_DIR!
+
     call :StartLogFile || exit /b 1
-    call :MAIN_SET || exit /b 1
+    set OK=yes
+    call :MAIN_SET %* || exit /b 1
     if defined OK if not defined Read_N (
         call :MAIN_CHECK_PARAMETR %* || exit /b 1
     )
@@ -55,7 +61,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
         set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     )
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
@@ -75,7 +80,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
@@ -93,10 +97,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
 
     exit /b 0
 rem endfunction

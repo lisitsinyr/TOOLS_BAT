@@ -141,11 +141,61 @@ rem beginfunction
     )
     set !FUNCNAME!=
  
+    call :__SET_VAR_SCRIPT %1 || exit /b 1
     call :__SET_VAR_DEFAULT || exit /b 1
     call :__SET_VAR_PROJECTS || exit /b 1
-    call :__SET_VAR_SCRIPT %1 || exit /b 1
     call :__SET_LOG || exit /b 1
     call :__SET_POETRY || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure __SET_VAR_SCRIPT (%1 - FULLFILENAME)
+rem --------------------------------------------------------------------------------
+:__SET_VAR_SCRIPT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SET_VAR_SCRIPT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
+    rem -------------------------------------------------------------------
+    set SCRIPT_FULLFILENAME=%1
+    echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+    rem -------------------------------------------------------------------
+    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
+    rem -------------------------------------------------------------------
+    set SCRIPT_FULLFILENAME=%~f1
+    rem echo SCRIPT_FULLFILENAME: !SCRIPT_FULLFILENAME!
+
+    rem -------------------------------------------------------------------
+    rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
+    rem -------------------------------------------------------------------
+    set SCRIPT_BASEFILENAME=%~n1%~x1
+    rem echo SCRIPT_BASEFILENAME: !SCRIPT_BASEFILENAME!
+
+    rem -------------------------------------------------------------------
+    rem SCRIPT_FILENAME - Файл скрипта [имя]
+    rem -------------------------------------------------------------------
+    set SCRIPT_FILENAME=%~n1
+    rem echo SCRIPT_FILENAME: !SCRIPT_FILENAME!
+
+    rem -------------------------------------------------------------------
+    rem Файл скрипта: каталог
+    rem -------------------------------------------------------------------
+    set SCRIPT_FILEDIR=
+    rem echo SCRIPT_FILEDIR: !SCRIPT_FILEDIR!
+
+    rem -------------------------------------------------------------------
+    rem Файл скрипта: расширение
+    rem -------------------------------------------------------------------
+    set SCRIPT_FILEEXT=
+    rem echo SCRIPT_FILEEXT: !SCRIPT_FILEEXT!
 
     exit /b 0
 rem endfunction
@@ -255,56 +305,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set CURRENT_DIR=%CD%
     rem echo CURRENT_DIR: !CURRENT_DIR!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure __SET_VAR_SCRIPT (%1 - FULLFILENAME)
-rem --------------------------------------------------------------------------------
-:__SET_VAR_SCRIPT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_VAR_SCRIPT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-    rem -------------------------------------------------------------------
-    set SCRIPT_FULLFILENAME=%1
-    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-    rem -------------------------------------------------------------------
-    set SCRIPT_FULLFILENAME=%~f1
-    rem echo SCRIPT_FULLFILENAME: !SCRIPT_FULLFILENAME!
-
-    rem -------------------------------------------------------------------
-    rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
-    rem -------------------------------------------------------------------
-    set SCRIPT_BASEFILENAME=%~n1%~x1
-    rem echo SCRIPT_BASEFILENAME: !SCRIPT_BASEFILENAME!
-
-    rem -------------------------------------------------------------------
-    rem SCRIPT_FILENAME - Файл скрипта [имя]
-    rem -------------------------------------------------------------------
-    set SCRIPT_FILENAME=%~n1
-    rem echo SCRIPT_FILENAME: !SCRIPT_FILENAME!
-
-    rem -------------------------------------------------------------------
-    rem Файл скрипта: каталог
-    rem -------------------------------------------------------------------
-    set SCRIPT_FILEDIR=
-    rem echo SCRIPT_FILEDIR: !SCRIPT_FILEDIR!
-
-    rem -------------------------------------------------------------------
-    rem Файл скрипта: расширение
-    rem -------------------------------------------------------------------
-    set SCRIPT_FILEEXT=
-    rem echo SCRIPT_FILEEXT: !SCRIPT_FILEEXT!
 
     exit /b 0
 rem endfunction
