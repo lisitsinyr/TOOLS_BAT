@@ -129,12 +129,12 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set tomlFile=pyproject.toml
-    call :CheckFile !tomlFile! || exit /b 1
-    if not defined CheckFile (
-        echo ERROR: Файл !tomlFile! не существует ...
-        set OK=
-    )
+    rem set tomlFile=pyproject.toml
+    rem call :CheckFile !tomlFile! || exit /b 1
+    rem if not defined CheckFile (
+    rem     echo INFO: Файл !tomlFile! не существует ...
+    rem     set OK=
+    rem )
 
     exit /b 0
 rem endfunction
@@ -176,12 +176,12 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set name=
+    set ProjectName=
     set PN_CAPTION=Name of the package
-    call :Read_P name "" || exit /b 1
-    rem echo name: !name!
+    call :Read_P ProjectName %1 || exit /b 1
+    rem echo ProjectName: !ProjectName!
     if defined name (
-        set OPTION=!OPTION! --name=!name!
+        set OPTION=!OPTION! --name=!ProjectName!
     )
     set description=Description of the package
     set PN_CAPTION=Description of the package
