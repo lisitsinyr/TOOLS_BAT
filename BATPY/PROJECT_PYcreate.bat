@@ -158,11 +158,13 @@ rem beginfunction
             rem --------------------------
             rem POETRY
             rem --------------------------
-            call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
+            rem call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
             rem cd /D "!Directory!"
             rem call lyrpoetry_init.bat --name=!ProjectName!
             rem cd ..\
-            )
+
+            mkdir "!Directory!"
+        )
 
         cd /D "!Directory!"
         rem --------------------------
@@ -218,9 +220,10 @@ rem beginfunction
         ) else (
             set OK=yes
         )
+
         set PN_CAPTION=Каталог проекта
-        set Directory=PATTERN_PY
-        call :Read_P Directory %1 || exit /b 1
+        set Directory=!ProjectName!
+        call :Read_P Directory %2 || exit /b 1
         echo Directory: !Directory!
         if not defined Directory (
             echo ERROR: Directory not defined ...
