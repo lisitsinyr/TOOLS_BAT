@@ -124,6 +124,9 @@ rem beginfunction
     if defined OK (
         echo ProjectName: !ProjectName!
 
+        echo D:\TOOLS\EXE>setini.exe
+        echo SETINI: setini <ini_file> <group> <parameter> <value> 
+
         call :CurrentDir || exit /b 1
 
         set LDir=.devcontainer
