@@ -216,9 +216,9 @@ rem beginfunction
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\SRC\PATTERN_PY
-        echo DIR_FROM: !DIR_FROM!
+        rem echo DIR_FROM: !DIR_FROM!
         set DIR_TO=!CurrentDir!\SRC\!ProjectName!
-        echo DIR_TO: !DIR_TO!
+        rem echo DIR_TO: !DIR_TO!
         set LFileName=PATTERN_PY.py
         call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!"\!ProjectName!.py > NUL
