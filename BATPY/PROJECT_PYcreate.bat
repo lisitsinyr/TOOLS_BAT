@@ -126,45 +126,43 @@ rem beginfunction
         rem echo ProjectName: !PROJECT_NAME!
         rem echo Directory: !Directory!
 
-        if not exist "PROJECT.ini" (
-            echo Создание проекта !ProjectName! ...
-            echo Directory: !Directory!
-            if exist "!Directory!"\ (
-                echo INFO: Каталог проекта "!Directory!" существует...
-                set delete=N
-                set PN_CAPTION=Удалить?
-                call :Read_F delete "yN" 5 || exit /b 1
-                if defined delete (
-                    echo Удаление каталога проекта "!Directory!"
-                    rmdir "!Directory!" /s
-                    mkdir "!Directory!"
-                )
+        echo Создание проекта !ProjectName! ...
+        echo Directory: !Directory!
+        if exist "!Directory!"\ (
+            echo INFO: Каталог проекта "!Directory!" существует...
+            set delete=N
+            set PN_CAPTION=Удалить?
+            call :Read_F delete "yN" 5 || exit /b 1
+            if defined delete (
+                echo Удаление каталога проекта "!Directory!"
+                rmdir "!Directory!" /s
+                mkdir "!Directory!"
+            )
 
-                set tomlFile="!Directory!"\pyproject.toml
-                call :CheckFile !tomlFile! || exit /b 1
-                if defined CheckFile (
-                    set OK=yes
-                    cd /D "!Directory!"
-                    call lyrpoetry_init.bat --name=!ProjectName!
-                    cd ..\
-                ) else (
-                    set OK=
-                    echo ERROR: Файл !tomlFile! не существует ...
-                    call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-                    cd /D "!Directory!"
-                    call lyrpoetry_init.bat --name=!ProjectName!
-                    cd ..\
-                )
+            set tomlFile="!Directory!"\pyproject.toml
+            call :CheckFile !tomlFile! || exit /b 1
+            if defined CheckFile (
+                set OK=yes
+                cd /D "!Directory!"
+                call lyrpoetry_init.bat --name=!ProjectName!
+                cd ..\
             ) else (
-                rem --------------------------
-                rem POETRY
-                rem --------------------------
+                set OK=
+                echo ERROR: Файл !tomlFile! не существует ...
                 call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
                 cd /D "!Directory!"
                 call lyrpoetry_init.bat --name=!ProjectName!
                 cd ..\
             )
-        )
+        ) else (
+            rem --------------------------
+            rem POETRY
+            rem --------------------------
+            call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
+            cd /D "!Directory!"
+            call lyrpoetry_init.bat --name=!ProjectName!
+            cd ..\
+            )
 
         cd /D "!Directory!"
         rem --------------------------
