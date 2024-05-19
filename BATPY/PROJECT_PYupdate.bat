@@ -124,6 +124,8 @@ rem beginfunction
     if defined OK (
         echo ProjectName: !ProjectName!
 
+        call :CurrentDir || exit /b 1
+
         set LDir=.devcontainer
         call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
         call :CreateDir !LDir!
