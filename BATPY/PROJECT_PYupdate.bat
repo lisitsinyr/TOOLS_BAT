@@ -183,9 +183,11 @@ rem beginfunction
         set LFileName=.pypirc
         call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         call :CreateFile !LFileName!
-        set LFileName=src\test\__init__.py
+
+        set LFileName=src\!ProjectName!\__init__.py
         call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         call :CreateFile !LFileName!
+
         set LFileName=tests\__init__.py
         call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         call :CreateFile !LFileName!

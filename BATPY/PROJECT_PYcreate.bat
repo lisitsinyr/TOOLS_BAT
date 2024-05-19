@@ -143,25 +143,25 @@ rem beginfunction
             call :CheckFile !tomlFile! || exit /b 1
             if defined CheckFile (
                 set OK=yes
-                cd /D "!Directory!"
-                call lyrpoetry_init.bat --name=!ProjectName!
-                cd ..\
+                rem cd /D "!Directory!"
+                rem call lyrpoetry_init.bat --name=!ProjectName!
+                rem cd ..\
             ) else (
                 set OK=
-                echo ERROR: Файл !tomlFile! не существует ...
+                echo INFO: Файл !tomlFile! не существует ...
                 call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-                cd /D "!Directory!"
-                call lyrpoetry_init.bat --name=!ProjectName!
-                cd ..\
+                rem cd /D "!Directory!"
+                rem call lyrpoetry_init.bat --name=!ProjectName!
+                rem cd ..\
             )
         ) else (
             rem --------------------------
             rem POETRY
             rem --------------------------
             call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-            cd /D "!Directory!"
-            call lyrpoetry_init.bat --name=!ProjectName!
-            cd ..\
+            rem cd /D "!Directory!"
+            rem call lyrpoetry_init.bat --name=!ProjectName!
+            rem cd ..\
             )
 
         cd /D "!Directory!"
@@ -169,6 +169,12 @@ rem beginfunction
         rem Структура каталогов
         rem --------------------------
         call PROJECT_PYupdate.bat !ProjectName!
+        set tomlFile=pyproject.toml
+        call :CheckFile !tomlFile! || exit /b 1
+        if not defined CheckFile (
+            echo INFO: Файл !tomlFile! не существует ...
+            call lyrpoetry_init.bat --name=!ProjectName!
+        )
 
         rem --------------------------
         rem GIT
@@ -176,7 +182,7 @@ rem beginfunction
         if exist ".git"\ (
             echo INFO: Repository exist ...
         ) else (
-            call lyrgit_init.bat .\
+            rem call lyrgit_init.bat .\
         )
     )
 
