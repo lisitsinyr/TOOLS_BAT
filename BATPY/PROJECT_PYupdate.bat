@@ -124,9 +124,6 @@ rem beginfunction
     if defined OK (
         echo ProjectName: !ProjectName!
 
-        echo D:\TOOLS\EXE\setini.exe
-        echo SETINI: setini ini_file group parameter value
-
         call :CurrentDir || exit /b 1
 
         set LDir=.devcontainer
@@ -222,6 +219,9 @@ rem beginfunction
         set LFileName=pyproject.toml
         call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+
+        echo D:\TOOLS\EXE\setini.exe
+        setini LFileName tool.poetry name !ProjectName!
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\SRC\PATTERN_PY
         rem echo DIR_FROM: !DIR_FROM!
