@@ -221,7 +221,7 @@ rem beginfunction
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 
         echo D:\TOOLS\EXE\setini.exe
-        D:\TOOLS\EXE\setini.exe LFileName tool.poetry name !ProjectName!
+        D:\TOOLS\EXE\setini.exe !LFileName! tool.poetry name !ProjectName!
 
         set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\SRC\PATTERN_PY
         rem echo DIR_FROM: !DIR_FROM!
