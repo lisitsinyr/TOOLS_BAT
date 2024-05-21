@@ -142,35 +142,29 @@ rem beginfunction
             set tomlFile="!Directory!"\pyproject.toml
             call :CheckFile !tomlFile! || exit /b 1
             if defined CheckFile (
-                set OK=yes
-                rem cd /D "!Directory!"
+                cd /D "!Directory!"
                 rem call lyrpoetry_init.bat --name=!ProjectName!
-                rem cd ..\
             ) else (
-                set OK=
                 echo INFO: Файл !tomlFile! не существует ...
-                call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-                rem cd /D "!Directory!"
+                rem call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
+                mkdir "!Directory!"
+                cd /D "!Directory!"
                 rem call lyrpoetry_init.bat --name=!ProjectName!
-                rem cd ..\
             )
+            set OK=yes
         ) else (
-            rem --------------------------
-            rem POETRY
-            rem --------------------------
             rem call lyrpoetry_new.bat --name=!ProjectName! --src "!Directory!"
-            rem cd /D "!Directory!"
-            rem call lyrpoetry_init.bat --name=!ProjectName!
-            rem cd ..\
-
             mkdir "!Directory!"
+            cd /D "!Directory!"
+            rem call lyrpoetry_init.bat --name=!ProjectName!
+            set OK=yes
         )
 
-        cd /D "!Directory!"
         rem --------------------------
         rem Структура каталогов
         rem --------------------------
         call PROJECT_PYupdate.bat !ProjectName!
+
         set tomlFile=pyproject.toml
         call :CheckFile !tomlFile! || exit /b 1
         if not defined CheckFile (
