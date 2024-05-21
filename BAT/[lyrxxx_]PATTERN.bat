@@ -114,11 +114,22 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
+    set O1=
+    if defined O1 (
+        set OPTION=!OPTION! !O1!
+    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
+    set A1=
+    if defined A1 (
+        set ARGS=!ARGS! !A1!
+    ) else (
+        echo ERROR: A1 not defined ...
+        set OK=yes
+    )
 
     exit /b 0
 rem endfunction

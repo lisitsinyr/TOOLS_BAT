@@ -24,7 +24,7 @@ rem ----------------------------------------------------------------------------
 
     rem Количество аргументов
     call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
+    echo Read_N: !Read_N!
 
     call :SET_LIB %0 || exit /b 1
     rem echo CURRENT_DIR: !CURRENT_DIR!
@@ -60,7 +60,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
         set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     )
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
@@ -80,7 +79,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
@@ -99,6 +97,15 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem -------------------------------------------------------------------
+    rem rar - 
+    rem -------------------------------------------------------------------
+    set APP=rar
+    set COMMAND=a
+    set OPTION= -r
+    set ARGS=
+    set APPRUN=
+
     exit /b 0
 rem endfunction
 
@@ -111,21 +118,28 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
+    set O1=
+    if defined O1 (
+        set OPTION=!OPTION! !O1!
+    )
 
-    set RARCMD=
-
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    rem Проверка на обязательные аргументы
     set PN_CAPTION=Ввод значения directory
     set directory=
     call :Check_P directory %1 || exit /b 1
-    rem echo directory: !directory!
-
-    if "!directory!"=="" (
-        echo ERROR: Параметр directory не задан...
+    echo directory: !directory!
+    if defined directory (
+        set ARGS=!ARGS! !directory!
+    ) else (
+        echo ERROR: directory not defined ...
         echo Использование: !BATNAME! папка
         set OK=
-    ) else (
-        set RARCMD=rar a -r "!directory!.rar" "!directory!"
-        echo RARCMD: !RARCMD!
     )
 
     exit /b 0
@@ -141,7 +155,13 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    !RARCMD!
+    if not defined Read_N (
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+    ) else (
+        set APPRUN=!APP! !COMMAND!!OPTION! %*
+    )
+    echo APPRUN: !APPRUN!
+    !APPRUN!
 
     exit /b 0
 rem endfunction

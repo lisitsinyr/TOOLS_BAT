@@ -126,166 +126,223 @@ rem beginfunction
 
         call :CurrentDir || exit /b 1
 
-        set LDir=.devcontainer
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
+        call :MAIN_CreateDIRs || exit /b 1
 
-        set LDir=.idea
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=.venv
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=.vscode
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=BUILD
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=CONFIG
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=DATA
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=DIST
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=DOC
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=EXE
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=LOG
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=NOTEBOOKS
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=OUT
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=SRC
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=SRC\!ProjectName!
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=TESTS
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
-        set LDir=WORK
-        call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
-        call :CreateDir !LDir!
+        call :MAIN_CreateFILEs || exit /b 1
 
-        set LFileName=.gitmodules
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
-        set LFileName=.pypirc
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
+        call :MAIN_CopyFILEs || exit /b 1
 
-        set LFileName=src\!ProjectName!\__init__.py
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
-
-        set LFileName=tests\__init__.py
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
-
-        set DIR_TO=!CurrentDir!
-        rem echo DIR_TO: !DIR_TO!
-
-        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
-        rem echo DIR_FROM: !DIR_FROM!
-        set LFileName=lyrgit_push_main.bat
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
-        set LFileName=lyrgit_init.bat
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
-
-        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY
-        rem echo DIR_FROM: !DIR_FROM!
-        set LFileName=.gitignore
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
-
-        set LFileName=LICENSE
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
-
-        set LFileName=pyproject.toml
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
-
-        echo D:\TOOLS\EXE\setini.exe
-        D:\TOOLS\EXE\setini.exe !LFileName! tool.poetry name !ProjectName!
-
-        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\SRC\PATTERN_PY
-        rem echo DIR_FROM: !DIR_FROM!
-        set DIR_TO=!CurrentDir!\SRC\!ProjectName!
-        rem echo DIR_TO: !DIR_TO!
-        set LFileName=PATTERN_PY.py
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!"\!ProjectName!.py > NUL
-
-        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\SRC
-        rem echo DIR_FROM: !DIR_FROM!
-        set DIR_TO=!CurrentDir!\SRC
-        rem echo DIR_TO: !DIR_TO!
-        set LFileName=README.md
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
-
-        set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\BATPY
-        rem echo DIR_FROM: !DIR_FROM!
-        set LFileName=PROJECT_PYupdate.bat
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
-        
-        set LFileName=UPDATE_!ProjectName!.bat
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
-
-        set LFileName=README.md
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
-        call :FileSize !LFileName!
-        if !FileSize!==0 (
-            echo !ProjectName! >> !LFileName!
-            echo ---------- >> !LFileName!
-            echo You can use [GitHub-flavored Markdown]^(https://guides.github.com/features/mastering-markdown/^) >> !LFileName!
-        )
-
-        set LFileName=POETRY.ini
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
-        call :FileSize !LFileName!
-        if !FileSize!==0 (
-            echo # Это простой файл с настройками >> !LFileName!
-            echo PROJECT_NAME=!ProjectName! >> !LFileName!
-        )
-
-        set LFileName=PROJECT.ini
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
-        call :FileSize !LFileName!
-        if !FileSize!==0 (
-            echo # Это простой файл с настройками >> !LFileName!
-            echo PROJECT_NAME=!ProjectName! >> !LFileName!
-        )
-
-        set LFileName=REPO.ini
-        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
-        call :CreateFile !LFileName!
-        call :FileSize !LFileName!
-        if !FileSize!==0 (
-            echo # Это простой файл с настройками >> !LFileName!
-            echo REPO_NAME=!ProjectName! >> !LFileName!
-        )
+        call :MAIN_SetPOETRY || exit /b 1
     )
+
+    exit /b 0
+:end
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CreateDIRs ()
+rem --------------------------------------------------------------------------------
+:MAIN_CreateDIRs
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LDir=.devcontainer
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=.idea
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=.venv
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=.vscode
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=BUILD
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=CONFIG
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=DATA
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=DIST
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=DOC
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=EXE
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=LOG
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=NOTEBOOKS
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=OUT
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=SRC
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=SRC\!ProjectName!
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=TESTS
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+    set LDir=WORK
+    call :AddLog !loAll! !TEXT! CreateDir !LDir! || exit /b 1
+    call :CreateDir !LDir!
+
+    exit /b 0
+:end
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CreateFILEs ()
+rem --------------------------------------------------------------------------------
+:MAIN_CreateFILEs
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LFileName=.gitmodules
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+    set LFileName=.pypirc
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+    set LFileName=src\!ProjectName!\__init__.py
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+    set LFileName=tests\__init__.py
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+    set LFileName=UPDATE_!ProjectName!.bat
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+
+    set LFileName=README.md
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+    call :FileSize !LFileName!
+    if !FileSize!==0 (
+        echo !ProjectName! >> !LFileName!
+        echo ---------- >> !LFileName!
+        echo You can use [GitHub-flavored Markdown]^(https://guides.github.com/features/mastering-markdown/^) >> !LFileName!
+    )
+    set LFileName=POETRY.ini
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+    call :FileSize !LFileName!
+    if !FileSize!==0 (
+        echo # Это простой файл с настройками >> !LFileName!
+        echo PROJECT_NAME=!ProjectName! >> !LFileName!
+    )
+    set LFileName=PROJECT.ini
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+    call :FileSize !LFileName!
+    if !FileSize!==0 (
+        echo # Это простой файл с настройками >> !LFileName!
+        echo PROJECT_NAME=!ProjectName! >> !LFileName!
+    )
+    set LFileName=REPO.ini
+    call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+    call :CreateFile !LFileName!
+    call :FileSize !LFileName!
+    if !FileSize!==0 (
+        echo # Это простой файл с настройками >> !LFileName!
+        echo REPO_NAME=!ProjectName! >> !LFileName!
+    )
+
+    exit /b 0
+:end
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CopyFILEs ()
+rem --------------------------------------------------------------------------------
+:MAIN_CopyFILEs
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem ------------------------------------------------------
+    set DIR_TO=!CurrentDir!
+    rem echo DIR_TO: !DIR_TO!
+    rem ------------------------------------------------------
+    set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_GIT\BAT\A.WORK
+    rem echo DIR_FROM: !DIR_FROM!
+    set LFileName=lyrgit_push_main.bat
+    call :AddLog !loAll! !TEXT! CopyFile !LFileName! || exit /b 1
+    copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+    set LFileName=lyrgit_init.bat
+    call :AddLog !loAll! !TEXT! CopyFile !LFileName! || exit /b 1
+    copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+
+    set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY
+    rem echo DIR_FROM: !DIR_FROM!
+    set LFileName=.gitignore
+    call :AddLog !loAll! !TEXT! CopyFile !LFileName! || exit /b 1
+    copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+    set LFileName=LICENSE
+    call :AddLog !loAll! !TEXT! CopyFile !LFileName! || exit /b 1
+    copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+    set LFileName=pyproject.toml
+    call :AddLog !loAll! !TEXT! CopyFile !LFileName! || exit /b 1
+    copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+
+    rem ------------------------------------------------------
+    set DIR_TO=!CurrentDir!\SRC\!ProjectName!
+    rem echo DIR_TO: !DIR_TO!
+    rem ------------------------------------------------------
+    set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\SRC\PATTERN_PY
+    rem echo DIR_FROM: !DIR_FROM!
+    set LFileName=PATTERN_PY.py
+    call :AddLog !loAll! !TEXT! CopyFile !LFileName! || exit /b 1
+    copy "!DIR_FROM!\!LFileName!" "!DIR_TO!"\!ProjectName!.py > NUL
+        
+    rem ------------------------------------------------------
+    set DIR_TO=!CurrentDir!\SRC
+    rem echo DIR_TO: !DIR_TO!
+    rem ------------------------------------------------------
+    set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\SRC
+    rem echo DIR_FROM: !DIR_FROM!
+    set LFileName=README.md
+    call :AddLog !loAll! !TEXT! CopyFile !LFileName! || exit /b 1
+    copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+    set DIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\BATPY
+    rem echo DIR_FROM: !DIR_FROM!
+    set LFileName=PROJECT_PYupdate.bat
+    call :AddLog !loAll! !TEXT! CopyFile !LFileName! || exit /b 1
+    copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+
+    exit /b 0
+:end
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_SetPOETRY ()
+rem --------------------------------------------------------------------------------
+:MAIN_SetPOETRY
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LFileName=pyproject.toml
+    call :AddLog !loAll! !TEXT! SetPOETRY !LFileName! || exit /b 1
+    echo D:\TOOLS\EXE\setini.exe
+    D:\TOOLS\EXE\setini.exe !LFileName! tool.poetry name !ProjectName!
 
     exit /b 0
 :end

@@ -60,7 +60,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
         set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
     )
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
@@ -80,7 +79,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
@@ -113,50 +111,55 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set RARCMD=
-
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set PN_CAPTION=Ввод значения archive
-    set archive=
-    call :Check_P archive %1 || exit /b 1
-    rem echo archive: !archive!
+    set O1=
+    if defined O1 (
+        set OPTION=!OPTION! !O1!
+    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
-    
+    set PN_CAPTION=Ввод значения archive
+    set archive=
+    call :Check_P archive %1 || exit /b 1
+    rem echo archive: !archive!
     if not defined archive (
         echo ERROR: Параметр archive не задан...
         echo Использование: !BATNAME! архив [файлы]
         set OK=
     ) else (
+        call :FullFileName "!archive!" || exit /b 1
+        rem echo FullFileName: !FullFileName!
         call :ExtractFileName "!archive!" || exit /b 1
         rem echo ExtractFileName: !ExtractFileName!
         call :ExtractFileNameWithoutExt "!archive!" || exit /b 1
         rem echo ExtractFileNameWithoutExt: !ExtractFileNameWithoutExt!
+
         call :FileAttr "!archive!" || exit /b 1
         rem echo FileAttr: !FileAttr!
         rem echo FOLDER: !FOLDER!
-        call :FullFileName "!archive!" || exit /b 1
-        rem echo FullFileName: !FullFileName!
-        if "!FOLDER!"=="D" (
-            set RARCMD=rar a -r "!ExtractFileName!.rar" "!ExtractFileName!"
-        )
-        if "!FOLDER!"=="F" (
-            set RARCMD=rar a "!ExtractFileNameWithoutExt!.rar" "!archive!"
-        )
         if not defined FOLDER (
             set PN_CAPTION=Файлы
             set files=*.*
             call :Check_P files !files! || exit /b 1
             rem echo files: !files!    
-            set RARCMD=rar a -r "!archive!.rar" "!files!"
+            rem set RARCMD=rar a -r "!archive!.rar" "!files!"
+            set ARGS=!ARGS! "!archive!.rar" "!files!"
+        )
+        if "!FOLDER!"=="D" (
+            rem set RARCMD=rar a -r "!ExtractFileName!.rar" "!ExtractFileName!"
+            set ARGS=!ARGS! "!ExtractFileName!.rar" "!ExtractFileName!"
+        )
+        if "!FOLDER!"=="F" (
+            rem set RARCMD=rar a "!ExtractFileNameWithoutExt!.rar" "!archive!"
+            set OPTION=
+            set ARGS=!ARGS! "!ExtractFileNameWithoutExt!.rar" "!archive!"
         )
     )
-    echo RARCMD: !RARCMD!
 
     exit /b 0
 rem endfunction
@@ -172,7 +175,13 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     
-    !RARCMD!
+    if not defined Read_N (
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+    ) else (
+        set APPRUN=!APP! !COMMAND!!OPTION! %*
+    )
+    echo APPRUN: !APPRUN!
+    !APPRUN!
     
     rem call :Pause !SLEEP! || exit /b 1
     rem call :PressAnyKey || exit /b 1

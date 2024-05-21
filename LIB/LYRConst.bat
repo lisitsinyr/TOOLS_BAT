@@ -212,6 +212,12 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set APP=
+    set COMMAND=
+    set OPTION=
+    set ARGS=
+    set APPRUN=
+
     set touchRUN=touch -f
     set touchRUN=D:\TOOLS\EXE\touch.exe
 
