@@ -214,7 +214,12 @@ rem beginfunction
         set LFileName=.gitignore
         call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+
         set LFileName=LICENSE
+        call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
+        copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
+
+        set LFileName=pyproject.toml
         call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
         copy "!DIR_FROM!\!LFileName!" "!DIR_TO!" > NUL
 

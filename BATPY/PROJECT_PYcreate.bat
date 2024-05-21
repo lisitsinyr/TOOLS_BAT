@@ -175,7 +175,7 @@ rem beginfunction
         call :CheckFile !tomlFile! || exit /b 1
         if not defined CheckFile (
             echo INFO: Файл !tomlFile! не существует ...
-            call lyrpoetry_init.bat --name=!ProjectName!
+            rem call lyrpoetry_init.bat --name=!ProjectName!
         )
 
         rem --------------------------
