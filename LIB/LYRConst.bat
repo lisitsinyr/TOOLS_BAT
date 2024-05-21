@@ -54,9 +54,16 @@ rem     REPO_INI=REPO.ini
 rem -------------------------------------------------------------------
 rem :SET_CHECK_PROJECT
 rem PROJECT_NAME - проекта
-rem     REPO_NAME=
+rem     PROJECT_NAME=
 rem PROJECT_INI - Файл с параметрами проекта
 rem     PROJECT_INI=PROJECT.ini
+
+rem -------------------------------------------------------------------
+rem :SET_CHECK_POETRY
+rem PROJECT_NAME - проекта
+rem     PROJECT_NAME=
+rem POETRY_INI - Файл с параметрами проекта
+rem     POETRY_INI=POETRY.ini
 
 rem -------------------------------------------------------------------
 rem :__SET_LOG
@@ -234,26 +241,34 @@ rem beginfunction
     rem echo SLEEP: !SLEEP!
 
     rem -------------------------------------------------------------------
-    rem REPO_NAME - Имя репозитария
-    rem -------------------------------------------------------------------
-    set REPO_NAME=
-
-    rem -------------------------------------------------------------------
     rem REPO_INI - Файл с параметрами репозитария
     rem -------------------------------------------------------------------
     set REPO_INI=REPO.ini
     rem echo REPO_INI [REPO.ini]: !REPO_INI!
-
     rem -------------------------------------------------------------------
-    rem PROJECT_NAME - Имя проекта
+    rem REPO_NAME - Имя репозитария
     rem -------------------------------------------------------------------
-    set PROJECT_NAME=
+    set REPO_NAME=
 
     rem -------------------------------------------------------------------
     rem PROJECT_INI - Файл с параметрами проекта
     rem -------------------------------------------------------------------
     set PROJECT_INI=PROJECT.ini
     rem echo PROJECT_INI [PROJECT.ini]: !PROJECT_INI!
+    rem -------------------------------------------------------------------
+    rem PROJECT_NAME - Имя проекта
+    rem -------------------------------------------------------------------
+    set PROJECT_NAME=
+
+    rem -------------------------------------------------------------------
+    rem POETRY_INI - Файл с параметрами проекта
+    rem -------------------------------------------------------------------
+    set POETRY_INI=POETRY.ini
+    rem echo POETRY_INI [POETRY.ini]: !POETRY_INI!
+    rem -------------------------------------------------------------------
+    rem POETRY_NAME - Имя проекта
+    rem -------------------------------------------------------------------
+    set POETRY_NAME=
 
     exit /b 0
 rem endfunction
@@ -477,11 +492,11 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem Проверка существования файла REPO.ini
     if exist !REPO_INI! (
-        for /f "eol=# delims== tokens=1,2" %%i in (%REPO_INI%) do (
+        for /f "eol=# delims== tokens=1,2" %%i in (!REPO_INI!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
             set %%i=%%j
-            rem echo %%i: %%%j%
+            echo %%i: !%%i!
         )
     ) else (
         echo INFO: File !REPO_INI! not exist
@@ -507,17 +522,47 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem Проверка существования файла PROJECT.ini
     if exist !PROJECT_INI! (
-        for /f "eol=# delims== tokens=1,2" %%i in (%PROJECT_INI%) do (
+        for /f "eol=# delims== tokens=1,2" %%i in (!PROJECT_INI!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
             set %%i=%%j
-            rem echo %%i: %%%j%
+            echo %%i: !%%i!
         )
     ) else (
         echo INFO: File !PROJECT_INI! not exist
         rem exit /b 1
     )
     rem echo PROJECT_NAME: !PROJECT_NAME!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure SET_CHECK_POETRY ()
+rem --------------------------------------------------------------------------------
+:SET_CHECK_POETRY
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SET_CHECK_POETRY
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem Проверка существования файла PROJECT.ini
+    if exist !POETRY_INI! (
+        for /f "eol=# delims== tokens=1,2" %%i in (!POETRY_INI!) do (
+            rem В переменной i - ключ
+            rem В переменной j - значение
+            set %%i=%%j
+            echo %%i: !%%i!
+        )
+    ) else (
+        echo INFO: File !POETRY_INI! not exist
+        rem exit /b 1
+    )
+    rem echo POETRY_NAME: !POETRY_NAME!
 
     exit /b 0
 rem endfunction

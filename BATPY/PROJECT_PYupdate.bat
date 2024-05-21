@@ -244,7 +244,7 @@ rem beginfunction
     call :FileSize !LFileName!
     if !FileSize!==0 (
         echo # Это простой файл с настройками >> !LFileName!
-        echo PROJECT_NAME=!ProjectName! >> !LFileName!
+        echo POETRY_NAME=!ProjectName! >> !LFileName!
     )
     set LFileName=PROJECT.ini
     call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
