@@ -238,12 +238,13 @@ rem beginfunction
         echo ---------- >> !LFileName!
         echo You can use [GitHub-flavored Markdown]^(https://guides.github.com/features/mastering-markdown/^) >> !LFileName!
     )
+
     set LFileName=POETRY.ini
     call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
     call :CreateFile !LFileName!
     call :FileSize !LFileName!
     if !FileSize!==0 (
-        echo # Это простой файл с настройками >> !LFileName!
+        echo [general] >> !LFileName!
         echo POETRY_NAME=!ProjectName! >> !LFileName!
     )
     set LFileName=PROJECT.ini
@@ -251,7 +252,7 @@ rem beginfunction
     call :CreateFile !LFileName!
     call :FileSize !LFileName!
     if !FileSize!==0 (
-        echo # Это простой файл с настройками >> !LFileName!
+        echo [general] >> !LFileName!
         echo PROJECT_NAME=!ProjectName! >> !LFileName!
     )
     set LFileName=REPO.ini
@@ -259,7 +260,7 @@ rem beginfunction
     call :CreateFile !LFileName!
     call :FileSize !LFileName!
     if !FileSize!==0 (
-        echo # Это простой файл с настройками >> !LFileName!
+        echo [general] >> !LFileName!
         echo REPO_NAME=!ProjectName! >> !LFileName!
     )
 

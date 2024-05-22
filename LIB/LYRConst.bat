@@ -495,8 +495,14 @@ rem beginfunction
         for /f "eol=# delims== tokens=1,2" %%i in (!REPO_INI!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
-            set %%i=%%j
-            echo %%i: !%%i!
+
+            set s=%%i
+            set s=!s:~0,1!
+            rem echo s: !s!
+            if not "!s!"=="[" (
+                set %%i=%%j
+                echo %%i: !%%i!
+            )
         )
     ) else (
         echo INFO: File !REPO_INI! not exist
@@ -525,8 +531,14 @@ rem beginfunction
         for /f "eol=# delims== tokens=1,2" %%i in (!PROJECT_INI!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
-            set %%i=%%j
-            echo %%i: !%%i!
+            
+            set s=%%i
+            set s=!s:~0,1!
+            rem echo s: !s!
+            if not "!s!"=="[" (
+                set %%i=%%j
+                echo %%i: !%%i!
+            )
         )
     ) else (
         echo INFO: File !PROJECT_INI! not exist
@@ -555,8 +567,14 @@ rem beginfunction
         for /f "eol=# delims== tokens=1,2" %%i in (!POETRY_INI!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
-            set %%i=%%j
-            echo %%i: !%%i!
+            
+            set s=%%i
+            set s=!s:~0,1!
+            rem echo s: !s!
+            if not "!s!"=="[" (
+                set %%i=%%j
+                echo %%i: !%%i!
+            )
         )
     ) else (
         echo INFO: File !POETRY_INI! not exist
