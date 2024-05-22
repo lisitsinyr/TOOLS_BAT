@@ -247,6 +247,9 @@ rem beginfunction
         echo [general] >> !LFileName!
         echo POETRY_NAME=!ProjectName! >> !LFileName!
     )
+    call :AddLog !loAll! !TEXT! SetINI !LFileName! || exit /b 1
+    D:\TOOLS\EXE\setini.exe !LFileName! general POETRY_NAME !ProjectName!
+
     set LFileName=PROJECT.ini
     call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
     call :CreateFile !LFileName!
@@ -255,6 +258,9 @@ rem beginfunction
         echo [general] >> !LFileName!
         echo PROJECT_NAME=!ProjectName! >> !LFileName!
     )
+    call :AddLog !loAll! !TEXT! SetINI !LFileName! || exit /b 1
+    D:\TOOLS\EXE\setini.exe !LFileName! general PROJECT_NAME !ProjectName!
+
     set LFileName=REPO.ini
     call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
     call :CreateFile !LFileName!
@@ -263,6 +269,8 @@ rem beginfunction
         echo [general] >> !LFileName!
         echo REPO_NAME=!ProjectName! >> !LFileName!
     )
+    call :AddLog !loAll! !TEXT! SetINI !LFileName! || exit /b 1
+    D:\TOOLS\EXE\setini.exe !LFileName! general REPO_NAME !ProjectName!
 
     exit /b 0
 :end
@@ -342,7 +350,7 @@ rem beginfunction
 
     set LFileName=pyproject.toml
     call :AddLog !loAll! !TEXT! SetPOETRY !LFileName! || exit /b 1
-    echo D:\TOOLS\EXE\setini.exe
+    rem echo D:\TOOLS\EXE\setini.exe
     D:\TOOLS\EXE\setini.exe !LFileName! tool.poetry name !ProjectName!
 
     exit /b 0
