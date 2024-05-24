@@ -363,6 +363,7 @@ rem beginfunction
 
     call :AddLog !loAll! !TEXT! GetINIParametr !LFileName! || exit /b 1
     call :GetINIParametr !LFileName! name || exit /b 1
+    echo name: !name!
 
     exit /b 0
 :end
