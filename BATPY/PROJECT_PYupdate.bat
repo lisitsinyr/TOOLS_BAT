@@ -355,7 +355,10 @@ rem beginfunction
     set LFileName=pyproject.toml
     call :AddLog !loAll! !TEXT! SetPOETRY !LFileName! || exit /b 1
     rem echo D:\TOOLS\EXE\setini.exe
-    D:\TOOLS\EXE\setini.exe !LFileName! tool.poetry name !ProjectName!
+    rem D:\TOOLS\EXE\setini.exe !LFileName! tool.poetry name !ProjectName!
+    call :SetINI !LFileName! tool.poetry name !ProjectName! || exit /b 1
+
+    call :GetINI !LFileName! || exit /b 1
 
     exit /b 0
 :end
