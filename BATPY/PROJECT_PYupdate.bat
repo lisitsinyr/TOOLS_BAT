@@ -518,4 +518,7 @@ exit /b 0
 :SetINI
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+:GetINIParametr
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 rem =================================================
