@@ -247,8 +247,11 @@ rem beginfunction
         echo [general] >> !LFileName!
         echo POETRY_NAME=!ProjectName! >> !LFileName!
     )
+
     call :AddLog !loAll! !TEXT! SetINI !LFileName! || exit /b 1
-    D:\TOOLS\EXE\setini.exe !LFileName! general POETRY_NAME !ProjectName!
+
+    rem D:\TOOLS\EXE\setini.exe !LFileName! general POETRY_NAME !ProjectName!
+    %SetINIAPP% !LFileName! general POETRY_NAME !ProjectName!
 
     set LFileName=PROJECT.ini
     call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1

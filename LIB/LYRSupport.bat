@@ -13,6 +13,8 @@ rem     :Check_P
 rem     :Read_P
 rem     :Read_F
 rem     :Read_N
+rem     :GetINI
+rem     :SetINI
 rem -------------------------------------------------------------------
 
 :begin
@@ -242,6 +244,50 @@ rem beginfunction
     set !FUNCNAME!=
 
     for %%a in (%*) do set /a Read_N+=1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure SetINI ()
+rem --------------------------------------------------------------------------------
+:SetINI
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=SetINI
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set LFileName=%1
+    set LSection=%2
+    set LParameter=%3
+    set LValue=%4
+    rem D:\TOOLS\EXE\setini.exe !LFileName! general POETRY_NAME !ProjectName!
+    %SetINIAPP% !LFileName! !LSection! !LParameter! !LValue!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure GetINI ()
+rem --------------------------------------------------------------------------------
+:GetINI
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetINI
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set LFileName=%1
+    set LSection=%2
+    set LParameter=%3
+    set !FUNCNAME!=!TEMP_DIR!\%random%.tmp
+
+    %GetINIAPP% !LFileName! !LSection! !LParameter! > !FUNCNAME!
 
     exit /b 0
 rem endfunction

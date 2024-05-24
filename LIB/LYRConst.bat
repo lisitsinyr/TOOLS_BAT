@@ -228,6 +228,9 @@ rem beginfunction
     set touchRUN=touch -f
     set touchRUN=D:\TOOLS\EXE\touch.exe
 
+    set SetINIAPP=D:\TOOLS\EXE\setini.exe
+    set GetINIAPP=D:\TOOLS\EXE\getini.exe
+
     rem -------------------------------------------------------------------
     rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
     rem -------------------------------------------------------------------
@@ -326,6 +329,12 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set CURRENT_DIR=%CD%
     rem echo CURRENT_DIR: !CURRENT_DIR!
+
+    rem -------------------------------------------------------------------
+    rem TEMP_DIR - Временный каталог
+    rem -------------------------------------------------------------------
+    set TEMP_DIR=%temp%
+    rem echo TEMP_DIR: !TEMP_DIR!
 
     exit /b 0
 rem endfunction
