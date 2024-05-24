@@ -289,6 +289,22 @@ rem beginfunction
     echo !FUNCNAME!: !%FUNCNAME%!
 
     %GetINIAPP% !LFileName! !LSection! !LParameter! > !%FUNCNAME%!
+
+    type !%FUNCNAME%!
+
+    if exist !%FUNCNAME%! (
+        for /f "eol=# delims== tokens=1,2" %%i in (!%FUNCNAME%!) do (
+            rem В переменной i - ключ
+            rem В переменной j - значение
+            if not "!s!"=="[" (
+                set %%i=%%j
+                echo %%i: !%%i!
+            )
+        )
+        del !%FUNCNAME%!
+    ) else (
+        echo INFO: File !%FUNCNAME%! not exist ...
+    )
      
     exit /b 0
 rem endfunction

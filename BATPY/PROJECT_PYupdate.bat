@@ -361,9 +361,6 @@ rem beginfunction
     call :AddLog !loAll! !TEXT! GetPOETRY !LFileName! || exit /b 1
     call :GetINI !LFileName! || exit /b 1
 
-    type !GetINI!
-    del !GetINI!
-
     exit /b 0
 :end
 
