@@ -4,16 +4,10 @@ rem =================================================
 rem =================================================
 rem LYRConst.bat
 rem =================================================
+:SET_VAR_SCRIPT
+%LIB_BAT%\LYRConst.bat %*
+exit /b 0
 :SET_LIB
-%LIB_BAT%\LYRConst.bat %*
-exit /b 0
-:SET_CHECK_REPO
-%LIB_BAT%\LYRConst.bat %*
-exit /b 0
-:SET_CHECK_PROJECT
-%LIB_BAT%\LYRConst.bat %*
-exit /b 0
-:SET_CHECK_POETRY
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
 :SET_KIX
