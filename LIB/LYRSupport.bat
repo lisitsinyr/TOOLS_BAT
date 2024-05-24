@@ -342,7 +342,7 @@ rem beginfunction
                     if "%%i"=="!LParameter!" (
                        set %%i=%%j
                        echo %%i: !%%i!
-                       rem exit /b 0
+                       exit /b 0
                     )
                 ) else (
                     set %%i=%%j
