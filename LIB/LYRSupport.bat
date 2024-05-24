@@ -286,9 +286,10 @@ rem beginfunction
     set LSection=%2
     set LParameter=%3
     set !FUNCNAME!=!TEMP_DIR!\%random%.tmp
+    echo !FUNCNAME!: !%FUNCNAME%!
 
-    %GetINIAPP% !LFileName! !LSection! !LParameter! > !FUNCNAME!
-
+    %GetINIAPP% !LFileName! !LSection! !LParameter! > !%FUNCNAME%!
+     
     exit /b 0
 rem endfunction
 
