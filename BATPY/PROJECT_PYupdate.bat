@@ -358,7 +358,10 @@ rem beginfunction
     rem D:\TOOLS\EXE\setini.exe !LFileName! tool.poetry name !ProjectName!
     call :SetINI !LFileName! tool.poetry name !ProjectName! || exit /b 1
 
+    call :AddLog !loAll! !TEXT! GetPOETRY !LFileName! || exit /b 1
     call :GetINI !LFileName! || exit /b 1
+
+    type !GetINI!
 
     exit /b 0
 :end
