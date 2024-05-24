@@ -15,6 +15,7 @@ rem     :Read_F
 rem     :Read_N
 rem     :GetINI
 rem     :SetINI
+rem     :GetINIParametr
 rem -------------------------------------------------------------------
 
 :begin
@@ -290,12 +291,15 @@ rem beginfunction
 
     %GetINIAPP% !LFileName! !LSection! !LParameter! > !%FUNCNAME%!
 
-    type !%FUNCNAME%!
+    rem type !%FUNCNAME%!
 
     if exist !%FUNCNAME%! (
         for /f "eol=# delims== tokens=1,2" %%i in (!%FUNCNAME%!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
+            set s=%%i
+            set s=!s:~0,1!
+            rem echo s: !s!
             if not "!s!"=="[" (
                 set %%i=%%j
                 echo %%i: !%%i!
@@ -304,6 +308,50 @@ rem beginfunction
         del !%FUNCNAME%!
     ) else (
         echo INFO: File !%FUNCNAME%! not exist ...
+    )
+     
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure GetINIParametr ()
+rem --------------------------------------------------------------------------------
+:GetINIParametr
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetINI
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set LFileName=%1
+    set LParameter=%2
+
+    rem type !LFileName!
+
+    if exist !LFileName! (
+        for /f "eol=# delims== tokens=1,2" %%i in (!LFileName!) do (
+            rem В переменной i - ключ
+            rem В переменной j - значение
+            set s=%%i
+            set s=!s:~0,1!
+            rem echo s: !s!
+            if not "!s!"=="[" (
+                if defined LParameter (
+                    if "%%i"=="!LParameter!" (
+                       set %%i=%%j
+                       echo %%i: !%%i!
+                       rem exit /b 0
+                    )
+                ) else (
+                    set %%i=%%j
+                    echo %%i: !%%i!
+                )
+            )
+        )
+    ) else (
+        echo INFO: File !LFileName! not exist ...
     )
      
     exit /b 0
