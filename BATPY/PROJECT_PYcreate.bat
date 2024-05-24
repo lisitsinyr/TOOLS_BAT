@@ -321,6 +321,9 @@ rem =================================================
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 :Pause
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
@@ -336,7 +339,10 @@ exit /b 0
 :Read_F
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:PressAnyKey
+:GetINI
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:SetINI
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

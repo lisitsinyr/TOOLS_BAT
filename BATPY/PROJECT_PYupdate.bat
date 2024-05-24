@@ -247,11 +247,10 @@ rem beginfunction
         echo [general] >> !LFileName!
         echo POETRY_NAME=!ProjectName! >> !LFileName!
     )
-
     call :AddLog !loAll! !TEXT! SetINI !LFileName! || exit /b 1
-
     rem D:\TOOLS\EXE\setini.exe !LFileName! general POETRY_NAME !ProjectName!
-    %SetINIAPP% !LFileName! general POETRY_NAME !ProjectName!
+    rem %SetINIAPP% !LFileName! general POETRY_NAME !ProjectName!
+    call :SetINI !LFileName! general POETRY_NAME !ProjectName! || exit /b 1
 
     set LFileName=PROJECT.ini
     call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
@@ -262,7 +261,8 @@ rem beginfunction
         echo PROJECT_NAME=!ProjectName! >> !LFileName!
     )
     call :AddLog !loAll! !TEXT! SetINI !LFileName! || exit /b 1
-    D:\TOOLS\EXE\setini.exe !LFileName! general PROJECT_NAME !ProjectName!
+    rem D:\TOOLS\EXE\setini.exe !LFileName! general PROJECT_NAME !ProjectName!
+    call :SetINI !LFileName! general POETRY_NAME !ProjectName! || exit /b 1
 
     set LFileName=REPO.ini
     call :AddLog !loAll! !TEXT! CreateFile !LFileName! || exit /b 1
@@ -273,7 +273,8 @@ rem beginfunction
         echo REPO_NAME=!ProjectName! >> !LFileName!
     )
     call :AddLog !loAll! !TEXT! SetINI !LFileName! || exit /b 1
-    D:\TOOLS\EXE\setini.exe !LFileName! general REPO_NAME !ProjectName!
+    rem D:\TOOLS\EXE\setini.exe !LFileName! general REPO_NAME !ProjectName!
+    call :SetINI !LFileName! general POETRY_NAME !ProjectName! || exit /b 1
 
     exit /b 0
 :end
@@ -485,6 +486,9 @@ rem =================================================
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 :Pause
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
@@ -500,7 +504,10 @@ exit /b 0
 :Read_F
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:PressAnyKey
+:GetINI
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:SetINI
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================
