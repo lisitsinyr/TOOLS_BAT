@@ -100,10 +100,7 @@ rem -------------------------------------------------------------------
 rem -------------------------------------------------------------------
 rem ФУНКЦИИ
 rem :LYRConst
-
 rem :SET_LIB
-rem :SET_CHECK_REPO
-rem :SET_CHECK_PROJECT
 rem :SET_KIX
 
 rem :__SET_VAR_DEFAULT
@@ -153,6 +150,81 @@ rem beginfunction
     call :__SET_VAR_PROJECTS || exit /b 1
     call :__SET_LOG || exit /b 1
     call :__SET_POETRY || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem :SET_KIX ()
+rem --------------------------------------------------------------------------------
+:SET_KIX
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=SET_KIX
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem KIX_DIR - Каталог с файлами .KIX
+    set KIX_DIR=
+    rem APP_KIX_DIR - каталог APP_KIX
+    set APP_KIX_DIR=
+    rem -------------------------------------------------------------------
+    rem APP_KIX - Скрипт APP_KIX имя+расширение
+    set APP_KIX=[lyrxxx_]PATTERN_KIX.kix
+    rem -------------------------------------------------------------------
+    rem echo -------------------------------------------------------
+    rem echo Каталог библиотеки KIX: каталог
+    rem echo    %LIB_KIX%"
+    rem echo -------------------------------------------------------
+    rem LIB_KIX - Каталог библиотеки KIX [каталог]
+    if not defined LIB_KIX (
+        rem echo INFO: Dir LIB_KIX not set
+
+        if "!COMPUTERNAME!"=="!USERDOMAIN!" (
+            set LIB_KIX=!SCRIPTS_DIR_KIX!\LIB
+        ) else (
+            set LIB_KIX=\\S73FS01\APPInfo\tools\LIB
+        )
+    )
+    rem echo LIB_KIX: !LIB_KIX!
+    if exist !LIB_KIX! (
+        echo Dir !LIB_KIX! exist ...
+    ) else (
+        echo INFO: Dir !LIB_KIX! not exist ...
+        rem exit /b 1
+    )
+    rem echo -------------------------------------------------------
+    rem echo APP_KIX
+    rem echo    !APP_KIX!
+    rem echo    !APP_KIX_DIR!
+    rem echo -------------------------------------------------------
+    if not defined APP_KIX (
+        echo File APP_KIX not set...
+    ) else (
+        if exist !APP_KIX! (
+            rem echo Файл !APP_KIX! существует ...
+            set APP_KIX_DIR=.
+        ) else (
+            rem echo Файл !APP_KIX! не существует ...
+            if exist KIX\!APP_KIX! (
+                rem echo Файл KIX\!APP_KIX! существует ...
+                set APP_KIX_DIR=KIX
+            ) else (
+                rem echo Файл KIX\!APP_KIX! не существует ...
+                if exist !BAT_DIR!\KIX\!APP_KIX! (
+                    rem echo Файл !BAT_DIR!\KIX\!APP_KIX! существует ...
+                    set APP_KIX_DIR=!BAT_DIR!\KIX
+                ) else (
+                    echo INFO: File !BAT_DIR!\KIX\!APP_KIX! not exist ...
+                    rem exit /b 1
+                )
+            )
+        )
+    )
+    echo APP_KIX_DIR: !APP_KIX_DIR!
 
     exit /b 0
 rem endfunction
@@ -482,189 +554,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set LOG_FULLFILENAME=!LOG_DIR!\!LOG_FILENAME!.log
     rem echo LOG_FULLFILENAME: !%LOG_FULLFILENAME!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure __SET_CHECK_REPO ()
-rem --------------------------------------------------------------------------------
-:SET_CHECK_REPO
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_CHECK_REPO
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem Проверка существования файла REPO.ini
-    if exist !REPO_INI! (
-        for /f "eol=# delims== tokens=1,2" %%i in (!REPO_INI!) do (
-            rem В переменной i - ключ
-            rem В переменной j - значение
-
-            set s=%%i
-            set s=!s:~0,1!
-            rem echo s: !s!
-            if not "!s!"=="[" (
-                set %%i=%%j
-                echo %%i: !%%i!
-            )
-        )
-    ) else (
-        echo INFO: File !REPO_INI! not exist
-        rem exit /b 1
-    )
-    rem echo REPO_NAME: !REPO_NAME!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure SET_CHECK_PROJECT ()
-rem --------------------------------------------------------------------------------
-:SET_CHECK_PROJECT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_CHECK_PROJECT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem Проверка существования файла PROJECT.ini
-    if exist !PROJECT_INI! (
-        for /f "eol=# delims== tokens=1,2" %%i in (!PROJECT_INI!) do (
-            rem В переменной i - ключ
-            rem В переменной j - значение
-            
-            set s=%%i
-            set s=!s:~0,1!
-            rem echo s: !s!
-            if not "!s!"=="[" (
-                set %%i=%%j
-                echo %%i: !%%i!
-            )
-        )
-    ) else (
-        echo INFO: File !PROJECT_INI! not exist
-        rem exit /b 1
-    )
-    rem echo PROJECT_NAME: !PROJECT_NAME!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure SET_CHECK_POETRY ()
-rem --------------------------------------------------------------------------------
-:SET_CHECK_POETRY
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SET_CHECK_POETRY
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem Проверка существования файла PROJECT.ini
-    if exist !POETRY_INI! (
-        for /f "eol=# delims== tokens=1,2" %%i in (!POETRY_INI!) do (
-            rem В переменной i - ключ
-            rem В переменной j - значение
-            
-            set s=%%i
-            set s=!s:~0,1!
-            rem echo s: !s!
-            if not "!s!"=="[" (
-                set %%i=%%j
-                echo %%i: !%%i!
-            )
-        )
-    ) else (
-        echo INFO: File !POETRY_INI! not exist
-        rem exit /b 1
-    )
-    rem echo POETRY_NAME: !POETRY_NAME!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem :SET_KIX ()
-rem --------------------------------------------------------------------------------
-:SET_KIX
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=SET_KIX
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem KIX_DIR - Каталог с файлами .KIX
-    set KIX_DIR=
-    rem APP_KIX_DIR - каталог APP_KIX
-    set APP_KIX_DIR=
-    rem -------------------------------------------------------------------
-    rem APP_KIX - Скрипт APP_KIX имя+расширение
-    set APP_KIX=[lyrxxx_]PATTERN_KIX.kix
-    rem -------------------------------------------------------------------
-    rem echo -------------------------------------------------------
-    rem echo Каталог библиотеки KIX: каталог
-    rem echo    %LIB_KIX%"
-    rem echo -------------------------------------------------------
-    rem LIB_KIX - Каталог библиотеки KIX [каталог]
-    if not defined LIB_KIX (
-        rem echo INFO: Dir LIB_KIX not set
-
-        if "!COMPUTERNAME!"=="!USERDOMAIN!" (
-            set LIB_KIX=!SCRIPTS_DIR_KIX!\LIB
-        ) else (
-            set LIB_KIX=\\S73FS01\APPInfo\tools\LIB
-        )
-    )
-    rem echo LIB_KIX: !LIB_KIX!
-    if exist !LIB_KIX! (
-        echo Dir !LIB_KIX! exist ...
-    ) else (
-        echo INFO: Dir !LIB_KIX! not exist ...
-        rem exit /b 1
-    )
-    rem echo -------------------------------------------------------
-    rem echo APP_KIX
-    rem echo    !APP_KIX!
-    rem echo    !APP_KIX_DIR!
-    rem echo -------------------------------------------------------
-    if not defined APP_KIX (
-        echo File APP_KIX not set...
-    ) else (
-        if exist !APP_KIX! (
-            rem echo Файл !APP_KIX! существует ...
-            set APP_KIX_DIR=.
-        ) else (
-            rem echo Файл !APP_KIX! не существует ...
-            if exist KIX\!APP_KIX! (
-                rem echo Файл KIX\!APP_KIX! существует ...
-                set APP_KIX_DIR=KIX
-            ) else (
-                rem echo Файл KIX\!APP_KIX! не существует ...
-                if exist !BAT_DIR!\KIX\!APP_KIX! (
-                    rem echo Файл !BAT_DIR!\KIX\!APP_KIX! существует ...
-                    set APP_KIX_DIR=!BAT_DIR!\KIX
-                ) else (
-                    echo INFO: File !BAT_DIR!\KIX\!APP_KIX! not exist ...
-                    rem exit /b 1
-                )
-            )
-        )
-    )
-    echo APP_KIX_DIR: !APP_KIX_DIR!
 
     exit /b 0
 rem endfunction

@@ -172,9 +172,6 @@ rem =================================================
 rem =================================================
 rem LYRConst.bat
 rem =================================================
-:SET_VAR_SCRIPT
-%LIB_BAT%\LYRConst.bat %*
-exit /b 0
 :SET_LIB
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
