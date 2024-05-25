@@ -357,4 +357,62 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure GetDir (SET, args)
+rem --------------------------------------------------------------------------------
+:GetDir
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetDir
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set LSET=%1
+    if not defined LSET (
+        set LSET=*.*
+    )
+    echo LSET: !LSET!
+
+    rem set LARGS=%2
+    rem echo LARGS: !LARGS!
+
+    for /d %%D in ( !LSET!  ) do  (
+        set Directory=%%~fD
+        echo !Directory!
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure GetFile (SET, args)
+rem --------------------------------------------------------------------------------
+:GetFile
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetFile
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set LSET=%1
+    if not defined LSET (
+        set LSET=*.*
+    )
+    echo LSET: !LSET!
+
+    rem set LARGS=%2
+    rem echo LARGS: !LARGS!
+
+    for %%F in ( !LSET!  ) do  (
+        set File=%%~fF
+        echo !File!
+    )
+
+    exit /b 0
+rem endfunction
+
 rem ===================================================================

@@ -150,6 +150,9 @@ rem beginfunction
         mkdir !Directory!
     )
 
+    call :GetDir || exit /b 1
+    call :GetFile || exit /b 1
+
     rem call :Pause !SLEEP! || exit /b 1
     rem call :PressAnyKey || exit /b 1
 
@@ -253,6 +256,12 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetDir
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFile
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================
