@@ -150,8 +150,10 @@ rem beginfunction
         mkdir !Directory!
     )
 
-    call :GetDir || exit /b 1
-    call :GetFile || exit /b 1
+    rem call :GetDir || exit /b 1
+    call :GetFile *.* ~n /r || exit /b 1
+    call :GetFile *.* ~nx /r || exit /b 1
+    call :GetFile *.* ~f /r || exit /b 1
 
     rem call :Pause !SLEEP! || exit /b 1
     rem call :PressAnyKey || exit /b 1

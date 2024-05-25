@@ -387,7 +387,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetFile (SET, args)
+rem procedure GetFile (SET, view, args)
 rem --------------------------------------------------------------------------------
 :GetFile
 rem beginfunction
@@ -404,11 +404,14 @@ rem beginfunction
     )
     echo LSET: !LSET!
 
-    rem set LARGS=%2
-    rem echo LARGS: !LARGS!
+    set Lview=%2
+    if not defined Lview (
+        set Lview=~f
+    )
+    echo Lview: !Lview!
 
     for %%F in ( !LSET!  ) do  (
-        set File=%%~fF
+        set File=%%%Lview%F
         echo !File!
     )
 
