@@ -144,18 +144,25 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call rard.bat "01"
-    call rard.bat "02"
-    call rard.bat "03"
-    call rard.bat "04"
-    call rard.bat "05"
-    call rard.bat "06"
-    call rard.bat "07"
-    call rard.bat "08"
-    call rard.bat "09"
-    call rard.bat "10"
-    call rard.bat "11"
-    call rard.bat "12"
+    FOR /D %%d IN ( *.* ) DO  (
+        rem command
+        set Directory=%%d
+        echo !Directory!
+        call rard.bat "!Directory!" "!Directory!" > "!Directory!".log
+    )
+
+    rem call rard.bat "01"
+    rem call rard.bat "02"
+    rem call rard.bat "03"
+    rem call rard.bat "04"
+    rem call rard.bat "05"
+    rem call rard.bat "06"
+    rem call rard.bat "07"
+    rem call rard.bat "08"
+    rem call rard.bat "09"
+    rem call rard.bat "10"
+    rem call rard.bat "11"
+    rem call rard.bat "12"
 
     exit /b 0
 rem endfunction

@@ -135,7 +135,7 @@ rem beginfunction
     call :Check_P directory %1 || exit /b 1
     echo directory: !directory!
     if defined directory (
-        set ARGS=!ARGS! !directory!
+        set ARGS=!ARGS! !directory! !directory!
     ) else (
         echo ERROR: directory not defined ...
         echo Использование: !BATNAME! папка
@@ -172,13 +172,10 @@ rem =================================================
 rem =================================================
 rem LYRConst.bat
 rem =================================================
+:SET_VAR_SCRIPT
+%LIB_BAT%\LYRConst.bat %*
+exit /b 0
 :SET_LIB
-%LIB_BAT%\LYRConst.bat %*
-exit /b 0
-:SET_CHECK_REPO
-%LIB_BAT%\LYRConst.bat %*
-exit /b 0
-:SET_CHECK_PROJECT
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
 :SET_KIX
