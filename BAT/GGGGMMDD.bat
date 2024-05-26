@@ -150,10 +150,11 @@ rem beginfunction
         mkdir !Directory!
     )
 
-    rem call :GetDir || exit /b 1
-    call :GetFile *.* ~n /r || exit /b 1
-    call :GetFile *.* ~nx /r || exit /b 1
-    call :GetFile *.* ~f /r || exit /b 1
+    call :GetDir *.* ~n /r || exit /b 1
+
+    rem call :GetFile *.* ~n /r || exit /b 1
+    rem call :GetFile *.* ~nx /r || exit /b 1
+    rem call :GetFile *.* ~f /r || exit /b 1
 
     rem call :Pause !SLEEP! || exit /b 1
     rem call :PressAnyKey || exit /b 1
@@ -242,6 +243,9 @@ rem =================================================
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 :Pause
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
@@ -257,7 +261,16 @@ exit /b 0
 :Read_F
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:PressAnyKey
+:GetINI
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:SetINI
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetINIParametr
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFileParser
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :GetDir

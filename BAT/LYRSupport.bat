@@ -358,76 +358,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetFileParser (FileName delims tokens eol)
-rem --------------------------------------------------------------------------------
-:GetFileParser
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=GetINI
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set LFileName=%1
-    if not defined LFileName (
-        echo ERROR: File not set ...
-        exit /b 1
-    )
-    echo FileName: !LFileName!
-
-    set Ldelims=%~2
-    if not defined Ldelims (
-        set Ldelims=^=
-    )
-    echo delims: !Ldelims!
-
-    set Ltokens=%~3
-    if not defined Ltokens (
-        set Ltokens=1,2
-    )
-    echo tokens: !Ltokens!
-
-    set Leol=%~4
-    if not defined Leol (
-        set Leol=#
-    )
-    echo eol: !Leol!
-    
-    if exist !LFileName! (
-        for /f "eol=%Leol% delims=%Ldelims% tokens=%Ltokens%" %%i in (!LFileName!) do (
-            rem 1 token i - ключ
-            rem 2 token j - значение
-            rem 3 token k - значение
-
-            rem Переменная %i объявлена явно в инструкции FOR, а %j и %k объявлены неявно с помощью tokens=.
-            rem С помощью tokens= можно указать до 26 элементов,
-            rem если это не вызовет попытки объявить переменную с именем, большим буквы "z" или "Z".
-
-            rem set s=%%i
-            rem set s=!s:~0,1!
-            rem echo s: !s!
-            rem set %%i=%%j
-
-            rem echo %%i_%%j
-            
-            rem echo i: %%i
-            rem echo j: %%j
-
-            echo %%i_%%j
-
-
-        )
-    ) else (
-        echo ERROR: File !LFileName! not exist ...
-        exit /b 1
-    )
-     
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure GetDir (SET, view, arg)
+rem procedure GetDir (SET, args)
 rem --------------------------------------------------------------------------------
 :GetDir
 rem beginfunction
@@ -442,20 +373,13 @@ rem beginfunction
     if not defined LSET (
         set LSET=*.*
     )
-    echo SET: !LSET!
-    set Lview=%2
-    if not defined Lview (
-        set Lview=~f
-    )
-    echo view: !Lview!
-    set Larg=%3
-    if not defined Larg (
-        set Larg=
-    )
-    echo arg: !Larg!
+    echo LSET: !LSET!
 
-    for %Larg% /d %%D in ( !LSET!  ) do  (
-        set Directory=%%%Lview%D
+    rem set LARGS=%2
+    rem echo LARGS: !LARGS!
+
+    for /d %%D in ( !LSET!  ) do  (
+        set Directory=%%~fD
         echo !Directory!
     )
 
@@ -478,18 +402,21 @@ rem beginfunction
     if not defined LSET (
         set LSET=*.*
     )
-    echo SET: !LSET!
+    echo LSET: !LSET!
+
     set Lview=%2
     if not defined Lview (
         set Lview=~f
     )
-    echo view: !Lview!
+    echo Lview: !Lview!
+
     set Larg=%3
     if not defined Larg (
         set Larg=
     )
-    echo arg: !Larg!
-    for %Larg% %%F in ( !LSET!  ) do  (
+    echo Larg: !Larg!
+
+    for /r %%F in ( !LSET!  ) do  (
         set File=%%%Lview%F
         echo !File!
     )

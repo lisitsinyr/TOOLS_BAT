@@ -106,4 +106,13 @@ exit /b 0
 :GetINIParametr
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+:GetFileParser
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetDir
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFile
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 rem =================================================
