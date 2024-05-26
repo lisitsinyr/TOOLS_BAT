@@ -115,4 +115,7 @@ exit /b 0
 :GetFile
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+:FORCicle
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 rem =================================================

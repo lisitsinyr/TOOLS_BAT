@@ -314,7 +314,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIParametr ()
+rem procedure GetINIParametr (FileName, Parameter)
 rem --------------------------------------------------------------------------------
 :GetINIParametr
 rem beginfunction
@@ -326,7 +326,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     set LFileName=%1
+    echo FileName:!LFileName!
     set LParameter=%2
+    echo Parameter:!LParameter!
 
     rem type !LFileName!
 
@@ -339,9 +341,24 @@ rem beginfunction
             rem echo s: !s!
             if not "!s!"=="[" (
                 if defined LParameter (
-                    if "%%i"=="!LParameter!" (
-                       set %%i=%%j
-                       echo %%i: !%%i!
+                    echo i:%%i
+
+                    set STRi=%%i
+                    echo STRi:!STRi!
+                    call :TrimRight !STRi! || exit /b 1
+                    echo TrimRight:!TrimRight!
+
+                    rem if "%%i"=="!LParameter!" (
+                    if "!TrimRight!"=="!LParameter!" (
+                       set STRj=%%j
+                       echo STRj:!STRj!
+                       call :TrimLeft !STRj! || exit /b 1
+                       echo TrimLeft:!TrimLeft!
+
+                       rem set %%i=%%j
+                       !%TrimRight%!=!TrimLeft!
+
+                       echo Parametr:!TrimRight!=!TrimLeft!
                        exit /b 0
                     )
                 ) else (
@@ -396,7 +413,7 @@ rem beginfunction
     
     if exist !LFileName! (
         for /f "eol=%Leol% delims=%Ldelims% tokens=%Ltokens%" %%i in (!LFileName!) do (
-            rem 1 token i - ключ
+            rem 1 token i - значение
             rem 2 token j - значение
             rem 3 token k - значение
 
@@ -407,15 +424,29 @@ rem beginfunction
             rem set s=%%i
             rem set s=!s:~0,1!
             rem echo s: !s!
-            rem set %%i=%%j
 
             rem echo %%i_%%j
             
-            rem echo i: %%i
-            rem echo j: %%j
+            echo i:%%i
+            set STR=%%i
+            echo STR:!STR!
+            call :TrimRight !STR! || exit /b 1
+            echo STR:!STR!
 
-            echo %%i_%%j
+            echo j:%%j
+            set STR=%%j
+            echo STR:!STR!
+            call :TrimLeft !STR! || exit /b 1
+            echo STR:!STR!
+            call :TrimRight !STR! || exit /b 1
+            echo STR:!STR!
 
+            rem set token1=%%i
+            rem set token2=%%j
+            rem set token3=%%k
+            rem set token4=%%l
+            rem set token5=%%m
+            rem echo !token1!!token2!!token3!!token4!!token5!
 
         )
     ) else (
@@ -496,5 +527,52 @@ rem beginfunction
 
     exit /b 0
 rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure FORCicle (start, step, end)
+rem --------------------------------------------------------------------------------
+:FORCicle
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetFile
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Lstart=%1
+    if not defined Lstart (
+        set /a Lstart=1
+    )
+    echo start: !Lstart!
+    set Lstep=%2
+    if not defined Lstep (
+        set Lstep=1
+    )
+    echo step: !Lstep!
+    set Lend=%3
+    if not defined Lend (
+        set Lend=10
+    )
+    echo end: !Lend!
+    for /L %%L in ( !Lstart!, !Lstep!, !Lend!  ) do  (
+        echo %%L
+    )
+
+    exit /b 0
+rem endfunction
+
+rem =================================================
+rem LYRStrUtils.bat
+rem =================================================
+:TrimLeft
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:TrimRight
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:Trim
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
 
 rem ===================================================================
