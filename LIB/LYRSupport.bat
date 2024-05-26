@@ -272,7 +272,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINI ()
+rem procedure GetINI (FileName, Section, Parameter)
 rem --------------------------------------------------------------------------------
 :GetINI
 rem beginfunction
@@ -283,9 +283,9 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LFileName=%1
-    set LSection=%2
-    set LParameter=%3
+    set LFileName=%~1
+    set LSection=%~2
+    set LParameter=%~3
     set !FUNCNAME!=!TEMP_DIR!\%random%.tmp
     echo !FUNCNAME!: !%FUNCNAME%!
 
@@ -297,15 +297,33 @@ rem beginfunction
         for /f "eol=# delims== tokens=1,2" %%i in (!%FUNCNAME%!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
-            set s=%%i
-            set s=!s:~0,1!
+
+            rem set s=%%i
+            rem set s=!s:~0,1!
             rem echo s: !s!
+
             if not "!s!"=="[" (
-                set %%i=%%j
-                echo %%i: !%%i!
+                rem set %%i=%%j
+                rem echo %%i:!%%i!
+
+                set STRi=%%i
+                rem echo STRi:!STRi!
+                call :TrimRight !STRi! || exit /b 1
+                rem echo TrimRight:!TrimRight!
+
+                set STRj=%%j
+                rem echo STRj:!STRj!
+
+                !%TrimRight%!=!STRj!
+                echo Parametr:!TrimRight!=!STRj!
+
+                rem call :TrimLeft !STRj! || exit /b 1
+                rem echo TrimLeft:!TrimLeft!
+                rem !%TrimRight%!=!TrimLeft!
+                rem echo Parametr:!TrimRight!=!TrimLeft!
             )
         )
-        del !%FUNCNAME%!
+        rem del !%FUNCNAME%!
     ) else (
         echo INFO: File !%FUNCNAME%! not exist ...
     )
@@ -326,9 +344,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     set LFileName=%1
-    echo FileName:!LFileName!
+    rem echo FileName:!LFileName!
     set LParameter=%2
-    echo Parameter:!LParameter!
+    rem echo Parameter:!LParameter!
 
     rem type !LFileName!
 
@@ -336,34 +354,56 @@ rem beginfunction
         for /f "eol=# delims== tokens=1,2" %%i in (!LFileName!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
-            set s=%%i
-            set s=!s:~0,1!
+            
+            rem set s=%%i
+            rem set s=!s:~0,1!
             rem echo s: !s!
+
             if not "!s!"=="[" (
                 if defined LParameter (
-                    echo i:%%i
-
+                    rem echo i:%%i
                     set STRi=%%i
-                    echo STRi:!STRi!
+                    rem echo STRi:!STRi!
                     call :TrimRight !STRi! || exit /b 1
-                    echo TrimRight:!TrimRight!
+                    rem echo TrimRight:!TrimRight!
 
                     rem if "%%i"=="!LParameter!" (
                     if "!TrimRight!"=="!LParameter!" (
-                       set STRj=%%j
-                       echo STRj:!STRj!
-                       call :TrimLeft !STRj! || exit /b 1
-                       echo TrimLeft:!TrimLeft!
+                        rem set %%i=%%j
 
-                       rem set %%i=%%j
-                       !%TrimRight%!=!TrimLeft!
+                        set STRj=%%j
+                        rem echo STRj:!STRj!
 
-                       echo Parametr:!TrimRight!=!TrimLeft!
-                       exit /b 0
+                        rem !%TrimRight%!=!STRj!
+                        rem echo Parametr:!TrimRight!=!STRj!
+
+                        call :TrimLeft !STRj! || exit /b 1
+                        rem echo TrimLeft:!TrimLeft!
+                        !%TrimRight%!=!TrimLeft!
+                        echo Parametr:!TrimRight!=!TrimLeft!
+
+                        exit /b 0
                     )
                 ) else (
-                    set %%i=%%j
-                    echo %%i: !%%i!
+                    rem set %%i=%%j
+                    rem echo %%i: !%%i!
+
+                    rem echo i:%%i
+                    set STRi=%%i
+                    rem echo STRi:!STRi!
+                    call :TrimRight !STRi! || exit /b 1
+                    rem echo TrimRight:!TrimRight!
+
+                    set STRj=%%j
+                    rem echo STRj:!STRj!
+
+                    rem !%TrimRight%!=!STRj!
+                    rem echo Parametr:!TrimRight!=!STRj!
+
+                    call :TrimLeft !STRj! || exit /b 1
+                    rem echo TrimLeft:!TrimLeft!
+                    !%TrimRight%!=!TrimLeft!
+                    echo Parametr:!TrimRight!=!TrimLeft!
                 )
             )
         )

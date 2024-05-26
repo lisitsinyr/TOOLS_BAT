@@ -46,6 +46,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set STR=%~1
+    rem echo STR:!STR!
 
     rem Обрезать слева - обрезать пробелы в начале строки
     for /f "tokens=* delims= " %%a in ("!STR!") do set STR=%%a
@@ -67,6 +68,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set STR=%~1
+    rem echo STR:!STR!
 
     rem Обрезать справа - обрезать пробелы в конце строки
     for /l %%a in (1,1,31) do if "!str:~-1!"==" " set STR=!STR:~0,-1!
