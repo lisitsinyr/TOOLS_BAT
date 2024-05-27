@@ -34,7 +34,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure TrimLeft (str)
+rem procedure TrimLeft (ASTR)
 rem --------------------------------------------------------------------------------
 :TrimLeft
 rem beginfunction
@@ -45,18 +45,18 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set STR=%~1
-    rem echo STR:!STR!
+    set ASTR=%~1
+    rem echo ASTR:!ASTR!
 
     rem Обрезать слева - обрезать пробелы в начале строки
-    for /f "tokens=* delims= " %%a in ("!STR!") do set STR=%%a
-    set !FUNCNAME!=!STR!
+    for /f "tokens=* delims= " %%a in ("!ASTR!") do set ASTR=%%a
+    set !FUNCNAME!=!ASTR!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure TrimRight (str)
+rem procedure TrimRight (ASTR)
 rem --------------------------------------------------------------------------------
 :TrimRight
 rem beginfunction
@@ -67,18 +67,18 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set STR=%~1
-    rem echo STR:!STR!
+    set ASTR=%~1
+    rem echo ASTR:!ASTR!
 
     rem Обрезать справа - обрезать пробелы в конце строки
-    for /l %%a in (1,1,31) do if "!str:~-1!"==" " set STR=!STR:~0,-1!
-    set !FUNCNAME!=!STR!
+    for /l %%a in (1,1,31) do if "!ASTR:~-1!"==" " set ASTR=!ASTR:~0,-1!
+    set !FUNCNAME!=!ASTR!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Trim (str)
+rem procedure Trim (ASTR)
 rem --------------------------------------------------------------------------------
 :Trim
 rem beginfunction
@@ -89,12 +89,32 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set STR=%~1
+    set ASTR=%~1
 
-    call :TrimLeft !STR!
-    call :TrimRight !STR!
+    call :TrimLeft !ASTR!
+    call :TrimRight !ASTR!
 
-    set !FUNCNAME!=!STR!
+    set !FUNCNAME!=!ASTR!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure Left (ASTR, Alen)
+rem --------------------------------------------------------------------------------
+:Left
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=Left
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set ASTR=%~1
+    rem echo ASTR:!ASTR!
+
+    set !FUNCNAME!=!ASTR:0,Alen!
 
     exit /b 0
 rem endfunction
