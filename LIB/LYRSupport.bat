@@ -323,7 +323,7 @@ rem beginfunction
                 rem echo Parametr:!TrimRight!=!TrimLeft!
             )
         )
-        rem del !%FUNCNAME%!
+        del !%FUNCNAME%!
     ) else (
         echo INFO: File !%FUNCNAME%! not exist ...
     )

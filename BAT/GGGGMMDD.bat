@@ -150,7 +150,7 @@ rem beginfunction
         mkdir !Directory!
     )
 
-    call :GetDir *.* ~n /r || exit /b 1
+    rem call :GetDir *.* ~n /r || exit /b 1
 
     rem call :GetFile *.* ~n /r || exit /b 1
     rem call :GetFile *.* ~nx /r || exit /b 1
