@@ -351,6 +351,7 @@ rem beginfunction
 
     rem type !AFileName!
 
+    set Section=
     if exist !AFileName! (
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
 
@@ -360,57 +361,43 @@ rem beginfunction
             rem echo i:%%i
             rem В переменной j - значение
             rem echo j:%%j
-            
+           
             rem set %%i=%%j
+
+            set STRi=%%i
+            rem echo STRi:!STRi!
+            call :TrimRight !STRi! || exit /b 1
+            rem echo TrimRight:!TrimRight!
+
+            set STRj=%%j
+            rem echo STRj:!STRj!
+            call :TrimLeft !STRj! || exit /b 1
+            rem echo TrimLeft:!TrimLeft!
 
             set s=%%i
             set s=!s:~0,1!
             rem echo s:!s!
-
             if "!s!"=="[" (
-
                 set s=%%i
                 set Section=!s:~1,-1!
-                echo Section:!Section!
-
+                rem echo Section:!Section!
             ) else (
                 if defined AParameter (
-                    set STRi=%%i
-                    rem echo STRi:!STRi!
-                    call :TrimRight !STRi! || exit /b 1
-                    rem echo TrimRight:!TrimRight!
-
                     if "!TrimRight!"=="!AParameter!" (
-                        rem echo i:%%i
-                        rem echo j:%%j
-
-                        set STRj=%%j
-                        rem set STRj=!STRj:"=!
-                        rem echo STRj:!STRj!
-
-                        call :TrimLeft !STRj! || exit /b 1
-                        rem echo TrimLeft:!TrimLeft!
-
                         !%TrimRight%!=!TrimLeft!
                         echo !TrimRight!=!TrimLeft!
-
                         exit /b 0
                     )
                 ) else (
-                    set STRi=%%i
-                    rem echo STRi:!STRi!
-                    call :TrimRight !STRi! || exit /b 1
-                    rem echo TrimRight:!TrimRight!
-
-                    set STRj=%%j
-                    rem set STRj=!STRj:"=!
-                    rem echo STRj:!STRj!
-
-                    call :TrimLeft !STRj! || exit /b 1
-                    rem echo TrimLeft:!TrimLeft!
-
-                    !%TrimRight%!=!TrimLeft!
-                    echo !TrimRight!=!TrimLeft!
+                    if defined ASection (
+                        if "!ASection!"=="!Section!" (
+                            !%TrimRight%!=!TrimLeft!
+                            echo !TrimRight!=!TrimLeft!
+                        )
+                    ) else (
+                        !%TrimRight%!=!TrimLeft!
+                        echo !TrimRight!=!TrimLeft!
+                    )
                 )
             )
         )
@@ -422,7 +409,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetFileParser (FileName delims tokens eol)
+rem procedure GetFileParser (AFileName Adelims Atokens Aeol)
 rem --------------------------------------------------------------------------------
 :GetFileParser
 rem beginfunction
@@ -433,33 +420,33 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LFileName=%1
-    if not defined LFileName (
-        echo ERROR: File not set ...
+    set AFileName=%1
+    if not defined AFileName (
+        echo ERROR: FileName not set ...
         exit /b 1
     )
-    echo FileName: !LFileName!
+    echo AFileName: !AFileName!
 
-    set Ldelims=%~2
-    if not defined Ldelims (
-        set Ldelims=^=
+    set Adelims=%~2
+    if not defined Adelims (
+        set Adelims=^=
     )
-    echo delims: !Ldelims!
+    echo Adelims: !Adelims!
 
-    set Ltokens=%~3
-    if not defined Ltokens (
-        set Ltokens=1,2
+    set Atokens=%~3
+    if not defined Atokens (
+        set Atokens=1,2
     )
-    echo tokens: !Ltokens!
+    echo Atokens: !Atokens!
 
-    set Leol=%~4
-    if not defined Leol (
-        set Leol=#
+    set Aeol=%~4
+    if not defined Aeol (
+        set Aeol=#
     )
-    echo eol: !Leol!
+    echo Aeol: !Aeol!
     
     if exist !LFileName! (
-        for /f "eol=%Leol% delims=%Ldelims% tokens=%Ltokens%" %%i in (!LFileName!) do (
+        for /f "eol=%Aeol% delims=%Adelims% tokens=%Atokens%" %%i in (!AFileName!) do (
             rem 1 token i - значение
             rem 2 token j - значение
             rem 3 token k - значение
@@ -468,25 +455,13 @@ rem beginfunction
             rem С помощью tokens= можно указать до 26 элементов,
             rem если это не вызовет попытки объявить переменную с именем, большим буквы "z" или "Z".
 
-            rem set s=%%i
-            rem set s=!s:~0,1!
-            rem echo s: !s!
-
-            rem echo %%i_%%j
-            
             echo i:%%i
-            set STR=%%i
-            echo STR:!STR!
-            call :TrimRight !STR! || exit /b 1
-            echo STR:!STR!
+            set STRi=%%i
+            echo STRi:!STRi!
 
             echo j:%%j
-            set STR=%%j
-            echo STR:!STR!
-            call :TrimLeft !STR! || exit /b 1
-            echo STR:!STR!
-            call :TrimRight !STR! || exit /b 1
-            echo STR:!STR!
+            set STRj=%%j
+            echo STRj:!STRj!
 
             rem set token1=%%i
             rem set token2=%%j
@@ -497,7 +472,7 @@ rem beginfunction
 
         )
     ) else (
-        echo ERROR: File !LFileName! not exist ...
+        echo ERROR: File !AFileName! not exist ...
         exit /b 1
     )
      
@@ -505,7 +480,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetDir (SET, view, arg)
+rem procedure GetDir (ASET, Aview, Aarg)
 rem --------------------------------------------------------------------------------
 :GetDir
 rem beginfunction
@@ -516,24 +491,24 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LSET=%1
-    if not defined LSET (
-        set LSET=*.*
+    set ASET=%1
+    if not defined ASET (
+        set ASET=*.*
     )
-    echo SET: !LSET!
-    set Lview=%2
-    if not defined Lview (
-        set Lview=~f
+    echo ASET: !ASET!
+    set Aview=%2
+    if not defined Aview (
+        set Aview=~f
     )
-    echo view: !Lview!
-    set Larg=%3
-    if not defined Larg (
-        set Larg=
+    echo Aview: !Aview!
+    set Aarg=%3
+    if not defined Aarg (
+        set Aarg=
     )
-    echo arg: !Larg!
+    echo Aarg: !Aarg!
 
-    for %Larg% /d %%D in ( !LSET!  ) do  (
-        set Directory=%%%Lview%D
+    for %Aarg% /d %%D in ( !ASET!  ) do  (
+        set Directory=%%%Aview%D
         echo !Directory!
     )
 
@@ -541,7 +516,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetFile (SET, view, arg)
+rem procedure GetFile (ASET, Aview, Aarg)
 rem --------------------------------------------------------------------------------
 :GetFile
 rem beginfunction
@@ -552,23 +527,23 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LSET=%1
-    if not defined LSET (
-        set LSET=*.*
+    set ASET=%1
+    if not defined ASET (
+        set ASET=*.*
     )
-    echo SET: !LSET!
-    set Lview=%2
-    if not defined Lview (
-        set Lview=~f
+    echo ASET: !ASET!
+    set Aview=%2
+    if not defined Aview (
+        set Aview=~f
     )
-    echo view: !Lview!
-    set Larg=%3
-    if not defined Larg (
-        set Larg=
+    echo Aview: !Aview!
+    set Aarg=%3
+    if not defined Aarg (
+        set Aarg=
     )
-    echo arg: !Larg!
-    for %Larg% %%F in ( !LSET!  ) do  (
-        set File=%%%Lview%F
+    echo Aarg: !Aarg!
+    for %Aarg% %%F in ( !ASET!  ) do  (
+        set File=%%%Aview%F
         echo !File!
     )
 
@@ -576,7 +551,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FORCicle (start, step, end)
+rem procedure FORCicle (Astart, Astep, Aend)
 rem --------------------------------------------------------------------------------
 :FORCicle
 rem beginfunction
@@ -587,22 +562,22 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Lstart=%1
-    if not defined Lstart (
-        set /a Lstart=1
+    set Astart=%1
+    if not defined Astart (
+        set /a Astart=1
     )
-    echo start: !Lstart!
-    set Lstep=%2
-    if not defined Lstep (
-        set Lstep=1
+    echo Astart: !Astart!
+    set Astep=%2
+    if not defined Astep (
+        set Astep=1
     )
-    echo step: !Lstep!
-    set Lend=%3
-    if not defined Lend (
-        set Lend=10
+    echo Astep: !Astep!
+    set Aend=%3
+    if not defined Aend (
+        set Aend=10
     )
-    echo end: !Lend!
-    for /L %%L in ( !Lstart!, !Lstep!, !Lend!  ) do  (
+    echo Aend: !Aend!
+    for /L %%L in ( !Astart!, !Astep!, !Aend!  ) do  (
         echo %%L
     )
 
