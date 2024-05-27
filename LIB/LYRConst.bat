@@ -134,7 +134,7 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure SET_LIB ()
+rem procedure SET_LIB (ASCRIPT)
 rem -----------------------------------------------
 :SET_LIB
 rem beginfunction
@@ -145,7 +145,9 @@ rem beginfunction
     )
     set !FUNCNAME!=
  
-    call :__SET_VAR_SCRIPT %1 || exit /b 1
+    set ASCRIPT=%1
+
+    call :__SET_VAR_SCRIPT !ASCRIPT! || exit /b 1
     call :__SET_VAR_DEFAULT || exit /b 1
     call :__SET_VAR_PROJECTS || exit /b 1
     call :__SET_LOG || exit /b 1
@@ -230,7 +232,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure __SET_VAR_SCRIPT (%1 - FULLFILENAME)
+rem procedure __SET_VAR_SCRIPT (AFULLFILENAME)
 rem --------------------------------------------------------------------------------
 :__SET_VAR_SCRIPT
 rem beginfunction
@@ -240,6 +242,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+
+    set AFULLFILENAME=%1
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]

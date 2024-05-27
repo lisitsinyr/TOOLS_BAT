@@ -96,7 +96,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure ExtractFileDir (FullFilename)
+rem procedure ExtractFileDir (AFullFilename)
 rem --------------------------------------------------------------------------------
 :ExtractFileDir
 rem beginfunction
@@ -107,6 +107,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set AFullFilename=%1
+
     set ExtractFileDir=%~d1%~p1
     set !FUNCNAME!=%~d1%~p1
     rem echo !FUNCNAME!: !%FUNCNAME%!
@@ -115,7 +117,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FullFileName (Filename)
+rem procedure FullFileName (AFilename)
 rem --------------------------------------------------------------------------------
 :FullFileName
 rem beginfunction
@@ -126,6 +128,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set AFilename=%1
+
     set FullFileName=%~f1
     set !FUNCNAME!=%~f1
     rem echo !FUNCNAME!: !%FUNCNAME%!
@@ -134,7 +138,7 @@ rem beginfunction
 rem endfunction
   
 rem --------------------------------------------------------------------------------
-rem procedure ExtractFileName (Filename)
+rem procedure ExtractFileName (AFilename)
 rem --------------------------------------------------------------------------------
 :ExtractFileName
 rem beginfunction
@@ -145,6 +149,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set AFilename=%1
+
     set ExtractFileName=%~nx1
     set !FUNCNAME!=%~nx1
     rem echo !FUNCNAME!: !%FUNCNAME%!
@@ -153,7 +159,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure ExtractFileNameWithoutExt (FileName)
+rem procedure ExtractFileNameWithoutExt (AFileName)
 rem --------------------------------------------------------------------------------
 :ExtractFileNameWithoutExt
 rem beginfunction
@@ -164,6 +170,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set AFilename=%1
+
     set ExtractFileNameWithoutExt=%~n1
     set !FUNCNAME!=%~n1
     rem echo !FUNCNAME!: !%FUNCNAME%!
@@ -172,7 +180,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure ExtractFileExt (FileName)
+rem procedure ExtractFileExt (AFileName)
 rem --------------------------------------------------------------------------------
 :ExtractFileExt
 rem beginfunction
@@ -183,6 +191,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set AFilename=%1
+
     set ExtractFileExt=%~x1
     set !FUNCNAME!=%~x1
     rem echo !FUNCNAME!: !%FUNCNAME%!
@@ -191,7 +201,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FileAttr (FileName)
+rem procedure FileAttr (AFileName)
 rem --------------------------------------------------------------------------------
 :FileAttr
 rem beginfunction
@@ -201,6 +211,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+
+    set AFilename=%1
 
     set FILENAME=%~1
     rem echo FILENAME: !FILENAME!
@@ -224,7 +236,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FileSize (FileName)
+rem procedure FileSize (AFileName)
 rem --------------------------------------------------------------------------------
 :FileSize
 rem beginfunction
@@ -234,6 +246,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+
+    set AFilename=%1
 
     set FILENAME=%~1
     rem echo FILENAME: !FILENAME!
@@ -251,7 +265,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CreateDir (DIRECTORY)
+rem procedure CreateDir (ADIRECTORY)
 rem --------------------------------------------------------------------------------
 :CreateDir
 rem beginfunction
@@ -262,19 +276,19 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set DIRECTORY=%~1
-    rem echo DIRECTORYE: !DIRECTORY!
+    set ADIRECTORY=%~1
+    rem echo ADIRECTORY: !ADIRECTORY!
 
-    if defined DIRECTORY (
-        if not exist "!DIRECTORY!\" (
-            mkdir "!DIRECTORY!"
+    if defined ADIRECTORY (
+        if not exist "!ADIRECTORY!\" (
+            mkdir "!ADIRECTORY!"
             if not "!ERRORLEVEL!"=="0" (
-                echo ERROR: Dir !DIRECTORY! not created...
+                echo ERROR: Directory !ADIRECTORY! not created...
                 exit /b 1
             )
         )
-        set CreateDir=!DIRECTORY!
-        set !FUNCNAME!=!DIRECTORY!
+        set CreateDir=!ADIRECTORY!
+        set !FUNCNAME!=!ADIRECTORY!
     )
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
@@ -283,7 +297,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CreateFile (FILENAME)
+rem procedure CreateFile (AFILENAME)
 rem --------------------------------------------------------------------------------
 :CreateFile
 rem beginfunction
@@ -294,19 +308,19 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    set AFILENAME=%~1
+    rem echo AFILENAME: !AFILENAME!
 
-    if defined FILENAME (
-        if not exist "!FILENAME!" (
-            rem set touchRUN=touch -f "!FILENAME!"
-            rem set touchRUN=D:\TOOLS\EXE\touch.exe "!FILENAME!"
+    if defined AFILENAME (
+        if not exist "!AFILENAME!" (
+            rem set touchRUN=touch -f "!AFILENAME!"
+            rem set touchRUN=D:\TOOLS\EXE\touch.exe "!AFILENAME!"
             rem echo !touchRUN!
             rem %touchRUN%
-            D:\TOOLS\EXE\touch.exe "!FILENAME!"
+            D:\TOOLS\EXE\touch.exe "!AFILENAME!"
         )
-        set CreateFile="!FILENAME!"
-        set !FUNCNAME!="!FILENAME!"
+        set CreateFile="!AFILENAME!"
+        set !FUNCNAME!="!AFILENAME!"
     )
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
@@ -327,13 +341,13 @@ rem beginfunction
     set !FUNCNAME!=
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
-    set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    set AFILENAME=%~1
+    rem echo AFILENAME: !AFILENAME!
 
-    if defined FILENAME (
-        if exist "!FILENAME!" (
-            set CheckFile="!FILENAME!"
-            set !FUNCNAME!="!FILENAME!"
+    if defined AFILENAME (
+        if exist "!AFILENAME!" (
+            set CheckFile="!AFILENAME!"
+            set !FUNCNAME!="!AFILENAME!"
         )
     )
     rem echo !FUNCNAME!: !%FUNCNAME%!
