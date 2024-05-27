@@ -62,7 +62,7 @@ rem beginfunction
 rem endfunction
    
 rem --------------------------------------------------------------------------------
-rem procedure Pause (SLEEP)
+rem procedure Pause (APause)
 rem --------------------------------------------------------------------------------
 :Pause
 rem beginfunction
@@ -73,20 +73,20 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set /a LPause=%1
-    rem echo LPause: !LPause!
+    set /a APause=%1
+    rem echo APause:!APause!
 
-    if not defined LPause (
+    if not defined APause (
         timeout 0
     ) else (
-        timeout !LPause!
+        timeout !APause!
     )
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Check_P ()
+rem procedure Check_P (P_Name, P_Value)
 rem --------------------------------------------------------------------------------
 :Check_P
 rem beginfunction
@@ -99,16 +99,16 @@ rem beginfunction
 
     set P_Name=%1
     rem !P_Name! - имя переменной
-    rem echo P_Name: !P_Name!
+    rem echo P_Name:!P_Name!
     rem %P_Name% - имя переменной
-    rem echo P_Name: %P_Name%
+    rem echo P_Name:%P_Name%
 
     rem !%P_Name%! - значение переменной по умолчанию
-    rem echo P_Value_default: !%P_Name%!
+    rem echo P_Value_default:!%P_Name%!
 
     rem - значение переменной
     set P_Value=%~2
-    rem echo P_Value: !P_Value!
+    rem echo P_Value:!P_Value!
 
     rem !PN_CAPTION! - PN_CAPTION
     rem [!P_Name!]   - имя переменной
@@ -126,7 +126,7 @@ rem beginfunction
         set %P_Name%=!P_Value!
         exit /b 0
     )
-    rem echo Input: !Input!
+    rem echo Input:!Input!
 
     if not defined Input (
         rem [!%P_Name%!] - значение переменной по умолчанию
@@ -139,7 +139,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Read_P ()
+rem procedure Read_P (P_Name, P_Value)
 rem --------------------------------------------------------------------------------
 :Read_P
 rem beginfunction
@@ -150,22 +150,19 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set P_Name=%1
+    rem !PN_CAPTION! - CAPTION
+    rem echo PN_CAPTION:!PN_CAPTION!
+
     rem !P_Name! - имя переменной
-    rem echo P_Name: !P_Name!
-    rem %P_Name% - имя переменной
-    rem echo P_Name: %P_Name%
+    set P_Name=%1
+    rem echo P_Name:!P_Name!
 
     rem !%P_Name%! - значение переменной по умолчанию
-    rem echo P_Value_default: !%P_Name%!
+    rem echo P_Value [default]:!%P_Name%!
 
-    rem - значение переменной
+    rem !P_Value! - значение переменной
     set P_Value=%~2
-    rem echo P_Value: !P_Value!
-
-    rem !PN_CAPTION! - PN_CAPTION
-    rem [!P_Name!]   - имя переменной
-    rem [!%P_Name%!] - значение переменной по умолчанию
+    rem echo P_Value:!P_Value!
 
     set Input=
     if not defined P_Value (
@@ -176,13 +173,14 @@ rem beginfunction
 
     ) else (
 
+        rem !P_Value! - значение переменной
         set %P_Name%=!P_Value!
         exit /b 0
     )
-    rem echo Input: !Input!
+    rem echo Input:!Input!
 
     if not defined Input (
-        rem [!%P_Name%!] - значение переменной по умолчанию
+        rem !%P_Name%! - значение переменной по умолчанию
         set %P_Name%=!%P_Name%!
     ) else (
         set %P_Name%=!Input!
@@ -192,7 +190,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Read_F ()
+rem procedure Read_F (P_Name, P_List, Atimeout)
 rem --------------------------------------------------------------------------------
 :Read_F
 rem beginfunction
@@ -203,21 +201,23 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    rem !P_Name! - имя переменной
     set P_Name=%1
-    rem !P_Name! имя переменной
-    rem echo имя переменной: !P_Name!
-    rem !%P_Name%! значение переменной по умолчанию
-    echo Deault: !%P_Name%!
+    rem echo P_Name:!P_Name!
+
+    rem !%P_Name%! - значение переменной по умолчанию
+    rem echo P_Value [default]:!%P_Name%!
 
     rem список создаваемых вариантов
     set P_List=%~2
     rem echo P_List: !P_List!
-    rem timeout
-    set timeout=%3
-    if not defined timeout (
-        set timeout=10
+
+    rem Atimeout
+    set Atimeout=%3
+    if not defined Atimeout (
+        set Atimeout=10
     )
-    rem echo timeout: !timeout!
+    rem echo Atimeout:!Atimeout!
 
     set %P_Name%=!%P_Name%!
     if not "!P_List!"=="" (
@@ -250,7 +250,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure SetINI ()
+rem procedure SetINI (AFileName, ASection, AParameter, AValue)
 rem --------------------------------------------------------------------------------
 :SetINI
 rem beginfunction
@@ -261,18 +261,22 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LFileName=%1
-    set LSection=%2
-    set LParameter=%3
-    set LValue=%4
-    rem D:\TOOLS\EXE\setini.exe !LFileName! general POETRY_NAME !ProjectName!
-    %SetINIAPP% !LFileName! !LSection! !LParameter! !LValue!
+    set AFileName=%~1
+    rem echo AFileName:!AFileName!
+    set ASection=%~2
+    rem echo ASection:!ASection!
+    set AParameter=%~3
+    rem echo AParameter:!AParameter!
+    set AValue=%~4
+    rem echo AValue:!AValue!
+
+    %SetINIAPP% "!AFileName!" !ASection! !AParameter! "!AValue!"
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINI (FileName, Section, Parameter)
+rem procedure GetINI (AFileName, ASection, AParameter)
 rem --------------------------------------------------------------------------------
 :GetINI
 rem beginfunction
@@ -283,13 +287,17 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LFileName=%~1
-    set LSection=%~2
-    set LParameter=%~3
+    set AFileName=%~1
+    rem echo AFileName:!AFileName!
+    set ASection=%~2
+    rem echo ASection:!ASection!
+    set AParameter=%~3
+    rem echo AParameter:!AParameter!
+
     set !FUNCNAME!=!TEMP_DIR!\%random%.tmp
     echo !FUNCNAME!: !%FUNCNAME%!
 
-    %GetINIAPP% !LFileName! !LSection! !LParameter! > !%FUNCNAME%!
+    %GetINIAPP% !AFileName! !ASection! !AParameter! > !%FUNCNAME%!
 
     rem type !%FUNCNAME%!
 
@@ -298,32 +306,23 @@ rem beginfunction
             rem В переменной i - ключ
             rem В переменной j - значение
 
-            rem set s=%%i
-            rem set s=!s:~0,1!
-            rem echo s: !s!
+            set %%i=%%j
+            echo %%i:!%%i!
 
-            if not "!s!"=="[" (
-                rem set %%i=%%j
-                rem echo %%i:!%%i!
-
-                set STRi=%%i
-                rem echo STRi:!STRi!
-                call :TrimRight !STRi! || exit /b 1
-                rem echo TrimRight:!TrimRight!
-
-                set STRj=%%j
-                rem echo STRj:!STRj!
-
-                !%TrimRight%!=!STRj!
-                echo Parametr:!TrimRight!=!STRj!
-
-                rem call :TrimLeft !STRj! || exit /b 1
-                rem echo TrimLeft:!TrimLeft!
-                rem !%TrimRight%!=!TrimLeft!
-                rem echo Parametr:!TrimRight!=!TrimLeft!
-            )
+            rem set STRi=%%i
+            rem rem echo STRi:!STRi!
+            rem call :TrimRight !STRi! || exit /b 1
+            rem rem echo TrimRight:!TrimRight!
+            rem set STRj=%%j
+            rem rem echo STRj:!STRj!
+            rem call :TrimLeft "!STRj!" || exit /b 1
+            rem rem echo TrimLeft:!TrimLeft!
+            rem !%TrimRight%!=!TrimLeft!
+            rem echo !TrimRight!=!TrimLeft!
         )
-        del !%FUNCNAME%!
+
+        rem del !%FUNCNAME%!
+
     ) else (
         echo INFO: File !%FUNCNAME%! not exist ...
     )
@@ -332,7 +331,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIParametr (FileName, Parameter)
+rem procedure GetINIParametr (AFileName, ASection, AParameter)
 rem --------------------------------------------------------------------------------
 :GetINIParametr
 rem beginfunction
@@ -343,67 +342,75 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LFileName=%1
-    rem echo FileName:!LFileName!
-    set LParameter=%2
-    rem echo Parameter:!LParameter!
+    set AFileName=%~1
+    rem echo AFileName:!AFileName!
+    set ASection=%~2
+    rem echo ASection:!ASection!
+    set AParameter=%~3
+    rem echo AParameter:!AParameter!
 
-    rem type !LFileName!
+    rem type !AFileName!
 
-    if exist !LFileName! (
-        for /f "eol=# delims== tokens=1,2" %%i in (!LFileName!) do (
+    if exist !AFileName! (
+        for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
+
+            rem usebackq
+
             rem В переменной i - ключ
+            rem echo i:%%i
             rem В переменной j - значение
+            rem echo j:%%j
             
-            rem set s=%%i
-            rem set s=!s:~0,1!
-            rem echo s: !s!
+            rem set %%i=%%j
 
-            if not "!s!"=="[" (
-                if defined LParameter (
-                    rem echo i:%%i
+            set s=%%i
+            set s=!s:~0,1!
+            rem echo s:!s!
+
+            if "!s!"=="[" (
+
+                set s=%%i
+                set Section=!s:~1,-1!
+                echo Section:!Section!
+
+            ) else (
+                if defined AParameter (
                     set STRi=%%i
                     rem echo STRi:!STRi!
                     call :TrimRight !STRi! || exit /b 1
                     rem echo TrimRight:!TrimRight!
 
-                    rem if "%%i"=="!LParameter!" (
-                    if "!TrimRight!"=="!LParameter!" (
-                        rem set %%i=%%j
+                    if "!TrimRight!"=="!AParameter!" (
+                        rem echo i:%%i
+                        rem echo j:%%j
 
                         set STRj=%%j
+                        rem set STRj=!STRj:"=!
                         rem echo STRj:!STRj!
-
-                        rem !%TrimRight%!=!STRj!
-                        rem echo Parametr:!TrimRight!=!STRj!
 
                         call :TrimLeft !STRj! || exit /b 1
                         rem echo TrimLeft:!TrimLeft!
+
                         !%TrimRight%!=!TrimLeft!
-                        echo Parametr:!TrimRight!=!TrimLeft!
+                        echo !TrimRight!=!TrimLeft!
 
                         exit /b 0
                     )
                 ) else (
-                    rem set %%i=%%j
-                    rem echo %%i: !%%i!
-
-                    rem echo i:%%i
                     set STRi=%%i
                     rem echo STRi:!STRi!
                     call :TrimRight !STRi! || exit /b 1
                     rem echo TrimRight:!TrimRight!
 
                     set STRj=%%j
+                    rem set STRj=!STRj:"=!
                     rem echo STRj:!STRj!
-
-                    rem !%TrimRight%!=!STRj!
-                    rem echo Parametr:!TrimRight!=!STRj!
 
                     call :TrimLeft !STRj! || exit /b 1
                     rem echo TrimLeft:!TrimLeft!
+
                     !%TrimRight%!=!TrimLeft!
-                    echo Parametr:!TrimRight!=!TrimLeft!
+                    echo !TrimRight!=!TrimLeft!
                 )
             )
         )
