@@ -557,7 +557,7 @@ rem ----------------------------------------------------------------------------
 :FORCicle
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=GetFile
+    set FUNCNAME=FORCicle
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -587,12 +587,47 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetSET (Aparametr)
+rem procedure GetSET (ASET Adelims Atokens)
 rem --------------------------------------------------------------------------------
 :GetSET
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=GetDir
+    set FUNCNAME=GetSET
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set ASET=%1
+    if not defined ASET (
+        set ASET=`set`
+    )
+    echo ASET:!ASET!
+    set Adelims=%~2
+    if not defined Adelims (
+        set Adelims=^=
+    )
+    echo Adelims: !Adelims!
+    set Atokens=%~3
+    if not defined Atokens (
+        set Atokens=1,2
+    )
+    echo Atokens: !Atokens!
+
+    for /F "usebackq tokens=%Atokens% delims=%Adelims%" %%i IN ( !ASET!  ) do  (
+        echo %%i=%%j
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure GetDIRcmd (Aparametr)
+rem --------------------------------------------------------------------------------
+:GetDIRcmd
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetDIRcmd
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -604,10 +639,8 @@ rem beginfunction
     )
     echo ASET:!ASET!
 
-    for /F "usebackq tokens=1,2 delims==" %%i IN ( `set`  ) do  (
-        echo %%i=%%j
-        rem set LParametr=!%%i_%%j!
-        rem echo "!LParametr!"
+    for /F "usebackq tokens=1-7 delims= " %%i IN ( `dir`  ) do  (
+        echo %%i %%j %%k %%k %%m %%n %%o
     )
 
     exit /b 0
