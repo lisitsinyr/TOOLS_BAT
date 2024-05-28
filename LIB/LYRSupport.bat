@@ -495,17 +495,17 @@ rem beginfunction
     if not defined ASET (
         set ASET=*.*
     )
-    echo ASET: !ASET!
+    echo ASET:!ASET!
     set Aview=%2
     if not defined Aview (
         set Aview=~f
     )
-    echo Aview: !Aview!
+    echo Aview:!Aview!
     set Aarg=%3
     if not defined Aarg (
         set Aarg=
     )
-    echo Aarg: !Aarg!
+    echo Aarg:!Aarg!
 
     for %Aarg% /d %%D in ( !ASET!  ) do  (
         set Directory=%%%Aview%D
@@ -531,17 +531,18 @@ rem beginfunction
     if not defined ASET (
         set ASET=*.*
     )
-    echo ASET: !ASET!
+    echo ASET:!ASET!
     set Aview=%2
     if not defined Aview (
         set Aview=~f
     )
-    echo Aview: !Aview!
+    echo Aview:!Aview!
     set Aarg=%3
     if not defined Aarg (
         set Aarg=
     )
-    echo Aarg: !Aarg!
+    echo Aarg:!Aarg!
+
     for %Aarg% %%F in ( !ASET!  ) do  (
         set File=%%%Aview%F
         echo !File!
@@ -566,19 +567,47 @@ rem beginfunction
     if not defined Astart (
         set /a Astart=1
     )
-    echo Astart: !Astart!
+    echo Astart:!Astart!
     set Astep=%2
     if not defined Astep (
         set Astep=1
     )
-    echo Astep: !Astep!
+    echo Astep:!Astep!
     set Aend=%3
     if not defined Aend (
         set Aend=10
     )
-    echo Aend: !Aend!
+    echo Aend:!Aend!
+
     for /L %%L in ( !Astart!, !Astep!, !Aend!  ) do  (
         echo %%L
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure GetSET (Aparametr)
+rem --------------------------------------------------------------------------------
+:GetSET
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetDir
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set ASET=%1
+    if not defined ASET (
+        set ASET=*.*
+    )
+    echo ASET:!ASET!
+
+    for /F "usebackq tokens=1,2 delims==" %%i IN ( `set`  ) do  (
+        echo %%i=%%j
+        rem set LParametr=!%%i_%%j!
+        rem echo "!LParametr!"
     )
 
     exit /b 0
