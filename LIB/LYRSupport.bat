@@ -622,12 +622,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetDIRcmd (Aparametr)
+rem procedure GetCMD (ASET Adelims Atokens)
 rem --------------------------------------------------------------------------------
-:GetDIRcmd
+:GetCMD
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=GetDIRcmd
+    set FUNCNAME=GetCMD
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -635,12 +635,22 @@ rem beginfunction
 
     set ASET=%1
     if not defined ASET (
-        set ASET=*.*
+        set ASET=`dir`
     )
     echo ASET:!ASET!
+    set Adelims=%~2
+    if not defined Adelims (
+        set Adelims=^=
+    )
+    echo Adelims: !Adelims!
+    set Atokens=%~3
+    if not defined Atokens (
+        set Atokens=1,2
+    )
+    echo Atokens: !Atokens!
 
-    for /F "usebackq tokens=1-7 delims= " %%i IN ( `dir`  ) do  (
-        echo %%i %%j %%k %%k %%m %%n %%o
+    for /F "usebackq tokens=1-20 delims=%Adelims%" %%i IN ( !ASET!  ) do  (
+        echo %%i %%j %%k %%k %%m %%n %%o %%p %%r %%s %%t
     )
 
     exit /b 0

@@ -330,4 +330,10 @@ exit /b 0
 :FORCicle
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+:GetSET
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetCMD
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 rem =================================================
