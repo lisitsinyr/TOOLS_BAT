@@ -645,12 +645,12 @@ rem beginfunction
     echo Adelims: !Adelims!
     set Atokens=%~3
     if not defined Atokens (
-        set Atokens=1,2
+        set Atokens=1-26
     )
     echo Atokens: !Atokens!
 
-    for /F "usebackq tokens=1-20 delims=%Adelims%" %%i IN ( !ASET!  ) do  (
-        echo %%i %%j %%k %%k %%m %%n %%o %%p %%r %%s %%t
+    for /F "usebackq tokens=%Atokens% delims=%Adelims%" %%i IN ( !ASET!  ) do  (
+        echo %%i^|%%j^|%%k^|%%k^|%%m^|%%n^|%%o^|%%p^|%%r^|%%s^|%%t^|
     )
 
     exit /b 0
