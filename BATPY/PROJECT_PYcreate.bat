@@ -240,10 +240,10 @@ rem =================================================
 rem =================================================
 rem LYRConst.bat
 rem =================================================
-:SET_VAR_SCRIPT
+:SET_LIB
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
-:SET_LIB
+:SET_POETRY
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
 :SET_KIX

@@ -154,6 +154,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    call :SET_POETRY || exit /b 1
+
     echo Runs a command in the appropriate environment ...
     set COMMAND=run
     
@@ -208,10 +210,7 @@ rem =================================================
 :SET_LIB
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
-:SET_CHECK_REPO
-%LIB_BAT%\LYRConst.bat %*
-exit /b 0
-:SET_CHECK_PROJECT
+:SET_POETRY
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
 :SET_KIX
