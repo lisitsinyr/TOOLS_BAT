@@ -151,8 +151,30 @@ rem beginfunction
     call :__SET_VAR_DEFAULT || exit /b 1
     call :__SET_VAR_PROJECTS || exit /b 1
     call :__SET_LOG || exit /b 1
-    call :__SET_POETRY || exit /b 1
 
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem :SET_POETRY ()
+rem --------------------------------------------------------------------------------
+:SET_POETRY
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=SET_KIX
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem POETRY - 
+    rem -------------------------------------------------------------------
+    set APP=poetry
+    set OPTION= -v --no-ansi
+    set OPTION= -v --ansi
+    set ARGS=
+    set APPRUN=
     exit /b 0
 rem endfunction
 
@@ -559,29 +581,6 @@ rem beginfunction
     set LOG_FULLFILENAME=!LOG_DIR!\!LOG_FILENAME!.log
     rem echo LOG_FULLFILENAME: !%LOG_FULLFILENAME!
 
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem :SET_POETRY ()
-rem --------------------------------------------------------------------------------
-:__SET_POETRY
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=SET_KIX
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem POETRY - 
-    rem -------------------------------------------------------------------
-    set APP=poetry
-    set OPTION= -v --no-ansi
-    set OPTION= -v --ansi
-    set ARGS=
-    set APPRUN=
     exit /b 0
 rem endfunction
 

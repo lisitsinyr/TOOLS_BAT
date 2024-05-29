@@ -19,7 +19,7 @@ set LIB_BAT=!SCRIPTS_DIR!\LIB
 rem -------------------------------------------------------------------
 rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
 rem -------------------------------------------------------------------
-set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
+rem set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
 
 rem --------------------------------------------------------------------------------
 rem 
