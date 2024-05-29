@@ -6,6 +6,21 @@ chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
+rem -------------------------------------------------------------------
+rem SCRIPTS_DIR - Каталог скриптов
+rem -------------------------------------------------------------------
+set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
+
+rem -------------------------------------------------------------------
+rem LIB_BAT - каталог библиотеки скриптов
+rem -------------------------------------------------------------------
+set LIB_BAT=!SCRIPTS_DIR!\LIB
+
+rem -------------------------------------------------------------------
+rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
+rem -------------------------------------------------------------------
+set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
+
 rem --------------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
@@ -13,103 +28,18 @@ rem ----------------------------------------------------------------------------
     set BATNAME=%~nx0
     echo Start !BATNAME! ...
 
-    set DEBUG=
-
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
-    rem LIB_BAT - каталог библиотеки скриптов
-    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-    rem -------------------------------------------------------------------
-    call :MAIN_INIT %* || exit /b 1
-
     rem Количество аргументов
     call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
     call :SET_LIB %0 || exit /b 1
-    rem echo CURRENT_DIR: !CURRENT_DIR!
-
-    call :StartLogFile || exit /b 1
-    set OK=yes
-    call :MAIN_SET %* || exit /b 1
-    if defined OK if not defined Read_N (
-        call :MAIN_CHECK_PARAMETR %* || exit /b 1
-    )
-    if defined OK (
-        call :MAIN %* || exit /b 1
-    )
-    call :StopLogFile || exit /b 1
-
-    exit /b 0
-:end
-rem --------------------------------------------------------------------------------
-
-rem -----------------------------------------------
-rem procedure MAIN_INIT (FULLFILENAME, DEBUG)
-rem -----------------------------------------------
-:MAIN_INIT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_INIT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
+    rem rar - 
     rem -------------------------------------------------------------------
-    if not defined SCRIPTS_DIR (
-        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
-    )
-    rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
-    rem -------------------------------------------------------------------
-    rem LIB_BAT - каталог библиотеки скриптов
-    rem -------------------------------------------------------------------
-    if not defined LIB_BAT (
-        set LIB_BAT=!SCRIPTS_DIR!\LIB
-        rem echo LIB_BAT: !LIB_BAT!
-    )
-    if not exist !LIB_BAT!\ (
-        echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
-        exit /b 0
-    )
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-    rem -------------------------------------------------------------------
-    if not defined SCRIPTS_DIR_KIX (
-        set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
-    )
-    rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_SET ()
-rem --------------------------------------------------------------------------------
-:MAIN_SET
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_SET
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_CHECK_PARAMETR ()
-rem --------------------------------------------------------------------------------
-:MAIN_CHECK_PARAMETR
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_CHECK_PARAMETR
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
+    set APP=rar
+    set COMMAND=a
+    set OPTION= -r
+    set ARGS=
+    set APPRUN=
 
     rem -------------------------------------
     rem OPTION
@@ -118,61 +48,44 @@ rem beginfunction
     if defined O1 (
         set OPTION=!OPTION! !O1!
     )
-
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
     set PN_CAPTION=Ввод значения archive
-    set archive=
+    set archive=archive
     call :Check_P archive %1 || exit /b 1
     rem echo archive: !archive!
     if not defined archive (
         echo ERROR: Параметр archive не задан...
         echo Использование: !BATNAME! архив [файлы]
         set OK=
-    ) else (
-        call :FullFileName "!archive!" || exit /b 1
-        rem echo FullFileName: !FullFileName!
-        call :ExtractFileName "!archive!" || exit /b 1
-        rem echo ExtractFileName: !ExtractFileName!
-        call :ExtractFileNameWithoutExt "!archive!" || exit /b 1
-        rem echo ExtractFileNameWithoutExt: !ExtractFileNameWithoutExt!
-
-        call :FileAttr "!archive!" || exit /b 1
-        rem echo FileAttr: !FileAttr!
-        rem echo FOLDER: !FOLDER!
-        if not defined FOLDER (
-            set PN_CAPTION=Файлы
-            set files=*.*
-            call :Check_P files !files! || exit /b 1
-            rem echo files: !files!    
-            rem set RARCMD=rar a -r "!archive!.rar" "!files!"
-            set ARGS=!ARGS! "!archive!.rar" "!files!"
-        )
-        if "!FOLDER!"=="D" (
-            rem set RARCMD=rar a -r "!ExtractFileName!.rar" "!ExtractFileName!"
-            set ARGS=!ARGS! "!ExtractFileName!.rar" "!ExtractFileName!"
-        )
-        if "!FOLDER!"=="F" (
-            rem set RARCMD=rar a "!ExtractFileNameWithoutExt!.rar" "!archive!"
-            set OPTION=
-            set ARGS=!ARGS! "!ExtractFileNameWithoutExt!.rar" "!archive!"
-        )
     )
 
-    exit /b 0
-rem endfunction
+    call :FullFileName "!archive!" || exit /b 1
+    rem echo FullFileName: !FullFileName!
+    call :ExtractFileName "!archive!" || exit /b 1
+    rem echo ExtractFileName: !ExtractFileName!
+    call :ExtractFileNameWithoutExt "!archive!" || exit /b 1
+    rem echo ExtractFileNameWithoutExt: !ExtractFileNameWithoutExt!
+    call :FileAttr "!archive!" || exit /b 1
+    rem echo FileAttr: !FileAttr!
+    rem echo FOLDER: !FOLDER!
 
-rem =================================================
-rem procedure MAIN ()
-rem =================================================
-:MAIN
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
+    if not defined FOLDER (
+        set PN_CAPTION=Файлы
+        set files=*.*
+        call :Check_P files !files! || exit /b 1
+        rem echo files: !files!    
+        set ARGS=!ARGS! "!archive!.rar" "!files!"
+    )
+
+    if "!FOLDER!"=="D" (
+        set ARGS=!ARGS! "!ExtractFileName!.rar" "!ExtractFileName!"
+    )
+    if "!FOLDER!"=="F" (
+        set OPTION=
+        set ARGS=!ARGS! "!ExtractFileNameWithoutExt!.rar" "!archive!"
     )
     
     if not defined Read_N (
@@ -187,7 +100,8 @@ rem beginfunction
     rem call :PressAnyKey || exit /b 1
 
     exit /b 0
-rem endfunction
+:end
+rem --------------------------------------------------------------------------------
 
 rem =================================================
 rem ФУНКЦИИ LIB
@@ -204,12 +118,6 @@ exit /b 0
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
-:YYYYMMDDHHMMSS
-%LIB_BAT%\LYRDateTime.bat %*
-exit /b 0
-:DateTime
-%LIB_BAT%\LYRDateTime.bat %*
-exit /b 0
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
@@ -249,79 +157,16 @@ exit /b 0
 rem =================================================
 rem LYRLog.bat
 rem =================================================
-:FormatStr
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
-:AddLog
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
-:AddLogFile
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
-:StartLogFile
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
-:StopLogFile
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
-:TrimLeft
-%LIB_BAT%\LYRStrUtils.bat %*
-exit /b 0
-:TrimRight
-%LIB_BAT%\LYRStrUtils.bat %*
-exit /b 0
-:Trim
-%LIB_BAT%\LYRStrUtils.bat %*
-exit /b 0
-:Left
-%LIB_BAT%\LYRStrUtils.bat %*
-exit /b 0
-:Mid
-%LIB_BAT%\LYRStrUtils.bat %*
-exit /b 0
-:TrimQuotes
-%LIB_BAT%\LYRStrUtils.bat %*
-exit /b 0
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
-:PressAnyKey
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Pause
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Check_P
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_P
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
 :Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:Read_F
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetINI
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:SetINI
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetINIParametr
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetFileParser
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetDir
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetFile
+:Check_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================
