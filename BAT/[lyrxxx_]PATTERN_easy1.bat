@@ -19,7 +19,7 @@ set LIB_BAT=!SCRIPTS_DIR!\LIB
 rem -------------------------------------------------------------------
 rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
 rem -------------------------------------------------------------------
-rem set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
+set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
 
 rem --------------------------------------------------------------------------------
 rem 
@@ -35,9 +35,9 @@ rem ----------------------------------------------------------------------------
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set O1=
+    set O1=O1
     set PN_CAPTION=O1
-    call :Read_P O1 "" || exit /b 1
+    call :Read_P O1 O1 || exit /b 1
     rem echo O1:!O1!
     if defined O1 (
         set OPTION=!OPTION! --O1 !O1!
@@ -60,13 +60,16 @@ rem ----------------------------------------------------------------------------
         set OK=
     )
 
+    rem set APP_KIX_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX\KIX
+    rem set APP_KIX=
+
     rem call :SET_KIX || exit /b 1
-    rem if exist %APP_KIX_DIR%\%APP_KIX% (
-    rem     echo START script %APP_KIX_DIR%\%APP_KIX% ... >> %LOG_FULLFILENAME%
-    rem     kix32.exe %APP_KIX_DIR%\%APP_KIX% "$P1=%1" "$P2=%2" "$P3=%3" "$P4=%4" "$P5=%5" "$P6=%6" "$P7=%7" "$P8=%8" "$P9=%9"
+
+    rem if exist !APP_KIX_DIR!\!APP_KIX!.kix (
+    rem     echo START !APP_KIX_DIR!\!APP_KIX!.kix ... 
+    rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
     rem )
 
-    rem call :Pause !SLEEP! || exit /b 1
     rem call :PressAnyKey || exit /b 1
 
     exit /b 0

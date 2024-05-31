@@ -239,14 +239,14 @@ rem beginfunction
 
     call :FormatStr !Alevel! %3 %4 %5 %6 %7 %8 %9 || exit /b 1
     if !Aout! EQU 0 (
-        echo %LOG_STR%
+        echo !LOG_STR!
     )
     if !Aout! EQU 1 (
-        echo %LOG_STR% >> "%LOG_FULLFILENAME%"
+        echo !LOG_STR! >> "!LOG_FULLFILENAME!"
     )
     if !Aout! EQU 2 (
-        echo %LOG_STR%
-        echo %LOG_STR% >> "%LOG_FULLFILENAME%"
+        echo !LOG_STR!
+        echo !LOG_STR! >> "!LOG_FULLFILENAME!"
     )
 
     exit /b 0
@@ -293,7 +293,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure StartLogFile (AFileName)
+rem procedure StartLogFile ()
 rem --------------------------------------------------------------------------------
 :StartLogFile
 rem beginfunction
@@ -311,19 +311,20 @@ rem beginfunction
     rem ------------------------------------------------------
     rem Открытие файла журнала
     rem ------------------------------------------------------
-    set AFileName=!LOG_FULLFILENAME!
+    set LFileName=!LOG_FULLFILENAME!
+    rem echo LFileName: !LFileName!
     if LOG_FILE_ADD==0 (
-        if exist "!AFileName!" (
-            del "!AFileName!"
+        if exist "!LFileName!" (
+            del "!LFileName!"
         )
-        rem set touchRUN=touch -f "!AFileName!"
-        rem set touchRUN=D:\TOOLS\EXE\touch.exe "!AFileName!"
-        echo touchRUN: !touchRUN!
-        %touchRUN% "!AFileName!"
+        rem set touchRUN=touch -f "!LFileName!"
+        rem set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
+        rem echo touchRUN: !touchRUN!
+        %touchRUN% "!LFileName!"
     ) else (
-        if not exist "!AFileName!" (
-            rem set touchRUN=touch -f "!AFileName!"
-            rem set touchRUN=D:\TOOLS\EXE\touch.exe "!AFileName!"
+        if not exist "!LFileName!" (
+            rem set touchRUN=touch -f "!LFileName!"
+            rem set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
             echo touchRUN: !touchRUN!
             %touchRUN% "!LFileName!"
         )

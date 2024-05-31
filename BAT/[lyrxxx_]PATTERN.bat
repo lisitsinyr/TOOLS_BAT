@@ -169,10 +169,14 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem set APP_KIX_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX\KIX
+    rem set APP_KIX=
+
     rem call :SET_KIX || exit /b 1
-    rem if exist %APP_KIX_DIR%\%APP_KIX% (
-    rem     echo START script %APP_KIX_DIR%\%APP_KIX% ... >> %LOG_FULLFILENAME%
-    rem     kix32.exe %APP_KIX_DIR%\%APP_KIX% "$P1=%1" "$P2=%2" "$P3=%3" "$P4=%4" "$P5=%5" "$P6=%6" "$P7=%7" "$P8=%8" "$P9=%9"
+
+    rem if exist !APP_KIX_DIR!\!APP_KIX!.kix (
+    rem     echo START !APP_KIX_DIR!\!APP_KIX!.kix ... 
+    rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
     rem )
 
     exit /b 0
