@@ -115,8 +115,13 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set O1=
+    set PN_CAPTION=O1
+    call :Read_P O1 "" || exit /b 1
+    rem echo O1:!O1!
     if defined O1 (
-        set OPTION=!OPTION! !O1!
+        set OPTION=!OPTION! --O1 !O1!
+    ) else (
+        echo INFO: O1 not defined ...
     )
 
     rem -------------------------------------
@@ -124,11 +129,14 @@ rem beginfunction
     rem -------------------------------------
     rem Проверка на обязательные аргументы
     set A1=
+    set PN_CAPTION=A1
+    call :Read_P A1 %1 || exit /b 1
+    rem echo A1:!A1!
     if defined A1 (
         set ARGS=!ARGS! !A1!
     ) else (
         echo ERROR: A1 not defined ...
-        set OK=yes
+        set OK=
     )
 
     exit /b 0
