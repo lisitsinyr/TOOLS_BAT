@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem UPDATE_TOOLS_JAVA.bat
+rem [lyrxxx_]PATTERN.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -16,13 +16,13 @@ rem ----------------------------------------------------------------------------
     set DEBUG=
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ
-    rem LIB_BAT - РєР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё СЃРєСЂРёРїС‚РѕРІ
-    rem SCRIPTS_DIR_KIX - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ KIX
+    rem SCRIPTS_DIR - Каталог скриптов
+    rem LIB_BAT - каталог библиотеки скриптов
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
     call :MAIN_INIT %* || exit /b 1
 
-    rem РљРѕР»РёС‡РµСЃС‚РІРѕ Р°СЂРіСѓРјРµРЅС‚РѕРІ
+    rem Количество аргументов
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
@@ -56,30 +56,30 @@ rem beginfunction
     )
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ
+    rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
+        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
     rem -------------------------------------------------------------------
-    rem LIB_BAT - РєР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё СЃРєСЂРёРїС‚РѕРІ
+    rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\LIB
         rem echo LIB_BAT: !LIB_BAT!
     )
     if not exist !LIB_BAT!\ (
-        echo ERROR: РљР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё LYR !LIB_BAT! РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚...
+        echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 0
     )
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR_KIX - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ KIX
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
+        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
@@ -114,12 +114,31 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
+    set O1=
+    set PN_CAPTION=O1
+    call :Read_P O1 "" || exit /b 1
+    rem echo O1:!O1!
+    if defined O1 (
+        set OPTION=!OPTION! --O1 !O1!
+    ) else (
+        echo INFO: O1 not defined ...
+    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
-    rem РџСЂРѕРІРµСЂРєР° РЅР° РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ Р°СЂРіСѓРјРµРЅС‚С‹
-    
+    rem Проверка на обязательные аргументы
+    set A1=
+    set PN_CAPTION=A1
+    call :Read_P A1 %1 || exit /b 1
+    rem echo A1:!A1!
+    if defined A1 (
+        set ARGS=!ARGS! !A1!
+    ) else (
+        echo ERROR: A1 not defined ...
+        set OK=
+    )
+
     exit /b 0
 rem endfunction
 
@@ -129,40 +148,42 @@ rem =================================================
 :MAIN
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :TOOLS_JAVA_git_push || exit /b 1
-
-    rem call :Pause %SLEEP% || exit /b 1
-    rem call :PressAnyKey || exit /b 1
+    call :MAIN_FUNC %* || exit /b 1
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure TOOLS_JAVA_git_push ()
+rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
-:TOOLS_JAVA_git_push
+:MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    echo ---------------------------
-    echo 3.git push TOOLS_JAVA:
-    echo ---------------------------
-    set DIR_TOOLS_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA\TOOLS_JAVA
-    cd /D %DIR_TOOLS_JAVA%
-    set LOG_FILE_ADD=1
-    call lyrgit_push_main.bat
+    rem set APP_KIX_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX\KIX
+    rem set APP_KIX=
+
+    rem call :SET_KIX || exit /b 1
+
+    rem if exist !APP_KIX_DIR!\!APP_KIX!.kix (
+    rem     echo START !APP_KIX_DIR!\!APP_KIX!.kix ... 
+    rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
+    rem )
+
     exit /b 0
 rem endfunction
 
 rem =================================================
-rem Р¤РЈРќРљР¦РР LIB
+rem ФУНКЦИИ LIB
 rem =================================================
 rem =================================================
 rem LYRConst.bat
@@ -239,6 +260,24 @@ exit /b 0
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
+:TrimLeft
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:TrimRight
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:Trim
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:Left
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:Mid
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:TrimQuotes
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
@@ -258,6 +297,55 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+rem =================================================
+rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Check_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetINI
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:SetINI
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetINIParametr
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFileParser
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetDir
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFile
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:FORCicle
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetSET
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetCMD
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

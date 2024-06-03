@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem UPDATE_YOUTUBE.bat
+rem UPDATE_PROJECTS.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -16,13 +16,13 @@ rem ----------------------------------------------------------------------------
     set DEBUG=
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ
-    rem LIB_BAT - РєР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё СЃРєСЂРёРїС‚РѕРІ
-    rem SCRIPTS_DIR_KIX - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ KIX
+    rem SCRIPTS_DIR - Каталог скриптов
+    rem LIB_BAT - каталог библиотеки скриптов
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
     call :MAIN_INIT %* || exit /b 1
 
-    rem РљРѕР»РёС‡РµСЃС‚РІРѕ Р°СЂРіСѓРјРµРЅС‚РѕРІ
+    rem Количество аргументов
     call :Read_N %* || exit /b 1
     rem echo Read_N: !Read_N!
 
@@ -56,26 +56,26 @@ rem beginfunction
     )
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ
+    rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_BAT
+        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
     rem -------------------------------------------------------------------
-    rem LIB_BAT - РєР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё СЃРєСЂРёРїС‚РѕРІ
+    rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\LIB
         rem echo LIB_BAT: !LIB_BAT!
     )
     if not exist !LIB_BAT!\ (
-        echo ERROR: РљР°С‚Р°Р»РѕРі Р±РёР±Р»РёРѕС‚РµРєРё LYR !LIB_BAT! РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚...
+        echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 0
     )
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR_KIX - РљР°С‚Р°Р»РѕРі СЃРєСЂРёРїС‚РѕРІ KIX
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
@@ -96,6 +96,38 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    
+    set DIR_EXAMPLES_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\EXAMPLES_PY
+    set DIR_MobileAPP_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\MobileAPP_PY
+    set DIR_PATTERN_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY
+    set DIR_TEST_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TEST_PY
+    set DIR_YOUTUBE_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\YOUTUBE_PY
+
+    set DIR_TESTS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TESTS_PY
+    set DIR_TOOLS_SRC_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TOOLS_SRC_PY
+    set DIR_TOOLS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
+
+    set DIR_TESTS_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA\TESTS_JAVA
+    set DIR_TOOLS_SRC_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA\TOOLS_SRC_JAVA
+    set DIR_TOOLS_JAVA= D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\TOOLS_JAVA
+
+    set DIR_TOOLS_SRC_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
+    set DIR_TOOLS_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
+
+    set DIR_TOOLS_SRC_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+    set DIR_TOOLS_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
+
+    set DIR_TOOLS_SRC_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    set DIR_TOOLS_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
+
+    set DIR_TOOLS_SRC_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
+    set DIR_TOOLS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
+
+    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
+    set DIR_TOOLS_GIT_=D:\TOOLS\TOOLS_GIT
+    set DIR_TOOLS_KIX_=D:\TOOLS\TOOLS_KIX
+    set DIR_TOOLS_PY_=D:\TOOLS\TOOLS_PY
+
 
     exit /b 0
 rem endfunction
@@ -114,12 +146,31 @@ rem beginfunction
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
+    set O1=
+    set PN_CAPTION=O1
+    call :Read_P O1 O1 || exit /b 1
+    rem echo O1:!O1!
+    if defined O1 (
+        set OPTION=!OPTION! --O1 !O1!
+    ) else (
+        echo INFO: O1 not defined ...
+    )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
-    rem РџСЂРѕРІРµСЂРєР° РЅР° РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ Р°СЂРіСѓРјРµРЅС‚С‹
-    
+    rem Проверка на обязательные аргументы
+    set A1=
+    set PN_CAPTION=A1
+    call :Read_P A1 A1 || exit /b 1
+    rem echo A1:!A1!
+    if defined A1 (
+        set ARGS=!ARGS! !A1!
+    ) else (
+        echo ERROR: A1 not defined ...
+        set OK=
+    )
+
     exit /b 0
 rem endfunction
 
@@ -129,14 +180,12 @@ rem =================================================
 :MAIN
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=MAIN
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :YOUTUBE_git_push || exit /b 1
-
-    rem call :Pause %SLEEP% || exit /b 1
-    rem call :PressAnyKey || exit /b 1
+    call :MAIN_FUNC %* || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -144,25 +193,91 @@ rem endfunction
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
-:YOUTUBE_git_push
+:MAIN_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :git_push !DIR_EXAMPLES_PY! || exit /b 1
+    call :git_push !DIR_MobileAPP_PY! || exit /b 1
+    call :git_push !DIR_PATTERN_PY! || exit /b 1
+    call :git_push !DIR_TEST_PY! || exit /b 1
+    call :git_push !DIR_YOUTUBE_PY! || exit /b 1
+
+    call :git_push !DIR_TESTS_PY! || exit /b 1
+    call :git_push !DIR_TOOLS_SRC_PY! || exit /b 1
+    call :git_push !DIR_TOOLS_PY! || exit /b 1
+
+    call :git_push !DIR_TESTS_JAVA! || exit /b 1
+    call :git_push !DIR_TOOLS_SRC_JAVA! || exit /b 1
+    call :git_push !DIR_TOOLS_JAVA! || exit /b 1
+
+    call :git_push !DIR_TOOLS_SRC_SH! || exit /b 1
+    call :git_push !DIR_TOOLS_SH! || exit /b 1
+
+    call :git_push !DIR_TOOLS_SRC_KIX! || exit /b 1
+    call :git_push !DIR_TOOLS_KIX! || exit /b 1
+
+    call :git_push !DIR_TOOLS_SRC_BAT! || exit /b 1
+    call :git_push !DIR_TOOLS_BAT! || exit /b 1
+
+    call :git_push !DIR_TOOLS_SRC_GIT! || exit /b 1
+    call :git_push !DIR_TOOLS_GIT! || exit /b 1
+
+    call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
+    call :git_pull !DIR_TOOLS_GIT_! || exit /b 1
+    call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
+    call :git_pull !DIR_TOOLS_PY_! || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem =================================================
+rem procedure git_push (ADirectory)
+rem =================================================
+:git_push
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    echo ---------------------------
-    echo 3.git push YOUTUBE:
-    echo ---------------------------
-    set DIR_YOUTUBE=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\YOUTUBE
-    cd /D %DIR_YOUTUBE%
     set LOG_FILE_ADD=1
+    set ADirectory=%~1
+    echo ADirectory:!ADirectory!
+    cd /D !ADirectory!
+
     call lyrgit_push_main.bat
+    
     exit /b 0
 rem endfunction
 
 rem =================================================
-rem Р¤РЈРќРљР¦РР LIB
+rem procedure git_pull (ADirectory)
+rem =================================================
+:git_pull
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LOG_FILE_ADD=1
+    set ADirectory=%~1
+    echo ADirectory:!ADirectory!
+    cd /D !ADirectory!
+
+    rem call lyrgit_pull_main.bat
+    git pull    
+    
+    exit /b 0
+rem endfunction
+
+rem =================================================
+rem ФУНКЦИИ LIB
 rem =================================================
 rem =================================================
 rem LYRConst.bat
@@ -239,6 +354,24 @@ exit /b 0
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
+:TrimLeft
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:TrimRight
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:Trim
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:Left
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:Mid
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+:TrimQuotes
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
@@ -258,6 +391,55 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+rem =================================================
+rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Check_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetINI
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:SetINI
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetINIParametr
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFileParser
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetDir
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFile
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:FORCicle
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetSET
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetCMD
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================
