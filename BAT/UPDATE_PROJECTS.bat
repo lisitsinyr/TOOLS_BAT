@@ -229,10 +229,10 @@ rem beginfunction
     call :REPO_WORK !DIR_TOOLS_JAVA! 0 || exit /b 1
     call :REPO_WORK !DIR_TOOLS_SH! 0 || exit /b 1
 
-    call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
-    call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
-    call :git_pull !DIR_TOOLS_GIT_! || exit /b 1
-    call :git_pull !DIR_TOOLS_PY_! || exit /b 1
+    rem call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
+    rem call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
+    rem call :git_pull !DIR_TOOLS_GIT_! || exit /b 1
+    rem call :git_pull !DIR_TOOLS_PY_! || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -260,7 +260,7 @@ rem beginfunction
     del *.bat                               
 
     set LFileName=!DIR_TOOLS_SRC_GIT!\lyrgit_push_main.bat
-    rem echo LFileName: !LFileName!
+    echo LFileName: !LFileName!
     if exist !LFileName! (
         echo COPY: !LFileName!
         copy !LFileName!
