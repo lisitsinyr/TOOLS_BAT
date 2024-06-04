@@ -97,6 +97,8 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set /a LOG_FILE_ADD=1
     
     set DIR_EXAMPLES_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\EXAMPLES_PY
     set DIR_MobileAPP_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\MobileAPP_PY
@@ -203,29 +205,29 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :REPO_WORK !DIR_EXAMPLES_PY! || exit /b 1
-    call :REPO_WORK !DIR_MobileAPP_PY! || exit /b 1
-    call :REPO_WORK !DIR_PATTERN_PY! || exit /b 1
-    call :REPO_WORK !DIR_TEST_PY! || exit /b 1
-    call :REPO_WORK !DIR_YOUTUBE_PY! || exit /b 1
+    call :REPO_WORK !DIR_EXAMPLES_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_MobileAPP_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_PATTERN_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_TEST_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_YOUTUBE_PY! 1 || exit /b 1
 
-    call :REPO_WORK !DIR_TESTS_PY! || exit /b 1
+    call :REPO_WORK !DIR_TESTS_PY! 1 || exit /b 1
 
-    call :REPO_WORK !DIR_TESTS_JAVA! || exit /b 1
+    call :REPO_WORK !DIR_TESTS_JAVA! 0 || exit /b 1
     
-    call :REPO_WORK !DIR_TOOLS_SRC_BAT! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_KIX! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_GIT! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_PY! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_SH! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_JAVA! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_BAT! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_KIX! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_GIT! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_JAVA! 0 || exit /b 1
 
-    call :REPO_WORK !DIR_TOOLS_BAT! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_KIX! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_GIT! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_PY! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_JAVA! || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SH! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_BAT! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_KIX! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_GIT! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_PY! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_JAVA! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SH! 0 || exit /b 1
 
     call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
     call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
@@ -236,7 +238,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure REPO_WORK (ADirectory)
+rem procedure REPO_WORK (ADirectory, APYTHON)
 rem --------------------------------------------------------------------------------
 :REPO_WORK
 rem beginfunction
@@ -245,14 +247,37 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LOG_FILE_ADD=1
     set ADirectory=%~1
     echo ADirectory:!ADirectory!
     cd /D "!ADirectory!"
 
+    set APYTHON=%2
+    echo APYTHON:!APYTHON!
+
     call :GetINIParametr REPO.ini general REPO_NAME || exit /b 1
     echo REPO_NAME:!REPO_NAME!
 
+    del *.bat                               
+
+    set LFileName=!DIR_TOOLS_SRC_GIT!\lyrgit_push_main.bat
+    rem echo LFileName: !LFileName!
+    if exist !LFileName! (
+        echo COPY: !LFileName!
+        copy !LFileName!
+        )
+    )
+
+    if !APYTHON!==1 (
+        set LFileName=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT\PROJECT_PYupdate.bat
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            echo COPY: !LFileName!
+            copy !LFileName!
+            )
+        )
+    )
+
+    
     rem call :PressAnyKey || exit /b 1
 
     if "!REPO_NAME!"=="TOOLS_BAT" (
