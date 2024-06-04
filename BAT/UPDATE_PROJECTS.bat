@@ -267,7 +267,7 @@ rem beginfunction
     )
 
     if !APYTHON!==1 (
-        set LFileName=!DIR_TOOLS_SRC_PY!\BAT\PROJECT_PYupdate.bat
+        set LFileName=!DIR_TOOLS_SRC_PY!\SRC\BAT\PROJECT_PYupdate.bat
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             echo COPY: !LFileName!
@@ -432,11 +432,11 @@ rem beginfunction
     )
 
     set LDIR_FROM=!DIR_TOOLS_SRC_PY!\BAT
-    set LDIR_TO=!DIR_TOOLS_PY!\BAT
+    set LDIR_TO=!DIR_TOOLS_PY!\SRC\BAT
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SCRIPTS
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
     set LDIR_TO=!DIR_TOOLS_PY!\SCRIPTS
     set LMASK=*.*
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
