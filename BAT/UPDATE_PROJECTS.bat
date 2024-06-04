@@ -253,7 +253,7 @@ rem beginfunction
     call :GetINIParametr REPO.ini general REPO_NAME || exit /b 1
     echo REPO_NAME:!REPO_NAME!
 
-    call :PressAnyKey || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     if "!REPO_NAME!"=="TOOLS_BAT" (
         call :UPDATE_TOOLS_BAT || exit /b 1
