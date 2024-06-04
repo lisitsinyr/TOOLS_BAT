@@ -431,8 +431,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\BAT
-    set LDIR_TO=!DIR_TOOLS_PY!\SRC\BAT
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\BAT
+    set LDIR_TO=!DIR_TOOLS_PY!\BAT
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 

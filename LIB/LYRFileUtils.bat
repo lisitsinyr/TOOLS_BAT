@@ -397,6 +397,7 @@ rem beginfunction
     set AMASK=%~3
     rem echo AMASK:!AMASK!
     set AARG=%~4
+    rem echo AARG:!AARG!
 
     call :CurrentDir || exit /b 1
 
@@ -452,7 +453,7 @@ rem beginfunction
     set AMASK=%~3
     rem echo AMASK:!AMASK!
     set AARG=%~4
-    echo AARG:!AARG!
+    rem echo AARG:!AARG!
     if not defined AARG (
         set AARG=/D /E /V /F /H /R /K /O /Y
     )
