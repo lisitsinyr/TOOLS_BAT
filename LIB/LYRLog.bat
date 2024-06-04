@@ -310,8 +310,8 @@ rem beginfunction
     rem Открытие файла журнала
     rem ------------------------------------------------------
     set LFileName=!LOG_FULLFILENAME!
-    echo LFileName: !LFileName!
-    echo LOG_FILE_ADD:!LOG_FILE_ADD!
+    rem echo LFileName: !LFileName!
+    rem echo LOG_FILE_ADD:!LOG_FILE_ADD!
 
     if !LOG_FILE_ADD! EQU 0 (
         if exist "!LFileName!" (
