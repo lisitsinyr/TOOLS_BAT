@@ -259,7 +259,7 @@ rem beginfunction
 
     del *.bat                               
 
-    set LFileName=!DIR_TOOLS_SRC_GIT!\lyrgit_push_main.bat
+    set LFileName=!DIR_TOOLS_SRC_GIT!\BAT\A.WORK\lyrgit_push_main.bat
     echo LFileName: !LFileName!
     if exist !LFileName! (
         echo COPY: !LFileName!
@@ -268,7 +268,7 @@ rem beginfunction
     )
 
     if !APYTHON!==1 (
-        set LFileName=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT\PROJECT_PYupdate.bat
+        set LFileName=!DIR_TOOLS_SRC_PY!\BAT\PROJECT_PYupdate.bat
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             echo COPY: !LFileName!
@@ -276,8 +276,7 @@ rem beginfunction
             )
         )
     )
-
-    
+   
     rem call :PressAnyKey || exit /b 1
 
     if "!REPO_NAME!"=="TOOLS_BAT" (
