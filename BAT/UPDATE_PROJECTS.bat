@@ -228,10 +228,10 @@ rem beginfunction
     call :REPO_WORK !DIR_TOOLS_JAVA! 0 || exit /b 1
     call :REPO_WORK !DIR_TOOLS_SH! 0 || exit /b 1
 
-    rem call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
-    rem call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
-    rem call :git_pull !DIR_TOOLS_GIT_! || exit /b 1
-    rem call :git_pull !DIR_TOOLS_PY_! || exit /b 1
+    call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
+    call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
+    call :git_pull !DIR_TOOLS_GIT_! || exit /b 1
+    call :git_pull !DIR_TOOLS_PY_! || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -251,18 +251,18 @@ rem beginfunction
     cd /D "!ADirectory!"
 
     set APYTHON=%2
-    echo APYTHON:!APYTHON!
+    rem echo APYTHON:!APYTHON!
 
     call :GetINIParametr REPO.ini general REPO_NAME || exit /b 1
-    echo REPO_NAME:!REPO_NAME!
+    rem echo REPO_NAME:!REPO_NAME!
 
-    del *.bat                               
+    del *.bat > NUL
 
     set LFileName=!DIR_TOOLS_SRC_GIT!\BAT\A.WORK\lyrgit_push_main.bat
-    echo LFileName: !LFileName!
+    rem echo LFileName: !LFileName!
     if exist !LFileName! (
-        echo COPY: !LFileName!
-        copy !LFileName!
+        rem echo COPY: !LFileName!
+        copy !LFileName! > NUL
         )
     )
 
@@ -270,8 +270,8 @@ rem beginfunction
         set LFileName=!DIR_TOOLS_SRC_PY!\SRC\BAT\PROJECT_PYupdate.bat
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
-            echo COPY: !LFileName!
-            copy !LFileName!
+            rem echo COPY: !LFileName!
+            copy !LFileName! > NUL
             )
         )
     )
