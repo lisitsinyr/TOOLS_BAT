@@ -14,6 +14,7 @@ rem ----------------------------------------------------------------------------
     echo Start !BATNAME! ...
 
     set DEBUG=
+    set /a LOG_FILE_ADD=0
 
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
@@ -79,7 +80,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX
+        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
@@ -104,7 +105,8 @@ rem beginfunction
     set DIR_YOUTUBE_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\YOUTUBE_PY
 
     set DIR_TESTS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TESTS_PY
-    set DIR_TOOLS_SRC_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TOOLS_SRC_PY
+    set DIR_TOOLS_SRC_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TOOLS_SRC_PY\SRC
+
     set DIR_TOOLS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
 
     set DIR_TESTS_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA\TESTS_JAVA
@@ -201,44 +203,42 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :git_push !DIR_EXAMPLES_PY! || exit /b 1
-    call :git_push !DIR_MobileAPP_PY! || exit /b 1
-    call :git_push !DIR_PATTERN_PY! || exit /b 1
-    call :git_push !DIR_TEST_PY! || exit /b 1
-    call :git_push !DIR_YOUTUBE_PY! || exit /b 1
+    call :REPO_WORK !DIR_EXAMPLES_PY! || exit /b 1
+    call :REPO_WORK !DIR_MobileAPP_PY! || exit /b 1
+    call :REPO_WORK !DIR_PATTERN_PY! || exit /b 1
+    call :REPO_WORK !DIR_TEST_PY! || exit /b 1
+    call :REPO_WORK !DIR_YOUTUBE_PY! || exit /b 1
 
-    call :git_push !DIR_TESTS_PY! || exit /b 1
-    call :git_push !DIR_TOOLS_SRC_PY! || exit /b 1
-    call :git_push !DIR_TOOLS_PY! || exit /b 1
+    call :REPO_WORK !DIR_TESTS_PY! || exit /b 1
 
-    call :git_push !DIR_TESTS_JAVA! || exit /b 1
-    call :git_push !DIR_TOOLS_SRC_JAVA! || exit /b 1
-    call :git_push !DIR_TOOLS_JAVA! || exit /b 1
+    call :REPO_WORK !DIR_TESTS_JAVA! || exit /b 1
+    
+    call :REPO_WORK !DIR_TOOLS_SRC_BAT! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_KIX! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_GIT! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_PY! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_SH! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_JAVA! || exit /b 1
 
-    call :git_push !DIR_TOOLS_SRC_SH! || exit /b 1
-    call :git_push !DIR_TOOLS_SH! || exit /b 1
-
-    call :git_push !DIR_TOOLS_SRC_KIX! || exit /b 1
-    call :git_push !DIR_TOOLS_KIX! || exit /b 1
-
-    call :git_push !DIR_TOOLS_SRC_BAT! || exit /b 1
-    call :git_push !DIR_TOOLS_BAT! || exit /b 1
-
-    call :git_push !DIR_TOOLS_SRC_GIT! || exit /b 1
-    call :git_push !DIR_TOOLS_GIT! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_BAT! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_KIX! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_GIT! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_PY! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_JAVA! || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SH! || exit /b 1
 
     call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
-    call :git_pull !DIR_TOOLS_GIT_! || exit /b 1
     call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
+    call :git_pull !DIR_TOOLS_GIT_! || exit /b 1
     call :git_pull !DIR_TOOLS_PY_! || exit /b 1
 
     exit /b 0
 rem endfunction
 
-rem =================================================
-rem procedure git_push (ADirectory)
-rem =================================================
-:git_push
+rem --------------------------------------------------------------------------------
+rem procedure REPO_WORK (ADirectory)
+rem --------------------------------------------------------------------------------
+:REPO_WORK
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
@@ -250,8 +250,174 @@ rem beginfunction
     echo ADirectory:!ADirectory!
     cd /D !ADirectory!
 
+    call :GetINIParametr REPO.ini general REPO_NAME || exit /b 1
+    echo REPO_NAME:!REPO_NAME!
+
+    call :PressAnyKey || exit /b 1
+
+    if "!REPO_NAME!"=="TOOLS_BAT" (
+        call :UPDATE_TOOLS_BAT || exit /b 1
+    )
+
+    if "!REPO_NAME!"=="TOOLS_KIX" (
+        call :UPDATE_TOOLS_KIX || exit /b 1
+    )
+
+    if "!REPO_NAME!"=="TOOLS_GIT" (
+        call :UPDATE_TOOLS_GIT || exit /b 1
+    )
+
+    if "!REPO_NAME!"=="TOOLS_PY" (
+        call :UPDATE_TOOLS_PY || exit /b 1
+    )
+
+    if "!REPO_NAME!"=="TOOLS_JAVA" (
+        call :UPDATE_TOOLS_JAVA || exit /b 1
+    )
+
+    if "!REPO_NAME!"=="TOOLS_SH" (
+        call :UPDATE_TOOLS_SH || exit /b 1
+    )
+
     call lyrgit_push_main.bat
-    
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_BAT ()
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_BAT
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT
+    set LDIR_TO=!DIR_TOOLS_BAT!\BAT
+    set LMASK=*.bat
+    rem rmdir "!LDIR_TO!"
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!" >> %LOG_FULLFILENAME%
+    )
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\LIB
+    set LDIR_TO=!DIR_TOOLS_BAT!\LIB
+    set LMASK=*.bat
+    rem rmdir "!LDIR_TO!"
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!" >> %LOG_FULLFILENAME%
+    )
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_SH (ADirectory)
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_SH
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\SH
+    set LDIR_TO=!DIR_TOOLS_SH!\SH
+    set LMASK=*.sh
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\LIB
+    set LDIR_TO=!DIR_TOOLS_SH!\LIB
+    set LMASK=*.sh
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\SH
+    set LDIR_TO=!DIR_TOOLS_SH!\SH_GIT
+    set LMASK=*.sh
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_KIX (ADirectory)
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_KIX
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\BAT
+    set LDIR_TO=!DIR_TOOLS_KIX!\BAT
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\LIB
+    set LDIR_TO=!DIR_TOOLS_KIX!\LIB
+    set LMASK=*.*
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\SCRIPTS
+    set LDIR_TO=!DIR_TOOLS_KIX!\SCRIPTS
+    set LMASK=*.*
+    call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_GIT (ADirectory)
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_GIT
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\BAT
+    set LDIR_TO=!DIR_TOOLS_GIT!\BAT
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\BAT_KIX
+    set LDIR_TO=!DIR_TOOLS_GIT!\BAT_KIX
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_PY (ADirectory)
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_PY
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\BAT
+    set LDIR_TO=!DIR_TOOLS_PY!\BAT
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SCRIPTS
+    set LDIR_TO=!DIR_TOOLS_PY!\SCRIPTS
+    set LMASK=*.*
+    call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
     exit /b 0
 rem endfunction
 
@@ -273,6 +439,19 @@ rem beginfunction
     rem call lyrgit_pull_main.bat
     git pull    
     
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_JAVA (ADirectory)
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_JAVA
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
     exit /b 0
 rem endfunction
 
@@ -331,6 +510,12 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILES
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:XCOPY_FILES
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 rem =================================================

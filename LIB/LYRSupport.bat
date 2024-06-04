@@ -384,19 +384,22 @@ rem beginfunction
             ) else (
                 if defined AParameter (
                     if "!TrimRight!"=="!AParameter!" (
-                        !%TrimRight%!=!TrimLeft!
-                        echo !TrimRight!=!TrimLeft!
+                        set !TrimRight!=!TrimLeft!
+                        rem echo !TrimRight!=!TrimLeft!
+                        set !FUNCNAME!=!TrimLeft!
                         exit /b 0
                     )
                 ) else (
                     if defined ASection (
                         if "!ASection!"=="!Section!" (
-                            !%TrimRight%!=!TrimLeft!
-                            echo !TrimRight!=!TrimLeft!
+                            set !TrimRight!=!TrimLeft!
+                            rem echo !TrimRight!=!TrimLeft!
+                            set !FUNCNAME!=!TrimLeft!
                         )
                     ) else (
-                        !%TrimRight%!=!TrimLeft!
-                        echo !TrimRight!=!TrimLeft!
+                        set !TrimRight!=!TrimLeft!
+                        rem echo !TrimRight!=!TrimLeft!
+                        set !FUNCNAME!=!TrimLeft!
                     )
                 )
             )

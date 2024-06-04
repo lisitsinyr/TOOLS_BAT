@@ -556,7 +556,7 @@ rem beginfunction
         echo INFO: Create !LOG_DIR! ...
         mkdir "!LOG_DIR!"
         rem echo ERRORLEVEL: !ERRORLEVEL!
-        if not !ERRORLEVEL!==0 (
+        if not !ERRORLEVEL! EQU 0 (
             echo ERROR: Dir !LOG_DIR! not created...
             exit /b 1
         )

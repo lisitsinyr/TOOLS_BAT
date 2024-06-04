@@ -231,10 +231,9 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aout=%1
+    set /a Aout=%1
     rem echo Aout: !Aout!
-
-    set Alevel=%2
+    set /a Alevel=%2
     rem echo Alevel: !Alevel!
 
     call :FormatStr !Alevel! %3 %4 %5 %6 %7 %8 %9 || exit /b 1
@@ -264,9 +263,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aout=%1
+    set /a Aout=%1
     rem echo Aout: !Aout!
-
     set AFileName=%2
     rem echo AFileName: !AFileName!
 
@@ -312,9 +310,12 @@ rem beginfunction
     rem Открытие файла журнала
     rem ------------------------------------------------------
     set LFileName=!LOG_FULLFILENAME!
-    rem echo LFileName: !LFileName!
-    if LOG_FILE_ADD==0 (
+    echo LFileName: !LFileName!
+    echo LOG_FILE_ADD:!LOG_FILE_ADD!
+
+    if !LOG_FILE_ADD! EQU 0 (
         if exist "!LFileName!" (
+            echo INFO: File !LFileName! exist ...
             del "!LFileName!"
         )
         rem set touchRUN=touch -f "!LFileName!"
@@ -323,6 +324,7 @@ rem beginfunction
         %touchRUN% "!LFileName!"
     ) else (
         if not exist "!LFileName!" (
+            echo INFO: File !LFileName! not exist ...
             rem set touchRUN=touch -f "!LFileName!"
             rem set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
             echo touchRUN: !touchRUN!
@@ -349,8 +351,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
-
-    rem if not "!LOG_FILESCRIPT!"=="!SCRIPT_FILENAME!" (exit /b 0)
 
     rem -------------------------------------------------------------------
     call :AddLog !loAll! !TEXT! !S01! || exit /b 1

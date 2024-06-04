@@ -1,9 +1,0 @@
-﻿01.НАЗВАНИЕ
-    LYRStrUtils.bat
-
-02.СИНТАКСИС
-rem ФУНКЦИИ
-rem     :LYRStrUtils
-
-03.ОПИСАНИЕ
-    ***

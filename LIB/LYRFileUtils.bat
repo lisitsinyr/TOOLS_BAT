@@ -282,7 +282,7 @@ rem beginfunction
     if defined ADIRECTORY (
         if not exist "!ADIRECTORY!\" (
             mkdir "!ADIRECTORY!"
-            if not "!ERRORLEVEL!"=="0" (
+            if not !ERRORLEVEL! EQU 0 (
                 echo ERROR: Directory !ADIRECTORY! not created...
                 exit /b 1
             )
@@ -368,12 +368,111 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem set CurrentDir=!cd!
-    set !FUNCNAME!=!cd!
+    rem set CurrentDir="!cd!"
+    rem echo CurrentDir: !CurrentDir!
+
+    set !FUNCNAME!="!cd!"
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
     exit /b 0
 
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure COPY_FILES (DIR_FROM, DIR_TO, MASK, ARG)
+rem --------------------------------------------------------------------------------
+:COPY_FILES
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=COPY_FILES
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set ADIR_FROM=%~1
+    rem echo ADIR_FROM:!ADIR_FROM!
+    set ADIR_TO=%~2
+    rem echo ADIR_TO:!ADIR_TO!
+    set AMASK=%~3
+    rem echo AMASK:!AMASK!
+    set AARG=%~4
+
+    call :CurrentDir || exit /b 1
+
+    if defined AARG if "!AARG!"=="/R" (
+        set AARG=/R !ADIR_FROM!
+    ) else (
+        set AARG=
+    )
+    rem echo AARG:!AARG!
+
+    echo --------------------------->> %LOG_FULLFILENAME%
+    echo COPY_FILES:                >> %LOG_FULLFILENAME%
+    echo     !ADIR_FROM!            >> %LOG_FULLFILENAME%
+    echo     !ADIR_TO!              >> %LOG_FULLFILENAME%
+    echo     !AMASK!                >> %LOG_FULLFILENAME%
+    echo --------------------------->> %LOG_FULLFILENAME%
+
+    if exist "!ADIR_TO!" (
+        del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
+    )
+
+    cd /D "!ADIR_FROM!"
+    
+    for %AARG% %%f in (!AMASK!) do (
+        rem echo %%~nf%%~xf
+        copy "%%f" !ADIR_TO!\        >  NUL
+        echo File %%f copied ...     >> %LOG_FULLFILENAME%
+    )
+
+    cd /D "!CurrentDir!"
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure XCOPY_FILES (DIR_FROM, DIR_TO, MASK, ARG)
+rem --------------------------------------------------------------------------------
+:XCOPY_FILES
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=XCOPY_FILES
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set ADIR_FROM=%~1
+    rem echo ADIR_FROM:!ADIR_FROM!
+    set ADIR_TO=%~2
+    rem echo ADIR_TO:!ADIR_TO!
+    set AMASK=%~3
+    rem echo AMASK:!AMASK!
+    set AARG=%~4
+    echo AARG:!AARG!
+    if not defined AARG (
+        set AARG=/D /E /V /F /H /R /K /O /Y
+    )
+
+    echo ---------------------------   >> %LOG_FULLFILENAME%
+    echo XCOPY_FILES:                  >> %LOG_FULLFILENAME%
+    echo     !ADIR_FROM!               >> %LOG_FULLFILENAME%
+    echo     !ADIR_TO!                 >> %LOG_FULLFILENAME%
+    echo     !AMASK!                   >> %LOG_FULLFILENAME%
+    echo ---------------------------   >> %LOG_FULLFILENAME%
+
+    if exist "!ADIR_TO!" (
+        del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
+    )
+
+    xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
+
+    exit /b 0
 rem endfunction
 
 rem ===================================================================

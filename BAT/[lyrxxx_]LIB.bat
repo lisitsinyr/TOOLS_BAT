@@ -58,6 +58,12 @@ exit /b 0
 :CurrentDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+:COPY_FILES
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:XCOPY_FILES
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 rem =================================================
 rem LYRLog.bat
 rem =================================================
