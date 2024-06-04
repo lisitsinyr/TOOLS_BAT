@@ -248,7 +248,7 @@ rem beginfunction
     set LOG_FILE_ADD=1
     set ADirectory=%~1
     echo ADirectory:!ADirectory!
-    cd /D !ADirectory!
+    cd /D "!ADirectory!"
 
     call :GetINIParametr REPO.ini general REPO_NAME || exit /b 1
     echo REPO_NAME:!REPO_NAME!
@@ -434,7 +434,7 @@ rem beginfunction
     set LOG_FILE_ADD=1
     set ADirectory=%~1
     echo ADirectory:!ADirectory!
-    cd /D !ADirectory!
+    cd /D "!ADirectory!"
 
     rem call lyrgit_pull_main.bat
     git pull    
