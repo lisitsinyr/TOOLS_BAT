@@ -183,7 +183,8 @@ rem beginfunction
     rem echo SHORTLevelName: %SHORTLevelName%
 
     set asctime=!FORMAT!
-    set LOG_STR=set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+
+    set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
 
     if !Llevel! EQU !INFO! (
         set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
