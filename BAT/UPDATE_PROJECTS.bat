@@ -259,10 +259,10 @@ rem beginfunction
     del *.bat > NUL
 
     set LFileName=!DIR_TOOLS_SRC_GIT!\BAT\A.WORK\lyrgit_push_main.bat
-    echo LFileName: !LFileName!
+    rem echo LFileName: !LFileName!
     if exist !LFileName! (
         rem echo COPY: !LFileName!
-        copy !LFileName!
+        copy !LFileName! > NUL
         )
     )
 

@@ -61,7 +61,7 @@ rem ----------------------------------------------------------------------------
     call :Check_P directory %1 || exit /b 1
     echo directory: !directory!
     if defined directory (
-        set ARGS=!ARGS! !directory! !directory!
+        set ARGS=!ARGS! "!directory!".rar "!directory!"
     ) else (
         echo ERROR: directory not defined ...
         echo Использование: !BATNAME! папка
@@ -70,9 +70,10 @@ rem ----------------------------------------------------------------------------
     
     if not defined Read_N (
         set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-        exit /b 1
+        exit /b 0
     ) else (
-        set APPRUN=!APP! !COMMAND!!OPTION! %*
+
+        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
     )
     echo APPRUN: !APPRUN!
     !APPRUN!
