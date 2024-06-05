@@ -172,10 +172,10 @@ rem beginfunction
     set MM=%date:~3,2%
     set DD=%date:~0,2%
     set HH=%TIME:~0,2%
-    set MM=%TIME:~3,2%
+    set MIN=%TIME:~3,2%
     set SS=%TIME:~6,2%
     rem --------------------------------
-    set FORMAT=%YYYY%-%MM%-%DD% %HH%:%MM%:%SS%
+    set FORMAT=!YYYY!-!MM!-!DD! !HH!:!MIN!:!SS!
     rem echo.%FORMAT%
     rem --------------------------------
 
