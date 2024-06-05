@@ -204,22 +204,22 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem call :REPO_WORK !DIR_EXAMPLES_PY! 1 || exit /b 1
-    rem call :REPO_WORK !DIR_MobileAPP_PY! 1 || exit /b 1
-    rem call :REPO_WORK !DIR_PATTERN_PY! 1 || exit /b 1
-    rem call :REPO_WORK !DIR_TEST_PY! 1 || exit /b 1
-    rem call :REPO_WORK !DIR_YOUTUBE_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_EXAMPLES_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_MobileAPP_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_PATTERN_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_TEST_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_YOUTUBE_PY! 1 || exit /b 1
 
-    rem call :REPO_WORK !DIR_TESTS_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_TESTS_PY! 1 || exit /b 1
 
-    rem call :REPO_WORK !DIR_TESTS_JAVA! 0 || exit /b 1
+    call :REPO_WORK !DIR_TESTS_JAVA! 0 || exit /b 1
     
     call :REPO_WORK !DIR_TOOLS_SRC_BAT! 0 || exit /b 1
     call :REPO_WORK !DIR_TOOLS_SRC_KIX! 0 || exit /b 1
-    rem call :REPO_WORK !DIR_TOOLS_SRC_GIT! 0 || exit /b 1
-    rem call :REPO_WORK !DIR_TOOLS_SRC_PY! 1 || exit /b 1
-    rem call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
-    rem call :REPO_WORK !DIR_TOOLS_SRC_JAVA! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_GIT! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_PY! 1 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_JAVA! 0 || exit /b 1
 
     call :REPO_WORK !DIR_TOOLS_BAT! 0 || exit /b 1
     call :REPO_WORK !DIR_TOOLS_KIX! 0 || exit /b 1
