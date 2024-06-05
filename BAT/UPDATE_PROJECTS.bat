@@ -215,7 +215,7 @@ rem beginfunction
     rem call :REPO_WORK !DIR_TESTS_JAVA! 0 || exit /b 1
     
     call :REPO_WORK !DIR_TOOLS_SRC_BAT! 0 || exit /b 1
-    rem call :REPO_WORK !DIR_TOOLS_SRC_KIX! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_KIX! 0 || exit /b 1
     rem call :REPO_WORK !DIR_TOOLS_SRC_GIT! 0 || exit /b 1
     rem call :REPO_WORK !DIR_TOOLS_SRC_PY! 1 || exit /b 1
     rem call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
@@ -259,10 +259,10 @@ rem beginfunction
     del *.bat > NUL
 
     set LFileName=!DIR_TOOLS_SRC_GIT!\BAT\A.WORK\lyrgit_push_main.bat
-    rem echo LFileName: !LFileName!
+    echo LFileName: !LFileName!
     if exist !LFileName! (
         rem echo COPY: !LFileName!
-        copy !LFileName! > NUL
+        copy !LFileName!
         )
     )
 
