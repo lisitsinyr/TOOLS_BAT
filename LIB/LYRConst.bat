@@ -175,6 +175,7 @@ rem beginfunction
     set OPTION= -v --ansi
     set ARGS=
     set APPRUN=
+
     exit /b 0
 rem endfunction
 

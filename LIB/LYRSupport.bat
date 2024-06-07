@@ -214,6 +214,8 @@ rem beginfunction
 
     rem Atimeout
     set Atimeout=%3
+    rem echo Atimeout:!Atimeout!
+
     if not defined Atimeout (
         set Atimeout=10
     )
@@ -221,7 +223,7 @@ rem beginfunction
 
     set %P_Name%=!%P_Name%!
     if not "!P_List!"=="" (
-        choice /C !P_List! /D !%P_Name%! /T !timeout! /M "!PN_CAPTION!"
+        choice /C !P_List! /D !%P_Name%! /T !Atimeout! /M "!PN_CAPTION!"
         if !ERRORLEVEL!==1 (
             set %P_Name%=!ERRORLEVEL!
         ) else (
