@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem UPDATE_PROJECTS.bat
+rem UPDATE_PROJECTS_LYR.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -55,6 +55,13 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set ROOT_PROJECTS_LYR=D:
+    echo ROOT_PROJECTS_LYR:!ROOT_PROJECTS_LYR!
+    set PROJECTS_LYR=PROJECTS_LYR
+    echo PROJECTS_LYR:!PROJECTS_LYR!
+    set DIR_PROJECTS_LYR=!ROOT_PROJECTS_LYR!\!PROJECTS_LYR!
+    echo DIR_PROJECTS_LYR:!DIR_PROJECTS_LYR!
 
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
