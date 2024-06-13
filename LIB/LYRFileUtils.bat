@@ -6,13 +6,20 @@ chcp 1251>NUL
 
 rem -------------------------------------------------------------------
 rem ФУНКЦИИ
-rem     :LYRFileUtils
-rem     :ExtractFileDir
-rem     :ExtractFileName
-rem     :ExtractFileNameWithoutExt
-rem     :ExtractFileExt
-rem     :FileAttr
-rem     :CurrentDir
+rem     LYRFileUtils
+rem     ExtractFileDir
+rem     ExtractFileName
+rem     ExtractFileNameWithoutExt
+rem     ExtractFileExt
+rem     FileAttr
+rem     CurrentDir
+rem     FileSize (AFileName)
+rem     CreateDir (ADIRECTORY)
+rem     CreateFile (AFILENAME)
+rem     CheckFile (AFILENAME)
+rem     COPY_FILES (DIR_FROM, DIR_TO, MASK, ARG)
+rem     XCOPY_FILES (DIR_FROM, DIR_TO, MASK, ARG)
+
 rem -------------------------------------------------------------------
 rem d -- drive
 rem p -- path

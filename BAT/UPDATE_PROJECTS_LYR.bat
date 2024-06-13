@@ -56,12 +56,11 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set ROOT_PROJECTS_LYR=D:
-    echo ROOT_PROJECTS_LYR:!ROOT_PROJECTS_LYR!
-    set PROJECTS_LYR=PROJECTS_LYR
-    echo PROJECTS_LYR:!PROJECTS_LYR!
-    set DIR_PROJECTS_LYR=!ROOT_PROJECTS_LYR!\!PROJECTS_LYR!
-    echo DIR_PROJECTS_LYR:!DIR_PROJECTS_LYR!
+    set PROJECTS_LYR_ROOT=D:
+    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+
+    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
 
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов

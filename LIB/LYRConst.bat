@@ -4,112 +4,6 @@ rem LYRConst.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
-rem -------------------------------------------------------------------
-rem :__SET_VAR_SCRIPT
-rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
-rem     SCRIPT_FULLFILENAME=
-rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
-rem     SCRIPT_BASEFILENAME=
-rem SCRIPT_FILENAME - Файл скрипта [имя]
-rem     SCRIPT_FILENAME=
-rem -------------------------------------------------------------------
-rem :__SET_SCRIPTS_DIR
-rem SCRIPTS_DIR - Каталог скриптов
-rem     SCRIPTS_DIR=
-rem -------------------------------------------------------------------
-rem :__SET_VAR_DEFAULT
-rem LOG_FILENAME - Файл журнала [имя]
-rem     LOG_FILENAME=
-rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
-rem     DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
-rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DT,...]
-rem     LOG_FILENAME_FORMAT=FILENAME
-rem LOG_OPT - Параметры журнала [11]
-rem     LOG_OPT=11
-rem -------------------------------------------------------------------
-rem :__SET_VAR_PROJECTS
-rem PROJECTS -
-rem     PROJECTS=
-rem CURRENT_SYSTEM -
-rem     CURRENT_SYSTEM=
-rem UNAME -
-rem     UNAME=
-rem USERNAME -
-rem     USERNAME=
-rem PROJECTS_LYR_DIR -
-rem     PROJECTS_LYR_DIR=
-rem PROJECTS_DIR -
-rem     PROJECTS_DIR=
-rem CURRENT_DIR - Текущий каталог
-rem     CURRENT_DIR=
-
-rem -------------------------------------------------------------------
-rem :SET_CHECK_REPO
-
-rem REPO_NAME - Имя репозитария
-rem     REPO_NAME=
-rem REPO_INI - Файл с параметрами репозитария
-rem     REPO_INI=REPO.ini
-
-rem -------------------------------------------------------------------
-rem :SET_CHECK_PROJECT
-rem PROJECT_NAME - проекта
-rem     PROJECT_NAME=
-rem PROJECT_INI - Файл с параметрами проекта
-rem     PROJECT_INI=PROJECT.ini
-
-rem -------------------------------------------------------------------
-rem :SET_CHECK_POETRY
-rem PROJECT_NAME - проекта
-rem     PROJECT_NAME=
-rem POETRY_INI - Файл с параметрами проекта
-rem     POETRY_INI=POETRY.ini
-
-rem -------------------------------------------------------------------
-rem :__SET_LOG
-rem LOG_DT_FORMAT -
-rem     LOG_DT_FORMAT=
-rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
-rem     LOG_FILENAME_FORMAT=
-rem LOG_FILE_ADD - Параметры журнала [0]
-rem     LOG_FILE_ADD=  
-rem LOG_FILE_DT - Параметры журнала [0]
-rem     LOG_FILE_DT=
-rem LOG_DIR - Каталог журнала
-rem     LOG_DIR=
-rem LOG_FILENAME - Файл журнала [имя]
-rem     LOG_FILENAME=
-rem LOG_FILESCRIPT - Файл первого скрипта [имя]
-rem     LOG_FILESCRIPT=
-rem LOG_STR -
-rem     LOG_STR=
-rem -------------------------------------------------------------------
-
-rem -------------------------------------------------------------------
-rem KIX_DIR - Каталог с файлами .KIX
-rem     KIX_DIR=
-rem APP_KIX_DIR - каталог APP_KIX
-rem     APP_KIX_DIR=
-rem APP_KIX - Скрипт APP_KIX [имя+расширение]
-rem     APP_KIX=lyrxxx_ШАБЛОН.kix
-rem -------------------------------------------------------------------
-rem LIB_KIX - Каталог библиотеки KIX
-rem     LIB_KIX=
-rem -------------------------------------------------------------------
-
-rem -------------------------------------------------------------------
-rem ФУНКЦИИ
-rem :LYRConst
-rem :SET_LIB
-rem :SET_KIX
-
-rem :__SET_VAR_DEFAULT
-rem :__SET_VAR_PROJECTS
-rem :__SET_VAR_SCRIPT
-rem :__SET_LOG
-
-rem -------------------------------------------------------------------
-
 :begin
 rem Выход из сценария. Дальше - только функции.
 :Exit
@@ -118,6 +12,7 @@ exit /b 0
 rem =================================================
 rem ФУНКЦИИ
 rem =================================================
+
 rem --------------------------------------------------------------------------------
 rem procedure LYRConst ()
 rem --------------------------------------------------------------------------------
@@ -156,12 +51,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :SET_POETRY ()
+rem procedure SET_POETRY ()
 rem --------------------------------------------------------------------------------
 :SET_POETRY
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=SET_KIX
+    set FUNCNAME=SET_POETRY
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -180,7 +75,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :SET_KIX ()
+rem procedure SET_KIX ()
 rem --------------------------------------------------------------------------------
 :SET_KIX
 rem beginfunction
@@ -202,13 +97,13 @@ rem beginfunction
             set LIB_KIX=\\S73FS01\APPInfo\tools\LIB
         )
     )
-    echo LIB_KIX: !LIB_KIX!
     if exist !LIB_KIX! (
         echo INFO: Directory !LIB_KIX! exist ...
     ) else (
         echo INFO: Directory !LIB_KIX! not exist ...
         rem exit /b 1
     )
+    rem echo LIB_KIX: !LIB_KIX!
 
     rem -------------------------------------------------------------------
     rem APP_KIX_DIR - каталог APP_KIX
@@ -218,9 +113,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem APP_KIX - Скрипт APP_KIX имя
     rem -------------------------------------------------------------------
-    rem set APP_KIX=[lyrxxx_]PATTERN_KIX
-    rem echo APP_KIX: !APP_KIX!
-
     if not defined APP_KIX (
         echo ERROR: Script APP_KIX not set...
         exit /b 1
@@ -298,13 +190,13 @@ rem beginfunction
     rem echo SCRIPT_FILENAME: !SCRIPT_FILENAME!
 
     rem -------------------------------------------------------------------
-    rem Файл скрипта: каталог
+    rem SCRIPT_FILEDIR - Файл скрипта: каталог
     rem -------------------------------------------------------------------
     set SCRIPT_FILEDIR=
     rem echo SCRIPT_FILEDIR: !SCRIPT_FILEDIR!
 
     rem -------------------------------------------------------------------
-    rem Файл скрипта: расширение
+    rem SCRIPT_FILEEXT - Файл скрипта: расширение
     rem -------------------------------------------------------------------
     set SCRIPT_FILEEXT=
     rem echo SCRIPT_FILEEXT: !SCRIPT_FILEEXT!
@@ -332,7 +224,6 @@ rem beginfunction
 
     set touchRUN=touch -f
     set touchRUN=D:\TOOLS\EXE\touch.exe
-
     set SetINIAPP=D:\TOOLS\EXE\setini.exe
     set GetINIAPP=D:\TOOLS\EXE\getini.exe
 
@@ -397,22 +288,22 @@ rem beginfunction
     set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
-    rem PROJECTS - проект
-    rem -------------------------------------------------------------------
-    set PROJECTS=
-    rem echo PROJECTS: !PROJECTS!
-
-    rem -------------------------------------------------------------------
     rem PROJECTS_LYR_DIR -
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
-    
+
     rem -------------------------------------------------------------------
-    rem PROJECTS_DIR -
+    rem PROJECT - проект
     rem -------------------------------------------------------------------
-    set PROJECTS_DIR=
-    rem echo PROJECTS_DIR: !PROJECTS_DIR!
+    set PROJECT=
+    rem echo PROJECT: !PROJECT!
+  
+    rem -------------------------------------------------------------------
+    rem PROJECT_DIR -
+    rem -------------------------------------------------------------------
+    set PROJECT_DIR=
+    rem echo PROJECT_DIR: !PROJECT_DIR!
 
     rem -------------------------------------------------------------------
     rem CURRENT_SYSTEM -
@@ -458,17 +349,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem LOG_DIR - Каталог журнала [каталог]
-    rem -------------------------------------------------------------------
-    rem set LOG_DIR=
-    
-    rem -------------------------------------------------------------------
-    rem LOG_FILENAME - Файл журнала [имя]
-    rem -------------------------------------------------------------------
-    rem set LOG_FILENAME=
-
+   
     rem ------------------------------------------------------
     rem LOG_FILESCRIPT - Файл первого скрипта [имя]
     rem ------------------------------------------------------
@@ -478,16 +359,6 @@ rem beginfunction
     rem LOG_STR
     rem ------------------------------------------------------
     set LOG_STR=
-
-    rem -------------------------------------------------------------------
-    rem LOG_DT_FORMAT -
-    rem -------------------------------------------------------------------
-    rem set LOG_DT_FORMAT=
-
-    rem -------------------------------------------------------------------
-    rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
-    rem -------------------------------------------------------------------
-    rem set LOG_FILENAME_FORMAT=
 
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT_DEFAULT -
@@ -510,10 +381,12 @@ rem beginfunction
     if not defined LOG_FILE_DT (
         set /a LOG_FILE_DT=0
     )
+    rem echo LOG_FILE_DT: !LOG_FILE_DT!
 
-    rem ------------------------------------------------------
+    rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT -
     rem -------------------------------------------------------------------
+    rem set LOG_DT_FORMAT=
     if not defined LOG_DT_FORMAT (
         set LOG_DT_FORMAT=!LOG_DT_FORMAT_DEFAULT!
     )
@@ -522,6 +395,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
     rem -------------------------------------------------------------------
+    rem set LOG_FILENAME_FORMAT=
     if not defined LOG_FILENAME_FORMAT (
         set LOG_FILENAME_FORMAT=FILENAME
         rem set LOG_FILENAME_FORMAT=DATETIME
@@ -529,24 +403,9 @@ rem beginfunction
     rem echo LOG_FILENAME_FORMAT [FILENAME,DATETIME,...]: !LOG_FILENAME_FORMAT!
 
     rem -------------------------------------------------------------------
-    rem LOG_FILE_ADD -
-    rem -------------------------------------------------------------------
-    if not defined LOG_FILE_ADD (
-        set /a LOG_FILE_ADD=0
-    )
-    rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
-
-    rem -------------------------------------------------------------------
-    rem LOG_FILE_DT -
-    rem -------------------------------------------------------------------
-    if not defined LOG_FILE_DT (
-        set /a LOG_FILE_DT=0
-    )
-    rem echo LOG_FILE_DT: !LOG_FILE_DT!
-
-    rem -------------------------------------------------------------------
     rem LOG_DIR - Каталог журнала [каталог]
     rem -------------------------------------------------------------------
+    rem set LOG_DIR=
     if not defined LOG_DIR (
         set LOG_DIR=!PROJECTS_LYR_DIR!\LOG
     )
@@ -566,6 +425,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem LOG_FILENAME - Файл журнала [имя]
     rem -------------------------------------------------------------------
+    rem set LOG_FILENAME=
     if not defined LOG_FILENAME (
         if "!LOG_FILENAME_FORMAT!"=="FILENAME" (
             set LOG_FILENAME=!SCRIPT_FILENAME!
@@ -590,7 +450,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set LOG_FULLFILENAME=!LOG_DIR!\!LOG_FILENAME!.log
     rem echo LOG_FULLFILENAME: !%LOG_FULLFILENAME!
-
+   
     exit /b 0
 rem endfunction
 

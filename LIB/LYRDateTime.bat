@@ -4,24 +4,17 @@ rem LYRDateTime.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
-rem -------------------------------------------------------------------
-rem ФУНКЦИИ
-rem     :LYRDateTime
-rem     :YYYYMMDDHHMMSS
-rem     :DateTime
-rem -------------------------------------------------------------------
-
 :begin
-rem Выход из сценария. Дальше - только функции.
-:Exit
-exit /b 0
+    rem Выход из сценария. Дальше - только функции.
+    exit /b 0
+:end
 
 rem =================================================
 rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem :LYRDateTime
+rem procedure LYRDateTime ()
 rem --------------------------------------------------------------------------------
 :LYRDateTime
 rem beginfunction
@@ -36,7 +29,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :YYYYMMDDHHMMSS
+rem function YYYYMMDDHHMMSS () -> YYYYMMDDHHMMSS
 rem --------------------------------------------------------------------------------
 :YYYYMMDDHHMMSS
 rem beginfunction
@@ -47,15 +40,18 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set YYYYMMDDHHMMSS=YYYYMMDDHHMMSS
-    set !FUNCNAME!=YYYYMMDDHHMMSS
-    rem echo YYYYMMDDHHMMSS: !YYYYMMDDHHMMSS!
+    set LFORMAT="!YYYY!!MM!!DD!!HH!!MIN!!SS!"
+    call :DateTime !LFORMAT! !! exit /b 1
+
+    set YYYYMMDDHHMMSS=!DateTime!
+    set !FUNCNAME!=!DateTime!
+    rem echo YYYYMMDDHHMMSS:!YYYYMMDDHHMMSS!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem :DateTime
+rem function DateTime (AFORMAT) -> DateTime
 rem --------------------------------------------------------------------------------
 :DateTime
 rem beginfunction
@@ -66,9 +62,19 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set DateTime=DateTime
-    set !FUNCNAME!=DateTime
-    rem echo DateTime: !DateTime!
+    set YYYY=%date:~6,4%
+    set MM=%date:~3,2%
+    set DD=%date:~0,2%
+    set HH=%TIME:~0,2%
+    set MIN=%TIME:~3,2%
+    set SS=%TIME:~6,2%
+
+    set AFORMAT=%~1
+    rem echo AFORMAT:!AFORMAT!
+
+    rem set DateTime=!AFORMAT!
+    set !FUNCNAME!=!AFORMAT!
+    rem echo DateTime:!DateTime!
 
     exit /b 0
 rem endfunction

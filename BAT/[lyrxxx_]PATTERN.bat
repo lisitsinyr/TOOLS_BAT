@@ -191,6 +191,9 @@ rem =================================================
 :SET_LIB
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
+:SET_POETRY
+%LIB_BAT%\LYRConst.bat %*
+exit /b 0
 :SET_KIX
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
@@ -284,28 +287,6 @@ exit /b 0
 :TrimQuotes
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
-rem =================================================
-rem LYRSupport.bat
-rem =================================================
-:Pause
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Check_P
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_P
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_N
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_F
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:PressAnyKey
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-rem =================================================
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
