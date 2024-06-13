@@ -45,7 +45,7 @@ rem ----------------------------------------------------------------------------
 rem --------------------------------------------------------------------------------
 
 rem -----------------------------------------------
-rem procedure MAIN_INIT (FULLFILENAME, DEBUG)
+rem procedure MAIN_INIT (%*)
 rem -----------------------------------------------
 :MAIN_INIT
 rem beginfunction
@@ -87,7 +87,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_SET ()
+rem procedure MAIN_SET (%*)
 rem --------------------------------------------------------------------------------
 :MAIN_SET
 rem beginfunction
@@ -101,7 +101,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_CHECK_PARAMETR ()
+rem procedure MAIN_CHECK_PARAMETR (%*)
 rem --------------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
@@ -143,7 +143,7 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
-rem procedure MAIN ()
+rem procedure MAIN (%*)
 rem =================================================
 :MAIN
 rem beginfunction
@@ -159,7 +159,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN_FUNC (%*)
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
