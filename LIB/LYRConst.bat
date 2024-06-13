@@ -5,9 +5,9 @@ rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 :begin
-rem Выход из сценария. Дальше - только функции.
-:Exit
-exit /b 0
+    rem Выход из сценария. Дальше - только функции.
+    exit /b 0
+:end
 
 rem =================================================
 rem ФУНКЦИИ
@@ -24,6 +24,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+
+    echo ERROR: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -354,11 +356,6 @@ rem beginfunction
     rem LOG_FILESCRIPT - Файл первого скрипта [имя]
     rem ------------------------------------------------------
     set LOG_FILESCRIPT=
-
-    rem ------------------------------------------------------
-    rem LOG_STR
-    rem ------------------------------------------------------
-    set LOG_STR=
 
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT_DEFAULT -

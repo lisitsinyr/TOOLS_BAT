@@ -4,20 +4,10 @@ rem LYRLog.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
-rem -------------------------------------------------------------------
-rem ФУНКЦИИ
-rem     :LYRLog
-rem     :FormatStr
-rem     :AddLog
-rem     :AddLogFile
-rem     :StartLogFile
-rem     :StopLogFile
-rem -------------------------------------------------------------------
-
 :begin
-rem Выход из сценария. Дальше - только функции.
-:Exit
-exit /b 0
+    rem Выход из сценария. Дальше - только функции.
+    exit /b 0
+:end
 
 rem =================================================
 rem ФУНКЦИИ
@@ -35,16 +25,18 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ERROR: function !FUNCNAME! not implemented! ...
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure SETVarLog ()
+rem procedure __SETVarLog ()
 rem --------------------------------------------------------------------------------
-:SETVarLog
+:__SETVarLog
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=SETVarLog
+    set FUNCNAME=__SETVarLog
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -52,10 +44,12 @@ rem beginfunction
 
     rem -------------------------------------------------------------------
     set S01=------------------------------------------------------
+
     rem --------------------------------
     set /a loStandard=0
     set /a loTextFile=1
     set /a loAll=2
+
     rem --------------------------------
     set /a NOTSET=0
     set /a DEBUGT=1
@@ -68,6 +62,7 @@ rem beginfunction
     set /a END=22
     set /a PROCESS=23
     set /a TEXT=24
+
     rem # --------------------------------
     set ctlsNOTSET=" "
     set ctlsDEBUGT=D
@@ -85,88 +80,73 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure SHORTLevel (Alevel)
+rem function __SHORTLevelName (Alevel) -> __SHORTLevelName
 rem --------------------------------------------------------------------------------
-:SHORTLevel
+:__SHORTLevelName
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=SHORTLevel
+    set FUNCNAME=__SHORTLevel
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
 
-    set SHORTLevel=SHORTLevel
-    rem echo SHORTLevel: !SHORTLevel!
-
     set /a Alevel=%1
     rem echo Alevel: !Alevel!
 
-    set /a Llevel=!Alevel!
-    rem echo Llevel: !Llevel!
+    set __SHORTLevelName=
 
-    set SHORTLevelName=
-
-    if !Llevel! EQU !INFO! (
-        set SHORTLevelName=!ctlsINFO!
+    if !Alevel! EQU !INFO! (
+        set !FUNCNAME!=!ctlsINFO!
     )
-    if !Llevel! EQU !WARNING! (
-        set SHORTLevelName=!ctlsWARNING!
+    if !Alevel! EQU !WARNING! (
+        set !FUNCNAME!=!ctlsWARNING!
     )
-    if !Llevel! EQU !ERROR! (
-        set SHORTLevelName=!ctlsERROR!
+    if !Alevel! EQU !ERROR! (
+        set !FUNCNAME!=!ctlsERROR!
     )
-    if !Llevel! EQU !CRITICAL! (
-        set SHORTLevelName=!ctlsCRITICAL!
+    if !Alevel! EQU !CRITICAL! (
+        set !FUNCNAME!=!ctlsCRITICAL!
     )
-    if !Llevel! EQU !DEBUGT! (
-        set SHORTLevelName=!ctlsDEBUG!
+    if !Alevel! EQU !DEBUGT! (
+        set !FUNCNAME!=!ctlsDEBUG!
     )
-    if !Llevel! EQU !TEXT! (
-        set SHORTLevelName=!ctlsTEXT!
+    if !Alevel! EQU !TEXT! (
+        set !FUNCNAME!=!ctlsTEXT!
     )
-    if !Llevel! EQU !DEBUGTEXT! (
-        set SHORTLevelName=!ctlsDEBUGTEXT!
+    if !Alevel! EQU !DEBUGTEXT! (
+        set !FUNCNAME!=!ctlsDEBUGTEXT!
     )
-    if !Llevel! EQU !BEGIN! (
-        set SHORTLevelName=!ctlsBEGIN!
+    if !Alevel! EQU !BEGIN! (
+        set !FUNCNAME!=!ctlsBEGIN!
     )
-    if !Llevel! EQU !END! (
-        set SHORTLevelName=!ctlsEND!
+    if !Alevel! EQU !END! (
+        set !FUNCNAME!=!ctlsEND!
     )
-    if !Llevel! EQU !PROCESS! (
-        set SHORTLevelName=!ctlsPROCESS!
+    if !Alevel! EQU !PROCESS! (
+        set !FUNCNAME!=!ctlsPROCESS!
     )
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FormatStr (Alevel, Amessage)
+rem function __LOG_STR (Alevel, Amessage) -> __LOG_STR
 rem --------------------------------------------------------------------------------
-:FormatStr
+:__LOG_STR
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=FormatStr
+    set FUNCNAME=__LOG_STR
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
 
-    set FormatStr=FormatStr
-    rem echo FormatStr: !FormatStr!
-
     set /a Alevel=%1
     rem echo Alevel: !Alevel!
 
-    set /a Llevel=!Alevel!
-    rem echo Llevel: !Llevel!
-
     set Amessage=%2 %3 %4 %5 %6 %7 %8 %9
     rem echo Amessage: %Amessage%
-
-    set Lmessage=%2 %3 %4 %5 %6 %7 %8 %9
-    rem echo Lmessage: %Lmessage%
 
     set YYYY=%date:~6,4%
     set MM=%date:~3,2%
@@ -174,47 +154,48 @@ rem beginfunction
     set HH=%TIME:~0,2%
     set MIN=%TIME:~3,2%
     set SS=%TIME:~6,2%
-    rem --------------------------------
-    set FORMAT=!YYYY!-!MM!-!DD! !HH!:!MIN!:!SS!
-    rem echo.%FORMAT%
-    rem --------------------------------
 
-    call :SHORTLevel !Llevel! || exit /b 1
-    rem echo SHORTLevelName: %SHORTLevelName%
+    set FORMAT=!YYYY!-!MM!-!DD! !HH!:!MIN!:!SS!
+    rem echo FORMAT:!FORMAT!
+
+    call :__SHORTLevelName !Alevel! || exit /b 1
+    rem echo __SHORTLevelName:!__SHORTLevelName!
+    
+    set FUNCNAME=__LOG_STR
 
     set asctime=!FORMAT!
 
-    set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
 
-    if !Llevel! EQU !INFO! (
-        set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    if !Alevel! EQU !INFO! (
+        set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
     )
-    if !Llevel! EQU !WARNING! (
-        set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    if !Alevel! EQU !WARNING! (
+        set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
     )
-    if !Llevel! EQU !ERROR! (
-        set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    if !Alevel! EQU !ERROR! (
+        set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
     )
-    if !Llevel! EQU !CRITICAL! (
-        set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    if !Alevel! EQU !CRITICAL! (
+        set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
     )
-    if !Llevel! EQU !DEBUGT! (
-        set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    if !Alevel! EQU !DEBUGT! (
+        set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
     )
-    if !Llevel! EQU !TEXT! (
-        set LOG_STR=!Lmessage!
+    if !Alevel! EQU !TEXT! (
+        set !FUNCNAME!=!Amessage!
     )
-    if !Llevel! EQU !DEBUGTEXT! (
-        set LOG_STR=%SHORTLevelName% %Lmessage%
+    if !Alevel! EQU !DEBUGTEXT! (
+        set !FUNCNAME!=!__SHORTLevelName! !Amessage!
     )
-    if !Llevel! EQU !BEGIN! (
-        set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    if !Alevel! EQU !BEGIN! (
+        set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
     )
-    if !Llevel! EQU !END! (
-        set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    if !Alevel! EQU !END! (
+        set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
     )
-    if !Llevel! EQU !PROCESS! (
-        set LOG_STR=!asctime! !SHORTLevelName! !Lmessage!
+    if !Alevel! EQU !PROCESS! (
+        set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
     )
 
     exit /b 0
@@ -237,16 +218,16 @@ rem beginfunction
     set /a Alevel=%2
     rem echo Alevel: !Alevel!
 
-    call :FormatStr !Alevel! %3 %4 %5 %6 %7 %8 %9 || exit /b 1
+    call :__LOG_STR !Alevel! %3 %4 %5 %6 %7 %8 %9 || exit /b 1
     if !Aout! EQU 0 (
-        echo !LOG_STR!
+        echo !__LOG_STR!
     )
     if !Aout! EQU 1 (
-        echo !LOG_STR! >> "!LOG_FULLFILENAME!"
+        echo !__LOG_STR! >> "!LOG_FULLFILENAME!"
     )
     if !Aout! EQU 2 (
-        echo !LOG_STR!
-        echo !LOG_STR! >> "!LOG_FULLFILENAME!"
+        echo !__LOG_STR!
+        echo !__LOG_STR! >> "!LOG_FULLFILENAME!"
     )
 
     exit /b 0
@@ -303,7 +284,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :SETVarLog || exit /b 1
+    call :__SETVarLog || exit /b 1
 
     set LOG_FILESCRIPT=!SCRIPT_FILENAME!
 

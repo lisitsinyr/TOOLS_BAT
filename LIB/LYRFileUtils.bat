@@ -4,82 +4,10 @@ rem LYRFileUtils.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
-rem -------------------------------------------------------------------
-rem ФУНКЦИИ
-rem     LYRFileUtils
-rem     ExtractFileDir
-rem     ExtractFileName
-rem     ExtractFileNameWithoutExt
-rem     ExtractFileExt
-rem     FileAttr
-rem     CurrentDir
-rem     FileSize (AFileName)
-rem     CreateDir (ADIRECTORY)
-rem     CreateFile (AFILENAME)
-rem     CheckFile (AFILENAME)
-rem     COPY_FILES (DIR_FROM, DIR_TO, MASK, ARG)
-rem     XCOPY_FILES (DIR_FROM, DIR_TO, MASK, ARG)
-
-rem -------------------------------------------------------------------
-rem d -- drive
-rem p -- path
-rem n -- file name
-rem x -- extension
-rem f -- full path
-rem -------------------------------------------------------------------
-rem Use the special %0 variable to get the path to the current file.
-rem в двойных кавычках
-rem BATFilename1="D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\BAT\test.bat"
-rem set BATFilename1=%0
-rem echo BATFilename1=%BATFilename1%
-
-rem Use the special %0 variable to get the path to the current file.
-rem без кавычек
-rem f -- full path
-rem BATFilename2=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\BAT\test.bat
-rem set BATFilename2=%~f0
-rem echo BATFilename2=%BATFilename2%
-
-rem Use the special %0 variable to get the path to the current file.
-rem p -- path
-rem Pathname=\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\BAT\
-rem set Pathname=%~p0
-rem echo Pathname=%Pathname%
-
-rem Use the special %0 variable to get the path to the current file.
-rem d -- drive
-rem Drive=D:
-rem set Drive=%~d0
-rem echo Drive=%Drive%
-
-rem Use the special %0 variable to get the path to the current file.
-rem n -- file name
-rem FilenameWithoutExt=test
-rem set FilenameWithoutExt=%~n0
-rem echo FilenameWithoutExt=%FilenameWithoutExt%
-
-rem Use the special %0 variable to get the path to the current file.
-rem x -- extension
-rem FileExt=.bat
-rem set FileExt=%~x0
-rem echo FileExt=%FileExt%
-
-rem Write %~n0%~x0 to get the filename and extension.
-rem %~n0%~x0
-rem FilenameWithExt1=test.bat
-rem set FilenameWithExt1=%~n0%~x0
-rem echo FilenameWithExt1=%FilenameWithExt1%
-
-rem Also possible to write %~nx0 to get the filename and extension.
-rem %~nx0
-rem FilenameWithExt2=test.bat
-rem set FilenameWithExt2=%~nx0
-rem echo FilenameWithExt2=%FilenameWithExt2%
-
 :begin
-rem Выход из сценария. Дальше - только функции.
-:Exit
-exit /b 0
+    rem Выход из сценария. Дальше - только функции.
+    exit /b 0
+:end
 
 rem =================================================
 rem ФУНКЦИИ
@@ -97,13 +25,14 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ERROR: function !FUNCNAME! not implemented! ...
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure ExtractFileDir (AFullFilename)
+rem function ExtractFileDir (AFullFilename) -> ExtractFileDir
 rem --------------------------------------------------------------------------------
 :ExtractFileDir
 rem beginfunction
@@ -124,7 +53,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FullFileName (AFilename)
+rem function FullFileName (AFilename) -> FullFileName
 rem --------------------------------------------------------------------------------
 :FullFileName
 rem beginfunction
@@ -145,7 +74,7 @@ rem beginfunction
 rem endfunction
   
 rem --------------------------------------------------------------------------------
-rem procedure ExtractFileName (AFilename)
+rem function ExtractFileName (AFilename) -> ExtractFileName
 rem --------------------------------------------------------------------------------
 :ExtractFileName
 rem beginfunction
@@ -166,7 +95,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure ExtractFileNameWithoutExt (AFileName)
+rem function ExtractFileNameWithoutExt (AFileName) -> ExtractFileNameWithoutExt
 rem --------------------------------------------------------------------------------
 :ExtractFileNameWithoutExt
 rem beginfunction
@@ -187,7 +116,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure ExtractFileExt (AFileName)
+rem function ExtractFileExt (AFileName) -> ExtractFileExt
 rem --------------------------------------------------------------------------------
 :ExtractFileExt
 rem beginfunction
@@ -208,7 +137,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FileAttr (AFileName)
+rem function FileAttr (AFileName) -> FileAttr
 rem --------------------------------------------------------------------------------
 :FileAttr
 rem beginfunction
@@ -243,7 +172,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FileSize (AFileName)
+rem function FileSize (AFileName) -> FileSize
 rem --------------------------------------------------------------------------------
 :FileSize
 rem beginfunction
@@ -272,7 +201,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CreateDir (ADIRECTORY)
+rem function CreateDir (ADIRECTORY) -> CreateDir
 rem --------------------------------------------------------------------------------
 :CreateDir
 rem beginfunction
@@ -304,7 +233,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CreateFile (AFILENAME)
+rem function CreateFile (AFILENAME) -> CreateFile
 rem --------------------------------------------------------------------------------
 :CreateFile
 rem beginfunction
@@ -336,7 +265,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CheckFile (FILENAME)
+rem function CheckFile (FILENAME) -> CheckFile
 rem --------------------------------------------------------------------------------
 :CheckFile
 rem beginfunction
@@ -364,7 +293,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CurrentDir ()
+rem function CurrentDir () -> CurrentDir
 rem --------------------------------------------------------------------------------
 :CurrentDir
 rem beginfunction

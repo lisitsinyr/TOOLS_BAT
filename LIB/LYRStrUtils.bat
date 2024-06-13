@@ -4,15 +4,10 @@ rem LYRStrUtils.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
-rem -------------------------------------------------------------------
-rem ФУНКЦИИ
-rem     :LYRStrUtils
-rem -------------------------------------------------------------------
-
 :begin
-rem Выход из сценария. Дальше - только функции.
-:Exit
-exit /b 0
+    rem Выход из сценария. Дальше - только функции.
+    exit /b 0
+:end
 
 rem =================================================
 rem ФУНКЦИИ
@@ -30,11 +25,13 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ERROR: function !FUNCNAME! not implemented! ...
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure TrimLeft (ASTR)
+rem function TrimLeft (ASTR) -> TrimLeft
 rem --------------------------------------------------------------------------------
 :TrimLeft
 rem beginfunction
@@ -56,7 +53,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure TrimRight (ASTR)
+rem function TrimRight (ASTR) -> TrimRight
 rem --------------------------------------------------------------------------------
 :TrimRight
 rem beginfunction
@@ -78,7 +75,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Trim (ASTR)
+rem function Trim (ASTR) -> Trim
 rem --------------------------------------------------------------------------------
 :Trim
 rem beginfunction
@@ -100,7 +97,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Left (ASTR, Alen)
+rem function Left (ASTR, Alen) -> Left
 rem --------------------------------------------------------------------------------
 :Left
 rem beginfunction
@@ -122,7 +119,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Mid (ASTR, Aposition, Alen)
+rem function  Mid (ASTR, Aposition, Alen) -> Mid
 rem --------------------------------------------------------------------------------
 :Mid
 rem beginfunction
@@ -146,7 +143,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure TrimQuotes (ASTR)
+rem function TrimQuotes (ASTR) -> TrimQuotes
 rem --------------------------------------------------------------------------------
 :TrimQuotes
 rem beginfunction

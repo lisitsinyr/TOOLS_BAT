@@ -4,24 +4,10 @@ rem LYRSupport.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
-rem -------------------------------------------------------------------
-rem ФУНКЦИИ
-rem     :LYRSupport
-rem     :PressAnyKey
-rem     :Pause
-rem     :Check_P
-rem     :Read_P
-rem     :Read_F
-rem     :Read_N
-rem     :GetINI
-rem     :SetINI
-rem     :GetINIParametr
-rem -------------------------------------------------------------------
-
 :begin
-rem Выход из сценария. Дальше - только функции.
-:Exit
-exit /b 0
+    rem Выход из сценария. Дальше - только функции.
+    exit /b 0
+:end
 
 rem =================================================
 rem ФУНКЦИИ
@@ -38,6 +24,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+
+    echo ERROR: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -235,7 +223,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Read_N ()
+rem function Read_N () -> Read_N
 rem --------------------------------------------------------------------------------
 :Read_N
 rem beginfunction

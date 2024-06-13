@@ -25,6 +25,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ERROR: function !FUNCNAME! not implemented! ...
+
     exit /b 0
 rem endfunction
 
@@ -43,7 +45,8 @@ rem beginfunction
     set LFORMAT="!YYYY!!MM!!DD!!HH!!MIN!!SS!"
     call :DateTime !LFORMAT! !! exit /b 1
 
-    set YYYYMMDDHHMMSS=!DateTime!
+    set FUNCNAME=YYYYMMDDHHMMSS
+    rem set YYYYMMDDHHMMSS=!DateTime!
     set !FUNCNAME!=!DateTime!
     rem echo YYYYMMDDHHMMSS:!YYYYMMDDHHMMSS!
 
