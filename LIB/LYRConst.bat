@@ -404,7 +404,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem set LOG_DIR=
     if not defined LOG_DIR (
-        set LOG_DIR=!PROJECTS_LYR_DIR!\LOG
+        set LOG_DIR=!PROJECTS_LYR_DIR!\LOGS
     )
     rem echo LOG_DIR: !LOG_DIR!
     if not exist !LOG_DIR! (

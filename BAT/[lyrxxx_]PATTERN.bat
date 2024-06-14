@@ -142,22 +142,6 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-rem =================================================
-rem procedure MAIN (%*)
-rem =================================================
-:MAIN
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    call :MAIN_FUNC %* || exit /b 1
-
-    exit /b 0
-rem endfunction
-
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC (%*)
 rem --------------------------------------------------------------------------------
@@ -178,6 +162,22 @@ rem beginfunction
     rem     echo START !APP_KIX_DIR!\!APP_KIX!.kix ... 
     rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
     rem )
+
+    exit /b 0
+rem endfunction
+
+rem =================================================
+rem procedure MAIN (%*)
+rem =================================================
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :MAIN_FUNC %* || exit /b 1
 
     exit /b 0
 rem endfunction
