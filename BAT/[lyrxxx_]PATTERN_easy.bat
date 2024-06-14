@@ -6,31 +6,66 @@ chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
-rem -------------------------------------------------------------------
-rem SCRIPTS_DIR - Каталог скриптов
-rem -------------------------------------------------------------------
-if not defined SCRIPTS_DIR (
-    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
-)
-
-rem -------------------------------------------------------------------
-rem LIB_BAT - каталог библиотеки скриптов
-rem -------------------------------------------------------------------
-set LIB_BAT=!SCRIPTS_DIR!\LIB
-
-rem -------------------------------------------------------------------
-rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-rem -------------------------------------------------------------------
-if not defined SCRIPTS_DIR_KIX (
-    set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-)
-
 rem --------------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
 :begin
+    call :MAIN %* || exit /b 1
+
+    exit /b 0
+:end
+rem --------------------------------------------------------------------------------
+
+rem -----------------------------------------------
+rem procedure MAIN_INIT ()
+rem -----------------------------------------------
+:MAIN_INIT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR - Каталог скриптов
+    rem -------------------------------------------------------------------
+    if not defined SCRIPTS_DIR (
+        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    )
+
+    rem -------------------------------------------------------------------
+    rem LIB_BAT - каталог библиотеки скриптов
+    rem -------------------------------------------------------------------
+    set LIB_BAT=!SCRIPTS_DIR!\LIB
+
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
+    rem -------------------------------------------------------------------
+    if not defined SCRIPTS_DIR_KIX (
+        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+    )
+
+    exit /b 0
+rem endfunction
+
+rem =================================================
+rem procedure MAIN (%*)
+rem =================================================
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
     set BATNAME=%~nx0
     echo Start !BATNAME! ...
+
+    set DEBUG=
+    set /a LOG_FILE_ADD=0
+
+    call :MAIN_INIT || exit /b 1
 
     rem Количество аргументов
     call :Read_N %* || exit /b 1
@@ -56,7 +91,7 @@ rem ----------------------------------------------------------------------------
     rem Проверка на обязательные аргументы
     set A1=
     set PN_CAPTION=A1
-    call :Read_P A1 %1 || exit /b 1
+    call :Read_P A1 A1 || exit /b 1
     rem echo A1:!A1!
     if defined A1 (
         set ARGS=!ARGS! !A1!
@@ -84,6 +119,7 @@ rem ----------------------------------------------------------------------------
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
+
 rem =================================================
 rem LYRConst.bat
 rem =================================================
