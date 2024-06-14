@@ -117,6 +117,6 @@ rem beginfunction
     cd "CHECK_LIST\01_OS\03_UNIX\WORK"
 
     exit /b 0
-:end
+rem endfunction
 
 rem ===================================================================

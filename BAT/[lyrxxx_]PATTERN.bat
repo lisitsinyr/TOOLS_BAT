@@ -137,7 +137,7 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
-rem procedure MAIN (ASCRIPT %*)
+rem procedure MAIN (%*)
 rem =================================================
 :MAIN
 rem beginfunction
