@@ -10,42 +10,12 @@ rem ----------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
 :begin
-    set BATNAME=%~nx0
-    echo Start !BATNAME! ...
-
-    set DEBUG=
-
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
-    rem LIB_BAT - каталог библиотеки скриптов
-    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-    rem -------------------------------------------------------------------
-    call :MAIN_INIT %* || exit /b 1
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    call :SET_LIB %0 || exit /b 1
-    rem echo CURRENT_DIR: !CURRENT_DIR!
-
-    call :StartLogFile || exit /b 1
-    set OK=yes
-    call :MAIN_SET %* || exit /b 1
-    if defined OK if not defined Read_N (
-        call :MAIN_CHECK_PARAMETR %* || exit /b 1
-    )
-    if defined OK (
-        call :MAIN %* || exit /b 1
-    )
-    call :StopLogFile || exit /b 1
-
-    exit /b 0
+    call :MAIN %* || exit /b 1
 :end
 rem --------------------------------------------------------------------------------
 
 rem -----------------------------------------------
-rem procedure MAIN_INIT (%*)
+rem procedure MAIN_INIT ()
 rem -----------------------------------------------
 :MAIN_INIT
 rem beginfunction
@@ -87,7 +57,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_SET (%*)
+rem procedure MAIN_SET ()
 rem --------------------------------------------------------------------------------
 :MAIN_SET
 rem beginfunction
@@ -143,7 +113,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC (%*)
+rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
@@ -167,7 +137,7 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
-rem procedure MAIN (%*)
+rem procedure MAIN (ASCRIPT %*)
 rem =================================================
 :MAIN
 rem beginfunction
@@ -177,7 +147,30 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :MAIN_FUNC %* || exit /b 1
+    set BATNAME=%~nx0
+    echo Start !BATNAME! ...
+
+    set DEBUG=
+
+    call :MAIN_INIT || exit /b 1
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    call :SET_LIB %~f0 || exit /b 1
+    rem echo CURRENT_DIR: !CURRENT_DIR!
+
+    call :StartLogFile || exit /b 1
+    set OK=yes
+    call :MAIN_SET || exit /b 1
+    if defined OK if not defined Read_N (
+        call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    )
+    if defined OK (
+        call :MAIN_FUNC || exit /b 1
+    )
+    call :StopLogFile || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -185,6 +178,7 @@ rem endfunction
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
+
 rem =================================================
 rem LYRConst.bat
 rem =================================================
