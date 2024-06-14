@@ -10,43 +10,12 @@ rem ----------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
 :begin
-    set BATNAME=%~nx0
-    echo Start !BATNAME! ...
-
-    set DEBUG=
-    set /a LOG_FILE_ADD=0
-
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
-    rem LIB_BAT - каталог библиотеки скриптов
-    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-    rem -------------------------------------------------------------------
-    call :MAIN_INIT %* || exit /b 1
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    call :SET_LIB %0 || exit /b 1
-    rem echo CURRENT_DIR: !CURRENT_DIR!
-
-    call :StartLogFile || exit /b 1
-    set OK=yes
-    call :MAIN_SET %* || exit /b 1
-    if defined OK if not defined Read_N (
-        call :MAIN_CHECK_PARAMETR %* || exit /b 1
-    )
-    if defined OK (
-        call :MAIN %* || exit /b 1
-    )
-    call :StopLogFile || exit /b 1
-
-    exit /b 0
+    call :MAIN %* || exit /b 1
 :end
 rem --------------------------------------------------------------------------------
 
 rem -----------------------------------------------
-rem procedure MAIN_INIT (FULLFILENAME, DEBUG)
+rem procedure MAIN_INIT ()
 rem -----------------------------------------------
 :MAIN_INIT
 rem beginfunction
@@ -55,12 +24,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set PROJECTS_LYR_ROOT=D:
-    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
-
-    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
 
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
@@ -106,6 +69,12 @@ rem beginfunction
 
     set /a LOG_FILE_ADD=1
 
+    set PROJECTS_LYR_ROOT=D:
+    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+
+    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+
     set DIR_DELPHI7=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
     set DIR_LUIS_D7=!DIR_DELPHI7!\LUIS_D7
     set DIR_TOOLS_D7=!DIR_DELPHI7!\TOOLS_D7
@@ -150,7 +119,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_CHECK_PARAMETR ()
+rem procedure MAIN_CHECK_PARAMETR (%*)
 rem --------------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
@@ -191,13 +160,13 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-rem =================================================
-rem procedure MAIN ()
-rem =================================================
-:MAIN
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN
+    set FUNCNAME=MAIN_FUNC
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -536,12 +505,56 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
+rem procedure MAIN (%*)
+rem =================================================
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set BATNAME=%~nx0
+    echo Start !BATNAME! ...
+
+    set DEBUG=
+    set /a LOG_FILE_ADD=0
+
+    call :MAIN_INIT || exit /b 1
+
+    rem Количество аргументов
+    call :Read_N %* || exit /b 1
+    rem echo Read_N: !Read_N!
+
+    call :SET_LIB %~f0 || exit /b 1
+    rem echo CURRENT_DIR: !CURRENT_DIR!
+
+    call :StartLogFile || exit /b 1
+    set OK=yes
+    call :MAIN_SET || exit /b 1
+    if defined OK if not defined Read_N (
+        call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    )
+    if defined OK (
+        call :MAIN_FUNC || exit /b 1
+    )
+    call :StopLogFile || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
+
 rem =================================================
 rem LYRConst.bat
 rem =================================================
 :SET_LIB
+%LIB_BAT%\LYRConst.bat %*
+exit /b 0
+:SET_POETRY
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
 :SET_KIX
@@ -637,28 +650,6 @@ exit /b 0
 :TrimQuotes
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
-rem =================================================
-rem LYRSupport.bat
-rem =================================================
-:Pause
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Check_P
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_P
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_N
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_F
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:PressAnyKey
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-rem =================================================
 rem =================================================
 rem LYRSupport.bat
 rem =================================================

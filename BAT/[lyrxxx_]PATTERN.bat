@@ -151,6 +151,7 @@ rem beginfunction
     echo Start !BATNAME! ...
 
     set DEBUG=
+    set /a LOG_FILE_ADD=0
 
     call :MAIN_INIT || exit /b 1
 
