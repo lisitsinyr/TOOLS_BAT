@@ -100,7 +100,7 @@ rem =================================================
 :Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:Check_P
+:Read_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

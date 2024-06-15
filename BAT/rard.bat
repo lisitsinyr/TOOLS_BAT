@@ -58,7 +58,7 @@ rem ----------------------------------------------------------------------------
     rem Проверка на обязательные аргументы
     set PN_CAPTION=Ввод значения directory
     set directory=
-    call :Check_P directory %1 || exit /b 1
+    call :Read_P directory %1 || exit /b 1
     echo directory: !directory!
     if defined directory (
         set ARGS=!ARGS! "!directory!".rar "!directory!"
@@ -112,7 +112,7 @@ rem =================================================
 :Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:Check_P
+:Read_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

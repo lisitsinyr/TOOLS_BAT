@@ -58,7 +58,7 @@ rem ----------------------------------------------------------------------------
     rem Проверка на обязательные аргументы
     set PN_CAPTION=Ввод значения archive
     set archive=archive
-    call :Check_P archive %1 || exit /b 1
+    call :Read_P archive %1 || exit /b 1
     rem echo archive: !archive!
     if not defined archive (
         echo ERROR: Параметр archive не задан...
@@ -79,7 +79,7 @@ rem ----------------------------------------------------------------------------
     if not defined FOLDER (
         set PN_CAPTION=Файлы
         set files=*.*
-        call :Check_P files !files! || exit /b 1
+        call :Read_P files !files! || exit /b 1
         rem echo files: !files!    
         set ARGS=!ARGS! "!archive!.rar" "!files!"
     )
@@ -170,7 +170,7 @@ rem =================================================
 :Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:Check_P
+:Read_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

@@ -74,9 +74,9 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Check_P (P_Name, P_Value)
+rem procedure Read_P (P_Name, P_Value)
 rem --------------------------------------------------------------------------------
-:Check_P
+:Read_P
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=Check_P
@@ -94,7 +94,7 @@ rem beginfunction
     rem !%P_Name%! - значение переменной по умолчанию
     rem echo P_Value_default:!%P_Name%!
 
-    rem - значение переменной
+    rem !P_Value! - значение переменной
     set P_Value=%~2
     rem echo P_Value:!P_Value!
 
@@ -104,71 +104,18 @@ rem beginfunction
 
     set Input=
     if not defined P_Value (
-
         if defined PN_CAPTION (
             set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
+        ) else (
+            set /p Input=[!P_Name!][!%P_Name%!]:
         )
-
     ) else (
-
         set %P_Name%=!P_Value!
         exit /b 0
     )
     rem echo Input:!Input!
 
     if not defined Input (
-        rem [!%P_Name%!] - значение переменной по умолчанию
-        set %P_Name%=!%P_Name%!
-    ) else (
-        set %P_Name%=!Input!
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure Read_P (P_Name, P_Value)
-rem --------------------------------------------------------------------------------
-:Read_P
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=Read_P
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem !PN_CAPTION! - CAPTION
-    rem echo PN_CAPTION:!PN_CAPTION!
-
-    rem !P_Name! - имя переменной
-    set P_Name=%1
-    rem echo P_Name:!P_Name!
-
-    rem !%P_Name%! - значение переменной по умолчанию
-    rem echo P_Value [default]:!%P_Name%!
-
-    rem !P_Value! - значение переменной
-    set P_Value=%~2
-    rem echo P_Value:!P_Value!
-
-    set Input=
-    if not defined P_Value (
-
-        if defined PN_CAPTION (
-            set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
-        )
-
-    ) else (
-
-        rem !P_Value! - значение переменной
-        set %P_Name%=!P_Value!
-        exit /b 0
-    )
-    rem echo Input:!Input!
-
-    if not defined Input (
-        rem !%P_Name%! - значение переменной по умолчанию
         set %P_Name%=!%P_Name%!
     ) else (
         set %P_Name%=!Input!
