@@ -352,7 +352,7 @@ rem beginfunction
     echo --------------------------->> %LOG_FULLFILENAME%
 
     if exist "!ADIR_TO!" (
-        del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
+        rem del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
     )
@@ -402,7 +402,7 @@ rem beginfunction
     echo ---------------------------   >> %LOG_FULLFILENAME%
 
     if exist "!ADIR_TO!" (
-        del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
+        rem del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
     )

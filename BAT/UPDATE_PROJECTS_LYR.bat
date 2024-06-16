@@ -171,8 +171,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :MAIN_DELPHI %* || exit /b 1
-    call :MAIN_DESKTOP %* || exit /b 1
+    rem call :MAIN_DELPHI %* || exit /b 1
+    rem call :MAIN_DESKTOP %* || exit /b 1
     call :MAIN_SCRIPT %* || exit /b 1
 
     exit /b 0
