@@ -27,17 +27,28 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    echo GDirectory:!GDirectory!
-    rem echo GRepo:!GRepo!
+    cd /d "!PROJECTS_LYR!"
 
-    cd /d "!PROJECTS_LYR_ROOT!"
+    echo GDirectory:!GDirectory!
 
     if not exist "!GDirectory!"\ (
+        rem echo INFO: Dir "!GDirectory!" not exist ...
+        rem echo INFO: Create "!GDirectory!" ...
         mkdir "!GDirectory!"
     )
+
+    cd /d !GDirectory!
+
     if defined GRepo (
-        cd /d !GDirectory!
-        rem git clone !GRepo!
+        rem echo GRepo:!GRepo!
+        if not exist ".git"\ (
+            cd ..\
+            echo git clone: !GRepo!
+            git clone !GRepo!
+        ) else (
+            echo git pull: !GRepo!
+            git pull
+        )
     )
 
     exit /b 0
@@ -55,7 +66,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_03_UNIX=PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX
+    set DIR_03_UNIX=CHECK_LIST\01_OS\03_UNIX
 
     set GDirectory=!DIR_03_UNIX!\"^!^!SOFTWARE"
     set GRepo=
@@ -127,7 +138,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_02_Python=PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python
+    set DIR_02_Python=CHECK_LIST\05_DESKTOP\02_Python
 
     set GDirectory=!DIR_02_Python!\"^!^!SOFTWARE"
     set GRepo=
@@ -209,39 +220,6 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure MAIN_INIT ()
-rem -----------------------------------------------
-:MAIN_INIT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_INIT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
-    rem -------------------------------------------------------------------
-    if not defined SCRIPTS_DIR (
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
-    )
-
-    rem -------------------------------------------------------------------
-    rem LIB_BAT - каталог библиотеки скриптов
-    rem -------------------------------------------------------------------
-    set LIB_BAT=!SCRIPTS_DIR!\LIB
-
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-    rem -------------------------------------------------------------------
-    if not defined SCRIPTS_DIR_KIX (
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-    )
-
-    exit /b 0
-rem endfunction
-
-rem -----------------------------------------------
 rem procedure MAIN_SetROOT ()
 rem -----------------------------------------------
 :MAIN_SetROOT
@@ -252,39 +230,16 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    set PROJECTS_LYR_ROOT=D:
     set PROJECTS_LYR_ROOT=D:\WORK
     echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+    set PROJECTS_LYR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    echo PROJECTS_LYR:!PROJECTS_LYR!
 
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_CHECK_PARAMETR (%*)
-rem --------------------------------------------------------------------------------
-:MAIN_CHECK_PARAMETR
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_CHECK_PARAMETR
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    rem -------------------------------------
-    rem OPTION
-    rem -------------------------------------
-
-    rem -------------------------------------
-    rem ARGS
-    rem -------------------------------------
-    set PROJECTS_LYR_ROOT=D:\WORK
-    set PN_CAPTION=PROJECTS_LYR_ROOT
-    call :Read_P PROJECTS_LYR_ROOT !PROJECTS_LYR_ROOT! || exit /b 1
-    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
-    if defined PROJECTS_LYR_ROOT (
-        set ARGS=!ARGS! !PROJECTS_LYR_ROOT!
-    ) else (
-        echo ERROR: PROJECTS_LYR_ROOT not defined ...
-        set OK=
+    if not exist "!PROJECTS_LYR!"\ (
+        rem echo INFO: Dir "!PROJECTS_LYR!" not exist...
+        rem echo INFO: Create "!PROJECTS_LYR!" ...
+        mkdir "!PROJECTS_LYR!"
     )
 
     exit /b 0
@@ -304,15 +259,7 @@ rem beginfunction
     set BATNAME=%~nx0
     echo Start !BATNAME! ...
 
-    call :MAIN_INIT || exit /b 1
-
     call :MAIN_SetROOT || exit /b 1
-
-    call :MAIN_CHECK_PARAMETR %* || exit /b 1
-
-    if not exist "!PROJECTS_LYR_ROOT!"\ (
-        mkdir "!PROJECTS_LYR_ROOT!"
-    )
 
     call :MAIN_03_UNIX || exit /b 1
     
