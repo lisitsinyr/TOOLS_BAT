@@ -343,7 +343,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT
     set LDIR_TO=!DIR_TOOLS_BAT!\BAT
     set LMASK=*.bat
     rem rmdir "!LDIR_TO!"
@@ -352,9 +351,16 @@ rem beginfunction
     ) else (
         mkdir "!LDIR_TO!" >> %LOG_FULLFILENAME%
     )
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\LIB
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT\99.[lyr]LYR
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT\99.[lyr]LYR\LYR
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
     set LDIR_TO=!DIR_TOOLS_BAT!\LIB
     set LMASK=*.bat
     rem rmdir "!LDIR_TO!"
@@ -363,6 +369,8 @@ rem beginfunction
     ) else (
         mkdir "!LDIR_TO!" >> %LOG_FULLFILENAME%
     )
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\LIB
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     exit /b 0
@@ -378,19 +386,22 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\SH
     set LDIR_TO=!DIR_TOOLS_SH!\SH
     set LMASK=*.sh
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\SH
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\LIB
     set LDIR_TO=!DIR_TOOLS_SH!\LIB
     set LMASK=*.sh
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\LIB
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\SH
     set LDIR_TO=!DIR_TOOLS_SH!\SH_GIT
     set LMASK=*.sh
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\SH
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     exit /b 0
@@ -406,19 +417,22 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\BAT
     set LDIR_TO=!DIR_TOOLS_KIX!\BAT
     set LMASK=*.bat
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\BAT
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\LIB
     set LDIR_TO=!DIR_TOOLS_KIX!\LIB
     set LMASK=*.*
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\LIB
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\SCRIPTS
     set LDIR_TO=!DIR_TOOLS_KIX!\SCRIPTS
     set LMASK=*.*
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\SCRIPTS
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     exit /b 0
@@ -434,14 +448,16 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\BAT
     set LDIR_TO=!DIR_TOOLS_GIT!\BAT
     set LMASK=*.bat
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\BAT
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\BAT_KIX
     set LDIR_TO=!DIR_TOOLS_GIT!\BAT_KIX
     set LMASK=*.bat
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\BAT_KIX
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     exit /b 0
@@ -457,14 +473,16 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\BAT
     set LDIR_TO=!DIR_TOOLS_PY!\BAT
     set LMASK=*.bat
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\BAT
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
     set LDIR_TO=!DIR_TOOLS_PY!\SCRIPTS
     set LMASK=*.*
+
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     exit /b 0

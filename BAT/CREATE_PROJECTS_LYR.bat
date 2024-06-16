@@ -218,6 +218,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
@@ -236,6 +237,23 @@ rem beginfunction
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
     )
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure MAIN_SetROOT ()
+rem -----------------------------------------------
+:MAIN_SetROOT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SetROOT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set PROJECTS_LYR_ROOT=D:\WORK
+    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     exit /b 0
 rem endfunction
@@ -260,7 +278,7 @@ rem beginfunction
     rem -------------------------------------
     set PROJECTS_LYR_ROOT=D:\WORK
     set PN_CAPTION=PROJECTS_LYR_ROOT
-    call :Read_P PROJECTS_LYR_ROOT %1 || exit /b 1
+    call :Read_P PROJECTS_LYR_ROOT !PROJECTS_LYR_ROOT! || exit /b 1
     rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
     if defined PROJECTS_LYR_ROOT (
         set ARGS=!ARGS! !PROJECTS_LYR_ROOT!
@@ -288,10 +306,9 @@ rem beginfunction
 
     call :MAIN_INIT || exit /b 1
 
-    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    call :MAIN_SetROOT || exit /b 1
 
-    rem set PROJECTS_LYR_ROOT=D:\WORK
-    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
 
     if not exist "!PROJECTS_LYR_ROOT!"\ (
         mkdir "!PROJECTS_LYR_ROOT!"
