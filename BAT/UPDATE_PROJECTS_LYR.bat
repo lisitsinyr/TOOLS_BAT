@@ -171,8 +171,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem call :MAIN_DELPHI %* || exit /b 1
-    rem call :MAIN_DESKTOP %* || exit /b 1
+    call :MAIN_DELPHI %* || exit /b 1
+    call :MAIN_DESKTOP %* || exit /b 1
     call :MAIN_SCRIPT %* || exit /b 1
 
     exit /b 0
@@ -345,11 +345,12 @@ rem beginfunction
 
     set LDIR_TO=!DIR_TOOLS_BAT!\BAT
     set LMASK=*.bat
+
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
-        mkdir "!LDIR_TO!" >> %LOG_FULLFILENAME%
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
 
     set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT
@@ -363,11 +364,12 @@ rem beginfunction
 
     set LDIR_TO=!DIR_TOOLS_BAT!\LIB
     set LMASK=*.bat
+
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
-        mkdir "!LDIR_TO!" >> %LOG_FULLFILENAME%
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
 
     set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\LIB
@@ -388,6 +390,13 @@ rem beginfunction
 
     set LDIR_TO=!DIR_TOOLS_SH!\SH
     set LMASK=*.sh
+
+    rem rmdir "!LDIR_TO!"
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
 
     set LDIR_FROM=!DIR_TOOLS_SRC_SH!\SH
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -420,6 +429,13 @@ rem beginfunction
     set LDIR_TO=!DIR_TOOLS_KIX!\BAT
     set LMASK=*.bat
 
+    rem rmdir "!LDIR_TO!"
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
+
     set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\BAT
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
@@ -451,6 +467,13 @@ rem beginfunction
     set LDIR_TO=!DIR_TOOLS_GIT!\BAT
     set LMASK=*.bat
 
+    rem rmdir "!LDIR_TO!"
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
+
     set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\BAT
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
@@ -475,6 +498,13 @@ rem beginfunction
 
     set LDIR_TO=!DIR_TOOLS_PY!\BAT
     set LMASK=*.bat
+
+    rem rmdir "!LDIR_TO!"
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
 
     set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\BAT
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
