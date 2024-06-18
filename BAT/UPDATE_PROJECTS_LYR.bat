@@ -389,28 +389,33 @@ rem beginfunction
     )
 
     set LDIR_TO=!DIR_TOOLS_SH!\SH
-    set LMASK=*.sh
-
-    rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
         rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
-
     set LDIR_FROM=!DIR_TOOLS_SRC_SH!\SH
+    set LMASK=*.sh
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     set LDIR_TO=!DIR_TOOLS_SH!\LIB
-    set LMASK=*.sh
-
+    if exist "!LDIR_TO!" (
+        rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
     set LDIR_FROM=!DIR_TOOLS_SRC_SH!\LIB
+    set LMASK=*.sh
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     set LDIR_TO=!DIR_TOOLS_SH!\SH_GIT
-    set LMASK=*.sh
-
+    if exist "!LDIR_TO!" (
+        rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
     set LDIR_FROM=!DIR_TOOLS_SRC_GIT!\SH
+    set LMASK=*.sh
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     exit /b 0
