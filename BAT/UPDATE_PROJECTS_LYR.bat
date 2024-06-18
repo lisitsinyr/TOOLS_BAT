@@ -393,7 +393,7 @@ rem beginfunction
 
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
