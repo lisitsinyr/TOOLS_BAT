@@ -390,7 +390,7 @@ rem beginfunction
 
     set LDIR_TO=!DIR_TOOLS_SH!\SH
     if exist "!LDIR_TO!" (
-        rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
@@ -400,7 +400,7 @@ rem beginfunction
 
     set LDIR_TO=!DIR_TOOLS_SH!\LIB
     if exist "!LDIR_TO!" (
-        rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
@@ -410,7 +410,7 @@ rem beginfunction
 
     set LDIR_TO=!DIR_TOOLS_SH!\SH_GIT
     if exist "!LDIR_TO!" (
-        rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
