@@ -54,7 +54,6 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-
 rem -----------------------------------------------
 rem procedure MAIN_03_UNIX ()
 rem -----------------------------------------------
@@ -231,8 +230,9 @@ rem beginfunction
     )
 
     set PROJECTS_LYR_ROOT=D:
-    set PROJECTS_LYR_ROOT=D:\WORK
+    rem set PROJECTS_LYR_ROOT=D:\WORK
     echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+
     set PROJECTS_LYR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     echo PROJECTS_LYR:!PROJECTS_LYR!
 
@@ -263,7 +263,7 @@ rem beginfunction
 
     call :MAIN_03_UNIX || exit /b 1
     
-    call :MAIN_02_Python || exit /b 1
+    rem call :MAIN_02_Python || exit /b 1
 
     exit /b 0
 :end
