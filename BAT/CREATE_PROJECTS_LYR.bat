@@ -55,9 +55,9 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure MAIN_03_UNIX ()
+rem procedure MAIN_01_OS\03_UNIX ()
 rem -----------------------------------------------
-:MAIN_03_UNIX
+:MAIN_01_OS_03_UNIX
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=MAIN_INIT
@@ -127,9 +127,9 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure MAIN_02_Python ()
+rem procedure MAIN_05_DESKTOP_02_Python ()
 rem -----------------------------------------------
-:MAIN_02_Python
+:MAIN_05_DESKTOP_02_Python
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=MAIN_INIT
@@ -261,9 +261,9 @@ rem beginfunction
 
     call :MAIN_SetROOT || exit /b 1
 
-    call :MAIN_03_UNIX || exit /b 1
+    call :MAIN_01_OS_03_UNIX || exit /b 1
     
-    rem call :MAIN_02_Python || exit /b 1
+    call :MAIN_05_DESKTOP_02_Python || exit /b 1
 
     exit /b 0
 :end

@@ -75,46 +75,6 @@ rem beginfunction
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
 
-    set DIR_DELPHI7=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
-    set DIR_LUIS_D7=!DIR_DELPHI7!\LUIS_D7
-    set DIR_TOOLS_D7=!DIR_DELPHI7!\TOOLS_D7
-    
-    set DIR_DELPHI11=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11\PROJECTS_D11
-    set DIR_LUIS_D11=!DIR_DELPHI11!\LUIS_D11
-    set DIR_TOOLS_D11=!DIR_DELPHI11!\TOOLS_D11
-
-    set DIR_PYTHON=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY
-    set DIR_EXAMPLES_PY=!DIR_PYTHON!\EXAMPLES_PY
-    set DIR_MobileAPP_PY=!DIR_PYTHON!\MobileAPP_PY
-    set DIR_PATTERN_PY=!DIR_PYTHON!\PATTERN_PY
-    set DIR_TEST_PY=!DIR_PYTHON!\TEST_PY
-    set DIR_YOUTUBE_PY=!DIR_PYTHON!\YOUTUBE_PY
-    set DIR_TESTS_PY=!DIR_PYTHON!\TESTS_PY
-    set DIR_TOOLS_SRC_PY=!DIR_PYTHON!\TOOLS_SRC_PY
-    set DIR_TOOLS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
-
-    set DIR_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA
-    set DIR_TESTS_JAVA=!DIR_JAVA!\TESTS_JAVA
-    set DIR_TOOLS_SRC_JAVA=!DIR_JAVA!\TOOLS_SRC_JAVA
-    set DIR_TOOLS_JAVA= D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\TOOLS_JAVA
-
-    set DIR_TOOLS_SRC_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
-    set DIR_TOOLS_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
-
-    set DIR_TOOLS_SRC_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-    set DIR_TOOLS_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
-
-    set DIR_TOOLS_SRC_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
-    set DIR_TOOLS_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
-
-    set DIR_TOOLS_SRC_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
-    set DIR_TOOLS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
-
-    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
-    set DIR_TOOLS_GIT_=D:\TOOLS\TOOLS_GIT
-    set DIR_TOOLS_KIX_=D:\TOOLS\TOOLS_KIX
-    set DIR_TOOLS_PY_=D:\TOOLS\TOOLS_PY
-
     exit /b 0
 rem endfunction
 
@@ -161,33 +121,23 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN_05_DESKTOP_01_Pascal_Delphi ()
 rem --------------------------------------------------------------------------------
-:MAIN_FUNC
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_FUNC
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    call :MAIN_DELPHI %* || exit /b 1
-    call :MAIN_DESKTOP %* || exit /b 1
-    call :MAIN_SCRIPT %* || exit /b 1
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_DELPHI ()
-rem --------------------------------------------------------------------------------
-:MAIN_DELPHI
+:MAIN_05_DESKTOP_01_Pascal_Delphi
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=MAIN_DELPHI
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set DIR_DELPHI7=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
+    set DIR_DELPHI11=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11\PROJECTS_D11
+
+    set DIR_LUIS_D7=!DIR_DELPHI7!\LUIS_D7
+    set DIR_TOOLS_D7=!DIR_DELPHI7!\TOOLS_D7
+    set DIR_LUIS_D11=!DIR_DELPHI11!\LUIS_D11
+    set DIR_TOOLS_D11=!DIR_DELPHI11!\TOOLS_D11
 
     call :REPO_WORK !DIR_LUIS_D7! 0 || exit /b 1
     call :REPO_WORK !DIR_TOOLS_D7! 0 || exit /b 1
@@ -198,15 +148,28 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_DESKTOP ()
+rem procedure MAIN_05_DESKTOP_02_Python ()
 rem --------------------------------------------------------------------------------
-:MAIN_DESKTOP
+:MAIN_05_DESKTOP_02_Python
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DESKTOP
+    set FUNCNAME=MAIN_DELPHI
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    set DIR_PYTHON=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY
+
+    set DIR_EXAMPLES_PY=!DIR_PYTHON!\EXAMPLES_PY
+    set DIR_MobileAPP_PY=!DIR_PYTHON!\MobileAPP_PY
+    set DIR_PATTERN_PY=!DIR_PYTHON!\PATTERN_PY
+    set DIR_TEST_PY=!DIR_PYTHON!\TEST_PY
+    set DIR_YOUTUBE_PY=!DIR_PYTHON!\YOUTUBE_PY
+    set DIR_TESTS_PY=!DIR_PYTHON!\TESTS_PY
+    set DIR_TOOLS_SRC_PY=!DIR_PYTHON!\TOOLS_SRC_PY
+
+    set DIR_TOOLS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
+    set DIR_TOOLS_PY_=D:\TOOLS\TOOLS_PY
 
     call :REPO_WORK !DIR_EXAMPLES_PY! 1 || exit /b 1
     call :REPO_WORK !DIR_MobileAPP_PY! 1 || exit /b 1
@@ -214,12 +177,10 @@ rem beginfunction
     call :REPO_WORK !DIR_TEST_PY! 1 || exit /b 1
     call :REPO_WORK !DIR_YOUTUBE_PY! 1 || exit /b 1
     call :REPO_WORK !DIR_TESTS_PY! 1 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_PY! 1 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_PY! 0 || exit /b 1
 
-    call :REPO_WORK !DIR_TESTS_JAVA! 0 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_JAVA! 0 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_JAVA! 0 || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SRC_PY! 1 || exit /b 1
+    call :UPDATE_TOOLS_PY || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_PY! 0 || exit /b 1
 
     call :git_pull !DIR_TOOLS_PY_! || exit /b 1
 
@@ -227,29 +188,147 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_SCRIPT ()
+rem procedure MAIN_05_DESKTOP_03_Java ()
 rem --------------------------------------------------------------------------------
-:MAIN_SCRIPT
+:MAIN_05_DESKTOP_03_Java
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_SCRIPT
+    set FUNCNAME=MAIN_DELPHI
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-  
-    call :REPO_WORK !DIR_TOOLS_SRC_BAT! 0 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_KIX! 0 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_GIT! 0 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
 
-    call :REPO_WORK !DIR_TOOLS_BAT! 0 || exit /b 1
+    set DIR_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA
+    set DIR_TESTS_JAVA=!DIR_JAVA!\TESTS_JAVA
+    set DIR_TOOLS_SRC_JAVA=!DIR_JAVA!\TOOLS_SRC_JAVA
+
+    set DIR_TOOLS_JAVA= D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\TOOLS_JAVA
+
+    call :REPO_WORK !DIR_TESTS_JAVA! 0 || exit /b 1
+
+    call :REPO_WORK !DIR_TOOLS_SRC_JAVA! 0 || exit /b 1
+    call :UPDATE_TOOLS_JAVA || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_JAVA! 0 || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_03_SCRIPT_01_KIX ()
+rem --------------------------------------------------------------------------------
+:MAIN_03_SCRIPT_01_KIX
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_DELPHI
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIR_TOOLS_SRC_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+    set DIR_TOOLS_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
+    set DIR_TOOLS_KIX_=D:\TOOLS\TOOLS_KIX
+
+    call :REPO_WORK !DIR_TOOLS_SRC_KIX! 0 || exit /b 1
+    call :UPDATE_TOOLS_KIX || exit /b 1
     call :REPO_WORK !DIR_TOOLS_KIX! 0 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_GIT! 0 || exit /b 1
-    call :REPO_WORK !DIR_TOOLS_SH! 0 || exit /b 1
+
+    call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_03_SCRIPT_04_BAT ()
+rem --------------------------------------------------------------------------------
+:MAIN_03_SCRIPT_04_BAT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_DELPHI
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIR_TOOLS_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
+    set DIR_TOOLS_SRC_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
+
+    call :REPO_WORK !DIR_TOOLS_SRC_BAT! 0 || exit /b 1
+    call :UPDATE_TOOLS_BAT || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_BAT! 0 || exit /b 1
 
     call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
-    call :git_pull !DIR_TOOLS_KIX_! || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_07_GIT ()
+rem --------------------------------------------------------------------------------
+:MAIN_07_GIT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_DELPHI
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIR_TOOLS_SRC_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
+    set DIR_TOOLS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
+    set DIR_TOOLS_GIT_=D:\TOOLS\TOOLS_GIT
+
+    call :REPO_WORK !DIR_TOOLS_SRC_GIT! 0 || exit /b 1
+    call :UPDATE_TOOLS_GIT || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_GIT! 0 || exit /b 1
+
     call :git_pull !DIR_TOOLS_GIT_! || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_01_OS_03_UNIX ()
+rem --------------------------------------------------------------------------------
+:MAIN_01_OS_03_UNIX
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_DELPHI
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIR_TOOLS_SRC_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
+    set DIR_TOOLS_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
+
+    call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
+    call :UPDATE_TOOLS_SH || exit /b 1
+    call :REPO_WORK !DIR_TOOLS_SH! 0 || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :MAIN_05_DESKTOP_01_Pascal_Delphi %* || exit /b 1
+    call :MAIN_05_DESKTOP_02_Python %* || exit /b 1
+    call :MAIN_05_DESKTOP_03_Java %* || exit /b 1
+    
+    call :MAIN_03_SCRIPT_01_KIX %* || exit /b 1
+    call :MAIN_03_SCRIPT_04_BAT %* || exit /b 1
+
+    call :MAIN_07_GIT %* || exit /b 1
+
+    call :MAIN_01_OS_03_UNIX %* || exit /b 1
+
+    rem call :PressAnyKey || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -292,7 +371,6 @@ rem beginfunction
             copy !LFileName! > NUL
             )
         )
-
         set LFileName=!DIR_PYTHON!\PATTERN_PY\pyproject.toml
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
@@ -302,32 +380,6 @@ rem beginfunction
         )
     )
    
-    rem call :PressAnyKey || exit /b 1
-
-    if "!REPO_NAME!"=="TOOLS_BAT" (
-        call :UPDATE_TOOLS_BAT || exit /b 1
-    )
-
-    if "!REPO_NAME!"=="TOOLS_KIX" (
-        call :UPDATE_TOOLS_KIX || exit /b 1
-    )
-
-    if "!REPO_NAME!"=="TOOLS_GIT" (
-        call :UPDATE_TOOLS_GIT || exit /b 1
-    )
-
-    if "!REPO_NAME!"=="TOOLS_PY" (
-        call :UPDATE_TOOLS_PY || exit /b 1
-    )
-
-    if "!REPO_NAME!"=="TOOLS_JAVA" (
-        call :UPDATE_TOOLS_JAVA || exit /b 1
-    )
-
-    if "!REPO_NAME!"=="TOOLS_SH" (
-        call :UPDATE_TOOLS_SH || exit /b 1
-    )
-
     call lyrgit_push_main.bat
 
     exit /b 0
@@ -523,6 +575,19 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_JAVA (ADirectory)
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_JAVA
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    exit /b 0
+rem endfunction
+
 rem =================================================
 rem procedure git_pull (ADirectory)
 rem =================================================
@@ -541,19 +606,6 @@ rem beginfunction
     rem call lyrgit_pull_main.bat
     git pull    
     
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_JAVA (ADirectory)
-rem --------------------------------------------------------------------------------
-:UPDATE_TOOLS_JAVA
-rem beginfunction
-    set FUNCNAME=%0
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
     exit /b 0
 rem endfunction
 
