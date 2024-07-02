@@ -25,6 +25,12 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    set PROJECTS_LYR_ROOT=D:
+    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+
+    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
@@ -68,12 +74,6 @@ rem beginfunction
     )
 
     set /a LOG_FILE_ADD=1
-
-    set PROJECTS_LYR_ROOT=D:
-    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
-
-    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
 
     exit /b 0
 rem endfunction
@@ -317,14 +317,14 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :MAIN_05_DESKTOP_01_Pascal_Delphi %* || exit /b 1
+    rem call :MAIN_05_DESKTOP_01_Pascal_Delphi %* || exit /b 1
     call :MAIN_05_DESKTOP_02_Python %* || exit /b 1
-    call :MAIN_05_DESKTOP_03_Java %* || exit /b 1
+    rem call :MAIN_05_DESKTOP_03_Java %* || exit /b 1
     
-    call :MAIN_03_SCRIPT_01_KIX %* || exit /b 1
+    rem call :MAIN_03_SCRIPT_01_KIX %* || exit /b 1
     call :MAIN_03_SCRIPT_04_BAT %* || exit /b 1
 
-    call :MAIN_07_GIT %* || exit /b 1
+    rem call :MAIN_07_GIT %* || exit /b 1
 
     call :MAIN_01_OS_03_UNIX %* || exit /b 1
 
@@ -360,7 +360,6 @@ rem beginfunction
     if exist !LFileName! (
         rem echo COPY: !LFileName!
         copy !LFileName! > NUL
-        )
     )
 
     if !APYTHON!==1 (
@@ -369,14 +368,12 @@ rem beginfunction
         if exist !LFileName! (
             rem echo COPY: !LFileName!
             copy !LFileName! > NUL
-            )
         )
         set LFileName=!DIR_PYTHON!\PATTERN_PY\pyproject.toml
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName!
             copy !LFileName! > NUL
-            )
         )
     )
    
@@ -409,9 +406,6 @@ rem beginfunction
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT\99.[lyr]LYR
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
-
-    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT\99.[lyr]LYR\LYR
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     set LDIR_TO=!DIR_TOOLS_BAT!\LIB
