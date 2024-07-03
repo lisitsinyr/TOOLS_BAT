@@ -11,6 +11,7 @@ rem
 rem --------------------------------------------------------------------------------
 :begin
     call :MAIN %* || exit /b 1
+    exit /b 0
 :end
 rem --------------------------------------------------------------------------------
 
@@ -27,7 +28,6 @@ rem beginfunction
 
     set PROJECTS_LYR_ROOT=D:
     echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
-
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
 
@@ -248,8 +248,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_TOOLS_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
     set DIR_TOOLS_SRC_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    set DIR_TOOLS_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
     set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
 
     call :REPO_WORK !DIR_TOOLS_SRC_BAT! 0 || exit /b 1
@@ -318,13 +318,16 @@ rem beginfunction
     )
 
     rem call :MAIN_05_DESKTOP_01_Pascal_Delphi %* || exit /b 1
+
     call :MAIN_05_DESKTOP_02_Python %* || exit /b 1
+    
     rem call :MAIN_05_DESKTOP_03_Java %* || exit /b 1
     
     rem call :MAIN_03_SCRIPT_01_KIX %* || exit /b 1
+
     call :MAIN_03_SCRIPT_04_BAT %* || exit /b 1
 
-    rem call :MAIN_07_GIT %* || exit /b 1
+    call :MAIN_07_GIT %* || exit /b 1
 
     call :MAIN_01_OS_03_UNIX %* || exit /b 1
 
@@ -351,14 +354,15 @@ rem beginfunction
     rem echo APYTHON:!APYTHON!
 
     call :GetINIParametr REPO.ini general REPO_NAME || exit /b 1
-    rem echo REPO_NAME:!REPO_NAME!
+    echo REPO_NAME:!REPO_NAME!
 
     del *.bat > NUL
 
+    set DIR_TOOLS_SRC_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
     set LFileName=!DIR_TOOLS_SRC_GIT!\BAT\A.WORK\lyrgit_push_main.bat
-    rem echo LFileName: !LFileName!
+    echo LFileName:!LFileName!
     if exist !LFileName! (
-        rem echo COPY: !LFileName!
+        echo COPY:!LFileName!
         copy !LFileName! > NUL
     )
 
@@ -410,14 +414,12 @@ rem beginfunction
 
     set LDIR_TO=!DIR_TOOLS_BAT!\LIB
     set LMASK=*.bat
-
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
-
     set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\LIB
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
@@ -767,18 +769,6 @@ exit /b 0
 :Read_F
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:GetINI
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:SetINI
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetINIParametr
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetFileParser
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
 :GetDir
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
@@ -793,5 +783,20 @@ exit /b 0
 exit /b 0
 :GetCMD
 %LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+rem =================================================
+rem LYRParserINI.bat
+rem =================================================
+:GetINI
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:SetINI
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetINIParametr
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetFileParser
+%LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 rem =================================================

@@ -11,7 +11,6 @@ rem
 rem --------------------------------------------------------------------------------
 :begin
     call :MAIN %* || exit /b 1
-
     exit /b 0
 :end
 rem --------------------------------------------------------------------------------
@@ -334,5 +333,54 @@ exit /b 0
 exit /b 0
 :GetCMD
 %LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+rem =================================================
+rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetDir
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFile
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:FORCicle
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetSET
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetCMD
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+rem =================================================
+rem LYRParserINI.bat
+rem =================================================
+:GetINI
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:SetINI
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetINIParametr
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetFileParser
+%LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 rem =================================================
