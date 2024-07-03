@@ -360,9 +360,9 @@ rem beginfunction
 
     set DIR_TOOLS_SRC_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
     set LFileName=!DIR_TOOLS_SRC_GIT!\BAT\A.WORK\lyrgit_push_main.bat
-    echo LFileName:!LFileName!
+    rem echo LFileName:!LFileName!
     if exist !LFileName! (
-        echo COPY:!LFileName!
+        rem echo COPY:!LFileName!
         copy !LFileName! > NUL
     )
 
