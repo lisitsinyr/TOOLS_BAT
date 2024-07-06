@@ -27,7 +27,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    cd /d "!PROJECTS_LYR!"
+    cd /d "!PROJECTS_LYR_DIR!"
 
     echo GDirectory:!GDirectory!
 
@@ -295,13 +295,13 @@ rem beginfunction
     set PROJECTS_LYR_ROOT=D:\WORK\WIN
     echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
-    set PROJECTS_LYR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    echo PROJECTS_LYR:!PROJECTS_LYR!
+    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
 
-    if not exist "!PROJECTS_LYR!"\ (
-        rem echo INFO: Dir "!PROJECTS_LYR!" not exist...
-        rem echo INFO: Create "!PROJECTS_LYR!" ...
-        mkdir "!PROJECTS_LYR!"
+    if not exist "!PROJECTS_LYR_DIR!"\ (
+        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist...
+        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        mkdir "!PROJECTS_LYR_DIR!"
     )
 
     exit /b 0
