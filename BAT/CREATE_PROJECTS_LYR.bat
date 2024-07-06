@@ -55,9 +55,9 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure MAIN_01_OS\03_UNIX ()
+rem procedure MAIN_07_GIT ()
 rem -----------------------------------------------
-:MAIN_01_OS_03_UNIX
+:MAIN_07_GIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=MAIN_INIT
@@ -65,61 +65,121 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_03_UNIX=CHECK_LIST\01_OS\03_UNIX
+    set DIR_07_GIT=CHECK_LIST\07_GIT
 
-    set GDirectory=!DIR_03_UNIX!\"^!^!SOFTWARE"
+    set GDirectory=!DIR_07_GIT!\SOFTWARE
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"^!^!ƒŒ ”Ã≈Õ“¿÷»ﬂ"
+    set GDirectory=!DIR_07_GIT!\ƒŒ ”Ã≈Õ“¿÷»ﬂ
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"^!^!ƒŒ ”Ã≈Õ“€"
+    set GDirectory=!DIR_07_GIT!\ƒŒ ”Ã≈Õ“€
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"^!^! Õ»√»"
+    set GDirectory=!DIR_07_GIT!\ Õ»√»
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"^!^! ”–—€"
+    set GDirectory=!DIR_07_GIT!\ ”–—€
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"^!^!—“¿“‹»"
+    set GDirectory=!DIR_07_GIT!\—“¿“‹»
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"FRAMEWORK"
+    set GDirectory=!DIR_07_GIT!\FRAMEWORK
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"LIBRARY"
+    set GDirectory=!DIR_07_GIT!\LIBRARY
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"WORK"
+    set GDirectory=!DIR_07_GIT!\WORK
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
     
-    set GDirectory=!DIR_03_UNIX!\"TOOLS_SH"
+    set GDirectory=!DIR_07_GIT!\TOOLS_GIT
+    set GRepo="git@github.com:lisitsinyr/TOOLS_GIT.git"
+    call :MAIN_CreateDirectory || exit /b 1
+    
+    set GDirectory=!DIR_07_GIT!\PROJECTS_GIT\TOOLS_SRC_GIT
+    set GRepo="git@github.com:lisitsinyr/TOOLS_SRC_GIT.git"
+    call :MAIN_CreateDirectory || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure MAIN_01_03_UNIX ()
+rem -----------------------------------------------
+:MAIN_01_03_UNIX
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIR_01_03_UNIX=CHECK_LIST\01_OS\03_UNIX
+
+    set GDirectory=!DIR_01_03_UNIX!\SOFTWARE
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_01_03_UNIX!\ƒŒ ”Ã≈Õ“¿÷»ﬂ
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_01_03_UNIX!\ƒŒ ”Ã≈Õ“€
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_01_03_UNIX!\ Õ»√»
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_01_03_UNIX!\ ”–—€
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_01_03_UNIX!\—“¿“‹»
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_01_03_UNIX!\FRAMEWORK
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_01_03_UNIX!\LIBRARY
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_01_03_UNIX!\WORK
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+    
+    set GDirectory=!DIR_01_03_UNIX!\TOOLS_SH
     set GRepo="git@github.com:lisitsinyr/TOOLS_SH.git"
     call :MAIN_CreateDirectory || exit /b 1
     
-    set GDirectory=!DIR_03_UNIX!\"PROJECTS\UBUNTU"
+    set GDirectory=!DIR_01_03_UNIX!\PROJECTS\UBUNTU
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"PROJECTS_UNIX\COMMANDS"
+    set GDirectory=!DIR_01_03_UNIX!\PROJECTS_UNIX\COMMANDS
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"PROJECTS_UNIX\TESTS_SH"
+    set GDirectory=!DIR_01_03_UNIX!\PROJECTS_UNIX\TESTS_SH
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_03_UNIX!\"PROJECTS_UNIX\TOOLS_SRC_SH"
+    set GDirectory=!DIR_01_03_UNIX!\PROJECTS_UNIX\TOOLS_SRC_SH
     set GRepo="git@github.com:lisitsinyr/TOOLS_SRC_SH.git"
     call :MAIN_CreateDirectory || exit /b 1
 
@@ -127,9 +187,9 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure MAIN_05_DESKTOP_02_Python ()
+rem procedure MAIN_05_02_Python ()
 rem -----------------------------------------------
-:MAIN_05_DESKTOP_02_Python
+:MAIN_05_02_Python
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=MAIN_INIT
@@ -137,82 +197,84 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_02_Python=CHECK_LIST\05_DESKTOP\02_Python
+    set DIR_05_02_Python=CHECK_LIST\05_DESKTOP\02_Python
 
-    set GDirectory=!DIR_02_Python!\"^!^!SOFTWARE"
+    set GDirectory=!DIR_05_02_Python!\SOFTWARE
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"^!^!ƒŒ ”Ã≈Õ“¿÷»ﬂ"
+    set GDirectory=!DIR_05_02_Python!\ƒŒ ”Ã≈Õ“¿÷»ﬂ
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"^!^!ƒŒ ”Ã≈Õ“€"
+    set GDirectory=!DIR_05_02_Python!\ƒŒ ”Ã≈Õ“€
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"^!^! Õ»√»"
+    set GDirectory=!DIR_05_02_Python!\ Õ»√»
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"^!^! ”–—€"
+    set GDirectory=!DIR_05_02_Python!\ ”–—€
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"^!^!—“¿“‹»"
+    set GDirectory=!DIR_05_02_Python!\—“¿“‹»
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"FRAMEWORK"
+    set GDirectory=!DIR_05_02_Python!\FRAMEWORK
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"LIBRARY"
+    set GDirectory=!DIR_05_02_Python!\LIBRARY
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"PROJECTS"
+    set GDirectory=!DIR_05_02_Python!\PROJECTS
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"TOOLS_PY"
+    set GDirectory=!DIR_05_02_Python!\TOOLS_PY
     set GRepo=git@github.com:lisitsinyr/TOOLS_PY.git
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"VENV\312"
+    set GDirectory=!DIR_05_02_Python!\VENV\312
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"WORK"
+    set GDirectory=!DIR_05_02_Python!\WORK
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"PROJECTS_PY\EXAMPLES_PY"
+    set GDirectory=!DIR_05_02_Python!\PROJECTS_PY\EXAMPLES_PY
     set GRepo=git@github.com:lisitsinyr/EXAMPLES_PY.git
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"PROJECTS_PY\MobileAPP_PY"
-    set GRepo=git@github.com:lisitsinyr/MobileAPP.git
+    set GDirectory=!DIR_05_02_Python!\PROJECTS_PY\MobileAPP_PY
+    rem set GRepo=git@github.com:lisitsinyr/MobileAPP.git
+    set GRepo=git@github.com:lisitsinyr/MobileAPP_PY.git
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"PROJECTS_PY\PATTERN_PY"
+    set GDirectory=!DIR_05_02_Python!\PROJECTS_PY\PATTERN_PY
     set GRepo=git@github.com:lisitsinyr/PATTERN_PY.git
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"PROJECTS_PY\TEST_PY"
+    set GDirectory=!DIR_05_02_Python!\PROJECTS_PY\TEST_PY
     set GRepo=git@github.com:lisitsinyr/TEST_PY.git
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"PROJECTS_PY\TESTS_PY"
+    set GDirectory=!DIR_05_02_Python!\PROJECTS_PY\TESTS_PY
     set GRepo=git@github.com:lisitsinyr/TESTS_PY.git
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"PROJECTS_PY\TOOLS_SRC_PY"
+    set GDirectory=!DIR_05_02_Python!\PROJECTS_PY\TOOLS_SRC_PY
     set GRepo=git@github.com:lisitsinyr/TOOLS_SRC_PY.git
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_02_Python!\"PROJECTS_PY\YOUTUBE_PY"
-    set GRepo=git@github.com:lisitsinyr/YOUTUBE.git
+    set GDirectory=!DIR_05_02_Python!\PROJECTS_PY\YOUTUBE_PY
+    rem set GRepo=git@github.com:lisitsinyr/YOUTUBE.git
+    set GRepo=git@github.com:lisitsinyr/YOUTUBE_PY.git
     call :MAIN_CreateDirectory || exit /b 1
 
     exit /b 0
@@ -230,7 +292,7 @@ rem beginfunction
     )
 
     set PROJECTS_LYR_ROOT=D:
-    rem set PROJECTS_LYR_ROOT=D:\WORK
+    set PROJECTS_LYR_ROOT=D:\WORK\WIN
     echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     set PROJECTS_LYR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
@@ -261,9 +323,11 @@ rem beginfunction
 
     call :MAIN_SetROOT || exit /b 1
 
-    call :MAIN_01_OS_03_UNIX || exit /b 1
+    call :MAIN_01_03_UNIX || exit /b 1
     
-    call :MAIN_05_DESKTOP_02_Python || exit /b 1
+    call :MAIN_05_02_Python || exit /b 1
+    
+    call :MAIN_07_GIT || exit /b 1
 
     exit /b 0
 :end
