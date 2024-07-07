@@ -453,7 +453,7 @@ rem beginfunction
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
     set LDIR_FROM=!DIR_TOOLS_SRC_SH!\LIB
-    set LMASK=*.sh
+    set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     set LDIR_TO=!DIR_TOOLS_SH!\SH_GIT
