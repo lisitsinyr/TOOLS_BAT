@@ -126,7 +126,7 @@ rem ----------------------------------------------------------------------------
 :MAIN_05_DESKTOP_01_Pascal_Delphi
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DELPHI
+    set FUNCNAME=MAIN_05_DESKTOP_01_Pascal_Delphi
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -148,12 +148,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_05_DESKTOP_02_Python ()
+rem procedure MAIN_05_02_Python ()
 rem --------------------------------------------------------------------------------
-:MAIN_05_DESKTOP_02_Python
+:MAIN_05_02_Python
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DELPHI
+    set FUNCNAME=MAIN_05_02_Python
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -188,12 +188,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_05_DESKTOP_03_Java ()
+rem procedure MAIN_05_03_Java ()
 rem --------------------------------------------------------------------------------
-:MAIN_05_DESKTOP_03_Java
+:MAIN_05_03_Java
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DELPHI
+    set FUNCNAME=MAIN_05_03_Java
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -214,12 +214,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_03_SCRIPT_01_KIX ()
+rem procedure MAIN_03_01_KIX ()
 rem --------------------------------------------------------------------------------
-:MAIN_03_SCRIPT_01_KIX
+:MAIN_03_01_KIX
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DELPHI
+    set FUNCNAME=MAIN_03_01_KIX
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -238,12 +238,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_03_SCRIPT_04_BAT ()
+rem procedure MAIN_03_04_BAT ()
 rem --------------------------------------------------------------------------------
-:MAIN_03_SCRIPT_04_BAT
+:MAIN_03_04_BAT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DELPHI
+    set FUNCNAME=MAIN_03_04_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -267,7 +267,7 @@ rem ----------------------------------------------------------------------------
 :MAIN_07_GIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DELPHI
+    set FUNCNAME=MAIN_07_GIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -286,12 +286,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_01_OS_03_UNIX ()
+rem procedure MAIN_01_03_UNIX ()
 rem --------------------------------------------------------------------------------
-:MAIN_01_OS_03_UNIX
+:MAIN_01_03_UNIX
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DELPHI
+    set FUNCNAME=MAIN_01_03_UNIX
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -317,19 +317,19 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem call :MAIN_05_DESKTOP_01_Pascal_Delphi %* || exit /b 1
+    rem call :MAIN_05_01_Pascal_Delphi %* || exit /b 1
 
-    call :MAIN_05_DESKTOP_02_Python %* || exit /b 1
+    call :MAIN_05_02_Python %* || exit /b 1
     
-    rem call :MAIN_05_DESKTOP_03_Java %* || exit /b 1
+    rem call :MAIN_05_03_Java %* || exit /b 1
     
-    rem call :MAIN_03_SCRIPT_01_KIX %* || exit /b 1
+    rem call :MAIN_03_01_KIX %* || exit /b 1
 
-    call :MAIN_03_SCRIPT_04_BAT %* || exit /b 1
+    call :MAIN_03_04_BAT %* || exit /b 1
 
     call :MAIN_07_GIT %* || exit /b 1
 
-    call :MAIN_01_OS_03_UNIX %* || exit /b 1
+    call :MAIN_01_03_UNIX %* || exit /b 1
 
     rem call :PressAnyKey || exit /b 1
 
