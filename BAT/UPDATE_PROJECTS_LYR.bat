@@ -75,6 +75,65 @@ rem beginfunction
 
     set /a LOG_FILE_ADD=1
 
+    rem ------------------------------------------------
+    rem 01_03_UNIX
+    rem ------------------------------------------------
+    set DIR_TOOLS_SRC_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
+    set DIR_TOOLS_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
+
+    rem ------------------------------------------------
+    rem 05_01_Pascal_Delphi
+    rem ------------------------------------------------
+    set DIR_DELPHI7=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
+    set DIR_DELPHI11=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11\PROJECTS_D11
+    set DIR_LUIS_D7=!DIR_DELPHI7!\LUIS_D7
+    set DIR_TOOLS_D7=!DIR_DELPHI7!\TOOLS_D7
+    set DIR_LUIS_D11=!DIR_DELPHI11!\LUIS_D11
+    set DIR_TOOLS_D11=!DIR_DELPHI11!\TOOLS_D11
+
+    rem ------------------------------------------------
+    rem 05_02_Python
+    rem ------------------------------------------------
+    set DIR_PYTHON=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY
+    set DIR_EXAMPLES_PY=!DIR_PYTHON!\EXAMPLES_PY
+    set DIR_MobileAPP_PY=!DIR_PYTHON!\MobileAPP_PY
+    set DIR_PATTERN_PY=!DIR_PYTHON!\PATTERN_PY
+    set DIR_TEST_PY=!DIR_PYTHON!\TEST_PY
+    set DIR_YOUTUBE_PY=!DIR_PYTHON!\YOUTUBE_PY
+    set DIR_TESTS_PY=!DIR_PYTHON!\TESTS_PY
+    set DIR_TOOLS_SRC_PY=!DIR_PYTHON!\TOOLS_SRC_PY
+    set DIR_TOOLS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
+    set DIR_TOOLS_PY_=D:\TOOLS\TOOLS_PY
+
+    rem ------------------------------------------------
+    rem 05_03_Java
+    rem ------------------------------------------------
+    set DIR_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA
+    set DIR_TESTS_JAVA=!DIR_JAVA!\TESTS_JAVA
+    set DIR_TOOLS_SRC_JAVA=!DIR_JAVA!\TOOLS_SRC_JAVA
+    set DIR_TOOLS_JAVA= D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\TOOLS_JAVA
+
+    rem ------------------------------------------------
+    rem 03_01_KIX
+    rem ------------------------------------------------
+    set DIR_TOOLS_SRC_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+    set DIR_TOOLS_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
+    set DIR_TOOLS_KIX_=D:\TOOLS\TOOLS_KIX
+
+    rem ------------------------------------------------
+    rem 03_04_BAT
+    rem ------------------------------------------------
+    set DIR_TOOLS_SRC_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    set DIR_TOOLS_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
+    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
+
+    rem ------------------------------------------------
+    rem 07_GIT
+    rem ------------------------------------------------
+    set DIR_TOOLS_SRC_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
+    set DIR_TOOLS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
+    set DIR_TOOLS_GIT_=D:\TOOLS\TOOLS_GIT
+
     exit /b 0
 rem endfunction
 
@@ -131,14 +190,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_DELPHI7=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
-    set DIR_DELPHI11=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11\PROJECTS_D11
-
-    set DIR_LUIS_D7=!DIR_DELPHI7!\LUIS_D7
-    set DIR_TOOLS_D7=!DIR_DELPHI7!\TOOLS_D7
-    set DIR_LUIS_D11=!DIR_DELPHI11!\LUIS_D11
-    set DIR_TOOLS_D11=!DIR_DELPHI11!\TOOLS_D11
-
     call :REPO_WORK !DIR_LUIS_D7! 0 || exit /b 1
     call :REPO_WORK !DIR_TOOLS_D7! 0 || exit /b 1
     call :REPO_WORK !DIR_LUIS_D11! 0 || exit /b 1
@@ -157,19 +208,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set DIR_PYTHON=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY
-
-    set DIR_EXAMPLES_PY=!DIR_PYTHON!\EXAMPLES_PY
-    set DIR_MobileAPP_PY=!DIR_PYTHON!\MobileAPP_PY
-    set DIR_PATTERN_PY=!DIR_PYTHON!\PATTERN_PY
-    set DIR_TEST_PY=!DIR_PYTHON!\TEST_PY
-    set DIR_YOUTUBE_PY=!DIR_PYTHON!\YOUTUBE_PY
-    set DIR_TESTS_PY=!DIR_PYTHON!\TESTS_PY
-    set DIR_TOOLS_SRC_PY=!DIR_PYTHON!\TOOLS_SRC_PY
-
-    set DIR_TOOLS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
-    set DIR_TOOLS_PY_=D:\TOOLS\TOOLS_PY
 
     call :REPO_WORK !DIR_EXAMPLES_PY! 1 || exit /b 1
     call :REPO_WORK !DIR_MobileAPP_PY! 1 || exit /b 1
@@ -198,12 +236,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA
-    set DIR_TESTS_JAVA=!DIR_JAVA!\TESTS_JAVA
-    set DIR_TOOLS_SRC_JAVA=!DIR_JAVA!\TOOLS_SRC_JAVA
-
-    set DIR_TOOLS_JAVA= D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\TOOLS_JAVA
-
     call :REPO_WORK !DIR_TESTS_JAVA! 0 || exit /b 1
 
     call :REPO_WORK !DIR_TOOLS_SRC_JAVA! 0 || exit /b 1
@@ -223,10 +255,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set DIR_TOOLS_SRC_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-    set DIR_TOOLS_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
-    set DIR_TOOLS_KIX_=D:\TOOLS\TOOLS_KIX
 
     call :REPO_WORK !DIR_TOOLS_SRC_KIX! 0 || exit /b 1
     call :UPDATE_TOOLS_KIX || exit /b 1
@@ -248,10 +276,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_TOOLS_SRC_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
-    set DIR_TOOLS_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
-    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
-
     call :REPO_WORK !DIR_TOOLS_SRC_BAT! 0 || exit /b 1
     call :UPDATE_TOOLS_BAT || exit /b 1
     call :REPO_WORK !DIR_TOOLS_BAT! 0 || exit /b 1
@@ -272,10 +296,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_TOOLS_SRC_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
-    set DIR_TOOLS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
-    set DIR_TOOLS_GIT_=D:\TOOLS\TOOLS_GIT
-
     call :REPO_WORK !DIR_TOOLS_SRC_GIT! 0 || exit /b 1
     call :UPDATE_TOOLS_GIT || exit /b 1
     call :REPO_WORK !DIR_TOOLS_GIT! 0 || exit /b 1
@@ -295,9 +315,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set DIR_TOOLS_SRC_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
-    set DIR_TOOLS_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
 
     call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
     call :UPDATE_TOOLS_SH || exit /b 1
