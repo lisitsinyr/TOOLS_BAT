@@ -339,17 +339,233 @@ rem beginfunction
     set GDirectory=!DIR_05_01_Pascal_Delphi!\01_Delphi_5
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
+
     set GDirectory=!DIR_05_01_Pascal_Delphi!\02_Delphi_7
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
+    
     set GDirectory=!DIR_05_01_Pascal_Delphi!\03_Delphi_11
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
+    
     set GDirectory=!DIR_05_01_Pascal_Delphi!\04_TP5
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
+    
     set GDirectory=!DIR_05_01_Pascal_Delphi!\99_Õ¿—“–Œ… »
     set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure MAIN_05_01_Pascal_Delphi_01_Delphi_5 ()
+rem -----------------------------------------------
+:MAIN_05_01_Pascal_Delphi_01_Delphi_5
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIR_05_01_Pascal_Delphi_01_Delphi_5=CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\01_Delphi_5
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\FRAMEWORK
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\LIBRARY
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\PROJECTS
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\SOFTWARE
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\WORK
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\ƒŒ ”Ã≈Õ“¿÷»ﬂ
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\ƒŒ ”Ã≈Õ“€
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\ Õ»√»
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\ ”–—€
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\Õ¿—“–Œ… »
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\—“¿“‹»
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\LIBRARY_D5
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\PROJECTS_D5
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure MAIN_05_01_Pascal_Delphi_02_Delphi_7 ()
+rem -----------------------------------------------
+:MAIN_05_01_Pascal_Delphi_02_Delphi_7
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIR_05_01_Pascal_Delphi_02_Delphi_7=CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\FRAMEWORK
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\LIBRARY
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\PROJECTS
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\SOFTWARE
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\WORK
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\ƒŒ ”Ã≈Õ“¿÷»ﬂ
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\ƒŒ ”Ã≈Õ“€
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\ Õ»√»
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\ ”–—€
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\Õ¿—“–Œ… »
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\—“¿“‹»
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\LIBRARY_D7
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\PROJECTS_D7\LUIS_D7
+    set GRepo="git@github.com:lisitsinyr/LUIS_D7.git"
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\PROJECTS_D7\TOOLS_D7
+    set GRepo="git@github.com:lisitsinyr/TOOLS_D7.git"
+    call :MAIN_CreateDirectory || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure MAIN_05_01_Pascal_Delphi_03_Delphi_11 ()
+rem -----------------------------------------------
+:MAIN_05_01_Pascal_Delphi_03_Delphi_11
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set DIR_05_01_Pascal_Delphi_03_Delphi_11=CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\FRAMEWORK
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\LIBRARY
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\PROJECTS
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\SOFTWARE
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\WORK
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\ƒŒ ”Ã≈Õ“¿÷»ﬂ
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\ƒŒ ”Ã≈Õ“€
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\ Õ»√»
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\ ”–—€
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\Õ¿—“–Œ… »
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\—“¿“‹»
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\LIBRARY_D11
+    set GRepo=
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\PROJECTS_D11\LUIS_D11
+    set GRepo="git@github.com:lisitsinyr/LUIS_D11.git"
+    call :MAIN_CreateDirectory || exit /b 1
+
+    set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\PROJECTS_D11\TOOLS_D11
+    set GRepo="git@github.com:lisitsinyr/TOOLS_D11.git"
     call :MAIN_CreateDirectory || exit /b 1
 
     exit /b 0
@@ -600,6 +816,9 @@ rem beginfunction
     call :MAIN_03_04_BAT || exit /b 1
     
     call :MAIN_05_01_Pascal_Delphi || exit /b 1
+    call :MAIN_05_01_Pascal_Delphi_01_Delphi_5 || exit /b 1
+    call :MAIN_05_01_Pascal_Delphi_02_Delphi_7 || exit /b 1
+    call :MAIN_05_01_Pascal_Delphi_03_Delphi_11 || exit /b 1
 
     call :MAIN_05_02_Python || exit /b 1
     
