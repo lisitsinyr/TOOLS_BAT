@@ -423,25 +423,25 @@ rem beginfunction
     )
 
     call :MAIN_01_03_UNIX %* || exit /b 1
-    call :PressAnyKey || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     call :MAIN_03_01_KIX %* || exit /b 1
-    call :PressAnyKey || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     call :MAIN_03_04_BAT %* || exit /b 1
-    call :PressAnyKey || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     call :MAIN_05_01_Pascal_Delphi %* || exit /b 1
-    call :PressAnyKey || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     call :MAIN_05_02_Python %* || exit /b 1
-    call :PressAnyKey || exit /b 1
+    rem call :PressAnyKey || exit /b 1
     
     call :MAIN_05_03_Java %* || exit /b 1
-    call :PressAnyKey || exit /b 1
+    rem call :PressAnyKey || exit /b 1
     
     call :MAIN_07_GIT %* || exit /b 1
-    call :PressAnyKey || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     exit /b 0
 rem endfunction
