@@ -482,7 +482,6 @@ rem beginfunction
         copy !LFileName! > NUL
     )
 
-
     if !APYTHON!==1 (
         set LFileName=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\PROJECT_PYupdate.bat
         rem echo LFileName: !LFileName!
