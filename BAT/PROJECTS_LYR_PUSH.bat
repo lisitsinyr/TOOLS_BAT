@@ -466,7 +466,8 @@ rem beginfunction
     call :GetINIParametr REPO.ini general REPO_NAME || exit /b 1
     echo REPO_NAME:!REPO_NAME!
 
-    rem del *.bat > NUL
+    del *.bat
+    del *.sh
 
     set LFileName=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT\BAT\A.WORK\lyrgit_push_main.bat
     rem echo LFileName:!LFileName!
@@ -720,9 +721,9 @@ rem beginfunction
 
     cd /D "!ADirectory!"
 
-    rem call lyrgit_pull_main.bat
-    git pull    
-    
+    call lyrgit_pull_main.bat
+    rem git pull    
+
     exit /b 0
 rem endfunction
 
