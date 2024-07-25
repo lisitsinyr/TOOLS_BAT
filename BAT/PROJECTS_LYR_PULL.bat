@@ -138,7 +138,7 @@ rem beginfunction
     call :MAIN_CreateDirectory || exit /b 1
 
     set GDirectory=!DIR_01_03_UNIX!\PROJECTS_UNIX\COMMANDS
-    set GRepo=
+    set GRepo=git@github.com:lisitsinyr/COMMANDS_SH.git
     call :MAIN_CreateDirectory || exit /b 1
 
     set GDirectory=!DIR_01_03_UNIX!\PROJECTS_UNIX\TESTS_SH

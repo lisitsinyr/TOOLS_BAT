@@ -102,33 +102,28 @@ rem beginfunction
     rem ------------------------------------------------
     rem 01_03_UNIX
     rem ------------------------------------------------
-    rem set DIR_TOOLS_SRC_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
+    set DIR_COMMANDS_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\COMMANDS_SH
+    echo DIR_COMMANDS_SH:!COMMANDS_SH!
     set DIR_TOOLS_SRC_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
     echo DIR_TOOLS_SRC_SH:!DIR_TOOLS_SRC_SH!
-    rem set DIR_TOOLS_SH=D:\PROJECTS_LYR\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
     set DIR_TOOLS_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
     echo DIR_TOOLS_SH:!DIR_TOOLS_SH!
 
     rem ------------------------------------------------
     rem 03_01_KIX
     rem ------------------------------------------------
-    rem set DIR_TOOLS_SRC_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
     set DIR_TOOLS_SRC_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
     echo DIR_TOOLS_SRC_KIX:!DIR_TOOLS_SRC_KIX!
-    rem set DIR_TOOLS_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
     set DIR_TOOLS_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
     echo DIR_TOOLS_KIX:!DIR_TOOLS_KIX!
-
     set DIR_TOOLS_KIX_=D:\TOOLS\TOOLS_KIX
     echo DIR_TOOLS_KIX_:!DIR_TOOLS_KIX_!
 
     rem ------------------------------------------------
     rem 03_04_BAT
     rem ------------------------------------------------
-    rem set DIR_TOOLS_SRC_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     set DIR_TOOLS_SRC_BAT=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     echo DIR_TOOLS_SRC_BAT:!DIR_TOOLS_SRC_BAT!
-    rem set DIR_TOOLS_BAT=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
     set DIR_TOOLS_BAT=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
     echo DIR_TOOLS_BAT:!DIR_TOOLS_BAT!
 
@@ -138,12 +133,10 @@ rem beginfunction
     rem ------------------------------------------------
     rem 05_01_Pascal_Delphi
     rem ------------------------------------------------
-    rem set DIR_DELPHI7=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
     set DIR_DELPHI7=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
     echo DIR_DELPHI7:!DIR_DELPHI7!
     set DIR_LUIS_D7=!DIR_DELPHI7!\LUIS_D7
     set DIR_TOOLS_D7=!DIR_DELPHI7!\TOOLS_D7
-    rem set DIR_DELPHI11=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11\PROJECTS_D11
     set DIR_DELPHI11=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11\PROJECTS_D11
     echo DIR_DELPHI11:!DIR_DELPHI11!
     set DIR_LUIS_D11=!DIR_DELPHI11!\LUIS_D11
@@ -152,7 +145,6 @@ rem beginfunction
     rem ------------------------------------------------
     rem 05_02_Python
     rem ------------------------------------------------
-    rem set DIR_PYTHON=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY
     set DIR_PYTHON=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY
     echo DIR_PYTHON:!DIR_PYTHON!
     set DIR_EXAMPLES_PY=!DIR_PYTHON!\EXAMPLES_PY
@@ -162,7 +154,6 @@ rem beginfunction
     set DIR_YOUTUBE_PY=!DIR_PYTHON!\YOUTUBE_PY
     set DIR_TESTS_PY=!DIR_PYTHON!\TESTS_PY
     set DIR_TOOLS_SRC_PY=!DIR_PYTHON!\TOOLS_SRC_PY
-    rem set DIR_TOOLS_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
     set DIR_TOOLS_PY=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
     echo DIR_TOOLS_PY:!DIR_TOOLS_PY!
 
@@ -172,24 +163,20 @@ rem beginfunction
     rem ------------------------------------------------
     rem 05_03_Java
     rem ------------------------------------------------
-    rem set DIR_JAVA=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA
     set DIR_JAVA=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA
     echo DIR_JAVA:!DIR_JAVA!
     set DIR_TESTS_JAVA=!DIR_JAVA!\TESTS_JAVA
     echo DIR_TESTS_JAVA:!DIR_TESTS_JAVA!
     set DIR_TOOLS_SRC_JAVA=!DIR_JAVA!\TOOLS_SRC_JAVA
     echo DIR_TOOLS_SRC_JAVA:!DIR_TOOLS_SRC_JAVA!
-    rem set DIR_TOOLS_JAVA= D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\03_Java\TOOLS_JAVA
     set DIR_TOOLS_JAVA=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\03_Java\TOOLS_JAVA
     echo DIR_TOOLS_JAVA:!DIR_TOOLS_JAVA!
 
     rem ------------------------------------------------
     rem 07_GIT
     rem ------------------------------------------------
-    rem set DIR_TOOLS_SRC_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
     set DIR_TOOLS_SRC_GIT=!PROJECTS_LYR_DIR!\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
     echo DIR_TOOLS_SRC_GIT:!DIR_TOOLS_SRC_GIT!
-    rem set DIR_TOOLS_GIT=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\TOOLS_GIT
     set DIR_TOOLS_GIT=!PROJECTS_LYR_DIR!\CHECK_LIST\07_GIT\TOOLS_GIT
     echo DIR_TOOLS_GIT:!DIR_TOOLS_GIT!
 
@@ -255,6 +242,8 @@ rem beginfunction
     echo ===============================
     echo 01_03_UNIX ...
     echo ===============================
+
+    call :REPO_WORK !DIR_COMMANDS_SH! 0 || exit /b 1
 
     call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
     call :UPDATE_TOOLS_SH || exit /b 1
