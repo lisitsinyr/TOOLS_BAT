@@ -244,7 +244,6 @@ rem beginfunction
     echo ===============================
 
     call :REPO_WORK !DIR_COMMANDS_SH! 0 || exit /b 1
-
     call :REPO_WORK !DIR_TOOLS_SRC_SH! 0 || exit /b 1
     call :UPDATE_TOOLS_SH || exit /b 1
     call :REPO_WORK !DIR_TOOLS_SH! 0 || exit /b 1
