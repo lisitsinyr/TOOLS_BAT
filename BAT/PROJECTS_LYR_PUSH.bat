@@ -725,8 +725,16 @@ rem beginfunction
 
     cd /D "!ADirectory!"
 
-    call lyrgit_pull.bat
-    rem git pull    
+    echo -------------------------------
+    echo git pull !ADirectory! ...
+    echo -------------------------------
+
+    call :PressAnyKey || exit /b 1
+
+    rem call lyrgit_pull.bat
+    git pull
+
+    call :PressAnyKey || exit /b 1
 
     exit /b 0
 rem endfunction
