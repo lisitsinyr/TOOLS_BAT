@@ -460,7 +460,7 @@ rem beginfunction
     echo REPO_NAME:!REPO_NAME!
 
     del *.bat
-    del *.sh > NUL
+    rem del *.sh
 
     set LFileName=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT\BAT\A.WORK\lyrgit_push_main.bat
     rem echo LFileName:!LFileName!
