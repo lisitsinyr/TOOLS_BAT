@@ -27,8 +27,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set PROJECTS_LYR_ROOT=D:
     set PROJECTS_LYR_ROOT=D:\WORK\WIN
+    set PROJECTS_LYR_ROOT=D:
     echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
@@ -810,20 +810,20 @@ rem beginfunction
 
     call :MAIN_01_03_UNIX || exit /b 1
     
-    call :MAIN_03_01_KIX || exit /b 1
+    rem call :MAIN_03_01_KIX || exit /b 1
 
-    call :MAIN_03_04_BAT || exit /b 1
+    rem call :MAIN_03_04_BAT || exit /b 1
     
-    call :MAIN_05_01_Pascal_Delphi || exit /b 1
-    call :MAIN_05_01_Pascal_Delphi_01_Delphi_5 || exit /b 1
-    call :MAIN_05_01_Pascal_Delphi_02_Delphi_7 || exit /b 1
-    call :MAIN_05_01_Pascal_Delphi_03_Delphi_11 || exit /b 1
+    rem call :MAIN_05_01_Pascal_Delphi || exit /b 1
+    rem call :MAIN_05_01_Pascal_Delphi_01_Delphi_5 || exit /b 1
+    rem call :MAIN_05_01_Pascal_Delphi_02_Delphi_7 || exit /b 1
+    rem call :MAIN_05_01_Pascal_Delphi_03_Delphi_11 || exit /b 1
 
-    call :MAIN_05_02_Python || exit /b 1
+    rem call :MAIN_05_02_Python || exit /b 1
     
-    call :MAIN_05_03_Java || exit /b 1
+    rem call :MAIN_05_03_Java || exit /b 1
 
-    call :MAIN_07_GIT || exit /b 1
+    rem call :MAIN_07_GIT || exit /b 1
 
     exit /b 0
 :end
