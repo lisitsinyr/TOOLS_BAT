@@ -730,8 +730,10 @@ rem beginfunction
     echo -------------------------------
 
     if exist lyrgit_pull.bat (
+        echo lyrgit_pull.bat
         call lyrgit_pull.bat
     ) else (
+        echo git pull
         git pull
     )
 
