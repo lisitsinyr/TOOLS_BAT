@@ -729,12 +729,11 @@ rem beginfunction
     echo git pull !ADirectory! ...
     echo -------------------------------
 
-    call :PressAnyKey || exit /b 1
-
-    rem call lyrgit_pull.bat
-    git pull
-
-    call :PressAnyKey || exit /b 1
+    if exist lyrgit_pull.bat (
+        call lyrgit_pull.bat
+    ) else (
+        git pull
+    )
 
     exit /b 0
 rem endfunction
