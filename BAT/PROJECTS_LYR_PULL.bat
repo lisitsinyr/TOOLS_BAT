@@ -6,6 +6,18 @@ chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
+rem -------------------------------------------------------------------
+rem SCRIPTS_DIR - Каталог скриптов
+rem -------------------------------------------------------------------
+if not defined SCRIPTS_DIR (
+    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+)
+
+rem -------------------------------------------------------------------
+rem LIB_BAT - каталог библиотеки скриптов
+rem -------------------------------------------------------------------
+set LIB_BAT=!SCRIPTS_DIR!\LIB
+
 rem --------------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
@@ -73,6 +85,7 @@ rem beginfunction
         ) else (
             echo ...git pull:!GRepo!
             git pull
+            rem call :PressAnyKey || exit /b 1
         )
     )
 
@@ -835,6 +848,9 @@ rem =================================================
 rem LYRSupport.bat
 rem =================================================
 :Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:PressAnyKey
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 
