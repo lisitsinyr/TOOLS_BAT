@@ -64,6 +64,7 @@ rem beginfunction
     cd /d !GDirectory!
 
     if defined GRepo (
+        echo GDirectory:!GDirectory!
         rem echo GRepo:!GRepo!
         if not exist ".git"\ (
             cd ..\
