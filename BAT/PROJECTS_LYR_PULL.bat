@@ -30,13 +30,11 @@ rem beginfunction
     set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
     echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
-
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
-
     if not exist "!PROJECTS_LYR_DIR!"\ (
         rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist...
-        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        echo INFO: Create "!PROJECTS_LYR_DIR!" ...
         mkdir "!PROJECTS_LYR_DIR!"
     )
 
@@ -59,7 +57,7 @@ rem beginfunction
     if not exist "!GDirectory!"\ (
         echo GDirectory:!GDirectory!
         rem echo INFO: Dir "!GDirectory!" not exist ...
-        rem echo INFO: Create "!GDirectory!" ...
+        echo INFO: Create "!GDirectory!" ...
         mkdir "!GDirectory!"
     )
 
@@ -69,10 +67,10 @@ rem beginfunction
         rem echo GRepo:!GRepo!
         if not exist ".git"\ (
             cd ..\
-            echo ...git clone: !GRepo!
+            echo ...git clone:!GRepo!
             git clone !GRepo!
         ) else (
-            echo ...git pull: !GRepo!
+            echo ...git pull:!GRepo!
             git pull
         )
     )

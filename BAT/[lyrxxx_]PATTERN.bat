@@ -11,9 +11,35 @@ rem
 rem --------------------------------------------------------------------------------
 :begin
     call :MAIN %* || exit /b 1
+
     exit /b 0
 :end
 rem --------------------------------------------------------------------------------
+
+rem -----------------------------------------------
+rem procedure MAIN_SetROOT ()
+rem -----------------------------------------------
+:MAIN_SetROOT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SetROOT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set PROJECTS_LYR_ROOT=D:\WORK\WIN
+    set PROJECTS_LYR_ROOT=D:
+    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    if not exist "!PROJECTS_LYR_DIR!"\ (
+        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
+        echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        mkdir "!PROJECTS_LYR_DIR!"
+    )
+
+    exit /b 0
+rem endfunction
 
 rem -----------------------------------------------
 rem procedure MAIN_INIT ()
@@ -26,18 +52,12 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set PROJECTS_LYR_ROOT=D:
-    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
-
-    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
-
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
     rem -------------------------------------------------------------------
@@ -49,14 +69,14 @@ rem beginfunction
     )
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
-        exit /b 0
+        exit /b 1
     )
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+        set SCRIPTS_DIR_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
@@ -159,6 +179,8 @@ rem beginfunction
 
     set DEBUG=
     set /a LOG_FILE_ADD=0
+
+    call :MAIN_SetROOT || exit /b 1
 
     call :MAIN_INIT || exit /b 1
 
@@ -289,52 +311,6 @@ exit /b 0
 :TrimQuotes
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
-rem =================================================
-rem LYRSupport.bat
-rem =================================================
-:PressAnyKey
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Pause
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_P
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_N
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:Read_F
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetINI
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:SetINI
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetINIParametr
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetFileParser
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetDir
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetFile
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:FORCicle
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetSET
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GetCMD
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-rem =================================================
 rem =================================================
 rem LYRSupport.bat
 rem =================================================

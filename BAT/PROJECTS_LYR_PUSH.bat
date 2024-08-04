@@ -16,6 +16,31 @@ rem ----------------------------------------------------------------------------
 rem --------------------------------------------------------------------------------
 
 rem -----------------------------------------------
+rem procedure MAIN_SetROOT ()
+rem -----------------------------------------------
+:MAIN_SetROOT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SetROOT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set PROJECTS_LYR_ROOT=D:\WORK\WIN
+    set PROJECTS_LYR_ROOT=D:
+    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    if not exist "!PROJECTS_LYR_DIR!"\ (
+        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
+        echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        mkdir "!PROJECTS_LYR_DIR!"
+    )
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
 rem procedure MAIN_INIT ()
 rem -----------------------------------------------
 :MAIN_INIT
@@ -31,7 +56,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
     rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
     rem -------------------------------------------------------------------
@@ -43,42 +68,16 @@ rem beginfunction
     )
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
-        exit /b 0
+        exit /b 1
     )
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
         set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+        set SCRIPTS_DIR_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
     )
     rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
-
-    exit /b 0
-rem endfunction
-
-rem -----------------------------------------------
-rem procedure MAIN_SetROOT ()
-rem -----------------------------------------------
-:MAIN_SetROOT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_SetROOT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    set PROJECTS_LYR_ROOT=D:\WORK\WIN
-    set PROJECTS_LYR_ROOT=D:
-    echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
-    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
-
-    if not exist "!PROJECTS_LYR_DIR!"\ (
-        echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
-        echo INFO: Create "!PROJECTS_LYR_DIR!" ...
-        mkdir "!PROJECTS_LYR_DIR!"
-    )
 
     exit /b 0
 rem endfunction
@@ -95,8 +94,6 @@ rem beginfunction
     )
 
     set /a LOG_FILE_ADD=1
-
-    call :MAIN_SetROOT || exit /b 1
 
     rem ------------------------------------------------
     rem 01_03_UNIX
@@ -725,17 +722,8 @@ rem beginfunction
 
     cd /D "!ADirectory!"
 
-    echo -------------------------------
-    echo git pull !ADirectory! ...
-    echo -------------------------------
-
-    if exist lyrgit_pull.bat (
-        echo lyrgit_pull.bat
-        call lyrgit_pull.bat
-    ) else (
-        echo git pull
-        git pull
-    )
+    call lyrgit_pull.bat
+    rem git pull    
 
     exit /b 0
 rem endfunction
@@ -756,6 +744,8 @@ rem beginfunction
 
     set DEBUG=
     set /a LOG_FILE_ADD=0
+
+    call :MAIN_SetROOT || exit /b 1
 
     call :MAIN_INIT || exit /b 1
 
