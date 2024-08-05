@@ -454,7 +454,9 @@ rem beginfunction
     rem echo APYTHON:!APYTHON!
 
     call :GetINIParametr REPO.ini general REPO_NAME || exit /b 1
+    echo -------------------------------
     echo REPO_NAME:!REPO_NAME!
+    echo -------------------------------
 
     del *.bat
     rem del *.sh
