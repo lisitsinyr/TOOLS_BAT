@@ -103,6 +103,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo ===============================
+    echo 01_03_UNIX ...
+    echo ===============================
+
     set DIR_01_03_UNIX=CHECK_LIST\01_OS\03_UNIX
 
     set GDirectory=!DIR_01_03_UNIX!\SOFTWARE
@@ -175,6 +179,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo ===============================
+    echo 03_01_KIX ...
+    echo ===============================
+
     set DIR_03_01_KIX=CHECK_LIST\03_SCRIPT\01_KIX
 
     set GDirectory=!DIR_03_01_KIX!\SOFTWARE
@@ -240,6 +248,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo ===============================
+    echo 03_04_BAT ...
+    echo ===============================
+
     set DIR_03_04_BAT=CHECK_LIST\03_SCRIPT\04_BAT
 
     set GDirectory=!DIR_03_04_BAT!\SOFTWARE
@@ -304,6 +316,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    echo ===============================
+    echo 05_01_Pascal_Delphi ...
+    echo ===============================
 
     set DIR_05_01_Pascal_Delphi=CHECK_LIST\05_DESKTOP\01_Pascal_Delphi
 
@@ -593,6 +609,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo ===============================
+    echo 05_02_Python ...
+    echo ===============================
+
     set DIR_05_02_Python=CHECK_LIST\05_DESKTOP\02_Python
 
     set GDirectory=!DIR_05_02_Python!\SOFTWARE
@@ -687,6 +707,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo ===============================
+    echo 05_03_Java ...
+    echo ===============================
+
     set DIR_05_03_Java=CHECK_LIST\05_DESKTOP\03_Java
 
     set GDirectory=!DIR_05_03_Java!\SOFTWARE
@@ -754,6 +778,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    echo ===============================
+    echo 07_GIT ...
+    echo ===============================
 
     set DIR_07_GIT=CHECK_LIST\07_GIT
 
