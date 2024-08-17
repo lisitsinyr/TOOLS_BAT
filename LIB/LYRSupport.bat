@@ -126,6 +126,7 @@ rem endfunction
 
 rem --------------------------------------------------------------------------------
 rem procedure Read_F (P_Name, P_List, Atimeout)
+rem procedure Read_F (P_Name, P_List, ADefault, ACaption, Atimeout)
 rem --------------------------------------------------------------------------------
 :Read_F
 rem beginfunction
@@ -136,29 +137,39 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem !P_Name! - имя переменной
+    rem P_Name      - Имя переменной
+    rem P_List      - список создаваемых вариантов
+    rem ADefault    - Значение по умолчанию 
+    rem ACaption    - CAPTION
+    rem Atimeout    - timeout
+
+    rem P_Value     - Значение переменной
+    rem !%P_Name%!  - Значение переменной по умолчанию
+    rem !P_Name!    - имя переменной
+
     set P_Name=%1
-    rem echo P_Name:!P_Name!
-
-    rem !%P_Name%! - значение переменной по умолчанию
-    rem echo P_Value [default]:!%P_Name%!
-
-    rem список создаваемых вариантов
+    echo P_Name:!P_Name!
     set P_List=%~2
-    rem echo P_List: !P_List!
-
-    rem Atimeout
-    set Atimeout=%3
-    rem echo Atimeout:!Atimeout!
-
-    if not defined Atimeout (
-        set Atimeout=10
+    echo P_List:!P_List!
+    set ADefault=%~3
+    echo ADefault:!ADefault!
+    set ACaption=%~4
+    if "!ACaption!"=="" (
+        set ACaption=!PN_CAPTION!
     )
-    rem echo Atimeout:!Atimeout!
+    echo ACaption:!ACaption!
+    set Atimeout=%5
+    set Atimeout=!TIMEOUT!
+    if not defined Atimeout (
+        set Atimeout=5
+    )
+    echo Atimeout:!Atimeout!
 
     set %P_Name%=!%P_Name%!
+    set %P_Name%=!ADefault!
+
     if not "!P_List!"=="" (
-        choice /C !P_List! /D !%P_Name%! /T !Atimeout! /M "!PN_CAPTION!"
+        choice /C !P_List! /D !%P_Name%! /T !Atimeout! /M "!ACaption!"
         if !ERRORLEVEL!==1 (
             set %P_Name%=!ERRORLEVEL!
         ) else (
