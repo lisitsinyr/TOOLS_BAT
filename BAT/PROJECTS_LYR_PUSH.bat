@@ -769,6 +769,8 @@ rem beginfunction
     )
     call :StopLogFile || exit /b 1
 
+    call :PressAnyKey || exit /b 1
+
     exit /b 0
 rem endfunction
 
