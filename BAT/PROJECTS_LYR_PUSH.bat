@@ -695,9 +695,9 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE__PY (ADirectory)
+rem procedure UPDATE_D7 (ADirectory)
 rem --------------------------------------------------------------------------------
-:UPDATE_TOOLS_PY
+:UPDATE_TOOLS_D7
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
