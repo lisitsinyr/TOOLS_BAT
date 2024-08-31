@@ -691,6 +691,9 @@ rem beginfunction
     set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
+    set LMASK=*.py
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
     exit /b 0
 rem endfunction
 
