@@ -337,14 +337,16 @@ rem beginfunction
     echo 05_02_Python ...
     echo ===============================
 
-    call :REPO_WORK !DIR_EXAMPLES_PY! 1 || exit /b 1
-    call :REPO_WORK !DIR_MobileAPP_PY! 1 || exit /b 1
-    call :REPO_WORK !DIR_PATTERN_PY! 1 || exit /b 1
-    call :REPO_WORK !DIR_TEST_PY! 1 || exit /b 1
-    call :REPO_WORK !DIR_YOUTUBE_PY! 1 || exit /b 1
-    call :REPO_WORK !DIR_TESTS_PY! 1 || exit /b 1
+    rem call :REPO_WORK !DIR_EXAMPLES_PY! 1 || exit /b 1
+    rem call :REPO_WORK !DIR_MobileAPP_PY! 1 || exit /b 1
+    rem call :REPO_WORK !DIR_PATTERN_PY! 1 || exit /b 1
+    rem call :REPO_WORK !DIR_TEST_PY! 1 || exit /b 1
+    rem call :REPO_WORK !DIR_YOUTUBE_PY! 1 || exit /b 1
+    rem call :REPO_WORK !DIR_TESTS_PY! 1 || exit /b 1
+
     call :REPO_WORK !DIR_TOOLS_SRC_PY! 1 || exit /b 1
     call :UPDATE_TOOLS_PY || exit /b 1
+
     call :REPO_WORK !DIR_TOOLS_PY! 0 || exit /b 1
 
     call :git_pull !DIR_TOOLS_PY_! || exit /b 1
@@ -692,7 +694,7 @@ rem beginfunction
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     set LMASK=*.py
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     exit /b 0
 rem endfunction
