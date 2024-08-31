@@ -313,8 +313,11 @@ rem beginfunction
 
     call :REPO_WORK !DIR_LUIS_D7! 0 || exit /b 1
     call :REPO_WORK !DIR_TOOLS_D7! 0 || exit /b 1
+    call :UPDATE_TOOLS_D7 || exit /b 1
+
     call :REPO_WORK !DIR_LUIS_D11! 0 || exit /b 1
     call :REPO_WORK !DIR_TOOLS_D11! 0 || exit /b 1
+    rem call :UPDATE_TOOLS_D7 || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -687,6 +690,33 @@ rem beginfunction
     set LMASK=*.*
     set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE__PY (ADirectory)
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_PY
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LDIR_TO=D:\TOOLS\EXE
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
+
+    set LDIR_FROM=!DIR_TOOLS_D7!\SRC\GetINI
+    set LMASK=GetINI.exe
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+    set LDIR_FROM=!DIR_TOOLS_D7!\SRC\SetINI
+    set LMASK=SetINI.exe
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     exit /b 0
 rem endfunction
