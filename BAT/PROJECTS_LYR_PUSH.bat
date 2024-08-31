@@ -695,6 +695,8 @@ rem beginfunction
 
     set LMASK=*.py
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     exit /b 0
 rem endfunction
