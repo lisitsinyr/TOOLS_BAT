@@ -16,18 +16,14 @@ rem -------------------------------------------------------------------
 rem LIB_BAT - каталог библиотеки скриптов
 rem -------------------------------------------------------------------
 set LIB_BAT=!SCRIPTS_DIR!\LIB
+
 rem -------------------------------------------------------------------
 rem SCRIPTS_DIR_PY - Каталог скриптов PY
 rem -------------------------------------------------------------------
 if not defined SCRIPTS_DIR_PY (
-    set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\SCRIPTS
+    set SCRIPTS_DIR_PY=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\SCRIPTS
 )
-rem -------------------------------------------------------------------
-rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-rem -------------------------------------------------------------------
-if not defined SCRIPTS_DIR_KIX (
-    set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-)
+echo SCRIPTS_DIR_PY:!SCRIPTS_DIR_PY!
 
 rem --------------------------------------------------------------------------------
 rem 
@@ -56,6 +52,7 @@ rem ----------------------------------------------------------------------------
     ) else (
         echo INFO: O1 not defined ...
     )
+    echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
@@ -71,16 +68,11 @@ rem ----------------------------------------------------------------------------
         echo ERROR: A1 not defined ...
         set OK=
     )
+    echo ARGS:!ARGS!
 
-    rem set APP_KIX_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX\KIX
-    rem set APP_KIX=
-    rem call :SET_KIX || exit /b 1
-    rem if exist !APP_KIX_DIR!\!APP_KIX!.kix (
-    rem     echo START !APP_KIX_DIR!\!APP_KIX!.kix ... 
-    rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
-    rem )
+    rem python "!SCRIPTS_DIR_PY!"\COPYFILE\COPYFILE.py !ARGS!
 
-    rem call :PressAnyKey || exit /b 1
+    call :PressAnyKey || exit /b 1
 
     exit /b 0
 :end
@@ -113,6 +105,9 @@ rem =================================================
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 :Read_N
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0

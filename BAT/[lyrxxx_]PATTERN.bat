@@ -71,14 +71,6 @@ rem beginfunction
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
     )
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-    rem -------------------------------------------------------------------
-    if not defined SCRIPTS_DIR_KIX (
-        set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
-        set SCRIPTS_DIR_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-    )
-    rem echo SCRIPTS_DIR_KIX: !SCRIPTS_DIR_KIX!
 
     exit /b 0
 rem endfunction
@@ -120,6 +112,7 @@ rem beginfunction
     ) else (
         echo INFO: O1 not defined ...
     )
+    echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
@@ -135,6 +128,7 @@ rem beginfunction
         echo ERROR: A1 not defined ...
         set OK=
     )
+    echo ARGS:!ARGS!
 
     exit /b 0
 rem endfunction
@@ -149,16 +143,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    rem set APP_KIX_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_KIX\KIX
-    rem set APP_KIX=
-
-    rem call :SET_KIX || exit /b 1
-
-    rem if exist !APP_KIX_DIR!\!APP_KIX!.kix (
-    rem     echo START !APP_KIX_DIR!\!APP_KIX!.kix ... 
-    rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
-    rem )
 
     exit /b 0
 rem endfunction
