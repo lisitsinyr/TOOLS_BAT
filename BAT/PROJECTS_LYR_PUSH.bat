@@ -646,6 +646,14 @@ rem beginfunction
     set LMASK=*.*
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
+    rem --------------------------------------------------------
+    rem !DIR_TOOLS_SRC_KIX!\SRC\SCRIPTS
+    rem --------------------------------------------------------
+    set LDIR_FROM=!DIR_TOOLS_SRC_KIX!\SRC\SCRIPTS
+    set LDIR_TO=!DIR_TOOLS_KIX!\BAT
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
     exit /b 0
 rem endfunction
 
