@@ -12,12 +12,16 @@ rem -------------------------------------------------------------------
 if not defined SCRIPTS_DIR (
     set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
 )
-
 rem -------------------------------------------------------------------
 rem LIB_BAT - каталог библиотеки скриптов
 rem -------------------------------------------------------------------
 set LIB_BAT=!SCRIPTS_DIR!\LIB
-
+rem -------------------------------------------------------------------
+rem SCRIPTS_DIR_PY - Каталог скриптов PY
+rem -------------------------------------------------------------------
+if not defined SCRIPTS_DIR_PY (
+    set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\SCRIPTS
+)
 rem -------------------------------------------------------------------
 rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
 rem -------------------------------------------------------------------
