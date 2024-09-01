@@ -103,7 +103,7 @@ rem beginfunction
     if not defined LIB_KIX (
         echo INFO: Directory LIB_KIX not set ...
         if "!COMPUTERNAME!"=="!USERDOMAIN!" (
-            set LIB_KIX=!SCRIPTS_DIR_KIX!\LIB
+            set LIB_KIX=!SCRIPTS_DIR_KIX!\SRC\LIB
         ) else (
             set LIB_KIX=\\S73FS01\APPInfo\tools\LIB
         )
@@ -119,7 +119,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem APP_KIX_DIR - каталог APP_KIX
     rem -------------------------------------------------------------------
-    set APP_KIX_DIR=!SCRIPTS_DIR_KIX!\KIX
+    set APP_KIX_DIR=!SCRIPTS_DIR_KIX!\SRC\SCRIPTS
 
     rem -------------------------------------------------------------------
     rem APP_KIX - Скрипт APP_KIX имя
