@@ -671,6 +671,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\BAT
     set LDIR_TO=!DIR_TOOLS_PY!\BAT
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
@@ -678,10 +679,10 @@ rem beginfunction
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
-    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\BAT
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
     set LDIR_TO=!DIR_TOOLS_PY!\SCRIPTS
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
@@ -690,11 +691,15 @@ rem beginfunction
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
     set LMASK=*.*
-    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-    set LMASK=*.py
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+    rem set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
+    rem set LDIR_TO=!DIR_TOOLS_PY!\SCRIPTS
+    rem set LMASK=*.py
+    rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+    
+    set LDIR_FROM=!DIR_TOOLS_SRC_PY!\SRC\SCRIPTS
+    set LDIR_TO=!DIR_TOOLS_PY!\BAT
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
@@ -721,6 +726,7 @@ rem beginfunction
     set LDIR_FROM=!DIR_TOOLS_D7!\SRC\GetINI
     set LMASK=GetINI.exe
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
     set LDIR_FROM=!DIR_TOOLS_D7!\SRC\SetINI
     set LMASK=SetINI.exe
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
