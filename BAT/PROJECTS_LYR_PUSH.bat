@@ -63,7 +63,7 @@ rem beginfunction
     rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
-        set LIB_BAT=!SCRIPTS_DIR!\LIB
+        set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
         rem echo LIB_BAT: !LIB_BAT!
     )
     if not exist !LIB_BAT!\ (
@@ -506,7 +506,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem !DIR_TOOLS_SRC_BAT!\BAT
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\SRC\BAT
     set LDIR_TO=!DIR_TOOLS_BAT!\BAT
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
@@ -520,7 +520,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem !DIR_TOOLS_SRC_BAT!\BAT\99.[lyr]LYR
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\BAT\99.[lyr]LYR
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\SRC\BAT\99.[lyr]LYR
     set LDIR_TO=!DIR_TOOLS_BAT!\BAT
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
@@ -528,7 +528,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem !DIR_TOOLS_SRC_BAT!\LIB
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\LIB
+    set LDIR_FROM=!DIR_TOOLS_SRC_BAT!\SRC\LIB
     set LDIR_TO=!DIR_TOOLS_BAT!\LIB
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
