@@ -555,7 +555,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem !DIR_TOOLS_SRC_SH!\SH
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\SH
+    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\SRC\SH
     set LDIR_TO=!DIR_TOOLS_SH!\SH
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
@@ -568,7 +568,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem !DIR_TOOLS_SRC_SH!\LIB
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\LIB
+    set LDIR_FROM=!DIR_TOOLS_SRC_SH!\SRC\LIB
     set LDIR_TO=!DIR_TOOLS_SH!\LIB
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
