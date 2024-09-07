@@ -139,7 +139,7 @@ rem beginfunction
     set DIR_EXAMPLES_PY=!DIR_PYTHON!\EXAMPLES_PY
     set DIR_MobileAPP_PY=!DIR_PYTHON!\MobileAPP_PY
     set DIR_PATTERN_PY=!DIR_PYTHON!\PATTERN_PY
-    set DIR_TEST_PY=!DIR_PYTHON!\TEST_PY
+    rem set DIR_TEST_PY=!DIR_PYTHON!\TEST_PY
     set DIR_YOUTUBE_PY=!DIR_PYTHON!\YOUTUBE_PY
     set DIR_TESTS_PY=!DIR_PYTHON!\TESTS_PY
     set DIR_TOOLS_SRC_PY=!DIR_PYTHON!\TOOLS_SRC_PY
@@ -334,7 +334,7 @@ rem beginfunction
     call :REPO_WORK !DIR_EXAMPLES_PY! 1 || exit /b 1
     call :REPO_WORK !DIR_MobileAPP_PY! 1 || exit /b 1
     call :REPO_WORK !DIR_PATTERN_PY! 1 || exit /b 1
-    call :REPO_WORK !DIR_TEST_PY! 1 || exit /b 1
+    rem call :REPO_WORK !DIR_TEST_PY! 1 || exit /b 1
     call :REPO_WORK !DIR_YOUTUBE_PY! 1 || exit /b 1
     call :REPO_WORK !DIR_TESTS_PY! 1 || exit /b 1
 
