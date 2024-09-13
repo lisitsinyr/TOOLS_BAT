@@ -54,18 +54,17 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
-    echo SCRIPTS_DIR: !SCRIPTS_DIR!
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
-    echo SCRIPTS_DIR: !SCRIPTS_DIR!
+    rem echo SCRIPTS_DIR: !SCRIPTS_DIR!
     rem -------------------------------------------------------------------
     rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
-        echo LIB_BAT: !LIB_BAT!
+        rem echo LIB_BAT: !LIB_BAT!
     )
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
