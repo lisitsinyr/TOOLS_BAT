@@ -54,17 +54,18 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
+    echo SCRIPTS_DIR: !SCRIPTS_DIR!
     if not defined SCRIPTS_DIR (
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
-    rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
+    echo SCRIPTS_DIR: !SCRIPTS_DIR!
     rem -------------------------------------------------------------------
     rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
-        rem echo LIB_BAT: !LIB_BAT!
+        echo LIB_BAT: !LIB_BAT!
     )
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
@@ -90,19 +91,19 @@ rem beginfunction
     rem ------------------------------------------------
     rem 01_03_UNIX
     rem ------------------------------------------------
-    set DIR_COMMANDS_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\COMMANDS_SH
+    set DIR_COMMANDS_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\03_UNIX\PROJECTS_UNIX\COMMANDS_SH
     rem echo DIR_COMMANDS_SH:!COMMANDS_SH!
-    set DIR_TOOLS_SRC_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\01_OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
+    set DIR_TOOLS_SRC_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\03_UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
     rem echo DIR_TOOLS_SRC_SH:!DIR_TOOLS_SRC_SH!
-    set DIR_TOOLS_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\01_OS\03_UNIX\TOOLS_SH
+    set DIR_TOOLS_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\03_UNIX\TOOLS_SH
     rem echo DIR_TOOLS_SH:!DIR_TOOLS_SH!
 
     rem ------------------------------------------------
     rem 03_01_KIX
     rem ------------------------------------------------
-    set DIR_TOOLS_SRC_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+    set DIR_TOOLS_SRC_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
     rem echo DIR_TOOLS_SRC_KIX:!DIR_TOOLS_SRC_KIX!
-    set DIR_TOOLS_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\01_KIX\TOOLS_KIX
+    set DIR_TOOLS_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\01_KIX\TOOLS_KIX
     rem echo DIR_TOOLS_KIX:!DIR_TOOLS_KIX!
 
     set DIR_TOOLS_KIX_=D:\TOOLS\TOOLS_KIX
@@ -111,9 +112,9 @@ rem beginfunction
     rem ------------------------------------------------
     rem 03_04_BAT
     rem ------------------------------------------------
-    set DIR_TOOLS_SRC_BAT=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    set DIR_TOOLS_SRC_BAT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     rem echo DIR_TOOLS_SRC_BAT:!DIR_TOOLS_SRC_BAT!
-    set DIR_TOOLS_BAT=!PROJECTS_LYR_DIR!\CHECK_LIST\03_SCRIPT\04_BAT\TOOLS_BAT
+    set DIR_TOOLS_BAT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\04_BAT\TOOLS_BAT
     rem echo DIR_TOOLS_BAT:!DIR_TOOLS_BAT!
 
     set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
@@ -122,11 +123,11 @@ rem beginfunction
     rem ------------------------------------------------
     rem 05_01_Pascal_Delphi
     rem ------------------------------------------------
-    set DIR_DELPHI7=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
+    set DIR_DELPHI7=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\01_Pascal_Delphi\02_Delphi_7\PROJECTS_D7
     rem echo DIR_DELPHI7:!DIR_DELPHI7!
     set DIR_LUIS_D7=!DIR_DELPHI7!\LUIS_D7
     set DIR_TOOLS_D7=!DIR_DELPHI7!\TOOLS_D7
-    set DIR_DELPHI11=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11\PROJECTS_D11
+    set DIR_DELPHI11=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\01_Pascal_Delphi\03_Delphi_11\PROJECTS_D11
     rem echo DIR_DELPHI11:!DIR_DELPHI11!
     set DIR_LUIS_D11=!DIR_DELPHI11!\LUIS_D11
     set DIR_TOOLS_D11=!DIR_DELPHI11!\TOOLS_D11
@@ -134,7 +135,7 @@ rem beginfunction
     rem ------------------------------------------------
     rem 05_02_Python
     rem ------------------------------------------------
-    set DIR_PYTHON=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY
+    set DIR_PYTHON=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\02_Python\PROJECTS_PY
     rem echo DIR_PYTHON:!DIR_PYTHON!
     set DIR_EXAMPLES_PY=!DIR_PYTHON!\EXAMPLES_PY
     set DIR_MobileAPP_PY=!DIR_PYTHON!\MobileAPP_PY
@@ -143,7 +144,7 @@ rem beginfunction
     set DIR_YOUTUBE_PY=!DIR_PYTHON!\YOUTUBE_PY
     set DIR_TESTS_PY=!DIR_PYTHON!\TESTS_PY
     set DIR_TOOLS_SRC_PY=!DIR_PYTHON!\TOOLS_SRC_PY
-    set DIR_TOOLS_PY=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\02_Python\TOOLS_PY
+    set DIR_TOOLS_PY=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\02_Python\TOOLS_PY
     rem echo DIR_TOOLS_PY:!DIR_TOOLS_PY!
 
     set DIR_TOOLS_PY_=D:\TOOLS\TOOLS_PY
@@ -152,21 +153,21 @@ rem beginfunction
     rem ------------------------------------------------
     rem 05_03_Java
     rem ------------------------------------------------
-    set DIR_JAVA=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\03_Java\PROJECTS_JAVA
+    set DIR_JAVA=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\03_Java\PROJECTS_JAVA
     rem echo DIR_JAVA:!DIR_JAVA!
     set DIR_TESTS_JAVA=!DIR_JAVA!\TESTS_JAVA
     rem echo DIR_TESTS_JAVA:!DIR_TESTS_JAVA!
     set DIR_TOOLS_SRC_JAVA=!DIR_JAVA!\TOOLS_SRC_JAVA
     rem echo DIR_TOOLS_SRC_JAVA:!DIR_TOOLS_SRC_JAVA!
-    set DIR_TOOLS_JAVA=!PROJECTS_LYR_DIR!\CHECK_LIST\05_DESKTOP\03_Java\TOOLS_JAVA
+    set DIR_TOOLS_JAVA=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\03_Java\TOOLS_JAVA
     rem echo DIR_TOOLS_JAVA:!DIR_TOOLS_JAVA!
 
     rem ------------------------------------------------
-    rem 07_GIT
+    rem GIT
     rem ------------------------------------------------
-    set DIR_TOOLS_SRC_GIT=!PROJECTS_LYR_DIR!\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT
+    set DIR_TOOLS_SRC_GIT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT
     rem echo DIR_TOOLS_SRC_GIT:!DIR_TOOLS_SRC_GIT!
-    set DIR_TOOLS_GIT=!PROJECTS_LYR_DIR!\CHECK_LIST\07_GIT\TOOLS_GIT
+    set DIR_TOOLS_GIT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT\TOOLS_GIT
     rem echo DIR_TOOLS_GIT:!DIR_TOOLS_GIT!
 
     set DIR_TOOLS_GIT_=D:\TOOLS\TOOLS_GIT
@@ -296,7 +297,7 @@ rem ----------------------------------------------------------------------------
 :MAIN_05_01_Pascal_Delphi
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_05_DESKTOP_01_Pascal_Delphi
+    set FUNCNAME=MAIN_DESKTOP_01_Pascal_Delphi
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -372,18 +373,18 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_07_GIT ()
+rem procedure MAIN_GIT ()
 rem --------------------------------------------------------------------------------
-:MAIN_07_GIT
+:MAIN_GIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_07_GIT
+    set FUNCNAME=MAIN_GIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
     echo ===============================
-    echo 07_GIT ...
+    echo GIT ...
     echo ===============================
 
     call :REPO_WORK !DIR_TOOLS_SRC_GIT! 0 || exit /b 1
@@ -424,7 +425,7 @@ rem beginfunction
     call :MAIN_05_03_Java %* || exit /b 1
     rem call :PressAnyKey || exit /b 1
     
-    call :MAIN_07_GIT %* || exit /b 1
+    call :MAIN_GIT %* || exit /b 1
     rem call :PressAnyKey || exit /b 1
 
     exit /b 0
@@ -460,13 +461,13 @@ rem beginfunction
     del *.bat
     rem del *.sh
 
-    set LFileName=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT\BAT\A.WORK\lyrgit_push_main.bat
+    set LFileName=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\BAT\A.WORK\lyrgit_push_main.bat
     rem echo LFileName:!LFileName!
     if exist !LFileName! (
         rem echo COPY:!LFileName!
         copy !LFileName! > NUL
     )
-    set LFileName=D:\PROJECTS_LYR\CHECK_LIST\07_GIT\PROJECTS_GIT\TOOLS_SRC_GIT\BAT\A.WORK\lyrgit_pull.bat
+    set LFileName=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\BAT\A.WORK\lyrgit_pull.bat
     rem echo LFileName:!LFileName!
     if exist !LFileName! (
         rem echo COPY:!LFileName!
@@ -474,13 +475,13 @@ rem beginfunction
     )
 
     if !APYTHON!==1 (
-        set LFileName=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\PROJECT_PYupdate.bat
+        set LFileName=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\PROJECT_PYupdate.bat
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName!
             copy !LFileName! > NUL
         )
-        set LFileName=D:\PROJECTS_LYR\CHECK_LIST\05_DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\pyproject.toml
+        set LFileName=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\02_Python\PROJECTS_PY\PATTERN_PY\pyproject.toml
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName!

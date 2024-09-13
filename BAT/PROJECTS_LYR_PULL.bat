@@ -10,7 +10,7 @@ rem -------------------------------------------------------------------
 rem SCRIPTS_DIR -  ‡Ú‡ÎÓ„ ÒÍËÔÚÓ‚
 rem -------------------------------------------------------------------
 if not defined SCRIPTS_DIR (
-    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\03_SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
 )
 rem -------------------------------------------------------------------
 rem LIB_BAT - Í‡Ú‡ÎÓ„ ·Ë·ÎËÓÚÂÍË ÒÍËÔÚÓ‚
@@ -106,7 +106,7 @@ rem beginfunction
     echo 01_03_UNIX ...
     echo ===============================
 
-    set DIR_01_03_UNIX=CHECK_LIST\01_OS\03_UNIX
+    set DIR_01_03_UNIX=CHECK_LIST\OS\03_UNIX
 
     set GDirectory=!DIR_01_03_UNIX!\SOFTWARE
     set GRepo=
@@ -182,7 +182,7 @@ rem beginfunction
     echo 03_01_KIX ...
     echo ===============================
 
-    set DIR_03_01_KIX=CHECK_LIST\03_SCRIPT\01_KIX
+    set DIR_03_01_KIX=CHECK_LIST\SCRIPT\01_KIX
 
     set GDirectory=!DIR_03_01_KIX!\SOFTWARE
     set GRepo=
@@ -251,7 +251,7 @@ rem beginfunction
     echo 03_04_BAT ...
     echo ===============================
 
-    set DIR_03_04_BAT=CHECK_LIST\03_SCRIPT\04_BAT
+    set DIR_03_04_BAT=CHECK_LIST\SCRIPT\04_BAT
 
     set GDirectory=!DIR_03_04_BAT!\SOFTWARE
     set GRepo=
@@ -320,7 +320,7 @@ rem beginfunction
     echo 05_01_Pascal_Delphi ...
     echo ===============================
 
-    set DIR_05_01_Pascal_Delphi=CHECK_LIST\05_DESKTOP\01_Pascal_Delphi
+    set DIR_05_01_Pascal_Delphi=CHECK_LIST\DESKTOP\01_Pascal_Delphi
 
     set GDirectory=!DIR_05_01_Pascal_Delphi!\SOFTWARE
     set GRepo=
@@ -396,7 +396,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_05_01_Pascal_Delphi_01_Delphi_5=CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\01_Delphi_5
+    set DIR_05_01_Pascal_Delphi_01_Delphi_5=CHECK_LIST\DESKTOP\01_Pascal_Delphi\01_Delphi_5
 
     set GDirectory=!DIR_05_01_Pascal_Delphi_01_Delphi_5!\FRAMEWORK
     set GRepo=
@@ -464,7 +464,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_05_01_Pascal_Delphi_02_Delphi_7=CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\02_Delphi_7
+    set DIR_05_01_Pascal_Delphi_02_Delphi_7=CHECK_LIST\DESKTOP\01_Pascal_Delphi\02_Delphi_7
 
     set GDirectory=!DIR_05_01_Pascal_Delphi_02_Delphi_7!\FRAMEWORK
     set GRepo=
@@ -536,7 +536,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set DIR_05_01_Pascal_Delphi_03_Delphi_11=CHECK_LIST\05_DESKTOP\01_Pascal_Delphi\03_Delphi_11
+    set DIR_05_01_Pascal_Delphi_03_Delphi_11=CHECK_LIST\DESKTOP\01_Pascal_Delphi\03_Delphi_11
 
     set GDirectory=!DIR_05_01_Pascal_Delphi_03_Delphi_11!\FRAMEWORK
     set GRepo=
@@ -612,7 +612,7 @@ rem beginfunction
     echo 05_02_Python ...
     echo ===============================
 
-    set DIR_05_02_Python=CHECK_LIST\05_DESKTOP\02_Python
+    set DIR_05_02_Python=CHECK_LIST\DESKTOP\02_Python
 
     set GDirectory=!DIR_05_02_Python!\SOFTWARE
     set GRepo=
@@ -710,7 +710,7 @@ rem beginfunction
     echo 05_03_Java ...
     echo ===============================
 
-    set DIR_05_03_Java=CHECK_LIST\05_DESKTOP\03_Java
+    set DIR_05_03_Java=CHECK_LIST\DESKTOP\03_Java
 
     set GDirectory=!DIR_05_03_Java!\SOFTWARE
     set GRepo=
@@ -768,9 +768,9 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure MAIN_07_GIT ()
+rem procedure MAIN_GIT ()
 rem -----------------------------------------------
-:MAIN_07_GIT
+:MAIN_GIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=MAIN_INIT
@@ -779,52 +779,52 @@ rem beginfunction
     )
 
     echo ===============================
-    echo 07_GIT ...
+    echo GIT ...
     echo ===============================
 
-    set DIR_07_GIT=CHECK_LIST\07_GIT
+    set DIR_GIT=CHECK_LIST\GIT
 
-    set GDirectory=!DIR_07_GIT!\SOFTWARE
+    set GDirectory=!DIR_GIT!\SOFTWARE
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_07_GIT!\ƒŒ ”Ã≈Õ“¿÷»ﬂ
+    set GDirectory=!DIR_GIT!\ƒŒ ”Ã≈Õ“¿÷»ﬂ
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_07_GIT!\ƒŒ ”Ã≈Õ“€
+    set GDirectory=!DIR_GIT!\ƒŒ ”Ã≈Õ“€
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_07_GIT!\ Õ»√»
+    set GDirectory=!DIR_GIT!\ Õ»√»
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_07_GIT!\ ”–—€
+    set GDirectory=!DIR_GIT!\ ”–—€
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_07_GIT!\—“¿“‹»
+    set GDirectory=!DIR_GIT!\—“¿“‹»
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_07_GIT!\FRAMEWORK
+    set GDirectory=!DIR_GIT!\FRAMEWORK
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_07_GIT!\LIBRARY
+    set GDirectory=!DIR_GIT!\LIBRARY
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
 
-    set GDirectory=!DIR_07_GIT!\WORK
+    set GDirectory=!DIR_GIT!\WORK
     set GRepo=
     call :MAIN_CreateDirectory || exit /b 1
     
-    set GDirectory=!DIR_07_GIT!\TOOLS_GIT
+    set GDirectory=!DIR_GIT!\TOOLS_GIT
     set GRepo="git@github.com:lisitsinyr/TOOLS_GIT.git"
     call :MAIN_CreateDirectory || exit /b 1
     
-    set GDirectory=!DIR_07_GIT!\PROJECTS_GIT\TOOLS_SRC_GIT
+    set GDirectory=!DIR_GIT!\PROJECTS_GIT\TOOLS_SRC_GIT
     set GRepo="git@github.com:lisitsinyr/TOOLS_SRC_GIT.git"
     call :MAIN_CreateDirectory || exit /b 1
 
@@ -862,7 +862,7 @@ rem beginfunction
     
     rem call :MAIN_05_03_Java || exit /b 1
 
-    rem call :MAIN_07_GIT || exit /b 1
+    rem call :MAIN_GIT || exit /b 1
 
     exit /b 0
 :end
