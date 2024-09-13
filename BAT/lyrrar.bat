@@ -10,7 +10,7 @@ rem -------------------------------------------------------------------
 rem SCRIPTS_DIR - Каталог скриптов
 rem -------------------------------------------------------------------
 if not defined SCRIPTS_DIR (
-    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\04_BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
 )
 
 rem -------------------------------------------------------------------
@@ -22,7 +22,7 @@ rem -------------------------------------------------------------------
 rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
 rem -------------------------------------------------------------------
 if not defined SCRIPTS_DIR_KIX (
-    set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\01_KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+    set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX
 )
 
 rem --------------------------------------------------------------------------------
