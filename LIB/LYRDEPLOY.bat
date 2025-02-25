@@ -202,12 +202,12 @@ rem beginfunction
     )
 
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
-    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     cd /D !DIR_PROJECT_NAME!
     rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
     set APPRUN=DEPLOY.bat
-    echo APPRUN:!APPRUN!
+    rem echo APPRUN:!APPRUN!
     if exist "!APPRUN!" (
         call !APPRUN!
     )
