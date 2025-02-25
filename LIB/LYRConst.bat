@@ -181,12 +181,12 @@ rem beginfunction
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_FULLFILENAME=%1
-    rem echo SCRIPT_FULLFILENAME: %SCRIPT_FULLFILENAME%
+    rem echo SCRIPT_FULLFILENAME:%SCRIPT_FULLFILENAME%
     rem -------------------------------------------------------------------
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_FULLFILENAME=%~f1
-    rem echo SCRIPT_FULLFILENAME: !SCRIPT_FULLFILENAME!
+    rem echo SCRIPT_FULLFILENAME:!SCRIPT_FULLFILENAME!
 
     rem -------------------------------------------------------------------
     rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
@@ -198,19 +198,25 @@ rem beginfunction
     rem SCRIPT_FILENAME - Файл скрипта [имя]
     rem -------------------------------------------------------------------
     set SCRIPT_FILENAME=%~n1
-    rem echo SCRIPT_FILENAME: !SCRIPT_FILENAME!
+    rem echo SCRIPT_FILENAME:!SCRIPT_FILENAME!
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FILEDIR - Файл скрипта: каталог
     rem -------------------------------------------------------------------
-    set SCRIPT_FILEDIR=
-    rem echo SCRIPT_FILEDIR: !SCRIPT_FILEDIR!
+    set SCRIPT_FILEDIR=%~d1%~p1
+    rem echo SCRIPT_FILEDIR:!SCRIPT_FILEDIR!
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FILEEXT - Файл скрипта: расширение
     rem -------------------------------------------------------------------
-    set SCRIPT_FILEEXT=
-    rem echo SCRIPT_FILEEXT: !SCRIPT_FILEEXT!
+    set SCRIPT_FILEEXT=%~x1
+    rem echo SCRIPT_FILEEXT:!SCRIPT_FILEEXT!
+
+    rem -------------------------------------------------------------------
+    rem APPName - APP
+    rem -------------------------------------------------------------------
+    set APPName=%~n1
+    rem echo APPName:!APPName!
 
     exit /b 0
 rem endfunction
@@ -273,6 +279,11 @@ rem beginfunction
     set PROJECT_NAME=
 
     rem -------------------------------------------------------------------
+    rem PROJECT_GROUP - Имя проекта
+    rem -------------------------------------------------------------------
+    set PROJECT_GROUP=
+
+    rem -------------------------------------------------------------------
     rem POETRY_INI - Файл с параметрами проекта
     rem -------------------------------------------------------------------
     set POETRY_INI=POETRY.ini
@@ -299,9 +310,19 @@ rem beginfunction
     set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
+    rem PROJECTS_LYR_ROOT -
+    rem -------------------------------------------------------------------
+    if not defined PROJECTS_LYR_ROOT (
+        set PROJECTS_LYR_ROOT=D:
+    )
+    rem echo PROJECTS_LYR_ROOT: !PROJECTS_LYR_ROOT!
+
+    rem -------------------------------------------------------------------
     rem PROJECTS_LYR_DIR -
     rem -------------------------------------------------------------------
-    set PROJECTS_LYR_DIR=D:\PROJECTS_LYR
+    if not defined PROJECTS_LYR_DIR (
+        set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    )
     rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
 
     rem -------------------------------------------------------------------
@@ -360,7 +381,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
-   
+
     rem ------------------------------------------------------
     rem LOG_FILESCRIPT - Файл первого скрипта [имя]
     rem ------------------------------------------------------
@@ -457,6 +478,19 @@ rem beginfunction
     set LOG_FULLFILENAME=!LOG_DIR!\!LOG_FILENAME!.log
     rem echo LOG_FULLFILENAME: !%LOG_FULLFILENAME!
    
+    rem -------------------------------------------------------------------
+    rem DirectoryLOG - Каталог журнала
+    rem -------------------------------------------------------------------
+    set DirectoryLOG=D:\PROJECTS_LYR\LOGS
+    rem echo DirectoryLOG:!DirectoryLOG!
+    rem -------------------------------------------------------------------
+    rem FileNameLOG - Файл журнала
+    rem -------------------------------------------------------------------
+    set FileNameLOG=!APPName!.log
+    rem echo FileNameLOG:!FileNameLOG!
+    set FileNameLOGjson=!APPName!_json.log
+    rem echo FileNameLOGjson:!FileNameLOGjson!
+
     exit /b 0
 rem endfunction
 

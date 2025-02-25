@@ -70,7 +70,21 @@ rem ----------------------------------------------------------------------------
     )
     echo ARGS:!ARGS!
 
-    rem python "!SCRIPTS_DIR_PY!"\COPYFILE\COPYFILE.py !ARGS!
+    rem echo %~dp0
+    rem echo !SCRIPTS_DIR_PY!
+    rem python !%~dp0!COPYFILE.py %1 "%2"
+
+    rem set RUN=!SCRIPTS_DIR_PY!\COPYFILE\COPYFILE.py
+    rem echo RUN:!RUN! 
+    rem !RUN!
+
+    call :PY_ENV_START || exit /b 1
+
+    python "!SCRIPTS_DIR_PY!"\SRC\PATTERN\PATTERN_PY.py !OPTION! !ARGS!
+
+    call :PY_ENV_STOP || exit /b 1
+
+    rem call :PressAnyKey || exit /b 1
 
     call :PressAnyKey || exit /b 1
 
