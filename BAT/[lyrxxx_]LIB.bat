@@ -170,3 +170,15 @@ exit /b 0
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 rem =================================================
+rem =================================================
+rem LYRDEPLOY.bat
+rem =================================================
+:REPO_WORK
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:git_pull
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0

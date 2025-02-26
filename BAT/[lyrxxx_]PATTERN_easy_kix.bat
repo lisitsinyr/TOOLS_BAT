@@ -6,23 +6,46 @@ chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
-rem -------------------------------------------------------------------
-rem SCRIPTS_DIR - Каталог скриптов
-rem -------------------------------------------------------------------
-if not defined SCRIPTS_DIR (
-    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
-)
-rem -------------------------------------------------------------------
-rem LIB_BAT - каталог библиотеки скриптов
-rem -------------------------------------------------------------------
-set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
+    rem -------------------------------------------------------------------
+    rem PROJECTS_LYR_ROOT - Каталог ROOT
+    rem -------------------------------------------------------------------
+    rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
+    set PROJECTS_LYR_ROOT=D:
+    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
-rem -------------------------------------------------------------------
-rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-rem -------------------------------------------------------------------
-if not defined SCRIPTS_DIR_KIX (
-    set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-)
+    rem -------------------------------------------------------------------
+    rem PROJECTS_LYR_DIR - Каталог проектов LYR
+    rem -------------------------------------------------------------------
+    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    if not exist "!PROJECTS_LYR_DIR!"\ (
+        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
+        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        rem mkdir "!PROJECTS_LYR_DIR!"
+        exit /b 1
+    )
+
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR - Каталог скриптов BAT
+    rem -------------------------------------------------------------------
+    if not defined SCRIPTS_DIR (
+        rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+    )
+    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
+
+    rem -------------------------------------------------------------------
+    rem LIB_BAT - каталог библиотеки скриптов BAT
+    rem -------------------------------------------------------------------
+    if not defined LIB_BAT (
+        set LIB_BAT=!SCRIPTS_DIR!\LIB
+    )
+    rem echo LIB_BAT:!LIB_BAT!
+    if not exist !LIB_BAT!\ (
+        echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
+        exit /b 1
+    )
 
 rem --------------------------------------------------------------------------------
 rem 
@@ -34,10 +57,26 @@ rem ----------------------------------------------------------------------------
     set DEBUG=
     set /a LOG_FILE_ADD=0
 
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
+    rem -------------------------------------------------------------------
+    if not defined SCRIPTS_DIR_KIX (
+        rem set SCRIPTS_DIR_PY=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\01.DEPLOY
+        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX
+        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\01.DEPLOY
+    )
+    rem echo SCRIPTS_DIR_KIX:!SCRIPTS_DIR_KIX!
+
+    set SCRIPT_DIR=!SCRIPTS_DIR_KIX!\PATTERN
+    set SCRIPT_NAME=PATTERN_KIX.kix
+
     rem Количество аргументов
     call :Read_N %* || exit /b 1
 
     call :SET_LIB %0 || exit /b 1
+
+    call :CurrentDir
+    rem echo CurrentDir:!CurrentDir!
 
     rem -------------------------------------
     rem OPTION
@@ -59,7 +98,7 @@ rem ----------------------------------------------------------------------------
     )
     
     echo OPTION:!OPTION!
-
+ 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
@@ -82,6 +121,11 @@ rem ----------------------------------------------------------------------------
     
     echo ARGS:!ARGS!
 
+    call :PY_ENV_START || exit /b 1
+
+    rem python "!SCRIPTS_DIR_PY!"\SRC\PATTERN\PATTERN_PY.py !OPTION! !ARGS!
+    python "!SCRIPT_DIR!"\!SCRIPT_NAME! !OPTION! !ARGS!
+
     rem set APP_KIX_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_KIX\KIX
     rem set APP_KIX=
     rem call :SET_KIX || exit /b 1
@@ -90,7 +134,9 @@ rem ----------------------------------------------------------------------------
     rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
     rem )
 
-    call :PressAnyKey || exit /b 1
+    call :PY_ENV_STOP || exit /b 1
+
+    rem call :PressAnyKey || exit /b 1
 
     exit /b 0
 :end
@@ -99,6 +145,18 @@ rem ----------------------------------------------------------------------------
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
+
+rem =================================================
+rem LYRPY.bat
+rem =================================================
+:PY_ENV_START
+%LIB_BAT%\LYRPY.bat %*
+exit /b 0
+:PY_ENV_STOP
+%LIB_BAT%\LYRPY.bat %*
+exit /b 0
+rem =================================================
+
 rem =================================================
 rem LYRConst.bat
 rem =================================================
@@ -114,6 +172,8 @@ rem =================================================
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
+:CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
 rem =================================================
 rem LYRLog.bat
 rem =================================================
