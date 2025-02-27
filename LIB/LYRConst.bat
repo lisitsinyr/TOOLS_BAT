@@ -114,12 +114,15 @@ rem beginfunction
         echo INFO: Directory !LIB_KIX! not exist ...
         rem exit /b 1
     )
-    rem echo LIB_KIX: !LIB_KIX!
+    echo LIB_KIX: !LIB_KIX!
 
     rem -------------------------------------------------------------------
     rem APP_KIX_DIR - каталог APP_KIX
     rem -------------------------------------------------------------------
-    set APP_KIX_DIR=!SCRIPTS_DIR_KIX!\SRC\SCRIPTS
+    if not defined LIB_KIX (
+        set APP_KIX_DIR=!SCRIPTS_DIR_KIX!\SRC\SCRIPTS
+    )
+    echo APP_KIX_DIR:!APP_KIX_DIR!
 
     rem -------------------------------------------------------------------
     rem APP_KIX - Скрипт APP_KIX имя
@@ -128,37 +131,36 @@ rem beginfunction
         echo ERROR: Script APP_KIX not set...
         exit /b 1
     ) else (
-        if exist !APP_KIX!.kix (
-            echo INFO: Script !APP_KIX!.kix exist ...
+        if exist !APP_KIX! (
+            echo INFO: Script !APP_KIX! exist ...
             set APP_KIX_DIR=.
         ) else (
-            echo INFO: Script !APP_KIX!.kix not exist ...
-            if exist KIX\!APP_KIX!.kix (
-                echo INFO: Script KIX\!APP_KIX!.kix exist ...
+            echo INFO: Script !APP_KIX! not exist ...
+            if exist KIX\!APP_KIX! (
+                echo INFO: Script KIX\!APP_KIX! exist ...
                 set APP_KIX_DIR=KIX
             ) else (
-                echo INFO: Script KIX\!APP_KIX!.kix not exist ...
-                if exist !APP_KIX!\!APP_KIX!.kix (
-                    echo INFO: Script !APP_KIX!\!APP_KIX!.kix exist ...
+                echo INFO: Script KIX\!APP_KIX! not exist ...
+                if exist !APP_KIX!\!APP_KIX! (
+                    echo INFO: Script !APP_KIX!\!APP_KIX! exist ...
                     set APP_KIX_DIR=!APP_KIX!
                 ) else (
                     if defined APP_KIX_DIR (
                         if exist !APP_KIX_DIR!\!APP_KIX!.kix (
-                            echo INFO: Script !APP_KIX_DIR!\!APP_KIX!.kix exist ...
+                            echo INFO: Script !APP_KIX_DIR!\!APP_KIX! exist ...
                         ) else (
-                            echo ERROR: Script !APP_KIX_DIR!\!APP_KIX!.kix not exist ...
+                            echo ERROR: Script !APP_KIX_DIR!\!APP_KIX! not exist ...
                             exit /b 1
                         )
                     ) else (
-                        echo ERROR: Script !APP_KIX!\!APP_KIX!.kix not exist ...
+                        echo ERROR: Script !APP_KIX!\!APP_KIX! not exist ...
                         exit /b 1
                     )
                 )
             )
         )
     )
-    echo APP_KIX_DIR: !APP_KIX_DIR!
-    echo APP_KIX: !APP_KIX!
+    echo APP_KIX:!APP_KIX!
 
     exit /b 0
 rem endfunction

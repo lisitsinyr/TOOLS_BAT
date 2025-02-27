@@ -61,14 +61,14 @@ rem ----------------------------------------------------------------------------
     rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_KIX (
-        rem set SCRIPTS_DIR_PY=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\01.DEPLOY
+        set SCRIPTS_DIR_KIX=D:\TOOLS\TOOLS_KIX
+        set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SCRIPTS
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX
         set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\01.DEPLOY
     )
     rem echo SCRIPTS_DIR_KIX:!SCRIPTS_DIR_KIX!
 
-    set SCRIPT_DIR=!SCRIPTS_DIR_KIX!\PATTERN
-    set SCRIPT_NAME=PATTERN_KIX.kix
+    call :SET_KIX || exit /b 1
 
     rem Количество аргументов
     call :Read_N %* || exit /b 1
@@ -82,13 +82,11 @@ rem ----------------------------------------------------------------------------
     rem OPTION
     rem -------------------------------------
     set OPTION=
-
     set O1_Name=O1
     set O1_Caption=O1_Caption
     set O1_Default=O1_Default
     set O1=!O1_Default!
     set PN_CAPTION=!O1_Caption!
-
     call :Read_P O1 !O1! || exit /b 1
     rem echo O1:!O1!
     if defined O1 (
@@ -96,14 +94,12 @@ rem ----------------------------------------------------------------------------
     ) else (
         echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
     )
-    
     echo OPTION:!OPTION!
  
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
-
     set A1_Name=A1
     set A1_Caption=A1_Caption
     set A1_Default=A1_Default
@@ -118,13 +114,14 @@ rem ----------------------------------------------------------------------------
         set OK=
         exit /b 1
     )
-    
     echo ARGS:!ARGS!
 
-    call :PY_ENV_START || exit /b 1
+    set SCRIPT_DIR=!SCRIPTS_DIR_KIX!\PATTERN
+    set SCRIPT_NAME=PATTERN_KIX.kix
+    set SCRIPT_DIR=!SCRIPTS_DIR_KIX!\ListFile
+    set SCRIPT_NAME=ListFile.kix
 
-    rem python "!SCRIPTS_DIR_PY!"\SRC\PATTERN\PATTERN_PY.py !OPTION! !ARGS!
-    python "!SCRIPT_DIR!"\!SCRIPT_NAME! !OPTION! !ARGS!
+    rem python "!SCRIPT_DIR!"\!SCRIPT_NAME! !OPTION! !ARGS!
 
     rem set APP_KIX_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_KIX\KIX
     rem set APP_KIX=
@@ -133,8 +130,6 @@ rem ----------------------------------------------------------------------------
     rem     echo START !APP_KIX_DIR!\!APP_KIX!.kix ... 
     rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
     rem )
-
-    call :PY_ENV_STOP || exit /b 1
 
     rem call :PressAnyKey || exit /b 1
 
