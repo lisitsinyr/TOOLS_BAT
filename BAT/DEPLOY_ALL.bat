@@ -61,30 +61,42 @@ setlocal enabledelayedexpansion
     )
     rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
     
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
-    if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
-        call !APPRUN!
-    )
-
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
         call !APPRUN!
     )
-    
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
-    if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
-        call !APPRUN!
-    )
-    
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
         call !APPRUN!
     )
-    
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
+    if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
+    if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
+    if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
+    if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
+    if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
+        call !APPRUN!
+    )
+   
     exit /b 0
 :end
 rem ===================================================================
