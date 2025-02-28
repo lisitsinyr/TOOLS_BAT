@@ -13,72 +13,78 @@ setlocal enabledelayedexpansion
     set PROJECT_GROUP=ALL
     
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_ROOT - Каталог скриптов
+    rem PROJECTS_LYR_ROOT - Каталог ROOT
     rem -------------------------------------------------------------------
+    rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
     rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR - Каталог скриптов
+    rem PROJECTS_LYR_DIR - Каталог проектов LYR
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    if not exist "!PROJECTS_LYR_DIR!"\ (
+        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
+        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        rem mkdir "!PROJECTS_LYR_DIR!"
+        exit /b 1
+    )
 
     rem -------------------------------------------------------------------
-    rem DIR_PYTHON - Каталог
-    rem -------------------------------------------------------------------
-    set DIR_PYTHON=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Python\PROJECTS_PY
-    rem echo DIR_PYTHON:!DIR_PYTHON!
-
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
+    rem SCRIPTS_DIR - Каталог скриптов BAT
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
-        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+        rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
-    rem echo SCRIPTS_DIR: !SCRIPTS_DIR!
+    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
 
     rem -------------------------------------------------------------------
-    rem LIB_BAT - каталог библиотеки скриптов
+    rem LIB_BAT - каталог библиотеки скриптов BAT
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
-        set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
+        set LIB_BAT=!SCRIPTS_DIR!\LIB
     )
-    rem echo LIB_BAT: !LIB_BAT!
+    rem echo LIB_BAT:!LIB_BAT!
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
     )
 
-    set APPRUN=!SCRIPTS_DIR!\SRC\BAT\99.DEPLOY\DEPLOY_Python.bat
-    rem set APPRUN=DEPLOY_Python.bat
-    echo APPRUN:!APPRUN!
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR_DEPLOY - Каталог скриптов DEPLOY
+    rem -------------------------------------------------------------------
+    if not defined SCRIPTS_DIR_DEPLOY (
+        set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
+    )
+    rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
+    
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
     if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
 
-    set APPRUN=!SCRIPTS_DIR!\SRC\BAT\99.DEPLOY\DEPLOY_BAT.bat
-    rem set APPRUN=DEPLOY_Python.bat
-    echo APPRUN:!APPRUN!
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
     if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     
-    set APPRUN=!SCRIPTS_DIR!\SRC\BAT\99.DEPLOY\DEPLOY_GIT.bat
-    rem set APPRUN=DEPLOY_Python.bat
-    echo APPRUN:!APPRUN!
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
     if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     
-    set APPRUN=!SCRIPTS_DIR!\SRC\BAT\99.DEPLOY\DEPLOY_KIX.bat
-    rem set APPRUN=DEPLOY_Python.bat
-    echo APPRUN:!APPRUN!
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
     if exist "!APPRUN!" (
+        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     
-
     exit /b 0
 :end
 rem ===================================================================
