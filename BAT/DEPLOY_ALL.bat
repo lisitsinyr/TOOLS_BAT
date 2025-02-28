@@ -63,7 +63,9 @@ setlocal enabledelayedexpansion
     
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
     if exist "!APPRUN!" (
+        color 0a
         echo APPRUN:!APPRUN!
+        color 07
         call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
