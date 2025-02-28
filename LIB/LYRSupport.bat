@@ -390,7 +390,7 @@ rem beginfunction
     set GERRORLEVEL=%2
     set APAUSE=%3
 
-    if not !AERRORLEVEL!==0 (
+    if not !GERRORLEVEL!==0 (
         echo ERROR: !ATEXT! - !GERRORLEVEL!
         if defined APAUSE (
             call :PressAnyKey
