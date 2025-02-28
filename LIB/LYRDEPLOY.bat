@@ -8,72 +8,6 @@ chcp 1251>NUL
     rem -------------------------------------------------------------------
     rem CONST
     rem -------------------------------------------------------------------
-    rem ------------------------------------------------
-    rem 01_UNIX
-    rem ------------------------------------------------
-    set DIR_COMMANDS_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\UNIX\PROJECTS_UNIX\COMMANDS_SH
-    rem echo DIR_COMMANDS_SH:!COMMANDS_SH!
-    set DIR_TOOLS_SRC_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\UNIX\PROJECTS_UNIX\TOOLS_SRC_SH
-    rem echo DIR_TOOLS_SRC_SH:!DIR_TOOLS_SRC_SH!
-    set DIR_TOOLS_SH=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\UNIX\TOOLS_SH
-    rem echo DIR_TOOLS_SH:!DIR_TOOLS_SH!
-
-    rem ------------------------------------------------
-    rem 03_KIX
-    rem ------------------------------------------------
-    set DIR_TOOLS_SRC_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-    rem echo DIR_TOOLS_SRC_KIX:!DIR_TOOLS_SRC_KIX!
-    set DIR_TOOLS_KIX=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX
-    rem echo DIR_TOOLS_KIX:!DIR_TOOLS_KIX!
-
-    set DIR_TOOLS_KIX_=D:\TOOLS\TOOLS_KIX
-    rem echo DIR_TOOLS_KIX_:!DIR_TOOLS_KIX_!
-
-    rem ------------------------------------------------
-    rem 03_BAT
-    rem ------------------------------------------------
-    set DIR_TOOLS_SRC_BAT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
-    rem echo DIR_TOOLS_SRC_BAT:!DIR_TOOLS_SRC_BAT!
-    set DIR_TOOLS_BAT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT
-    rem echo DIR_TOOLS_BAT:!DIR_TOOLS_BAT!
-
-    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
-    rem echo DIR_TOOLS_BAT_:!DIR_TOOLS_BAT_!
-
-    rem ------------------------------------------------
-    rem 05_Pascal_Delphi
-    rem ------------------------------------------------
-    set DIR_DELPHI7=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Pascal_Delphi\02_Delphi_7\PROJECTS_D7
-    rem echo DIR_DELPHI7:!DIR_DELPHI7!
-    set DIR_LUIS_D7=!DIR_DELPHI7!\LUIS_D7
-    set DIR_TOOLS_D7=!DIR_DELPHI7!\TOOLS_D7
-    set DIR_DELPHI11=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Pascal_Delphi\03_Delphi_11\PROJECTS_D11
-    rem echo DIR_DELPHI11:!DIR_DELPHI11!
-    set DIR_LUIS_D11=!DIR_DELPHI11!\LUIS_D11
-    set DIR_TOOLS_D11=!DIR_DELPHI11!\TOOLS_D11
-
-    rem ------------------------------------------------
-    rem 05_Java
-    rem ------------------------------------------------
-    set DIR_JAVA=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Java\PROJECTS_JAVA
-    rem echo DIR_JAVA:!DIR_JAVA!
-    set DIR_TESTS_JAVA=!DIR_JAVA!\TESTS_JAVA
-    rem echo DIR_TESTS_JAVA:!DIR_TESTS_JAVA!
-    set DIR_TOOLS_SRC_JAVA=!DIR_JAVA!\TOOLS_SRC_JAVA
-    rem echo DIR_TOOLS_SRC_JAVA:!DIR_TOOLS_SRC_JAVA!
-    set DIR_TOOLS_JAVA=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Java\TOOLS_JAVA
-    rem echo DIR_TOOLS_JAVA:!DIR_TOOLS_JAVA!
-
-    rem ------------------------------------------------
-    rem GIT
-    rem ------------------------------------------------
-    set DIR_TOOLS_SRC_GIT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT
-    rem echo DIR_TOOLS_SRC_GIT:!DIR_TOOLS_SRC_GIT!
-    set DIR_TOOLS_GIT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT\TOOLS_GIT
-    rem echo DIR_TOOLS_GIT:!DIR_TOOLS_GIT!
-
-    set DIR_TOOLS_GIT_=D:\TOOLS\TOOLS_GIT
-    rem echo DIR_TOOLS_GIT_:!DIR_TOOLS_GIT_!
 
     rem -------------------------------------------------------------------
     rem VAR
@@ -186,6 +120,7 @@ rem beginfunction
 
     rem call lyrgit_pull.bat
     git pull    
+    call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
 
     exit /b 0
 rem endfunction
@@ -218,6 +153,16 @@ rem endfunction
 rem ===================================================================
 
 rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:CheckErrorlevel
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+
+rem =================================================
 rem LYRParserINI.bat
 rem =================================================
 :GetINI
@@ -232,4 +177,5 @@ exit /b 0
 :GetFileParser
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
+
 rem =================================================

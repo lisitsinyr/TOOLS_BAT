@@ -391,26 +391,39 @@ rem beginfunction
     set AARG=%~4
     rem echo AARG:!AARG!
     if not defined AARG (
-        set AARG=/D /E /V /F /H /R /K /O /Y
+        set AARG=/O
+        set AARG=/D /S /E /V /F /H /R /K /Y /O
     )
-
     echo ---------------------------   >> %LOG_FULLFILENAME%
     echo XCOPY_FILES:                  >> %LOG_FULLFILENAME%
     echo     !ADIR_FROM!               >> %LOG_FULLFILENAME%
     echo     !ADIR_TO!                 >> %LOG_FULLFILENAME%
     echo     !AMASK!                   >> %LOG_FULLFILENAME%
     echo ---------------------------   >> %LOG_FULLFILENAME%
-
-    if exist "!ADIR_TO!" (
-        rem del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
+    if exist "!ADIR_TO!"\ (
+        rem echo ---------------------------
+        del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
     ) else (
+        rem echo ===========================
         mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
     )
-
     xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
+    call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
+    rem set GERRORLEVEL=!errorlevel!
+    rem echo GERRORLEVEL:!GERRORLEVEL!
 
     exit /b 0
 rem endfunction
+
+rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:CheckErrorlevel
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 
 rem ===================================================================
 

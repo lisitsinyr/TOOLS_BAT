@@ -374,6 +374,31 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure CheckErrorlevel (ATEXT, AERRORLEVEL, APAUSE)
+rem --------------------------------------------------------------------------------
+:CheckErrorlevel
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=Check_P
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set ATEXT=%1
+    set GERRORLEVEL=%2
+    set APAUSE=%3
+
+    if not !AERRORLEVEL!==0 (
+        echo ERROR: !ATEXT! - !GERRORLEVEL!
+        if defined APAUSE (
+            call :PressAnyKey
+        )
+    )
+    exit /b 0
+rem endfunction
+
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
