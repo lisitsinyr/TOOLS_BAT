@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem [lyrxxx_]PATTERN_empty.bat
+rem ListDir.bat [lyrxxx_]PATTERN_empty.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -10,8 +10,10 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     echo Старт !BATNAME! ...
 
-    set GERRORLEVEL=!errorlevel!
-    echo GERRORLEVEL:!GERRORLEVEL!
+    for %%f in ( *.* ) do (
+        echo Файл: %%f
+        rem echo %%~nf%%~xf
+    )
 
     exit /b 0
 :end

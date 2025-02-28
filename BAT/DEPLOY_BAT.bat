@@ -51,8 +51,20 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
+    set PROJECT_NAME=INFO_BAT
+    call :DEPLOY_PROJECT
+
+rem call :PressAnyKey
+
+    set PROJECT_NAME=SCRIPTS_BAT
+    call :DEPLOY_PROJECT
+
+rem call :PressAnyKey
+
     set PROJECT_NAME=TOOLS_SRC_BAT
     call :DEPLOY_PROJECT
+
+rem call :PressAnyKey
 
     exit /b 0
 :end

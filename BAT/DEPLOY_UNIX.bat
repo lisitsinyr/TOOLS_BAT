@@ -48,7 +48,7 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\OS\UNIX\PROJECTS_UNIX
+    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\UNIX\PROJECTS_UNIX
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     set PROJECT_NAME=TOOLS_SRC_SH
