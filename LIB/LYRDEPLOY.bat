@@ -39,31 +39,6 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure DEPLOY_LIB ()
-rem --------------------------------------------------------------------------------
-:DEPLOY_LIB
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=LYRConst
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem CONST
-    rem -------------------------------------------------------------------
-
-    rem -------------------------------------------------------------------
-    rem VAR
-    rem -------------------------------------------------------------------
-
-    echo ERROR: function !FUNCNAME! not implemented! ...
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem procedure REPO_WORK (ADirectory, APYTHON)
 rem --------------------------------------------------------------------------------
 :REPO_WORK

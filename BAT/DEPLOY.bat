@@ -198,9 +198,11 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_BAT
 rem beginfunction
     set FUNCNAME=%0
+    set FUNCNAME=UPDATE_TOOLS_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem --------------------------------------------------------
     rem !DIR_PROJECT_NAME!\SRC\BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
@@ -221,16 +223,6 @@ rem beginfunction
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\BAT\99.[lyr]LYR -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
-    rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\BAT\99.[lyr]LYR
-    echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
-    echo LDIR_TO:!LDIR_TO!
-    set LMASK=*.bat
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
-
-    rem --------------------------------------------------------
     rem !DIR_PROJECT_NAME!\SRC\LIB -> !DIR_GROUP_ROOT!\TOOLS_BAT\LIB
     rem --------------------------------------------------------
     set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\LIB
@@ -245,6 +237,18 @@ rem beginfunction
     )
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    rem --------------------------------------------------------
+    rem !DIR_PROJECT_NAME!\SRC\BAT\99.[lyr]LYR -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem --------------------------------------------------------
+    rem "D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\01.[lyr]LYR" 
+    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\BAT\99.[lyr]LYR
+    echo LDIR_FROM:!LDIR_FROM!
+    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    echo LDIR_TO:!LDIR_TO!
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+    call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
 
     exit /b 0
 rem endfunction
@@ -486,6 +490,9 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :GetCMD
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:CheckErrorlevel
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 
