@@ -509,6 +509,14 @@ exit /b 0
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 rem =================================================
+
+rem =================================================
+rem LYRConsole.bat
+rem =================================================
+:WriteLOG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+
     call :WriteLOG !lNOTSET! NOTSET
     call :WriteLOG !lDEBUG! DEBUG
     call :WriteLOG !lINFO! INFO
