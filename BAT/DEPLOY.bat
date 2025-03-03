@@ -241,7 +241,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem !DIR_PROJECT_NAME!\SRC\BAT\99.[lyr]LYR -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
     rem --------------------------------------------------------
-    rem "D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\01.[lyr]LYR" 
+    set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\01.[lyr]LYR 
     set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\BAT\99.[lyr]LYR
     echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT

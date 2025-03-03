@@ -370,6 +370,8 @@ rem beginfunction
         rem echo %%~nf%%~xf
         copy "%%f" !ADIR_TO!\        >  NUL
 
+        echo errorlevel:!errorlevel!
+
         echo File %%f copied ...     >> %LOG_FULLFILENAME%
     )
 
