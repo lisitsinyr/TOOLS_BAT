@@ -371,6 +371,8 @@ rem beginfunction
         copy "%%f" !ADIR_TO!\        >  NUL
         
         echo !FUNCNAME! !errorlevel!
+        
+        call :PressAnyKey
 
         call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
         echo File %%f copied ...     >> %LOG_FULLFILENAME%
