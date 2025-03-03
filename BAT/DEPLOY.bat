@@ -248,7 +248,6 @@ rem beginfunction
     echo LDIR_TO:!LDIR_TO!
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
-    call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
 
     exit /b 0
 rem endfunction
