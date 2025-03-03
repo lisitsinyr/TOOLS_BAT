@@ -25,7 +25,15 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    echo ERROR: function !FUNCNAME! not implemented! ...
+    rem -------------------------------------------------------------------
+    rem CONST
+    rem -------------------------------------------------------------------
+
+    rem -------------------------------------------------------------------
+    rem VAR
+    rem -------------------------------------------------------------------
+
+    rem echo ERROR: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -391,7 +399,8 @@ rem beginfunction
     set APAUSE=%3
 
     if not !GERRORLEVEL!==0 (
-        echo ERROR: !ATEXT! - !GERRORLEVEL!
+        rem echo ERROR: !ATEXT!-!GERRORLEVEL!
+        call :WriteLOG !lERROR! !ATEXT!-!GERRORLEVEL!
         if defined APAUSE (
             call :PressAnyKey
         )
@@ -410,6 +419,19 @@ exit /b 0
 exit /b 0
 :Trim
 %LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRConsole.bat
+rem =================================================
+:Write
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLOG
+%LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 
 rem ===================================================================

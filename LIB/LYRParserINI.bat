@@ -25,7 +25,15 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    echo ERROR: function !FUNCNAME! not implemented! ...
+    rem -------------------------------------------------------------------
+    rem CONST
+    rem -------------------------------------------------------------------
+
+    rem -------------------------------------------------------------------
+    rem VAR
+    rem -------------------------------------------------------------------
+
+    rem echo ERROR: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction

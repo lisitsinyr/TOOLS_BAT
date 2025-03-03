@@ -25,7 +25,15 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    echo ERROR: function !FUNCNAME! not implemented! ...
+    rem -------------------------------------------------------------------
+    rem CONST
+    rem -------------------------------------------------------------------
+
+    rem -------------------------------------------------------------------
+    rem VAR
+    rem -------------------------------------------------------------------
+
+    rem echo ERROR: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -157,11 +165,56 @@ rem beginfunction
     set ASTR=%1
     rem echo ASTR:!ASTR!
 
-    for /f "useback tokens=*" %%a in ('%ASTR%') do set ASTR=%%~a
+    for %%a in ( '%ASTR%' ) do set ASTR=%%~a
 
     set !FUNCNAME!=!ASTR!
 
     exit /b 0
 rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function ListToStr (ASTR) -> ListToStr
+rem --------------------------------------------------------------------------------
+:ListToStr
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=ListToStr
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+    rem echo _:%*
+    rem set ASTR=%*
+
+    set LSTR=
+    set n=0
+    call :Read_N
+    for %%a in ( %* ) do (
+        if !n! EQU 0 (
+            set LSTR=%%a
+        ) else (
+            set LSTR=!LSTR!^;%%a
+        )
+        set /A n+=1
+    )
+    rem echo LSTR:!LSTR!
+
+    set !FUNCNAME!=!LSTR!
+
+    exit /b 0
+rem endfunction
+
+rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 
 rem ===================================================================

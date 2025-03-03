@@ -264,6 +264,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    call :WriteLOG !lBEGIN! BEGIN:!PROJECT_NAME!...
+
     call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
     call :UPDATE_TOOLS_BAT || exit /b 1
 
@@ -274,6 +276,8 @@ rem beginfunction
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
     set PROJECT_NAME=TOOLS_BAT
     call :DEPLOY_PROJECT
+
+    call :WriteLOG !lEND! END
 
     exit /b 0
 rem endfunction
@@ -352,13 +356,13 @@ rem =================================================
 rem LYRConst.bat
 rem =================================================
 :SET_LIB
-%LIB_BAT%\LYRConst.bat %*
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
 :SET_POETRY
-%LIB_BAT%\LYRConst.bat %*
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
 :SET_KIX
-%LIB_BAT%\LYRConst.bat %*
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
 
 rem =================================================
@@ -505,3 +509,14 @@ exit /b 0
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 rem =================================================
+    call :WriteLOG !lNOTSET! NOTSET
+    call :WriteLOG !lDEBUG! DEBUG
+    call :WriteLOG !lINFO! INFO
+    call :WriteLOG !lWARNING! WARNING
+    call :WriteLOG !lERROR! ERROR
+    call :WriteLOG !lCRITICAL! CRITICAL
+    call :WriteLOG !lBEGIN! BEGIN
+    call :WriteLOG !lEND! END
+    call :WriteLOG !lPROCESS! PROCESS
+    call :WriteLOG !lDEBUGTEXT! DEBUGTEXT
+    call :WriteLOG !lTEXT! TEXT
