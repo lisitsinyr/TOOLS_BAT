@@ -49,7 +49,7 @@ rem beginfunction
     )
 
     set ADirectory=%~1
-    echo REPO_WORK:!ADirectory!
+    rem echo REPO_WORK:!ADirectory!
     if not exist !ADirectory!\ (
         echo ERROR: Каталог !ADirectory! не существует ...
         exit /b 1
@@ -110,7 +110,7 @@ rem beginfunction
 
     set LOG_FILE_ADD=1
     set ADirectory=%~1
-    echo git_pull:!ADirectory!
+    rem echo git_pull:!ADirectory!
     if not exist !ADirectory!\ (
         echo ERROR: Каталог !ADirectory! не существует ...
         exit /b 1
