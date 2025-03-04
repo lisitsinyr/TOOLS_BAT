@@ -42,6 +42,8 @@ setlocal enabledelayedexpansion
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
     )
+    call :SET_LIB %~f0 || exit /b 1
+    rem echo CURRENT_DIR: !CURRENT_DIR!
 
     set PROJECT_GROUP=GIT
     
@@ -50,6 +52,8 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT\PROJECTS_GIT
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     set PROJECT_NAME=TOOLS_SRC_GIT
     call :DEPLOY_PROJECT
@@ -60,6 +64,19 @@ setlocal enabledelayedexpansion
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
+
+rem =================================================
+rem LYRLIB.bat
+rem =================================================
+:SET_LIB
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
+:SET_POETRY
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
+:SET_KIX
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
 
 rem =================================================
 rem LYRConsole.bat
