@@ -1,94 +1,36 @@
-@echo off
-rem -------------------------------------------------------------------
-rem rardir.bat
-rem -------------------------------------------------------------------
-chcp 1251>NUL
-
-setlocal enabledelayedexpansion
-
-rem -------------------------------------------------------------------
-rem SCRIPTS_DIR - Каталог скриптов
-rem -------------------------------------------------------------------
-if not defined SCRIPTS_DIR (
-    set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
-)
-
-rem -------------------------------------------------------------------
-rem LIB_BAT - каталог библиотеки скриптов
-rem -------------------------------------------------------------------
-set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
-
-rem -------------------------------------------------------------------
-rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
-rem -------------------------------------------------------------------
-if not defined SCRIPTS_DIR_KIX (
-    set SCRIPTS_DIR_KIX=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX
-)
-
-rem --------------------------------------------------------------------------------
-rem 
-rem --------------------------------------------------------------------------------
-:begin
-    set BATNAME=%~nx0
-    echo Start !BATNAME! ...
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    call :SET_LIB %0 || exit /b 1
-
-    rem -------------------------------------------------------------------
-    rem rar - 
-    rem -------------------------------------------------------------------
-    set APP=rar
-    set COMMAND=a
-    set OPTION= -r
-    set ARGS=
-    set APPRUN=
-    
-    rem -------------------------------------
-    rem OPTION
-    rem -------------------------------------
-    set O1=
-    if defined O1 (
-        set OPTION=!OPTION! !O1!
-    )
-    rem -------------------------------------
-    rem ARGS
-    rem -------------------------------------
-    rem Проверка на обязательные аргументы
-    set PN_CAPTION=Ввод значения directory
-    set directory=
-    call :Read_P directory %1 || exit /b 1
-    echo directory: !directory!
-    if defined directory (
-        set ARGS=!ARGS! "!directory!".rar "!directory!"
-    ) else (
-        echo ERROR: directory not defined ...
-        echo Использование: !BATNAME! папка
-        set OK=
-    )
-    
-    if not defined Read_N (
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-        exit /b 0
-    ) else (
-
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-    )
-    echo APPRUN: !APPRUN!
-    !APPRUN!
-
-    exit /b 0
-:end
-rem --------------------------------------------------------------------------------
-
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
 
 rem =================================================
+rem LYRConst.bat
+rem =================================================
+:LYRConst
+%LIB_BAT%\LYRConst.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRDEPLOY.bat
+rem =================================================
+:LYRDEPLOY
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:REPO_WORK
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:git_pull
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+
+rem =================================================
 rem LYRLIB.bat
 rem =================================================
+:LYRLIB
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
 :SET_LIB
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
@@ -102,6 +44,9 @@ exit /b 0
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
+:LYRDateTime
+%LIB_BAT%\LYRDateTime.bat %*
+exit /b 0
 :YYYYMMDDHHMMSS
 %LIB_BAT%\LYRDateTime.bat %*
 exit /b 0
@@ -112,6 +57,9 @@ exit /b 0
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
+:LYRFileUtils
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :ExtractFileDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
@@ -155,6 +103,9 @@ exit /b 0
 rem =================================================
 rem LYRLog.bat
 rem =================================================
+:LYRLog
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
 :AddLog
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
@@ -171,6 +122,9 @@ exit /b 0
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
+:LYRStrUtils
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
 :TrimLeft
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
@@ -196,6 +150,9 @@ exit /b 0
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
+:LYRSupport
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 :PressAnyKey
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
@@ -233,6 +190,9 @@ exit /b 0
 rem =================================================
 rem LYRParserINI.bat
 rem =================================================
+:LYRParserINI
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
 :GetINI
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
@@ -249,6 +209,9 @@ exit /b 0
 rem =================================================
 rem LYRConsole.bat
 rem =================================================
+:LYRConsole
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
 :Write
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
