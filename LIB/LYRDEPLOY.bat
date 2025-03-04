@@ -136,6 +136,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    call :WritePROCESS DEPLOY ÔÓÂÍÚ‡: !PROJECT_NAME! ...
+
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
@@ -150,7 +152,64 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-rem ===================================================================
+rem =================================================
+rem ‘”Õ ÷»» LIB
+rem =================================================
+
+rem =================================================
+rem LYRConsole.bat
+rem =================================================
+:Write
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLOG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:SetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:ReSetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteNOTSET
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteINFO
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteWARNING
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteERROR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCRITICAL
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteBEGIN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteEND
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WritePROCESS
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUGTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
 
 rem =================================================
 rem LYRSupport.bat
