@@ -195,90 +195,55 @@ rem beginfunction
         call :MAIN_FUNC || exit /b 1
     )
     
+    echo НАЧАЛО
+
     rem echo [101;93m NORMAL FOREGROUND COLORS [0m
     rem echo ^<ESC^>[33m [33mYellow[0m
-
     rem call :ConsoleTEST_00 %* || exit /b 1
-
     rem set cFG8_WHITE = 37 &rem Белый
     rem echo cFG8_WHITE:!cFG8_WHITE!
-
-    rem call :ListToStr A B C D E test || exit /b 1
-    rem echo ListToStr:!ListToStr!
-
     rem echo [33mYellow[0m
 
-    rem call :WriteLN Тест !cS_BOLD! !cFG8_GREEN! !cBG8_WHITE!
-
-    rem call :ListToStr !sBEGIN!!cS_BOLD! !cFG8_GREEN! !cBG8_WHITE!!sEND!Тест!sRESET! || exit /b 1
-    rem echo !ListToStr!
-
-    rem call :WriteLN !cS_BOLD! !cFG8_GREEN! !cBG8_WHITE! Тест
-
-    rem call :WriteLOG !lNOTSET! NOTSET
+    call :WriteLN !cS_BOLD! !cFG8_GREEN! !cBG8_WHITE! Тест
+    call :WriteLN !cS_BOLD! !cFG8_GREEN! !cBG8_WHITE! "Тест Тест Тест"
 
     call :SetColor !cERROR!
-    <nul set /p strTemp=test0
+    call :Write Тест
+    call :WriteCR
+    call :Write Тест Тест Тест
     call :ReSetColor
 
-    <nul set /p strTemp=[33m
-    echo test1
-    <nul set /p strTemp=[0m
+    call :WriteLOG !lNOTSET! NOTSET
+    call :WriteLOG !lDEBUG! DEBUG
+    call :WriteLOG !lINFO! INFO
+    call :WriteLOG !lWARNING! WARNING
+    call :WriteLOG !lERROR! ERROR
+    call :WriteLOG !lCRITICAL! CRITICAL
+    call :WriteLOG !lBEGIN! BEGIN
+    call :WriteLOG !lEND! END
+    call :WriteLOG !lPROCESS! PROCESS
+    call :WriteLOG !lDEBUGTEXT! DEBUGTEXT
+    call :WriteLOG !TEXT! TEXT
+    
+    call :WriteNOTSET NOTSET NOTSET NOTSET
+    call :WriteDEBUG DEBUG DEBUG DEBUG
+    call :WriteINFO INFO INFO INFO
+    call :WriteWARNING WARNING WARNING WARNING
+    call :WriteERROR ERROR ERROR ERROR
+    call :WriteCRITICAL CRITICAL CRITICAL CRITICAL
+    call :WriteBEGIN BEGIN BEGIN BEGIN
+    call :WriteEND END END END
+    call :WritePROCESS PROCESS PROCESS PROCESS
+    call :WriteDEBUGTEXT DEBUGTEXT DEBUGTEXT DEBUGTEXT
+    call :WriteTEXT TEXT TEXT TEXT
 
-    <nul set /p strTemp=[33m
-    echo test2
-    <nul set /p strTemp=[0m
-
-    call :SetColor !cERROR!
-    call :WriteLN test3 test3 test3
-    call :ReSetColor
+    echo КОНЕЦ
 
     rem call :StopLogFile || exit /b 1
 
     exit /b 0
 :end
 rem --------------------------------------------------------------------------------
-
-    rem call :WriteLOG !lDEBUG! DEBUG
-    call :SetColor !cDEBUG!
-    echo DEBUG
-    call :ReSetColor
-    rem call :WriteLOG !lINFO! INFO
-    call :SetColor !cDEBUG!
-    echo INFO
-    call :ReSetColor
-    rem call :WriteLOG !lWARNING! WARNING
-    call :SetColor !cWARNING!
-    echo WARNING
-    call :ReSetColor
-    rem call :WriteLOG !lERROR! ERROR
-    call :SetColor !cERROR!
-    echo ERROR
-    call :ReSetColor
-    rem call :WriteLOG !lCRITICAL! CRITICAL
-    call :SetColor !cCRITICAL!
-    echo CRITICAL
-    call :ReSetColor
-    rem call :WriteLOG !lBEGIN! BEGIN
-    call :SetColor !cBEGIN!
-    echo BEGIN
-    call :ReSetColor
-    rem call :WriteLOG !lEND! END
-    call :SetColor !cEND!
-    echo END
-    call :ReSetColor
-    rem call :WriteLOG !lPROCESS! PROCESS
-    call :SetColor !cPROCESS!
-    echo PROCESS
-    call :ReSetColor
-    rem call :WriteLOG !lDEBUGTEXT! DEBUGTEXT
-    call :SetColor !cDEBUGTEXT!
-    echo DEBUGTEXT
-    call :ReSetColor
-    rem call :WriteLOG !lTEXT! TEXT
-    call :SetColor !cTEXT!
-    echo TEXT TEXT TEXT
-    call :ReSetColor
 
 rem =================================================
 rem ФУНКЦИИ LIB
@@ -293,18 +258,23 @@ exit /b 0
 :SET_KIX
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
+
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
+
 rem =================================================
 rem LYRLog.bat
 rem =================================================
+
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
+
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
@@ -333,6 +303,9 @@ exit /b 0
 :Write
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
+:WriteCR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
 :WriteLN
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
@@ -343,6 +316,39 @@ exit /b 0
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :ReSetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteNOTSET
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteINFO
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteWARNING
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteERROR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCRITICAL
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteBEGIN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteEND
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WritePROCESS
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUGTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteTEXT
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 

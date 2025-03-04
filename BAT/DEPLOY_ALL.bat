@@ -58,45 +58,44 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_DEPLOY (
         set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
+        set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
     )
     rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
     
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
     if exist "!APPRUN!" (
-        rem echo [101;93m APPRUN:!APPRUN! [0m
-        echo [31mAPPRUN:!APPRUN![0m
-        rem echo APPRUN:!APPRUN!
-        rem call !APPRUN!
+        echo APPRUN:!APPRUN!
+        call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        rem call !APPRUN!
+        call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        rem call !APPRUN!
+        call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        rem call !APPRUN!
+        call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        rem call !APPRUN!
+        call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        rem call !APPRUN!
+        call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        rem call !APPRUN!
+        call !APPRUN!
     )
    
     exit /b 0
