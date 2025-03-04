@@ -227,6 +227,7 @@ rem beginfunction
             mkdir "!ADIRECTORY!"
             if not !ERRORLEVEL! EQU 0 (
                 echo ERROR: Directory !ADIRECTORY! not created...
+                call :CheckErrorlevel CreateDir !errorlevel! 1
                 exit /b 1
             )
         )
@@ -369,10 +370,8 @@ rem beginfunction
     for %AARG% %%f in (!AMASK!) do (
         rem echo %%~nf%%~xf
         copy "%%f" !ADIR_TO!\        >  NUL
-
-        echo errorlevel:!errorlevel!
-
-        echo File %%f copied ...     >> %LOG_FULLFILENAME%
+        call :CheckErrorlevel COPY_FILES !errorlevel! 1
+        echo File "%%f" copied ...     >> %LOG_FULLFILENAME%
     )
 
     cd /D "!CurrentDir!"
@@ -418,7 +417,7 @@ rem beginfunction
         mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
     )
     xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
-    call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
+    call :CheckErrorlevel XCOPY_FILES !errorlevel! 1
     rem set GERRORLEVEL=!errorlevel!
     rem echo GERRORLEVEL:!GERRORLEVEL!
 

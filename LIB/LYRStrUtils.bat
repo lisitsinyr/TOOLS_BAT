@@ -175,30 +175,45 @@ rem endfunction
 rem --------------------------------------------------------------------------------
 rem function ListToStr (ASTR) -> ListToStr
 rem --------------------------------------------------------------------------------
-:ListToStr
+:_ListToStr
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=ListToStr
+    set FUNCNAME=_ListToStr
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
     rem echo _:%*
-    rem set ASTR=%*
+    set ASTR=%*
 
     set LSTR=
-    set n=0
-    call :Read_N
-    for %%a in ( %* ) do (
-        if !n! EQU 0 (
-            set LSTR=%%a
+    call :Read_N %*
+    rem echo Read_N:!Read_N!
+
+    if !Read_N! GTR 0 (
+        if !Read_N! EQU 1 (
+            set LSTR=%1
         ) else (
-            set LSTR=!LSTR!^;%%a
+            set n=1
+            for %%a in ( %* ) do (
+                rem echo a:%%a
+                if !n! EQU 1 (
+                    set LSTR=!LSTR! %%a
+                ) else (
+                    if !n! EQU !Read_N! (
+                        set LSTR=!LSTR! %%a
+                    ) else (
+                        set LSTR=!LSTR! %%a
+                    )
+                )
+                set /A n+=1
+            )
+            rem set LSTR=!LSTR!
         )
-        set /A n+=1
     )
     rem echo LSTR:!LSTR!
 
+    set _ListToStr=!LSTR!
     set !FUNCNAME!=!LSTR!
 
     exit /b 0
