@@ -42,6 +42,8 @@ setlocal enabledelayedexpansion
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
     )
+    call :SET_LIB %~f0 || exit /b 1
+    rem echo CURRENT_DIR: !CURRENT_DIR!
 
     set PROJECT_GROUP=BAT
     
@@ -81,6 +83,19 @@ setlocal enabledelayedexpansion
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
+
+rem =================================================
+rem LYRLIB.bat
+rem =================================================
+:SET_LIB
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
+:SET_POETRY
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
+:SET_KIX
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
 
 rem =================================================
 rem LYRConsole.bat
