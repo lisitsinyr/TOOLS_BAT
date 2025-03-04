@@ -762,7 +762,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo cBEGIN:!cBEGIN!
+
     call :SetColor !cBEGIN!
+
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
     call :ReSetColor
