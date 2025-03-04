@@ -53,27 +53,29 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    call :WriteBEGIN Обновление группы: !PROJECT_GROUP!
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
-    call :PressAnyKey
+    rem call :PressAnyKey
 
     set PROJECT_NAME=INFO_BAT
-    call :WritePROCESS Проект: !PROJECT_NAME!
+    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
     call :DEPLOY_PROJECT
 
-    call :PressAnyKey
+    rem call :PressAnyKey
 
     set PROJECT_NAME=SCRIPTS_BAT
+    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
     call :WritePROCESS !PROJECT_NAME!
     call :DEPLOY_PROJECT
 
     rem call :PressAnyKey
 
     set PROJECT_NAME=TOOLS_SRC_BAT
+    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
     call :WritePROCESS !PROJECT_NAME!
     call :DEPLOY_PROJECT
 
-    call :WriteEND !DIR_PROJECTS_ROOT!
+    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     rem call :PressAnyKey
 
