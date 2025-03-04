@@ -63,40 +63,40 @@ setlocal enabledelayedexpansion
     
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
     if exist "!APPRUN!" (
-        color 0a
-        echo APPRUN:!APPRUN!
-        color 07
-        call !APPRUN!
+        rem echo [101;93m APPRUN:!APPRUN! [0m
+        echo [31mAPPRUN:!APPRUN![0m
+        rem echo APPRUN:!APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
     if exist "!APPRUN!" (
         echo APPRUN:!APPRUN!
-        call !APPRUN!
+        rem call !APPRUN!
     )
    
     exit /b 0
@@ -115,3 +115,5 @@ exit /b 0
 :DEPLOY_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
+
+rem =================================================

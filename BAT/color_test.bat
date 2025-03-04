@@ -213,25 +213,72 @@ rem beginfunction
     rem call :ListToStr !sBEGIN!!cS_BOLD! !cFG8_GREEN! !cBG8_WHITE!!sEND!Òåñò!sRESET! || exit /b 1
     rem echo !ListToStr!
 
-    call :WriteLN !cS_BOLD! !cFG8_GREEN! !cBG8_WHITE! Òåñò
+    rem call :WriteLN !cS_BOLD! !cFG8_GREEN! !cBG8_WHITE! Òåñò
 
-    call :WriteLOG !lNOTSET! NOTSET
-    call :WriteLOG !lDEBUG! DEBUG
-    call :WriteLOG !lINFO! INFO
-    call :WriteLOG !lWARNING! WARNING
-    call :WriteLOG !lERROR! ERROR
-    call :WriteLOG !lCRITICAL! CRITICAL
-    call :WriteLOG !lBEGIN! BEGIN
-    call :WriteLOG !lEND! END
-    call :WriteLOG !lPROCESS! PROCESS
-    call :WriteLOG !lDEBUGTEXT! DEBUGTEXT
-    call :WriteLOG !lTEXT! TEXT
+    rem call :WriteLOG !lNOTSET! NOTSET
+
+    call :SetColor !cERROR!
+    <nul set /p strTemp=test0
+    call :ReSetColor
+
+    <nul set /p strTemp=[33m
+    echo test1
+    <nul set /p strTemp=[0m
+
+    <nul set /p strTemp=[33m
+    echo test2
+    <nul set /p strTemp=[0m
+
+    call :SetColor !cERROR!
+    call :WriteLN test3 test3 test3
+    call :ReSetColor
 
     rem call :StopLogFile || exit /b 1
 
     exit /b 0
 :end
 rem --------------------------------------------------------------------------------
+
+    rem call :WriteLOG !lDEBUG! DEBUG
+    call :SetColor !cDEBUG!
+    echo DEBUG
+    call :ReSetColor
+    rem call :WriteLOG !lINFO! INFO
+    call :SetColor !cDEBUG!
+    echo INFO
+    call :ReSetColor
+    rem call :WriteLOG !lWARNING! WARNING
+    call :SetColor !cWARNING!
+    echo WARNING
+    call :ReSetColor
+    rem call :WriteLOG !lERROR! ERROR
+    call :SetColor !cERROR!
+    echo ERROR
+    call :ReSetColor
+    rem call :WriteLOG !lCRITICAL! CRITICAL
+    call :SetColor !cCRITICAL!
+    echo CRITICAL
+    call :ReSetColor
+    rem call :WriteLOG !lBEGIN! BEGIN
+    call :SetColor !cBEGIN!
+    echo BEGIN
+    call :ReSetColor
+    rem call :WriteLOG !lEND! END
+    call :SetColor !cEND!
+    echo END
+    call :ReSetColor
+    rem call :WriteLOG !lPROCESS! PROCESS
+    call :SetColor !cPROCESS!
+    echo PROCESS
+    call :ReSetColor
+    rem call :WriteLOG !lDEBUGTEXT! DEBUGTEXT
+    call :SetColor !cDEBUGTEXT!
+    echo DEBUGTEXT
+    call :ReSetColor
+    rem call :WriteLOG !lTEXT! TEXT
+    call :SetColor !cTEXT!
+    echo TEXT TEXT TEXT
+    call :ReSetColor
 
 rem =================================================
 rem ÔÓÍÊÖÈÈ LIB
@@ -290,6 +337,12 @@ exit /b 0
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :WriteLOG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:SetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:ReSetColor
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 

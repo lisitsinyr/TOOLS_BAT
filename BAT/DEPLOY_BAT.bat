@@ -54,17 +54,17 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=INFO_BAT
     call :DEPLOY_PROJECT
 
-rem call :PressAnyKey
+    rem call :PressAnyKey
 
     set PROJECT_NAME=SCRIPTS_BAT
     call :DEPLOY_PROJECT
 
-rem call :PressAnyKey
+    rem call :PressAnyKey
 
     set PROJECT_NAME=TOOLS_SRC_BAT
     call :DEPLOY_PROJECT
 
-rem call :PressAnyKey
+    rem call :PressAnyKey
 
     exit /b 0
 :end
@@ -81,9 +81,12 @@ exit /b 0
 :DEPLOY_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
 :PressAnyKey
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+
+rem =================================================

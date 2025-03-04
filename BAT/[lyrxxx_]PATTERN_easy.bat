@@ -84,6 +84,22 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set /a LOG_FILE_ADD=1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_CHECK_PARAMETR (%*)
 rem --------------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
@@ -135,6 +151,20 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    exit /b 0
+rem endfunction
+
 rem =================================================
 rem procedure MAIN (%*)
 rem =================================================
@@ -165,6 +195,9 @@ rem beginfunction
         call :MAIN_FUNC || exit /b 1
     )
     
+    echo [101;93m NORMAL FOREGROUND COLORS [0m
+    echo ^<ESC^>[33m [33mYellow[0m
+
     rem call :StopLogFile || exit /b 1
 
     exit /b 0
@@ -176,7 +209,7 @@ rem ‘”Õ ÷»» LIB
 rem =================================================
 
 rem =================================================
-rem LYRConst.bat
+rem LYRLIB.bat
 rem =================================================
 :SET_LIB
 %LIB_BAT%\LYRLIB.bat %*
@@ -184,18 +217,23 @@ exit /b 0
 :SET_KIX
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
+
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
+
 rem =================================================
 rem LYRLog.bat
 rem =================================================
+
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
+
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
@@ -208,4 +246,5 @@ exit /b 0
 :Read_P
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+
 rem =================================================
