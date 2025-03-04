@@ -53,11 +53,13 @@ setlocal enabledelayedexpansion
 
     call :WriteBEGIN !DIR_PROJECTS_ROOT!
 
+    call :PressAnyKey
+
     set PROJECT_NAME=INFO_BAT
     call :WritePROCESS !PROJECT_NAME!
     call :DEPLOY_PROJECT
 
-    rem call :PressAnyKey
+    call :PressAnyKey
 
     set PROJECT_NAME=SCRIPTS_BAT
     call :WritePROCESS !PROJECT_NAME!
