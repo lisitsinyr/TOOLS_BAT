@@ -58,19 +58,16 @@ setlocal enabledelayedexpansion
     rem call :PressAnyKey
 
     set PROJECT_NAME=INFO_BAT
-    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
     call :DEPLOY_PROJECT
 
     rem call :PressAnyKey
 
     set PROJECT_NAME=SCRIPTS_BAT
-    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
     call :DEPLOY_PROJECT
 
     rem call :PressAnyKey
 
     set PROJECT_NAME=TOOLS_SRC_BAT
-    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
     call :DEPLOY_PROJECT
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
