@@ -272,6 +272,65 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
+rem ФУНКЦИИ LIB
+rem =================================================
+
+rem =================================================
+rem LYRConsole.bat
+rem =================================================
+:Write
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLOG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:SetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:ReSetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteNOTSET
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteINFO
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteWARNING
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteERROR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCRITICAL
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteBEGIN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteEND
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WritePROCESS
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUGTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+
+rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
 :TrimLeft
