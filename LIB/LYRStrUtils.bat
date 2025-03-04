@@ -175,7 +175,7 @@ rem endfunction
 rem --------------------------------------------------------------------------------
 rem function ListToStr (ASTR) -> ListToStr
 rem --------------------------------------------------------------------------------
-:_ListToStr
+:ListToStr
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=_ListToStr
@@ -213,7 +213,7 @@ rem beginfunction
     )
     rem echo LSTR:!LSTR!
 
-    set _ListToStr=!LSTR!
+    set ListToStr=!LSTR!
     set !FUNCNAME!=!LSTR!
 
     exit /b 0

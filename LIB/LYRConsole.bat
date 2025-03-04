@@ -43,8 +43,10 @@ rem beginfunction
     set sRESET_1=!sBEGIN!0^;!sEND!
     set sRESET_2=!sBEGIN!!sEND!
 
+    rem Символ возврата каретки (CR) управляющий символ ASCII, который помечается как \r и имеет код 0x0D
+    rem Возврат каретки                    13  015 0x0D 00001101 CR \r &#013;  
     set sR=\r
-    rem символ возврата
+    rem Возврат на один символ (BACKSPACE)  8  010 0x08 00001000 BS \b &#008;  
     set sB=\b
 
     rem --------------------------------------
@@ -417,7 +419,7 @@ rem beginfunction
     )
     rem echo LSTR:!LSTR!
 
-    set ListToStr=!LSTR!
+    set aListToStr=!LSTR!
     set !FUNCNAME!=!LSTR!
 
     exit /b 0
@@ -451,22 +453,27 @@ rem beginfunction
                 if !n! EQU 1 (
                     set LSTR=!LSTR!%%a
                 ) else (
-                    set LSTR=!LSTR!^;%%a
+                    if !n! EQU !Read_N! (
+                        set LSTR=!LSTR!^;%%a
+                    ) else (
+                        set LSTR=!LSTR!^;%%a
+                    )
                 )
                 set /A n+=1
             )
+            set LSTR=!LSTR!
         )
     )
     rem echo LSTR:!LSTR!
 
-    set __ListToStr=!LSTR!
+    set bListToStr=!LSTR!
     set !FUNCNAME!=!LSTR!
 
     exit /b 0
 rem endfunction
 
 rem -------------------------------------------------
-rem  SetColor (AStyles, AFG8, ABG8, AFG256, ABG256):
+rem  SetColor (AStyles, AFG8, ABG8, AFG256, ABG256)
 rem -------------------------------------------------
 :SetColor
 rem beginfunction
@@ -477,14 +484,21 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    rem команда «echo», используемая в пакетных файлах для вывода текста,
+    rem добавляет символы 0x0D, 0x0A (Carriage Return и Line Feed).
+    rem Чтобы избежать этого, обычно используют какую-либо внешнюю утилиту
+    
     call :bListToStr %* || exit /b 1
+    rem echo bListToStr:!bListToStr!
 
-    <nul set /p strTemp=[33m
-    <nul set /p strTemp=[!cFG8_WHITE!^;!cBG8_BLACK!m
-    <nul set /p strTemp=[37^;40m
-    <nul set /p strTemp=[!cS_BOLD!;!cFG8_WHITE!;!cBG8_RED!!sEND!
-    <nul set /p strTemp=!sBEGIN!!__ListToStr!!sEND!
+    rem <nul set /p strTemp=[33m
+    rem <nul set /p strTemp=[!cFG8_WHITE!^;!cBG8_BLACK!m
+    rem <nul set /p strTemp=[37^;40m
+    rem <nul set /p strTemp=[!cS_BOLD!;!cFG8_WHITE!;!cBG8_RED!!sEND!
 
+    rem мы используем ввод с устройства «nul» в команде «set /p» для эмуляции команды «echo».
+    <nul set /p strTemp=!sBEGIN!!bListToStr!!sEND!
+    
     exit /b 0
 rem endfunction
 
@@ -500,16 +514,13 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem <nul set /p strTemp=!sRESET!
-    rem echo.
-
     echo !sRESET!
 
     exit /b 0
 rem endfunction
 
 rem -------------------------------------------------
-rem  Write (s, AStyles:()='', AFG8:str='', ABG8:str='', AFG256:str='', ABG256:str='', AESC:str=''):
+rem  Write (s)
 rem -------------------------------------------------
 :Write
 rem beginfunction
@@ -520,10 +531,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :_ListToStr %* || exit /b 1
+    call :ListToStr %* || exit /b 1
 
-    rem echo !_ListToStr!
-    <nul set /p strTemp=!_ListToStr!
+    rem echo !ListToStr!
+    <nul set /p strTemp=!ListToStr!
 
     rem call :FormatColorStr %* || exit /b 1
     rem echo FormatColorStr:!FormatColorStr!
@@ -533,7 +544,24 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteLN (s, AStyles:()='', AFG8:str='', ABG8:str='', AFG256:str='', ABG256:str='', AESC:str=''):
+rem  WriteCR ()
+rem -------------------------------------------------
+:WriteCR
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=Write
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    echo.
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteLN (AStyles, AFG8, ABG8, AFG256, ABG256, s)
 rem -------------------------------------------------
 :WriteLN
 rem beginfunction
@@ -544,8 +572,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :Write %* || exit /b 1
-    rem sys.stdout.write ('\n')
+    call :aListToStr %* || exit /b 1
+    echo !aListToStr!
 
     exit /b 0
 rem endfunction
@@ -563,12 +591,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ALevel=%1
-
     set s=%2
-
-    rem call :_ListToStr %* || exit /b 1
-    rem set s=!_ListToStr!
-    rem echo s:!s!
 
     if !ALevel! EQU !lNOTSET! (
         call :WriteLN !cNOTSET! !s!
@@ -583,8 +606,6 @@ rem beginfunction
         call :WriteLN !cWARNING! !s!
     )
     if !ALevel! EQU !lERROR! (
-        rem call :aListToStr !cERROR! !s! || exit /b 1
-        rem echo aListToStr:!ListToStr!
         call :WriteLN !cERROR! !s!
     )
     if !ALevel! EQU !lCRITICAL! (
@@ -609,6 +630,226 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem -------------------------------------------------
+rem  WriteNOTSET (s):
+rem -------------------------------------------------
+:WriteNOTSET
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteNOTSET
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cNOTSET!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteDEBUG (s):
+rem -------------------------------------------------
+:WriteDEBUG
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteDEBUG
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cDEBUG!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteINFO (s):
+rem -------------------------------------------------
+:WriteINFO
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteINFO
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cINFO!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteWARNING (s):
+rem -------------------------------------------------
+:WriteWARNING
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteWARNING
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cWARNING!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteERROR (s):
+rem -------------------------------------------------
+:WriteERROR
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteERROR
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cERROR!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteCRITICAL (s):
+rem -------------------------------------------------
+:WriteCRITICAL
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteCRITICAL
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cCRITICAL!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteBEGIN (s):
+rem -------------------------------------------------
+:WriteBEGIN
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteBEGIN
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cBEGIN!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteEND (s):
+rem -------------------------------------------------
+:WriteEND
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteEND
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cEND!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WritePROCESS (s):
+rem -------------------------------------------------
+:WritePROCESS
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WritePROCESS
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cPROCESS!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteDEBUGTEXT (s):
+rem -------------------------------------------------
+:WriteDEBUGTEXT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteDEBUGTEXT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cDEBUGTEXT!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  WriteTEXT (s):
+rem -------------------------------------------------
+:WriteTEXT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=WriteTEXT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    call :SetColor !cTEXT!
+    call :ListToStr %* || exit /b 1
+    call :Write !ListToStr!
+    call :ReSetColor
+
+    exit /b 0
+rem endfunction
+
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
@@ -625,7 +866,7 @@ exit /b 0
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
-:_ListToStr
+:ListToStr
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
 
