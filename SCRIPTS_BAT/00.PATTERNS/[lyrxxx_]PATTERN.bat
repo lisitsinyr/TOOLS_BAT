@@ -71,13 +71,11 @@ rem beginfunction
     rem Количество аргументов
     rem -------------------------------------------------------------------
     call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
 
     rem -------------------------------------------------------------------
     rem Настройка среды
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
-    rem echo CURRENT_DIR: !CURRENT_DIR!
 
     exit /b 0
 rem endfunction
@@ -92,8 +90,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set /a LOG_FILE_ADD=1
 
     exit /b 0
 rem endfunction
@@ -118,14 +114,14 @@ rem beginfunction
     set O1_Default=O1_Default
     set O1=!O1_Default!
     set PN_CAPTION=!O1_Caption!
-    call :Read_P O1 !O1! || exit /b 1
+    rem call :Read_P O1 !O1! || exit /b 1
     rem echo O1:!O1!
-    if defined O1 (
-        set OPTION=!OPTION! -!O1_Name! "!O1!"
-    ) else (
-        echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
-    )
-    echo OPTION:!OPTION!
+    rem if defined O1 (
+    rem     set OPTION=!OPTION! -!O1_Name! "!O1!"
+    rem ) else (
+    rem     echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
+    rem )
+    rem echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
@@ -136,16 +132,16 @@ rem beginfunction
     set A1_Default=A1_Default
     set A1=!A1_Default!
     set PN_CAPTION=!A1_Caption!
-    call :Read_P A1 !A1! || exit /b 1
+    rem call :Read_P A1 !A1! || exit /b 1
     rem echo A1:!A1!
-    if defined A1 (
-        set ARGS=!ARGS! "!A1!"
-    ) else (
-        echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
-        set OK=
-        exit /b 1
-    )
-    echo ARGS:!ARGS!
+    rem if defined A1 (
+    rem     set ARGS=!ARGS! "!A1!"
+    rem ) else (
+    rem     echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+    rem     set OK=
+    rem     exit /b 1
+    rem )
+    rem echo ARGS:!ARGS!
 
     exit /b 0
 rem endfunction
@@ -179,7 +175,8 @@ rem beginfunction
     echo Start !BATNAME! ...
 
     set DEBUG=
-    set /a LOG_FILE_ADD=0
+
+    set /a LOG_FILE_ADD=1
 
     call :MAIN_INIT || exit /b 1
 
