@@ -54,16 +54,9 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_SRC_JAVA
     call :DEPLOY_PROJECT
 
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECT_ROOT - Каталог группы проектов
-    rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Java
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-    set PROJECT_NAME=TOOLS_JAVA
-    call :DEPLOY_PROJECT
-
     exit /b 0
 :end
+rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB

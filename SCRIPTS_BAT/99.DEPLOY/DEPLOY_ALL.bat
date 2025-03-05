@@ -36,7 +36,6 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -58,48 +57,42 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_DEPLOY (
         set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
-        set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
     )
     rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
     
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
+    rem echo APPRUN:!APPRUN!
     if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
     if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
     if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
     if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
     if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
     if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
     if exist "!APPRUN!" (
-        echo APPRUN:!APPRUN!
         call !APPRUN!
     )
    
     exit /b 0
 :end
+
 rem ===================================================================
 
 rem =================================================
