@@ -55,13 +55,11 @@ setlocal enabledelayedexpansion
     rem Количество аргументов
     rem -------------------------------------------------------------------
     call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
 
     rem -------------------------------------------------------------------
     rem Настройка среды
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
-    rem echo CURRENT_DIR: !CURRENT_DIR!
 
     set PROJECT_GROUP=BAT
     
