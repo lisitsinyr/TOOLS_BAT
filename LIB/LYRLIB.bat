@@ -412,7 +412,7 @@ rem beginfunction
     rem LOG_FILE_ADD - Параметры журнала [0]
     rem -------------------------------------------------------------------
     if not defined LOG_FILE_ADD (
-        set /a LOG_FILE_ADD=1
+        set /a LOG_FILE_ADD=0
     )
     rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
 

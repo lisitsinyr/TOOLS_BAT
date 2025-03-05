@@ -232,7 +232,7 @@ rem beginfunction
 
     set DEBUG=
 
-    set /a LOG_FILE_ADD=1
+    set /a LOG_FILE_ADD=0
 
     call :MAIN_INIT || exit /b 1
 
