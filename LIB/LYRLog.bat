@@ -5,12 +5,12 @@ rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 :begin
-    rem –í—ã—Ö–æ–¥ –∏–∑ —Å—Ü–µ–Ω–∞—Ä–∏—è. –î–∞–ª—å—à–µ - —Ç–æ–ª—å–∫–æ —Ñ—É–Ω–∫—Ü–∏–∏.
+    rem ¬˚ıÓ‰ ËÁ ÒˆÂÌ‡Ëˇ. ƒ‡Î¸¯Â - ÚÓÎ¸ÍÓ ÙÛÌÍˆËË.
     exit /b 0
 :end
 
 rem =================================================
-rem –§–£–ù–ö–¶–ò–ò
+rem ‘”Õ ÷»»
 rem =================================================
 
 rem --------------------------------------------------------------------------------
@@ -210,6 +210,56 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure AddLogConsole (s)
+rem --------------------------------------------------------------------------------
+:AddLogConsole
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=AddLog
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+    set s=%*
+
+    if !GLevel! EQU !NOTSET! (
+        call :WriteNOTSET !s!
+    )
+    if !GLevel! EQU !DEBUG! (
+        call :WriteDEBUG !s!
+    )
+    if !GLevel! EQU !INFO! (
+        call :WriteINFO !s!
+    )
+    if !GLevel! EQU !WARNING! (
+        call :WriteWARNING !s!
+    )
+    if !GLevel! EQU !ERROR! (
+        call :WriteERROR !s!
+    )
+    if !GLevel! EQU !CRITICAL! (
+        call :WriteCRITICAL !s!
+    )
+    if !GLevel! EQU !BEGIN! (
+        call :WriteBEGIN !s!
+    )
+    if !GLevel! EQU !END! (
+        call :WriteEND !s!
+    )
+    if !GLevel! EQU !PROCESS! (
+        call :WritePROCESS !s!
+    )
+    if !GLevel! EQU !DEBUGTEXT! (
+        call :WriteDEBUGTEXT !s!
+    )
+    if !GLevel! EQU !TEXT! (
+        call :WriteTEXT !s!
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure AddLog (Aout, Alevel, ...)
 rem --------------------------------------------------------------------------------
 :AddLog
@@ -223,18 +273,20 @@ rem beginfunction
 
     set /a Aout=%1
     rem echo Aout: !Aout!
-    set /a Alevel=%2
-    rem echo Alevel: !Alevel!
+    set /a Glevel=%2
+    rem echo Glevel: !Glevel!
 
-    call :__LOG_STR !Alevel! %3 %4 %5 %6 %7 %8 %9 || exit /b 1
+    call :__LOG_STR !Glevel! %3 %4 %5 %6 %7 %8 %9 || exit /b 1
     if !Aout! EQU 0 (
-        echo !__LOG_STR!
+        rem echo !__LOG_STR!
+        call ::AddLogConsole !__LOG_STR!
     )
     if !Aout! EQU 1 (
         echo !__LOG_STR! >> "!LOG_FULLFILENAME!"
     )
     if !Aout! EQU 2 (
-        echo !__LOG_STR!
+        rem echo !__LOG_STR!
+        call ::AddLogConsole !__LOG_STR!
         echo !__LOG_STR! >> "!LOG_FULLFILENAME!"
     )
 
@@ -297,7 +349,7 @@ rem beginfunction
     set LOG_FILESCRIPT=!SCRIPT_FILENAME!
 
     rem ------------------------------------------------------
-    rem –û—Ç–∫—Ä—ã—Ç–∏–µ —Ñ–∞–π–ª–∞ –∂—É—Ä–Ω–∞–ª–∞
+    rem ŒÚÍ˚ÚËÂ Ù‡ÈÎ‡ ÊÛÌ‡Î‡
     rem ------------------------------------------------------
     set LFileName=!LOG_FULLFILENAME!
     rem echo LFileName: !LFileName!
@@ -323,7 +375,7 @@ rem beginfunction
     )
     rem -------------------------------------------------------------------
     call :AddLog !loAll! !TEXT! !S01! || exit /b 1
-    call :AddLog !loAll! !INFO! Start: !SCRIPT_BASEFILENAME! ... || exit /b 1
+    call :AddLog !loAll! !TEXT! Start: !SCRIPT_BASEFILENAME! ... || exit /b 1
     call :AddLog !loAll! !TEXT! !S01! || exit /b 1
     rem -------------------------------------------------------------------
 
@@ -344,7 +396,7 @@ rem beginfunction
 
     rem -------------------------------------------------------------------
     call :AddLog !loAll! !TEXT! !S01! || exit /b 1
-    call :AddLog !loAll! !INFO! Stop: !SCRIPT_BASEFILENAME! ... || exit /b 1
+    call :AddLog !loAll! !TEXT! Stop: !SCRIPT_BASEFILENAME! ... || exit /b 1
     call :AddLog !loAll! !TEXT! !S01! || exit /b 1
     rem -------------------------------------------------------------------
 
@@ -352,7 +404,7 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
-rem –§–£–ù–ö–¶–ò–ò LIB
+rem ‘”Õ ÷»» LIB
 rem =================================================
 
 rem =================================================
