@@ -8,7 +8,8 @@ setlocal enabledelayedexpansion
 
 :begin
     set BATNAME=%~nx0
-    echo Старт !BATNAME! ...
+    rem echo Старт !BATNAME! ...
+    call :WritePROCESS Старт !BATNAME! ...
 
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_ROOT - Каталог ROOT
