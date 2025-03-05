@@ -47,6 +47,16 @@ setlocal enabledelayedexpansion
         exit /b 1
     )
 
+    rem -------------------------------------------------------------------
+    rem Количество аргументов
+    rem -------------------------------------------------------------------
+    call :Read_N %* || exit /b 1
+
+    rem -------------------------------------------------------------------
+    rem Настройка среды
+    rem -------------------------------------------------------------------
+    call :SET_LIB %~f0 || exit /b 1
+
 rem --------------------------------------------------------------------------------
 rem 
 rem --------------------------------------------------------------------------------
@@ -55,7 +65,8 @@ rem ----------------------------------------------------------------------------
     echo Start !BATNAME! ...
 
     set DEBUG=
-    set /a LOG_FILE_ADD=0
+
+    set /a LOG_FILE_ADD=1
 
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR_KIX - Каталог скриптов KIX
@@ -69,13 +80,6 @@ rem ----------------------------------------------------------------------------
     rem echo SCRIPTS_DIR_KIX:!SCRIPTS_DIR_KIX!
 
     call :SET_KIX || exit /b 1
-
-    call :Read_N %* || exit /b 1
-
-    call :SET_LIB %0 || exit /b 1
-
-    call :CurrentDir
-    rem echo CurrentDir:!CurrentDir!
 
     rem -------------------------------------
     rem OPTION
@@ -130,18 +134,29 @@ rem ----------------------------------------------------------------------------
     rem     kix32.exe !APP_KIX_DIR!\!APP_KIX!.kix "$A1=!A1!"
     rem )
 
-    rem call :PressAnyKey || exit /b 1
-
     exit /b 0
 :end
-rem --------------------------------------------------------------------------------
+rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
 
 rem =================================================
-rem LYRLIB.bat
+rem LYRDEPLOY.bat
+rem =================================================
+:REPO_WORK
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:git_pull
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRConst.bat
 rem =================================================
 :SET_LIB
 %LIB_BAT%\LYRLIB.bat %*
@@ -209,6 +224,9 @@ exit /b 0
 rem =================================================
 rem LYRLog.bat
 rem =================================================
+:FormatStr
+%LIB_BAT%\LYRLog.bat %*
+exit /b 0
 :AddLog
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
@@ -241,9 +259,6 @@ exit /b 0
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
 :TrimQuotes
-%LIB_BAT%\LYRStrUtils.bat %*
-exit /b 0
-:ListToStr
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
 
@@ -280,9 +295,6 @@ exit /b 0
 :GetCMD
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:CheckErrorlevel
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
 
 rem =================================================
 rem LYRParserINI.bat
@@ -299,60 +311,4 @@ exit /b 0
 :GetFileParser
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
-
-rem =================================================
-rem LYRConsole.bat
-rem =================================================
-:Write
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteCR
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteLN
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteLOG
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:SetColor
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:ReSetColor
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteNOTSET
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteDEBUG
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteINFO
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteWARNING
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteERROR
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteCRITICAL
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteBEGIN
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteEND
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WritePROCESS
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteDEBUGTEXT
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteTEXT
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-
 rem =================================================

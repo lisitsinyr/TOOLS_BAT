@@ -70,13 +70,11 @@ rem beginfunction
     rem Количество аргументов
     rem -------------------------------------------------------------------
     call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
 
     rem -------------------------------------------------------------------
     rem Настройка среды
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
-    rem echo CURRENT_DIR: !CURRENT_DIR!
 
     exit /b 0
 rem endfunction
@@ -91,8 +89,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set /a LOG_FILE_ADD=1
 
     exit /b 0
 rem endfunction
@@ -187,7 +183,8 @@ rem beginfunction
     echo Start !BATNAME! ...
 
     set DEBUG=
-    set /a LOG_FILE_ADD=0
+
+    set /a LOG_FILE_ADD=1
 
     call :MAIN_INIT || exit /b 1
 
@@ -206,10 +203,24 @@ rem beginfunction
 
     exit /b 0
 rem endfunction
+rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
+
+rem =================================================
+rem LYRDEPLOY.bat
+rem =================================================
+:REPO_WORK
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:git_pull
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
 
 rem =================================================
 rem LYRConst.bat
@@ -223,6 +234,7 @@ exit /b 0
 :SET_KIX
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
@@ -232,6 +244,7 @@ exit /b 0
 :DateTime
 %LIB_BAT%\LYRDateTime.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
@@ -274,6 +287,7 @@ exit /b 0
 :XCOPY_FILES
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRLog.bat
 rem =================================================
@@ -292,6 +306,7 @@ exit /b 0
 :StopLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
@@ -313,6 +328,7 @@ exit /b 0
 :TrimQuotes
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
@@ -346,6 +362,7 @@ exit /b 0
 :GetCMD
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRParserINI.bat
 rem =================================================

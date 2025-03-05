@@ -27,42 +27,55 @@ rem beginfunction
     )
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_ROOT - Каталог скриптов
+    rem PROJECTS_LYR_ROOT - Каталог ROOT
     rem -------------------------------------------------------------------
-    set PROJECTS_LYR_ROOT=D:\WORK\WIN
+    rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
     rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR - Каталог скриптов
+    rem PROJECTS_LYR_DIR - Каталог проектов LYR
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
     if not exist "!PROJECTS_LYR_DIR!"\ (
         rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
-        echo INFO: Create "!PROJECTS_LYR_DIR!" ...
-        mkdir "!PROJECTS_LYR_DIR!"
+        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        rem mkdir "!PROJECTS_LYR_DIR!"
+        exit /b 1
     )
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
+    rem SCRIPTS_DIR - Каталог скриптов BAT
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
-        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+        rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
-    rem echo SCRIPTS_DIR: !SCRIPTS_DIR!
+    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
+
     rem -------------------------------------------------------------------
-    rem LIB_BAT - каталог библиотеки скриптов
+    rem LIB_BAT - каталог библиотеки скриптов BAT
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
-        set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
-        rem echo LIB_BAT: !LIB_BAT!
+        set LIB_BAT=!SCRIPTS_DIR!\LIB
     )
+    rem echo LIB_BAT:!LIB_BAT!
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
     )
+
+    rem -------------------------------------------------------------------
+    rem Количество аргументов
+    rem -------------------------------------------------------------------
+    call :Read_N %* || exit /b 1
+
+    rem -------------------------------------------------------------------
+    rem Настройка среды
+    rem -------------------------------------------------------------------
+    call :SET_LIB %~f0 || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -77,8 +90,6 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    set /a LOG_FILE_ADD=1
 
     rem ------------------------------------------------
     rem 01_UNIX
@@ -821,16 +832,10 @@ rem beginfunction
     echo Start !BATNAME! ...
 
     set DEBUG=
-    set /a LOG_FILE_ADD=0
+
+    set /a LOG_FILE_ADD=1
 
     call :MAIN_INIT || exit /b 1
-
-    rem Количество аргументов
-    call :Read_N %* || exit /b 1
-    rem echo Read_N: !Read_N!
-
-    call :SET_LIB %~f0 || exit /b 1
-    rem echo CURRENT_DIR: !CURRENT_DIR!
 
     call :StartLogFile || exit /b 1
     set OK=yes
@@ -843,17 +848,29 @@ rem beginfunction
     )
     call :StopLogFile || exit /b 1
 
-    rem call :PressAnyKey || exit /b 1
-
     exit /b 0
 rem endfunction
+rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
 
 rem =================================================
-rem LYRLIB.bat
+rem LYRDEPLOY.bat
+rem =================================================
+:REPO_WORK
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:git_pull
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRConst.bat
 rem =================================================
 :SET_LIB
 %LIB_BAT%\LYRLIB.bat %*
@@ -1008,5 +1025,4 @@ exit /b 0
 :GetFileParser
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
-
 rem =================================================
