@@ -262,7 +262,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  FormatColorStr (s, AStyles:()='', AFG8:str='', ABG8:str='', AFG256:str='', ABG256:str='', AESC:str=''):
+rem  FormatColorStr (AStyles, AFG8, ABG8, AFG256, ABG256, AESC, s):
 rem -------------------------------------------------
 :FormatColorStr
 rem beginfunction
@@ -297,7 +297,7 @@ rem beginfunction
         ) else (
             set LResult=!sBEGIN!!AESC!!s!!sRESET!
         )
-        echo 0.LResult:!LResult!
+        rem echo 0.LResult:!LResult!
     ) else (
 
         rem --------------------------------------------
@@ -762,10 +762,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    echo cBEGIN:!cBEGIN!
-
     call :SetColor !cBEGIN!
-
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
     call :ReSetColor
