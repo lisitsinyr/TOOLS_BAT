@@ -502,8 +502,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem echo !sRESET!
-    <nul set /p strTemp=!sRESET!
+    echo.!sRESET!
+    rem <nul set /p strTemp=!sRESET!
 
     exit /b 0
 rem endfunction
