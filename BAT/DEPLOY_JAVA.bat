@@ -55,14 +55,30 @@ setlocal enabledelayedexpansion
 
     set PROJECT_GROUP=JAVA
     
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Java\PROJECTS_JAVA
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
+    set PROJECT_NAME=INFO_JAVA
+    call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=LANG_JAVA
+    call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=PATTERNS_JAVA
+    call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=TESTS_JAVA
+    call :DEPLOY_PROJECT
+
     set PROJECT_NAME=TOOLS_SRC_JAVA
     call :DEPLOY_PROJECT
+
+    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
 :end

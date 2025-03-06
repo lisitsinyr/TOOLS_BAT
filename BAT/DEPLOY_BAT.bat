@@ -63,13 +63,13 @@ setlocal enabledelayedexpansion
 
     set PROJECT_GROUP=BAT
     
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     set PROJECT_NAME=INFO_BAT
     call :DEPLOY_PROJECT
