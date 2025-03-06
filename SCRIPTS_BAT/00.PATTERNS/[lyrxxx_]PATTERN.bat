@@ -11,6 +11,7 @@ rem
 rem --------------------------------------------------------------------------------
 :begin
     call :MAIN %* || exit /b 1
+
     exit /b 0
 :end
 rem --------------------------------------------------------------------------------
@@ -114,14 +115,14 @@ rem beginfunction
     set O1_Default=O1_Default
     set O1=!O1_Default!
     set PN_CAPTION=!O1_Caption!
-    rem call :Read_P O1 !O1! || exit /b 1
-    rem echo O1:!O1!
-    rem if defined O1 (
-    rem     set OPTION=!OPTION! -!O1_Name! "!O1!"
-    rem ) else (
-    rem     echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
-    rem )
-    rem echo OPTION:!OPTION!
+    call :Read_P O1 !O1! || exit /b 1
+    echo O1:!O1!
+    if defined O1 (
+        set OPTION=!OPTION! -!O1_Name! "!O1!"
+    ) else (
+        echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
+    )
+    echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
@@ -132,16 +133,16 @@ rem beginfunction
     set A1_Default=A1_Default
     set A1=!A1_Default!
     set PN_CAPTION=!A1_Caption!
-    rem call :Read_P A1 !A1! || exit /b 1
-    rem echo A1:!A1!
-    rem if defined A1 (
-    rem     set ARGS=!ARGS! "!A1!"
-    rem ) else (
-    rem     echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
-    rem     set OK=
-    rem     exit /b 1
-    rem )
-    rem echo ARGS:!ARGS!
+    call :Read_P A1 !A1! || exit /b 1
+    echo A1:!A1!
+    if defined A1 (
+        set ARGS=!ARGS! "!A1!"
+    ) else (
+        echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+        set OK=
+        exit /b 1
+    )
+    echo ARGS:!ARGS!
 
     exit /b 0
 rem endfunction
@@ -183,11 +184,16 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
+
     call :MAIN_SET || exit /b 1
-    if defined OK if not defined Read_N (
-        call :MAIN_CHECK_PARAMETR %* || exit /b 1
-    )
+
+    rem if defined OK if not defined Read_N (
+    rem     call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    rem )
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+
     if defined OK (
+        echo Step2
         call :MAIN_FUNC || exit /b 1
     )
     
@@ -195,6 +201,7 @@ rem beginfunction
 
     exit /b 0
 rem endfunction
+rem =================================================
 
 rem =================================================
 rem ‘”Õ ÷»» LIB
