@@ -89,8 +89,18 @@ rem ‘”Õ ÷»» LIB
 rem =================================================
 
 rem =================================================
+rem LYRConst.bat
+rem =================================================
+:LYRConst
+%LIB_BAT%\LYRConst.bat %*
+exit /b 0
+
+rem =================================================
 rem LYRDEPLOY.bat
 rem =================================================
+:LYRDEPLOY
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
 :REPO_WORK
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
@@ -102,8 +112,11 @@ exit /b 0
 exit /b 0
 
 rem =================================================
-rem LYRConst.bat
+rem LYRLIB.bat
 rem =================================================
+:LYRLIB
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
 :SET_LIB
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
@@ -117,6 +130,9 @@ exit /b 0
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
+:LYRDateTime
+%LIB_BAT%\LYRDateTime.bat %*
+exit /b 0
 :YYYYMMDDHHMMSS
 %LIB_BAT%\LYRDateTime.bat %*
 exit /b 0
@@ -127,6 +143,9 @@ exit /b 0
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
+:LYRFileUtils
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :ExtractFileDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
@@ -170,7 +189,7 @@ exit /b 0
 rem =================================================
 rem LYRLog.bat
 rem =================================================
-:FormatStr
+:LYRLog
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
 :AddLog
@@ -189,6 +208,9 @@ exit /b 0
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
+:LYRStrUtils
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
 :TrimLeft
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
@@ -207,10 +229,16 @@ exit /b 0
 :TrimQuotes
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
+:ListToStr
+%LIB_BAT%\LYRStrUtils.bat %*
+exit /b 0
 
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
+:LYRSupport
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 :PressAnyKey
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
@@ -241,10 +269,16 @@ exit /b 0
 :GetCMD
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+:CheckErrorlevel
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
 
 rem =================================================
 rem LYRParserINI.bat
 rem =================================================
+:LYRParserINI
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
 :GetINI
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
@@ -257,4 +291,63 @@ exit /b 0
 :GetFileParser
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
+
+rem =================================================
+rem LYRConsole.bat
+rem =================================================
+:LYRConsole
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:Write
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLOG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:SetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:ReSetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteNOTSET
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteINFO
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteWARNING
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteERROR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCRITICAL
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteBEGIN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteEND
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WritePROCESS
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUGTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+
 rem =================================================
