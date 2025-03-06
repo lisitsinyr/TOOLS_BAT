@@ -119,10 +119,11 @@ rem beginfunction
 
     cd /D "!ADirectory!"
 
-    rem call lyrgit_pull.bat
+    call lyrgit_pull.bat
+    
     rem echo "git pull ..."
-    git pull
-    call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
+    rem git pull
+    rem call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
 
     exit /b 0
 rem endfunction
