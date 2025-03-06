@@ -374,9 +374,9 @@ rem beginfunction
         )
     )
     rem -------------------------------------------------------------------
-    call :AddLog !loAll! !TEXT! !S01! || exit /b 1
-    call :AddLog !loAll! !TEXT! Start: !SCRIPT_BASEFILENAME! ... || exit /b 1
-    call :AddLog !loAll! !TEXT! !S01! || exit /b 1
+    call :AddLog !loAll! !PROCESS! !S01! || exit /b 1
+    call :AddLog !loAll! !PROCESS! Start: !SCRIPT_BASEFILENAME! ... || exit /b 1
+    call :AddLog !loAll! !PROCESS! !S01! || exit /b 1
     rem -------------------------------------------------------------------
 
     exit /b 0
@@ -395,9 +395,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     rem -------------------------------------------------------------------
-    call :AddLog !loAll! !TEXT! !S01! || exit /b 1
-    call :AddLog !loAll! !TEXT! Stop: !SCRIPT_BASEFILENAME! ... || exit /b 1
-    call :AddLog !loAll! !TEXT! !S01! || exit /b 1
+    call :AddLog !loAll! !PROCESS! !S01! || exit /b 1
+    call :AddLog !loAll! !PROCESS! Stop: !SCRIPT_BASEFILENAME! ... || exit /b 1
+    call :AddLog !loAll! !PROCESS! !S01! || exit /b 1
     rem -------------------------------------------------------------------
 
     exit /b 0
