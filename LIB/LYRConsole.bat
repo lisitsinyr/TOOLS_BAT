@@ -651,7 +651,7 @@ rem beginfunction
     call :SetColor !cNOTSET!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -671,7 +671,7 @@ rem beginfunction
     call :SetColor !cDEBUG!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -691,7 +691,7 @@ rem beginfunction
     call :SetColor !cINFO!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -711,7 +711,7 @@ rem beginfunction
     call :SetColor !cWARNING!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -731,7 +731,7 @@ rem beginfunction
     call :SetColor !cERROR!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -751,7 +751,7 @@ rem beginfunction
     call :SetColor !cCRITICAL!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -771,7 +771,7 @@ rem beginfunction
     call :SetColor !cBEGIN!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -791,7 +791,7 @@ rem beginfunction
     call :SetColor !cEND!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -831,7 +831,7 @@ rem beginfunction
     call :SetColor !cDEBUGTEXT!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
@@ -851,7 +851,7 @@ rem beginfunction
     call :SetColor !cTEXT!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
