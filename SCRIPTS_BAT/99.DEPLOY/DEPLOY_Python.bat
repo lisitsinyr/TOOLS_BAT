@@ -71,6 +71,15 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=FRAMEWORK_PY
     call :DEPLOY_PROJECT
 
+    set PROJECT_NAME=INFO_PYTHON
+    call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=LANG_PYTHON
+    call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=LIBRARY_PY
+    call :DEPLOY_PROJECT
+
     set PROJECT_NAME=MobileAPP_PY
     call :DEPLOY_PROJECT
 
