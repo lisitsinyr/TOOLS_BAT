@@ -811,7 +811,7 @@ rem beginfunction
     call :SetColor !cPROCESS!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
-    call :ReSetColor
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
