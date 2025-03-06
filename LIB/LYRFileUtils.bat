@@ -369,7 +369,7 @@ rem beginfunction
     
     for %AARG% %%f in (!AMASK!) do (
         rem echo %%~nf%%~xf
-        copy "%%f" !ADIR_TO!\        >  NUL
+        copy "%%f" !ADIR_TO!\           >  NUL
         call :CheckErrorlevel COPY_FILES !errorlevel! 1
         echo File "%%f" copied ...     >> %LOG_FULLFILENAME%
     )
@@ -418,8 +418,6 @@ rem beginfunction
     )
     xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
     call :CheckErrorlevel XCOPY_FILES !errorlevel! 1
-    rem set GERRORLEVEL=!errorlevel!
-    rem echo GERRORLEVEL:!GERRORLEVEL!
 
     exit /b 0
 rem endfunction

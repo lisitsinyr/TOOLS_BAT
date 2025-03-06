@@ -92,6 +92,7 @@ rem beginfunction
     )
    
     if exist ".git"\ (
+        rem echo "call lyrgit_push_main.bat ..."
         call lyrgit_push_main.bat
     )
 
@@ -119,7 +120,8 @@ rem beginfunction
     cd /D "!ADirectory!"
 
     rem call lyrgit_pull.bat
-    git pull    
+    rem echo "git pull ..."
+    git pull
     call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
 
     exit /b 0
