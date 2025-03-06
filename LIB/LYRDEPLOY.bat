@@ -50,6 +50,7 @@ rem beginfunction
 
     set ADirectory=%~1
     rem echo REPO_WORK:!ADirectory!
+
     if not exist !ADirectory!\ (
         echo ERROR: Каталог !ADirectory! не существует ...
         exit /b 1
