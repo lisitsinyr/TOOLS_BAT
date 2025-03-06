@@ -491,12 +491,12 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  ReSetColor ():
+rem  ReSetColorCR ():
 rem -------------------------------------------------
-:ReSetColor
+:ReSetColorCR
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=Write
+    set FUNCNAME=ReSetColorCR
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -504,6 +504,23 @@ rem beginfunction
 
     echo !sRESET!
     rem <nul set /p strTemp=!sRESET!
+
+    exit /b 0
+rem endfunction
+
+rem -------------------------------------------------
+rem  ReSetColor ():
+rem -------------------------------------------------
+:ReSetColor
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=ReSetColor
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    <nul set /p strTemp=!sRESET!
 
     exit /b 0
 rem endfunction
@@ -538,7 +555,7 @@ rem -------------------------------------------------
 :WriteCR
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=Write
+    set FUNCNAME=WriteCR
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
