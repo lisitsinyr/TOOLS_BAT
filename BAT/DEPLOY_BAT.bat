@@ -99,6 +99,7 @@ setlocal enabledelayedexpansion
     rem set PROJECT_NAME=TOOLS_BAT
     rem call :DEPLOY_PROJECT
 
+    set DIR_GROUP_ROOT=
     cd /d "D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT"
     call DEPLOY_PROJECT_TOOLS_BAT.bat
 
