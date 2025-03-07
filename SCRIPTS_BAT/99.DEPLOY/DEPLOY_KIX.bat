@@ -55,7 +55,12 @@ setlocal enabledelayedexpansion
 
     set PROJECT_GROUP=KIX
     
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    if not defined DIR_GROUP_ROOT (
+        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\KIX
+    )
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
@@ -63,6 +68,21 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    
+    rem --------------------------------------------------------
+    rem !DIR_GROUP_ROOT!\TOOLS_KIX\BAT - Очистка
+    rem --------------------------------------------------------
+    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_KIX\BAT
+    rem echo LDIR_TO:!LDIR_TO!
+    call :WritePROCESS Очистка !LDIR_TO! ...
+    rem rmdir "!LDIR_TO!"
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
+    
     set PROJECT_NAME=SCRIPTS_KIX
     call :DEPLOY_PROJECT
 

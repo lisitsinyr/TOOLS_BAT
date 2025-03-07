@@ -54,13 +54,23 @@ setlocal enabledelayedexpansion
 
     set PROJECT_GROUP=Python
     
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    if not defined DIR_GROUP_ROOT (
+        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Python
+    )
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Python\PROJECTS_PY
-    rem echo DIR_PROJECT_ROOT:!DIR_PROJECT_ROOT!
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_PY
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+
+rem goto :Start
 
     set PROJECT_NAME=APPInfo_PY
     call :DEPLOY_PROJECT
@@ -92,9 +102,6 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=PROJECTS_PY
     call :DEPLOY_PROJECT
 
-    set PROJECT_NAME=SCRIPTS_PY
-    call :DEPLOY_PROJECT
-
     set PROJECT_NAME=SOFTWARE_PY
     call :DEPLOY_PROJECT
 
@@ -104,10 +111,37 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TESTS_PY
     call :DEPLOY_PROJECT
 
+    set PROJECT_NAME=YOUTUBE_PY
+    call :DEPLOY_PROJECT
+
+:Start
+
+    rem --------------------------------------------------------
+    rem !DIR_PROJECTS_ROOT!\TOOLS_PY\BAT - Очистка
+    rem --------------------------------------------------------
+    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_PY\BAT
+    rem echo LDIR_TO:!LDIR_TO!
+    rem rmdir "!LDIR_TO!"
+    call :WritePROCESS Очистка !LDIR_TO! ...
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
+
+    set PROJECT_NAME=SCRIPTS_PY
+    call :DEPLOY_PROJECT
+
     set PROJECT_NAME=TOOLS_SRC_PY
     call :DEPLOY_PROJECT
 
-    set PROJECT_NAME=YOUTUBE_PY
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECT_ROOT - Каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    set PROJECT_NAME=TOOLS_PY
+    rem echo PROJECT_NAME:!PROJECT_NAME!
     call :DEPLOY_PROJECT
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...

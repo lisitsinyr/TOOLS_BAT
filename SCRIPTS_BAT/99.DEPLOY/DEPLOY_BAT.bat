@@ -71,11 +71,12 @@ setlocal enabledelayedexpansion
     if not defined DIR_GROUP_ROOT (
         set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT
     )
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_BAT
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     set PROJECT_NAME=COMMANDS_BAT
@@ -100,6 +101,14 @@ setlocal enabledelayedexpansion
     call :DEPLOY_PROJECT
 
     set PROJECT_NAME=TOOLS_SRC_BAT
+    call :DEPLOY_PROJECT
+
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECT_ROOT - Каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    set PROJECT_NAME=TOOLS_BAT
     call :DEPLOY_PROJECT
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
