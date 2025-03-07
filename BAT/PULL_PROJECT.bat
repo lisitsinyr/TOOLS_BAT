@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_Python.bat
+rem PULL_PROJECT.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -53,52 +53,29 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    set PROJECT_GROUP=KIX
+    set PROJECT_GROUP=GIT
     
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     if not defined DIR_GROUP_ROOT (
-        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\KIX
+        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT
+        set DIR_GROUP_ROOT=D:\WORK
     )
     rem DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_KIX
+    set DIR_PROJECTS_ROOT=DIR_GROUP_ROOT\PROJECTS_GIT
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
-    
-    rem --------------------------------------------------------
-    rem !DIR_GROUP_ROOT!\TOOLS_KIX\BAT - Очистка
-    rem --------------------------------------------------------
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_KIX\BAT
-    rem echo LDIR_TO:!LDIR_TO!
-    call :WritePROCESS Очистка !LDIR_TO! ...
-    rem rmdir "!LDIR_TO!"
-    if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
-    ) else (
-        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
-    )
-    
-    set PROJECT_NAME=SCRIPTS_KIX
-    call :DEPLOY_PROJECT
+    call :WriteBEGIN PULL группы проектов: !PROJECT_GROUP! ...
 
-    set PROJECT_NAME=TOOLS_SRC_KIX
-    call :DEPLOY_PROJECT
+    set PROJECT_NAME=TOOLS_SRC_GIT
+    call :PULL_PROJECT
 
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECT_ROOT - Каталог группы проектов
-    rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-    set PROJECT_NAME=TOOLS_KIX
-    call :DEPLOY_PROJECT
-
-    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteEND Конец PULL группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
 :end
@@ -128,6 +105,9 @@ exit /b 0
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:PULL_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 

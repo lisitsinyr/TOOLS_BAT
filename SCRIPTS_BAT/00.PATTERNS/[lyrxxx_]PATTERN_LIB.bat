@@ -1,108 +1,18 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_Python.bat
+rem [lyrxxx_]PATTERN_LIB.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
+rem --------------------------------------------------------------------------------
+rem 
+rem --------------------------------------------------------------------------------
 :begin
-    set BATNAME=%~nx0
-    echo Старт !BATNAME! ...
-
-    rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_ROOT - Каталог скриптов
-    rem -------------------------------------------------------------------
-    set PROJECTS_LYR_ROOT=D:
-    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
-
-    rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR - Каталог скриптов
-    rem -------------------------------------------------------------------
-    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
-
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
-    rem -------------------------------------------------------------------
-    if not defined SCRIPTS_DIR (
-        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
-    )
-    rem echo SCRIPTS_DIR: !SCRIPTS_DIR!
-
-    rem -------------------------------------------------------------------
-    rem LIB_BAT - каталог библиотеки скриптов
-    rem -------------------------------------------------------------------
-    if not defined LIB_BAT (
-        set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
-    )
-    rem echo LIB_BAT: !LIB_BAT!
-    if not exist !LIB_BAT!\ (
-        echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
-        exit /b 1
-    )
-
-    rem -------------------------------------------------------------------
-    rem Количество аргументов
-    rem -------------------------------------------------------------------
-    call :Read_N %* || exit /b 1
-
-    rem -------------------------------------------------------------------
-    rem Настройка среды
-    rem -------------------------------------------------------------------
-    call :SET_LIB %~f0 || exit /b 1
-
-    set PROJECT_GROUP=KIX
-    
-    rem -------------------------------------------------------------------
-    rem DIR_GROUP_ROOT - каталог группы проектов
-    rem -------------------------------------------------------------------
-    if not defined DIR_GROUP_ROOT (
-        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\KIX
-    )
-    rem DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
-
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECT_ROOT - Каталог группы проектов
-    rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_KIX
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
-    
-    rem --------------------------------------------------------
-    rem !DIR_GROUP_ROOT!\TOOLS_KIX\BAT - Очистка
-    rem --------------------------------------------------------
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_KIX\BAT
-    rem echo LDIR_TO:!LDIR_TO!
-    call :WritePROCESS Очистка !LDIR_TO! ...
-    rem rmdir "!LDIR_TO!"
-    if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
-    ) else (
-        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
-    )
-    
-    set PROJECT_NAME=SCRIPTS_KIX
-    call :DEPLOY_PROJECT
-
-    set PROJECT_NAME=TOOLS_SRC_KIX
-    call :DEPLOY_PROJECT
-
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECT_ROOT - Каталог группы проектов
-    rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-    set PROJECT_NAME=TOOLS_KIX
-    call :DEPLOY_PROJECT
-
-    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
-
     exit /b 0
 :end
-rem =================================================
+rem --------------------------------------------------------------------------------
 
 rem =================================================
 rem ФУНКЦИИ LIB

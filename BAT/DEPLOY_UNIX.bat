@@ -54,14 +54,22 @@ setlocal enabledelayedexpansion
     call :SET_LIB %~f0 || exit /b 1
 
     set PROJECT_GROUP=UNIX
-    
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    if not defined DIR_GROUP_ROOT (
+        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\UNIX
+    )
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\UNIX\PROJECTS_UNIX
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_UNIX
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     set PROJECT_NAME=COMMANDS_SH
     call :DEPLOY_PROJECT

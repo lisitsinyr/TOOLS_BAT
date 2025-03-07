@@ -60,7 +60,6 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT
     set DIR_PROJECTS_ROOT=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\Delphi_7\PROJECTS_D7
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
@@ -70,11 +69,9 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_D7
     call :DEPLOY_PROJECT
 
-
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT
     set DIR_PROJECTS_ROOT=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\Delphi_11\PROJECTS_D11
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 

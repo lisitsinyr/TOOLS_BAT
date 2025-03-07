@@ -55,13 +55,21 @@ setlocal enabledelayedexpansion
 
     set PROJECT_GROUP=JAVA
     
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    if not defined DIR_GROUP_ROOT (
+        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Java
+    )
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Java\PROJECTS_JAVA
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_JAVA
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     set PROJECT_NAME=INFO_JAVA
     call :DEPLOY_PROJECT
