@@ -85,18 +85,6 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=INFO_BAT
     call :DEPLOY_PROJECT
 
-    rem --------------------------------------------------------
-    rem !DIR_GROUP_ROOT!\TOOLS_BAT\BAT - очистка
-    rem --------------------------------------------------------
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
-    rem echo LDIR_TO:!LDIR_TO!
-    call :WritePROCESS Очистка !LDIR_TO! ...
-    if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
-    ) else (
-        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
-    )
-    
     set PROJECT_NAME=SCRIPTS_BAT
     call :DEPLOY_PROJECT
 
@@ -111,6 +99,7 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_BAT
     rem call :DEPLOY_PROJECT
 
+    cd /d "D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT"
     call D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\DEPLOY_PROJECT_TOOLS_BAT.bat
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...

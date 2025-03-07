@@ -74,6 +74,9 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_SRC_GIT
     call :DEPLOY_PROJECT
 
+    cd /d "D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT"
+    call D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\DEPLOY_PROJECT_TOOLS_GIT.bat
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0

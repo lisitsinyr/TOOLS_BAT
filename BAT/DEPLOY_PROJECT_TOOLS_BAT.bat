@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_PROJECT_TOOLS.bat
+rem DEPLOY_PROJECT_TOOLS_BAT.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -96,7 +96,7 @@ rem beginfunction
     if not defined PROJECT_GROUP (
         call :GetINIParametr !PROJECT_INI! general PROJECT_GROUP || exit /b 1
     )
-    echo PROJECT_GROUP:!PROJECT_GROUP!
+    rem echo PROJECT_GROUP:!PROJECT_GROUP!
 
     rem ------------------------------------------------
     rem PROJECT_NAME
@@ -104,7 +104,7 @@ rem beginfunction
     if not defined PROJECT_NAME (
         call :GetINIParametr !PROJECT_INI! general PROJECT_NAME || exit /b 1
     )
-    echo PROJECT_NAME:!PROJECT_NAME!
+    rem echo PROJECT_NAME:!PROJECT_NAME!
 
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
@@ -112,7 +112,7 @@ rem beginfunction
     if not defined DIR_GROUP_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_GROUP_ROOT || exit /b 1
     )
-    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECTS_ROOT - каталог группы проектов
@@ -121,7 +121,7 @@ rem beginfunction
     if not defined DIR_PROJECTS_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
     )
-    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     rem ------------------------------------------------
     rem DIR_PROJECT
@@ -133,7 +133,7 @@ rem beginfunction
     rem DIR_PROJECT_NAME
     rem ------------------------------------------------
     set DIR_PROJECT_NAME=!DIR_PROJECT!\!PROJECT_NAME!
-    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
     rem echo REPO_NAME:!REPO_NAME!
@@ -158,7 +158,7 @@ rem beginfunction
     set OPTION=
     set O1_Name=O1
     set O1_Caption=O1_Caption
-    set O1_Default=O1_Default
+    set O1_Default=
     set O1=!O1_Default!
     set PN_CAPTION=!O1_Caption!
     rem call :Read_P O1 !O1! || exit /b 1
@@ -170,7 +170,7 @@ rem beginfunction
     rem )
     rem echo OPTION:!OPTION!
 
-        rem -------------------------------------
+    rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
@@ -217,46 +217,135 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_BAT ()
+rem procedure UPDATE_TOOLS_BAT_SCRIPTS_BAT ()
 rem --------------------------------------------------------------------------------
-:UPDATE_TOOLS_BAT
+:UPDATE_TOOLS_BAT_SCRIPTS_BAT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_BAT
+    set FUNCNAME=UPDATE_TOOLS_BAT_SCRIPTS_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    set !FUNCNAME!=
+    call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
     rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT
-    rem                              ---------------
-
+    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\SCRIPTS_BAT
-    rem                              ---------------
+    set LDIR_FROM=!DIR_GROUP_ROOT!\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
+    rem echo LDIR_FROM:!LDIR_FROM!
+
+    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\SCRIPTS_BAT
     rem echo LDIR_TO:!LDIR_TO!
-    rem rmdir "!LDIR_TO!"
+    set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_BAT
+    rem echo LDIR_TO:!LDIR_TO!
+
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (                        
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME% 
     )
+
     set LMASK=*.*
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     rem --------------------------------------------------------
     rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT
-    rem                              ---------------
+    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    set LDIR_FROM=!DIR_GROUP_ROOT!\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
+    rem echo LDIR_FROM:!LDIR_FROM!
+
+    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\BAT
     rem echo LDIR_TO:!LDIR_TO!
+    set LDIR_TO=!DIR_PROJECT_NAME!\BAT
+    rem echo LDIR_TO:!LDIR_TO!
+
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_BAT_TOOLS_SRC_BAT ()
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    call :WritePROCESS FUNCNAME:!FUNCNAME!
+
+    rem --------------------------------------------------------
+    rem !DIR_PROJECT_NAME!\SRC\BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem --------------------------------------------------------
+    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\BAT
+    rem echo LDIR_FROM:!LDIR_FROM!
+    set LDIR_FROM=!DIR_GROUP_ROOT!\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\BAT
+    rem echo LDIR_FROM:!LDIR_FROM!
+
+    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\BAT
+    rem echo LDIR_TO:!LDIR_TO!
+    set LDIR_TO=!DIR_PROJECT_NAME!\BAT
+    rem echo LDIR_TO:!LDIR_TO!
+
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    rem --------------------------------------------------------
+    rem !DIR_PROJECT_NAME!\SRC\LIB -> !DIR_GROUP_ROOT!\TOOLS_BAT\LIB
+    rem --------------------------------------------------------
+    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\LIB
+    rem echo LDIR_FROM:!LDIR_FROM!
+    set LDIR_FROM=!DIR_GROUP_ROOT!\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\LIB
+    rem echo LDIR_FROM:!LDIR_FROM!
+
+    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\LIB
+    rem echo LDIR_TO:!LDIR_TO!
+    set LDIR_TO=!DIR_PROJECT_NAME!\LIB
+    rem echo LDIR_TO:!LDIR_TO!
+
+    if exist "!LDIR_TO!" (
+        rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
+
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure CLEAR_TOOLS_BAT ()
+rem --------------------------------------------------------------------------------
+:CLEAR_TOOLS_BAT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=CLEAR_TOOLS_BAT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    rem call :WritePROCESS FUNCNAME:!FUNCNAME!
+
+    rem --------------------------------------------------------
+    rem D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\BAT - очистка
+    rem --------------------------------------------------------
+    rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\BAT
+    set LDIR_CLEAR=!DIR_GROUP_ROOT!\BAT\TOOLS_BAT\BAT
+    rem echo LDIR_CLEAR:!LDIR_CLEAR!
+    call :WritePROCESS Очистка !LDIR_CLEAR! ...
+    if exist "!LDIR_CLEAR!"\ (
+        del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
+    ) else (
+        mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
+    )
 
     exit /b 0
 rem endfunction
@@ -272,8 +361,14 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    call :CLEAR_TOOLS_BAT
+    call :UPDATE_TOOLS_BAT_SCRIPTS_BAT
+    call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+
     call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
-    rem call :UPDATE_TOOLS_BAT || exit /b 1
+
+    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
+    call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -330,7 +425,6 @@ rem beginfunction
 
     exit /b 0
 rem endfunction
-rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB
@@ -562,9 +656,6 @@ exit /b 0
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :ReSetColor
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:ReSetColorCR
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :WriteNOTSET

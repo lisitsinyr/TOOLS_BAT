@@ -116,19 +116,6 @@ rem goto :Start
 
 :Start
 
-    rem --------------------------------------------------------
-    rem !DIR_PROJECTS_ROOT!\TOOLS_PY\BAT - Очистка
-    rem --------------------------------------------------------
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_PY\BAT
-    rem echo LDIR_TO:!LDIR_TO!
-    rem rmdir "!LDIR_TO!"
-    call :WritePROCESS Очистка !LDIR_TO! ...
-    if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
-    ) else (
-        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
-    )
-
     set PROJECT_NAME=SCRIPTS_PY
     call :DEPLOY_PROJECT
 
@@ -142,7 +129,10 @@ rem goto :Start
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
     set PROJECT_NAME=TOOLS_PY
     rem echo PROJECT_NAME:!PROJECT_NAME!
-    call :DEPLOY_PROJECT
+    rem call :DEPLOY_PROJECT
+
+    cd /D "D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY"
+    call D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\DEPLOY_PROJECT_TOOLS_PY.bat
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 

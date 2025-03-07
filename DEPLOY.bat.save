@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_PROJECT_TOOLS.bat
+rem DEPLOY.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -50,6 +50,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -93,35 +94,25 @@ rem beginfunction
     rem ------------------------------------------------
     rem PROJECT_GROUP
     rem ------------------------------------------------
-    if not defined PROJECT_GROUP (
-        call :GetINIParametr !PROJECT_INI! general PROJECT_GROUP || exit /b 1
-    )
-    echo PROJECT_GROUP:!PROJECT_GROUP!
-
+    call :GetINIParametr !PROJECT_INI! general PROJECT_GROUP || exit /b 1
     rem ------------------------------------------------
     rem PROJECT_NAME
     rem ------------------------------------------------
-    if not defined PROJECT_NAME (
-        call :GetINIParametr !PROJECT_INI! general PROJECT_NAME || exit /b 1
-    )
-    echo PROJECT_NAME:!PROJECT_NAME!
+    call :GetINIParametr !PROJECT_INI! general PROJECT_NAME || exit /b 1
 
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     if not defined DIR_GROUP_ROOT (
-        call :GetINIParametr !PROJECT_INI! general DIR_GROUP_ROOT || exit /b 1
+        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT
     )
-    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECTS_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     if not defined DIR_PROJECTS_ROOT (
-        call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
+        set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
     )
-    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     rem ------------------------------------------------
     rem DIR_PROJECT
@@ -170,93 +161,25 @@ rem beginfunction
     rem )
     rem echo OPTION:!OPTION!
 
-        rem -------------------------------------
+    rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
-
-    set A1_Name=DIR_PROJECTS_ROOT
-    set A1_Caption=DIR_PROJECTS_ROOT
-    set A1_Default=%1
-    if not defined A1 (
-        set A1_Default=!DIR_PROJECTS_ROOT!
-    )
+    set A1_Name=A1
+    set A1_Caption=A1_Caption
+    set A1_Default=A1_Default
     set A1=!A1_Default!
     set PN_CAPTION=!A1_Caption!
-    call :Read_P A1 !A1! || exit /b 1
+    rem call :Read_P A1 !A1! || exit /b 1
     rem echo A1:!A1!
-    if defined A1 (
-        set ARGS=!ARGS! "!A1!"
-        set DIR_PROJECTS_ROOT=!A1!
-    ) else (
-        set DIR_PROJECTS_ROOT=
-        echo INFO: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
-    )
-
-    set A2_Name=PROJECT_NAME
-    set A2_Caption=PROJECT_NAME
-    set A2_Default=%2
-    if not defined A2 (
-        set A2_Default=!PROJECT_NAME!
-    )
-    set A2=!A2_Default!
-    set PN_CAPTION=!A2_Caption!
-    call :Read_P A2 !A2! || exit /b 1
-    rem echo A2:!A2!
-    if defined A2 (
-        set ARGS=!ARGS! !A2!
-        set PROJECT_NAME=!A2!
-    ) else (
-        set PROJECT_NAME=
-        echo INFO: A2 [A2_Name:!A2_Name! A2_Caption:!A2_Caption!] not defined ... 
-    )
-
+    rem if defined A1 (
+    rem     set ARGS=!ARGS! "!A1!"
+    rem ) else (
+    rem     echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+    rem     set OK=
+    rem     exit /b 1
+    rem )
     rem echo ARGS:!ARGS!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_BAT ()
-rem --------------------------------------------------------------------------------
-:UPDATE_TOOLS_BAT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_BAT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
-    rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT
-    rem                              ---------------
-
-    rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\SCRIPTS_BAT
-    rem                              ---------------
-    rem echo LDIR_TO:!LDIR_TO!
-    rem rmdir "!LDIR_TO!"
-    if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
-    ) else (                        
-        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME% 
-    )
-    set LMASK=*.*
-    call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
-
-    rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
-    rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT
-    rem                              ---------------
-    rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
-    rem echo LDIR_TO:!LDIR_TO!
-    set LMASK=*.bat
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -273,7 +196,9 @@ rem beginfunction
     )
 
     call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
-    rem call :UPDATE_TOOLS_BAT || exit /b 1
+
+    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
+    call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -317,11 +242,10 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
-
     call :MAIN_SET || exit /b 1
-
-    call :MAIN_CHECK_PARAMETR %* || exit /b 1
-
+    if defined OK if not defined Read_N (
+        call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    )
     if defined OK (
         call :MAIN_FUNC || exit /b 1
     )
@@ -562,9 +486,6 @@ exit /b 0
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :ReSetColor
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:ReSetColorCR
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :WriteNOTSET

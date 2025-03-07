@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_PROJECT.bat
+rem DEPLOY_PROJECT_TOOLS_KIX.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -121,19 +121,19 @@ rem beginfunction
     if not defined DIR_PROJECTS_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
     )
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     rem ------------------------------------------------
     rem DIR_PROJECT
     rem ------------------------------------------------
     set DIR_PROJECT=!DIR_PROJECTS_ROOT!
-    rem echo DIR_PROJECT:!DIR_PROJECT!
+    echo DIR_PROJECT:!DIR_PROJECT!
 
     rem ------------------------------------------------
     rem DIR_PROJECT_NAME
     rem ------------------------------------------------
     set DIR_PROJECT_NAME=!DIR_PROJECT!\!PROJECT_NAME!
-    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
     rem echo REPO_NAME:!REPO_NAME!
@@ -217,6 +217,140 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure UPDATE_TOOLS_KIX_SCRIPTS_KIX ()
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_KIX_SCRIPTS_KIX
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UPDATE_TOOLS_KIX_SCRIPTS_KIX
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    call :WritePROCESS FUNCNAME:!FUNCNAME!
+
+    rem --------------------------------------------------------
+    rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem --------------------------------------------------------
+    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
+    rem echo LDIR_FROM:!LDIR_FROM!
+    set LDIR_FROM=!DIR_GROUP_ROOT!\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
+    rem echo LDIR_FROM:!LDIR_FROM!
+
+    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_BAT\SCRIPTS_KIX
+    rem echo LDIR_TO:!LDIR_TO!
+    set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_KIX
+    rem echo LDIR_TO:!LDIR_TO!
+
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (                        
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME% 
+    )
+
+    set LMASK=*.*
+    call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+
+    rem --------------------------------------------------------
+    rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem --------------------------------------------------------
+    set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
+    rem echo LDIR_FROM:!LDIR_FROM!
+    set LDIR_FROM=!DIR_GROUP_ROOT!\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
+    rem echo LDIR_FROM:!LDIR_FROM!
+
+    set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\KIX
+    rem echo LDIR_TO:!LDIR_TO!
+    set LDIR_TO=!DIR_PROJECT_NAME!\BAT
+    rem echo LDIR_TO:!LDIR_TO!
+
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem UPDATE_TOOLS_KIX_TOOLS_SRC_KIX ()
+rem --------------------------------------------------------------------------------
+:UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    call :WritePROCESS FUNCNAME:!FUNCNAME!
+
+    rem --------------------------------------------------------
+    rem !DIR_PROJECT_NAME!\SRC\BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem --------------------------------------------------------
+    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\BAT
+    rem echo LDIR_FROM:!LDIR_FROM!
+    set LDIR_FROM=!DIR_GROUP_ROOT!\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\BAT
+    rem echo LDIR_FROM:!LDIR_FROM!
+
+    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\BAT
+    rem echo LDIR_TO:!LDIR_TO!
+    set LDIR_TO=!DIR_PROJECT_NAME!\BAT
+    rem echo LDIR_TO:!LDIR_TO!
+
+    set LMASK=*.bat
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    rem --------------------------------------------------------
+    rem !DIR_PROJECT_NAME!\SRC\LIB -> !DIR_GROUP_ROOT!\TOOLS_BAT\LIB
+    rem --------------------------------------------------------
+    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\KIX
+    rem echo LDIR_FROM:!LDIR_FROM!
+    set LDIR_FROM=!DIR_GROUP_ROOT!\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\LIB
+    rem echo LDIR_FROM:!LDIR_FROM!
+
+    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\LIB
+    rem echo LDIR_TO:!LDIR_TO!
+    set LDIR_TO=!DIR_PROJECT_NAME!\LIB
+    rem echo LDIR_TO:!LDIR_TO!
+
+    if exist "!LDIR_TO!" (
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+    ) else (
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    )
+
+    set LMASK=*.kxl
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure CLEAR_TOOLS_KIX ()
+rem --------------------------------------------------------------------------------
+:CLEAR_TOOLS_KIX
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=CLEAR_TOOLS_KIX
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem --------------------------------------------------------
+    rem D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\BAT - очистка
+    rem --------------------------------------------------------
+    rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\BAT
+    set LDIR_CLEAR=!DIR_GROUP_ROOT!\KIX\TOOLS_KIX\BAT
+    rem echo LDIR_CLEAR:!LDIR_CLEAR!
+
+    call :WritePROCESS Очистка !LDIR_CLEAR! ...
+    if exist "!LDIR_CLEAR!"\ (
+        del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
+    ) else (
+        mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_DEPLOY_PROJECT ()
 rem --------------------------------------------------------------------------------
 :MAIN_DEPLOY_PROJECT
@@ -227,7 +361,14 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :REPO_WORK !DIR_PROJECT_NAME! 1 || exit /b 1
+    call :CLEAR_TOOLS_KIX
+    call :UPDATE_TOOLS_KIX_SCRIPTS_KIX
+    call :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
+
+    call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
+
+    set DIR_TOOLS_KIX=D:\TOOLS\TOOLS_KIX
+    call :git_pull !DIR_TOOLS_KIX! || exit /b 1
 
     exit /b 0
 rem endfunction
