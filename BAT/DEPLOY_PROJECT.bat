@@ -107,8 +107,17 @@ rem beginfunction
     echo PROJECT_NAME:!PROJECT_NAME!
 
     rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    if not defined DIR_GROUP_ROOT (
+        call :GetINIParametr !PROJECT_INI! general DIR_GROUP_ROOT || exit /b 1
+    )
+    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+
+    rem -------------------------------------------------------------------
     rem DIR_PROJECTS_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     if not defined DIR_PROJECTS_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
     )

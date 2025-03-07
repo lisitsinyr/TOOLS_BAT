@@ -107,8 +107,17 @@ rem beginfunction
     echo PROJECT_NAME:!PROJECT_NAME!
 
     rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    if not defined DIR_GROUP_ROOT (
+        call :GetINIParametr !PROJECT_INI! general DIR_GROUP_ROOT || exit /b 1
+    )
+    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+
+    rem -------------------------------------------------------------------
     rem DIR_PROJECTS_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     if not defined DIR_PROJECTS_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
     )
@@ -161,7 +170,7 @@ rem beginfunction
     rem )
     rem echo OPTION:!OPTION!
 
-    rem -------------------------------------
+        rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
@@ -220,47 +229,34 @@ rem beginfunction
     set !FUNCNAME!=
 
     rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\BAT
-    rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
-    rem echo LDIR_TO:!LDIR_TO!
-    rem rmdir "!LDIR_TO!"
-    rem if exist "!LDIR_TO!" (
-    rem     del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
-    rem ) else (
-    rem     mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
-    rem )
-    set LMASK=*.bat
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT
+    rem                              ---------------
 
-    rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\LIB -> !DIR_GROUP_ROOT!\TOOLS_BAT\LIB
-    rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\LIB
+    set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\SCRIPTS_BAT
+    rem                              ---------------
     rem echo LDIR_TO:!LDIR_TO!
     rem rmdir "!LDIR_TO!"
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
-    ) else (
-        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+    ) else (                        
+        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME% 
     )
-    set LMASK=*.bat
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+    set LMASK=*.*
+    call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\BAT\99.[lyr]LYR -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\BAT\99.[lyr]LYR
-    set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\01.[lyr]LYR 
+    set LDIR_FROM=!DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT
+    rem                              ---------------
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
     rem echo LDIR_TO:!LDIR_TO!
     set LMASK=*.bat
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -277,7 +273,7 @@ rem beginfunction
     )
 
     call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
-    call :UPDATE_TOOLS_BAT || exit /b 1
+    rem call :UPDATE_TOOLS_BAT || exit /b 1
 
     exit /b 0
 rem endfunction

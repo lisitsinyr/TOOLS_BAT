@@ -109,7 +109,9 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
     set PROJECT_NAME=TOOLS_BAT
-    call :DEPLOY_PROJECT
+    rem call :DEPLOY_PROJECT
+
+    call D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\DEPLOY_PROJECT_TOOLS_BAT.bat
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 

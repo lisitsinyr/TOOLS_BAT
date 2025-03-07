@@ -156,6 +156,44 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure PULL_PROJECT ()
+rem --------------------------------------------------------------------------------
+:PULL_PROJECT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=PULL_PROJECT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :WritePROCESS PULL ÔÓÂÍÚ‡: !PROJECT_NAME! ...
+
+    set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    if EXIST !DIR_PROJECT_NAME!\ (
+        cd /D !DIR_PROJECT_NAME!
+        if exist ".git"\ (
+            rem echo "call lyrgit_push_main.bat ..."
+            call lyrgit_pull_main.bat
+        )
+    ) else (
+        rem git clone 
+    )
+
+    rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
+    rem set APPRUN=DEPLOY.bat
+    rem echo APPRUN:!APPRUN!
+    rem if exist "!APPRUN!" (
+    rem     call !APPRUN!
+    rem )
+
+    exit /b 0
+rem endfunction
+
+rem =================================================
+
 rem =================================================
 rem ‘”Õ ÷»» LIB
 rem =================================================
