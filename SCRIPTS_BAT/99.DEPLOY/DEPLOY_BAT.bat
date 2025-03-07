@@ -94,13 +94,13 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
+    rem set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-    set PROJECT_NAME=TOOLS_BAT
+    rem set PROJECT_NAME=TOOLS_BAT
     rem call :DEPLOY_PROJECT
 
     cd /d "D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT"
-    call D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\DEPLOY_PROJECT_TOOLS_BAT.bat
+    call DEPLOY_PROJECT_TOOLS_BAT.bat
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
