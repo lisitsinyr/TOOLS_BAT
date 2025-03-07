@@ -89,6 +89,7 @@ setlocal enabledelayedexpansion
     rem --------------------------------------------------------
     set LDIR_TO=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
     rem echo LDIR_TO:!LDIR_TO!
+    call :WritePROCESS Очистка !LDIR_TO! ...
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
