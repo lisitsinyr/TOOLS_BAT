@@ -83,11 +83,11 @@ setlocal enabledelayedexpansion
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
     if exist "!APPRUN!" (
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
     if exist "!APPRUN!" (
-        call !APPRUN!
+        rem call !APPRUN!
     )
    
     exit /b 0
