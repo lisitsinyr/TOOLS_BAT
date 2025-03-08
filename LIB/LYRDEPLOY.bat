@@ -56,6 +56,8 @@ rem beginfunction
         exit /b 1
     )
 
+    echo PROJECT_NAME:!PROJECT_NAME!
+
     cd /D "!ADirectory!"
 
     set APYTHON=%2
@@ -79,10 +81,10 @@ rem beginfunction
     )
 
     set LFileName=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY\DEPLOY_PROJECT.bat
-    echo LFileName:!LFileName!
+    rem echo LFileName:!LFileName!
     if exist !LFileName! (
-        echo COPY:!LFileName!
-        copy !LFileName!
+        rem echo COPY:!LFileName!
+        copy !LFileName! > NUL
     )
 
     if !APYTHON!==1 (
@@ -156,7 +158,8 @@ rem beginfunction
     cd /D !DIR_PROJECT_NAME!
     rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
     set APPRUN=DEPLOY.bat
-    rem echo APPRUN:!APPRUN!
+    set APPRUN=DEPLOY_PROJECT.bat
+    echo APPRUN:!APPRUN!
     if exist "!APPRUN!" (
         call !APPRUN!
     )
