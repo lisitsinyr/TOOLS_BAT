@@ -260,7 +260,7 @@ rem beginfunction
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\SCRIPTS_PY
     rem echo LDIR_TO:!LDIR_TO!
-    set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_PY
+    set LDIR_TO=!DIR_PROJECT_NAME!\BAT
     rem echo LDIR_TO:!LDIR_TO!
 
     set LMASK=*.bat
