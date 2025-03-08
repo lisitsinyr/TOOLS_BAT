@@ -80,11 +80,12 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
+    rem set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-    set PROJECT_NAME=TOOLS_KIX
+    rem set PROJECT_NAME=TOOLS_KIX
     rem call :DEPLOY_PROJECT
 
+    set DIR_GROUP_ROOT=
     cd /d "D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX"
     call D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\DEPLOY_PROJECT_TOOLS_KIX.bat
 

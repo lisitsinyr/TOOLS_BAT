@@ -133,7 +133,7 @@ rem beginfunction
     rem DIR_PROJECT_NAME
     rem ------------------------------------------------
     set DIR_PROJECT_NAME=!DIR_PROJECT!\!PROJECT_NAME!
-    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
     rem echo REPO_NAME:!REPO_NAME!
@@ -226,6 +226,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
@@ -279,6 +280,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
@@ -311,7 +313,7 @@ rem beginfunction
     rem echo LDIR_TO:!LDIR_TO!
 
     if exist "!LDIR_TO!" (
-        rem del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
@@ -332,15 +334,18 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     rem call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
     rem D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\BAT - очистка
     rem --------------------------------------------------------
     rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\BAT
-    set LDIR_CLEAR=!DIR_GROUP_ROOT!\BAT\TOOLS_BAT\BAT
+    set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
+
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
+
     if exist "!LDIR_CLEAR!"\ (
         del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
     ) else (

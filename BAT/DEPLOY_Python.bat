@@ -125,12 +125,13 @@ rem goto :Start
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
+    rem set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-    set PROJECT_NAME=TOOLS_PY
+    rem set PROJECT_NAME=TOOLS_PY
     rem echo PROJECT_NAME:!PROJECT_NAME!
     rem call :DEPLOY_PROJECT
 
+    set DIR_GROUP_ROOT=
     cd /D "D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY"
     call D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\DEPLOY_PROJECT_TOOLS_PY.bat
 

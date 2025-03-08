@@ -96,7 +96,7 @@ rem beginfunction
     if not defined PROJECT_GROUP (
         call :GetINIParametr !PROJECT_INI! general PROJECT_GROUP || exit /b 1
     )
-    echo PROJECT_GROUP:!PROJECT_GROUP!
+    rem echo PROJECT_GROUP:!PROJECT_GROUP!
 
     rem ------------------------------------------------
     rem PROJECT_NAME
@@ -104,7 +104,7 @@ rem beginfunction
     if not defined PROJECT_NAME (
         call :GetINIParametr !PROJECT_INI! general PROJECT_NAME || exit /b 1
     )
-    echo PROJECT_NAME:!PROJECT_NAME!
+    rem echo PROJECT_NAME:!PROJECT_NAME!
 
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
@@ -112,7 +112,7 @@ rem beginfunction
     if not defined DIR_GROUP_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_GROUP_ROOT || exit /b 1
     )
-    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECTS_ROOT - каталог группы проектов
@@ -121,19 +121,19 @@ rem beginfunction
     if not defined DIR_PROJECTS_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
     )
-    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     rem ------------------------------------------------
     rem DIR_PROJECT
     rem ------------------------------------------------
     set DIR_PROJECT=!DIR_PROJECTS_ROOT!
-    echo DIR_PROJECT:!DIR_PROJECT!
+    rem echo DIR_PROJECT:!DIR_PROJECT!
 
     rem ------------------------------------------------
     rem DIR_PROJECT_NAME
     rem ------------------------------------------------
     set DIR_PROJECT_NAME=!DIR_PROJECT!\!PROJECT_NAME!
-    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
     rem echo REPO_NAME:!REPO_NAME!
@@ -226,6 +226,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
@@ -271,9 +272,10 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT
     set LDIR_CLEAR=!DIR_GROUP_ROOT!\GIT\TOOLS_GIT\BAT
-    echo LDIR_CLEAR:!LDIR_CLEAR!
+    rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
+
     if exist "!LDIR_CLEAR!"\ (
         del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
     ) else (
@@ -285,9 +287,10 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT_KIX
     set LDIR_CLEAR=!DIR_GROUP_ROOT!\GIT\TOOLS_GIT\BAT_KIX
-    echo LDIR_CLEAR:!LDIR_CLEAR!
+    rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
+
     if exist "!LDIR_CLEAR!"\ (
         del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
     ) else (

@@ -70,11 +70,19 @@ rem beginfunction
         rem echo COPY:!LFileName!
         copy !LFileName! > NUL
     )
+
     set LFileName=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT\A.WORK\lyrgit_pull.bat
     rem echo LFileName:!LFileName!
     if exist !LFileName! (
         rem echo COPY:!LFileName!
         copy !LFileName! > NUL
+    )
+
+    set LFileName=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY\DEPLOY_PROJECT.bat
+    echo LFileName:!LFileName!
+    if exist !LFileName! (
+        echo COPY:!LFileName!
+        copy !LFileName!
     )
 
     if !APYTHON!==1 (

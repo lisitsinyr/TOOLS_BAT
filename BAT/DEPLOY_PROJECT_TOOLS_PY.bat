@@ -279,6 +279,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
@@ -332,6 +333,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     rem call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
@@ -343,6 +345,7 @@ rem beginfunction
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
+
     if exist "!LDIR_CLEAR!"\ (
         del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
     ) else (
