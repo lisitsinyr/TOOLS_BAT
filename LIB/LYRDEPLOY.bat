@@ -66,7 +66,7 @@ rem beginfunction
     rem del *.bat
     rem del *.sh
 
-    LFileName=DEPLOY.bat
+    set LFileName=DEPLOY.bat
     if exist !LFileName!\ (
         del !LFileName! > NUL
     )
