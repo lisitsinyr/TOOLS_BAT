@@ -102,7 +102,7 @@ rem beginfunction
     if !PROJECT_NAME!==TOOLS_PY (
         set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_PY.bat
     )    
-    echo LFileName:!LFileName!
+    rem echo LFileName:!LFileName!
     if exist !LFileName! (
         rem echo COPY:!LFileName!
         copy !LFileName! > NUL
