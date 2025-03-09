@@ -66,7 +66,10 @@ rem beginfunction
     rem del *.bat
     rem del *.sh
 
-    del DEPLOY.bat > NUL
+    LFileName=DEPLOY.bat
+    if exist !LFileName!\ (
+        del !LFileName! > NUL
+    )
 
     set LDirectory=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT\A.WORK
     set LFileName=!LDirectory!\lyrgit_push_main.bat
