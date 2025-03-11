@@ -80,6 +80,37 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET_DEFAULT ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET_DEFAULT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET_DEFAULT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem -------------------------------------------------------------------
+    rem PROJECT_GROUP - группа проектов
+    rem -------------------------------------------------------------------
+    set PROJECT_GROUP=GIT
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECT_ROOT - Каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
+    rem -------------------------------------------------------------------
+    rem PROJECT_NAME - 
+    rem -------------------------------------------------------------------
+    set PROJECT_NAME=TOOLS_GIT
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_SET ()
 rem --------------------------------------------------------------------------------
 :MAIN_SET
@@ -117,7 +148,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem DIR_PROJECTS_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     if not defined DIR_PROJECTS_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
     )
@@ -232,7 +262,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem 
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_GROUP_ROOT!\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
 
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
@@ -244,7 +274,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem 
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_GROUP_ROOT!\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT_KIX
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT_KIX
     rem echo LDIR_FROM:!LDIR_FROM!
 
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT_KIX
@@ -271,7 +301,7 @@ rem beginfunction
     rem D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT - очистка
     rem --------------------------------------------------------
     rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT
-    set LDIR_CLEAR=!DIR_GROUP_ROOT!\GIT\TOOLS_GIT\BAT
+    set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_GIT\BAT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
@@ -286,7 +316,7 @@ rem beginfunction
     rem D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT_KIX - очистка
     rem --------------------------------------------------------
     rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT_KIX
-    set LDIR_CLEAR=!DIR_GROUP_ROOT!\GIT\TOOLS_GIT\BAT_KIX
+    set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_GIT\BAT_KIX
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
@@ -361,6 +391,8 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
+
+    call :MAIN_SET_DEFAULT || exit /b 1
 
     call :MAIN_SET || exit /b 1
 

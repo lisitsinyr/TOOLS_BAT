@@ -80,6 +80,37 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET_DEFAULT ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET_DEFAULT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET_DEFAULT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem -------------------------------------------------------------------
+    rem PROJECT_GROUP - группа проектов
+    rem -------------------------------------------------------------------
+    set PROJECT_GROUP=Python
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Python
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECT_ROOT - Каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
+    rem -------------------------------------------------------------------
+    rem PROJECT_NAME - 
+    rem -------------------------------------------------------------------
+    set PROJECT_NAME=TOOLS_PY
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_SET ()
 rem --------------------------------------------------------------------------------
 :MAIN_SET
@@ -117,7 +148,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem DIR_PROJECTS_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     if not defined DIR_PROJECTS_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
     )
@@ -233,7 +263,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_FROM=!DIR_GROUP_ROOT!\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
     rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\SCRIPTS_PY
@@ -255,7 +285,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_FROM=!DIR_GROUP_ROOT!\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
     rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\SCRIPTS_PY
@@ -287,7 +317,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_FROM=!DIR_GROUP_ROOT!\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\BAT
@@ -303,7 +333,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_FROM=!DIR_GROUP_ROOT!\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\LIB
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_PY\TOOLS_SRC_PY\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\LIB
@@ -341,7 +371,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\BAT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
-    set LDIR_CLEAR=!DIR_GROUP_ROOT!\Python\TOOLS_PY\BAT
+    set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_PY\BAT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
@@ -417,6 +447,8 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
+
+    call :MAIN_SET_DEFAULT || exit /b 1
 
     call :MAIN_SET || exit /b 1
 

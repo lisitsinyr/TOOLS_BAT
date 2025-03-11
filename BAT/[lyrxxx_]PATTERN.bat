@@ -82,6 +82,20 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET_DEFAULT ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET_DEFAULT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET_DEFAULT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_SET ()
 rem --------------------------------------------------------------------------------
 :MAIN_SET
@@ -185,6 +199,8 @@ rem beginfunction
 
     set OK=yes
 
+    call :MAIN_SET_DEFAULT || exit /b 1
+
     call :MAIN_SET || exit /b 1
 
     rem if defined OK if not defined Read_N (
@@ -193,7 +209,6 @@ rem beginfunction
     call :MAIN_CHECK_PARAMETR %* || exit /b 1
 
     if defined OK (
-        echo Step2
         call :MAIN_FUNC || exit /b 1
     )
     

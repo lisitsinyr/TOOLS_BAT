@@ -80,7 +80,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_SET ()
+rem procedure MAIN_SET_DEFAULT ()
 rem --------------------------------------------------------------------------------
 :MAIN_SET_DEFAULT
 rem beginfunction
