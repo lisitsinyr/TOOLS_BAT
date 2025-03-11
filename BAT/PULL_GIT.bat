@@ -1,67 +1,43 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY.bat [[lyrxxx_]PATTERN.bat]
+rem PULL_GIT.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
-rem --------------------------------------------------------------------------------
-rem 
-rem --------------------------------------------------------------------------------
 :begin
-    call :MAIN %* || exit /b 1
-    exit /b 0
-:end
-rem --------------------------------------------------------------------------------
-
-rem -----------------------------------------------
-rem procedure MAIN_INIT ()
-rem -----------------------------------------------
-:MAIN_INIT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_INIT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
+    set BATNAME=%~nx0
+    echo Старт !BATNAME! ...
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_ROOT - Каталог ROOT
+    rem PROJECTS_LYR_ROOT - Каталог скриптов
     rem -------------------------------------------------------------------
-    rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
     rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR - Каталог проектов LYR
+    rem PROJECTS_LYR_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
-    if not exist "!PROJECTS_LYR_DIR!"\ (
-        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
-        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
-        rem mkdir "!PROJECTS_LYR_DIR!"
-        exit /b 1
-    )
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов BAT
+    rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
-        rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
-        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
-    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
+    rem echo SCRIPTS_DIR: !SCRIPTS_DIR!
 
     rem -------------------------------------------------------------------
-    rem LIB_BAT - каталог библиотеки скриптов BAT
+    rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
-        set LIB_BAT=!SCRIPTS_DIR!\LIB
+        set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
     )
-    rem echo LIB_BAT:!LIB_BAT!
+    rem echo LIB_BAT: !LIB_BAT!
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
@@ -77,180 +53,35 @@ rem beginfunction
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_SET ()
-rem --------------------------------------------------------------------------------
-:MAIN_SET
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_SET
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    rem ------------------------------------------------
-    rem PROJECT_GROUP
-    rem ------------------------------------------------
-    call :GetINIParametr !PROJECT_INI! general PROJECT_GROUP || exit /b 1
-    rem ------------------------------------------------
-    rem PROJECT_NAME
-    rem ------------------------------------------------
-    call :GetINIParametr !PROJECT_INI! general PROJECT_NAME || exit /b 1
-
+    set PROJECT_GROUP=GIT
+    
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     if not defined DIR_GROUP_ROOT (
-        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT
+        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT
     )
+    rem DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
-    rem DIR_PROJECTS_ROOT - каталог группы проектов
+    rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    if not defined DIR_PROJECTS_ROOT (
-        set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_BAT
-    )
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_GIT
+    set DIR_PROJECTS_ROOT=D:\WORK
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    rem ------------------------------------------------
-    rem DIR_PROJECT
-    rem ------------------------------------------------
-    set DIR_PROJECT=!DIR_PROJECTS_ROOT!
-    rem echo DIR_PROJECT:!DIR_PROJECT!
+    call :WriteBEGIN PULL группы проектов: !PROJECT_GROUP! ...
 
-    rem ------------------------------------------------
-    rem DIR_PROJECT_NAME
-    rem ------------------------------------------------
-    set DIR_PROJECT_NAME=!DIR_PROJECT!\!PROJECT_NAME!
-    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    set PROJECT_NAME=TOOLS_SRC_GIT
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
-    rem echo REPO_NAME:!REPO_NAME!
+    set PROJECT_NAME=TOOLS_GIT
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    call :WriteEND Конец PULL группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_CHECK_PARAMETR (%*)
-rem --------------------------------------------------------------------------------
-:MAIN_CHECK_PARAMETR
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_CHECK_PARAMETR
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    rem -------------------------------------
-    rem OPTION
-    rem -------------------------------------
-    set OPTION=
-    set O1_Name=O1
-    set O1_Caption=O1_Caption
-    set O1_Default=O1_Default
-    set O1=!O1_Default!
-    set PN_CAPTION=!O1_Caption!
-    rem call :Read_P O1 !O1! || exit /b 1
-    rem echo O1:!O1!
-    rem if defined O1 (
-    rem     set OPTION=!OPTION! -!O1_Name! "!O1!"
-    rem ) else (
-    rem     echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
-    rem )
-    rem echo OPTION:!OPTION!
-
-    rem -------------------------------------
-    rem ARGS
-    rem -------------------------------------
-    set ARGS=
-    set A1_Name=A1
-    set A1_Caption=A1_Caption
-    set A1_Default=A1_Default
-    set A1=!A1_Default!
-    set PN_CAPTION=!A1_Caption!
-    rem call :Read_P A1 !A1! || exit /b 1
-    rem echo A1:!A1!
-    rem if defined A1 (
-    rem     set ARGS=!ARGS! "!A1!"
-    rem ) else (
-    rem     echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
-    rem     set OK=
-    rem     exit /b 1
-    rem )
-    rem echo ARGS:!ARGS!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_DEPLOY_PROJECT ()
-rem --------------------------------------------------------------------------------
-:MAIN_DEPLOY_PROJECT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_DEPLOY_PROJECT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
-rem --------------------------------------------------------------------------------
-:MAIN_FUNC
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_FUNC
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    call :MAIN_DEPLOY_PROJECT %* || exit /b 1
-
-    exit /b 0
-rem endfunction
-
-rem =================================================
-rem procedure MAIN (%*)
-rem =================================================
-:MAIN
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    set BATNAME=%~nx0
-    echo Start !BATNAME! ...
-
-    set DEBUG=
-
-    set /a LOG_FILE_ADD=0
-
-    call :MAIN_INIT || exit /b 1
-
-    call :StartLogFile || exit /b 1
-
-    set OK=yes
-    call :MAIN_SET || exit /b 1
-    if defined OK if not defined Read_N (
-        call :MAIN_CHECK_PARAMETR %* || exit /b 1
-    )
-    if defined OK (
-        call :MAIN_FUNC || exit /b 1
-    )
-
-    call :StopLogFile || exit /b 1
-
-    exit /b 0
-rem endfunction
+:end
 rem =================================================
 
 rem =================================================
@@ -277,6 +108,9 @@ exit /b 0
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:PULL_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 

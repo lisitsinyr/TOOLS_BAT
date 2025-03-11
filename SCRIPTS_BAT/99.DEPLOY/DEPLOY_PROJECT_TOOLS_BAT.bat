@@ -82,6 +82,37 @@ rem endfunction
 rem --------------------------------------------------------------------------------
 rem procedure MAIN_SET ()
 rem --------------------------------------------------------------------------------
+:MAIN_SET_DEFAULT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET_DEFAULT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem -------------------------------------------------------------------
+    rem PROJECT_GROUP - группа проектов
+    rem -------------------------------------------------------------------
+    set PROJECT_GROUP=BAT
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECT_ROOT - Каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
+    rem -------------------------------------------------------------------
+    rem PROJECT_NAME - 
+    rem -------------------------------------------------------------------
+    set PROJECT_NAME=TOOLS_BAT
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET ()
+rem --------------------------------------------------------------------------------
 :MAIN_SET
 rem beginfunction
     set FUNCNAME=%0
@@ -96,7 +127,7 @@ rem beginfunction
     if not defined PROJECT_GROUP (
         call :GetINIParametr !PROJECT_INI! general PROJECT_GROUP || exit /b 1
     )
-    rem echo PROJECT_GROUP:!PROJECT_GROUP!
+    echo PROJECT_GROUP:!PROJECT_GROUP!
 
     rem ------------------------------------------------
     rem PROJECT_NAME
@@ -104,7 +135,7 @@ rem beginfunction
     if not defined PROJECT_NAME (
         call :GetINIParametr !PROJECT_INI! general PROJECT_NAME || exit /b 1
     )
-    rem echo PROJECT_NAME:!PROJECT_NAME!
+    echo PROJECT_NAME:!PROJECT_NAME!
 
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
@@ -112,16 +143,15 @@ rem beginfunction
     if not defined DIR_GROUP_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_GROUP_ROOT || exit /b 1
     )
-    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECTS_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     if not defined DIR_PROJECTS_ROOT (
         call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
     )
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     rem ------------------------------------------------
     rem DIR_PROJECT
@@ -234,7 +264,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_FROM=!DIR_GROUP_ROOT!\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
     rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\SCRIPTS_BAT
@@ -256,7 +286,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_FROM=!DIR_GROUP_ROOT!\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
     rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\BAT
@@ -288,7 +318,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_FROM=!DIR_GROUP_ROOT!\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\BAT
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\BAT
@@ -304,7 +334,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_FROM=!DIR_GROUP_ROOT!\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\LIB
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT\LIB
@@ -372,8 +402,8 @@ rem beginfunction
 
     call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
 
-    set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
-    call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
+    rem set DIR_TOOLS_BAT_=D:\TOOLS\TOOLS_BAT
+    rem call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -417,6 +447,8 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
+
+    call :MAIN_SET_DEFAULT || exit /b 1
 
     call :MAIN_SET || exit /b 1
 

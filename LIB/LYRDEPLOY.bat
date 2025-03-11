@@ -6,6 +6,7 @@ chcp 1251>NUL
 
 :begin
     rem Выход из сценария. Дальше - только функции.
+    call :LYRDEPLOY
     exit /b 0
 :end
 
@@ -28,6 +29,43 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem CONST
     rem -------------------------------------------------------------------
+    set urlTOOLS_SRC_GIT=git@github.com:lisitsinyr/TOOLS_SRC_GIT.git
+    set urlTOOLS_GIT=git@github.com:lisitsinyr/TOOLS_GIT.git
+
+    set urlTOOLS_SRC_BAT=git@github.com:lisitsinyr/TOOLS_SRC_BAT.git
+    set urlTOOLS_BAT=git@github.com:lisitsinyr/TOOLS_BAT.git
+
+    set urlTOOLS_SRC_KIX=git@github.com:lisitsinyr/TOOLS_SRC_KIX.git
+    set urlTOOLS_KIX=git@github.com:lisitsinyr/TOOLS_KIX.git
+
+    set urlTOOLS_PS=git@github.com:lisitsinyr/TOOLS_PS.git
+
+    set urlINFO_JAVA=git@github.com:lisitsinyr/INFO_JAVA.git
+    set urlTESTS_JAVA=git@github.com:lisitsinyr/TESTS_JAVA.git
+    set urlTOOLS_SRC_JAVA=git@github.com:lisitsinyr/TOOLS_SRC_JAVA.git
+    set urlTOOLS_JAVA=git@github.com:lisitsinyr/TOOLS_JAVA.git
+
+    set urlLUIS_D7=git@github.com:lisitsinyr/LUIS_D7.git
+    set urlTOOLS_D7=git@github.com:lisitsinyr/TOOLS_D7.git
+    set urlLUIS_D11=git@github.com:lisitsinyr/LUIS_D11.git
+    set urlTOOLS_D11=git@github.com:lisitsinyr/TOOLS_D11.git
+
+    set urlEXAMPLES_PY=git@github.com:lisitsinyr/EXAMPLES_PY.git
+    set urlINFO_PYTHON=git@github.com:lisitsinyr/INFO_PYTHON.git
+    set urlLANG_PYTHON=git@github.com:lisitsinyr/LANG_PYTHON.git
+    set urlLIBRARY_PY=git@github.com:lisitsinyr/LIBRARY_PY.git
+    set urlMobileAPP_PY=git@github.com:lisitsinyr/MobileAPP_PY.git
+    set urlPATTERN_PY=git@github.com:lisitsinyr/PATTERN_PY.git
+    set urlSCRIPTS_PY=git@github.com:lisitsinyr/SCRIPTS_PY.git
+    set urlTESTS_PY=git@github.com:lisitsinyr/TESTS_PY.git
+    set urlTOOLS_SRC_PY=git@github.com:lisitsinyr/TOOLS_SRC_PY.git
+    set urlYOUTUBE_PY=git@github.com:lisitsinyr/YOUTUBE_PY.git
+    set urlTOOLS_PY=git@github.com:lisitsinyr/TOOLS_PY.git
+
+    set urlCOMMANDS_SH=git@github.com:lisitsinyr/COMMANDS_SH.git
+    set urlINFO_UNIX=git@github.com:lisitsinyr/INFO_UNIX.git
+    set urlTOOLS_SRC_SH=git@github.com:lisitsinyr/TOOLS_SRC_SH.git
+    set urlTOOLS_SH=git@github.com:lisitsinyr/TOOLS_SH.git
 
     rem -------------------------------------------------------------------
     rem VAR
@@ -132,6 +170,34 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure DEPLOY_PROJECT ()
+rem --------------------------------------------------------------------------------
+:DEPLOY_PROJECT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=DEPLOY_PROJECT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
+
+    set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    cd /D !DIR_PROJECT_NAME!
+    rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
+    set APPRUN=DEPLOY.bat
+    set APPRUN=DEPLOY_PROJECT.bat
+    echo APPRUN:!APPRUN!
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+
+    exit /b 0
+rem endfunction
+
 rem =================================================
 rem procedure git_pull (ADirectory)
 rem =================================================
@@ -161,29 +227,30 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-rem --------------------------------------------------------------------------------
-rem procedure DEPLOY_PROJECT ()
-rem --------------------------------------------------------------------------------
-:DEPLOY_PROJECT
+rem =================================================
+rem procedure git_clone (Aurl)
+rem =================================================
+:git_clone
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=DEPLOY_PROJECT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
+    set LDIR_PROJECTS_ROOT=%1
+    set url=%2
 
-    set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-
-    cd /D !DIR_PROJECT_NAME!
-    rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
-    set APPRUN=DEPLOY.bat
-    set APPRUN=DEPLOY_PROJECT.bat
-    echo APPRUN:!APPRUN!
-    if exist "!APPRUN!" (
-        call !APPRUN!
+    if exist "!LDIR_PROJECTS_ROOT!"\ (
+        cd /D !LDIR_PROJECTS_ROOT!
+        if defined !url! (
+            rem git clone !url!
+            call lyrgit_clone.bat !url!
+        ) else (
+            echo INFO: Github не существует...
+        )
+    ) else (
+        echo ERROR: Каталог !LDIR_PROJECTS_ROOT! не существует...
+        exit /b 1
     )
 
     exit /b 0
@@ -200,20 +267,152 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :WritePROCESS PULL проекта: !PROJECT_NAME! ...
+    set LDIR_PROJECTS_ROOT=%1
+    set LPROJECT_NAME=%2
 
-    set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    call :WritePROCESS PULL проекта: !LPROJECT_NAME! ...
 
-    if EXIST !DIR_PROJECT_NAME!\ (
-        cd /D !DIR_PROJECT_NAME!
+    set LDIR_PROJECT_NAME=!LDIR_PROJECTS_ROOT!\!LPROJECT_NAME!
+    echo LDIR_PROJECTS_ROOT:!LDIR_PROJECTS_ROOT!
+
+    if exist "!LDIR_PROJECT_NAME!"\ (
+        cd /D !LDIR_PROJECT_NAME!
         if exist ".git"\ (
-            rem echo "call lyrgit_push_main.bat ..."
-            call lyrgit_pull_main.bat
+            rem echo "call lyrgit_pull.bat ..."
+            call lyrgit_pull.bat
         )
     ) else (
-        rem git clone 
-    )
+        if !LPROJECT_NAME!==TOOLS_SRC_GIT (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_GIT!
+        )
+        if !LPROJECT_NAME!==TOOLS_GIT (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_GIT!
+        )
+
+        
+        if !LPROJECT_NAME!==TOOLS_SRC_BAT (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_BAT (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_BAT!
+        )
+        if !LPROJECT_NAME!==COMMANDS_BAT (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==INFO_BAT (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==SCRIPTS_BAT (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+
+        if !LPROJECT_NAME!==INFO_JAVA (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==LANG_JAVA (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==LIBRARY_JAVA (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==PATTERNS_JAVA (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TESTS_JAVA (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_SRC_JAVA (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_JAVA (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+
+        if !LPROJECT_NAME!==APPInfo_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==EXAMPLES_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==FRAMEWORK_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==INFO_PYTHON (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==LANG_PYTHON (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==LIBRARY_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==MobileAPP_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==PATTERN_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==PATTERNS_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==PROJECTS_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==SCRIPTS_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==SOFTWARE_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TEST_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TESTS_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_SRC_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==YOUTUBE_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_PY (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+
+        if !LPROJECT_NAME!==LUIS_D7 (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_D7 (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==LUIS_D11 (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_D11 (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+
+        if !LPROJECT_NAME!==COMMANDS_SH (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==INFO_UNIX (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==SCRIPTS_SH (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==SOFTWARE (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_SRC_SH (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+        if !LPROJECT_NAME!==TOOLS_SH (
+            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        )
+
+    )   
 
     rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
     rem set APPRUN=DEPLOY.bat
