@@ -406,7 +406,7 @@ rem beginfunction
     rem call :git_pull !DIR_TOOLS_BAT_! || exit /b 1
 
     rem set PROJECT_NAME=TOOLS_BAT
-    call :PULL_PROJECT !DIR_TOOLS_BAT_! !PROJECT_NAME!
+    call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
     exit /b 0
 rem endfunction
