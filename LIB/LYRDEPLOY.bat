@@ -244,9 +244,9 @@ rem beginfunction
 
     if exist "!ADIR_PROJECTS_ROOT!"\ (
         cd /D "!ADIR_PROJECTS_ROOT!"
-        if defined !url! (
+        if defined url (
             rem git clone !url!
-            call lyrgit_clone.bat !url!
+            echo call lyrgit_clone.bat !url!
         ) else (
             echo INFO: Github не существует...
         )
@@ -269,13 +269,13 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LDIR_PROJECTS_ROOT=%1
-    set LPROJECT_NAME=%2
+    set ADIR_PROJECTS_ROOT=%1
+    set APROJECT_NAME=%2
 
     call :WritePROCESS PULL проекта: !LPROJECT_NAME! ...
 
-    set LDIR_PROJECT_NAME=!LDIR_PROJECTS_ROOT!\!LPROJECT_NAME!
-    echo LDIR_PROJECTS_ROOT:!LDIR_PROJECTS_ROOT!
+    set LDIR_PROJECT_NAME=!ADIR_PROJECTS_ROOT!\!APROJECT_NAME!
+    echo LDIR_PROJECT_ROOT:!LDIR_PROJECT_ROOT!
 
     if exist "!LDIR_PROJECT_NAME!"\ (
         cd /D "!LDIR_PROJECT_NAME!"
