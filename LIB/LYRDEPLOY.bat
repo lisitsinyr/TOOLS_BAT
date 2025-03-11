@@ -237,11 +237,13 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set LDIR_PROJECTS_ROOT=%1
+    set ADIR_PROJECTS_ROOT=%1
+    echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
     set url=%2
+    echo url:!url!
 
-    if exist "!LDIR_PROJECTS_ROOT!"\ (
-        cd /D !LDIR_PROJECTS_ROOT!
+    if exist "!ADIR_PROJECTS_ROOT!"\ (
+        cd /D "!ADIR_PROJECTS_ROOT!"
         if defined !url! (
             rem git clone !url!
             call lyrgit_clone.bat !url!
@@ -249,7 +251,7 @@ rem beginfunction
             echo INFO: Github не существует...
         )
     ) else (
-        echo ERROR: Каталог !LDIR_PROJECTS_ROOT! не существует...
+        echo ERROR: Каталог !ADIR_PROJECTS_ROOT! не существует...
         exit /b 1
     )
 
@@ -276,7 +278,7 @@ rem beginfunction
     echo LDIR_PROJECTS_ROOT:!LDIR_PROJECTS_ROOT!
 
     if exist "!LDIR_PROJECT_NAME!"\ (
-        cd /D !LDIR_PROJECT_NAME!
+        cd /D "!LDIR_PROJECT_NAME!"
         if exist ".git"\ (
             rem echo "call lyrgit_pull.bat ..."
             call lyrgit_pull.bat
