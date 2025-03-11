@@ -270,7 +270,9 @@ rem beginfunction
     )
 
     set ADIR_PROJECTS_ROOT=%1
+    echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
     set APROJECT_NAME=%2
+    echo APROJECT_NAME:!APROJECT_NAME!
 
     call :WritePROCESS PULL проекта: !LPROJECT_NAME! ...
 
