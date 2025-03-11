@@ -274,10 +274,10 @@ rem beginfunction
     set APROJECT_NAME=%2
     echo APROJECT_NAME:!APROJECT_NAME!
 
-    call :WritePROCESS PULL проекта: !LPROJECT_NAME! ...
+    call :WritePROCESS PULL проекта: !APROJECT_NAME! ...
 
     set LDIR_PROJECT_NAME=!ADIR_PROJECTS_ROOT!\!APROJECT_NAME!
-    echo LDIR_PROJECT_ROOT:!LDIR_PROJECT_ROOT!
+    echo LDIR_PROJECT_ROOT:!LDIR_PROJECT_NAME!
 
     if exist "!LDIR_PROJECT_NAME!"\ (
         cd /D "!LDIR_PROJECT_NAME!"
