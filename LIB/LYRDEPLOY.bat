@@ -87,14 +87,14 @@ rem beginfunction
     )
 
     set ADirectory=%~1
-    echo ADirectory:!ADirectory!
+    rem echo ADirectory:!ADirectory!
 
     if not exist !ADirectory!\ (
         echo ERROR: Каталог !ADirectory! не существует ...
         exit /b 1
     )
 
-    echo PROJECT_NAME:!PROJECT_NAME!
+    rem echo PROJECT_NAME:!PROJECT_NAME!
 
     cd /D "!ADirectory!"
 
