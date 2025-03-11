@@ -487,6 +487,9 @@ exit /b 0
 :DEPLOY_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
+:PULL_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
 
 rem =================================================
 rem LYRLIB.bat
