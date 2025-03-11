@@ -56,17 +56,8 @@ setlocal enabledelayedexpansion
     set PROJECT_GROUP=BAT
     
     rem -------------------------------------------------------------------
-    rem DIR_GROUP_ROOT - каталог группы проектов
-    rem -------------------------------------------------------------------
-    if not defined DIR_GROUP_ROOT (
-        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT
-    )
-    rem DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
-
-    rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_GIT
     set DIR_PROJECTS_ROOT=D:\WORK
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 

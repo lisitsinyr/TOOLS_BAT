@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem PULL_BAT.bat
+rem PULL_KIX.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -53,7 +53,7 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    set PROJECT_GROUP=BAT
+    set PROJECT_GROUP=KIX
     
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
@@ -63,19 +63,16 @@ setlocal enabledelayedexpansion
 
     call :WriteBEGIN PULL группы проектов: !PROJECT_GROUP! ...
 
-    set PROJECT_NAME=COMMANDS_BAT
+    set PROJECT_NAME=INFO_KIX
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    set PROJECT_NAME=INFO_BAT
+    set PROJECT_NAME=SCRIPTS_KIX
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    set PROJECT_NAME=SCRIPTS_BAT
-    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
-
-    set PROJECT_NAME=TOOLS_SRC_BAT
+    set PROJECT_NAME=TOOLS_SRC_KIX
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
     
-    set PROJECT_NAME=TOOLS_BAT
+    set PROJECT_NAME=TOOLS_KIX
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
     call :WriteEND Конец PULL группы проектов: !PROJECT_GROUP! ...

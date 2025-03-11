@@ -402,8 +402,11 @@ rem beginfunction
 
     call :REPO_WORK !DIR_PROJECT_NAME! 1 || exit /b 1
 
-    set DIR_TOOLS_PY=D:\TOOLS\TOOLS_PY
-    call :git_pull !DIR_TOOLS_PY! || exit /b 1
+    rem set DIR_TOOLS_PY=D:\TOOLS\TOOLS_PY
+    rem call :git_pull !DIR_TOOLS_PY! || exit /b 1
+
+    rem set PROJECT_NAME=TOOLS_BAT
+    call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
     exit /b 0
 rem endfunction

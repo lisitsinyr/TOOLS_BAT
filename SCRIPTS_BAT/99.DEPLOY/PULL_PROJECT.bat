@@ -80,6 +80,20 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET_DEFAULT ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET_DEFAULT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET_DEFAULT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_SET ()
 rem --------------------------------------------------------------------------------
 :MAIN_SET
@@ -271,6 +285,8 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
+
+    call :MAIN_SET_DEFAULT || exit /b 1
 
     call :MAIN_SET || exit /b 1
 

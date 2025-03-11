@@ -184,7 +184,7 @@ rem beginfunction
     call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
 
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     cd /D !DIR_PROJECT_NAME!
     rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
@@ -246,7 +246,7 @@ rem beginfunction
         cd /D "!ADIR_PROJECTS_ROOT!"
         if defined url (
             rem git clone !url!
-            echo call lyrgit_clone.bat !url!
+            call lyrgit_clone.bat "!url!"
         ) else (
             echo INFO: Github не существует...
         )
@@ -286,134 +286,148 @@ rem beginfunction
             call lyrgit_pull.bat
         )
     ) else (
-        if !LPROJECT_NAME!==TOOLS_SRC_GIT (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_GIT!
+        echo info:  аталог !LDIR_PROJECT_NAME! не существует...
+        if !APROJECT_NAME!==TOOLS_SRC_GIT (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SRC_GIT!
         )
-        if !LPROJECT_NAME!==TOOLS_GIT (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_GIT!
+        if !APROJECT_NAME!==TOOLS_GIT (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_GIT!
         )
 
         
-        if !LPROJECT_NAME!==TOOLS_SRC_BAT (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==TOOLS_SRC_BAT (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
         )
-        if !LPROJECT_NAME!==TOOLS_BAT (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_BAT!
+        if !APROJECT_NAME!==TOOLS_BAT (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_BAT!
         )
-        if !LPROJECT_NAME!==COMMANDS_BAT (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==COMMANDS_BAT (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlCOMMANDS_BAT!
         )
-        if !LPROJECT_NAME!==INFO_BAT (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==INFO_BAT (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlINFO_BAT!
         )
-        if !LPROJECT_NAME!==SCRIPTS_BAT (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-
-        if !LPROJECT_NAME!==INFO_JAVA (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==LANG_JAVA (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==LIBRARY_JAVA (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==PATTERNS_JAVA (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==TESTS_JAVA (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==TOOLS_SRC_JAVA (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==TOOLS_JAVA (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==SCRIPTS_BAT (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlSCRIPTS_BAT!
         )
 
-        if !LPROJECT_NAME!==APPInfo_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==TOOLS_SRC_KIX (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SRC_KIX!
         )
-        if !LPROJECT_NAME!==EXAMPLES_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==TOOLS_KIX (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_KIX!
         )
-        if !LPROJECT_NAME!==FRAMEWORK_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==INFO_KIX (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlINFO_KIX!
         )
-        if !LPROJECT_NAME!==INFO_PYTHON (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==LANG_PYTHON (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==LIBRARY_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==MobileAPP_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==PATTERN_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==PATTERNS_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==PROJECTS_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==SCRIPTS_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==SOFTWARE_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==TEST_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==TESTS_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==TOOLS_SRC_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==YOUTUBE_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
-        )
-        if !LPROJECT_NAME!==TOOLS_PY (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==SCRIPTS_KIX (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlSCRIPTS_KIX!
         )
 
-        if !LPROJECT_NAME!==LUIS_D7 (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==INFO_JAVA (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlINFO_JAVA!
         )
-        if !LPROJECT_NAME!==TOOLS_D7 (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==LANG_JAVA (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlLANG_JAVA!
         )
-        if !LPROJECT_NAME!==LUIS_D11 (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==LIBRARY_JAVA (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlLIBRARY_JAVA!
         )
-        if !LPROJECT_NAME!==TOOLS_D11 (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==PATTERNS_JAVA (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlPATTERNS_JAVA!
+        )
+        if !APROJECT_NAME!==TESTS_JAVA (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTESTS_JAVA!
+        )
+        if !APROJECT_NAME!==TOOLS_SRC_JAVA (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SRC_JAVA!
+        )
+        if !APROJECT_NAME!==TOOLS_JAVA (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_JAVA!
         )
 
-        if !LPROJECT_NAME!==COMMANDS_SH (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==APPInfo_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlAPPInfo_PY!
         )
-        if !LPROJECT_NAME!==INFO_UNIX (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==EXAMPLES_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlEXAMPLES_PY!
         )
-        if !LPROJECT_NAME!==SCRIPTS_SH (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==FRAMEWORK_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlFRAMEWORK_PY!
         )
-        if !LPROJECT_NAME!==SOFTWARE (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==INFO_PYTHON (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlINFO_PYTHON!
         )
-        if !LPROJECT_NAME!==TOOLS_SRC_SH (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==LANG_PYTHON (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlLANG_PYTHON!
         )
-        if !LPROJECT_NAME!==TOOLS_SH (
-            call :git_clone !LDIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+        if !APROJECT_NAME!==LIBRARY_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlLIBRARY_PY!
+        )
+        if !APROJECT_NAME!==MobileAPP_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlMobileAPP_PY!
+        )
+        if !APROJECT_NAME!==PATTERN_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlPATTERN_PY!
+        )
+        if !APROJECT_NAME!==PATTERNS_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlPATTERNS_PY!
+        )
+        if !APROJECT_NAME!==PROJECTS_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlPROJECTS_PY!
+        )
+        if !APROJECT_NAME!==SCRIPTS_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlSCRIPTS_PY!
+        )
+        if !APROJECT_NAME!==SOFTWARE_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlSOFTWARE_PY!
+        )
+        if !APROJECT_NAME!==TEST_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTEST_PY!
+        )
+        if !APROJECT_NAME!==TESTS_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTESTS_PY!
+        )
+        if !APROJECT_NAME!==TOOLS_SRC_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SRC_PY!
+        )
+        if !APROJECT_NAME!==YOUTUBE_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlYOUTUBE_PY!
+        )
+        if !APROJECT_NAME!==TOOLS_PY (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_PY!
+        )
+
+        if !APROJECT_NAME!==LUIS_D7 (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlLUIS_D7!
+        )
+        if !APROJECT_NAME!==TOOLS_D7 (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_D7!
+        )
+        if !APROJECT_NAME!==LUIS_D11 (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlLUIS_D11!
+        )
+        if !APROJECT_NAME!==TOOLS_D11 (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_D11!
+        )
+
+        if !APROJECT_NAME!==COMMANDS_SH (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlCOMMANDS_SH!
+        )
+        if !APROJECT_NAME!==INFO_UNIX (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlINFO_UNIX!
+        )
+        if !APROJECT_NAME!==SCRIPTS_SH (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlSCRIPTS_SH!
+        )
+        if !APROJECT_NAME!==SOFTWARE (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlSOFTWARE!
+        )
+        if !APROJECT_NAME!==TOOLS_SRC_SH (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SRC_SH!
+        )
+        if !APROJECT_NAME!==TOOLS_SH (
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SH!
         )
 
     )   

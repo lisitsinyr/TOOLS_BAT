@@ -265,12 +265,12 @@ rem beginfunction
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
-    echo LDIR_FROM:!LDIR_FROM!
+    rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_BAT\SCRIPTS_KIX
     rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_KIX
-    echo LDIR_TO:!LDIR_TO!
+    rem echo LDIR_TO:!LDIR_TO!
 
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
@@ -287,12 +287,12 @@ rem beginfunction
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
-    echo LDIR_FROM:!LDIR_FROM!
+    rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\KIX
     rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
-    echo LDIR_TO:!LDIR_TO!
+    rem echo LDIR_TO:!LDIR_TO!
 
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -319,12 +319,12 @@ rem beginfunction
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\BAT
-    echo LDIR_FROM:!LDIR_FROM!
+    rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\BAT
     rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
-    echo LDIR_TO:!LDIR_TO!
+    rem echo LDIR_TO:!LDIR_TO!
 
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -335,12 +335,12 @@ rem beginfunction
     rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\KIX
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\LIB
-    echo LDIR_FROM:!LDIR_FROM!
+    rem echo LDIR_FROM:!LDIR_FROM!
 
     rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\LIB
     rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\LIB
-    echo LDIR_TO:!LDIR_TO!
+    rem echo LDIR_TO:!LDIR_TO!
 
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
@@ -400,8 +400,11 @@ rem beginfunction
 
     call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
 
-    set DIR_TOOLS_KIX=D:\TOOLS\TOOLS_KIX
-    call :git_pull !DIR_TOOLS_KIX! || exit /b 1
+    rem set DIR_TOOLS_KIX=D:\TOOLS\TOOLS_KIX
+    rem call :git_pull !DIR_TOOLS_KIX! || exit /b 1
+
+    rem set PROJECT_NAME=TOOLS_BAT
+    call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
     exit /b 0
 rem endfunction
