@@ -61,13 +61,13 @@ setlocal enabledelayedexpansion
     if not defined DIR_GROUP_ROOT (
         set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\UNIX
     )
-    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_UNIX
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
