@@ -190,7 +190,7 @@ rem beginfunction
     rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
     set APPRUN=DEPLOY.bat
     set APPRUN=DEPLOY_PROJECT.bat
-    echo APPRUN:!APPRUN!
+    rem echo APPRUN:!APPRUN!
     if exist "!APPRUN!" (
         call !APPRUN!
     )
@@ -238,9 +238,9 @@ rem beginfunction
     )
 
     set ADIR_PROJECTS_ROOT=%1
-    echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
+    rem echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
     set url=%2
-    echo url:!url!
+    rem echo url:!url!
 
     if exist "!ADIR_PROJECTS_ROOT!"\ (
         cd /D "!ADIR_PROJECTS_ROOT!"
@@ -270,14 +270,14 @@ rem beginfunction
     )
 
     set ADIR_PROJECTS_ROOT=%1
-    echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
+    rem echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
     set APROJECT_NAME=%2
-    echo APROJECT_NAME:!APROJECT_NAME!
+    rem echo APROJECT_NAME:!APROJECT_NAME!
 
     call :WritePROCESS PULL проекта: !APROJECT_NAME! ...
 
     set LDIR_PROJECT_NAME=!ADIR_PROJECTS_ROOT!\!APROJECT_NAME!
-    echo LDIR_PROJECT_ROOT:!LDIR_PROJECT_NAME!
+    rem echo LDIR_PROJECT_ROOT:!LDIR_PROJECT_NAME!
 
     if exist "!LDIR_PROJECT_NAME!"\ (
         cd /D "!LDIR_PROJECT_NAME!"
