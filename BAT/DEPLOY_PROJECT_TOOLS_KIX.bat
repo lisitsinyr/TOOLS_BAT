@@ -260,20 +260,16 @@ rem beginfunction
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
-    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
     rem echo LDIR_FROM:!LDIR_FROM!
-
-    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_BAT\SCRIPTS_KIX
-    rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_KIX
     rem echo LDIR_TO:!LDIR_TO!
 
+    set LMASK=*.*
     if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\!LMASK! >> %LOG_FULLFILENAME%
     ) else (                        
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME% 
     )
@@ -282,15 +278,10 @@ rem beginfunction
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\SCRIPTS_BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
-    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_KIX\SCRIPTS_KIX\SRC\SCRIPTS_KIX
     rem echo LDIR_FROM:!LDIR_FROM!
-
-    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\KIX
-    rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
     rem echo LDIR_TO:!LDIR_TO!
 
@@ -314,15 +305,10 @@ rem beginfunction
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\BAT -> !DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\BAT
-    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-
-    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\BAT
-    rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
     rem echo LDIR_TO:!LDIR_TO!
 
@@ -330,20 +316,16 @@ rem beginfunction
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     rem --------------------------------------------------------
-    rem !DIR_PROJECT_NAME!\SRC\LIB -> !DIR_GROUP_ROOT!\TOOLS_BAT\LIB
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\KIX
-    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_KIX\TOOLS_SRC_KIX\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
-
-    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\LIB
-    rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\LIB
     rem echo LDIR_TO:!LDIR_TO!
 
+    set LMASK=*.kxl
     if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\!LMASK! >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
@@ -366,16 +348,16 @@ rem beginfunction
     )
 
     rem --------------------------------------------------------
-    rem D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\BAT - очистка
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\TOOLS_KIX\BAT
     set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_KIX\BAT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
 
+    set LMASK=*.bat
     if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
+        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
     ) else (
         mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
     )
@@ -400,10 +382,6 @@ rem beginfunction
 
     call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
 
-    rem set DIR_TOOLS_KIX=D:\TOOLS\TOOLS_KIX
-    rem call :git_pull !DIR_TOOLS_KIX! || exit /b 1
-
-    rem set PROJECT_NAME=TOOLS_BAT
     call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
     exit /b 0

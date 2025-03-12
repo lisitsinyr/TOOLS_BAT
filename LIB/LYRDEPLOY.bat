@@ -143,6 +143,9 @@ rem beginfunction
     if !PROJECT_NAME!==TOOLS_SH (
         set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_SH.bat
     )    
+    if !PROJECT_NAME!==TOOLS_JAVA (
+        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_JAVA.bat
+    )    
     rem echo LFileName:!LFileName!
     if exist !LFileName! (
         rem echo COPY:!LFileName!
@@ -191,7 +194,6 @@ rem beginfunction
 
     cd /D !DIR_PROJECT_NAME!
     rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
-    set APPRUN=DEPLOY.bat
     set APPRUN=DEPLOY_PROJECT.bat
     rem echo APPRUN:!APPRUN!
     if exist "!APPRUN!" (

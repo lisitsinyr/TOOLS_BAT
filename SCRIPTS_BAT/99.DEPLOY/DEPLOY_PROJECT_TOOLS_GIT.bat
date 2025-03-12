@@ -264,7 +264,6 @@ rem beginfunction
     rem --------------------------------------------------------
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
     rem echo LDIR_TO:!LDIR_TO!
 
@@ -276,7 +275,6 @@ rem beginfunction
     rem --------------------------------------------------------
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT_KIX
     rem echo LDIR_FROM:!LDIR_FROM!
-
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT_KIX
     rem echo LDIR_TO:!LDIR_TO!
 
@@ -298,31 +296,31 @@ rem beginfunction
     )
 
     rem --------------------------------------------------------
-    rem D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT - очистка
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT
     set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_GIT\BAT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
 
+    set LMASK=*.bat
     if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
+        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
     ) else (
         mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
     )
 
     rem --------------------------------------------------------
-    rem D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT_KIX - очистка
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\GIT\TOOLS_GIT\BAT_KIX
     set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_GIT\BAT_KIX
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
 
+    set LMASK=*.bat
     if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
+        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
     ) else (
         mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
     )
@@ -346,10 +344,6 @@ rem beginfunction
 
     call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
 
-    rem set DIR_TOOLS_GIT=D:\TOOLS\TOOLS_GIT
-    rem call :git_pull !DIR_TOOLS_GIT! || exit /b 1
-
-    rem set PROJECT_NAME=TOOLS_BAT
     call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
     exit /b 0

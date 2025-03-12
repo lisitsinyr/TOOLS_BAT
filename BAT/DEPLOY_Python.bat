@@ -70,8 +70,6 @@ setlocal enabledelayedexpansion
 
     call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
-rem goto :Start
-
     set PROJECT_NAME=APPInfo_PY
     call :DEPLOY_PROJECT
 
@@ -114,22 +112,11 @@ rem goto :Start
     set PROJECT_NAME=YOUTUBE_PY
     call :DEPLOY_PROJECT
 
-:Start
-
     set PROJECT_NAME=SCRIPTS_PY
     call :DEPLOY_PROJECT
 
     set PROJECT_NAME=TOOLS_SRC_PY
     call :DEPLOY_PROJECT
-
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECT_ROOT - Каталог группы проектов
-    rem -------------------------------------------------------------------
-    rem set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-    rem set PROJECT_NAME=TOOLS_PY
-    rem echo PROJECT_NAME:!PROJECT_NAME!
-    rem call :DEPLOY_PROJECT
 
     set DIR_GROUP_ROOT=
     cd /D "D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY"

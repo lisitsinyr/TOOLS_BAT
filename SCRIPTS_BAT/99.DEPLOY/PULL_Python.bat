@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_Python.bat
+rem PULL_KIX.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -11,41 +11,33 @@ setlocal enabledelayedexpansion
     echo Старт !BATNAME! ...
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_ROOT - Каталог ROOT
+    rem PROJECTS_LYR_ROOT - Каталог скриптов
     rem -------------------------------------------------------------------
-    rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
     rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR - Каталог проектов LYR
+    rem PROJECTS_LYR_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
-    if not exist "!PROJECTS_LYR_DIR!"\ (
-        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
-        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
-        rem mkdir "!PROJECTS_LYR_DIR!"
-        exit /b 1
-    )
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов BAT
+    rem SCRIPTS_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
-        rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
-        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
-    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
+    rem echo SCRIPTS_DIR: !SCRIPTS_DIR!
 
     rem -------------------------------------------------------------------
-    rem LIB_BAT - каталог библиотеки скриптов BAT
+    rem LIB_BAT - каталог библиотеки скриптов
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
-        set LIB_BAT=!SCRIPTS_DIR!\LIB
+        set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
     )
-    rem echo LIB_BAT:!LIB_BAT!
+    rem echo LIB_BAT: !LIB_BAT!
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
@@ -61,41 +53,68 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    set PROJECT_GROUP=BAT
+    set PROJECT_GROUP=Python
     
-    rem -------------------------------------------------------------------
-    rem DIR_GROUP_ROOT - каталог группы проектов
-    rem -------------------------------------------------------------------
-    if not defined DIR_GROUP_ROOT (
-        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT
-    )
-    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
-
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_BAT
+    set DIR_PROJECTS_ROOT=D:\WORK
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteBEGIN PULL группы проектов: !PROJECT_GROUP! ...
 
-    set PROJECT_NAME=COMMANDS_BAT
-    call :DEPLOY_PROJECT
+    set PROJECT_NAME=APPInfo_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    set PROJECT_NAME=INFO_BAT
-    call :DEPLOY_PROJECT
+    set PROJECT_NAME=EXAMPLES_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    set PROJECT_NAME=SCRIPTS_BAT
-    call :DEPLOY_PROJECT
+    set PROJECT_NAME=FRAMEWORK_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    set PROJECT_NAME=TOOLS_SRC_BAT
-    call :DEPLOY_PROJECT
+    set PROJECT_NAME=INFO_PYTHON
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    set DIR_GROUP_ROOT=
-    cd /d "D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\TOOLS_BAT"
-    call DEPLOY_PROJECT_TOOLS_BAT.bat
+    set PROJECT_NAME=LANG_PYTHON
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+    set PROJECT_NAME=LIBRARY_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=MobileAPP_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=PATTERN_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=PATTERNS_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=PROJECTS_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=SCRIPTS_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=SOFTWARE_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=TEST_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=TESTS_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=TOOLS_SRC_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    set PROJECT_NAME=YOUTUBE_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+    
+    set PROJECT_NAME=TOOLS_PY
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
+
+    call :WriteEND Конец PULL группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
 :end
@@ -125,6 +144,9 @@ exit /b 0
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:PULL_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 

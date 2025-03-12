@@ -259,20 +259,16 @@ rem beginfunction
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
-    rem D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
-    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
     rem echo LDIR_FROM:!LDIR_FROM!
-
-    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\SCRIPTS_PY
-    rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_PY
     rem echo LDIR_TO:!LDIR_TO!
 
+    set LMASK=*.*
     if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\!LMASK! >> %LOG_FULLFILENAME%
     ) else (                        
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME% 
     )
@@ -281,15 +277,10 @@ rem beginfunction
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     rem --------------------------------------------------------
-    rem D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
-    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
     rem echo LDIR_FROM:!LDIR_FROM!
-
-    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\SCRIPTS_PY
-    rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
     rem echo LDIR_TO:!LDIR_TO!
 
@@ -313,15 +304,10 @@ rem beginfunction
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
-    rem D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT
-    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
-
-    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\BAT
-    rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
     rem echo LDIR_TO:!LDIR_TO!
 
@@ -329,20 +315,16 @@ rem beginfunction
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     rem --------------------------------------------------------
-    rem D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\LIB
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\LIB
-    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_PY\TOOLS_SRC_PY\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
-
-    rem set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\LIB
-    rem echo LDIR_TO:!LDIR_TO!
     set LDIR_TO=!DIR_PROJECT_NAME!\LIB
     rem echo LDIR_TO:!LDIR_TO!
 
+    set LMASK=*.*
     if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\*.* >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\!LMASK! >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
@@ -367,17 +349,16 @@ rem beginfunction
     rem call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
-    rem D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\BAT - очистка
+    rem 
     rem --------------------------------------------------------
-    rem set LDIR_CLEAR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\TOOLS_PY\BAT
-    rem echo LDIR_CLEAR:!LDIR_CLEAR!
     set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_PY\BAT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
 
+    set LMASK=*.bat
     if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\*.bat >> %LOG_FULLFILENAME% 
+        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
     ) else (
         mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
     )
@@ -402,10 +383,6 @@ rem beginfunction
 
     call :REPO_WORK !DIR_PROJECT_NAME! 1 || exit /b 1
 
-    rem set DIR_TOOLS_PY=D:\TOOLS\TOOLS_PY
-    rem call :git_pull !DIR_TOOLS_PY! || exit /b 1
-
-    rem set PROJECT_NAME=TOOLS_BAT
     call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
     exit /b 0

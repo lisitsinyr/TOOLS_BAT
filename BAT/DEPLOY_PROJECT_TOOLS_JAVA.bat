@@ -93,11 +93,11 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem PROJECT_GROUP - группа проектов
     rem -------------------------------------------------------------------
-    set PROJECT_GROUP=BAT
+    set PROJECT_GROUP=JAVA
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT
+    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\!PROJECT_GROUP!
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
@@ -105,7 +105,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem PROJECT_NAME - 
     rem -------------------------------------------------------------------
-    set PROJECT_NAME=TOOLS_BAT
+    set PROJECT_NAME=TOOLS_JAVA
 
     exit /b 0
 rem endfunction
@@ -163,7 +163,7 @@ rem beginfunction
     rem DIR_PROJECT_NAME
     rem ------------------------------------------------
     set DIR_PROJECT_NAME=!DIR_PROJECT!\!PROJECT_NAME!
-    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
     rem echo REPO_NAME:!REPO_NAME!
@@ -242,29 +242,28 @@ rem beginfunction
     )
 
     rem echo ARGS:!ARGS!
-
+        
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_BAT_SCRIPTS_BAT ()
+rem procedure UPDATE_TOOLS_JAVA_SCRIPTS_JAVA ()
 rem --------------------------------------------------------------------------------
-:UPDATE_TOOLS_BAT_SCRIPTS_BAT
+:UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_BAT_SCRIPTS_BAT
+    set FUNCNAME=UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
     rem 
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
+    set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Java\PROJECTS_JAVA\SCRIPTS_JAVA
     rem echo LDIR_FROM:!LDIR_FROM!
-    set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_BAT
+    set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_JAVA
     rem echo LDIR_TO:!LDIR_TO!
 
     set LMASK=*.*
@@ -280,7 +279,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem 
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT
+    set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Java\PROJECTS_JAVA\SCRIPTS_JAVA
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
     rem echo LDIR_TO:!LDIR_TO!
@@ -292,12 +291,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_BAT_TOOLS_SRC_BAT ()
+rem procedure UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA ()
 rem --------------------------------------------------------------------------------
-:UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+:UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+    set FUNCNAME=UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -307,7 +306,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem 
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\BAT
+    set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Java\PROJECTS_JAVA\TOOLS_SRC_JAVA\src\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
     rem echo LDIR_TO:!LDIR_TO!
@@ -318,31 +317,31 @@ rem beginfunction
     rem --------------------------------------------------------
     rem 
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_BAT\TOOLS_SRC_BAT\SRC\LIB
+    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_JAVA\TOOLS_SRC_JAVA\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_PROJECT_NAME!\LIB
     rem echo LDIR_TO:!LDIR_TO!
 
-    set LMASK=*.bat
+    set LMASK=*.*
     if exist "!LDIR_TO!" (
         del /F /S /Q "!LDIR_TO!"\!LMASK! >> %LOG_FULLFILENAME%
     ) else (
         mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
     )
 
-    set LMASK=*.bat
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+    set LMASK=*.*
+    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CLEAR_TOOLS_BAT ()
+rem procedure CLEAR_TOOLS_JAVA ()
 rem --------------------------------------------------------------------------------
-:CLEAR_TOOLS_BAT
+:CLEAR_TOOLS_JAVA
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_BAT
+    set FUNCNAME=CLEAR_TOOLS_JAVA
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -352,7 +351,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem 
     rem --------------------------------------------------------
-    set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_BAT\BAT
+    set LDIR_CLEAR=!DIR_GROUP_ROOT!\TOOLS_JAVA\BAT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
 
     call :WritePROCESS Очистка !LDIR_CLEAR! ...
@@ -378,11 +377,11 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :CLEAR_TOOLS_BAT
-    call :UPDATE_TOOLS_BAT_SCRIPTS_BAT
-    call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+    call :CLEAR_TOOLS_JAVA
+    call :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
+    call :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
 
-    call :REPO_WORK !DIR_PROJECT_NAME! 0 || exit /b 1
+    call :REPO_WORK !DIR_PROJECT_NAME! 1 || exit /b 1
 
     call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
