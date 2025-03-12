@@ -128,14 +128,14 @@ rem beginfunction
     if !PROJECT_NAME!==TOOLS_BAT (
         set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_BAT.bat
     )    
-    if !PROJECT_NAME!==TOOLS_KIX (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_KIX.bat
-    )    
-    if !PROJECT_NAME!==TOOLS_PS (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_PS.bat
-    )    
     if !PROJECT_NAME!==TOOLS_GIT (
         set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_GIT.bat
+    )    
+    if !PROJECT_NAME!==TOOLS_JAVA (
+        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_JAVA.bat
+    )    
+    if !PROJECT_NAME!==TOOLS_KIX (
+        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_KIX.bat
     )    
     if !PROJECT_NAME!==TOOLS_PY (
         set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_PY.bat
@@ -143,8 +143,8 @@ rem beginfunction
     if !PROJECT_NAME!==TOOLS_SH (
         set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_SH.bat
     )    
-    if !PROJECT_NAME!==TOOLS_JAVA (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_JAVA.bat
+    if !PROJECT_NAME!==TOOLS_PS (
+        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_PS.bat
     )    
     rem echo LFileName:!LFileName!
     if exist !LFileName! (
