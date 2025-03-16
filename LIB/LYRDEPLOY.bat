@@ -240,7 +240,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\BUILD
         set LDIR_TO=!DIR_PROJECT_NAME!\BUILD
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -248,7 +248,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\CONFIG
         set LDIR_TO=!DIR_PROJECT_NAME!\CONFIG
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -256,7 +256,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\DATA
         set LDIR_TO=!DIR_PROJECT_NAME!\DATA
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -264,7 +264,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\DIST
         set LDIR_TO=!DIR_PROJECT_NAME!\DIST
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -272,7 +272,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\DOC
         set LDIR_TO=!DIR_PROJECT_NAME!\DOC
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -280,7 +280,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\EXE
         set LDIR_TO=!DIR_PROJECT_NAME!\EXE
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -288,7 +288,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\LOG
         set LDIR_TO=!DIR_PROJECT_NAME!\LOG
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -296,7 +296,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\NOTEBOOKS
         set LDIR_TO=!DIR_PROJECT_NAME!\NOTEBOOKS
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -304,7 +304,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\OUT
         set LDIR_TO=!DIR_PROJECT_NAME!\OUT
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -312,7 +312,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\SRC
         set LDIR_TO=!DIR_PROJECT_NAME!\SRC
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -320,7 +320,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\TESTS
         set LDIR_TO=!DIR_PROJECT_NAME!\TESTS
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -328,7 +328,7 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\WORK
         set LDIR_TO=!DIR_PROJECT_NAME!\WORK
         if exist !LDIR_FROM!\ (
-            echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_FROM:!LDIR_FROM!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -524,7 +524,7 @@ rem beginfunction
     rem call :WritePROCESS DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
 
     rem echo PROJECT_GROUP : !PROJECT_GROUP!
-    rem echo PROJECT_NAME  : !PROJECT_NAME!
+    echo PROJECT_NAME  : !PROJECT_NAME!
     rem echo DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
 
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!

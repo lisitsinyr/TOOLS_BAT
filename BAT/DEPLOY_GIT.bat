@@ -75,9 +75,9 @@ setlocal enabledelayedexpansion
     call :DEPLOY_PROJECT
 
     set PROJECT_NAME=TOOLS_GIT
-    echo PROJECT_NAME:!PROJECT_NAME!
+    rem echo PROJECT_NAME:!PROJECT_NAME!
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!
-    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     call :DEPLOY_PROJECT
     

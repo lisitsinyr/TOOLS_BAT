@@ -80,16 +80,16 @@ setlocal enabledelayedexpansion
     call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     set PROJECT_NAME=COMMANDS_BAT
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
 
     set PROJECT_NAME=INFO_BAT
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
 
     set PROJECT_NAME=SCRIPTS_BAT
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
 
     set PROJECT_NAME=TOOLS_SRC_BAT
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
 
     set PROJECT_NAME=TOOLS_BAT
     rem echo PROJECT_NAME:!PROJECT_NAME!
