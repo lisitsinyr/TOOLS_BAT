@@ -538,43 +538,41 @@ rem beginfunction
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_GIT (
-        rem call :CLEAR_TOOLS_GIT
-        rem call :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
-        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        call :CLEAR_TOOLS_GIT
+        call :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
+        call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_JAVA (
-        rem call :CLEAR_TOOLS_JAVA
-        rem call :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
-        rem call :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
-        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        call :CLEAR_TOOLS_JAVA
+        call :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
+        call :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
+        call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_KIX (
-        rem call :CLEAR_TOOLS_KIX
-        rem call :UPDATE_TOOLS_KIX_SCRIPTS_KIX
-        rem call :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
-        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        call :CLEAR_TOOLS_KIX
+        call :UPDATE_TOOLS_KIX_SCRIPTS_KIX
+        call :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
+        call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_PY (
-        rem call :CLEAR_TOOLS_PY
-        rem call :UPDATE_TOOLS_PY_SCRIPTS_PY
-        rem call :UPDATE_TOOLS_PY_TOOLS_SRC_PY
-        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        call :CLEAR_TOOLS_PY
+        call :UPDATE_TOOLS_PY_SCRIPTS_PY
+        call :UPDATE_TOOLS_PY_TOOLS_SRC_PY
+        call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_SH (
-        rem set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_SH.bat
-        rem call :CLEAR_TOOLS_SH
-        rem call :UPDATE_TOOLS_SH_SCRIPTS_SH
-        rem call :UPDATE_TOOLS_SH_TOOLS_SRC_SH
-        rem call :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
+        call :CLEAR_TOOLS_SH
+        call :UPDATE_TOOLS_SH_SCRIPTS_SH
+        call :UPDATE_TOOLS_SH_TOOLS_SRC_SH
+        call :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_PS (
-        rem set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_PS.bat
         rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
         exit /b 0
     )    
