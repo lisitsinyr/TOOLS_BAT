@@ -106,6 +106,9 @@ rem beginfunction
     )
     rem echo PROJECT_NAME:!PROJECT_NAME!
 
+    call :ExtractFileName !SCRIPT_FILEDIR!
+    echo ExtractFileName:!ExtractFileName!
+
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
@@ -118,10 +121,10 @@ rem beginfunction
     rem DIR_PROJECTS_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
-    if not defined DIR_PROJECTS_ROOT (
-        call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
-    )
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem if not defined DIR_PROJECTS_ROOT (
+    rem     call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
+    rem )
+    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     rem ------------------------------------------------
     rem DIR_PROJECT
@@ -132,8 +135,8 @@ rem beginfunction
     rem ------------------------------------------------
     rem DIR_PROJECT_NAME
     rem ------------------------------------------------
-    set DIR_PROJECT_NAME=!DIR_PROJECT!\!PROJECT_NAME!
-    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
+    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
     rem echo REPO_NAME:!REPO_NAME!

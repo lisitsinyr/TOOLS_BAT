@@ -58,7 +58,7 @@ setlocal enabledelayedexpansion
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     if not defined DIR_GROUP_ROOT (
-        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Python
+        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\!PROJECT_GROUP!
     )
     rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
@@ -92,7 +92,7 @@ setlocal enabledelayedexpansion
     call :DEPLOY_PROJECT
 
     set PROJECT_NAME=PATTERN_PY
-    call :DEPLOY_PROJECT
+    rem call :DEPLOY_PROJECT
 
     set PROJECT_NAME=PATTERNS_PY
     call :DEPLOY_PROJECT

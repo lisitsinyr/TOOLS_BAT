@@ -808,6 +808,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set ListToStr=
     call :SetColor !cPROCESS!
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!

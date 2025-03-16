@@ -218,7 +218,7 @@ rem beginfunction
     rem SCRIPT_FILEDIR - Файл скрипта: каталог
     rem -------------------------------------------------------------------
     set SCRIPT_FILEDIR=%~d1%~p1
-    rem echo SCRIPT_FILEDIR:!SCRIPT_FILEDIR!
+    echo SCRIPT_FILEDIR:!SCRIPT_FILEDIR!
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FILEEXT - Файл скрипта: расширение

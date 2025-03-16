@@ -77,37 +77,286 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure REPO_WORK (ADirectory, APYTHON)
+rem procedure CopyFilesFromPATTERN ()
 rem --------------------------------------------------------------------------------
-:REPO_WORK
+:CopyFilesFromPATTERN
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=CopyFilesFromPATTERN
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem echo PROJECT_GROUP:!PROJECT_GROUP!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    rem echo PROJECT_NAME:!PROJECT_NAME!
+
+    set LDirPATTERN=
+
+    set res=
+    if !PROJECT_GROUP!==PROJECTS_GIT set res=true
+    if !PROJECT_GROUP!==GIT set res=true
+    if defined res ( 
+        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\GIT\PATTERN_GIT
+    )
+
+    set res=
+    if !PROJECT_GROUP!==PROJECTS_BAT set res=true
+    if !PROJECT_GROUP!==BAT set res=true
+    if defined res ( 
+        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PATTERN_BAT
+    )
+
+    set res=
+    if !PROJECT_GROUP!==PROJECTS_KIX set res=true
+    if !PROJECT_GROUP!==KIX set res=true
+    if defined res ( 
+        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PATTERN_KIX
+    )
+
+    set res=
+    if !PROJECT_GROUP!==PROJECTS_PS set res=true
+    if !PROJECT_GROUP!==PowerShell set res=true
+    if defined res ( 
+        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\PowerShell\PATTERN_PS
+    )
+
+    set res=
+    if !PROJECT_GROUP!==PROJECTS_SH set res=true
+    if !PROJECT_GROUP!==UNIX set res=true
+    if defined res ( 
+        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\OS\UNIX\PATTERN_SH
+    )
+
+    set res=
+    if !PROJECT_GROUP!==PROJECTS_JAVA set res=true
+    if !PROJECT_GROUP!==JAVA set res=true
+    if defined res ( 
+        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\JAVA\PATTERN_JAVA
+    )
+
+    set res=
+    if !PROJECT_GROUP!==PROJECTS_D7 set res=true
+    if !PROJECT_GROUP!==PROJECTS_D11 set res=true
+    if !PROJECT_GROUP!==Pascal_Delphi set res=true
+    if defined res ( 
+        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\PATTERN_PAS
+    )
+
+    set res=
+    if !PROJECT_GROUP!==PROJECTS_PY set res=true
+    if !PROJECT_GROUP!==Python set res=true
+    if defined res ( 
+        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PATTERN_PY
+        set LFileName=!LDirPATTERN!\PROJECT_PYupdate.bat
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME!
+        )
+        set LFileName=!LDirPATTERN!\pyproject.toml
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME!
+        )
+        set LFileName=!LDirPATTERN!\requirements.txt
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME!
+        )
+        set LFileName=!LDirPATTERN!\POETRY.ini
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME!
+        )
+        
+        rem set POETRY.ini
+
+        set LFileName=!LDirPATTERN!\.pypirc
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME!
+        )
+    )
+
+    if defined LDirPATTERN if exist "!LDirPATTERN!"\ ( 
+
+        call :WritePROCESS ... !FUNCNAME! ...
+        call :WritePROCESS LDirPATTERN         : !LDirPATTERN!
+        call :WritePROCESS DIR_PROJECT_NAME    : !DIR_PROJECT_NAME!
+
+        set LFileName=!LDirPATTERN!\PROJECT.INI
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+        )
+        set LFileName=!LDirPATTERN!\REPO.INI
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+        )
+        set LFileName=!LDirPATTERN!\.editorconfig
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+        )
+        set LFileName=!LDirPATTERN!\.env
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+        )
+        set LFileName=!LDirPATTERN!\.gitignore
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+        )
+        set LFileName=!LDirPATTERN!\.gitmodules
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+        )
+        set LFileName=!LDirPATTERN!\LICENSE
+        rem echo LFileName: !LFileName!
+        if exist !LFileName! (
+            rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+        )
+
+        set LARG=/D /S /E /V /F /H /R /K /Y /O
+        set LMASK=*.*
+
+        set LDIR_FROM=!LDirPATTERN!\BUILD
+        set LDIR_TO=!DIR_PROJECT_NAME!\BUILD
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\CONFIG
+        set LDIR_TO=!DIR_PROJECT_NAME!\CONFIG
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\DATA
+        set LDIR_TO=!DIR_PROJECT_NAME!\DATA
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\DIST
+        set LDIR_TO=!DIR_PROJECT_NAME!\DIST
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\DOC
+        set LDIR_TO=!DIR_PROJECT_NAME!\DOC
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\EXE
+        set LDIR_TO=!DIR_PROJECT_NAME!\EXE
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\LOG
+        set LDIR_TO=!DIR_PROJECT_NAME!\LOG
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\NOTEBOOKS
+        set LDIR_TO=!DIR_PROJECT_NAME!\NOTEBOOKS
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\OUT
+        set LDIR_TO=!DIR_PROJECT_NAME!\OUT
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\SRC
+        set LDIR_TO=!DIR_PROJECT_NAME!\SRC
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\TESTS
+        set LDIR_TO=!DIR_PROJECT_NAME!\TESTS
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+        set LDIR_FROM=!LDirPATTERN!\WORK
+        set LDIR_TO=!DIR_PROJECT_NAME!\WORK
+        if exist !LDIR_FROM!\ (
+            echo LDIR_FROM:!LDIR_FROM!
+            rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
+            rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+        )
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure CopyFilesROOT ()
+rem --------------------------------------------------------------------------------
+:CopyFilesROOT
 rem beginfunction
     set FUNCNAME=%0
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set ADirectory=%~1
+    rem set ADirectory=%~1
     rem echo ADirectory:!ADirectory!
 
-    if not exist !ADirectory!\ (
-        echo ERROR: Каталог !ADirectory! не существует ...
-        exit /b 1
-    )
-
+    rem echo PROJECT_GROUP:!PROJECT_GROUP!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
     rem echo PROJECT_NAME:!PROJECT_NAME!
 
-    cd /D "!ADirectory!"
-
-    set APYTHON=%2
-    rem echo APYTHON:!APYTHON!
-
-    rem del *.bat
-    rem del *.sh
-
-    set LFileName=DEPLOY.bat
-    if exist !LFileName!\ (
-        del !LFileName! > NUL
-    )
+    call :WritePROCESS ... !FUNCNAME! ...
 
     set LDirectory=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT\A.WORK
     set LFileName=!LDirectory!\lyrgit_push_main.bat
@@ -116,6 +365,7 @@ rem beginfunction
         rem echo COPY:!LFileName!
         copy !LFileName! > NUL
     )
+
     set LFileName=!LDirectory!\lyrgit_pull.bat
     rem echo LFileName:!LFileName!
     if exist !LFileName! (
@@ -125,53 +375,133 @@ rem beginfunction
 
     set LDirectory=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
     set LFileName=!LDirectory!\DEPLOY_PROJECT.bat
-    if !PROJECT_NAME!==TOOLS_BAT (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_BAT.bat
-    )    
-    if !PROJECT_NAME!==TOOLS_GIT (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_GIT.bat
-    )    
-    if !PROJECT_NAME!==TOOLS_JAVA (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_JAVA.bat
-    )    
-    if !PROJECT_NAME!==TOOLS_KIX (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_KIX.bat
-    )    
-    if !PROJECT_NAME!==TOOLS_PY (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_PY.bat
-    )    
-    if !PROJECT_NAME!==TOOLS_SH (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_SH.bat
-    )    
-    if !PROJECT_NAME!==TOOLS_PS (
-        set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_PS.bat
-    )    
     rem echo LFileName:!LFileName!
     if exist !LFileName! (
         rem echo COPY:!LFileName!
         copy !LFileName! > NUL
     )
 
-    if !APYTHON!==1 (
-        set LDirectory=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\PATTERN_PY
-        set LFileName=!LDirectory!\PROJECT_PYupdate.bat
-        rem echo LFileName: !LFileName!
-        if exist !LFileName! (
-            rem echo COPY: !LFileName!
-            copy !LFileName! > NUL
-        )
-        set LFileName=!LDirectory!\pyproject.toml
-        rem echo LFileName: !LFileName!
-        if exist !LFileName! (
-            rem echo COPY: !LFileName!
-            copy !LFileName! > NUL
-        )
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure SetPROJECT_INI ()
+rem --------------------------------------------------------------------------------
+:SetPROJECT_INI
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
-   
+
+    call :WritePROCESS SetPROJECT_INI ...
+
+    call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_GROUP !PROJECT_GROUP!
+    call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_NAME !PROJECT_NAME!
+    call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general DIR_GROUP_ROOT !DIR_GROUP_ROOT!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure SetREPO_INI ()
+rem --------------------------------------------------------------------------------
+:SetREPO_INI
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :WritePROCESS SetREPO_INI ...
+
+    call :SetINI !DIR_PROJECT_NAME!\REPO.ini general REPO_NAME !PROJECT_NAME!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure REPO_WORK (ADirectory)
+rem --------------------------------------------------------------------------------
+:REPO_WORK
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :WritePROCESS DEPLOY проекта [REPO_WORK]: !PROJECT_NAME!
+
+    rem call :WritePROCESS PROJECT_GROUP: !PROJECT_GROUP!
+    rem call :WritePROCESS DIR_PROJECTS_ROOT: !DIR_PROJECTS_ROOT!
+    rem call :WritePROCESS DIR_PROJECT_NAME: !DIR_PROJECT_NAME!
+
+    set ADirectory=%~1
+    rem echo ADirectory:!ADirectory!
+
+    if not exist !ADirectory!\ (
+        echo ERROR: Каталог !ADirectory! не существует ...
+        exit /b 1
+    )
+
+    cd /D "!ADirectory!"
+
+    call :CopyFilesROOT
+
+    call :CopyFilesFromPATTERN
+
+    call :SetPROJECT_INI
+
+    call :SetREPO_INI
+
     if exist ".git"\ (
-        rem echo "call lyrgit_push_main.bat ..."
+        echo call lyrgit_push_main.bat ...
         call lyrgit_push_main.bat
     )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure REPO_WORK_TOOLS (ADirectory)
+rem --------------------------------------------------------------------------------
+:REPO_WORK_TOOLS
+rem beginfunction
+    set FUNCNAME=%0
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :WritePROCESS DEPLOY проекта [REPO_WORK_TOOLS]: !PROJECT_NAME!
+
+    rem call :WritePROCESS PROJECT_GROUP: !PROJECT_GROUP!
+    rem call :WritePROCESS DIR_PROJECTS_ROOT: !DIR_PROJECTS_ROOT!
+    rem call :WritePROCESS DIR_PROJECT_NAME: !DIR_PROJECT_NAME!
+
+    set ADirectory=%~1
+    rem echo ADirectory:!ADirectory!
+
+    if not exist !ADirectory!\ (
+        echo ERROR: Каталог !ADirectory! не существует ...
+        exit /b 1
+    )
+
+    cd /D "!ADirectory!"
+
+    call :CopyFilesROOT
+
+    rem call :CopyFilesFromPATTERN
+
+    call :SetPROJECT_INI
+
+    call :SetREPO_INI
+
+    if exist ".git"\ (
+        echo call lyrgit_push_main.bat ...
+        call lyrgit_push_main.bat
+    )
+
+    call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
     exit /b 0
 rem endfunction
@@ -187,18 +517,69 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :WritePROCESS DEPLOY проекта: !PROJECT_NAME! ...
+    call :WritePROCESS DEPLOY_PROJECT ...
+
+    rem call :WritePROCESS PROJECT_GROUP : !PROJECT_GROUP!
+    rem call :WritePROCESS PROJECT_NAME  : !PROJECT_NAME!
+    rem call :WritePROCESS DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
+
+    rem echo PROJECT_GROUP : !PROJECT_GROUP!
+    rem echo PROJECT_NAME  : !PROJECT_NAME!
+    rem echo DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
 
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
     rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
-    cd /D !DIR_PROJECT_NAME!
-    rem set APPRUN=!DIR_PROJECT_NAME!\DEPLOY.bat
-    set APPRUN=DEPLOY_PROJECT.bat
-    rem echo APPRUN:!APPRUN!
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
+    if !PROJECT_NAME!==TOOLS_BAT (
+        call :CLEAR_TOOLS_BAT
+        call :UPDATE_TOOLS_BAT_SCRIPTS_BAT
+        call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+        call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        exit /b 0
+    )    
+    if !PROJECT_NAME!==TOOLS_GIT (
+        rem call :CLEAR_TOOLS_GIT
+        rem call :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
+        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        exit /b 0
+    )    
+    if !PROJECT_NAME!==TOOLS_JAVA (
+        rem call :CLEAR_TOOLS_JAVA
+        rem call :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
+        rem call :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
+        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        exit /b 0
+    )    
+    if !PROJECT_NAME!==TOOLS_KIX (
+        rem call :CLEAR_TOOLS_KIX
+        rem call :UPDATE_TOOLS_KIX_SCRIPTS_KIX
+        rem call :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
+        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        exit /b 0
+    )    
+    if !PROJECT_NAME!==TOOLS_PY (
+        rem call :CLEAR_TOOLS_PY
+        rem call :UPDATE_TOOLS_PY_SCRIPTS_PY
+        rem call :UPDATE_TOOLS_PY_TOOLS_SRC_PY
+        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        exit /b 0
+    )    
+    if !PROJECT_NAME!==TOOLS_SH (
+        rem set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_SH.bat
+        rem call :CLEAR_TOOLS_SH
+        rem call :UPDATE_TOOLS_SH_SCRIPTS_SH
+        rem call :UPDATE_TOOLS_SH_TOOLS_SRC_SH
+        rem call :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
+        call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        exit /b 0
+    )    
+    if !PROJECT_NAME!==TOOLS_PS (
+        rem set LFileName=!LDirectory!\DEPLOY_PROJECT_TOOLS_PS.bat
+        rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        exit /b 0
+    )    
+
+    call :REPO_WORK !DIR_PROJECT_NAME!
 
     exit /b 0
 rem endfunction
@@ -223,9 +604,10 @@ rem beginfunction
 
     cd /D "!ADirectory!"
 
+    rem echo "git pull ..."
+
     call lyrgit_pull.bat
     
-    rem echo "git pull ..."
     rem git pull
     rem call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
 
@@ -446,12 +828,69 @@ rem beginfunction
 
     exit /b 0
 rem endfunction
-
 rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
+
+rem =================================================
+rem LYRDEPLOYTools.bat
+rem =================================================
+:LYRDEPLOYTools.bat
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_BAT_SCRIPTS_BAT
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_BAT
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_GIT
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_JAVA
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_KIX_SCRIPTS_KIX
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_KIX
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_PY_SCRIPTS_PY
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_PY_TOOLS_SRC_PY
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_PY
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_SH_SCRIPTS_SH
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_SH_TOOLS_SRC_SH
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_SH
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
 
 rem =================================================
 rem LYRConsole.bat
@@ -516,6 +955,52 @@ rem =================================================
 exit /b 0
 :CheckErrorlevel
 %LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRFileUtils.bat
+rem =================================================
+:LYRFileUtils
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FullFileName
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileName
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileNameWithoutExt
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileExt
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FileAttr
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FileSize
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateFile
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckFile
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILES
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:XCOPY_FILES
+%LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 
 rem =================================================

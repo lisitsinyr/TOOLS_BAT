@@ -1,6 +1,43 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_PROJECT.bat
+rem lyrgit_pull.bat
+rem ----------------------------------------------------------------------------
+rem ***Отправить изменения
+rem ----------------------------------------------------------------------------
+rem usage: git push [<options>] [<repository> [<refspec>...]]
+rem 
+rem     -v, --verbose         be more verbose
+rem     -q, --quiet           be more quiet
+rem     --repo <repository>   repository
+rem     --all                 push all refs
+rem     --mirror              mirror all refs
+rem     -d, --delete          delete refs
+rem     --tags                push tags (can't be used with --all or --mirror)
+rem     -n, --dry-run         dry run
+rem     --porcelain           machine-readable output
+rem     -f, --force           force updates
+rem     --force-with-lease[=<refname>:<expect>]
+rem                           require old value of ref to be at this value
+rem     --force-if-includes   require remote updates to be integrated locally
+rem     --recurse-submodules (check|on-demand|no)
+rem                           control recursive pushing of submodules
+rem     --thin                use thin pack
+rem     --receive-pack <receive-pack>
+rem                           receive pack program
+rem     --exec <receive-pack>
+rem                           receive pack program
+rem     -u, --set-upstream    set upstream for git pull/status
+rem     --progress            force progress reporting
+rem     --prune               prune locally removed refs
+rem     --no-verify           bypass pre-push hook
+rem     --follow-tags         push missing but relevant tags
+rem     --signed[=(yes|no|if-asked)]
+rem                           GPG sign the push
+rem     --atomic              request atomic transaction on remote side
+rem     -o, --push-option <server-specific>
+rem                           option to transmit
+rem     -4, --ipv4            use IPv4 addresses only
+rem     -6, --ipv6            use IPv6 addresses only
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -11,6 +48,7 @@ rem
 rem --------------------------------------------------------------------------------
 :begin
     call :MAIN %* || exit /b 1
+
     exit /b 0
 :end
 rem --------------------------------------------------------------------------------
@@ -50,6 +88,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -90,62 +129,11 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem ------------------------------------------------
-    rem PROJECT_GROUP
-    rem ------------------------------------------------
-    if not defined PROJECT_GROUP (
-        call :GetINIParametr !PROJECT_INI! general PROJECT_GROUP || exit /b 1
-    )
-    rem echo PROJECT_GROUP:!PROJECT_GROUP!
-
-    rem ------------------------------------------------
-    rem PROJECT_NAME
-    rem ------------------------------------------------
-    if not defined PROJECT_NAME (
-        call :GetINIParametr !PROJECT_INI! general PROJECT_NAME || exit /b 1
-    )
-    rem echo PROJECT_NAME:!PROJECT_NAME!
-
-    call :ExtractFileName !SCRIPT_FILEDIR!
-    echo ExtractFileName:!ExtractFileName!
-
-    rem -------------------------------------------------------------------
-    rem DIR_GROUP_ROOT - каталог группы проектов
-    rem -------------------------------------------------------------------
-    if not defined DIR_GROUP_ROOT (
-        call :GetINIParametr !PROJECT_INI! general DIR_GROUP_ROOT || exit /b 1
-    )
-    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
-
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECTS_ROOT - каталог группы проектов
-    rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
-    rem if not defined DIR_PROJECTS_ROOT (
-    rem     call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
-    rem )
-    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-
-    rem ------------------------------------------------
-    rem DIR_PROJECT
-    rem ------------------------------------------------
-    set DIR_PROJECT=!DIR_PROJECTS_ROOT!
-    rem echo DIR_PROJECT:!DIR_PROJECT!
-
-    rem ------------------------------------------------
-    rem DIR_PROJECT_NAME
-    rem ------------------------------------------------
-    set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
-    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
-
-    rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
-    rem echo REPO_NAME:!REPO_NAME!
-
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_CHECK_PARAMETR (%*)
+rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
@@ -161,7 +149,7 @@ rem beginfunction
     set OPTION=
     set O1_Name=O1
     set O1_Caption=O1_Caption
-    set O1_Default=
+    set O1_Default=O1_Default
     set O1=!O1_Default!
     set PN_CAPTION=!O1_Caption!
     rem call :Read_P O1 !O1! || exit /b 1
@@ -177,67 +165,49 @@ rem beginfunction
     rem ARGS
     rem -------------------------------------
     set ARGS=
-
-    set A1_Name=DIR_PROJECTS_ROOT
-    set A1_Caption=DIR_PROJECTS_ROOT
-    set A1_Default=%1
-    if not defined A1 (
-        set A1_Default=!DIR_PROJECTS_ROOT!
-    )
+    set A1_Name=Comment
+    set A1_Caption=Comment
+    set A1_Default=Git Bash commit update
+    set A1_Default=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
     set A1=!A1_Default!
     set PN_CAPTION=!A1_Caption!
-    call :Read_P A1 !A1! || exit /b 1
+    rem call :Read_P A1 !A1! || exit /b 1
     rem echo A1:!A1!
-    if defined A1 (
-        set ARGS=!ARGS! "!A1!"
-        set DIR_PROJECTS_ROOT=!A1!
-    ) else (
-        set DIR_PROJECTS_ROOT=
-        echo INFO: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
-    )
-
-    set A2_Name=PROJECT_NAME
-    set A2_Caption=PROJECT_NAME
-    set A2_Default=%2
-    if not defined A2 (
-        set A2_Default=!PROJECT_NAME!
-    )
-    set A2=!A2_Default!
-    set PN_CAPTION=!A2_Caption!
-    call :Read_P A2 !A2! || exit /b 1
-    rem echo A2:!A2!
-    if defined A2 (
-        set ARGS=!ARGS! !A2!
-        set PROJECT_NAME=!A2!
-    ) else (
-        set PROJECT_NAME=
-        echo INFO: A2 [A2_Name:!A2_Name! A2_Caption:!A2_Caption!] not defined ... 
-    )
-
+    rem if defined A1 (
+    rem     set ARGS=!ARGS! "!A1!"
+    rem ) else (
+    rem     echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+    rem     set OK=
+    rem     exit /b 1
+    rem )
     rem echo ARGS:!ARGS!
-
+    
     exit /b 0
 rem endfunction
 
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_DEPLOY_PROJECT ()
-rem --------------------------------------------------------------------------------
-:MAIN_DEPLOY_PROJECT
+rem =================================================
+rem procedure MAIN_GIT_RUN ()
+rem =================================================
+:MAIN_GIT_RUN
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DEPLOY_PROJECT
+    set FUNCNAME=MAIN_GIT_RUN
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :REPO_WORK !DIR_PROJECT_NAME! 1 || exit /b 1
+    rem echo ...git pull
+    call :WritePROCESS ...git pull...
+    call :SetColor !cTEXT!
+    git pull
+    call :ReSetColorCR
 
     exit /b 0
 rem endfunction
 
-rem --------------------------------------------------------------------------------
+rem =================================================
 rem procedure MAIN_FUNC ()
-rem --------------------------------------------------------------------------------
+rem =================================================
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
@@ -246,7 +216,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :MAIN_DEPLOY_PROJECT %* || exit /b 1
+    call :MAIN_GIT_RUN || exit /b 1
+
+    rem call :Pause !SLEEP! || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -274,19 +247,23 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
-
+    
     call :MAIN_SET || exit /b 1
 
+    rem if defined OK if not defined Read_N (
+    rem     call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    rem )
     call :MAIN_CHECK_PARAMETR %* || exit /b 1
-
+        
     if defined OK (
         call :MAIN_FUNC || exit /b 1
     )
-
+    
     call :StopLogFile || exit /b 1
 
     exit /b 0
 rem endfunction
+rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB
@@ -518,6 +495,9 @@ exit /b 0
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :ReSetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:ReSetColorCR
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :WriteNOTSET
