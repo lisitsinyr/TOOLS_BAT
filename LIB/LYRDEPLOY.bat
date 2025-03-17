@@ -548,13 +548,9 @@ rem beginfunction
 
     if !PROJECT_NAME!==TOOLS_BAT (
         call :CLEAR_TOOLS_BAT
-call :PressAnyKey
         call :UPDATE_TOOLS_BAT_SCRIPTS_BAT
-call :PressAnyKey
         call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
-call :PressAnyKey
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
-call :PressAnyKey
         exit /b 0
 call :PressAnyKey
     )    
