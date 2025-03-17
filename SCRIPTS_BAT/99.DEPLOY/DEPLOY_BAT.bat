@@ -62,6 +62,7 @@ setlocal enabledelayedexpansion
     call :SET_LIB %~f0 || exit /b 1
 
     set PROJECT_GROUP=PROJECTS_BAT
+    rem echo PROJECT_GROUP:!PROJECT_GROUP! 
 
     call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
 
@@ -77,16 +78,16 @@ setlocal enabledelayedexpansion
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     set PROJECT_NAME=COMMANDS_BAT
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
 
     set PROJECT_NAME=INFO_BAT
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
 
     set PROJECT_NAME=SCRIPTS_BAT
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
 
     set PROJECT_NAME=TOOLS_SRC_BAT
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
