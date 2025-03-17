@@ -1,0 +1,80 @@
+﻿Создание ярлыка в Windows с помощью `.bat` (batch) файла — это удобный способ автоматизации создания ярлыков для программ или файлов. Вот пошаговая инструкция:
+
+---
+
+### **1. Создание простого ярлыка**
+Если вам нужно создать ярлык для определенной программы или файла, вы можете использовать команду `mklink`. Однако для создания *ярлыка на рабочем столе* или в другом месте лучше использовать метод через скрипт.
+
+#### Пример:
+```bat
+@echo off
+set ShortcutName="Мой Ярлык"
+set TargetPath="C:\Program Files\MyApp\app.exe"
+set ShortcutLocation="%USERPROFILE%\Desktop\Мой Ярлык.lnk"
+
+:: Создаем ярлык
+powershell -Command "$ws = New-Object -ComObject WScript.Shell; $s = $ws.CreateShortcut('%ShortcutLocation%'); $s.TargetPath = '%TargetPath%'; $s.Save()"
+```
+
+**Объяснение:**
+- `ShortcutName`: имя ярлыка.
+- `TargetPath`: путь к целевому файлу или программе.
+- `ShortcutLocation`: место, где будет сохранен ярлык (например, на рабочем столе).
+- Команда `powershell` используется для создания ярлыка через COM-объект `WScript.Shell`.
+
+---
+
+### **2. Добавление дополнительных параметров**
+Вы можете добавить аргументы, иконку или описание к ярлыку.
+
+#### Пример:
+```bat
+@echo off
+set ShortcutName="Google Chrome"
+set TargetPath="C:\Program Files\Google\Chrome\Application\chrome.exe"
+set Arguments="--incognito"  :: Аргументы для запуска
+set IconLocation="C:\Program Files\Google\Chrome\Application\chrome.exe,0"  :: Путь к иконке
+set ShortcutLocation="%USERPROFILE%\Desktop\Google Chrome.lnk"
+
+:: Создаем ярлык
+powershell -Command "$ws = New-Object -ComObject WScript.Shell; $s = $ws.CreateShortcut('%ShortcutLocation%'); $s.TargetPath = '%TargetPath%'; $s.Arguments = '%Arguments%'; $s.IconLocation = '%IconLocation%'; $s.Description = 'Запуск Google Chrome в режиме инкогнито'; $s.Save()"
+```
+
+**Новые параметры:**
+- `Arguments`: дополнительные параметры для запуска программы.
+- `IconLocation`: путь к иконке ярлыка (может быть указан индекс иконки через `,0`, `,1` и т.д.).
+- `Description`: описание ярлыка.
+
+---
+
+### **3. Создание ярлыка для папки**
+Если нужно создать ярлык для папки, просто укажите путь к папке в параметре `TargetPath`.
+
+#### Пример:
+```bat
+@echo off
+set ShortcutName="Моя Папка"
+set TargetPath="C:\Users\Username\Documents\MyFolder"
+set ShortcutLocation="%USERPROFILE%\Desktop\Моя Папка.lnk"
+
+:: Создаем ярлык
+powershell -Command "$ws = New-Object -ComObject WScript.Shell; $s = $ws.CreateShortcut('%ShortcutLocation%'); $s.TargetPath = '%TargetPath%'; $s.Save()"
+```
+
+---
+
+### **4. Запуск скрипта**
+1. Сохраните код выше в файл с расширением `.bat` (например, `create_shortcut.bat`).
+2. Запустите этот файл двойным кликом или через командную строку.
+3. После выполнения скрипта ярлык будет создан в указанном месте.
+
+---
+
+### **Примечания**
+- Если возникают проблемы с русскими символами, убедитесь, что файл `.bat` сохранен в кодировке **ANSI** или **UTF-8 без BOM**.
+- Для работы с правами администратора может потребоваться запуск скрипта от имени администратора.
+- Если PowerShell не поддерживается, можно использовать VBScript вместо PowerShell.
+
+---
+
+Этот метод позволяет легко создавать ярлыки для любых программ, файлов или папок с минимальными усилиями!
