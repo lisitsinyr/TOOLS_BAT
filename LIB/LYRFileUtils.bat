@@ -370,7 +370,7 @@ rem beginfunction
     for %AARG% %%f in (!AMASK!) do (
         rem echo %%~nf%%~xf
         copy "%%f" !ADIR_TO!\           >  NUL
-        call :CheckErrorlevel COPY_FILES !errorlevel! 1
+        rem call :CheckErrorlevel COPY_FILES !errorlevel! 1
         echo File "%%f" copied ...     >> %LOG_FULLFILENAME%
     )
 

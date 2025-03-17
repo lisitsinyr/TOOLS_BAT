@@ -157,25 +157,25 @@ rem beginfunction
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
         )
         set LFileName=!LDirPATTERN!\pyproject.toml
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
         )
         set LFileName=!LDirPATTERN!\requirements.txt
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
         )
         set LFileName=!LDirPATTERN!\POETRY.ini
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
         )
         
         rem set POETRY.ini
@@ -184,56 +184,56 @@ rem beginfunction
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME!
+            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
         )
     )
 
     if defined LDirPATTERN if exist "!LDirPATTERN!"\ ( 
 
-        rem call :WritePROCESS LDirPATTERN         : !LDirPATTERN!
-        rem call :WritePROCESS DIR_PROJECT_NAME    : !DIR_PROJECT_NAME!
+        call :WritePROCESS LDirPATTERN:!LDirPATTERN!
+        call :WritePROCESS DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
         set LFileName=!LDirPATTERN!\PROJECT.INI
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+            copy /Y !LFileName! !DIR_PROJECT_NAME!\ > NUL
         )
         set LFileName=!LDirPATTERN!\REPO.INI
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+            copy /Y !LFileName! !DIR_PROJECT_NAME!\ > NUL
         )
         set LFileName=!LDirPATTERN!\.editorconfig
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+            copy /Y !LFileName! !DIR_PROJECT_NAME!\ > NUL
         )
         set LFileName=!LDirPATTERN!\.env
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+            copy /Y !LFileName! !DIR_PROJECT_NAME!\ > NUL
         )
         set LFileName=!LDirPATTERN!\.gitignore
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+            copy /Y !LFileName! !DIR_PROJECT_NAME!\ > NUL
         )
         set LFileName=!LDirPATTERN!\.gitmodules
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+            copy /Y !LFileName! !DIR_PROJECT_NAME!\ > NUL
         )
         set LFileName=!LDirPATTERN!\LICENSE
         rem echo LFileName: !LFileName!
         if exist !LFileName! (
             rem echo COPY: !LFileName! !DIR_PROJECT_NAME!
-            copy /Y !LFileName! !DIR_PROJECT_NAME! > NUL
+            copy /Y !LFileName! !DIR_PROJECT_NAME!\ > NUL
         )
 
         set LARG=/D /S /E /V /F /H /R /K /Y /O
@@ -275,14 +275,17 @@ rem beginfunction
         set LDIR_TO=!DIR_PROJECT_NAME!\DOC
         if exist !LDIR_FROM!\ (
             rem echo LDIR_FROM:!LDIR_FROM!
+            rem echo LDIR_TO:!LDIR_TO!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
         )
         set LDIR_FROM=!LDirPATTERN!\EXE
+        rem echo LDIR_FROM:!LDIR_FROM!
         set LDIR_TO=!DIR_PROJECT_NAME!\EXE
+        rem echo LDIR_TO:!LDIR_TO!
         if exist !LDIR_FROM!\ (
-            rem echo LDIR_FROM:!LDIR_FROM!
+            rem mkdir !LDIR_TO!
             rem xcopy !LDIR_FROM! !DIR_PROJECT_NAME! !LARG! >> %LOG_FULLFILENAME%
             rem call :CheckErrorlevel CopyFilesFromPATTERN !errorlevel! 1
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -1018,6 +1021,9 @@ exit /b 0
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_KIX_SCRIPTS_KIX
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :CLEAR_TOOLS_KIX
