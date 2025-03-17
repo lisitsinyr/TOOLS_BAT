@@ -351,6 +351,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -397,6 +398,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -433,6 +435,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -477,6 +480,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -524,6 +528,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -598,6 +603,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -630,6 +636,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -664,6 +671,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
