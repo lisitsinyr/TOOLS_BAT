@@ -57,7 +57,7 @@ rem beginfunction
     call :LYRConst || exit /b 1
     call :LYRDateTime || exit /b 1
     call :LYRDEPLOY || exit /b 1
-    call :LYRDEPLOYTools || exit /b 1
+    rem call :LYRDEPLOYTools || exit /b 1
     call :LYRFileUtils || exit /b 1
     call :LYRLog || exit /b 1
     call :LYRParserINI || exit /b 1
