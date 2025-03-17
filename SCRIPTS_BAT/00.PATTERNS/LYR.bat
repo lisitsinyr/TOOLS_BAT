@@ -382,4 +382,3 @@ exit /b 0
 :CheckErrorlevel
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-
