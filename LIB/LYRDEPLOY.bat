@@ -190,9 +190,8 @@ rem beginfunction
 
     if defined LDirPATTERN if exist "!LDirPATTERN!"\ ( 
 
-        call :WritePROCESS ... !FUNCNAME! ...
-        call :WritePROCESS LDirPATTERN         : !LDirPATTERN!
-        call :WritePROCESS DIR_PROJECT_NAME    : !DIR_PROJECT_NAME!
+        rem call :WritePROCESS LDirPATTERN         : !LDirPATTERN!
+        rem call :WritePROCESS DIR_PROJECT_NAME    : !DIR_PROJECT_NAME!
 
         set LFileName=!LDirPATTERN!\PROJECT.INI
         rem echo LFileName: !LFileName!
