@@ -20,7 +20,7 @@ rem ----------------------------------------------------------------------------
 :LYRDEPLOY
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRDEPLOY
+    rem set FUNCNAME=LYRDEPLOY
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )

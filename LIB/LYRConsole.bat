@@ -21,7 +21,7 @@ rem ----------------------------------------------------------------------------
 :LYRConsole
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRConst
+    set FUNCNAME=LYRConsole
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )

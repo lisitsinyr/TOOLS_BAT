@@ -21,7 +21,7 @@ rem ----------------------------------------------------------------------------
 :LYRLIB
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRConst
+    set FUNCNAME=LYRLIB
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
