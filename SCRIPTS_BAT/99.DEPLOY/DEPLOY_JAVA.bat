@@ -86,6 +86,9 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_SRC_JAVA
     call :DEPLOY_PROJECT
 
+    set PROJECT_NAME=TOOLS_JAVA
+    call :DEPLOY_PROJECT
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
