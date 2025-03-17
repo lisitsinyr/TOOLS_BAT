@@ -20,7 +20,7 @@ rem ----------------------------------------------------------------------------
 :LYRDEPLOYTools
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRConst
+    rem set FUNCNAME=LYRDEPLOYTools
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -45,10 +45,11 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_BAT_SCRIPTS_BAT
+    rem set FUNCNAME=UPDATE_TOOLS_BAT_SCRIPTS_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -90,10 +91,11 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+    rem set FUNCNAME=UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -135,10 +137,11 @@ rem ----------------------------------------------------------------------------
 :CLEAR_TOOLS_BAT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_BAT
+    rem set FUNCNAME=CLEAR_TOOLS_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -166,10 +169,11 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
+    rem set FUNCNAME=UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     call :WritePROCESS FUNCNAME:!FUNCNAME!
 
@@ -208,6 +212,9 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -248,11 +255,13 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
+    rem set FUNCNAME=UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    set !FUNCNAME!=
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -292,12 +301,13 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
+    rem set FUNCNAME=UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -337,12 +347,13 @@ rem ----------------------------------------------------------------------------
 :CLEAR_TOOLS_JAVA
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_JAVA
+    rem set FUNCNAME=CLEAR_TOOLS_JAVA
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    rem call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -368,12 +379,13 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_KIX_SCRIPTS_KIX
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_KIX_SCRIPTS_KIX
+    rem set FUNCNAME=UPDATE_TOOLS_KIX_SCRIPTS_KIX
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -413,12 +425,13 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
+    rem set FUNCNAME=UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -458,10 +471,13 @@ rem ----------------------------------------------------------------------------
 :CLEAR_TOOLS_KIX
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_KIX
+    rem set FUNCNAME=CLEAR_TOOLS_KIX
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -487,11 +503,13 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_PY_SCRIPTS_PY
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_PY_SCRIPTS_PY
+    rem set FUNCNAME=UPDATE_TOOLS_PY_SCRIPTS_PY
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    set !FUNCNAME!=
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -531,12 +549,13 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_PY_TOOLS_SRC_PY
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_PY_TOOLS_SRC_PY
+    rem set FUNCNAME=UPDATE_TOOLS_PY_TOOLS_SRC_PY
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -576,12 +595,13 @@ rem ----------------------------------------------------------------------------
 :CLEAR_TOOLS_PY
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_PY
+    rem set FUNCNAME=CLEAR_TOOLS_PY
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    rem call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -606,13 +626,14 @@ rem procedure UPDATE_TOOLS_SH_SCRIPTS_SH ()
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_SH_SCRIPTS_SH
 rem beginfunction
-    set FUNCNAME=%0
+    rem set FUNCNAME=%0
     set FUNCNAME=UPDATE_TOOLS_SH_SCRIPTS_SH
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -652,12 +673,13 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_SH_TOOLS_SRC_SH
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_SH_TOOLS_SRC_SH
+    rem set FUNCNAME=UPDATE_TOOLS_SH_TOOLS_SRC_SH
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -699,12 +721,13 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
+    rem set FUNCNAME=UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -735,10 +758,13 @@ rem ----------------------------------------------------------------------------
 :CLEAR_TOOLS_SH
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_BAT
+    rem set FUNCNAME=CLEAR_TOOLS_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     set LDIR_CLEAR=!DIR_PROJECT_NAME!\SH_GIT
     rem echo LDIR_CLEAR:!LDIR_CLEAR!
