@@ -44,7 +44,7 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=UPDATE_TOOLS_BAT_SCRIPTS_BAT
+    set FUNCNAME=UPDATE_TOOLS_BAT_SCRIPTS_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -90,7 +90,7 @@ rem ----------------------------------------------------------------------------
 :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
+    set FUNCNAME=UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -136,7 +136,7 @@ rem ----------------------------------------------------------------------------
 :CLEAR_TOOLS_BAT
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=CLEAR_TOOLS_BAT
+    set FUNCNAME=CLEAR_TOOLS_BAT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )

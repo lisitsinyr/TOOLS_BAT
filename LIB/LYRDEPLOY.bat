@@ -552,7 +552,6 @@ rem beginfunction
         call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
         exit /b 0
-call :PressAnyKey
     )    
     if !PROJECT_NAME!==TOOLS_GIT (
         call :CLEAR_TOOLS_GIT
