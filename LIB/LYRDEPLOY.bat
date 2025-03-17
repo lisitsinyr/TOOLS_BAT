@@ -83,7 +83,7 @@ rem ----------------------------------------------------------------------------
 :CopyFilesFromPATTERN
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=CopyFilesFromPATTERN
+    set FUNCNAME=CopyFilesFromPATTERN
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -347,7 +347,7 @@ rem ----------------------------------------------------------------------------
 :CopyFilesROOT
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=CopyFilesROOT
+    set FUNCNAME=CopyFilesROOT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -395,7 +395,7 @@ rem ----------------------------------------------------------------------------
 :SetPROJECT_INI
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=SetPROJECT_INI
+    set FUNCNAME=SetPROJECT_INI
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -416,7 +416,7 @@ rem ----------------------------------------------------------------------------
 :SetREPO_INI
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=SetREPO_INI
+    set FUNCNAME=SetREPO_INI
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -434,7 +434,7 @@ rem ----------------------------------------------------------------------------
 :REPO_WORK
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=REPO_WORK
+    set FUNCNAME=REPO_WORK
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -480,7 +480,7 @@ rem ----------------------------------------------------------------------------
 :REPO_WORK_TOOLS
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=REPO_WORK_TOOLS
+    set FUNCNAME=REPO_WORK_TOOLS
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -604,7 +604,7 @@ rem =================================================
 :git_pull
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=git_pull
+    set FUNCNAME=git_pull
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -638,7 +638,7 @@ rem =================================================
 :git_clone
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=git_clone
+    set FUNCNAME=git_clone
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -673,7 +673,7 @@ rem ----------------------------------------------------------------------------
 :PULL_PROJECT
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=PULL_PROJECT
+    set FUNCNAME=PULL_PROJECT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
