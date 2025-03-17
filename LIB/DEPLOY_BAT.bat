@@ -1,18 +1,122 @@
 @echo off
 rem -------------------------------------------------------------------
-rem [lyrxxx_]PATTERN_LIB.bat
+rem DEPLOY_Python.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
-rem --------------------------------------------------------------------------------
-rem 
-rem --------------------------------------------------------------------------------
 :begin
+    set BATNAME=%~nx0
+    echo Старт !BATNAME! ...
+
+    rem -------------------------------------------------------------------
+    rem PROJECTS_LYR_ROOT - Каталог ROOT
+    rem -------------------------------------------------------------------
+    rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
+    set PROJECTS_LYR_ROOT=D:
+    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+
+    rem -------------------------------------------------------------------
+    rem PROJECTS_LYR_DIR - Каталог проектов LYR
+    rem -------------------------------------------------------------------
+    set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
+    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    if not exist "!PROJECTS_LYR_DIR!"\ (
+        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
+        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        rem mkdir "!PROJECTS_LYR_DIR!"
+        exit /b 1
+    )
+
+    rem -------------------------------------------------------------------
+    rem SCRIPTS_DIR - Каталог скриптов BAT
+    rem -------------------------------------------------------------------
+    if not defined SCRIPTS_DIR (
+        rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+    )
+    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
+
+    rem -------------------------------------------------------------------
+    rem LIB_BAT - каталог библиотеки скриптов BAT
+    rem -------------------------------------------------------------------
+    if not defined LIB_BAT (
+        set LIB_BAT=!SCRIPTS_DIR!\LIB
+    )
+    rem echo LIB_BAT:!LIB_BAT!
+    if not exist !LIB_BAT!\ (
+        echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
+        exit /b 1
+    )
+
+    rem -------------------------------------------------------------------
+    rem Количество аргументов
+    rem -------------------------------------------------------------------
+    call :Read_N %* || exit /b 1
+
+    rem -------------------------------------------------------------------
+    rem Настройка среды
+    rem -------------------------------------------------------------------
+    call :SET_LIB %~f0 || exit /b 1
+
+    set PROJECT_GROUP=PROJECTS_BAT
+
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECT_ROOT - Каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    set PROJECT_NAME=COMMANDS_BAT
+    rem call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=INFO_BAT
+    rem call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=SCRIPTS_BAT
+    rem call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=TOOLS_SRC_BAT
+    rem call :DEPLOY_PROJECT
+
+    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+
+    set PROJECT_GROUP=BAT
+    echo PROJECT_GROUP:!PROJECT_GROUP! 
+
+    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+
+    rem -------------------------------------------------------------------
+    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT
+    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECT_ROOT - Каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
+    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    set PROJECT_NAME=TOOLS_BAT
+    echo PROJECT_NAME:!PROJECT_NAME! 
+
+call :PressAnyKey
+
+    call :DEPLOY_PROJECT
+
+    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+
     exit /b 0
 :end
-rem --------------------------------------------------------------------------------
+rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB
