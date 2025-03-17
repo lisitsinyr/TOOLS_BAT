@@ -25,7 +25,6 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS test
     echo ...FUNCNAME:!FUNCNAME!...
 
     rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...

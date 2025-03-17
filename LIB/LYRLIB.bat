@@ -56,8 +56,6 @@ rem beginfunction
 
     call :LYRConst || exit /b 1
     call :LYRDateTime || exit /b 1
-    call :LYRDEPLOY || exit /b 1
-    rem call :LYRDEPLOYTools || exit /b 1
     call :LYRFileUtils || exit /b 1
     call :LYRLog || exit /b 1
     call :LYRParserINI || exit /b 1
@@ -65,6 +63,9 @@ rem beginfunction
     call :LYRStrUtils || exit /b 1
     call :LYRSupport || exit /b 1
     call :LYRConsole || exit /b 1
+
+    call :LYRDEPLOY || exit /b 1
+    call :LYRDEPLOYTools || exit /b 1
 
     call :__SET_VAR_SCRIPT !ASCRIPT! || exit /b 1
     call :__SET_VAR_DEFAULT || exit /b 1
