@@ -6,7 +6,6 @@ chcp 1251>NUL
 
 :begin
     rem Выход из сценария. Дальше - только функции.
-    rem call :LYRDEPLOY
     exit /b 0
 :end
 
