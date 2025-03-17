@@ -61,11 +61,12 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
+    rem -------------------------------------------------------------------
+    rem 
+    rem -------------------------------------------------------------------
     set PROJECT_GROUP=PROJECTS_BAT
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
-
     call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
-
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
@@ -76,26 +77,22 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
-
     set PROJECT_NAME=COMMANDS_BAT
     call :DEPLOY_PROJECT
-
     set PROJECT_NAME=INFO_BAT
     call :DEPLOY_PROJECT
-
     set PROJECT_NAME=SCRIPTS_BAT
     call :DEPLOY_PROJECT
-
     set PROJECT_NAME=TOOLS_SRC_BAT
     call :DEPLOY_PROJECT
-
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
+    rem -------------------------------------------------------------------
+    rem 
+    rem -------------------------------------------------------------------
     set PROJECT_GROUP=BAT
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
-
     call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
-
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
@@ -108,9 +105,7 @@ setlocal enabledelayedexpansion
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
     set PROJECT_NAME=TOOLS_BAT
     rem echo PROJECT_NAME:!PROJECT_NAME! 
-
     call :DEPLOY_PROJECT
-
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
@@ -368,17 +363,17 @@ exit /b 0
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
 :__SET_VAR_SCRIPT
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
-:SET_LIB
 :__SET_VAR_DEFAULT
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
-:SET_LIB
 :__SET_VAR_PROJECTS
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
-:SET_LIB
 :__SET_LOG
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
-:SET_LIB
 rem =================================================
 rem LYRLog.bat
 rem =================================================

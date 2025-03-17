@@ -130,7 +130,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
-:LYRDEPLOYTools.bat
+:LYRDEPLOYTools
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT
@@ -245,17 +245,17 @@ exit /b 0
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
 :__SET_VAR_SCRIPT
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
-:SET_LIB
 :__SET_VAR_DEFAULT
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
-:SET_LIB
 :__SET_VAR_PROJECTS
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
-:SET_LIB
 :__SET_LOG
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
-:SET_LIB
 rem =================================================
 rem LYRLog.bat
 rem =================================================
@@ -382,3 +382,4 @@ exit /b 0
 :CheckErrorlevel
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+rem =================================================
