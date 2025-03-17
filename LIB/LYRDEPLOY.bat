@@ -25,7 +25,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem -------------------------------------------------------------------
     rem CONST
