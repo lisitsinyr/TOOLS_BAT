@@ -509,8 +509,6 @@ rem beginfunction
     exit /b 0
 rem endfunction
 rem =================================================
-
-rem =================================================
 rem ‘”Õ ÷»» LIB
 rem =================================================
 
@@ -646,7 +644,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
-:LYRDEPLOYTools
+:LYRDEPLOYTools.bat
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT
@@ -898,5 +896,4 @@ exit /b 0
 :CheckErrorlevel
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-
 rem =================================================
