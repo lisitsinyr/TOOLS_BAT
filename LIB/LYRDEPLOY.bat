@@ -26,6 +26,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+
     rem -------------------------------------------------------------------
     rem CONST
     rem -------------------------------------------------------------------
@@ -87,6 +89,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem echo PROJECT_GROUP:!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
@@ -348,6 +352,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+
     rem set ADirectory=%~1
     rem echo ADirectory:!ADirectory!
 
@@ -355,8 +361,6 @@ rem beginfunction
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
     rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
     rem echo PROJECT_NAME:!PROJECT_NAME!
-
-    call :WritePROCESS ... !FUNCNAME! ...
 
     set LDirectory=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT\A.WORK
     set LFileName=!LDirectory!\lyrgit_push_main.bat
@@ -394,7 +398,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :WritePROCESS SetPROJECT_INI ...
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_GROUP !PROJECT_GROUP!
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_NAME !PROJECT_NAME!
@@ -413,7 +417,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :WritePROCESS SetREPO_INI ...
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :SetINI !DIR_PROJECT_NAME!\REPO.ini general REPO_NAME !PROJECT_NAME!
 
@@ -429,6 +433,8 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :WritePROCESS DEPLOY проекта [REPO_WORK]: !PROJECT_NAME!
 
@@ -471,6 +477,8 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :WritePROCESS DEPLOY проекта [REPO_WORK_TOOLS]: !PROJECT_NAME!
 
@@ -517,7 +525,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :WritePROCESS DEPLOY_PROJECT ...
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem call :WritePROCESS PROJECT_GROUP : !PROJECT_GROUP!
     rem call :WritePROCESS PROJECT_NAME  : !PROJECT_NAME!
@@ -591,6 +599,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+
     set LOG_FILE_ADD=1
     set ADirectory=%~1
     rem echo git_pull:!ADirectory!
@@ -620,6 +630,8 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     set ADIR_PROJECTS_ROOT=%1
     rem echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
@@ -652,6 +664,8 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
+    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     set ADIR_PROJECTS_ROOT=%1
     rem echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
