@@ -528,7 +528,7 @@ rem ----------------------------------------------------------------------------
 :DEPLOY_PROJECT
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=DEPLOY_PROJECT
+    set FUNCNAME=DEPLOY_PROJECT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
