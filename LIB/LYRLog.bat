@@ -357,7 +357,7 @@ rem beginfunction
 
     if !LOG_FILE_ADD! EQU 0 (
         if exist "!LFileName!" (
-            echo INFO: File !LFileName! exist ...
+            rem echo INFO: File !LFileName! exist ...
             del "!LFileName!"
         )
         rem set touchRUN=touch -f "!LFileName!"
@@ -366,7 +366,7 @@ rem beginfunction
         %touchRUN% "!LFileName!"
     ) else (
         if not exist "!LFileName!" (
-            echo INFO: File !LFileName! not exist ...
+            rem echo INFO: File !LFileName! not exist ...
             rem set touchRUN=touch -f "!LFileName!"
             rem set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
             echo touchRUN: !touchRUN!
