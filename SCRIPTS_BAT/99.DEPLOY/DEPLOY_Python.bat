@@ -82,7 +82,7 @@ setlocal enabledelayedexpansion
     call :DEPLOY_PROJECT
     set PROJECT_NAME=MobileAPP_PY
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=PATTERN_PY
+    rem set PROJECT_NAME=PATTERN_PY
     rem call :DEPLOY_PROJECT
     set PROJECT_NAME=PATTERNS_PY
     call :DEPLOY_PROJECT
