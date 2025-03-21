@@ -272,9 +272,9 @@ rem beginfunction
 
     set LMASK=*.*
     if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\!LMASK! >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\!LMASK!    >> %LOG_FULLFILENAME%
     ) else (                        
-        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME% 
+        mkdir "!LDIR_TO!"                   >> %LOG_FULLFILENAME% 
     )
 
     set LMASK=*.*
@@ -329,9 +329,9 @@ rem beginfunction
 
     set LMASK=*.*
     if exist "!LDIR_TO!" (
-        del /F /S /Q "!LDIR_TO!"\!LMASK! >> %LOG_FULLFILENAME%
+        del /F /S /Q "!LDIR_TO!"\!LMASK!    >> %LOG_FULLFILENAME%
     ) else (
-        mkdir "!LDIR_TO!"            >> %LOG_FULLFILENAME%
+        mkdir "!LDIR_TO!"                   >> %LOG_FULLFILENAME%
     )
 
     set LMASK=*.*
@@ -366,7 +366,7 @@ rem beginfunction
     if exist "!LDIR_CLEAR!"\ (
         del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
     ) else (
-        mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
+        mkdir "!LDIR_CLEAR!"                >> %LOG_FULLFILENAME%
     )
 
     exit /b 0
