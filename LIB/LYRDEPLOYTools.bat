@@ -131,38 +131,6 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CLEAR_TOOLS_BAT ()
-rem --------------------------------------------------------------------------------
-:CLEAR_TOOLS_BAT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_BAT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
-
-    rem --------------------------------------------------------
-    rem 
-    rem --------------------------------------------------------
-    set LDIR_CLEAR=!DIR_PROJECT_NAME!\BAT
-    rem echo LDIR_CLEAR:!LDIR_CLEAR!
-
-    rem call :WritePROCESS Очистка !LDIR_CLEAR! ...
-
-    set LMASK=*.bat
-    if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
-    ) else (
-        mkdir "!LDIR_CLEAR!"                >> %LOG_FULLFILENAME%
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem UPDATE_TOOLS_GIT_TOOLS_SRC_GIT ()
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
@@ -197,53 +165,6 @@ rem beginfunction
 
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure CLEAR_TOOLS_GIT ()
-rem --------------------------------------------------------------------------------
-:CLEAR_TOOLS_GIT
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_GIT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
-
-    rem --------------------------------------------------------
-    rem 
-    rem --------------------------------------------------------
-    set LDIR_CLEAR=!DIR_PROJECT_NAME!\BAT
-    rem echo LDIR_CLEAR:!LDIR_CLEAR!
-
-    call :WritePROCESS Очистка !LDIR_CLEAR! ...
-
-    set LMASK=*.bat
-    if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
-    ) else (
-        mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
-    )
-
-    rem --------------------------------------------------------
-    rem 
-    rem --------------------------------------------------------
-    set LDIR_CLEAR=!DIR_PROJECT_NAME!\BAT_KIX
-    rem echo LDIR_CLEAR:!LDIR_CLEAR!
-
-    call :WritePROCESS Очистка !LDIR_CLEAR! ...
-
-    set LMASK=*.bat
-    if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
-    ) else (
-        mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
-    )
 
     exit /b 0
 rem endfunction
@@ -341,38 +262,6 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CLEAR_TOOLS_JAVA ()
-rem --------------------------------------------------------------------------------
-:CLEAR_TOOLS_JAVA
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_JAVA
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
-
-    rem --------------------------------------------------------
-    rem 
-    rem --------------------------------------------------------
-    set LDIR_CLEAR=!DIR_PROJECT_NAME!\BAT
-    rem echo LDIR_CLEAR:!LDIR_CLEAR!
-
-    call :WritePROCESS Очистка !LDIR_CLEAR! ...
-
-    set LMASK=*.bat
-    if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
-    ) else (
-        mkdir "!LDIR_CLEAR!"                >> %LOG_FULLFILENAME%
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem procedure UPDATE_TOOLS_KIX_SCRIPTS_KIX ()
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_KIX_SCRIPTS_KIX
@@ -465,38 +354,6 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CLEAR_TOOLS_KIX ()
-rem --------------------------------------------------------------------------------
-:CLEAR_TOOLS_KIX
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_KIX
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
-
-    rem --------------------------------------------------------
-    rem 
-    rem --------------------------------------------------------
-    set LDIR_CLEAR=!DIR_PROJECT_NAME!\BAT
-    rem echo LDIR_CLEAR:!LDIR_CLEAR!
-
-    call :WritePROCESS Очистка !LDIR_CLEAR! ...
-
-    set LMASK=*.bat
-    if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
-    ) else (
-        mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem procedure UPDATE_TOOLS_PY_SCRIPTS_PY ()
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_PY_SCRIPTS_PY
@@ -584,38 +441,6 @@ rem beginfunction
 
     set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure CLEAR_TOOLS_PY ()
-rem --------------------------------------------------------------------------------
-:CLEAR_TOOLS_PY
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_PY
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
-
-    rem --------------------------------------------------------
-    rem 
-    rem --------------------------------------------------------
-    set LDIR_CLEAR=!DIR_PROJECT_NAME!\BAT
-    rem echo LDIR_CLEAR:!LDIR_CLEAR!
-
-    call :WritePROCESS Очистка !LDIR_CLEAR! ...
-
-    set LMASK=*.bat
-    if exist "!LDIR_CLEAR!"\ (
-        del /F /S /Q "!LDIR_CLEAR!"\!LMASK! >> %LOG_FULLFILENAME% 
-    ) else (
-        mkdir "!LDIR_CLEAR!"              >> %LOG_FULLFILENAME%
-    )
 
     exit /b 0
 rem endfunction
@@ -750,36 +575,6 @@ rem beginfunction
 
     exit /b 0
 rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure CLEAR_TOOLS_SH ()
-rem --------------------------------------------------------------------------------
-:CLEAR_TOOLS_SH
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=CLEAR_TOOLS_BAT
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
-
-    set LDIR_CLEAR=!DIR_PROJECT_NAME!\SH_GIT
-    rem echo LDIR_CLEAR:!LDIR_CLEAR!
-
-    call :WritePROCESS Очистка !LDIR_CLEAR! ...
-
-    set LMASK=*.sh
-    if exist "!LDIR_CLEAR!" (
-        del /F /S /Q "!LDIR_CLEAR!"\!LMASK!    >> %LOG_FULLFILENAME%
-    ) else (
-        mkdir "!LDIR_CLEAR!"                   >> %LOG_FULLFILENAME%
-    )
-
-    exit /b 0
-rem endfunction
-rem =================================================
 
 rem =================================================
 rem ФУНКЦИИ LIB
@@ -926,41 +721,22 @@ exit /b 0
 :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-
-rem :CLEAR_TOOLS_BAT
-rem %LIB_BAT%\LYRDEPLOYTools.bat %*
-rem exit /b 0
-
 :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-
-rem :CLEAR_TOOLS_GIT
-rem %LIB_BAT%\LYRDEPLOYTools.bat %*
-rem exit /b 0
-
 :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-:CLEAR_TOOLS_JAVA
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
 :UPDATE_TOOLS_KIX_SCRIPTS_KIX
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_KIX
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_PY_SCRIPTS_PY
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_PY_TOOLS_SRC_PY
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_PY
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_SH_SCRIPTS_SH
@@ -970,9 +746,6 @@ exit /b 0
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_SH
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 rem =================================================
