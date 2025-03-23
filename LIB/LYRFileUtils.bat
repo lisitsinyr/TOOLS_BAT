@@ -241,6 +241,33 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem function ClearDir (ADIRECTORY, AMASK)
+rem --------------------------------------------------------------------------------
+:ClearDir
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=ClearDir
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set ADIRECTORY=%~1
+    rem echo ADIRECTORY: !ADIRECTORY!
+    set AMASK=%~2
+    rem echo AMASK:!AMASK!
+
+    if defined ADIRECTORY (
+        if exist "!ADIRECTORY!\" (
+            del /F /S /Q "!ADIRECTORY!"\!AMASK!   > NUL
+        )
+    )
+
+    exit /b 0
+
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem function CreateFile (AFILENAME) -> CreateFile
 rem --------------------------------------------------------------------------------
 :CreateFile
@@ -323,7 +350,56 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure COPY_FILES (DIR_FROM, DIR_TO, MASK, ARG)
+rem procedure COPY_FILE (FileName, DIR_TO, /Y)
+rem --------------------------------------------------------------------------------
+:COPY_FILE
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=COPY_FILE
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set AFileName=%~1
+    rem echo AFileName:!AFileName!
+    set LFileName=%~n1%~x1
+    rem echo LFileName:!LFileName!
+    set ADIR_TO=%~2
+    rem echo ADIR_TO:!ADIR_TO!
+    set AARG=%~3
+    rem echo AARG:!AARG!
+
+    if defined AARG if "!AARG!"=="/Y" (
+        set LOverwrite=1
+    ) else (
+        set LOverwrite=
+    )
+    rem echo LOverwrite:!LOverwrite!
+
+    if exist "!AFileName!" (
+        if not exist "!ADIR_TO!" (
+            mkdir "!ADIR_TO!"                   >> %LOG_FULLFILENAME%
+        )
+        echo COPY_FILE: !AFileName! !ADIR_TO!   >> %LOG_FULLFILENAME%
+        if not exist !ADIR_TO!\!LFileName! (
+            rem echo AFileName:!AFileName!
+            copy !AFileName! !ADIR_TO! > NUL
+            rem call :CheckErrorlevel COPY_FILES !errorlevel! 1
+            rem echo File !AFileName! copied ...    >> %LOG_FULLFILENAME%
+        ) else (
+            if defined LOverwrite (
+                rem echo Overide: LFileName:!LFileName!
+                copy !AFileName! !ADIR_TO! > NUL
+            )
+        )
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure COPY_FILES (DIR_FROM, DIR_TO, MASK, /R /Y)
 rem --------------------------------------------------------------------------------
 :COPY_FILES
 rem beginfunction
@@ -340,41 +416,64 @@ rem beginfunction
     rem echo ADIR_TO:!ADIR_TO!
     set AMASK=%~3
     rem echo AMASK:!AMASK!
-    set AARG=%~4
-    rem echo AARG:!AARG!
+    set AARG1=%~4
+    rem echo AARG1:!AARG1!
+    set AARG2=%~5
+    rem echo AARG2:!AARG2!
 
-    call :CurrentDir || exit /b 1
-
-    if defined AARG if "!AARG!"=="/R" (
-        set AARG=/R !ADIR_FROM!
-    ) else (
-        set AARG=
+    set LR=
+    set res=
+    if "!AARG1!"=="/R" set res=true
+    if "!AARG2!"=="/R" set res=true
+    if defined res ( 
+        set LR=/R !ADIR_FROM!
     )
-    rem echo AARG:!AARG!
+    rem echo LR:!LR!
 
-    echo --------------------------->> %LOG_FULLFILENAME%
-    echo COPY_FILES:                >> %LOG_FULLFILENAME%
-    echo     !ADIR_FROM!            >> %LOG_FULLFILENAME%
-    echo     !ADIR_TO!              >> %LOG_FULLFILENAME%
-    echo     !AMASK!                >> %LOG_FULLFILENAME%
-    echo --------------------------->> %LOG_FULLFILENAME%
-
-    if exist "!ADIR_TO!" (
-        rem del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
-    ) else (
-        mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
+    set LOverwrite=
+    set res=
+    if "!AARG1!"=="/Y" set res=true
+    if "!AARG2!"=="/Y" set res=true
+    if defined res ( 
+        set LOverwrite=1
     )
+    rem echo LOverwrite:!LOverwrite!
 
-    cd /D "!ADIR_FROM!"
+    if exist "!ADIR_FROM!" (
+        call :CurrentDir || exit /b 1
+
+        echo COPY_FILES:                >> %LOG_FULLFILENAME%
+        echo     !ADIR_FROM!            >> %LOG_FULLFILENAME%
+        echo     !ADIR_TO!              >> %LOG_FULLFILENAME%
+        echo     !AMASK!                >> %LOG_FULLFILENAME%
+
+        if not exist "!ADIR_TO!" (
+            mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
+        )
+
+        cd /D "!ADIR_FROM!"
     
-    for %AARG% %%f in (!AMASK!) do (
-        rem echo %%~nf%%~xf
-        copy "%%f" !ADIR_TO!\           >  NUL
-        rem call :CheckErrorlevel COPY_FILES !errorlevel! 1
-        echo File "%%f" copied ...     >> %LOG_FULLFILENAME%
-    )
+        rem for %AARG1% %%f in (!AMASK!) do (
+        for %LR% %%f in (!AMASK!) do (
+            rem echo %%f
+            rem echo %%~nf%%~xf
+            set LFileName=%%~nf%%~xf
+            rem echo LFileName:!LFileName!
 
-    cd /D "!CurrentDir!"
+            if not exist !ADIR_TO!\!LFileName! (
+                copy "%%f" !ADIR_TO!        > NUL
+                echo File %%f copied ...    >> %LOG_FULLFILENAME%
+            ) else (
+                if defined LOverwrite (
+                    rem echo Overide: LFileName:!LFileName!
+                    copy "%%f" !ADIR_TO!    > NUL
+                )
+            )
+
+        )
+
+        cd /D "!CurrentDir!"
+    )
 
     exit /b 0
 rem endfunction
@@ -403,19 +502,17 @@ rem beginfunction
         set AARG=/O
         set AARG=/D /S /E /V /F /H /R /K /Y /O
     )
+
     echo ---------------------------   >> %LOG_FULLFILENAME%
     echo XCOPY_FILES:                  >> %LOG_FULLFILENAME%
     echo     !ADIR_FROM!               >> %LOG_FULLFILENAME%
     echo     !ADIR_TO!                 >> %LOG_FULLFILENAME%
     echo     !AMASK!                   >> %LOG_FULLFILENAME%
     echo ---------------------------   >> %LOG_FULLFILENAME%
-    if exist "!ADIR_TO!"\ (
-        rem echo ---------------------------
-        del /F /S /Q "!ADIR_TO!"\*.*   >> %LOG_FULLFILENAME%
-    ) else (
-        rem echo ===========================
+    if not exist "!ADIR_TO!"\ (
         mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
     )
+
     xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
     call :CheckErrorlevel XCOPY_FILES !errorlevel! 1
 

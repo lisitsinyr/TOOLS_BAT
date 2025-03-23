@@ -926,15 +926,19 @@ exit /b 0
 :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-:CLEAR_TOOLS_BAT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
+
+rem :CLEAR_TOOLS_BAT
+rem %LIB_BAT%\LYRDEPLOYTools.bat %*
+rem exit /b 0
+
 :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-:CLEAR_TOOLS_GIT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
+
+rem :CLEAR_TOOLS_GIT
+rem %LIB_BAT%\LYRDEPLOYTools.bat %*
+rem exit /b 0
+
 :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
@@ -1008,6 +1012,9 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILE
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :COPY_FILES

@@ -72,7 +72,7 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=SCRIPTS_KIX
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TOOLS_SRC_KIX
-    call :DEPLOY_PROJECT
+    rem call :DEPLOY_PROJECT
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     rem -------------------------------------------------------------------
@@ -327,6 +327,9 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILE
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :COPY_FILES

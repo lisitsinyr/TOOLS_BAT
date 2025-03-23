@@ -234,6 +234,9 @@ exit /b 0
 :CreateDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+:ClearDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :CreateFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
