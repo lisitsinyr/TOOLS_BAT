@@ -77,14 +77,22 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=COMMANDS_BAT
     call :DEPLOY_PROJECT
     set PROJECT_NAME=INFO_BAT
     call :DEPLOY_PROJECT
+    set PROJECT_NAME=LANG_BAT
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=PROJECTS_BAT
+    call :DEPLOY_PROJECT
     set PROJECT_NAME=SCRIPTS_BAT
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=TESTS_BAT
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TOOLS_SRC_BAT
     call :DEPLOY_PROJECT
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     rem -------------------------------------------------------------------
@@ -103,9 +111,10 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=TOOLS_BAT
-    rem echo PROJECT_NAME:!PROJECT_NAME! 
     call :DEPLOY_PROJECT
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
