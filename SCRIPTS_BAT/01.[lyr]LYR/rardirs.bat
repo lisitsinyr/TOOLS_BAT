@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem rardir.bat
+rem rar00.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -36,47 +36,35 @@ rem ----------------------------------------------------------------------------
     call :Read_N %* || exit /b 1
     call :SET_LIB %0 || exit /b 1
 
-    rem -------------------------------------------------------------------
-    rem rar - 
-    rem -------------------------------------------------------------------
-    set APP=rar
-    set COMMAND=a
-    set OPTION= -r
-    set ARGS=
-    set APPRUN=
-    
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set O1=
-    if defined O1 (
-        set OPTION=!OPTION! !O1!
-    )
+    rem set O1=
+    rem if defined O1 (
+    rem     set OPTION=!OPTION! !O1!
+    rem )
+
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     rem Проверка на обязательные аргументы
-    set PN_CAPTION=Ввод значения directory
-    set directory=
-    call :Read_P directory %1 || exit /b 1
-    echo directory: !directory!
-    if defined directory (
-        set ARGS=!ARGS! "!directory!".rar "!directory!"
-    ) else (
-        echo ERROR: directory not defined ...
-        echo Использование: !BATNAME! папка
-        set OK=
-    )
+    rem set A1=
+    rem if defined A1 (
+    rem     set ARGS=!ARGS! !A1!
+    rem ) else (
+    rem     echo ERROR: A1 not defined ...
+    rem     set OK=
+    rem )
     
-    if not defined Read_N (
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
-        exit /b 0
-    ) else (
-
-        set APPRUN=!APP! !COMMAND!!OPTION!!ARGS!
+    FOR /D %%d IN ( *.* ) DO  (
+        rem command
+        set Directory=%%d
+        echo !Directory!
+        call rardir.bat "!Directory!" "!Directory!" > "!Directory!".log
     )
-    echo APPRUN: !APPRUN!
-    !APPRUN!
+
+    rem call :Pause !SLEEP! || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     exit /b 0
 :end
