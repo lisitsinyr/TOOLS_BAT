@@ -290,7 +290,8 @@ rem beginfunction
         set LDIR_FROM=!LDirPATTERN!\SRC
         set LDIR_TO=!DIR_PROJECT_NAME!\SRC
         if exist !LDIR_FROM!\ (
-            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+            rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+            call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
             rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
             if not exist "!LDIR_TO!"\00.ARCHIVE\ (
