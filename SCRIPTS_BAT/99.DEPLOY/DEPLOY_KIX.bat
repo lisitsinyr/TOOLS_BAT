@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_Python.bat
+rem DEPLOY_KIX.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -69,10 +69,22 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    set PROJECT_NAME=INFO_KIX
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=LANG_KIX
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=PROJECTS_KIX
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=SOFTWARE_KIX
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=TESTS_KIX
+    call :DEPLOY_PROJECT
     set PROJECT_NAME=SCRIPTS_KIX
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TOOLS_SRC_KIX
-    rem call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     rem -------------------------------------------------------------------
@@ -91,9 +103,10 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=TOOLS_KIX
-    rem echo PROJECT_NAME:!PROJECT_NAME! 
     call :DEPLOY_PROJECT
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0

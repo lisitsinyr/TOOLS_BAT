@@ -68,6 +68,7 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=APPInfo_PY
     call :DEPLOY_PROJECT
     set PROJECT_NAME=EXAMPLES_PY
@@ -100,6 +101,7 @@ setlocal enabledelayedexpansion
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TOOLS_SRC_PY
     call :DEPLOY_PROJECT
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     rem -------------------------------------------------------------------
@@ -118,9 +120,10 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=TOOLS_PY
-    rem echo PROJECT_NAME:!PROJECT_NAME! 
     call :DEPLOY_PROJECT
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0

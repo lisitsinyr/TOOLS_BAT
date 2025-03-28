@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_UNIX.bat
+rem DEPLOY_PS.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -56,13 +56,13 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
-    set PROJECT_GROUP=PROJECTS_UNIX
+    set PROJECT_GROUP=PROJECTS_PS
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
     call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\OS\UNIX
+    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\PowerShell
     rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
@@ -70,21 +70,19 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    set PROJECT_NAME=COMMANDS_SH
+    set PROJECT_NAME=INFO_PS
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=INFO_UNIX
+    set PROJECT_NAME=LANG_PS
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=LANG_SH
+    set PROJECT_NAME=PROJECTS_PS
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=PROJECTS_SH
+    set PROJECT_NAME=SOFTWARE_PS
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=SCRIPTS_SH
+    set PROJECT_NAME=TESTS_PS
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=SOFTWARE
+    set PROJECT_NAME=SCRIPTS_PS
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=TESTS_SH
-    call :DEPLOY_PROJECT
-    set PROJECT_NAME=TOOLS_SRC_SH
+    set PROJECT_NAME=TOOLS_SRC_PS
     call :DEPLOY_PROJECT
 
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
@@ -92,13 +90,13 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
-    set PROJECT_GROUP=UNIX
+    set PROJECT_GROUP=PowerShell
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
     call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\OS
+    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT
     rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
@@ -106,9 +104,9 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    set PROJECT_NAME=TOOLS_SH
+    set PROJECT_NAME=TOOLS_PS
     call :DEPLOY_PROJECT
-    
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
@@ -278,10 +276,10 @@ exit /b 0
 :CLEAR_TOOLS_JAVA
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-:UPDATE_TOOLS_KIX_SCRIPTS_KIX
+:UPDATE_TOOLS_PS_SCRIPTS_PS
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-:CLEAR_TOOLS_KIX
+:CLEAR_TOOLS_PS
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_PY_SCRIPTS_PY
@@ -342,6 +340,9 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILE
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :COPY_FILES

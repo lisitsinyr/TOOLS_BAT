@@ -69,6 +69,10 @@ setlocal enabledelayedexpansion
     if exist "!APPRUN!" (
         call !APPRUN!
     )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
     if exist "!APPRUN!" (
         call !APPRUN!

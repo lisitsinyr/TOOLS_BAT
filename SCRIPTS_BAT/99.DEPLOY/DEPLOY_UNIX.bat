@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_Python.bat
+rem DEPLOY_UNIX.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -69,14 +69,24 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=COMMANDS_SH
     call :DEPLOY_PROJECT
     set PROJECT_NAME=INFO_UNIX
     call :DEPLOY_PROJECT
+    set PROJECT_NAME=LANG_SH
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=PROJECTS_SH
+    call :DEPLOY_PROJECT
     set PROJECT_NAME=SCRIPTS_SH
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=SOFTWARE
+    call :DEPLOY_PROJECT
+    set PROJECT_NAME=TESTS_SH
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TOOLS_SRC_SH
     call :DEPLOY_PROJECT
+
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     rem -------------------------------------------------------------------
@@ -95,9 +105,10 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=TOOLS_SH
-    rem echo PROJECT_NAME:!PROJECT_NAME! 
     call :DEPLOY_PROJECT
+    
     call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
