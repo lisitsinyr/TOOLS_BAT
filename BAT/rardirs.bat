@@ -60,7 +60,8 @@ rem ----------------------------------------------------------------------------
         rem command
         set Directory=%%d
         echo !Directory!
-        call rardir.bat "!Directory!" "!Directory!" > "!Directory!".log
+        rem call rardir.bat "!Directory!" "!Directory!" > "!Directory!".log
+        call rardir.bat "!Directory!" "!Directory!" > NUL
     )
 
     rem call :Pause !SLEEP! || exit /b 1
