@@ -95,8 +95,8 @@ setlocal enabledelayedexpansion
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TESTS_PY
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=YOUTUBE_PY
-    call :DEPLOY_PROJECT
+    rem set PROJECT_NAME=YOUTUBE_PY
+    rem call :DEPLOY_PROJECT
     set PROJECT_NAME=SCRIPTS_PY
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TOOLS_SRC_PY
