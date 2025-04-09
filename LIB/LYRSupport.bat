@@ -86,6 +86,9 @@ rem procedure Read_P (P_Name, P_Value)
 rem --------------------------------------------------------------------------------
 :Read_P
 rem beginfunction
+
+rem setlocal enabledelayedexpansion
+
     set FUNCNAME=%0
     set FUNCNAME=Check_P
     if defined DEBUG (
@@ -103,6 +106,10 @@ rem beginfunction
     rem echo P_Value_default:!%P_Name%!
 
     rem !P_Value! - значение переменной
+
+    rem set P_Value=%2
+    rem echo P_Value:!P_Value!
+
     set P_Value=%~2
     rem echo P_Value:!P_Value!
 
