@@ -72,8 +72,8 @@ setlocal enabledelayedexpansion
 
     set PROJECT_NAME=INFO_GIT
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=LANG_GIT
-    call :DEPLOY_PROJECT
+    rem set PROJECT_NAME=LANG_GIT
+    rem call :DEPLOY_PROJECT
     set PROJECT_NAME=SOFTWARE_GIT
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TOOLS_SRC_GIT
