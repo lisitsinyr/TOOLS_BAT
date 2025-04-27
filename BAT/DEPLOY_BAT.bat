@@ -81,8 +81,10 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=COMMANDS_BAT
     call :DEPLOY_PROJECT
     set PROJECT_NAME=INFO_BAT
-    call :DEPLOY_PROJECT
-    set PROJECT_NAME=LANG_BAT
+
+    rem call :DEPLOY_PROJECT
+    rem set PROJECT_NAME=LANG_BAT
+    
     call :DEPLOY_PROJECT
     set PROJECT_NAME=PROJECTS_BAT
     call :DEPLOY_PROJECT

@@ -83,8 +83,10 @@ setlocal enabledelayedexpansion
 
     set PROJECT_NAME=INFO_JAVA
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=LANG_JAVA
-    call :DEPLOY_PROJECT
+
+    rem set PROJECT_NAME=LANG_JAVA
+    rem call :DEPLOY_PROJECT
+
     set PROJECT_NAME=PATTERNS_JAVA
     call :DEPLOY_PROJECT
     set PROJECT_NAME=TESTS_JAVA

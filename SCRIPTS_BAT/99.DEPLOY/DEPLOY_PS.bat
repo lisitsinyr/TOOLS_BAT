@@ -72,8 +72,10 @@ setlocal enabledelayedexpansion
 
     set PROJECT_NAME=INFO_PS
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=LANG_PS
-    call :DEPLOY_PROJECT
+
+    rem set PROJECT_NAME=LANG_PS
+    rem call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=PROJECTS_PS
     call :DEPLOY_PROJECT
     set PROJECT_NAME=SOFTWARE_PS

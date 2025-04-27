@@ -72,8 +72,10 @@ setlocal enabledelayedexpansion
 
     set PROJECT_NAME=INFO_KIX
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=LANG_KIX
-    call :DEPLOY_PROJECT
+
+    rem set PROJECT_NAME=LANG_KIX
+    rem call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=PROJECTS_KIX
     call :DEPLOY_PROJECT
     set PROJECT_NAME=SOFTWARE_KIX
