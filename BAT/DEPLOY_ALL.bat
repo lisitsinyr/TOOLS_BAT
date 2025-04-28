@@ -6,12 +6,27 @@ chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
+rem --------------------------------------------------------------------------------
+rem 
+rem --------------------------------------------------------------------------------
 :begin
-    set BATNAME=%~nx0
-    echo Старт !BATNAME! ...
+    call :MAIN %* || exit /b 1
 
-    set PROJECT_GROUP=ALL
-    
+    exit /b 0
+:end
+rem --------------------------------------------------------------------------------
+
+rem -----------------------------------------------
+rem procedure MAIN_INIT ()
+rem -----------------------------------------------
+:MAIN_INIT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_ROOT - Каталог ROOT
     rem -------------------------------------------------------------------
@@ -36,6 +51,7 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -53,49 +69,204 @@ setlocal enabledelayedexpansion
     )
 
     rem -------------------------------------------------------------------
+    rem Количество аргументов
+    rem -------------------------------------------------------------------
+    call :Read_N %* || exit /b 1
+
+    rem -------------------------------------------------------------------
+    rem Настройка среды
+    rem -------------------------------------------------------------------
+    call :SET_LIB %~f0 || exit /b 1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET_DEFAULT ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET_DEFAULT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET_DEFAULT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CHECK_PARAMETR (%*)
+rem --------------------------------------------------------------------------------
+:MAIN_CHECK_PARAMETR
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_CHECK_PARAMETR
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
+    set OPTION=
+    set O1_Name=O1
+    set O1_Caption=O1_Caption
+    set O1_Default=O1_Default
+    set O1=!O1_Default!
+    set PN_CAPTION=!O1_Caption!
+    call :Read_P O1 !O1! || exit /b 1
+    echo O1:!O1!
+    if defined O1 (
+        set OPTION=!OPTION! -!O1_Name! "!O1!"
+    ) else (
+        echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
+    )
+    echo OPTION:!OPTION!
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    set ARGS=
+    set A1_Name=A1
+    set A1_Caption=A1_Caption
+    set A1_Default=A1_Default
+    set A1=!A1_Default!
+    set PN_CAPTION=!A1_Caption!
+    call :Read_P A1 !A1! || exit /b 1
+    echo A1:!A1!
+    if defined A1 (
+        set ARGS=!ARGS! "!A1!"
+    ) else (
+        echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+        set OK=
+        exit /b 1
+    )
+    echo ARGS:!ARGS!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set PROJECT_GROUP=ALL
+
+    rem -------------------------------------------------------------------
     rem SCRIPTS_DIR_DEPLOY - Каталог скриптов DEPLOY
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_DEPLOY (
         set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
     )
     rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
-    
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
-    rem echo APPRUN:!APPRUN!
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-   
+
+    set FILEINI="D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini"
+    call :GetINI !FILEINI!
+
+    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
+    @REM rem echo APPRUN:!APPRUN!
+    @REM if exist "!APPRUN!" (
+    @REM     call !APPRUN!
+    @REM )
+    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
+    @REM if exist "!APPRUN!" (
+    @REM     call !APPRUN!
+    @REM )
+    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
+    @REM if exist "!APPRUN!" (
+    @REM     call !APPRUN!
+    @REM )
+    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
+    @REM if exist "!APPRUN!" (
+    @REM     call !APPRUN!
+    @REM )
+    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
+    @REM if exist "!APPRUN!" (
+    @REM     call !APPRUN!
+    @REM )
+    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
+    @REM if exist "!APPRUN!" (
+    @REM     call !APPRUN!
+    @REM )
+    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
+    @REM if exist "!APPRUN!" (
+    @REM     call !APPRUN!
+    @REM )
+    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
+    @REM if exist "!APPRUN!" (
+    @REM     call !APPRUN!
+    @REM )
+
     exit /b 0
-:end
+rem endfunction
+
+rem =================================================
+rem procedure MAIN (%*)
+rem =================================================
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set BATNAME=%~nx0
+    echo Start !BATNAME! ...
+
+    set DEBUG=
+
+    set /a LOG_FILE_ADD=0
+
+    call :MAIN_INIT || exit /b 1
+
+    call :StartLogFile || exit /b 1
+
+    set OK=yes
+
+    call :MAIN_SET_DEFAULT || exit /b 1
+
+    call :MAIN_SET || exit /b 1
+
+    rem if defined OK if not defined Read_N (
+    rem     call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    rem )
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+
+    if defined OK (
+        echo НАЧАЛО
+
+        call :MAIN_FUNC || exit /b 1
+
+        echo КОНЕЦ
+    )
+    
+    call :StopLogFile || exit /b 1
+
+    exit /b 0
+rem endfunction
 rem =================================================
 
 rem =================================================
