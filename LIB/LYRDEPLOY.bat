@@ -294,15 +294,21 @@ rem beginfunction
             call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
             rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-            if not exist "!LDIR_TO!"\99_ARCHIVE\ (
-                mkdir "!LDIR_TO!"\01_ARCHIVE   >> %LOG_FULLFILENAME%
+            set DOP=99_ARCHIVE
+            if not exist "!LDIR_TO!"\!DOP!\ (
+                mkdir "!LDIR_TO!"\!DOP!   >> %LOG_FULLFILENAME%
             )
-            if not exist "!LDIR_TO!"\02_INFO\ (
-                mkdir "!LDIR_TO!"\01_INFO   >> %LOG_FULLFILENAME%
+
+            set DOP=02_INFO
+            if not exist "!LDIR_TO!"\!DOP!\ (
+                mkdir "!LDIR_TO!"\!DOP!   >> %LOG_FULLFILENAME%
             )
-            if not exist "!LDIR_TO!"\03_TEST\ (
-                mkdir "!LDIR_TO!"\01_TEST   >> %LOG_FULLFILENAME%
+
+            set DOP=03_TEST
+            if not exist "!LDIR_TO!"\!DOP!\ (
+                mkdir "!LDIR_TO!"\!DOP!   >> %LOG_FULLFILENAME%
             )
+
         )
         set LDIR_FROM=!LDirPATTERN!\TESTS
         set LDIR_TO=!DIR_PROJECT_NAME!\TESTS
