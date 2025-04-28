@@ -7,7 +7,7 @@ chcp 1251>NUL
 setlocal enabledelayedexpansion
 
 rem --------------------------------------------------------------------------------
-rem 
+rem
 rem --------------------------------------------------------------------------------
 :begin
     call :MAIN %* || exit /b 1
@@ -152,7 +152,7 @@ rem beginfunction
     if defined A1 (
         set ARGS=!ARGS! "!A1!"
     ) else (
-        echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+        echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ...
         set OK=
         exit /b 1
     )
@@ -182,42 +182,42 @@ rem beginfunction
     )
     rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
 
-    set FILEINI="D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini"
+    set FILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
     call :GetINI !FILEINI!
 
-    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
-    @REM rem echo APPRUN:!APPRUN!
-    @REM if exist "!APPRUN!" (
-    @REM     call !APPRUN!
-    @REM )
-    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
-    @REM if exist "!APPRUN!" (
-    @REM     call !APPRUN!
-    @REM )
-    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
-    @REM if exist "!APPRUN!" (
-    @REM     call !APPRUN!
-    @REM )
-    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
-    @REM if exist "!APPRUN!" (
-    @REM     call !APPRUN!
-    @REM )
-    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
-    @REM if exist "!APPRUN!" (
-    @REM     call !APPRUN!
-    @REM )
-    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
-    @REM if exist "!APPRUN!" (
-    @REM     call !APPRUN!
-    @REM )
-    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
-    @REM if exist "!APPRUN!" (
-    @REM     call !APPRUN!
-    @REM )
-    @REM set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
-    @REM if exist "!APPRUN!" (
-    @REM     call !APPRUN!
-    @REM )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
+    rem echo APPRUN:!APPRUN!
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
 
     exit /b 0
 rem endfunction
@@ -262,7 +262,7 @@ rem beginfunction
 
         echo йнмеж
     )
-    
+
     call :StopLogFile || exit /b 1
 
     exit /b 0

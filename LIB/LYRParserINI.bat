@@ -77,18 +77,18 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo AFileName:!AFileName!
+    @REM echo AFileName:!AFileName!
     set ASection=%~2
-    rem echo ASection:!ASection!
+    @REM echo ASection:!ASection!
     set AParameter=%~3
-    rem echo AParameter:!AParameter!
+    @REM echo AParameter:!AParameter!
 
     set !FUNCNAME!=!TEMP_DIR!\%random%.tmp
-    echo !FUNCNAME!: !%FUNCNAME%!
+    @REM echo !FUNCNAME!: !%FUNCNAME%!
 
     %GetINIAPP% !AFileName! !ASection! !AParameter! > !%FUNCNAME%!
 
-    rem type !%FUNCNAME%!
+    @REM type !%FUNCNAME%!
 
     if exist !%FUNCNAME%! (
         for /f "eol=# delims== tokens=1,2" %%i in (!%FUNCNAME%!) do (
