@@ -197,7 +197,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN_TEST ()
 rem --------------------------------------------------------------------------------
 :MAIN_TEST
 rem beginfunction
@@ -239,6 +239,89 @@ rem beginfunction
     rem for %%a in (%list%) do ( 
     rem     echo %%a
     rem )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_GITIGNORE ()
+rem --------------------------------------------------------------------------------
+:MAIN_GITIGNORE
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_GITIGNORE
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set gitignoreJava=D:\PROJECTS_LYR\CHECK_LIST\GitHub\PROJECTS\PATTERN\GITIGNORE\Java\.gitignore
+    set gitignorePython=D:\PROJECTS_LYR\CHECK_LIST\GitHub\PROJECTS\PATTERN\GITIGNORE\Python\.gitignore
+
+    set Section=PATTERNS
+    call :GetINI !FILEINI! !Section!
+    rem set /a kmax=ParametersCount-1
+    for /L %%i in (0,1,!ParametersCount!) do (
+        set Parameter=!Parameters[%%i]!
+        echo !Parameter!
+        call :GetINI !FILEINI! !Section! !Parameter!
+        if !Parameter!==GIT (
+            set LFileName=!gitignorePython!
+            if exist !LFileName! (
+                rem echo !ParameterValue!
+                call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
+            )
+        )
+        if !Parameter!==BAT (
+            set LFileName=!gitignorePython!
+            echo LFileName:!LFileName!
+            if exist !LFileName! (
+                rem echo !ParameterValue!
+                call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
+            )
+        )
+        if !Parameter!==KIX (
+            set LFileName=!gitignorePython!
+            if exist !LFileName! (
+                rem echo !ParameterValue!
+                call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
+            )
+        )
+        if !Parameter!==PowerShell (
+            set LFileName=!gitignorePython!
+            if exist !LFileName! (
+                rem echo !ParameterValue!
+                call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
+            )
+        )
+        if !Parameter!==UNIX (
+            set LFileName=!gitignorePython!
+            if exist !LFileName! (
+                rem echo !ParameterValue!
+                call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
+            )
+        )
+        if !Parameter!==Java (
+            set LFileName=!gitignoreJava!
+            if exist !LFileName! (
+                rem echo !ParameterValue!
+                call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
+            )
+        )
+        if !Parameter!==Pascal_Delphi (
+            set LFileName=!gitignorePython!
+            if exist !LFileName! (
+                rem echo !ParameterValue!
+                call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
+            )
+        )
+        if !Parameter!==Python (
+            set LFileName=!gitignorePython!
+            if exist !LFileName! (
+                rem echo !ParameterValue!
+                call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
+            )
+        )
+    )
 
     exit /b 0
 rem endfunction
@@ -348,6 +431,8 @@ rem beginfunction
 
     if defined OK (
         echo ÍÀ×ÀËÎ
+
+        call :MAIN_GITIGNORE
 
         call :MAIN_FUNC || exit /b 1
 
@@ -562,6 +647,9 @@ exit /b 0
 :CreateDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+:ClearDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :CreateFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
@@ -569,6 +657,9 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILE
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :COPY_FILES
