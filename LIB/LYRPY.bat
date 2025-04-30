@@ -19,7 +19,7 @@ rem ----------------------------------------------------------------------------
 :LYRPY
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRLog
+    set FUNCNAME=LYRPY
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -44,7 +44,7 @@ rem -----------------------------------------------
 :PY_ENV_START
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_SetROOT
+    set FUNCNAME=PY_ENV_START
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -68,7 +68,7 @@ rem -----------------------------------------------
 :PY_ENV_STOP
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_SetROOT
+    set FUNCNAME=PY_ENV_STOP
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )

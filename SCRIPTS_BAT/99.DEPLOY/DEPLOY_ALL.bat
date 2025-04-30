@@ -78,6 +78,9 @@ rem beginfunction
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
+    set FILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
+    echo FILEINI:!FILEINI!
+
     exit /b 0
 rem endfunction
 
@@ -162,6 +165,85 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure GetLenArray (Array)
+rem --------------------------------------------------------------------------------
+:GetLenArray
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetLenArray
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    echo %1
+    set AArray=%1
+
+    :: Here we initializing an variable named len to calculate length of array
+    set len=0
+    :: To iterate the element of array
+    :Loop 
+    :: It will check if the element is defined or not
+    if defined Sections[%len%] (
+    rem if defined %1[%len%] (
+        echo !Sections[%len%]!
+        set /a len+=1
+        GOTO :Loop 
+    )
+
+    set !FUNCNAME!=!len!
+    rem echo !FUNCNAME!:!%FUNCNAME%!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_TEST
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_TEST
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :GetINI !FILEINI!
+    rem call :GetINIPY !FILEINI!
+    rem call :GetINIParametr !FILEINI!
+
+    rem call :GetLenArray !Sections!
+    rem echo GetLenArray:!GetLenArray!
+
+    rem set /a nmax=SectionsCount-1
+    for /L %%i in (0,1,!SectionsCount!) do (
+        set Section=!Sections[%%i]!
+        rem echo !Section! 
+
+        call :GetINI !FILEINI! !Section!
+        rem set /a kmax=ParametersCount-1
+        for /L %%i in (0,1,!ParametersCount!) do (
+            set Parameter=!Parameters[%%i]!
+            rem echo !Parameter!
+
+            call :GetINI !FILEINI! !Section! !Parameter!
+            rem echo !GetINI!
+            
+            rem call :GetINIParametr !FILEINI! !Section! !Parameter!
+            rem echo !GetINIParametr!
+
+            rem echo !ParameterValue!
+        )
+    )
+
+    rem set list=A B C D
+    rem for %%a in (%list%) do ( 
+    rem     echo %%a
+    rem )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC
@@ -182,11 +264,7 @@ rem beginfunction
     )
     rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
 
-    set FILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
-    call :GetINI !FILEINI!
-
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
-    rem echo APPRUN:!APPRUN!
     if exist "!APPRUN!" (
         call !APPRUN!
     )
@@ -219,6 +297,19 @@ rem beginfunction
         call !APPRUN!
     )
 
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure TEST_FUNC ()
+rem --------------------------------------------------------------------------------
+:TEST_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
     exit /b 0
 rem endfunction
 
@@ -555,6 +646,11 @@ exit /b 0
 :GetINI
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
+
+:GetINIPY
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+
 :GetINIParametr
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0

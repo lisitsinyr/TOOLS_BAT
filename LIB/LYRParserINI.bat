@@ -77,45 +77,140 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    @REM echo AFileName:!AFileName!
+    rem echo AFileName:!AFileName!
     set ASection=%~2
-    @REM echo ASection:!ASection!
+    rem echo ASection:!ASection!
     set AParameter=%~3
-    @REM echo AParameter:!AParameter!
+    rem echo AParameter:!AParameter!
 
-    set !FUNCNAME!=!TEMP_DIR!\%random%.tmp
-    @REM echo !FUNCNAME!: !%FUNCNAME%!
+    set __GetINI=!TEMP_DIR!\%random%.tmp
+    rem echo __GetINI:!__GetINI!
 
-    %GetINIAPP% !AFileName! !ASection! !AParameter! > !%FUNCNAME%!
+    rem echo %GetINIAPP%
 
-    @REM type !%FUNCNAME%!
+    %GetINIAPP% !AFileName! !ASection! !AParameter! > !__GetINI!
 
-    if exist !%FUNCNAME%! (
-        for /f "eol=# delims== tokens=1,2" %%i in (!%FUNCNAME%!) do (
-            rem В переменной i - ключ
-            rem В переменной j - значение
+    rem type !__GetINI!
 
-            set %%i=%%j
-            echo %%i:!%%i!
+    set n=0
+    set k=0
+    if exist !__GetINI! (
+        if not defined ASection (
+            for /f %%i in (!__GetINI!) do (
+                set Sections[!n!]=%%i
+                set /A n+=1
+            )
+        ) else (
+            for /f "eol=# delims== tokens=1,2" %%i in (!__GetINI!) do (
+                rem В переменной i - ключ
+                rem В переменной j - значение
 
-            rem set STRi=%%i
-            rem rem echo STRi:!STRi!
-            rem call :TrimRight !STRi! || exit /b 1
-            rem rem echo TrimRight:!TrimRight!
-            rem set STRj=%%j
-            rem rem echo STRj:!STRj!
-            rem call :TrimLeft "!STRj!" || exit /b 1
-            rem rem echo TrimLeft:!TrimLeft!
-            rem !%TrimRight%!=!TrimLeft!
-            rem echo !TrimRight!=!TrimLeft!
+                set %%i=%%j
+                rem echo %%i:!%%i!
+
+                set Parameters[!k!]=%%i
+                set /A k+=1
+
+                set STRi=%%i
+                rem echo STRi:!STRi!
+                call :TrimRight !STRi! || exit /b 1
+                rem echo TrimRight:!TrimRight!
+
+                set STRj=%%j
+                rem echo STRj:!STRj!
+                call :TrimLeft !STRj! || exit /b 1
+                rem echo TrimLeft:!TrimLeft!
+
+                set FUNCNAME=GetINI
+                set !FUNCNAME!=!TrimLeft!
+
+                set ParameterValue=!TrimLeft!
+
+            )
         )
 
-        rem del !%FUNCNAME%!
+        del !__GetINI!
 
     ) else (
-        echo INFO: File !%FUNCNAME%! not exist ...
+        echo INFO: File !__GetINI! not exist ...
     )
-     
+    set /a SectionsCount=n-1
+    set /a ParametersCount=k-1
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure GetINIPY (AFileName, ASection, AParameter)
+rem --------------------------------------------------------------------------------
+:GetINIPY
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetINIPY
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set AFileName=%~1
+    rem echo AFileName:!AFileName!
+    set ASection=%~2
+    rem echo ASection:!ASection!
+    set AParameter=%~3
+    rem echo AParameter:!AParameter!
+
+    set __GetINI=!TEMP_DIR!\%random%.tmp
+    rem echo __GetINI:!__GetINI!
+
+    rem echo %GetINIAPPPY%
+    call %GetINIAPPPY% !AFileName! !ASection! !AParameter!
+
+    rem type !__GetINI!
+
+    set n=0
+    set k=0
+    if exist !__GetINI! (
+        if not defined ASection (
+            for /f %%i in (!__GetINI!) do (
+                set Sections[!n!]=%%i
+                set /A n+=1
+            )
+        ) else (
+            for /f "eol=# delims== tokens=1,2" %%i in (!__GetINI!) do (
+                rem В переменной i - ключ
+                rem В переменной j - значение
+
+                set %%i=%%j
+                rem echo %%i:!%%i!
+
+                set Parameters[!k!]=%%i
+                set /A k+=1
+
+                set STRi=%%i
+                rem echo STRi:!STRi!
+                call :TrimRight !STRi! || exit /b 1
+                rem echo TrimRight:!TrimRight!
+
+                set STRj=%%j
+                rem echo STRj:!STRj!
+                call :TrimLeft !STRj! || exit /b 1
+                rem echo TrimLeft:!TrimLeft!
+
+                set FUNCNAME=GetINIPY
+                set !FUNCNAME!=!TrimLeft!
+
+                set ParameterValue=!TrimLeft!
+            )
+        )
+
+        del !__GetINI!
+
+    ) else (
+        echo INFO: File !__GetINI! not exist ...
+    )
+    set /a SectionsCount=n-1
+    set /a ParametersCount=k-1
+
     exit /b 0
 rem endfunction
 
@@ -125,7 +220,7 @@ rem ----------------------------------------------------------------------------
 :GetINIParametr
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=GetINI
+    set FUNCNAME=GetINIParametr
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -141,16 +236,15 @@ rem beginfunction
     rem type !AFileName!
 
     set Section=
+    set n=0
+    set k=0
     if exist !AFileName! (
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
-
             rem usebackq
-
             rem В переменной i - ключ
             rem echo i:%%i
             rem В переменной j - значение
             rem echo j:%%j
-           
             rem set %%i=%%j
 
             set STRi=%%i
@@ -170,15 +264,25 @@ rem beginfunction
                 set s=%%i
                 set Section=!s:~1,-1!
                 rem echo Section:!Section!
+                set Sections[!n!]=!Section!
+                set /A n+=1
             ) else (
                 if defined AParameter (
                     if "!TrimRight!"=="!AParameter!" (
                         set !TrimRight!=!TrimLeft!
                         rem echo !TrimRight!=!TrimLeft!
+
+                        set FUNCNAME=GetINIParametr
                         set !FUNCNAME!=!TrimLeft!
+
+                        set ParameterValue=!TrimLeft!
+                        
                         exit /b 0
                     )
                 ) else (
+                    set Parameters[!k!]=%%i
+                    set /A k+=1
+
                     if defined ASection (
                         if "!ASection!"=="!Section!" (
                             set !TrimRight!=!TrimLeft!
@@ -194,9 +298,11 @@ rem beginfunction
             )
         )
     ) else (
-        echo INFO: File !LFileName! not exist ...
+        echo INFO: File !AFileName! not exist ...
     )
-     
+    set /a SectionsCount=n-1
+    set /a ParametersCount=k-1
+
     exit /b 0
 rem endfunction
 
@@ -236,7 +342,7 @@ rem beginfunction
         set Aeol=#
     )
     echo Aeol: !Aeol!
-    
+
     if exist !LFileName! (
         for /f "eol=%Aeol% delims=%Adelims% tokens=%Atokens%" %%i in (!AFileName!) do (
             rem 1 token i - значение
@@ -267,7 +373,7 @@ rem beginfunction
         echo ERROR: File !AFileName! not exist ...
         exit /b 1
     )
-     
+
     exit /b 0
 rem endfunction
 

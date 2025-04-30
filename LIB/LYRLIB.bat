@@ -259,6 +259,8 @@ rem beginfunction
     set touchRUN=D:\TOOLS\EXE\touch.exe
     set SetINIAPP=D:\TOOLS\EXE\setini.exe
     set GetINIAPP=D:\TOOLS\EXE\getini.exe
+    rem set GetINIAPPPY=D:\TOOLS\TOOLS_PY\BAT\GetINI1_py.bat 
+    set GetINIAPPPY=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY\GetINI\GetINI1_py.bat
 
     rem -------------------------------------------------------------------
     rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]

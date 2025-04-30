@@ -30,7 +30,11 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem CONST
     rem -------------------------------------------------------------------
+    set FILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
+    rem echo FILEINI:!FILEINI!
+
     set urlTOOLS_SRC_GIT=git@github.com:lisitsinyr/TOOLS_SRC_GIT.git
+
     set urlTOOLS_GIT=git@github.com:lisitsinyr/TOOLS_GIT.git
 
     set urlTOOLS_SRC_BAT=git@github.com:lisitsinyr/TOOLS_SRC_BAT.git
@@ -105,42 +109,55 @@ rem beginfunction
     if !PROJECT_GROUP!==PROJECTS_GIT set res=true
     if !PROJECT_GROUP!==GIT set res=true
     if defined res ( 
-        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\GIT\PATTERN_GIT
+        rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\PATTERN_GIT
+        call :GetINI !FILEINI! PATTERNS GIT
+        set LDirPATTERN=!ParameterValue!
     )
 
     set res=
     if !PROJECT_GROUP!==PROJECTS_BAT set res=true
     if !PROJECT_GROUP!==BAT set res=true
     if defined res ( 
-        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PATTERN_BAT
+        rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\PATTERN_BAT
+        call :GetINI !FILEINI! PATTERNS BAT
+        set LDirPATTERN=!ParameterValue!
     )
 
     set res=
     if !PROJECT_GROUP!==PROJECTS_KIX set res=true
     if !PROJECT_GROUP!==KIX set res=true
     if defined res ( 
-        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PATTERN_KIX
+        rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\PATTERN_KIX
+        call :GetINI !FILEINI! PATTERNS KIX
+        set LDirPATTERN=!ParameterValue!
+        rem echo LDirPATTERN:!LDirPATTERN!
     )
 
     set res=
     if !PROJECT_GROUP!==PROJECTS_PS set res=true
     if !PROJECT_GROUP!==PowerShell set res=true
     if defined res ( 
-        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\PowerShell\PATTERN_PS
+        rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\PowerShell\PROJECTS_PS\PATTERN_PS
+        call :GetINI !FILEINI! PATTERNS PowerShell
+        set LDirPATTERN=!ParameterValue!
     )
 
     set res=
     if !PROJECT_GROUP!==PROJECTS_UNIX set res=true
     if !PROJECT_GROUP!==UNIX set res=true
     if defined res ( 
-        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\OS\UNIX\PATTERN_SH
+        rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\OS\UNIX\PROJECTS_UNIX\PATTERN_SH
+        call :GetINI !FILEINI! PATTERNS UNIX
+        set LDirPATTERN=!ParameterValue!
     )
 
     set res=
     if !PROJECT_GROUP!==PROJECTS_JAVA set res=true
     if !PROJECT_GROUP!==JAVA set res=true
     if defined res ( 
-        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\JAVA\PATTERN_JAVA
+        rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Java\PROJECTS_JAVA\PATTERN_JAVA
+        call :GetINI !FILEINI! PATTERNS JAVA
+        set LDirPATTERN=!ParameterValue!
     )
 
     set res=
@@ -148,14 +165,18 @@ rem beginfunction
     if !PROJECT_GROUP!==PROJECTS_D11 set res=true
     if !PROJECT_GROUP!==Pascal_Delphi set res=true
     if defined res ( 
-        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\PATTERN_PAS
+        rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\PROJECTS\PATTERN_PAS
+        call :GetINI !FILEINI! PATTERNS Pascal_Delphi
+        set LDirPATTERN=!ParameterValue!
     )
 
     set res=
     if !PROJECT_GROUP!==PROJECTS_PY set res=true
     if !PROJECT_GROUP!==Python set res=true
     if defined res ( 
-        set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PATTERN_PY
+        rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\PATTERN_PY
+        call :GetINI !FILEINI! PATTERNS Python
+        set LDirPATTERN=!ParameterValue!
 
         set LFileName=PROJECT_PYupdate.bat
         rem echo LFileName: !LFileName!
@@ -695,16 +716,23 @@ rem beginfunction
     ) else (
         echo info: Каталог !LDIR_PROJECT_NAME! не существует...
         if !APROJECT_NAME!==TOOLS_SRC_GIT (
-            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SRC_GIT!
-        )
-        if !APROJECT_NAME!==TOOLS_GIT (
-            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_GIT!
+            call :GetINI !FILEINI! GITHUB TOOLS_SRC_GIT
+            set urlGITHUB=!ParameterValue!
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlGITHUB!
         )
 
+        if !APROJECT_NAME!==TOOLS_GIT (
+            call :GetINI !FILEINI! GITHUB TOOLS_GIT
+            set urlGITHUB=!ParameterValue!
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlGITHUB!
+        )
         
         if !APROJECT_NAME!==TOOLS_SRC_BAT (
-            call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SRC_BAT!
+            call :GetINI !FILEINI! GITHUB TOOLS_SRC_BAT
+            set urlGITHUB=!ParameterValue!
+            call :git_clone !ADIR_PROJECTS_ROOT! !urlGITHUB!
         )
+
         if !APROJECT_NAME!==TOOLS_BAT (
             call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_BAT!
         )
