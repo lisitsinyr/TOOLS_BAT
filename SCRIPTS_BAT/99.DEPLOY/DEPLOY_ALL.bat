@@ -79,7 +79,7 @@ rem beginfunction
     call :SET_LIB %~f0 || exit /b 1
 
     set FILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
-    echo FILEINI:!FILEINI!
+    rem echo FILEINI:!FILEINI!
 
     exit /b 0
 rem endfunction
@@ -133,13 +133,13 @@ rem beginfunction
     set O1=!O1_Default!
     set PN_CAPTION=!O1_Caption!
     call :Read_P O1 !O1! || exit /b 1
-    echo O1:!O1!
+    rem echo O1:!O1!
     if defined O1 (
         set OPTION=!OPTION! -!O1_Name! "!O1!"
     ) else (
         echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
     )
-    echo OPTION:!OPTION!
+    rem echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
@@ -151,7 +151,7 @@ rem beginfunction
     set A1=!A1_Default!
     set PN_CAPTION=!A1_Caption!
     call :Read_P A1 !A1! || exit /b 1
-    echo A1:!A1!
+    rem echo A1:!A1!
     if defined A1 (
         set ARGS=!ARGS! "!A1!"
     ) else (
@@ -159,7 +159,7 @@ rem beginfunction
         set OK=
         exit /b 1
     )
-    echo ARGS:!ARGS!
+    rem echo ARGS:!ARGS!
 
     exit /b 0
 rem endfunction
@@ -262,7 +262,7 @@ rem beginfunction
     rem set /a kmax=ParametersCount-1
     for /L %%i in (0,1,!ParametersCount!) do (
         set Parameter=!Parameters[%%i]!
-        echo !Parameter!
+        rem echo !Parameter!
         call :GetINI !FILEINI! !Section! !Parameter!
         if !Parameter!==GIT (
             set LFileName=!gitignorePython!
@@ -273,7 +273,7 @@ rem beginfunction
         )
         if !Parameter!==BAT (
             set LFileName=!gitignorePython!
-            echo LFileName:!LFileName!
+            rem echo LFileName:!LFileName!
             if exist !LFileName! (
                 rem echo !ParameterValue!
                 call :COPY_FILE !LFileName! !ParameterValue! /Y || exit /b 1
