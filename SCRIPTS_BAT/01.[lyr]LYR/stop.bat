@@ -1,6 +1,6 @@
 @echo off
 rem -------------------------------------------------------------------
-rem touch.bat
+rem chk.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -12,9 +12,7 @@ rem ----------------------------------------------------------------------------
 :begin
     set BATNAME=%~nx0
     echo Start !BATNAME! ...
-
-    rem @COPY /B %1+,, %1
-
+    
     set file_stop=G:\___ÐÀÇÁÎÐ\YOUTUBE\TELEGRAM\stop
 
     rem echo off > !file_stop! & echo on
