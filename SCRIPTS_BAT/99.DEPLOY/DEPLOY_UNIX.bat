@@ -72,12 +72,7 @@ setlocal enabledelayedexpansion
 
     set PROJECT_NAME=COMMANDS_SH
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=INFO_UNIX
-    call :DEPLOY_PROJECT
 
-    rem set PROJECT_NAME=LANG_SH
-    rem call :DEPLOY_PROJECT
-    
     set PROJECT_NAME=PROJECTS_SH
     call :DEPLOY_PROJECT
     set PROJECT_NAME=SCRIPTS_SH

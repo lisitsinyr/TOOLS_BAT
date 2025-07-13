@@ -70,8 +70,9 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    rem set PROJECT_NAME=FRAMEWORK_JAVA
-    rem call :DEPLOY_PROJECT
+    set PROJECT_NAME=TRICKS
+    call :DEPLOY_PROJECT
+
     set PROJECT_NAME=LIBRARY_JAVA
     call :DEPLOY_PROJECT
     
@@ -84,12 +85,6 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=SOFTWARE_JAVA
     call :DEPLOY_PROJECT
     
-    set PROJECT_NAME=INFO_JAVA
-    call :DEPLOY_PROJECT
-
-    rem set PROJECT_NAME=LANG_JAVA
-    rem call :DEPLOY_PROJECT
-
     set PROJECT_NAME=PATTERNS_JAVA
     call :DEPLOY_PROJECT
     

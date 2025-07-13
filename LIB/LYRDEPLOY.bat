@@ -45,30 +45,26 @@ rem beginfunction
 
     set urlTOOLS_PS=git@github.com:lisitsinyr/TOOLS_PS.git
 
-    set urlINFO_JAVA=git@github.com:lisitsinyr/INFO_JAVA.git
-    set urlTESTS_JAVA=git@github.com:lisitsinyr/TESTS_JAVA.git
+    set urlTESTS_JAVA=git@github.com:lisitsinyr/JAVA_TESTS.git
     set urlTOOLS_SRC_JAVA=git@github.com:lisitsinyr/TOOLS_SRC_JAVA.git
     set urlTOOLS_JAVA=git@github.com:lisitsinyr/TOOLS_JAVA.git
 
-    set urlLUIS_D7=git@github.com:lisitsinyr/LUIS_D7.git
+    set urlLUIS_D7=git@github.com:lisitsinyr/D7_LUIS.git
     set urlTOOLS_D7=git@github.com:lisitsinyr/TOOLS_D7.git
-    set urlLUIS_D11=git@github.com:lisitsinyr/LUIS_D11.git
+    set urlLUIS_D11=git@github.com:lisitsinyr/D11_LUIS.git
     set urlTOOLS_D11=git@github.com:lisitsinyr/TOOLS_D11.git
 
-    set urlEXAMPLES_PY=git@github.com:lisitsinyr/EXAMPLES_PY.git
-    set urlINFO_PYTHON=git@github.com:lisitsinyr/INFO_PYTHON.git
-    set urlLANG_PYTHON=git@github.com:lisitsinyr/LANG_PYTHON.git
-    set urlLIBRARY_PY=git@github.com:lisitsinyr/LIBRARY_PY.git
-    set urlMobileAPP_PY=git@github.com:lisitsinyr/MobileAPP_PY.git
-    set urlPATTERN_PY=git@github.com:lisitsinyr/PATTERN_PY.git
-    set urlSCRIPTS_PY=git@github.com:lisitsinyr/SCRIPTS_PY.git
-    set urlTESTS_PY=git@github.com:lisitsinyr/TESTS_PY.git
+    set urlPY_TRICKS=git@github.com:lisitsinyr/PY_TRICKS.git
+    set urlEXAMPLES_PY=git@github.com:lisitsinyr/PY_EXAMPLES.git
+    set urlLIBRARY_PY=git@github.com:lisitsinyr/PY_LIBRARY.git
+    set urlMobileAPP_PY=git@github.com:lisitsinyr/PY_MobileAPP.git
+    set urlPATTERN_PY=git@github.com:lisitsinyr/PY_PATTERN.git
+    set urlSCRIPTS_PY=git@github.com:lisitsinyr/PY_SCRIPTS.git
+    set urlTESTS_PY=git@github.com:lisitsinyr/PY_TESTS.git
     set urlTOOLS_SRC_PY=git@github.com:lisitsinyr/TOOLS_SRC_PY.git
-    set urlYOUTUBE_PY=git@github.com:lisitsinyr/YOUTUBE_PY.git
     set urlTOOLS_PY=git@github.com:lisitsinyr/TOOLS_PY.git
 
-    set urlCOMMANDS_SH=git@github.com:lisitsinyr/COMMANDS_SH.git
-    set urlINFO_UNIX=git@github.com:lisitsinyr/INFO_UNIX.git
+    set urlCOMMANDS_SH=git@github.com:lisitsinyr/SH_COMMANDS.git
     set urlTOOLS_SRC_SH=git@github.com:lisitsinyr/TOOLS_SRC_SH.git
     set urlTOOLS_SH=git@github.com:lisitsinyr/TOOLS_SH.git
 

@@ -70,12 +70,6 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    set PROJECT_NAME=INFO_PS
-    call :DEPLOY_PROJECT
-
-    rem set PROJECT_NAME=LANG_PS
-    rem call :DEPLOY_PROJECT
-    
     set PROJECT_NAME=PROJECTS_PS
     call :DEPLOY_PROJECT
     set PROJECT_NAME=SOFTWARE_PS

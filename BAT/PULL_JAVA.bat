@@ -63,12 +63,6 @@ setlocal enabledelayedexpansion
 
     call :WriteBEGIN PULL группы проектов: !PROJECT_GROUP! ...
 
-    set PROJECT_NAME=INFO_JAVA
-    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
-
-    rem set PROJECT_NAME=LANG_JAVA
-    rem call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
-
     set PROJECT_NAME=LIBRARY_JAVA
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 

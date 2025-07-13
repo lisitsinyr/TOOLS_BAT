@@ -63,9 +63,6 @@ setlocal enabledelayedexpansion
 
     call :WriteBEGIN PULL группы проектов: !PROJECT_GROUP! ...
 
-    set PROJECT_NAME=INFO_KIX
-    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
-
     set PROJECT_NAME=SCRIPTS_KIX
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
