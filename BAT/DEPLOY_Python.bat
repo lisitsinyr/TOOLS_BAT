@@ -73,8 +73,8 @@ setlocal enabledelayedexpansion
     call :DEPLOY_PROJECT
     set PROJECT_NAME=APPInfo_PY
     call :DEPLOY_PROJECT
-    set PROJECT_NAME=EXAMPLES_PY
-    call :DEPLOY_PROJECT
+    rem set PROJECT_NAME=EXAMPLES_PY
+    rem call :DEPLOY_PROJECT
     set PROJECT_NAME=LIBRARY_PY
     call :DEPLOY_PROJECT
     set PROJECT_NAME=MobileAPP_PY
