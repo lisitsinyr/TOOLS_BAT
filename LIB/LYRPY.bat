@@ -49,9 +49,20 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem echo PY_ENVDIR:!PY_ENVDIR!
-    rem echo PY_ENVNAME:!PY_ENVNAME!
-    call !PY_ENVDIR!\!PY_ENVNAME!\Scripts\activate.bat
+    echo PY_ENVDIR:!PY_ENVDIR!
+    echo PY_ENVNAME:!PY_ENVNAME!
+
+    if not exist !PY_ENVDIR! (
+        echo ERROR: Dir !PY_ENVDIR! not exist ...
+        exit /b 1
+    )
+    
+    if not exist !PY_ENVDIR!\Scripts\activate.bat (
+        echo ERROR: File !PY_ENVDIR!\Scripts\activate.bat ...
+        exit /b 2
+    )
+
+    call !PY_ENVDIR!\Scripts\activate.bat
     rem call D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P312\Scripts\activate.bat
 
     rem echo VIRTUAL_ENV_PROMPT:!VIRTUAL_ENV_PROMPT!
@@ -73,7 +84,18 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call !PY_ENVDIR!\!PY_ENVNAME!\Scripts\deactivate.bat
+    if not exist !PY_ENVDIR! (
+        echo ERROR: Dir !PY_ENVDIR! not exist ...
+        exit /b 1
+    )
+    
+    if not exist !PY_ENVDIR!\Scripts\activate.bat (
+        echo ERROR: File !PY_ENVDIR!\Scripts\deactivate.bat ...
+        exit /b 2
+    )
+
+
+    call !PY_ENVDIR!\Scripts\deactivate.bat
     rem call D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P312\Scripts\deactivate.bat
 
     rem echo VIRTUAL_ENV_PROMPT:!VIRTUAL_ENV_PROMPT!
