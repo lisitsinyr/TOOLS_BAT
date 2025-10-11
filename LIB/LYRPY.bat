@@ -50,7 +50,7 @@ rem beginfunction
     )
 
     echo PY_ENVDIR:!PY_ENVDIR!
-    echo PY_ENVNAME:!PY_ENVNAME!
+    rem echo PY_ENVNAME:!PY_ENVNAME!
 
     if not exist !PY_ENVDIR! (
         echo ERROR: Dir !PY_ENVDIR! not exist ...
@@ -63,7 +63,7 @@ rem beginfunction
     )
 
     call !PY_ENVDIR!\Scripts\activate.bat
-    rem call D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P312\Scripts\activate.bat
+    rem call D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\Scripts\activate.bat
 
     rem echo VIRTUAL_ENV_PROMPT:!VIRTUAL_ENV_PROMPT!
     rem echo PROMPT:!PROMPT!
