@@ -49,16 +49,16 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    echo PY_ENVDIR:!PY_ENVDIR!
+    rem echo PY_ENVDIR:!PY_ENVDIR!
     rem echo PY_ENVNAME:!PY_ENVNAME!
 
-    if not exist !PY_ENVDIR! (
+    if not exist !PY_ENVDIR!\ (
         echo ERROR: Dir !PY_ENVDIR! not exist ...
         exit /b 1
     )
     
     if not exist !PY_ENVDIR!\Scripts\activate.bat (
-        echo ERROR: File !PY_ENVDIR!\Scripts\activate.bat ...
+        echo ERROR: File !PY_ENVDIR!\Scripts\activate.bat not exist ...
         exit /b 2
     )
 
