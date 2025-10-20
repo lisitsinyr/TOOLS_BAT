@@ -106,12 +106,11 @@ rem setlocal enabledelayedexpansion
     rem echo P_Value_default:!%P_Name%!
 
     rem !P_Value! - значение переменной
-
     rem set P_Value=%2
     rem echo P_Value:!P_Value!
 
     set P_Value=%~2
-    rem echo P_Value:!P_Value!
+    echo P_Value:!P_Value!
 
     rem !PN_CAPTION! - PN_CAPTION
     rem [!P_Name!]   - имя переменной
