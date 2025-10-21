@@ -189,7 +189,6 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-
 rem -----------------------------------------------
 rem procedure UV_python_pin ()
 rem -----------------------------------------------
@@ -210,6 +209,220 @@ rem beginfunction
     rem uv python pin 3.X           
     rem cd myproject
     rem uv python pin 3.11
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_help ()
+rem -----------------------------------------------
+:UV_help
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_help
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    uv help
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_help_cmd ()
+rem -----------------------------------------------
+:UV_help_cmd
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_help_cmd
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem auth
+    rem run
+    rem init
+    rem add
+    rem remove
+    rem version
+    rem sync
+    rem lock
+    rem export
+    rem tree
+    rem format
+    rem tool
+    rem python
+    rem pip
+    rem venv
+    rem build
+    rem publish
+    rem cache
+    rem self
+    rem generate-shell-completion
+
+    set ACMD=%~1
+    rem echo ACMD:!ACMD!
+
+    uv help !ACMD!
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_version ()
+rem -----------------------------------------------
+:UV_version
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_version
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    uv --version
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_self ()
+rem -----------------------------------------------
+:UV_self
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_self
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    uv self
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_self_version ()
+rem -----------------------------------------------
+:UV_self_version
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_self_version
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    uv self version
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_install_self ()
+rem -----------------------------------------------
+:UV_install_self
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_install_self
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem Установка uv
+
+    rem Рекомендуемый способ установки uv с помощью автономного установщика
+    rem Для Windows:
+
+    rem powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+    "C:\Program Files\PowerShell\7\pwsh.exe" -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_install_other ()
+rem -----------------------------------------------
+:UV_install_other
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_install_other
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem Установка uv
+
+    rem Иные способы установки uv
+
+    rem Cargo:
+    rem cargo install --git https://github.com/astral-sh/uv uv
+
+    rem Homebrew:
+    rem brew install uv
+
+    rem Winget:
+    rem winget install --id=astral-sh.uv  -e
+
+    rem Scoop:
+    rem scoop install main/uv
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_update_self ()
+rem -----------------------------------------------
+:UV_update_self
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_update_self
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem Обновление uv
+
+    rem Если uv был установлен через автономный установщик, обновить его можно следующим образом:
+
+    uv self update
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_install_pip ()
+rem -----------------------------------------------
+:UV_install_pip
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_install_pip
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem Установка uv
+
+    rem Если вы предпочитаете классический способ установки uv через pip из PYPI:
+
+    pip install uv
+
+    exit /b 0
+rem endfunction
+
+rem -----------------------------------------------
+rem procedure UV_upgrade_pip ()
+rem -----------------------------------------------
+:UV_upgrade_pip
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=UV_upgrade_pip
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem Если uv был установлен через pip:
+
+    pip install --upgrade uv
 
     exit /b 0
 rem endfunction
