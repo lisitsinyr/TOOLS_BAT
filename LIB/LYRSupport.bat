@@ -162,33 +162,35 @@ rem beginfunction
     rem !P_Name!    - имя переменной
 
     set P_Name=%1
-    echo P_Name:!P_Name!
+    rem echo P_Name:!P_Name!
     set P_List=%~2
-    echo P_List:!P_List!
+    rem echo P_List:!P_List!
     set ADefault=%~3
-    echo ADefault:!ADefault!
+    rem echo ADefault:!ADefault!
     set ACaption=%~4
-    if "!ACaption!"=="" (
+    if not defined ACaption (
         set ACaption=!PN_CAPTION!
     )
-    echo ACaption:!ACaption!
+    rem echo ACaption:!ACaption!
     set Atimeout=%5
     set Atimeout=!TIMEOUT!
     if not defined Atimeout (
         set Atimeout=5
     )
-    echo Atimeout:!Atimeout!
+    rem echo Atimeout:!Atimeout!
 
-    set %P_Name%=!%P_Name%!
+    rem set %P_Name%=!%P_Name%!
     set %P_Name%=!ADefault!
 
-    if not "!P_List!"=="" (
+    if defined P_List (
         choice /C !P_List! /D !%P_Name%! /T !Atimeout! /M "!ACaption!"
-        if !ERRORLEVEL!==1 (
-            set %P_Name%=!ERRORLEVEL!
-        ) else (
-            set %P_Name%=
-        )
+        rem echo ERRORLEVEL:!ERRORLEVEL!
+        set %P_Name%=!ERRORLEVEL!
+        rem if !ERRORLEVEL!==1 (
+        rem     set %P_Name%=!ERRORLEVEL!
+        rem ) else (
+        rem     set %P_Name%=!ERRORLEVEL!
+        rem )
     )
 
     exit /b 0

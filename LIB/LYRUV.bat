@@ -53,6 +53,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo !FUNCNAME! ...
+
     echo List Python versions you have installed and versions you can install
     uv python list              
 
@@ -69,6 +71,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    echo !FUNCNAME! ...
 
     set AVERSION=%~1
     rem echo AVERSION:!AVERSION!
@@ -90,13 +93,14 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    echo !FUNCNAME! ...
 
     set AVERSION=%~1
     rem echo AVERSION:!AVERSION!
 
     echo unInstall Python !AVERSION!
     rem uv python uninstall 3.11.4
-    uv python uninstall !AVERSION!
+    rem uv python uninstall !AVERSION!
 
     exit /b 0
 rem endfunction
@@ -111,6 +115,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    echo !FUNCNAME! ...
 
     echo Run your default Python
     uv run python
@@ -128,6 +133,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    echo !FUNCNAME! ...
 
     echo Upgrade your Python versions
     uv python upgrade
@@ -145,6 +151,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    echo !FUNCNAME! ...
 
     set AVERSION=%~1
     rem echo AVERSION:!AVERSION!
@@ -165,6 +172,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    echo !FUNCNAME! ...
 
     echo View Python installation directory
     uv python dir
@@ -182,9 +190,12 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    echo !FUNCNAME! ...
 
-    rem UV will now use this version for all commands in this directory:
-    rem uv run python --version  # Will use Python 3.11
+    echo UV will now use this version for all commands in this directory:
+    
+    rem  Will use Python 3.11
+    uv run python --version  
 
     exit /b 0
 rem endfunction
@@ -199,6 +210,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    echo !FUNCNAME! ...
 
     set AVERSION=%~1
     rem echo AVERSION:!AVERSION!
@@ -209,7 +221,8 @@ rem beginfunction
     rem uv python pin 3.X           
     rem cd myproject
     rem uv python pin 3.11
-
+    uv python pin !AVERSION!
+    
     exit /b 0
 rem endfunction
 
