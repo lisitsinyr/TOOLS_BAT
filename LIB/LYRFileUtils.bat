@@ -28,8 +28,8 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem CONST
     rem -------------------------------------------------------------------
-    rem -------------------------------------------------------------------
 
+    rem -------------------------------------------------------------------
     rem VAR
     rem -------------------------------------------------------------------
 
@@ -339,10 +339,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem set CurrentDir="!cd!"
+    set CurrentDir=!cd!
     rem echo CurrentDir: !CurrentDir!
 
-    set !FUNCNAME!="!cd!"
+    rem set !FUNCNAME!=!cd!
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
     exit /b 0
