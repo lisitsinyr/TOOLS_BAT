@@ -41,7 +41,7 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure PY_ENV_START () -> None
+rem procedure PY_ENV_START (APY_ENVDIR) -> None
 rem -----------------------------------------------
 :PY_ENV_START
 rem beginfunction
@@ -51,34 +51,28 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem echo PY_ENVDIR:!PY_ENVDIR!
-    rem echo PY_ENVNAME:!PY_ENVNAME!
+    set APY_ENVDIR=%~1
+    echo APY_ENVDIR:!APY_ENVDIR!
 
-    if not exist !PY_ENVDIR!\ (
-        echo ERROR: Dir !PY_ENVDIR! not exist ...
+    if not exist !APY_ENVDIR!\ (
+        echo ERROR: Dir !APY_ENVDIR! not exist ...
         exit /b 1
     )
     
-    if not exist !PY_ENVDIR!\Scripts\activate.bat (
-        echo ERROR: File !PY_ENVDIR!\Scripts\activate.bat not exist ...
+    if not exist !APY_ENVDIR!\Scripts\activate.bat (
+        echo ERROR: File !APY_ENVDIR!\Scripts\activate.bat not exist ...
         exit /b 2
     )
 
-    call !PY_ENVDIR!\Scripts\activate.bat
-    rem call D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\Scripts\activate.bat
-
-    rem echo VIRTUAL_ENV_PROMPT:!VIRTUAL_ENV_PROMPT!
-    rem echo PROMPT:!PROMPT!
-    rem echo PYTHONHOME:!PYTHONHOME!
-    rem echo PATH:!PATH!
-
+    call !APY_ENVDIR!\Scripts\activate.bat
+ 
     set PY_ENV_START=
 
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure PY_ENV_STOP () -> None
+rem procedure PY_ENV_STOP (APY_ENVDIR) -> None
 rem -----------------------------------------------
 :PY_ENV_STOP
 rem beginfunction
@@ -88,23 +82,20 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    if not exist !PY_ENVDIR! (
-        echo ERROR: Dir !PY_ENVDIR! not exist ...
+    set APY_ENVDIR=%~1
+    echo APY_ENVDIR:!APY_ENVDIR!
+
+    if not exist !APY_ENVDIR! (
+        echo ERROR: Dir !APY_ENVDIR! not exist ...
         exit /b 1
     )
     
-    if not exist !PY_ENVDIR!\Scripts\activate.bat (
-        echo ERROR: File !PY_ENVDIR!\Scripts\deactivate.bat ...
+    if not exist !APY_ENVDIR!\Scripts\activate.bat (
+        echo ERROR: File !APY_ENVDIR!\Scripts\deactivate.bat ...
         exit /b 2
     )
 
-    call !PY_ENVDIR!\Scripts\deactivate.bat
-    rem call D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P312\Scripts\deactivate.bat
-
-    rem echo VIRTUAL_ENV_PROMPT:!VIRTUAL_ENV_PROMPT!
-    rem echo PROMPT:!PROMPT!
-    rem echo PYTHONHOME:!PYTHONHOME!
-    rem echo PATH:!PATH!
+    call !APY_ENVDIR!\Scripts\deactivate.bat
 
     set PY_ENV_STOP=
 
@@ -150,7 +141,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function VENV_DIR (AVENVDIR) -> None
+rem function VENV_DIR (AVENVDIR) -> !PY_ENVDIR!
 rem --------------------------------------------------------------------------------
 :VENV_DIR
 rem beginfunction
@@ -186,7 +177,7 @@ rem beginfunction
         exit /b 1
     )
 
-    set VENV_DIR=
+    set VENV_DIR=!PY_ENVDIR!
 
     exit /b 0
 
