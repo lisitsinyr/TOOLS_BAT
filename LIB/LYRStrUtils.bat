@@ -14,7 +14,7 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRStrUtils ()
+rem procedure LYRStrUtils () -> None
 rem --------------------------------------------------------------------------------
 :LYRStrUtils
 rem beginfunction
@@ -34,6 +34,8 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
+
+    set LYRStrUtils=
 
     exit /b 0
 rem endfunction
@@ -55,7 +57,9 @@ rem beginfunction
 
     rem Обрезать слева - обрезать пробелы в начале строки
     for /f "tokens=* delims= " %%a in ("!ASTR!") do set ASTR=%%a
-    set !FUNCNAME!=!ASTR!
+
+    rem set !FUNCNAME!=!ASTR!
+    set TrimLeft=!ASTR!
 
     exit /b 0
 rem endfunction
@@ -77,7 +81,9 @@ rem beginfunction
 
     rem Обрезать справа - обрезать пробелы в конце строки
     for /l %%a in (1,1,31) do if "!ASTR:~-1!"==" " set ASTR=!ASTR:~0,-1!
-    set !FUNCNAME!=!ASTR!
+
+    rem set !FUNCNAME!=!ASTR!
+    set TrimRight=!ASTR!
 
     exit /b 0
 rem endfunction
@@ -99,7 +105,8 @@ rem beginfunction
     call :TrimLeft !ASTR!
     call :TrimRight !ASTR!
 
-    set !FUNCNAME!=!ASTR!
+    rem set !FUNCNAME!=!ASTR!
+    set Trim=!ASTR!
 
     exit /b 0
 rem endfunction
@@ -121,7 +128,8 @@ rem beginfunction
     set /a Alen=%2
     rem echo Alen:!Alen!
 
-    set !FUNCNAME!=!ASTR:0,Alen!
+    rem set !FUNCNAME!=!ASTR:0,Alen!
+    set Left=!ASTR:0,Alen!
 
     exit /b 0
 rem endfunction
@@ -145,7 +153,8 @@ rem beginfunction
     set /a Alen=%3
     rem echo Alen:!Alen!
 
-    set !FUNCNAME!=!ASTR:~!Aposition!,Alen!
+    rem set !FUNCNAME!=!ASTR:~!Aposition!,Alen!
+    set Mid=!ASTR:~!Aposition!,Alen!
 
     exit /b 0
 rem endfunction
@@ -167,7 +176,8 @@ rem beginfunction
 
     for %%a in ( '%ASTR%' ) do set ASTR=%%~a
 
-    set !FUNCNAME!=!ASTR!
+    rem set !FUNCNAME!=!ASTR!
+    set TrimQuotes=!ASTR!
 
     exit /b 0
 rem endfunction
@@ -214,7 +224,7 @@ rem beginfunction
     rem echo LSTR:!LSTR!
 
     set ListToStr=!LSTR!
-    set !FUNCNAME!=!LSTR!
+    rem set !FUNCNAME!=!LSTR!
 
     exit /b 0
 rem endfunction

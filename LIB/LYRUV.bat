@@ -14,7 +14,7 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRUV ()
+rem procedure LYRUV () -> None
 rem --------------------------------------------------------------------------------
 :LYRUV
 rem beginfunction
@@ -35,6 +35,8 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRUV=
+
     exit /b 0
 rem endfunction
 
@@ -43,7 +45,7 @@ rem Manage Python versions
 rem -----------------------------------------------
 
 rem -----------------------------------------------
-rem procedure UV_python_list ()
+rem procedure UV_python_list () -> None
 rem -----------------------------------------------
 :UV_python_list
 rem beginfunction
@@ -58,11 +60,13 @@ rem beginfunction
     echo List Python versions you have installed and versions you can install
     uv python list              
 
+    set UV_python_list=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_install ()
+rem procedure UV_python_install () -> None
 rem -----------------------------------------------
 :UV_python_install
 rem beginfunction
@@ -80,11 +84,13 @@ rem beginfunction
     rem uv python install 3.13
     uv python install !AVERSION!
 
+    set UV_python_install=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_uninstall ()
+rem procedure UV_python_uninstall () -> None
 rem -----------------------------------------------
 :UV_python_uninstall
 rem beginfunction
@@ -102,11 +108,13 @@ rem beginfunction
     rem uv python uninstall 3.11.4
     rem uv python uninstall !AVERSION!
 
+    set UV_python_uninstall=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_run ()
+rem procedure UV_python_run () -> None
 rem -----------------------------------------------
 :UV_python_run
 rem beginfunction
@@ -120,11 +128,13 @@ rem beginfunction
     echo Run your default Python
     uv run python
 
+    set UV_python_run=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_upgrade ()
+rem procedure UV_python_upgrade () -> None
 rem -----------------------------------------------
 :UV_python_upgrade
 rem beginfunction
@@ -138,11 +148,13 @@ rem beginfunction
     echo Upgrade your Python versions
     uv python upgrade
 
+    set UV_python_upgrade=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_find ()
+rem procedure UV_python_find () -> None
 rem -----------------------------------------------
 :UV_python_find
 rem beginfunction
@@ -159,11 +171,13 @@ rem beginfunction
     echo Find specific Python version !AVERSION!
     uv python find !AVERSION!
 
+    set UV_python_find=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_dir ()
+rem procedure UV_python_dir () -> None
 rem -----------------------------------------------
 :UV_python_dir
 rem beginfunction
@@ -177,11 +191,13 @@ rem beginfunction
     echo View Python installation directory
     uv python dir
 
+    set UV_python_dir=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_ ()
+rem procedure UV_python_ () -> None
 rem -----------------------------------------------
 :UV_python_
 rem beginfunction
@@ -197,11 +213,13 @@ rem beginfunction
     rem  Will use Python 3.11
     uv run python --version  
 
+    set UV_python_=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_pin ()
+rem procedure UV_python_pin () -> None
 rem -----------------------------------------------
 :UV_python_pin
 rem beginfunction
@@ -223,11 +241,13 @@ rem beginfunction
     rem uv python pin 3.11
     uv python pin !AVERSION!
     
+    set UV_python_pin=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_help ()
+rem procedure UV_help () -> None
 rem -----------------------------------------------
 :UV_help
 rem beginfunction
@@ -239,11 +259,13 @@ rem beginfunction
 
     uv help
 
+    set UV_help=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_help_cmd ()
+rem procedure UV_help_cmd () -> None
 rem -----------------------------------------------
 :UV_help_cmd
 rem beginfunction
@@ -279,11 +301,13 @@ rem beginfunction
 
     uv help !ACMD!
 
+    set UV_help_cmd=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_version ()
+rem procedure UV_version () -> None
 rem -----------------------------------------------
 :UV_version
 rem beginfunction
@@ -295,11 +319,13 @@ rem beginfunction
 
     uv --version
 
+    set UV_version=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_self ()
+rem procedure UV_self () -> None
 rem -----------------------------------------------
 :UV_self
 rem beginfunction
@@ -311,11 +337,13 @@ rem beginfunction
 
     uv self
 
+    set UV_self=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_self_version ()
+rem procedure UV_self_version () -> None
 rem -----------------------------------------------
 :UV_self_version
 rem beginfunction
@@ -327,11 +355,13 @@ rem beginfunction
 
     uv self version
 
+    set UV_self_version=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_install_self ()
+rem procedure UV_install_self () -> None
 rem -----------------------------------------------
 :UV_install_self
 rem beginfunction
@@ -349,11 +379,13 @@ rem beginfunction
     rem powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
     "C:\Program Files\PowerShell\7\pwsh.exe" -c "irm https://astral.sh/uv/install.ps1 | iex"
 
+    set UV_install_self=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_install_other ()
+rem procedure UV_install_other () -> None
 rem -----------------------------------------------
 :UV_install_other
 rem beginfunction
@@ -379,11 +411,13 @@ rem beginfunction
     rem Scoop:
     rem scoop install main/uv
 
+    set UV_install_other=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_update_self ()
+rem procedure UV_update_self () -> None
 rem -----------------------------------------------
 :UV_update_self
 rem beginfunction
@@ -399,11 +433,13 @@ rem beginfunction
 
     uv self update
 
+    set UV_update_self=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_install_pip ()
+rem procedure UV_install_pip () -> None
 rem -----------------------------------------------
 :UV_install_pip
 rem beginfunction
@@ -419,11 +455,13 @@ rem beginfunction
 
     pip install uv
 
+    set UV_install_pip=
+
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_upgrade_pip ()
+rem procedure UV_upgrade_pip () -> None
 rem -----------------------------------------------
 :UV_upgrade_pip
 rem beginfunction
@@ -436,6 +474,8 @@ rem beginfunction
     rem Если uv был установлен через pip:
 
     pip install --upgrade uv
+
+    set UV_upgrade_pip=
 
     exit /b 0
 rem endfunction

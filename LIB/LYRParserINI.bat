@@ -14,7 +14,7 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRParserINI ()
+rem procedure LYRParserINI () -> None
 rem --------------------------------------------------------------------------------
 :LYRParserINI
 rem beginfunction
@@ -35,11 +35,13 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRParserINI=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure SetINI (AFileName, ASection, AParameter, AValue)
+rem procedure SetINI (AFileName, ASection, AParameter, AValue) -> None
 rem --------------------------------------------------------------------------------
 :SetINI
 rem beginfunction
@@ -61,11 +63,13 @@ rem beginfunction
 
     %SetINIAPP% "!AFileName!" !ASection! !AParameter! "!AValue!"
 
+    set SetINI=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINI (AFileName, ASection, AParameter)
+rem procedure GetINI (AFileName, ASection, AParameter) -> None
 rem --------------------------------------------------------------------------------
 :GetINI
 rem beginfunction
@@ -137,11 +141,13 @@ rem beginfunction
     set /a SectionsCount=n-1
     set /a ParametersCount=k-1
 
+    set GetINI=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIPY (AFileName, ASection, AParameter)
+rem procedure GetINIPY (AFileName, ASection, AParameter) -> None
 rem --------------------------------------------------------------------------------
 :GetINIPY
 rem beginfunction
@@ -211,11 +217,13 @@ rem beginfunction
     set /a SectionsCount=n-1
     set /a ParametersCount=k-1
 
+    set GetINIPY=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIParametr (AFileName, ASection, AParameter)
+rem procedure GetINIParametr (AFileName, ASection, AParameter) -> None
 rem --------------------------------------------------------------------------------
 :GetINIParametr
 rem beginfunction
@@ -303,11 +311,13 @@ rem beginfunction
     set /a SectionsCount=n-1
     set /a ParametersCount=k-1
 
+    set GetINIParametr=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetFileParser (AFileName Adelims Atokens Aeol)
+rem procedure GetFileParser (AFileName Adelims Atokens Aeol) -> None
 rem --------------------------------------------------------------------------------
 :GetFileParser
 rem beginfunction
@@ -373,6 +383,8 @@ rem beginfunction
         echo ERROR: File !AFileName! not exist ...
         exit /b 1
     )
+
+    set GetFileParser=
 
     exit /b 0
 rem endfunction

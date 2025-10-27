@@ -14,7 +14,7 @@ rem ÔÓÍÊÖÈÈ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRDEPLOY ()
+rem procedure LYRDEPLOY () -> None
 rem --------------------------------------------------------------------------------
 :LYRDEPLOY
 rem beginfunction
@@ -74,11 +74,13 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRDEPLOY=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CopyFilesFromPATTERN ()
+rem procedure CopyFilesFromPATTERN () -> None
 rem --------------------------------------------------------------------------------
 :CopyFilesFromPATTERN
 rem beginfunction
@@ -341,11 +343,13 @@ rem beginfunction
         )
     )
 
+    set CopyFilesFromPATTERN=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CopyFilesROOT ()
+rem procedure CopyFilesROOT () -> None
 rem --------------------------------------------------------------------------------
 :CopyFilesROOT
 rem beginfunction
@@ -390,11 +394,13 @@ rem beginfunction
         copy !LDirectory!\!LFileName! > NUL
     )
 
+    set CopyFilesROOT=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure SetPROJECT_INI ()
+rem procedure SetPROJECT_INI () -> None
 rem --------------------------------------------------------------------------------
 :SetPROJECT_INI
 rem beginfunction
@@ -411,11 +417,13 @@ rem beginfunction
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_NAME !PROJECT_NAME!
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general DIR_GROUP_ROOT !DIR_GROUP_ROOT!
 
+    set SetPROJECT_INI=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure SetREPO_INI ()
+rem procedure SetREPO_INI () -> None
 rem --------------------------------------------------------------------------------
 :SetREPO_INI
 rem beginfunction
@@ -429,11 +437,13 @@ rem beginfunction
 
     call :SetINI !DIR_PROJECT_NAME!\REPO.ini general REPO_NAME !PROJECT_NAME!
 
+    set SetREPO_INI=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure REPO_WORK (ADirectory)
+rem procedure REPO_WORK (ADirectory) -> None
 rem --------------------------------------------------------------------------------
 :REPO_WORK
 rem beginfunction
@@ -475,11 +485,13 @@ rem beginfunction
         call lyrgit_push_main.bat
     )
 
+    set REPO_WORK=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure REPO_WORK_TOOLS (ADirectory)
+rem procedure REPO_WORK_TOOLS (ADirectory) -> None
 rem --------------------------------------------------------------------------------
 :REPO_WORK_TOOLS
 rem beginfunction
@@ -523,11 +535,13 @@ rem beginfunction
 
     call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
 
+    set REPO_WORK_TOOLS=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure DEPLOY_PROJECT ()
+rem procedure DEPLOY_PROJECT () -> None
 rem --------------------------------------------------------------------------------
 :DEPLOY_PROJECT
 rem beginfunction
@@ -607,11 +621,13 @@ rem beginfunction
 
     call :REPO_WORK !DIR_PROJECT_NAME!
 
+    set DEPLOY_PROJECT=
+
     exit /b 0
 rem endfunction
 
 rem =================================================
-rem procedure git_pull (ADirectory)
+rem procedure git_pull (ADirectory) -> None
 rem =================================================
 :git_pull
 rem beginfunction
@@ -641,11 +657,13 @@ rem beginfunction
     rem git pull
     rem call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
 
+    set git_pull=
+
     exit /b 0
 rem endfunction
 
 rem =================================================
-rem procedure git_clone (Aurl)
+rem procedure git_clone (Aurl) -> None
 rem =================================================
 :git_clone
 rem beginfunction
@@ -676,11 +694,13 @@ rem beginfunction
         exit /b 1
     )
 
+    set git_clone=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure PULL_PROJECT ()
+rem procedure PULL_PROJECT () -> None
 rem --------------------------------------------------------------------------------
 :PULL_PROJECT
 rem beginfunction
@@ -860,8 +880,9 @@ rem beginfunction
         if !APROJECT_NAME!==TOOLS_SH (
             call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SH!
         )
-
     )   
+
+    set PULL_PROJECT=
 
     exit /b 0
 rem endfunction

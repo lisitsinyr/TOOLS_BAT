@@ -14,7 +14,7 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRFileUtils ()
+rem procedure LYRFileUtils () -> None
 rem --------------------------------------------------------------------------------
 :LYRFileUtils
 rem beginfunction
@@ -35,6 +35,8 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRFileUtils=
+
     exit /b 0
 rem endfunction
 
@@ -53,7 +55,7 @@ rem beginfunction
     set AFullFilename=%1
 
     set ExtractFileDir=%~d1%~p1
-    set !FUNCNAME!=%~d1%~p1
+    rem set !FUNCNAME!=%~d1%~p1
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
     exit /b 0
@@ -74,7 +76,7 @@ rem beginfunction
     set AFilename=%1
 
     set FullFileName=%~f1
-    set !FUNCNAME!=%~f1
+    rem set !FUNCNAME!=%~f1
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
     exit /b 0
@@ -95,7 +97,7 @@ rem beginfunction
     set AFilename=%1
 
     set ExtractFileName=%~nx1
-    set !FUNCNAME!=%~nx1
+    rem set !FUNCNAME!=%~nx1
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
     exit /b 0
@@ -116,7 +118,7 @@ rem beginfunction
     set AFilename=%1
 
     set ExtractFileNameWithoutExt=%~n1
-    set !FUNCNAME!=%~n1
+    rem set !FUNCNAME!=%~n1
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
     exit /b 0
@@ -137,14 +139,14 @@ rem beginfunction
     set AFilename=%1
 
     set ExtractFileExt=%~x1
-    set !FUNCNAME!=%~x1
+    rem set !FUNCNAME!=%~x1
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function FileAttr (AFileName) -> FileAttr
+rem function FileAttr (AFileName) -> FOLDER
 rem --------------------------------------------------------------------------------
 :FileAttr
 rem beginfunction
@@ -175,6 +177,8 @@ rem beginfunction
     rem echo !FUNCNAME!: !%FUNCNAME%!
     rem echo FOLDER: !FOLDER!
 
+    set FileAttr=!FOLDER!
+
     exit /b 0
 rem endfunction
 
@@ -196,9 +200,12 @@ rem beginfunction
     rem echo FILENAME: !FILENAME!
 
     set /a !FUNCNAME!=0
+    set /a FileSize=0
+
     if defined FILENAME (
         if exist "!FILENAME!" (
             set /a !FUNCNAME!=%~z1
+            set /a FileSize=%~z1
         )
     )
     rem echo !FUNCNAME!: !%FUNCNAME%!
@@ -222,6 +229,8 @@ rem beginfunction
     set ADIRECTORY=%~1
     rem echo ADIRECTORY: !ADIRECTORY!
 
+    set CreateDir=
+
     if defined ADIRECTORY (
         if not exist "!ADIRECTORY!\" (
             mkdir "!ADIRECTORY!"
@@ -232,7 +241,7 @@ rem beginfunction
             )
         )
         set CreateDir=!ADIRECTORY!
-        set !FUNCNAME!=!ADIRECTORY!
+        rem set !FUNCNAME!=!ADIRECTORY!
     )
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
@@ -241,7 +250,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function ClearDir (ADIRECTORY, AMASK)
+rem function ClearDir (ADIRECTORY, AMASK) -> None
 rem --------------------------------------------------------------------------------
 :ClearDir
 rem beginfunction
@@ -263,6 +272,8 @@ rem beginfunction
         )
     )
 
+    set ClearDir=
+
     exit /b 0
 
 rem endfunction
@@ -282,6 +293,7 @@ rem beginfunction
     set AFILENAME=%~1
     rem echo AFILENAME: !AFILENAME!
 
+    set CreateFile=
     if defined AFILENAME (
         if not exist "!AFILENAME!" (
             rem set touchRUN=touch -f "!AFILENAME!"
@@ -291,7 +303,7 @@ rem beginfunction
             D:\TOOLS\EXE\touch.exe "!AFILENAME!"
         )
         set CreateFile="!AFILENAME!"
-        set !FUNCNAME!="!AFILENAME!"
+        rem set !FUNCNAME!="!AFILENAME!"
     )
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
@@ -315,10 +327,12 @@ rem beginfunction
     set AFILENAME=%~1
     rem echo AFILENAME: !AFILENAME!
 
+    set CheckFile=
+
     if defined AFILENAME (
         if exist "!AFILENAME!" (
             set CheckFile="!AFILENAME!"
-            set !FUNCNAME!="!AFILENAME!"
+            rem set !FUNCNAME!="!AFILENAME!"
         )
     )
     rem echo !FUNCNAME!: !%FUNCNAME%!
@@ -350,7 +364,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure COPY_FILE (FileName, DIR_TO, /Y)
+rem procedure COPY_FILE (FileName, DIR_TO, /Y) -> None
 rem --------------------------------------------------------------------------------
 :COPY_FILE
 rem beginfunction
@@ -395,11 +409,13 @@ rem beginfunction
         )
     )
 
+    set COPY_FILE=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure COPY_FILES (DIR_FROM, DIR_TO, MASK, /R /Y)
+rem procedure COPY_FILES (DIR_FROM, DIR_TO, MASK, /R /Y) -> None
 rem --------------------------------------------------------------------------------
 :COPY_FILES
 rem beginfunction
@@ -475,11 +491,13 @@ rem beginfunction
         cd /D "!CurrentDir!"
     )
 
+    set COPY_FILES=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure XCOPY_FILES (DIR_FROM, DIR_TO, MASK, ARG)
+rem procedure XCOPY_FILES (DIR_FROM, DIR_TO, MASK, ARG) -> None
 rem --------------------------------------------------------------------------------
 :XCOPY_FILES
 rem beginfunction
@@ -515,6 +533,8 @@ rem beginfunction
 
     xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
     call :CheckErrorlevel XCOPY_FILES !errorlevel! 1
+
+    set XCOPY_FILES=
 
     exit /b 0
 rem endfunction

@@ -14,7 +14,7 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRSupport ()
+rem procedure LYRSupport () -> None
 rem --------------------------------------------------------------------------------
 :LYRSupport
 rem beginfunction
@@ -58,7 +58,7 @@ rem beginfunction
 rem endfunction
    
 rem --------------------------------------------------------------------------------
-rem procedure Pause (APause)
+rem procedure Pause (APause) -> None
 rem --------------------------------------------------------------------------------
 :Pause
 rem beginfunction
@@ -82,7 +82,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Read_P (P_Name, P_Value)
+rem procedure Read_P (P_Name, P_Value) -> None
 rem --------------------------------------------------------------------------------
 :Read_P
 rem beginfunction
@@ -139,8 +139,8 @@ rem setlocal enabledelayedexpansion
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Read_F (P_Name, P_List, Atimeout)
-rem procedure Read_F (P_Name, P_List, ADefault, ACaption, Atimeout)
+rem procedure Read_F (P_Name, P_List, Atimeout) -> None
+rem procedure Read_F (P_Name, P_List, ADefault, ACaption, Atimeout) -> None
 rem --------------------------------------------------------------------------------
 :Read_F
 rem beginfunction
@@ -214,7 +214,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetDir (ASET, Aview, Aarg)
+rem procedure GetDir (ASET, Aview, Aarg) -> None
 rem --------------------------------------------------------------------------------
 :GetDir
 rem beginfunction
@@ -246,11 +246,13 @@ rem beginfunction
         echo !Directory!
     )
 
+    set GetDir=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetFile (ASET, Aview, Aarg)
+rem procedure GetFile (ASET, Aview, Aarg) -> None
 rem --------------------------------------------------------------------------------
 :GetFile
 rem beginfunction
@@ -282,11 +284,13 @@ rem beginfunction
         echo !File!
     )
 
+    set GetFile=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure FORCicle (Astart, Astep, Aend)
+rem procedure FORCicle (Astart, Astep, Aend) -> None
 rem --------------------------------------------------------------------------------
 :FORCicle
 rem beginfunction
@@ -317,11 +321,13 @@ rem beginfunction
         echo %%L
     )
 
+    set FORCicle=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetSET (ASET Adelims Atokens)
+rem procedure GetSET (ASET Adelims Atokens) -> None
 rem --------------------------------------------------------------------------------
 :GetSET
 rem beginfunction
@@ -352,11 +358,13 @@ rem beginfunction
         echo %%i=%%j
     )
 
+    set GetSET=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetCMD (ASET Adelims Atokens)
+rem procedure GetCMD (ASET Adelims Atokens) -> None
 rem --------------------------------------------------------------------------------
 :GetCMD
 rem beginfunction
@@ -387,11 +395,13 @@ rem beginfunction
         echo %%i^|%%j^|%%k^|%%k^|%%m^|%%n^|%%o^|%%p^|%%r^|%%s^|%%t^|
     )
 
+    set GetCMD=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure CheckErrorlevel (ATEXT, AERRORLEVEL, APAUSE)
+rem procedure CheckErrorlevel (ATEXT, AERRORLEVEL, APAUSE) -> None
 rem --------------------------------------------------------------------------------
 :CheckErrorlevel
 rem beginfunction
@@ -413,6 +423,9 @@ rem beginfunction
             call :PressAnyKey
         )
     )
+
+    set CheckErrorlevel=
+
     exit /b 0
 rem endfunction
 

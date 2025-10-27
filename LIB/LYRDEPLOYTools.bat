@@ -14,7 +14,7 @@ rem ÔÓÍÊÖÈÈ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRDEPLOYTools ()
+rem procedure LYRDEPLOYTools () -> None
 rem --------------------------------------------------------------------------------
 :LYRDEPLOYTools
 rem beginfunction
@@ -35,11 +35,13 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRDEPLOYTools=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_BAT_SCRIPTS_BAT ()
+rem procedure UPDATE_TOOLS_BAT_SCRIPTS_BAT () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT
 rem beginfunction
@@ -81,11 +83,13 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_BAT_SCRIPTS_BAT=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_BAT_TOOLS_SRC_BAT ()
+rem procedure UPDATE_TOOLS_BAT_TOOLS_SRC_BAT () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
 rem beginfunction
@@ -127,11 +131,13 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
+    set UPDATE_TOOLS_BAT_TOOLS_SRC_BAT=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem UPDATE_TOOLS_GIT_TOOLS_SRC_GIT ()
+rem UPDATE_TOOLS_GIT_TOOLS_SRC_GIT () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
 rem beginfunction
@@ -166,11 +172,13 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_GIT_TOOLS_SRC_GIT=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_JAVA_SCRIPTS_JAVA ()
+rem procedure UPDATE_TOOLS_JAVA_SCRIPTS_JAVA () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
 rem beginfunction
@@ -212,11 +220,13 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_JAVA_SCRIPTS_JAVA=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA ()
+rem procedure UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
 rem beginfunction
@@ -258,11 +268,13 @@ rem beginfunction
     set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_KIX_SCRIPTS_KIX ()
+rem procedure UPDATE_TOOLS_KIX_SCRIPTS_KIX () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_KIX_SCRIPTS_KIX
 rem beginfunction
@@ -304,11 +316,13 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_KIX_SCRIPTS_KIX=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem UPDATE_TOOLS_KIX_TOOLS_SRC_KIX ()
+rem UPDATE_TOOLS_KIX_TOOLS_SRC_KIX () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
 rem beginfunction
@@ -350,11 +364,13 @@ rem beginfunction
     set LMASK=*.kxl
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_KIX_TOOLS_SRC_KIX=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_PY_SCRIPTS_PY ()
+rem procedure UPDATE_TOOLS_PY_SCRIPTS_PY () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_PY_SCRIPTS_PY
 rem beginfunction
@@ -396,11 +412,13 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_PY_SCRIPTS_PY=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_PY_TOOLS_SRC_PY ()
+rem procedure UPDATE_TOOLS_PY_TOOLS_SRC_PY () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_PY_TOOLS_SRC_PY
 rem beginfunction
@@ -442,11 +460,13 @@ rem beginfunction
     set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_PY_TOOLS_SRC_PY=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_SH_SCRIPTS_SH ()
+rem procedure UPDATE_TOOLS_SH_SCRIPTS_SH () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_SH_SCRIPTS_SH
 rem beginfunction
@@ -488,11 +508,13 @@ rem beginfunction
     set LMASK=*.sh
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_SH_SCRIPTS_SH=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_SH_TOOLS_SRC_SH ()
+rem procedure UPDATE_TOOLS_SH_TOOLS_SRC_SH () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_SH_TOOLS_SRC_SH
 rem beginfunction
@@ -536,11 +558,13 @@ rem beginfunction
     set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
+    set UPDATE_TOOLS_SH_TOOLS_SRC_SH=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure UPDATE_TOOLS_SH_TOOLS_SRC_SH ()
+rem procedure UPDATE_TOOLS_SH_TOOLS_SRC_SH () -> None
 rem --------------------------------------------------------------------------------
 :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
 rem beginfunction
@@ -572,6 +596,8 @@ rem beginfunction
 
     set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+
+    set UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH=
 
     exit /b 0
 rem endfunction

@@ -14,7 +14,7 @@ rem ÔÓÍÊÖÈÈ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRConst ()
+rem procedure LYRConst () -> None
 rem --------------------------------------------------------------------------------
 :LYRConst
 rem beginfunction
@@ -36,6 +36,8 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
+
+    set LYRConst=
 
     exit /b 0
 rem endfunction

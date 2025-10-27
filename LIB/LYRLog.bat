@@ -14,7 +14,7 @@ rem ÔÓÍÊÖÈÈ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRLog ()
+rem procedure LYRLog () -> None
 rem --------------------------------------------------------------------------------
 :LYRLog
 rem beginfunction
@@ -35,11 +35,13 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRLog=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure __SETVarLog ()
+rem procedure __SETVarLog () -> None
 rem --------------------------------------------------------------------------------
 :__SETVarLog
 rem beginfunction
@@ -84,6 +86,8 @@ rem beginfunction
     set ctlsDEBUGTEXT=T
     set ctlsTEXT=T
 
+    set __SETVarLog=
+
     exit /b 0
 rem endfunction
 
@@ -106,33 +110,43 @@ rem beginfunction
 
     if !Alevel! EQU !INFO! (
         set !FUNCNAME!=!ctlsINFO!
+        set __SHORTLevelName=!ctlsINFO!
     )
     if !Alevel! EQU !WARNING! (
         set !FUNCNAME!=!ctlsWARNING!
+        set __SHORTLevelName=!ctlsWARNING!
     )
     if !Alevel! EQU !ERROR! (
         set !FUNCNAME!=!ctlsERROR!
+        set __SHORTLevelName=!ctlsERROR!
     )
     if !Alevel! EQU !CRITICAL! (
         set !FUNCNAME!=!ctlsCRITICAL!
+        set __SHORTLevelName=!ctlsCRITICAL!
     )
     if !Alevel! EQU !DEBUGT! (
         set !FUNCNAME!=!ctlsDEBUG!
+        set __SHORTLevelName=!ctlsDEBUG!
     )
     if !Alevel! EQU !TEXT! (
         set !FUNCNAME!=!ctlsTEXT!
+        set __SHORTLevelName=!ctlsTEXT!
     )
     if !Alevel! EQU !DEBUGTEXT! (
         set !FUNCNAME!=!ctlsDEBUGTEXT!
+        set __SHORTLevelName=!ctlsDEBUGTEXT!
     )
     if !Alevel! EQU !BEGIN! (
         set !FUNCNAME!=!ctlsBEGIN!
+        set __SHORTLevelName=!ctlsBEGIN!
     )
     if !Alevel! EQU !END! (
         set !FUNCNAME!=!ctlsEND!
+        set __SHORTLevelName=!ctlsEND!
     )
     if !Alevel! EQU !PROCESS! (
         set !FUNCNAME!=!ctlsPROCESS!
+        set __SHORTLevelName=!ctlsPROCESS!
     )
 
     exit /b 0
@@ -170,47 +184,59 @@ rem beginfunction
     rem echo __SHORTLevelName:!__SHORTLevelName!
     
     set FUNCNAME=__LOG_STR
+    set __LOG_STR=
 
     set asctime=!FORMAT!
 
     set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+    set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
 
     if !Alevel! EQU !INFO! (
         set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+        set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
     )
     if !Alevel! EQU !WARNING! (
         set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+        set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
     )
     if !Alevel! EQU !ERROR! (
         set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+        set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
     )
     if !Alevel! EQU !CRITICAL! (
         set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+        set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
     )
     if !Alevel! EQU !DEBUGT! (
         set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+        set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
     )
     if !Alevel! EQU !TEXT! (
         set !FUNCNAME!=!Amessage!
+        set __LOG_STR=!Amessage!
     )
     if !Alevel! EQU !DEBUGTEXT! (
         set !FUNCNAME!=!__SHORTLevelName! !Amessage!
+        set __LOG_STR=!__SHORTLevelName! !Amessage!
     )
     if !Alevel! EQU !BEGIN! (
         set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+        set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
     )
     if !Alevel! EQU !END! (
         set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+        set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
     )
     if !Alevel! EQU !PROCESS! (
         set !FUNCNAME!=!asctime! !__SHORTLevelName! !Amessage!
+        set __LOG_STR=!asctime! !__SHORTLevelName! !Amessage!
     )
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure AddLogConsole (s)
+rem procedure AddLogConsole (s) -> None
 rem --------------------------------------------------------------------------------
 :AddLogConsole
 rem beginfunction
@@ -256,11 +282,13 @@ rem beginfunction
         call :WriteTEXT !s!
     )
 
+    set AddLogConsole=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure AddLog (Aout, Alevel, ...)
+rem procedure AddLog (Aout, Alevel, ...) -> None
 rem --------------------------------------------------------------------------------
 :AddLog
 rem beginfunction
@@ -290,11 +318,13 @@ rem beginfunction
         echo !__LOG_STR! >> "!LOG_FULLFILENAME!"
     )
 
+    set AddLog=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure AddLogFile (Aout, AFileName)
+rem procedure AddLogFile (Aout, AFileName) -> None
 rem --------------------------------------------------------------------------------
 :AddLogFile
 rem beginfunction
@@ -329,11 +359,13 @@ rem beginfunction
         )
     )
 
+    set AddLogFile=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure StartLogFile ()
+rem procedure StartLogFile () -> None
 rem --------------------------------------------------------------------------------
 :StartLogFile
 rem beginfunction
@@ -379,11 +411,13 @@ rem beginfunction
     rem call :AddLog !loAll! !PROCESS! !S01! || exit /b 1
     rem -------------------------------------------------------------------
 
+    set StartLogFile=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure StopLogFile ()
+rem procedure StopLogFile () -> None
 rem --------------------------------------------------------------------------------
 :StopLogFile
 rem beginfunction
@@ -399,6 +433,8 @@ rem beginfunction
     call :AddLog !loAll! !PROCESS! Stop: !SCRIPT_BASEFILENAME! ... || exit /b 1
     rem call :AddLog !loAll! !PROCESS! !S01! || exit /b 1
     rem -------------------------------------------------------------------
+
+    set StopLogFile=
 
     exit /b 0
 rem endfunction

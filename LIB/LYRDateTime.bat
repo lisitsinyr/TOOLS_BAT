@@ -14,7 +14,7 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRDateTime ()
+rem procedure LYRDateTime () -> None
 rem --------------------------------------------------------------------------------
 :LYRDateTime
 rem beginfunction
@@ -35,6 +35,8 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRDateTime=
+
     exit /b 0
 rem endfunction
 
@@ -53,10 +55,12 @@ rem beginfunction
     set LFORMAT="!YYYY!!MM!!DD!!HH!!MIN!!SS!"
     call :DateTime !LFORMAT! !! exit /b 1
 
-    set FUNCNAME=YYYYMMDDHHMMSS
+    rem set FUNCNAME=YYYYMMDDHHMMSS
     rem set YYYYMMDDHHMMSS=!DateTime!
-    set !FUNCNAME!=!DateTime!
+    rem set !FUNCNAME!=!DateTime!
     rem echo YYYYMMDDHHMMSS:!YYYYMMDDHHMMSS!
+
+    set YYYYMMDDHHMMSS=!DateTime!
 
     exit /b 0
 rem endfunction
@@ -84,8 +88,10 @@ rem beginfunction
     rem echo AFORMAT:!AFORMAT!
 
     rem set DateTime=!AFORMAT!
-    set !FUNCNAME!=!AFORMAT!
+    rem set !FUNCNAME!=!AFORMAT!
     rem echo DateTime:!DateTime!
+
+    set DateTime=!AFORMAT!
 
     exit /b 0
 rem endfunction
