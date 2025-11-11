@@ -432,7 +432,7 @@ rem beginfunction
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
-    rem 
+    rem TOOLS_SRC_PY\SRC\BAT
     rem --------------------------------------------------------
     set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT
     rem echo LDIR_FROM:!LDIR_FROM!
@@ -443,7 +443,7 @@ rem beginfunction
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     rem --------------------------------------------------------
-    rem 
+    rem TOOLS_SRC_PY\SRC\LIB
     rem --------------------------------------------------------
     set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
@@ -458,7 +458,7 @@ rem beginfunction
     )
 
     set LMASK=*.*
-    call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
+    rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     set UPDATE_TOOLS_PY_TOOLS_SRC_PY=
 
