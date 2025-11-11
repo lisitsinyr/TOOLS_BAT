@@ -66,7 +66,7 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set PROJECT_GROUP=PROJECTS_BAT
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
