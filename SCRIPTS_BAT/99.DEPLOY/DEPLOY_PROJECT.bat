@@ -136,7 +136,7 @@ rem beginfunction
     rem DIR_PROJECT_NAME
     rem ------------------------------------------------
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
-    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    echo ...............................................DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
     rem echo REPO_NAME:!REPO_NAME!
