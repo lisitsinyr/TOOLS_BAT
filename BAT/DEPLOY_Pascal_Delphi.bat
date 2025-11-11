@@ -53,14 +53,12 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-   
-    
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
     set PROJECT_GROUP=Pascal_Delphi
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
@@ -92,7 +90,7 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_D11
     call :DEPLOY_PROJECT
 
-    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
 :end

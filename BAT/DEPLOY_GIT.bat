@@ -58,7 +58,7 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set PROJECT_GROUP=PROJECTS_GIT
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
@@ -75,14 +75,14 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_SRC_GIT
     call :DEPLOY_PROJECT
 
-    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
     set PROJECT_GROUP=GIT
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
-    call :WriteBEGIN DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
@@ -97,7 +97,7 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_GIT
     call :DEPLOY_PROJECT
 
-    call :WriteEND Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
 :end
