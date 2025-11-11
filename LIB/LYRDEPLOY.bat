@@ -454,7 +454,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :WritePROCESS DEPLOY проекта [REPO_WORK]: !PROJECT_NAME!
 
@@ -502,9 +502,9 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
-    call :WritePROCESS DEPLOY проекта [REPO_WORK_TOOLS]: !PROJECT_NAME!
+    call :WritePROCESS ................................DEPLOY проекта [REPO_WORK_TOOLS]: !PROJECT_NAME!
 
     rem call :WritePROCESS PROJECT_GROUP: !PROJECT_GROUP!
     rem call :WritePROCESS DIR_PROJECTS_ROOT: !DIR_PROJECTS_ROOT!
