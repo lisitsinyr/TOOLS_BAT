@@ -418,6 +418,54 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem function GET_script (script) -> script
+rem --------------------------------------------------------------------------------
+:GET_script
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_script
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Ascript=%~1
+
+    rem -------------------------------------------------------------------
+    rem project_dir
+    rem -------------------------------------------------------------------
+    call :CurrentDir || exit /b 1
+    if not defined Ascript (
+        set Ox_Name=Ox
+        set Ox_Caption=script
+        set Ox_Default=!Ascript!
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox !Ox! || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        call :ExtractFileDir !Ascript! || exit /b 1
+        set scriptdir=!ExtractFileDir!
+        call :ExtractFileName !Ascript! || exit /b 1
+        set scriptname=!ExtractFileName!
+        call :ExtractFileExt !Ascript! || exit /b 1
+        set scriptext=!ExtractFileExt!
+    ) else (
+        set script=
+        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+        exit /b 1
+    )
+
+    set GET_script=!script!
+    echo GET_script:!GET_script!
+
+    exit /b 0
+rem endfunction
+
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
