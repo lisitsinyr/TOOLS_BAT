@@ -53,13 +53,13 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo AFileName:!AFileName!
+    echo AFileName:!AFileName!
     set ASection=%~2
-    rem echo ASection:!ASection!
+    echo ASection:!ASection!
     set AParameter=%~3
-    rem echo AParameter:!AParameter!
+    echo AParameter:!AParameter!
     set AValue=%~4
-    rem echo AValue:!AValue!
+    echo AValue:!AValue!
 
     %SetINIAPP% "!AFileName!" !ASection! !AParameter! "!AValue!"
 

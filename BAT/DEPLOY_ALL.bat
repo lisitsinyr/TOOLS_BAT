@@ -737,11 +737,9 @@ exit /b 0
 :GetINI
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
-
 :GetINIPY
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
-
 :GetINIParametr
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0

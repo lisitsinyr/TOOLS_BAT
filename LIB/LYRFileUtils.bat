@@ -53,8 +53,13 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFullFilename=%1
+    rem echo AFullFilename:!AFullFilename!
 
-    set ExtractFileDir=%~d1%~p1
+    if exist AFullFilename (
+        set ExtractFileDir=%~d1%~p1
+    ) else (
+        set ExtractFileDir=
+    )
     rem set !FUNCNAME!=%~d1%~p1
     rem echo !FUNCNAME!: !%FUNCNAME%!
 
@@ -535,6 +540,55 @@ rem beginfunction
     call :CheckErrorlevel XCOPY_FILES !errorlevel! 1
 
     set XCOPY_FILES=
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure CHANGE_STR (FileName, str_find, str_replace) -> None
+rem --------------------------------------------------------------------------------
+:CHANGE_STR
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=CHANGE_STR
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set AFileName=%~1
+    echo AFileName:!AFileName!
+    rem set LFileName=%~n1%~x1
+    rem echo LFileName:!LFileName!
+    set Astr_find=%2
+    echo Astr_find:!Astr_find!
+    set Astr_replace=%3
+    echo Astr_replace:!Astr_replace!
+
+    set FileNameOUT=test.txt
+
+    if exist "!AFileName!" (
+
+        D:\TOOLS\EXE\nhrt.exe -spt:!Astr_find! -t:!Astr_replace! "!AFileName!"
+        
+        rem del !FileNameOUT! > nul
+        rem FOR /F "tokens=* delims=" %%i IN ("!AFileName!") DO (
+        rem     SET VAR=%%i
+        rem     ECHO! VAR:%Astr_find%=%Astr_replace%! >> !FileNameOUT!
+        rem )
+        
+        rem touch FileNameOUT
+        rem FOR /f "delims=" %%a IN (!AFileName!) DO (
+        rem     SET line=%%a
+        rem     echo line:!line! >> !FileNameOUT!
+            rem SET "line=!line:‘!Astr_find!!"
+            rem SET "line=!line:’!Astr_replace!!"
+            rem ECHO (!line!
+        rem )
+
+    )
+
+    set CHANGE_STR=
 
     exit /b 0
 rem endfunction
