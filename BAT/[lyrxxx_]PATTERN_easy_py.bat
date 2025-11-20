@@ -76,13 +76,13 @@ rem ----------------------------------------------------------------------------
     )
     rem echo SCRIPTS_DIR_PY:!SCRIPTS_DIR_PY!
 
-    set PY_ENVDIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV
+    set VENV_DIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV
     set PY_ENVNAME=%PY_ENVNAME%
     if not defined PY_ENVNAME (
         set PY_ENVNAME=P313
     )
-    if not exist !PY_ENVDIR!\!PY_ENVNAME! (
-        echo INFO: Dir !PY_ENVDIR!\!PY_ENVNAME! not exist ...
+    if not exist !VENV_DIR!\!PY_ENVNAME! (
+        echo INFO: Dir !VENV_DIR!\!PY_ENVNAME! not exist ...
         exit /b 1
     )
 
@@ -127,11 +127,11 @@ rem ----------------------------------------------------------------------------
     set SCRIPT_DIR=!SCRIPTS_DIR_PY!\PATTERN
     set SCRIPT_NAME=PATTERN_PY.py
 
-    call :PY_ENV_START || exit /b 1
+    call :VENV_START || exit /b 1
 
     python "!SCRIPT_DIR!"\!SCRIPT_NAME! !OPTION! !ARGS!
 
-    call :PY_ENV_STOP || exit /b 1
+    call :VENV_STOP || exit /b 1
 
     rem call :PressAnyKey || exit /b 1
 
@@ -437,10 +437,10 @@ rem =================================================
 :LYRPY
 %LIB_BAT%\LYRPY.bat %*
 exit /b 0
-:PY_ENV_START
+:VENV_START
 %LIB_BAT%\LYRPY.bat %*
 exit /b 0
-:PY_ENV_STOP
+:VENV_STOP
 %LIB_BAT%\LYRPY.bat %*
 exit /b 0
 rem =================================================

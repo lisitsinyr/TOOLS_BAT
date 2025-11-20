@@ -57,7 +57,7 @@ rem beginfunction
 
     echo !FUNCNAME! ...
 
-    echo List Python versions you have installed and versions you can install
+    echo List Python versions you have installed and versions you can install ...
     uv python list              
 
     set UV_python_list=
@@ -104,7 +104,7 @@ rem beginfunction
     set AVERSION=%~1
     rem echo AVERSION:!AVERSION!
 
-    echo unInstall Python !AVERSION!
+    echo unInstall Python !AVERSION! ...
     rem uv python uninstall 3.11.4
     rem uv python uninstall !AVERSION!
 
@@ -125,7 +125,7 @@ rem beginfunction
     )
     echo !FUNCNAME! ...
 
-    echo Run your default Python
+    echo Run your default Python ...
     uv run python
 
     set UV_python_run=
@@ -145,7 +145,7 @@ rem beginfunction
     )
     echo !FUNCNAME! ...
 
-    echo Upgrade your Python versions
+    echo Upgrade your Python versions ...
     uv python upgrade
 
     set UV_python_upgrade=
@@ -168,7 +168,7 @@ rem beginfunction
     set AVERSION=%~1
     rem echo AVERSION:!AVERSION!
 
-    echo Find specific Python version !AVERSION!
+    echo Find specific Python version !AVERSION! ...
     uv python find !AVERSION!
 
     set UV_python_find=
@@ -188,7 +188,7 @@ rem beginfunction
     )
     echo !FUNCNAME! ...
 
-    echo View Python installation directory
+    echo View Python installation directory ...
     uv python dir
 
     set UV_python_dir=
@@ -208,7 +208,7 @@ rem beginfunction
     )
     echo !FUNCNAME! ...
 
-    echo UV will now use this version for all commands in this directory:
+    echo UV will now use this version for all commands in this directory ...
     
     rem  Will use Python 3.11
     uv run python --version  
@@ -233,12 +233,11 @@ rem beginfunction
     set AVERSION=%~1
     rem echo AVERSION:!AVERSION!
 
-    rem -------------------------------------------------------------------
-    rem Pin a version for your project:
-    rem -------------------------------------------------------------------
     rem uv python pin 3.X           
     rem cd myproject
     rem uv python pin 3.11
+
+    echo Pin a version for your project ...
     uv python pin !AVERSION!
     
     set UV_python_pin=
@@ -257,6 +256,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo help ...
     uv help
 
     set UV_help=
@@ -317,6 +317,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo --version ...
     uv --version
 
     set UV_version=
@@ -335,6 +336,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo self ...
     uv self
 
     set UV_self=
@@ -353,6 +355,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    echo self version ...
     uv self version
 
     set UV_self_version=
@@ -431,6 +434,7 @@ rem beginfunction
 
     rem Если uv был установлен через автономный установщик, обновить его можно следующим образом:
 
+    echo self update ...
     uv self update
 
     set UV_update_self=
@@ -556,7 +560,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         set result=F
         if !Ox!==3.13 set result=T
@@ -576,7 +580,7 @@ rem beginfunction
     )
 
     set GET_python=!python!
-    echo GET_python:!GET_python!
+    rem echo GET_python:!GET_python!
 
     exit /b 0
 rem endfunction
@@ -608,7 +612,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         rem pattern OR
         rem echo OR ...
@@ -633,7 +637,7 @@ rem beginfunction
     )
 
     set GET_project_type=!project_type!
-    echo GET_project_type:!GET_project_type!
+    rem echo GET_project_type:!GET_project_type!
 
     exit /b 0
 rem endfunction
@@ -665,7 +669,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         rem pattern OR
         rem echo OR ...
@@ -681,7 +685,7 @@ rem beginfunction
     )
 
     set GET_package=!package!
-    echo GET_package:!GET_package!
+    rem echo GET_package:!GET_package!
 
     exit /b 0
 rem endfunction
@@ -713,7 +717,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         rem pattern OR
         rem echo OR ...
@@ -729,7 +733,7 @@ rem beginfunction
     )
 
     set GET_no-workspace=!no-workspace!
-    echo GET_no-workspace:!GET_no-workspace!
+    rem echo GET_no-workspace:!GET_no-workspace!
 
     exit /b 0
 rem endfunction

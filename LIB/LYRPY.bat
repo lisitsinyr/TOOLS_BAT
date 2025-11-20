@@ -41,89 +41,106 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure PY_ENV_START (APY_ENVDIR) -> None
+rem procedure VENV_START (AVENV_DIR) -> None
 rem -----------------------------------------------
-:PY_ENV_START
+:VENV_START
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=PY_ENV_START
+    set FUNCNAME=VENV_START
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set APY_ENVDIR=%~1
-    rem echo APY_ENVDIR:!APY_ENVDIR!
+    set AVENV_DIR=%~1
+    rem echo AVENV_DIR:!AVENV_DIR!
 
-    if not exist !APY_ENVDIR!\ (
-        echo ERROR: Dir !APY_ENVDIR! not exist ...
+    set VENV_START=
+
+    if not defined AVENV_DIR (
+        echo ERROR: AVENV_DIR not defined ...
+        exit /b 3
+    )
+
+    if not exist !AVENV_DIR!\ (
+        echo ERROR: Dir !AVENV_DIR! not exist ...
         exit /b 1
     )
-    
-    if not exist !APY_ENVDIR!\Scripts\activate.bat (
-        echo ERROR: File !APY_ENVDIR!\Scripts\activate.bat not exist ...
+
+    if not exist !AVENV_DIR!\Scripts\activate.bat (
+        echo ERROR: File !AVENV_DIR!\Scripts\activate.bat not exist ...
         exit /b 2
     )
 
-    call !APY_ENVDIR!\Scripts\activate.bat
+    call !AVENV_DIR!\Scripts\activate.bat
  
-    set PY_ENV_START=
-
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure PY_ENV_STOP (APY_ENVDIR) -> None
+rem procedure VENV_STOP (AVENV_DIR) -> None
 rem -----------------------------------------------
-:PY_ENV_STOP
+:VENV_STOP
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=PY_ENV_STOP
+    set FUNCNAME=VENV_STOP
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set APY_ENVDIR=%~1
-    rem echo APY_ENVDIR:!APY_ENVDIR!
+    set AVENV_DIR=%~1
+    rem echo AVENV_DIR:!AVENV_DIR!
 
-    if not exist !APY_ENVDIR! (
-        echo ERROR: Dir !APY_ENVDIR! not exist ...
+    set VENV_STOP=
+
+    if not defined AVENV_DIR (
+        echo ERROR: AVENV_DIR not defined ...
+        exit /b 3
+    )
+
+    if not exist !AVENV_DIR! (
+        echo ERROR: Dir !AVENV_DIR! not exist ...
         exit /b 1
     )
     
-    if not exist !APY_ENVDIR!\Scripts\activate.bat (
-        echo ERROR: File !APY_ENVDIR!\Scripts\deactivate.bat ...
+    if not exist !AVENV_DIR!\Scripts\activate.bat (
+        echo ERROR: File !AVENV_DIR!\Scripts\deactivate.bat ...
         exit /b 2
     )
 
-    call !APY_ENVDIR!\Scripts\deactivate.bat
-
-    set PY_ENV_STOP=
+    call !AVENV_DIR!\Scripts\deactivate.bat
 
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure PY_ENV_UPDATE (APY_ENVDIR) -> None
+rem procedure VENV_UPDATE (AVENV_DIR) -> None
 rem -----------------------------------------------
-:PY_ENV_UPDATE
+:VENV_UPDATE
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=PY_ENV_UPDATE
+    set FUNCNAME=VENV_UPDATE
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set APY_ENVDIR=%~1
-    rem echo APY_ENVDIR:!APY_ENVDIR!
+    set AVENV_DIR=%~1
+    rem echo AVENV_DIR:!AVENV_DIR!
 
-    if not exist !APY_ENVDIR!\ (
-        echo ERROR: Dir !APY_ENVDIR! not exist ...
+    set VENV_UPDATE=
+
+    if not defined AVENV_DIR (
+        echo ERROR: AVENV_DIR not defined ...
+        exit /b 3
+    )
+
+    if not exist !AVENV_DIR!\ (
+        echo ERROR: Dir !AVENV_DIR! not exist ...
         exit /b 1
     )
 
     echo Install packeges requirements.txt ...
 
-    rem pip freeze > !APY_ENVDIR!\requirements.txt
+    rem pip freeze > !AVENV_DIR!\requirements.txt
     pip freeze > requirements.txt
 
     call :CHANGE_STR requirements.txt "==" ">=" || exit /b 1
@@ -135,18 +152,16 @@ rem beginfunction
         )
     ) else (
         pip install -r requirements.txt
-        rem pip install -r !APY_ENVDIR!\requirements.txt
+        rem pip install -r !AVENV_DIR!\requirements.txt
     )
-
-    set PY_ENV_UPDATE=
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function PROJECT_DIR (APROJECTDIR) -> None
+rem function SET_PROJECT_DIR (APROJECT_DIR) -> None
 rem --------------------------------------------------------------------------------
-:PROJECT_DIR
+:SET_PROJECT_DIR
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=PROJECT_DIR
@@ -155,36 +170,41 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set APROJECTDIR=%~1
-    rem echo APROJECTDIR:!APROJECTDIR!
+    set APROJECT_DIR=%~1
+    rem echo APROJECT_DIR:!APROJECT_DIR!
+
+    set SET_PROJECT_DIR=
 
     rem -------------------------------------------------------------------
-    rem project_dir - 
+    rem PROJECT_DIR
     rem -------------------------------------------------------------------
-    if defined APROJECTDIR (
-        if not exist !APROJECTDIR!\ (
-            echo ERROR: Dir !APROJECTDIR! not exist ...
+    if not defined APROJECT_DIR (
+        echo ERROR: APROJECT_DIR not defined ...
+        exit /b 3
+    )
+
+    if defined APROJECT_DIR (
+        if not exist !APROJECT_DIR!\ (
+            echo ERROR: Dir !APROJECT_DIR! not exist ...
             exit /b 1
         ) else (
             if not exist !APROJECTDIR!\PROJECT.ini (
-                echo ERROR: Dir !APROJECTDIR!\PROJECT.ini not exist ...
+                echo ERROR: Dir !APROJECT_DIR!\PROJECT.ini not exist ...
                 exit /b 1
             ) else (
-                cd /D !APROJECTDIR!
+                cd /D !APROJECT_DIR!
             )
         )
     )
-
-    set PROJECT_DIR=
 
     exit /b 0
 
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function VENV_DIR (AVENVDIR) -> !PY_ENVDIR!
+rem function VENV_DIR (AVENV_DIR) -> !VENV_DIR!
 rem --------------------------------------------------------------------------------
-:VENV_DIR
+:SET_VENV_DIR
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=VENV_DIR
@@ -193,35 +213,43 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set AVENVDIR=%~1
-    rem echo AVENVDIR:!AVENVDIR!
+    set AVENV_DIR=%~1
+    rem echo AVENV_DIR:!AVENV_DIR!
+
+    set SET_VENV_DIR=
 
     rem -------------------------------------------------------------------
-    rem ENV - 
+    rem VENV_DIR 
     rem -------------------------------------------------------------------
-    if !AVENVDIR!==P313 (
-        set PY_ENVDIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313
+    if !AVENV_DIR!==P313 (
+        set VENV_DIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\
     ) else (
-        if !AVENVDIR!==P314 (
-            set PY_ENVDIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P314
+        if !AVENV_DIR!==P314 (
+            set VENV_DIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P314\
         ) else (
-            if !AVENVDIR!==.venv (
-                set PY_ENVDIR=!project_dir!\.venv
+            if !AVENV_DIR!==.venv (
+                set VENV_DIR=.venv
             ) else (
-               set PY_ENVDIR=!AVENVDIR!
+                set VENV_DIR=!AVENV_DIR!
             )
         )
     )
-    rem echo PY_ENVDIR:!PY_ENVDIR!
-    if not exist !PY_ENVDIR!\ (
-        echo INFO: Dir !PY_ENVDIR! not exist ...
+    if defined VENV_DIR (
+        rem echo VENV_DIR:!VENV_DIR!
+        if not exist !VENV_DIR!\ (
+            set VENV_DIR=
+            echo ERROR: Dir !VENV_DIR! not exist ...
+            exit /b 1
+        )
+    ) else (
+        echo ERROR: Dir !VENV_DIR! not defined ...
         exit /b 1
     )
 
-    set VENV_DIR=!PY_ENVDIR!
+    set SET_VENV_DIR=!VENV_DIR!
+    rem echo SET_VENV_DIR:!SET_VENV_DIR!
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -252,7 +280,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         if exist !Ox!\ (
             set project_dir=!Ox!\
@@ -268,7 +296,7 @@ rem beginfunction
     )
 
     set GET_project_dir=!project_dir!
-    echo GET_project_dir:!GET_project_dir!
+    rem echo GET_project_dir:!GET_project_dir!
 
     exit /b 0
 rem endfunction
@@ -301,7 +329,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         if exist !Ox!\ (
             set projects_dir=!Ox!\
@@ -316,7 +344,7 @@ rem beginfunction
     )
 
     set GET_projects_dir=!projects_dir!
-    echo GET_projects_dir:!GET_projects_dir!
+    rem echo GET_projects_dir:!GET_projects_dir!
 
     exit /b 0
 rem endfunction
@@ -348,7 +376,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         set project_name=!Ox!
     ) else (
@@ -357,7 +385,7 @@ rem beginfunction
     )
 
     set GET_project_name=!project_name!
-    echo GET_project_name:!GET_project_name!
+    rem echo GET_project_name:!GET_project_name!
 
     exit /b 0
 rem endfunction
@@ -390,7 +418,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         if exist !Ox!\ (
             set script_dir=!Ox!\
@@ -405,7 +433,7 @@ rem beginfunction
     )
 
     set GET_script_dir=!script_dir!
-    echo GET_script_dir:!GET_script_dir!
+    rem echo GET_script_dir:!GET_script_dir!
 
     exit /b 0
 rem endfunction
@@ -425,7 +453,7 @@ rem beginfunction
     set Ascript_name=%~1
 
     rem -------------------------------------------------------------------
-    rem project_name
+    rem script_name
     rem -------------------------------------------------------------------
     if not defined Ascript_name (
         set Ox_Name=Ox
@@ -437,7 +465,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         set script_name=!Ox!
     ) else (
@@ -446,7 +474,7 @@ rem beginfunction
     )
 
     set GET_script_name=!script_name!
-    echo GET_script_name:!GET_script_name!
+    rem echo GET_script_name:!GET_script_name!
 
     exit /b 0
 rem endfunction
@@ -485,9 +513,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-
-    echo Ox:!Ox!
-
+    rem echo Ox:!Ox!
     if defined Ox (
         if exist !Ox!\ (
             set venv_dir=!Ox!\
@@ -520,7 +546,7 @@ rem beginfunction
     )
 
     set GET_venv_dir=!venv_dir!
-    echo GET_venv_dir:!GET_venv_dir!
+    rem echo GET_venv_dir:!GET_venv_dir!
 
     exit /b 0
 rem endfunction
@@ -552,7 +578,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         if exist !Ox!\ (
             set python_dir=!Ox!\
@@ -567,7 +593,6 @@ rem beginfunction
                 )
             )
         )
-
         if defined python_dir (
             rem echo python_dir:!python_dir!
             if not exist !python_dir! (
@@ -586,7 +611,7 @@ rem beginfunction
     )
 
     set GET_python_dir=!python_dir!
-    echo GET_python_dir:!GET_python_dir!
+    rem echo GET_python_dir:!GET_python_dir!
 
     exit /b 0
 rem endfunction
@@ -606,7 +631,7 @@ rem beginfunction
     set Ascript=%~1
 
     rem -------------------------------------------------------------------
-    rem project_dir
+    rem script
     rem -------------------------------------------------------------------
     call :CurrentDir || exit /b 1
     if not defined Ascript (
@@ -619,7 +644,7 @@ rem beginfunction
     ) else (
         call :Read_P Ox || exit /b 1
     )
-    echo Ox:!Ox!
+    rem echo Ox:!Ox!
     if defined Ox (
         call :ExtractFileDir !Ascript! || exit /b 1
         set scriptdir=!ExtractFileDir!
@@ -634,7 +659,95 @@ rem beginfunction
     )
 
     set GET_script=!script!
-    echo GET_script:!GET_script!
+    rem echo GET_script:!GET_script!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_requirements_file (requirements_file) -> requirements_file
+rem --------------------------------------------------------------------------------
+:GET_requirements_file
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_requirements_file
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Arequirements_file=%~1
+
+    rem -------------------------------------------------------------------
+    rem requirements_file
+    rem -------------------------------------------------------------------
+    call :CurrentDir || exit /b 1
+    if not defined Arequirements_file (
+        set Ox_Name=Ox
+        set Ox_Caption=requirements_file
+        set Ox_Default=requirements.txt
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    rem echo Ox:!Ox!
+    if defined Ox (
+        if exist !Ox! (
+            set requirements_file=-r !Ox!
+        ) else (
+            set requirements_file=
+            echo INFO: File !Ox! not exist ...
+        )
+    ) else (
+        set script_name=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    )
+
+    set GET_requirements_file=!requirements_file!
+    rem echo GET_requirements_file:!GET_requirements_file!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_package_name (package_name) -> package_name
+rem --------------------------------------------------------------------------------
+:GET_package_name
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_package_name
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Apackage_name=%~1
+
+    rem -------------------------------------------------------------------
+    rem package_name
+    rem -------------------------------------------------------------------
+    if not defined Apackage_name (
+        set Ox_Name=Ox
+        set Ox_Caption=package_names[A B C] requests
+        set Ox_Default=
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    rem echo Ox:!Ox!
+    if defined Ox (
+        set package_name=!Ox!
+    ) else (
+        set package_name=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    )
+
+    set GET_package_name=!package_name!
+    rem echo GET_package_name:!GET_package_name!
 
     exit /b 0
 rem endfunction
