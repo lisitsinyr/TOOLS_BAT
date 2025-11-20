@@ -123,14 +123,10 @@ rem beginfunction
 
     echo Install packeges requirements.txt ...
 
-    pip freeze > !APY_ENVDIR!\requirements.txt
+    rem pip freeze > !APY_ENVDIR!\requirements.txt
     pip freeze > requirements.txt
 
     call :CHANGE_STR requirements.txt "==" ">=" || exit /b 1
-
-    pause 
-
-    rem pip install -r !APY_ENVDIR!\requirements.txt
 
     echo cd:!cd!
 
@@ -139,6 +135,7 @@ rem beginfunction
         )
     ) else (
         pip install -r requirements.txt
+        rem pip install -r !APY_ENVDIR!\requirements.txt
     )
 
     set PY_ENV_UPDATE=
@@ -259,8 +256,6 @@ rem beginfunction
     if defined Ox (
         if exist !Ox!\ (
             set project_dir=!Ox!\
-            rem set scriptdir=!project_dir!
-            rem cd /D !project_dir!
         ) else (
             set project_dir=
             echo ERROR: Dir !project_dir! not exist ...
@@ -274,6 +269,184 @@ rem beginfunction
 
     set GET_project_dir=!project_dir!
     echo GET_project_dir:!GET_project_dir!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_projects_dir (projects_dir) -> projects_dir
+rem --------------------------------------------------------------------------------
+:GET_projects_dir
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_projects_dir
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Aprojects_dir=%~1
+
+    rem -------------------------------------------------------------------
+    rem projects_dir
+    rem -------------------------------------------------------------------
+    call :CurrentDir || exit /b 1
+    if not defined Aprojects_dir (
+        set Ox_Name=Ox
+        set Ox_Caption=projects_dir
+        set Ox_Default=!CurrentDir!
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        if exist !Ox!\ (
+            set projects_dir=!Ox!\
+        ) else (
+            set projects_dir=
+            echo ERROR: Dir !projects_dir! not exist ...
+            exit /b 1
+        )
+    ) else (
+        set projects_dir=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    )
+
+    set GET_projects_dir=!projects_dir!
+    echo GET_projects_dir:!GET_projects_dir!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_project_name (project_name) -> project_name
+rem --------------------------------------------------------------------------------
+:GET_project_name
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_project_name
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Aproject_name=%~1
+
+    rem -------------------------------------------------------------------
+    rem project_name
+    rem -------------------------------------------------------------------
+    if not defined Aproject_name (
+        set Ox_Name=Ox
+        set Ox_Caption=project_name
+        set Ox_Default=
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        set project_name=!Ox!
+    ) else (
+        set project_name=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    )
+
+    set GET_project_name=!project_name!
+    echo GET_project_name:!GET_project_name!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_script_dir (script_dir) -> script_dir
+rem --------------------------------------------------------------------------------
+:GET_script_dir
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_script_dir
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Ascript_dir=%~1
+
+    rem -------------------------------------------------------------------
+    rem script_dir
+    rem -------------------------------------------------------------------
+    call :CurrentDir || exit /b 1
+    if not defined Ascript_dir (
+        set Ox_Name=Ox
+        set Ox_Caption=script_dir
+        set Ox_Default=!CurrentDir!
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        if exist !Ox!\ (
+            set script_dir=!Ox!\
+        ) else (
+            set script_dir=
+            echo ERROR: Dir !script_dir! not exist ...
+            exit /b 1
+        )
+    ) else (
+        set script_dir=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    )
+
+    set GET_script_dir=!script_dir!
+    echo GET_script_dir:!GET_script_dir!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_script_name (script_name) -> script_name
+rem --------------------------------------------------------------------------------
+:GET_script_name
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_script_name
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Ascript_name=%~1
+
+    rem -------------------------------------------------------------------
+    rem project_name
+    rem -------------------------------------------------------------------
+    if not defined Ascript_name (
+        set Ox_Name=Ox
+        set Ox_Caption=script_name
+        set Ox_Default=
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        set script_name=!Ox!
+    ) else (
+        set script_name=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    )
+
+    set GET_script_name=!script_name!
+    echo GET_script_name:!GET_script_name!
 
     exit /b 0
 rem endfunction

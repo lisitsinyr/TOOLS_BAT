@@ -480,6 +480,260 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem function GET_O (O) -> O
+rem --------------------------------------------------------------------------------
+:GET_O
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_O
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set AO=%~1
+
+    rem -------------------------------------------------------------------
+    rem Ox
+    rem -------------------------------------------------------------------
+    call :CurrentDir || exit /b 1
+    if not defined AO (
+        set Ox_Name=Ox
+        set Ox_Caption=Ox
+        set Ox_Default=
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox !Ox! || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        rem if exist !Ox!\ (
+        rem     set O=!Ox!\
+        rem ) else (
+        rem     set O=
+        rem     echo ERROR: Dir !Ox! not exist ...
+        rem     exit /b 1
+        )
+    ) else (
+        set O=
+        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+        exit /b 1
+    )
+
+    set GET_O=!O!
+    echo GET_O:!GET_O!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_python (python) -> python
+rem --------------------------------------------------------------------------------
+:GET_python
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_python
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Apython=%~1
+
+    rem -------------------------------------------------------------------
+    rem python
+    rem -------------------------------------------------------------------
+    if not defined Apython (
+        set Ox_Name=Ox
+        set Ox_Caption=python
+        set Ox_Default=3.13
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        set result=F
+        if !Ox!==3.13 set result=T
+        if !Ox!==3.14 set result=T
+        if !result!==T (
+            set python=!Ox!
+        )    
+        if defined python (
+            rem echo python:!python!
+        ) else (
+            echo ERROR: !python! not defined ...
+            exit /b 1
+        )
+    ) else (
+        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+        exit /b 1
+    )
+
+    set GET_python=!python!
+    echo GET_python:!GET_python!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_project_type (project_type) -> project_type
+rem --------------------------------------------------------------------------------
+:GET_project_type
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_project_type
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Aproject_type=%~1
+
+    rem -------------------------------------------------------------------
+    rem python
+    rem -------------------------------------------------------------------
+    if not defined Aproject_type (
+        set Ox_Name=Ox
+        set Ox_Caption=project_type{app,lib,bare,script}
+        set Ox_Default=app
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        rem pattern OR
+        rem echo OR ...
+        set result=F
+        if !Ox!==app set result=T
+        if !Ox!==lib set result=T
+        if !Ox!==bare set result=T
+        if !Ox!==script set result=T
+        if !result!==T (
+            set project_type=--!Ox!
+        )    
+        if defined project_type (
+            rem echo project_type:!project_type!
+        ) else (
+            echo ERROR: Dir !project_type! not defined ...
+            exit /b 1
+        )
+
+    ) else (
+        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+        exit /b 1
+    )
+
+    set GET_project_type=!project_type!
+    echo GET_project_type:!GET_project_type!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_package (package) -> package
+rem --------------------------------------------------------------------------------
+:GET_package
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_package
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Apackage=%~1
+
+    rem -------------------------------------------------------------------
+    rem package
+    rem -------------------------------------------------------------------
+    if not defined Apackage (
+        set Ox_Name=Ox
+        set Ox_Caption=package[y/N]
+        set Ox_Default=
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        rem pattern OR
+        rem echo OR ...
+        set result=F
+        if !Ox!==y set result=T
+        if !Ox!==Y set result=T
+        if !result!==T (
+            set package=--package
+        )    
+    ) else (
+        set package=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    )
+
+    set GET_package=!package!
+    echo GET_package:!GET_package!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_no-workspace (no-workspace) -> no-workspace
+rem --------------------------------------------------------------------------------
+:GET_no-workspace
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_no-workspace
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Aworkspace=%~1
+
+    rem -------------------------------------------------------------------
+    rem package
+    rem -------------------------------------------------------------------
+    if not defined Aworkspace (
+        set Ox_Name=Ox
+        set Ox_Caption=[no-workspace]
+        set Ox_Default=
+        set Ox=!Ox_Default!
+        set PN_CAPTION=!Ox_Caption!
+        call :Read_P Ox || exit /b 1
+    ) else (
+        call :Read_P Ox || exit /b 1
+    )
+    echo Ox:!Ox!
+    if defined Ox (
+        rem pattern OR
+        rem echo OR ...
+        set result=F
+        if !Ox!==y set result=T
+        if !Ox!==Y set result=T
+        if !result!==T (
+            set no-workspace=--no-workspace
+        )    
+    ) else (
+        set no-workspace=!no-workspace!
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    )
+
+    set GET_no-workspace=!no-workspace!
+    echo GET_no-workspace:!GET_no-workspace!
+
+    exit /b 0
+rem endfunction
+
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================
@@ -537,4 +791,44 @@ exit /b 0
 exit /b 0
 :WriteTEXT
 %LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRSupport.bat
+rem =================================================
+:LYRSupport
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:PressAnyKey
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Pause
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_P
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_N
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:Read_F
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetDir
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetFile
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:FORCicle
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetSET
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetCMD
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:CheckErrorlevel
+%LIB_BAT%\LYRSupport.bat %*
 exit /b 0
