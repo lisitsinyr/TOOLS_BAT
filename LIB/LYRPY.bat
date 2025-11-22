@@ -712,23 +712,23 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function GET_package_name (package_name) -> package_name
+rem function GET_package_names (package_names) -> package_names
 rem --------------------------------------------------------------------------------
-:GET_package_name
+:GET_package_names
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=GET_package_name
+    set FUNCNAME=GET_package_names
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
 
-    set Apackage_name=%~1
+    set Apackage_names=%*
 
     rem -------------------------------------------------------------------
     rem package_name
     rem -------------------------------------------------------------------
-    if not defined Apackage_name (
+    if not defined Apackage_names (
         set Ox_Name=Ox
         set Ox_Caption=package_names[A B C] requests
         set Ox_Default=
@@ -740,13 +740,13 @@ rem beginfunction
     )
     rem echo Ox:!Ox!
     if defined Ox (
-        set package_name=!Ox!
+        set package_names=!Ox!
     ) else (
-        set package_name=
+        set package_names=
         echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
 
-    set GET_package_name=!package_name!
+    set GET_package_names=!package_names!
     rem echo GET_package_name:!GET_package_name!
 
     exit /b 0
