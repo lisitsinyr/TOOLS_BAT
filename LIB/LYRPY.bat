@@ -202,7 +202,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function VENV_DIR (AVENV_DIR) -> !VENV_DIR!
+rem function VENV_DIR (Aproject_dir AVENV_DIR) -> !VENV_DIR!
 rem --------------------------------------------------------------------------------
 :SET_VENV_DIR
 rem beginfunction
@@ -213,27 +213,49 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set AVENV_DIR=%~1
+    set Aproject_dir=%~1
+    rem echo Aproject_dir:!Aproject_dir!
+
+    set AVENV_DIR=%~2
     rem echo AVENV_DIR:!AVENV_DIR!
 
-    set SET_VENV_DIR=
+    if defined Aproject_dir (
+        if not exist !Aproject_dir!\ (
+            set VENV_DIR=
+            echo ERROR: Dir !Aproject_dir! not exist ...
+            exit /b 1
+        )
+    ) else (
+        echo ERROR: Dir project_dir not defined ...
+        exit /b 1
+    )
 
+    set SET_VENV_DIR=
     rem -------------------------------------------------------------------
     rem VENV_DIR 
     rem -------------------------------------------------------------------
-    if !AVENV_DIR!==P313 (
-        set VENV_DIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\
-    ) else (
-        if !AVENV_DIR!==P314 (
-            set VENV_DIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P314\
+    if defined AVENV_DIR (
+        if !AVENV_DIR!==P313 (
+            set VENV_DIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\
         ) else (
-            if !AVENV_DIR!==.venv (
-                set VENV_DIR=.venv
+            if !AVENV_DIR!==P314 (
+                set VENV_DIR=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P314\
             ) else (
-                set VENV_DIR=!AVENV_DIR!
+                if exist !AVENV_DIR!\ (
+                    set VENV_DIR=!AVENV_DIR!
+                ) else (
+                    set VENV_DIR=
+                )
             )
         )
+    ) else (
+        if exist !Aproject_dir!.venv (
+            set VENV_DIR=!Aproject_dir!.venv
+        ) else (
+            set VENV_DIR=
+        )
     )
+
     if defined VENV_DIR (
         rem echo VENV_DIR:!VENV_DIR!
         if not exist !VENV_DIR!\ (
