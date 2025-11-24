@@ -41,7 +41,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function SET_project_dir (Aproject_dir) -> None
+rem function SET_project_dir (Aproject_dir) -> project_dir
 rem --------------------------------------------------------------------------------
 :SET_project_dir
 rem beginfunction
@@ -55,32 +55,30 @@ rem beginfunction
     set Aproject_dir=%~1
     rem echo Aproject_dir:!Aproject_dir!
 
-    set SET_project_dir=
-
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
-    if not defined Aproject_dir (
+    if defined Aproject_dir (
+        if not exist !Aproject_dir!\ (
+            echo ERROR: Dir !Aproject_dir! not exist ...
+            exit /b 1
+        ) else (
+            if not exist !Aproject_dir!\PROJECT.ini (
+                echo ERROR: Dir !Aproject_dir!\PROJECT.ini not exist ...
+                exit /b 1
+            ) else (
+                set project_dir=!Aproject_dir!
+                cd /D !project_dir!
+            )
+        )
+    ) else (
         echo ERROR: Aproject_dir not defined ...
         exit /b 3
     )
 
-    if defined Aproject_dir (
-        if not exist !Aproject_dir! (
-            echo ERROR: Dir !Aproject_dir! not exist ...
-            exit /b 1
-        ) else (
-            if not exist !Aproject_dir!PROJECT.ini (
-                echo ERROR: Dir !Aproject_dir!PROJECT.ini not exist ...
-                exit /b 1
-            ) else (
-                cd /D !Aproject_dir!
-            )
-        )
-    )
+    set SET_project_dir=project_dir
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -130,7 +128,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function SET_projects_dir (Aprojects_dir) -> None
+rem function SET_projects_dir (Aprojects_dir) -> projects_dir
 rem --------------------------------------------------------------------------------
 :SET_projects_dir
 rem beginfunction
@@ -144,25 +142,23 @@ rem beginfunction
     set Aprojects_dir=%~1
     rem echo Aprojects_dir:!Aprojects_dir!
 
-    set SET_projects_dir=
-
     rem -------------------------------------------------------------------
     rem projecst_dir
     rem -------------------------------------------------------------------
-    if not defined Aprojects_dir (
-        echo ERROR: Aprojects_dir not defined ...
-        exit /b 3
-    )
-
     if defined Aprojects_dir (
-
         if not exist !Aprojects_dir! (
             echo ERROR: Dir !Aprojects_dir! not exist ...
             exit /b 1
         ) else (
-            cd /D !Aprojects_dir!
+            set projects_dir=!Aprojects_dir!
+            cd /D !projects_dir!
         )
+    ) else (
+        echo ERROR: Aprojects_dir not defined ...
+        exit /b 3
     )
+
+    set SET_projects_dir=!projects_dir!
 
     exit /b 0
 
@@ -214,7 +210,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function SET_project_name (Aproject_name) -> None
+rem function SET_project_name (Aproject_name) -> project_name
 rem --------------------------------------------------------------------------------
 :SET_project_name
 rem beginfunction
@@ -228,19 +224,17 @@ rem beginfunction
     set Aproject_name=%~1
     rem echo Aproject_name:!Aproject_name!
 
-    set SET_project_name=
-
     rem -------------------------------------------------------------------
     rem project_name
     rem -------------------------------------------------------------------
-    if not defined Aproject_name (
+    if defined Aproject_name (
+        set project_name=!Aproject_name!
+    ) else (
         echo ERROR: project_name not defined ...
         exit /b 3
     )
 
-    if defined Aproject_name (
-        set project_name=!Aproject_name!
-    )
+    set SET_project_name=!project_name!
 
     exit /b 0
 
@@ -291,7 +285,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function SET_script_dir (Ascript_dir) -> None
+rem function SET_script_dir (Ascript_dir) -> script_dir
 rem --------------------------------------------------------------------------------
 :SET_script_dir
 rem beginfunction
@@ -305,28 +299,25 @@ rem beginfunction
     set Ascript_dir=%~1
     rem echo Ascript_dir:!Ascript_dir!
 
-    set SET_script_dir=
-
     rem -------------------------------------------------------------------
     rem script_dir
     rem -------------------------------------------------------------------
-    if not defined Ascript_dir (
-        echo ERROR: Ascript_dir not defined ...
-        exit /b 3
-    )
-
     if defined Ascript_dir (
-
         if not exist !Ascript_dir! (
             echo ERROR: Dir !Ascript_dir! not exist ...
             exit /b 1
         ) else (
-            cd /D !Ascript_dir_dir!
+            set script_dir=!Ascript_dir!
+            cd /D !script_dir!
         )
+    ) else (
+        echo ERROR: Ascript_dir not defined ...
+        exit /b 3
     )
 
-    exit /b 0
+    set SET_script_dir=!script_dir!
 
+    exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -375,7 +366,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function SET_project_name (Aproject_name) -> None
+rem function SET_project_name (Aproject_name) -> project_name
 rem --------------------------------------------------------------------------------
 :SET_project_name
 rem beginfunction
@@ -389,22 +380,19 @@ rem beginfunction
     set Aproject_name=%~1
     rem echo project_name:!project_name!
 
-    set SET_project_name=
-
     rem -------------------------------------------------------------------
     rem project_name
     rem -------------------------------------------------------------------
-    if not defined Aproject_name (
+    if defined Aproject_name (
+        set project_name=!Aproject_name!
+    ) else (
         echo ERROR: project_name not defined ...
         exit /b 3
     )
 
-    if defined Aproject_name (
-        set project_name=!Aproject_name!
-    )
+    set SET_project_name=!project_name!
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -452,58 +440,63 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function SET_script_name (Ascript_name) -> None
+rem function SET_script (Ascript) -> script
 rem --------------------------------------------------------------------------------
-:SET_script_name
+:SET_script
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=SET_script_name
+    set FUNCNAME=SET_script
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
 
-    set Ascript_name=%~1
-    rem echo Ascript_name:!Ascript_name!
-
-    set SET_script_name=
+    set Ascript=%~1
+    rem echo Ascript:!Ascript!
 
     rem -------------------------------------------------------------------
     rem script_name
     rem -------------------------------------------------------------------
-    if not defined Ascript_name (
-        echo ERROR: script_name not defined ...
+    if defined Ascript (
+        set script=!Ascript!
+        call :ExtractFileDir !script! || exit /b 1
+        set script_dir=!ExtractFileDir!
+
+        call :ExtractFileName !script! || exit /b 1
+        set script_name=!ExtractFileName!
+
+        call :ExtractFileExt !script! || exit /b 1
+        set script_ext=!ExtractFileExt!
+    ) else (
+        echo ERROR: Ascript not defined ...
         exit /b 3
     )
 
-    if defined script_name (
-        set script_name=!Ascript_name!
-    )
+    set SET_script=script
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function GET_script_name (script_name) -> script_name
+rem function GET_script (script) -> script
 rem --------------------------------------------------------------------------------
-:GET_script_name
+:GET_script
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=GET_script_name
+    set FUNCNAME=GET_script
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
 
-    set Ascript_name=%~1
+    set Ascript=%~1
 
     rem -------------------------------------------------------------------
     rem script_name
     rem -------------------------------------------------------------------
-    if not defined Ascript_name (
+    if not defined Ascript (
         set Ox_Name=Ox
-        set Ox_Caption=script_name
+        set Ox_Caption=script
         set Ox_Default=
         set Ox=!Ox_Default!
         set PN_CAPTION=!Ox_Caption!
@@ -514,22 +507,22 @@ rem beginfunction
     rem echo Ox:!Ox!
     if defined Ox (
 
-        set script_name=!Ox!
-        call :SET_script_name !script_name! || exit /b 1
+        set script=!Ox!
+        call :SET_script !script! || exit /b 1
 
     ) else (
         set script_name=
         echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
 
-    set GET_script_name=!script_name!
-    rem echo GET_script_name:!GET_script_name!
+    set GET_script=!script!
+    rem echo GET_script:!GET_script!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function venv_dir (Aproject_dir Avenv_dir) -> !venv_dir!
+rem function venv_dir (Aproject_dir Avenv_dir) -> venv_dir
 rem --------------------------------------------------------------------------------
 :SET_venv_dir
 rem beginfunction
@@ -662,8 +655,8 @@ rem beginfunction
     rem echo Ox:!Ox!
 
     if defined Ox (
-        set venv_dir=!Ox!
 
+        set venv_dir=!Ox!
         call :SET_venv_dir !project_dir! !venv_dir! || exit /b 1
 
     ) else (
@@ -679,7 +672,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function SET_python_dir (Apython_dir) -> None
+rem function SET_python_dir (Apython_dir) -> python_dir
 rem --------------------------------------------------------------------------------
 :SET_python_dir
 rem beginfunction
@@ -693,16 +686,9 @@ rem beginfunction
     set Apython_dir=%~1
     rem echo Apython_dir:!Apython_dir!
 
-    set SET_python_dir=
-
     rem -------------------------------------------------------------------
     rem python_dir
     rem -------------------------------------------------------------------
-    if not defined Apython_dir (
-        echo ERROR: Apython_dir not defined ...
-        exit /b 3
-    )
-
     if defined Apython_dir (
 
        if !Apython_dir!==3.13 (
@@ -714,7 +700,6 @@ rem beginfunction
                 set python_dir=
             )
         )
-
         if defined python_dir (
             rem echo python_dir:!python_dir!
             if not exist !python_dir! (
@@ -726,10 +711,14 @@ rem beginfunction
             echo ERROR: Dir !python_dir! not defined ...
             exit /b 1
         )
+    ) else (
+        echo ERROR: Apython_dir not defined ...
+        exit /b 3
     )
 
-    exit /b 0
+    set SET_python_dir=!python_dir!
 
+    exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -772,92 +761,6 @@ rem beginfunction
 
     set GET_python_dir=!python_dir!
     rem echo GET_python_dir:!GET_python_dir!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function SET_script (Ascript) -> None
-rem --------------------------------------------------------------------------------
-:SET_script
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=SET_script
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set Ascript=%~1
-    rem echo Ascript:!Ascript!
-
-    set SET_script=
-
-    rem -------------------------------------------------------------------
-    rem script
-    rem -------------------------------------------------------------------
-    if not defined Ascript (
-        echo ERROR: script not defined ...
-        exit /b 3
-    )
-
-    if defined script (
-        set script=!Ascript!
-
-        call :ExtractFileDir !Ascript! || exit /b 1
-        set scriptdir=!ExtractFileDir!
-        call :ExtractFileName !Ascript! || exit /b 1
-        set scriptname=!ExtractFileName!
-        call :ExtractFileExt !Ascript! || exit /b 1
-        set scriptext=!ExtractFileExt!
-    )
-
-    exit /b 0
-
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function GET_script (script) -> script
-rem --------------------------------------------------------------------------------
-:GET_script
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=GET_script
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set Ascript=%~1
-
-    rem -------------------------------------------------------------------
-    rem script
-    rem -------------------------------------------------------------------
-    call :CurrentDir || exit /b 1
-    if not defined Ascript (
-        set Ox_Name=Ox
-        set Ox_Caption=script
-        set Ox_Default=!Ascript!
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox !Ox! || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-
-        set script=!Ox!
-        call :SET_script !script! || exit /b 1
-
-    ) else (
-        set script=
-        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        exit /b 1
-    )
-
-    set GET_script=!script!
-    rem echo GET_script:!GET_script!
 
     exit /b 0
 rem endfunction
@@ -970,22 +873,20 @@ rem beginfunction
 
     set VENV_START=
 
-    if not defined Avenv_dir (
+    if defined Avenv_dir (
+        if not exist !Avenv_dir! (
+            echo ERROR: Dir !Avenv_dir! not exist ...
+            exit /b 1
+        )
+        if not exist !Avenv_dir!Scripts\activate.bat (
+            echo ERROR: File !Avenv_dir!Scripts\activate.bat not exist ...
+            exit /b 2
+        )
+        call !Avenv_dir!Scripts\activate.bat
+    ) else (
         echo ERROR: Avenv_dir not defined ...
         exit /b 3
     )
-
-    if not exist !Avenv_dir! (
-        echo ERROR: Dir !Avenv_dir! not exist ...
-        exit /b 1
-    )
-
-    if not exist !Avenv_dir!Scripts\activate.bat (
-        echo ERROR: File !Avenv_dir!Scripts\activate.bat not exist ...
-        exit /b 2
-    )
-
-    call !Avenv_dir!Scripts\activate.bat
  
     exit /b 0
 rem endfunction
@@ -1006,22 +907,20 @@ rem beginfunction
 
     set VENV_STOP=
 
-    if not defined Avenv_dir (
+    if defined Avenv_dir (
+        if not exist !Avenv_dir! (
+            echo ERROR: Dir !Avenv_dir! not exist ...
+            exit /b 1
+        )
+        if not exist !Avenv_dir!Scripts\activate.bat (
+            echo ERROR: File !Avenv_dir!Scripts\deactivate.bat ...
+            exit /b 2
+        )
+        call !Avenv_dir!Scripts\deactivate.bat
+    ) else (
         echo ERROR: Avenv_dir not defined ...
         exit /b 3
     )
-
-    if not exist !Avenv_dir! (
-        echo ERROR: Dir !Avenv_dir! not exist ...
-        exit /b 1
-    )
-    
-    if not exist !Avenv_dir!Scripts\activate.bat (
-        echo ERROR: File !Avenv_dir!Scripts\deactivate.bat ...
-        exit /b 2
-    )
-
-    call !Avenv_dir!Scripts\deactivate.bat
 
     exit /b 0
 rem endfunction
@@ -1042,31 +941,27 @@ rem beginfunction
 
     set VENV_UPDATE=
 
-    if not defined Avenv_dir (
-        echo ERROR: Avenv_dir not defined ...
-        exit /b 3
-    )
-
-    if not exist !Avenv_dir!\ (
-        echo ERROR: Dir !Avenv_dir! not exist ...
-        exit /b 1
-    )
-
-    echo Install packeges requirements.txt ...
-
-    rem pip freeze > !Avenv_dir!\requirements.txt
-    pip freeze > requirements.txt
-
-    call :CHANGE_STR requirements.txt "==" ">=" || exit /b 1
-
-    echo cd:!cd!
-
-    if exist LOG\ (
-        pip install -r requirements.txt > LOG\install.log
+    if defined Avenv_dir (
+        if not exist !Avenv_dir!\ (
+            echo ERROR: Dir !Avenv_dir! not exist ...
+            exit /b 1
         )
+
+        echo Install packeges requirements.txt ...
+        rem pip freeze > !Avenv_dir!\requirements.txt
+        pip freeze > requirements.txt
+        call :CHANGE_STR requirements.txt "==" ">=" || exit /b 1
+        rem echo cd:!cd!
+        if exist LOG\ (
+            pip install -r requirements.txt > LOG\install.log
+        ) else (
+            pip install -r requirements.txt
+            rem pip install -r !Avenv_dir!\requirements.txt
+        )
+
     ) else (
-        pip install -r requirements.txt
-        rem pip install -r !Avenv_dir!\requirements.txt
+         echo ERROR: Avenv_dir not defined ...
+         exit /b 3
     )
 
     exit /b 0

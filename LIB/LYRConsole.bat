@@ -258,7 +258,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  FormatColorStr (AStyles, AFG8, ABG8, AFG256, ABG256, AESC, s) -> str
+rem  FormatColorStr (AStyles, AFG8, ABG8, AFG256, ABG256, AESC, s) -> FormatColorStr
 rem -------------------------------------------------
 :FormatColorStr
 rem beginfunction
@@ -373,7 +373,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function aListToStr (ASTR) -> str
+rem function aListToStr (ASTR) -> aListToStr
 rem --------------------------------------------------------------------------------
 :aListToStr
 rem beginfunction
@@ -419,7 +419,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function bListToStr (ASTR) -> str
+rem function bListToStr (ASTR) -> bListToStr
 rem --------------------------------------------------------------------------------
 :bListToStr
 rem beginfunction
