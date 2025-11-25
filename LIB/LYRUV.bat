@@ -66,7 +66,7 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_install () -> None
+rem procedure UV_python_install (Aversion) -> version
 rem -----------------------------------------------
 :UV_python_install
 rem beginfunction
@@ -77,20 +77,29 @@ rem beginfunction
     )
     echo !FUNCNAME! ...
 
-    set AVERSION=%~1
-    rem echo AVERSION:!AVERSION!
+    set Aversion=%~1
+    rem echo Aversion:!Aversion!
 
-    echo Install Python !AVERSION!
-    rem uv python install 3.13
-    uv python install !AVERSION!
+    rem -------------------------------------------------------------------
+    rem version
+    rem -------------------------------------------------------------------
+    if defined Aversion (
+        set version=!Aversion!
+        echo Install Python !version!
+        rem uv python install 3.13
+        uv python install !version! --force
+    ) else (
+        echo ERROR: Aversion not defined ...
+        exit /b 3
+    )
 
-    set UV_python_install=
+    set UV_python_install=!version!
 
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_uninstall () -> None
+rem procedure UV_python_uninstall (Aversion) -> version
 rem -----------------------------------------------
 :UV_python_uninstall
 rem beginfunction
@@ -101,14 +110,24 @@ rem beginfunction
     )
     echo !FUNCNAME! ...
 
-    set AVERSION=%~1
-    rem echo AVERSION:!AVERSION!
+    set Aversion=%~1
+    rem echo Aversion:!Aversion!
 
-    echo unInstall Python !AVERSION! ...
-    rem uv python uninstall 3.11.4
-    rem uv python uninstall !AVERSION!
+    rem -------------------------------------------------------------------
+    rem version
+    rem -------------------------------------------------------------------
+    if defined Aversion (
+        set version=!Aversion!
+        echo unInstall Python !Aversion! ...
+        rem uv python uninstall 3.11.4
+        rem uv python uninstall !Aversion!
 
-    set UV_python_uninstall=
+    ) else (
+        echo ERROR: Aversion not defined ...
+        exit /b 3
+    )
+
+    set UV_python_uninstall=!version!
 
     exit /b 0
 rem endfunction
@@ -154,7 +173,7 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_find () -> None
+rem procedure UV_python_find (Aversion) -> version
 rem -----------------------------------------------
 :UV_python_find
 rem beginfunction
@@ -165,13 +184,22 @@ rem beginfunction
     )
     echo !FUNCNAME! ...
 
-    set AVERSION=%~1
-    rem echo AVERSION:!AVERSION!
+    set Aversion=%~1
+    rem echo Aversion:!Aversion!
 
-    echo Find specific Python version !AVERSION! ...
-    uv python find !AVERSION!
+    rem -------------------------------------------------------------------
+    rem version
+    rem -------------------------------------------------------------------
+    if defined Aversion (
+        set version=!Aversion!
+        echo Find specific Python version !Aversion! ...
+        uv python find !Aversion!
+    ) else (
+        echo ERROR: Aversion not defined ...
+        exit /b 3
+    )
 
-    set UV_python_find=
+    set UV_python_find=version
 
     exit /b 0
 rem endfunction
@@ -197,12 +225,12 @@ rem beginfunction
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_ () -> None
+rem procedure UV_python_version () -> None
 rem -----------------------------------------------
-:UV_python_
+:UV_python_version
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=UV_python_
+    set FUNCNAME=UV_python_version
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -211,15 +239,15 @@ rem beginfunction
     echo UV will now use this version for all commands in this directory ...
     
     rem  Will use Python 3.11
-    uv run python --version  
+    uv run python --version 
 
-    set UV_python_=
+    set UV_python_version=
 
     exit /b 0
 rem endfunction
 
 rem -----------------------------------------------
-rem procedure UV_python_pin () -> None
+rem procedure UV_python_pin (Aversion) -> version
 rem -----------------------------------------------
 :UV_python_pin
 rem beginfunction
@@ -230,17 +258,25 @@ rem beginfunction
     )
     echo !FUNCNAME! ...
 
-    set AVERSION=%~1
-    rem echo AVERSION:!AVERSION!
+    set Aversion=%~1
+    rem echo Aversion:!Aversion!
 
-    rem uv python pin 3.X           
-    rem cd myproject
-    rem uv python pin 3.11
-
-    echo Pin a version for your project ...
-    uv python pin !AVERSION!
+    rem -------------------------------------------------------------------
+    rem version
+    rem -------------------------------------------------------------------
+    if defined Aversion (
+        set version=!Aversion!
+        rem uv python pin 3.X           
+        rem cd myproject
+        rem uv python pin 3.11
+        echo Pin a version for your project ...
+        uv python pin !version!
+    ) else (
+        echo ERROR: Aversion not defined ...
+        exit /b 3
+    )
     
-    set UV_python_pin=
+    set UV_python_pin=!version!
 
     exit /b 0
 rem endfunction
@@ -485,55 +521,6 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function GET_O (O) -> O
-rem --------------------------------------------------------------------------------
-:GET_O
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=GET_O
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set AO=%~1
-
-    rem -------------------------------------------------------------------
-    rem Ox
-    rem -------------------------------------------------------------------
-    call :CurrentDir || exit /b 1
-    if not defined AO (
-        set Ox_Name=Ox
-        set Ox_Caption=Ox
-        set Ox_Default=
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox !Ox! || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    echo Ox:!Ox!
-    if defined Ox (
-        rem if exist !Ox!\ (
-        rem     set O=!Ox!\
-        rem ) else (
-        rem     set O=
-        rem     echo ERROR: Dir !Ox! not exist ...
-        rem     exit /b 1
-        )
-    ) else (
-        set O=
-        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        exit /b 1
-    )
-
-    set GET_O=!O!
-    echo GET_O:!GET_O!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem function GET_python (python) -> python
 rem --------------------------------------------------------------------------------
 :GET_python
@@ -567,9 +554,6 @@ rem beginfunction
         if !Ox!==3.14 set result=T
         if !result!==T (
             set python=!Ox!
-        )    
-        if defined python (
-            rem echo python:!python!
         ) else (
             echo ERROR: !python! not defined ...
             exit /b 1
@@ -623,14 +607,10 @@ rem beginfunction
         if !Ox!==script set result=T
         if !result!==T (
             set project_type=--!Ox!
-        )    
-        if defined project_type (
-            rem echo project_type:!project_type!
         ) else (
-            echo ERROR: Dir !project_type! not defined ...
+            echo ERROR: !project_type! not defined ...
             exit /b 1
         )
-
     ) else (
         echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
         exit /b 1
@@ -728,7 +708,7 @@ rem beginfunction
             set no-workspace=--no-workspace
         )    
     ) else (
-        set no-workspace=!no-workspace!
+        set no-workspace=
         echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
 
@@ -834,5 +814,8 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :CheckErrorlevel
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GET_Ox
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0

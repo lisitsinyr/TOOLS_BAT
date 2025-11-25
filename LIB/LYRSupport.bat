@@ -429,6 +429,62 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem function GET_Ox (Aname Acaption Adefault) -> script
+rem --------------------------------------------------------------------------------
+:GET_Ox
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_Ox
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set Aname=%~1
+    rem echo Aname:!Aname!
+    set Acaption=%~2
+    rem echo Acaption:!Acaption!
+    set Adefault=%~3
+    rem echo Adefault:!Adefault!
+
+    rem -------------------------------------------------------------------
+    rem Ox
+    rem -------------------------------------------------------------------
+    
+    set Ox=!%Aname%!
+    rem echo Ox:!%Aname%!
+
+    set Ox_Name=!Aname!
+    set Ox_Caption=!Acaption!
+    set Ox_Default=!Adefault!
+    set Ox=!Ox_Default!
+    set PN_CAPTION=!Ox_Caption!
+
+    if not defined Ox (
+        call :Read_P Ox || exit /b 1
+        set !Aname!=!Ox!
+    ) else (
+        rem call :Read_P Ox || exit /b 1
+        set !Aname!=!Ox!
+    )
+    if defined Ox (
+        rem set !Aname!=!%Aname%!
+        set !Aname!=!Ox!
+    ) else (
+        set !Aname!=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+        rem echo INFO: Ox [Ox_Name:!Aname! Ox_Caption:!Acaption!] not defined ...
+    )
+
+    rem echo !Aname!=!%Aname%!
+    
+    set GET_Ox=!Ox!
+    echo GET_Ox:!GET_Ox!
+
+    exit /b 0
+rem endfunction
+
 rem =================================================
 rem ФУНКЦИИ LIB
 rem =================================================

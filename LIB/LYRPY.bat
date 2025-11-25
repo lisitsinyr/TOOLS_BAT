@@ -98,34 +98,42 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
-    call :CurrentDir || exit /b 1
-    if not defined Aproject_dir (
-        set Ox_Name=Ox
-        set Ox_Caption=project_dir
-        set Ox_Default=!CurrentDir!
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
+    if not defined Aproject_dir
+        call :CurrentDir || exit /b 1
+        set Aproject_dir=!CurrentDir!
     )
-    rem echo Ox:!Ox!
-    if defined Ox (
 
-        set project_dir=!Ox!
+    call :GET_Ox "project_dir" "project_dir" "Aproject_dir" || exit /b 1
+    echo project_dir:!project_dir!
+    if defined project_dir (
         call :SET_project_dir !project_dir! || exit /b 1
-
-    ) else (
-        set project_dir=
-        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        exit /b 1
     )
-
+    
     set GET_project_dir=!project_dir!
     rem echo GET_project_dir:!GET_project_dir!
 
     exit /b 0
 rem endfunction
+
+    rem if not defined Aproject_dir (
+    rem     set Ox_Name=Ox
+    rem     set Ox_Caption=project_dir
+    rem     set Ox_Default=!CurrentDir!
+    rem     set Ox=!Ox_Default!
+    rem     set PN_CAPTION=!Ox_Caption!
+    rem     call :Read_P Ox || exit /b 1
+    rem ) else (
+    rem     call :Read_P Ox || exit /b 1
+    rem )
+    rem echo Ox:!Ox!
+    rem if defined Ox (
+    rem     set project_dir=!Ox!
+    rem     call :SET_project_dir !project_dir! || exit /b 1
+    rem ) else (
+    rem     set project_dir=
+    rem     echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    rem     exit /b 1
+    rem )
 
 rem --------------------------------------------------------------------------------
 rem function SET_projects_dir (Aprojects_dir) -> projects_dir
@@ -143,7 +151,7 @@ rem beginfunction
     rem echo Aprojects_dir:!Aprojects_dir!
 
     rem -------------------------------------------------------------------
-    rem projecst_dir
+    rem projects_dir
     rem -------------------------------------------------------------------
     if defined Aprojects_dir (
         if not exist !Aprojects_dir! (
@@ -161,7 +169,6 @@ rem beginfunction
     set SET_projects_dir=!projects_dir!
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -181,26 +188,15 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem projects_dir
     rem -------------------------------------------------------------------
-    call :CurrentDir || exit /b 1
-    if not defined Aprojects_dir (
-        set Ox_Name=Ox
-        set Ox_Caption=projects_dir
-        set Ox_Default=!CurrentDir!
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
+    if not defined Aprojects_dir
+        call :CurrentDir || exit /b 1
+        set Aprojects_dir=!CurrentDir!
     )
-    rem echo Ox:!Ox!
-    if defined Ox (
 
-        set projects_dir=!Ox!
+    call :GET_Ox "projects_dir" "projects_dir" "!CurrentDir!" || exit /b 1
+    echo projects_dir:!projects_dir!
+    if defined projects_dir (
         call :SET_projects_dir !projects_dir! || exit /b 1
-
-    ) else (
-        set projects_dir=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
 
     set GET_projects_dir=!projects_dir!
@@ -257,25 +253,10 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem project_name
     rem -------------------------------------------------------------------
-    if not defined Aproject_name (
-        set Ox_Name=Ox
-        set Ox_Caption=project_name
-        set Ox_Default=
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-
-        set project_name=!Ox!
-        call :SET_project_name !project_name! || exit /b 1
-
-    ) else (
-        set project_name=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+    call :GET_Ox "project_name" "project_name" "!Aproject_name!" || exit /b 1
+    echo project_name:!project_name!
+    if defined project_name (
+        call :SET_projects_name !project_name! || exit /b 1
     )
 
     set GET_project_name=!project_name!
@@ -337,104 +318,19 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem script_dir
     rem -------------------------------------------------------------------
-    call :CurrentDir || exit /b 1
-    if not defined Ascript_dir (
-        set Ox_Name=Ox
-        set Ox_Caption=script_dir
-        set Ox_Default=!CurrentDir!
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
+    if not defined Ascript_dir
+        call :CurrentDir || exit /b 1
+        set Aproject_dir=!CurrentDir!
     )
-    rem echo Ox:!Ox!
-    if defined Ox (
 
-        set script_dir=!Ox!\
+    call :GET_Ox "script_dir" "script_dir" "Ascript_dir" || exit /b 1
+    echo script_dir:!script_dir!
+    if defined script_dir (
         call :SET_script_dir !script_dir! || exit /b 1
-
-    ) else (
-        set script_dir=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
-
+    
     set GET_script_dir=!script_dir!
     rem echo GET_script_dir:!GET_script_dir!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function SET_project_name (Aproject_name) -> project_name
-rem --------------------------------------------------------------------------------
-:SET_project_name
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=SET_project_name
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set Aproject_name=%~1
-    rem echo project_name:!project_name!
-
-    rem -------------------------------------------------------------------
-    rem project_name
-    rem -------------------------------------------------------------------
-    if defined Aproject_name (
-        set project_name=!Aproject_name!
-    ) else (
-        echo ERROR: project_name not defined ...
-        exit /b 3
-    )
-
-    set SET_project_name=!project_name!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function GET_project_name (Aproject_name) -> project_name
-rem --------------------------------------------------------------------------------
-:GET_project_name
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=GET_project_name
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set Aproject_name=%~1
-
-    rem -------------------------------------------------------------------
-    rem project_name
-    rem -------------------------------------------------------------------
-    if not defined Aproject_name (
-        set Ox_Name=Ox
-        set Ox_Caption=project_name
-        set Ox_Default=
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-
-        set project_name=!Ox!
-        call :SET_project_name !project_name! || exit /b 1
-
-    ) else (
-        set project_name=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-    )
-
-    set GET_project_name=!project_name!
-    rem echo GET_project_name:!GET_project_name!
 
     exit /b 0
 rem endfunction
@@ -472,7 +368,7 @@ rem beginfunction
         exit /b 3
     )
 
-    set SET_script=script
+    set SET_script=!script!
 
     exit /b 0
 rem endfunction
@@ -492,27 +388,12 @@ rem beginfunction
     set Ascript=%~1
 
     rem -------------------------------------------------------------------
-    rem script_name
+    rem script_dir
     rem -------------------------------------------------------------------
-    if not defined Ascript (
-        set Ox_Name=Ox
-        set Ox_Caption=script
-        set Ox_Default=
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-
-        set script=!Ox!
+    call :GET_Ox "script" "script" "Ascript" || exit /b 1
+    echo script:!script!
+    if defined script (
         call :SET_script !script! || exit /b 1
-
-    ) else (
-        set script_name=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
 
     set GET_script=!script!
@@ -782,32 +663,17 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem requirements_file
     rem -------------------------------------------------------------------
-    call :CurrentDir || exit /b 1
-    if not defined Arequirements_file (
-        set Ox_Name=Ox
-        set Ox_Caption=requirements_file
-        set Ox_Default=requirements.txt
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-
+    call :GET_Ox "requirements_file" "requirements_file" "Arequirements_file" || exit /b 1
+    echo requirements_file:!requirements_file!
+    if defined requirements_file (
         if exist !Ox! (
             set requirements_file=-r !Ox!
         ) else (
             set requirements_file=
             echo INFO: File !Ox! not exist ...
         )
-
-    ) else (
-        set script_name=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
-
+    
     set GET_requirements_file=!requirements_file!
     rem echo GET_requirements_file:!GET_requirements_file!
 
@@ -829,26 +695,12 @@ rem beginfunction
     set Apackage_names=%*
 
     rem -------------------------------------------------------------------
-    rem package_name
+    rem package_names
     rem -------------------------------------------------------------------
-    if not defined Apackage_names (
-        set Ox_Name=Ox
-        set Ox_Caption=package_names[A B C] requests
-        set Ox_Default=
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-
+    call :GET_Ox "package_names" "package_names" "Apackage_names" || exit /b 1
+    echo package_names:!package_names!
+    if defined package_names (
         set package_names=!Ox!
-
-    ) else (
-        set package_names=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
 
     set GET_package_names=!package_names!
@@ -1103,5 +955,8 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :GetCMD
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GET_Ox
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
