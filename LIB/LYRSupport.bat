@@ -35,11 +35,13 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRSupport=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure PressAnyKey ()
+rem procedure PressAnyKey () -> None
 rem --------------------------------------------------------------------------------
 :PressAnyKey
 rem beginfunction
@@ -53,6 +55,8 @@ rem beginfunction
     rem echo "Press any key to continue" && pause
     
     pause
+
+    set PressAnyKey=
 
     exit /b 0
 rem endfunction
@@ -78,11 +82,13 @@ rem beginfunction
         timeout !APause!
     )
 
+    set Pause=
+
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Read_P (P_Name, P_Value) -> None
+rem procedure Read_P (P_Name, P_Value, P_Caption) -> None
 rem --------------------------------------------------------------------------------
 :Read_P
 rem beginfunction
@@ -112,7 +118,15 @@ rem setlocal enabledelayedexpansion
     set P_Value=%~2
     rem echo P_Value:!P_Value!
 
+    set P_Caption=%~3
+    rem echo P_Caption:!P_Caption!
+
     rem !PN_CAPTION! - PN_CAPTION
+    if defined P_Caption (
+        set PN_CAPTION=!P_Caption!
+    )
+    rem echo PN_CAPTION:!PN_CAPTION!
+   
     rem [!P_Name!]   - имя переменной
     rem [!%P_Name%!] - значение переменной по умолчанию
 
@@ -134,6 +148,8 @@ rem setlocal enabledelayedexpansion
     ) else (
         set %P_Name%=!Input!
     )
+
+    set Read_P=
 
     exit /b 0
 rem endfunction
@@ -162,22 +178,22 @@ rem beginfunction
     rem !P_Name!    - имя переменной
 
     set P_Name=%1
-    rem echo P_Name:!P_Name!
+    echo P_Name:!P_Name!
     set P_List=%~2
-    rem echo P_List:!P_List!
+    echo P_List:!P_List!
     set ADefault=%~3
-    rem echo ADefault:!ADefault!
+    echo ADefault:!ADefault!
     set ACaption=%~4
+    echo ACaption:!ACaption!
     if not defined ACaption (
         set ACaption=!PN_CAPTION!
     )
-    rem echo ACaption:!ACaption!
     set Atimeout=%5
     set Atimeout=!TIMEOUT!
     if not defined Atimeout (
         set Atimeout=5
     )
-    rem echo Atimeout:!Atimeout!
+    echo Atimeout:!Atimeout!
 
     rem set %P_Name%=!%P_Name%!
     set %P_Name%=!ADefault!
@@ -462,7 +478,7 @@ rem beginfunction
     set PN_CAPTION=!Ox_Caption!
 
     if not defined Ox (
-        call :Read_P Ox || exit /b 1
+        call :Read_P Ox "" !PN_CAPTION! || exit /b 1
         set !Aname!=!Ox!
     ) else (
         rem call :Read_P Ox || exit /b 1
@@ -480,7 +496,7 @@ rem beginfunction
     rem echo !Aname!=!%Aname%!
     
     set GET_Ox=!Ox!
-    echo GET_Ox:!GET_Ox!
+    rem echo GET_Ox:!GET_Ox!
 
     exit /b 0
 rem endfunction

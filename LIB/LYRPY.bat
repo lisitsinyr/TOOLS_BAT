@@ -233,7 +233,6 @@ rem beginfunction
     set SET_project_name=!project_name!
 
     exit /b 0
-
 rem endfunction
 
 rem --------------------------------------------------------------------------------
@@ -511,39 +510,21 @@ rem beginfunction
 
     rem cd /D !project_dir!
 
-    set GET_venv_dir=
-
     rem -------------------------------------------------------------------
     rem venv_dir
     rem -------------------------------------------------------------------
-    if not defined Avenv_dir (
-    
+    if not defined Avenv_dir
         if exist !project_dir!.venv\ (
             set venv_dir=!Aproject_dir!.venv\
         ) else (
             set venv_dir=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\
         )
-        
-        set Ox_Name=Ox
-        set Ox_Caption=VENV
-        set Ox_Default=!venv_dir!
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
     )
-    rem echo Ox:!Ox!
 
-    if defined Ox (
-
-        set venv_dir=!Ox!
+    call :GET_Ox "venv_dir" "venv_dir" "!venv_dir!" || exit /b 1
+    echo venv_dir:!!
+    if defined venv_dir (
         call :SET_venv_dir !project_dir! !venv_dir! || exit /b 1
-
-    ) else (
-        set venv_dir=
-        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        exit /b 1
     )
 
     set GET_venv_dir=!venv_dir!
@@ -619,25 +600,15 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem python_dir
     rem -------------------------------------------------------------------
-    if not defined python_dir (
-        set Ox_Name=Ox
-        set Ox_Caption=python_dir
-        set Ox_Default=3.13
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
+    if not defined Apython_dir
+        call :CurrentDir || exit /b 1
+        set Apython_dir=3.13
     )
-    rem echo Ox:!Ox!
-    if defined Ox (
-        
-        set python_dir=!Ox!
-        call :SET_python_dir !python_dir! || exit /b 1
 
-    ) else (
-        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        exit /b 1
+    call :GET_Ox "python_dir" "python_dir" "!Apython_dir!" || exit /b 1
+    echo python_dir:!python_dir!
+    if defined python_dir (
+        call :SET_python_dir !python_dir! || exit /b 1
     )
 
     set GET_python_dir=!python_dir!

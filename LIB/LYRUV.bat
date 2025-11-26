@@ -521,50 +521,38 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function GET_python (python) -> python
+rem function GET_python_version (python_version) -> python_version
 rem --------------------------------------------------------------------------------
-:GET_python
+:GET_python_version
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=GET_python
+    set FUNCNAME=GET_python_version
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
 
-    set Apython=%~1
+    set Apython_version=%~1
 
     rem -------------------------------------------------------------------
-    rem python
+    rem python_version
     rem -------------------------------------------------------------------
-    if not defined Apython (
-        set Ox_Name=Ox
-        set Ox_Caption=python
-        set Ox_Default=3.13
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
+    call :GET_Ox "python_version" "python_version" "Apython_version" || exit /b 1
+    echo python_version:!python_version!
+    if defined python_version (
         set result=F
-        if !Ox!==3.13 set result=T
-        if !Ox!==3.14 set result=T
+        if !python_version!==3.13 set result=T
+        if !python_version!==3.14 set result=T
         if !result!==T (
-            set python=!Ox!
+            set pytho_version=!Ox!
         ) else (
-            echo ERROR: !python! not defined ...
+            echo ERROR: !python_version! not defined ...
             exit /b 1
         )
-    ) else (
-        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        exit /b 1
     )
 
-    set GET_python=!python!
-    rem echo GET_python:!GET_python!
+    set GET_python_version=!python_version!
+    rem echo GET_python_version:!GET_python_version!
 
     exit /b 0
 rem endfunction
@@ -584,36 +572,22 @@ rem beginfunction
     set Aproject_type=%~1
 
     rem -------------------------------------------------------------------
-    rem python
+    rem Aproject_type
     rem -------------------------------------------------------------------
-    if not defined Aproject_type (
-        set Ox_Name=Ox
-        set Ox_Caption=project_type{app,lib,bare,script}
-        set Ox_Default=app
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-        rem pattern OR
-        rem echo OR ...
+    call :GET_Ox "project_type" "project_type{app,lib,bare,script}" "Aproject_type" || exit /b 1
+    echo python_version:!python_version!
+    if defined project_type (
         set result=F
-        if !Ox!==app set result=T
-        if !Ox!==lib set result=T
-        if !Ox!==bare set result=T
-        if !Ox!==script set result=T
+        if !project_type!==app set result=T
+        if !project_type!==lib set result=T
+        if !project_type!==bare set result=T
+        if !project_type!==script set result=T
         if !result!==T (
-            set project_type=--!Ox!
+            set project_type=--!project_type!
         ) else (
             echo ERROR: !project_type! not defined ...
             exit /b 1
         )
-    ) else (
-        echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        exit /b 1
     )
 
     set GET_project_type=!project_type!
@@ -639,31 +613,20 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem package
     rem -------------------------------------------------------------------
-    if not defined Apackage (
-        set Ox_Name=Ox
-        set Ox_Caption=package[y/N]
-        set Ox_Default=
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-        rem pattern OR
-        rem echo OR ...
+    call :GET_Ox "package" "package[y/N]" "Apackage" || exit /b 1
+    echo package:!package!
+    if defined package (
         set result=F
-        if !Ox!==y set result=T
-        if !Ox!==Y set result=T
+        if !package!==y set result=T
+        if !package!==Y set result=T
         if !result!==T (
             set package=--package
+        ) else (
+            set package=
+            echo INFO: !package! not defined ...
         )    
-    ) else (
-        set package=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
-
+    
     set GET_package=!package!
     rem echo GET_package:!GET_package!
 
@@ -682,36 +645,25 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aworkspace=%~1
+    set Ano-workspace=%~1
 
     rem -------------------------------------------------------------------
-    rem package
+    rem no-workspace
     rem -------------------------------------------------------------------
-    if not defined Aworkspace (
-        set Ox_Name=Ox
-        set Ox_Caption=[no-workspace]
-        set Ox_Default=
-        set Ox=!Ox_Default!
-        set PN_CAPTION=!Ox_Caption!
-        call :Read_P Ox || exit /b 1
-    ) else (
-        call :Read_P Ox || exit /b 1
-    )
-    rem echo Ox:!Ox!
-    if defined Ox (
-        rem pattern OR
-        rem echo OR ...
+    call :GET_Ox "no-workspace" "no-workspace[y/N]" "Ano-workspace" || exit /b 1
+    echo no-workspace:!no-workspace!
+    if defined no-workspace (
         set result=F
-        if !Ox!==y set result=T
-        if !Ox!==Y set result=T
+        if !no-workspace!==y set result=T
+        if !no-workspace!==Y set result=T
         if !result!==T (
-            set no-workspace=--no-workspace
+            set package=--no-workspace
+        ) else (
+            set no-workspace=
+            echo INFO: !no-workspace! not defined ...
         )    
-    ) else (
-        set no-workspace=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
     )
-
+    
     set GET_no-workspace=!no-workspace!
     rem echo GET_no-workspace:!GET_no-workspace!
 
