@@ -251,7 +251,7 @@ rem beginfunction
         set Aview=~f
     )
     echo Aview:!Aview!
-    set Aarg=%3
+    set Aarg=%~3
     if not defined Aarg (
         set Aarg=
     )
@@ -259,6 +259,7 @@ rem beginfunction
 
     for %Aarg% /d %%D in ( !ASET!  ) do  (
         set Directory=%%%Aview%D
+        rem set Directory=%%D
         echo !Directory!
     )
 
