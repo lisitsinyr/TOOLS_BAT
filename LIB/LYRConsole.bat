@@ -373,7 +373,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function aListToStr (ASTR) -> aListToStr
+rem function aListToStr (ASTR*) -> aListToStr
 rem --------------------------------------------------------------------------------
 :aListToStr
 rem beginfunction
@@ -419,7 +419,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function bListToStr (ASTR) -> bListToStr
+rem function bListToStr (ASTR*) -> bListToStr
 rem --------------------------------------------------------------------------------
 :bListToStr
 rem beginfunction
@@ -651,7 +651,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteNOTSET (s) -> None
+rem  WriteNOTSET (s*) -> None
 rem -------------------------------------------------
 :WriteNOTSET
 rem beginfunction
@@ -673,7 +673,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteDEBUG (s) -> None
+rem  WriteDEBUG (s*) -> None
 rem -------------------------------------------------
 :WriteDEBUG
 rem beginfunction
@@ -695,7 +695,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteINFO (s) -> None
+rem  WriteINFO (s*) -> None
 rem -------------------------------------------------
 :WriteINFO
 rem beginfunction
@@ -717,7 +717,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteWARNING (s) -> None
+rem  WriteWARNING (s*) -> None
 rem -------------------------------------------------
 :WriteWARNING
 rem beginfunction
@@ -739,7 +739,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteERROR (s) -> None
+rem  WriteERROR (s*) -> None
 rem -------------------------------------------------
 :WriteERROR
 rem beginfunction
@@ -761,7 +761,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteCRITICAL (s) -> None
+rem  WriteCRITICAL (s*) -> None
 rem -------------------------------------------------
 :WriteCRITICAL
 rem beginfunction
@@ -783,7 +783,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteBEGIN (s) -> None
+rem  WriteBEGIN (s*) -> None
 rem -------------------------------------------------
 :WriteBEGIN
 rem beginfunction
@@ -805,7 +805,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteEND (s) -> None
+rem  WriteEND (s*) -> None
 rem -------------------------------------------------
 :WriteEND
 rem beginfunction
@@ -827,7 +827,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WritePROCESS (s) -> None
+rem  WritePROCESS (s*) -> None
 rem -------------------------------------------------
 :WritePROCESS
 rem beginfunction
@@ -850,7 +850,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteDEBUGTEXT (s) -> None
+rem  WriteDEBUGTEXT (s*) -> None
 rem -------------------------------------------------
 :WriteDEBUGTEXT
 rem beginfunction
@@ -872,7 +872,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteTEXT (s) -> None
+rem  WriteTEXT (s*) -> None
 rem -------------------------------------------------
 :WriteTEXT
 rem beginfunction

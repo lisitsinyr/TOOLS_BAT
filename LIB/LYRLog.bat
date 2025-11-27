@@ -236,7 +236,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure AddLogConsole (s) -> None
+rem procedure AddLogConsole (s*) -> None
 rem --------------------------------------------------------------------------------
 :AddLogConsole
 rem beginfunction

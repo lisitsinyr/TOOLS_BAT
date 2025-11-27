@@ -183,7 +183,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function ListToStr (ASTR) -> ListToStr
+rem function ListToStr (ASTR*) -> ListToStr
 rem --------------------------------------------------------------------------------
 :ListToStr
 rem beginfunction
