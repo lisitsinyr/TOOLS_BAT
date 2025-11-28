@@ -531,8 +531,8 @@ rem beginfunction
     set !FUNCNAME!=
 
     call :ListToStr %* || exit /b 1
-
     rem echo !ListToStr!
+
     <nul set /p strTemp=!ListToStr!
 
     exit /b 0
@@ -746,7 +746,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  WriteBEGIN (s*) -> None
+rem  WriteBEGIN (s) -> None
 rem -------------------------------------------------
 :WriteBEGIN
 rem beginfunction
