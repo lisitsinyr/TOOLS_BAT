@@ -449,7 +449,7 @@ rem beginfunction
     )
     echo LSTR:!LSTR!
 
-    set __bListToStr=!LSTR!
+    rem set __bListToStr=!LSTR!
 
     exit /b 0
 rem endfunction
