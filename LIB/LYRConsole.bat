@@ -1,4 +1,4 @@
-@echo o8ff
+@echo off
 rem -------------------------------------------------------------------
 rem LYRConsole.bat
 rem -------------------------------------------------------------------
@@ -407,7 +407,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function __bListToStr (ASTR*) -> bListToStr
+rem function __bListToStr (ASTR*) -> __bListToStr
 rem --------------------------------------------------------------------------------
 :__bListToStr
 rem beginfunction
@@ -467,7 +467,7 @@ rem beginfunction
     rem Чтобы избежать этого, обычно используют какую-либо внешнюю утилиту
     
     call :__bListToStr %* || exit /b 1
-    rem echo bListToStr:!bListToStr!
+    echo __bListToStr:!__bListToStr!
 
     rem <nul set /p strTemp=[33m
     rem <nul set /p strTemp=[!cFG8_WHITE!^;!cBG8_BLACK!m
