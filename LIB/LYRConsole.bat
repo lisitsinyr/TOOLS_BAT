@@ -475,8 +475,7 @@ rem beginfunction
     rem <nul set /p strTemp=[!cS_BOLD!;!cFG8_WHITE!;!cBG8_RED!!sEND!
 
     rem мы используем ввод с устройства Ђnulї в команде Ђset /pї дл€ эмул€ции команды Ђechoї.
-    <nul set /p strTemp=!sBEGIN!!bListToStr!!sEND!
-
+    <nul set /p strTemp=!sBEGIN!!__bListToStr!!sEND!
     exit /b 0
 rem endfunction
 
