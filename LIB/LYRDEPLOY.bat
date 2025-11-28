@@ -887,15 +887,6 @@ exit /b 0
 :ConsoleTEST_02
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
-:FormatColorStr
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:aListToStr
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:bListToStr
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
 :SetColor
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
