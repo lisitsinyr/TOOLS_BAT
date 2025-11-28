@@ -125,12 +125,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure ConsoleTEST_00 () - None
+rem procedure __ConsoleTEST_00 () - None
 rem --------------------------------------------------------------------------------
-:ConsoleTEST_00
+:__ConsoleTEST_00
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=ConsoleTEST_00
+    set FUNCNAME=__ConsoleTEST_00
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -166,12 +166,12 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure ConsoleTEST_01 () -> None
+rem procedure __ConsoleTEST_01 () -> None
 rem --------------------------------------------------------------------------------
-:ConsoleTEST_01
+:__ConsoleTEST_01
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=ConsoleTEST_01
+    set FUNCNAME=__ConsoleTEST_01
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -207,12 +207,12 @@ rem beginfunction
 rem endfunction
     
 rem --------------------------------------------------------------------------------
-rem procedure ConsoleTEST_02 () -> None
+rem procedure __ConsoleTEST_02 () -> None
 rem --------------------------------------------------------------------------------
-:ConsoleTEST_02
+:__ConsoleTEST_02
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRConst
+    set FUNCNAME=__ConsoleTEST_02
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -401,7 +401,7 @@ rem beginfunction
             set LSTR=!sBEGIN!!LSTR!!sRESET!
         )
     )
-    rem echo LSTR:!LSTR!
+    echo LSTR:!LSTR!
 
     set __aListToStr=!LSTR!
 
@@ -471,7 +471,7 @@ rem beginfunction
     rem Чтобы избежать этого, обычно используют какую-либо внешнюю утилиту
     
     call :__bListToStr %* || exit /b 1
-    rem echo __bListToStr:!__bListToStr!
+    echo __bListToStr:!__bListToStr!
 
     rem <nul set /p strTemp=[33m
     rem <nul set /p strTemp=[!cFG8_WHITE!^;!cBG8_BLACK!m
@@ -758,8 +758,10 @@ rem beginfunction
     set !FUNCNAME!=
 
     call :SetColor !cBEGIN!
+
     call :ListToStr %* || exit /b 1
     call :Write !ListToStr!
+    
     call :ReSetColorCR
 
     exit /b 0
