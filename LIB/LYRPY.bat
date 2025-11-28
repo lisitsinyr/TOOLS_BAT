@@ -14,12 +14,12 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRPY () -> None
+rem procedure LYRPYINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRPYINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRPY
+    set FUNCNAME=LYRPYINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -34,8 +34,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRPY=
 
     exit /b 0
 rem endfunction
@@ -114,26 +112,6 @@ rem beginfunction
 
     exit /b 0
 rem endfunction
-
-    rem if not defined Aproject_dir (
-    rem     set Ox_Name=Ox
-    rem     set Ox_Caption=project_dir
-    rem     set Ox_Default=!CurrentDir!
-    rem     set Ox=!Ox_Default!
-    rem     set PN_CAPTION=!Ox_Caption!
-    rem     call :Read_P Ox || exit /b 1
-    rem ) else (
-    rem     call :Read_P Ox || exit /b 1
-    rem )
-    rem echo Ox:!Ox!
-    rem if defined Ox (
-    rem     set project_dir=!Ox!
-    rem     call :SET_project_dir !project_dir! || exit /b 1
-    rem ) else (
-    rem     set project_dir=
-    rem     echo ERROR: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-    rem     exit /b 1
-    rem )
 
 rem --------------------------------------------------------------------------------
 rem function SET_projects_dir (Aprojects_dir) -> projects_dir
@@ -690,11 +668,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     set Avenv_dir=%~1
     rem echo Avenv_dir:!Avenv_dir!
-
-    set VENV_START=
 
     if defined Avenv_dir (
         if not exist !Avenv_dir! (
@@ -724,11 +701,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     set Avenv_dir=%~1
     rem echo Avenv_dir:!Avenv_dir!
-
-    set VENV_STOP=
 
     if defined Avenv_dir (
         if not exist !Avenv_dir! (
@@ -758,11 +734,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     set Avenv_dir=%~1
     rem echo Avenv_dir:!Avenv_dir!
-
-    set VENV_UPDATE=
 
     if defined Avenv_dir (
         if not exist !Avenv_dir!\ (

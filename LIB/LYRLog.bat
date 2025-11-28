@@ -14,12 +14,12 @@ rem ÔÓÍÊÖÈÈ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRLog () -> None
+rem procedure LYRLogINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRLogINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRLog
+    set FUNCNAME=LYRLogINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -34,8 +34,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRLog=
 
     exit /b 0
 rem endfunction
@@ -85,8 +83,6 @@ rem beginfunction
     set ctlsPROCESS=P
     set ctlsDEBUGTEXT=T
     set ctlsTEXT=T
-
-    set __SETVarLog=
 
     exit /b 0
 rem endfunction
@@ -282,8 +278,6 @@ rem beginfunction
         call :WriteTEXT !s!
     )
 
-    set AddLogConsole=
-
     exit /b 0
 rem endfunction
 
@@ -317,8 +311,6 @@ rem beginfunction
         call ::AddLogConsole !__LOG_STR!
         echo !__LOG_STR! >> "!LOG_FULLFILENAME!"
     )
-
-    set AddLog=
 
     exit /b 0
 rem endfunction
@@ -358,8 +350,6 @@ rem beginfunction
             call :AddLog !loAll! !ERROR! FileName: !AFileName! || exit /b 1
         )
     )
-
-    set AddLogFile=
 
     exit /b 0
 rem endfunction
@@ -411,8 +401,6 @@ rem beginfunction
     rem call :AddLog !loAll! !PROCESS! !S01! || exit /b 1
     rem -------------------------------------------------------------------
 
-    set StartLogFile=
-
     exit /b 0
 rem endfunction
 
@@ -433,8 +421,6 @@ rem beginfunction
     call :AddLog !loAll! !PROCESS! Stop: !SCRIPT_BASEFILENAME! ... || exit /b 1
     rem call :AddLog !loAll! !PROCESS! !S01! || exit /b 1
     rem -------------------------------------------------------------------
-
-    set StopLogFile=
 
     exit /b 0
 rem endfunction

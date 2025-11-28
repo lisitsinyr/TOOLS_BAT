@@ -14,12 +14,12 @@ rem ÔÓÍÊÖÈÈ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRDEPLOYTools () -> None
+rem procedure LYRDEPLOYToolsINIT () -> None
 rem --------------------------------------------------------------------------------
-:LYRDEPLOYINITTools
+:LYRDEPLOYToolsINIT
 rem beginfunction
     set FUNCNAME=%0
-    rem set FUNCNAME=LYRDEPLOYTools
+    set FUNCNAME=LYRDEPLOYToolsINITINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -34,8 +34,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRDEPLOYTools=
 
     exit /b 0
 rem endfunction
@@ -83,8 +81,6 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
-    set UPDATE_TOOLS_BAT_SCRIPTS_BAT=
-
     exit /b 0
 rem endfunction
 
@@ -131,8 +127,6 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
-    set UPDATE_TOOLS_BAT_TOOLS_SRC_BAT=
-
     exit /b 0
 rem endfunction
 
@@ -171,8 +165,6 @@ rem beginfunction
 
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-
-    set UPDATE_TOOLS_GIT_TOOLS_SRC_GIT=
 
     exit /b 0
 rem endfunction
@@ -220,8 +212,6 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
-    set UPDATE_TOOLS_JAVA_SCRIPTS_JAVA=
-
     exit /b 0
 rem endfunction
 
@@ -267,8 +257,6 @@ rem beginfunction
 
     set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-
-    set UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA=
 
     exit /b 0
 rem endfunction
@@ -316,8 +304,6 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
-    set UPDATE_TOOLS_KIX_SCRIPTS_KIX=
-
     exit /b 0
 rem endfunction
 
@@ -363,8 +349,6 @@ rem beginfunction
 
     set LMASK=*.kxl
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-
-    set UPDATE_TOOLS_KIX_TOOLS_SRC_KIX=
 
     exit /b 0
 rem endfunction
@@ -412,8 +396,6 @@ rem beginfunction
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
-    set UPDATE_TOOLS_PY_SCRIPTS_PY=
-
     exit /b 0
 rem endfunction
 
@@ -460,8 +442,6 @@ rem beginfunction
     set LMASK=*.*
     rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
-    set UPDATE_TOOLS_PY_TOOLS_SRC_PY=
-
     exit /b 0
 rem endfunction
 
@@ -507,8 +487,6 @@ rem beginfunction
 
     set LMASK=*.sh
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-
-    set UPDATE_TOOLS_SH_SCRIPTS_SH=
 
     exit /b 0
 rem endfunction
@@ -558,8 +536,6 @@ rem beginfunction
     set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
-    set UPDATE_TOOLS_SH_TOOLS_SRC_SH=
-
     exit /b 0
 rem endfunction
 
@@ -596,8 +572,6 @@ rem beginfunction
 
     set LMASK=*.*
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-
-    set UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH=
 
     exit /b 0
 rem endfunction
@@ -738,7 +712,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
-:LYRDEPLOYINITTools.bat
+:LYRDEPLOYToolsINIT.bat
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT

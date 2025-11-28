@@ -14,12 +14,12 @@ rem ÔÓÍÊÖÈÈ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRConst () -> None
+rem procedure LYRConstINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRConstINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRConst
+    set FUNCNAME=LYRConstINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -36,8 +36,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRConst=
 
     exit /b 0
 rem endfunction

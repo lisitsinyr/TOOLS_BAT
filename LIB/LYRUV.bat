@@ -14,12 +14,12 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRUV () -> None
+rem procedure LYRUVINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRUVINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRUV
+    set FUNCNAME=LYRUVINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -34,8 +34,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRUV=
 
     exit /b 0
 rem endfunction
@@ -54,13 +52,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     echo List Python versions you have installed and versions you can install ...
     uv python list              
-
-    set UV_python_list=
 
     exit /b 0
 rem endfunction
@@ -75,7 +70,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     set Aversion=%~1
     rem echo Aversion:!Aversion!
@@ -108,7 +103,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     set Aversion=%~1
     rem echo Aversion:!Aversion!
@@ -142,12 +137,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     echo Run your default Python ...
     uv run python
-
-    set UV_python_run=
 
     exit /b 0
 rem endfunction
@@ -162,12 +155,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     echo Upgrade your Python versions ...
     uv python upgrade
-
-    set UV_python_upgrade=
 
     exit /b 0
 rem endfunction
@@ -182,7 +173,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     set Aversion=%~1
     rem echo Aversion:!Aversion!
@@ -214,12 +205,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     echo View Python installation directory ...
     uv python dir
-
-    set UV_python_dir=
 
     exit /b 0
 rem endfunction
@@ -234,14 +223,12 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     echo UV will now use this version for all commands in this directory ...
     
     rem  Will use Python 3.11
     uv run python --version 
-
-    set UV_python_version=
 
     exit /b 0
 rem endfunction
@@ -256,7 +243,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-    echo !FUNCNAME! ...
+    set !FUNCNAME!=
 
     set Aversion=%~1
     rem echo Aversion:!Aversion!
@@ -291,11 +278,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     echo help ...
     uv help
-
-    set UV_help=
 
     exit /b 0
 rem endfunction
@@ -310,6 +296,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem auth
     rem run
@@ -337,8 +324,6 @@ rem beginfunction
 
     uv help !ACMD!
 
-    set UV_help_cmd=
-
     exit /b 0
 rem endfunction
 
@@ -352,11 +337,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     echo --version ...
     uv --version
-
-    set UV_version=
 
     exit /b 0
 rem endfunction
@@ -371,11 +355,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     echo self ...
     uv self
-
-    set UV_self=
 
     exit /b 0
 rem endfunction
@@ -390,11 +373,10 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     echo self version ...
     uv self version
-
-    set UV_self_version=
 
     exit /b 0
 rem endfunction
@@ -409,6 +391,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem Установка uv
 
@@ -417,8 +400,6 @@ rem beginfunction
 
     rem powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
     "C:\Program Files\PowerShell\7\pwsh.exe" -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-    set UV_install_self=
 
     exit /b 0
 rem endfunction
@@ -433,6 +414,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem Установка uv
 
@@ -450,8 +432,6 @@ rem beginfunction
     rem Scoop:
     rem scoop install main/uv
 
-    set UV_install_other=
-
     exit /b 0
 rem endfunction
 
@@ -465,6 +445,7 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem Обновление uv
 
@@ -472,8 +453,6 @@ rem beginfunction
 
     echo self update ...
     uv self update
-
-    set UV_update_self=
 
     exit /b 0
 rem endfunction
@@ -488,14 +467,13 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem Установка uv
 
     rem Если вы предпочитаете классический способ установки uv через pip из PYPI:
 
     pip install uv
-
-    set UV_install_pip=
 
     exit /b 0
 rem endfunction
@@ -510,12 +488,11 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
     rem Если uv был установлен через pip:
 
     pip install --upgrade uv
-
-    set UV_upgrade_pip=
 
     exit /b 0
 rem endfunction

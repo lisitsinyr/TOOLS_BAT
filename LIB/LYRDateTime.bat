@@ -14,12 +14,12 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRDateTime () -> None
+rem procedure LYRDateTimeINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRDateTimeINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRDateTime
+    set FUNCNAME=LYRDateTimeINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -34,8 +34,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRDateTime=
 
     exit /b 0
 rem endfunction

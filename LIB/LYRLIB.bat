@@ -16,12 +16,12 @@ rem ----------------------------------------------------------------------------
 rem --------------------------------------------------------------------------------
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRLIB () -> None
+rem procedure LYRLIBINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRLIBINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRLIB
+    set FUNCNAME=LYRLIBINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -36,8 +36,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRLIB=
 
     exit /b 0
 rem endfunction
@@ -69,14 +67,12 @@ rem beginfunction
     call :LYRUVINIT || exit /b 1
 
     call :LYRDEPLOYINIT || exit /b 1
-    call :LYRDEPLOYINITTools || exit /b 1
+    call :LYRDEPLOYToolsINIT || exit /b 1
 
     call :__SET_VAR_SCRIPT !ASCRIPT! || exit /b 1
     call :__SET_VAR_DEFAULT || exit /b 1
     call :__SET_VAR_PROJECTS || exit /b 1
     call :__SET_LOG || exit /b 1
-
-    set SET_LIB=
 
     exit /b 0
 rem endfunction
@@ -101,8 +97,6 @@ rem beginfunction
     set OPTION= -v --ansi
     set ARGS=
     set APPRUN=
-
-    set SET_POETRY=
 
     exit /b 0
 rem endfunction
@@ -184,8 +178,6 @@ rem beginfunction
     )
     echo APP_KIX:!APP_KIX!
 
-    set SET_KIX=
-
     exit /b 0
 rem endfunction
 
@@ -243,8 +235,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set APPName=%~n1
     rem echo APPName:!APPName!
-
-    set __SET_VAR_SCRIPT=
 
     exit /b 0
 rem endfunction
@@ -324,8 +314,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set POETRY_NAME=
 
-    set __SET_VAR_DEFAULT=
-
     exit /b 0
 rem endfunction
 
@@ -398,8 +386,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set TEMP_DIR=%temp%
     rem echo TEMP_DIR: !TEMP_DIR!
-
-    set __SET_VAR_PROJECTS=
 
     exit /b 0
 rem endfunction
@@ -524,8 +510,6 @@ rem beginfunction
     rem echo FileNameLOG:!FileNameLOG!
     set FileNameLOGjson=!APPName!_json.log
     rem echo FileNameLOGjson:!FileNameLOGjson!
-
-    set __SET_LOG=
 
     exit /b 0
 rem endfunction
@@ -671,7 +655,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
-:LYRDEPLOYINITTools
+:LYRDEPLOYToolsINIT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT

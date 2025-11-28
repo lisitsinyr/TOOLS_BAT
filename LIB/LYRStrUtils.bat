@@ -14,12 +14,12 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRStrUtils () -> None
+rem procedure LYRStrUtilsINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRStrUtilsINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRStrUtils
+    set FUNCNAME=LYRStrUtilsINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -34,8 +34,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRStrUtils=
 
     exit /b 0
 rem endfunction

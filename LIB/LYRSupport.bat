@@ -14,12 +14,12 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRSupport () -> None
+rem procedure LYRSupportINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRSupportINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRSupport
+    set FUNCNAME=LYRSupportINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -34,8 +34,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRSupport=
 
     exit /b 0
 rem endfunction
@@ -55,8 +53,6 @@ rem beginfunction
     rem echo "Press any key to continue" && pause
     
     pause
-
-    set PressAnyKey=
 
     exit /b 0
 rem endfunction
@@ -81,8 +77,6 @@ rem beginfunction
     ) else (
         timeout !APause!
     )
-
-    set Pause=
 
     exit /b 0
 rem endfunction
@@ -148,8 +142,6 @@ rem setlocal enabledelayedexpansion
     ) else (
         set %P_Name%=!Input!
     )
-
-    set Read_P=
 
     exit /b 0
 rem endfunction
@@ -263,8 +255,6 @@ rem beginfunction
         echo !Directory!
     )
 
-    set GetDir=
-
     exit /b 0
 rem endfunction
 
@@ -301,8 +291,6 @@ rem beginfunction
         echo !File!
     )
 
-    set GetFile=
-
     exit /b 0
 rem endfunction
 
@@ -337,8 +325,6 @@ rem beginfunction
     for /L %%L in ( !Astart!, !Astep!, !Aend!  ) do  (
         echo %%L
     )
-
-    set FORCicle=
 
     exit /b 0
 rem endfunction
@@ -375,8 +361,6 @@ rem beginfunction
         echo %%i=%%j
     )
 
-    set GetSET=
-
     exit /b 0
 rem endfunction
 
@@ -412,8 +396,6 @@ rem beginfunction
         echo %%i^|%%j^|%%k^|%%k^|%%m^|%%n^|%%o^|%%p^|%%r^|%%s^|%%t^|
     )
 
-    set GetCMD=
-
     exit /b 0
 rem endfunction
 
@@ -440,8 +422,6 @@ rem beginfunction
             call :PressAnyKey
         )
     )
-
-    set CheckErrorlevel=
 
     exit /b 0
 rem endfunction

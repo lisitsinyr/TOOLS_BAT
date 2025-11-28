@@ -254,7 +254,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
-:LYRDEPLOYINITTools
+:LYRDEPLOYToolsINIT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT

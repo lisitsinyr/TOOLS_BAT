@@ -14,12 +14,12 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRParserINI () -> None
+rem procedure LYRParserINIINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRParserINIINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRSupport
+    set FUNCNAME=LYRParserINIINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -34,8 +34,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRParserINI=
 
     exit /b 0
 rem endfunction
@@ -62,8 +60,6 @@ rem beginfunction
     rem echo AValue:!AValue!
 
     %SetINIAPP% "!AFileName!" !ASection! !AParameter! "!AValue!"
-
-    set SetINI=
 
     exit /b 0
 rem endfunction
@@ -141,8 +137,6 @@ rem beginfunction
     set /a SectionsCount=n-1
     set /a ParametersCount=k-1
 
-    set GetINI=
-
     exit /b 0
 rem endfunction
 
@@ -216,8 +210,6 @@ rem beginfunction
     )
     set /a SectionsCount=n-1
     set /a ParametersCount=k-1
-
-    set GetINIPY=
 
     exit /b 0
 rem endfunction
@@ -311,8 +303,6 @@ rem beginfunction
     set /a SectionsCount=n-1
     set /a ParametersCount=k-1
 
-    set GetINIParametr=
-
     exit /b 0
 rem endfunction
 
@@ -383,8 +373,6 @@ rem beginfunction
         echo ERROR: File !AFileName! not exist ...
         exit /b 1
     )
-
-    set GetFileParser=
 
     exit /b 0
 rem endfunction

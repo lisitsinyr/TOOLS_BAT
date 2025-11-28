@@ -14,12 +14,12 @@ rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
-rem procedure LYRDEPLOY () -> None
+rem procedure LYRDEPLOYINIT () -> None
 rem --------------------------------------------------------------------------------
 :LYRDEPLOYINIT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=LYRDEPLOY
+    set FUNCNAME=LYRDEPLOYINIT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -73,8 +73,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
-
-    set LYRDEPLOY=
 
     exit /b 0
 rem endfunction
@@ -343,8 +341,6 @@ rem beginfunction
         )
     )
 
-    set CopyFilesFromPATTERN=
-
     exit /b 0
 rem endfunction
 
@@ -394,8 +390,6 @@ rem beginfunction
         copy !LDirectory!\!LFileName! > NUL
     )
 
-    set CopyFilesROOT=
-
     exit /b 0
 rem endfunction
 
@@ -417,8 +411,6 @@ rem beginfunction
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_NAME !PROJECT_NAME!
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general DIR_GROUP_ROOT !DIR_GROUP_ROOT!
 
-    set SetPROJECT_INI=
-
     exit /b 0
 rem endfunction
 
@@ -436,8 +428,6 @@ rem beginfunction
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :SetINI !DIR_PROJECT_NAME!\REPO.ini general REPO_NAME !PROJECT_NAME!
-
-    set SetREPO_INI=
 
     exit /b 0
 rem endfunction
@@ -484,8 +474,6 @@ rem beginfunction
         rem echo call lyrgit_push_main.bat ...
         call lyrgit_push_main.bat
     )
-
-    set REPO_WORK=
 
     exit /b 0
 rem endfunction
@@ -534,8 +522,6 @@ rem beginfunction
     )
 
     call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
-
-    set REPO_WORK_TOOLS=
 
     exit /b 0
 rem endfunction
@@ -621,8 +607,6 @@ rem beginfunction
 
     call :REPO_WORK !DIR_PROJECT_NAME!
 
-    set DEPLOY_PROJECT=
-
     exit /b 0
 rem endfunction
 
@@ -693,8 +677,6 @@ rem beginfunction
         echo ERROR: Каталог !ADIR_PROJECTS_ROOT! не существует...
         exit /b 1
     )
-
-    set git_clone=
 
     exit /b 0
 rem endfunction
@@ -882,8 +864,6 @@ rem beginfunction
         )
     )   
 
-    set PULL_PROJECT=
-
     exit /b 0
 rem endfunction
 rem =================================================
@@ -1024,7 +1004,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
-:LYRDEPLOYINITTools
+:LYRDEPLOYToolsINIT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT
