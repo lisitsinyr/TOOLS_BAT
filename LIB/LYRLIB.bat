@@ -18,7 +18,7 @@ rem ----------------------------------------------------------------------------
 rem --------------------------------------------------------------------------------
 rem procedure LYRLIB () -> None
 rem --------------------------------------------------------------------------------
-:LYRLIB
+:LYRLIBINIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=LYRLIB
@@ -56,18 +56,20 @@ rem beginfunction
  
     set ASCRIPT=%1
 
-    call :LYRConst || exit /b 1
-    call :LYRDateTime || exit /b 1
-    call :LYRFileUtils || exit /b 1
-    call :LYRLog || exit /b 1
-    call :LYRParserINI || exit /b 1
-    call :LYRPY || exit /b 1
-    call :LYRStrUtils || exit /b 1
-    call :LYRSupport || exit /b 1
-    call :LYRConsole || exit /b 1
+    call :LYRConstINIT || exit /b 1
 
-    call :LYRDEPLOY || exit /b 1
-    call :LYRDEPLOYTools || exit /b 1
+    call :LYRConsoleINIT || exit /b 1
+    call :LYRDateTimeINIT || exit /b 1
+    call :LYRFileUtilsINIT || exit /b 1
+    call :LYRLogINIT || exit /b 1
+    call :LYRParserINIINIT || exit /b 1
+    call :LYRPYINIT || exit /b 1
+    call :LYRStrUtilsINIT || exit /b 1
+    call :LYRSupportINIT || exit /b 1
+    call :LYRUVINIT || exit /b 1
+
+    call :LYRDEPLOYINIT || exit /b 1
+    call :LYRDEPLOYINITTools || exit /b 1
 
     call :__SET_VAR_SCRIPT !ASCRIPT! || exit /b 1
     call :__SET_VAR_DEFAULT || exit /b 1
@@ -536,7 +538,7 @@ rem =================================================
 rem =================================================
 rem LYRConsole.bat
 rem =================================================
-:LYRConsole
+:LYRConsoleINIT
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :ConsoleTEST_00
@@ -615,14 +617,14 @@ exit /b 0
 rem =================================================
 rem LYRConst.bat
 rem =================================================
-:LYRConst
+:LYRConstINIT
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
 
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
-:LYRDateTime
+:LYRDateTimeINIT
 %LIB_BAT%\LYRDateTime.bat %*
 exit /b 0
 :YYYYMMDDHHMMSS
@@ -635,7 +637,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOY.bat
 rem =================================================
-:LYRDEPLOY
+:LYRDEPLOYINIT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :CopyFilesFromPATTERN
@@ -669,7 +671,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
-:LYRDEPLOYTools
+:LYRDEPLOYINITTools
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT
@@ -709,7 +711,7 @@ exit /b 0
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
-:LYRFileUtils
+:LYRFileUtilsINIT
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :ExtractFileDir
@@ -755,7 +757,7 @@ exit /b 0
 rem =================================================
 rem LYRLIB.bat
 rem =================================================
-:LYRLIB
+:LYRLIBINIT
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
 :SET_LIB
@@ -783,7 +785,7 @@ exit /b 0
 rem =================================================
 rem LYRLog.bat
 rem =================================================
-:LYRLog
+:LYRLogINIT
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
 :__SETVarLog
@@ -814,7 +816,7 @@ exit /b 0
 rem =================================================
 rem LYRParserINI.bat
 rem =================================================
-:LYRParserINI
+:LYRParserINIINIT
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 :SetINI
@@ -833,7 +835,7 @@ exit /b 0
 rem =================================================
 rem LYRPY.bat
 rem =================================================
-:LYRPY
+:LYRPYINIT
 %LIB_BAT%\LYRPY.bat %*
 exit /b 0
 :VENV_START
@@ -846,7 +848,7 @@ exit /b 0
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
-:LYRStrUtils
+:LYRStrUtilsINIT
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
 :TrimLeft
@@ -874,7 +876,7 @@ exit /b 0
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
-:LYRSupport
+:LYRSupportINIT
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey
@@ -911,3 +913,82 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================
+
+rem =================================================
+rem LYRUV.bat
+rem =================================================
+:LYRUVINIT
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_list
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_install
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_uninstall
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_run
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_upgrade
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_find
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_dir
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_python_pin
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_help
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_help_cmd
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_version
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_self
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_self_version
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_install_self
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_install_other
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_update_self
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_install_pip
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:UV_upgrade_pip
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:GET_project_type
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:GET_package
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:GET_python
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:GET_no-workspace
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0
+:GET_package
+%LIB_BAT%\LYRUV.bat %*
+exit /b 0

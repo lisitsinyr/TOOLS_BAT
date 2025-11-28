@@ -16,7 +16,7 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRStrUtils () -> None
 rem --------------------------------------------------------------------------------
-:LYRStrUtils
+:LYRStrUtilsINIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=LYRStrUtils

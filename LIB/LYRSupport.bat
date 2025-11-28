@@ -16,7 +16,7 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRSupport () -> None
 rem --------------------------------------------------------------------------------
-:LYRSupport
+:LYRSupportINIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=LYRSupport

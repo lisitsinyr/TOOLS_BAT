@@ -16,7 +16,7 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRParserINI () -> None
 rem --------------------------------------------------------------------------------
-:LYRParserINI
+:LYRParserINIINIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=LYRSupport

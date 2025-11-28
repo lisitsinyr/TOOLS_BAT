@@ -18,7 +18,7 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRConsole () -> None
 rem --------------------------------------------------------------------------------
-:LYRConsole
+:LYRConsoleINIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=LYRConsole
@@ -258,7 +258,7 @@ rem beginfunction
 rem endfunction
 
 rem -------------------------------------------------
-rem  FormatColorStr (AStyles, AFG8, ABG8, AFG256, ABG256, AESC, s) -> FormatColorStr
+rem  FormatColorStr (s AStyles, AFG8, ABG8, AFG256, ABG256, AESC) -> FormatColorStr
 rem -------------------------------------------------
 :FormatColorStr
 rem beginfunction
@@ -269,19 +269,19 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set s=%1
+    set s=%~1
     rem echo s:!s!
-    set AStyles=%2
+    set AStyles=%~2
     rem echo AStyles:!AStyles!
-    set AFG8=%3
+    set AFG8=%~3
     rem echo AFG8:!AFG8!
-    set ABG8=%4
+    set ABG8=%~4
     rem echo ABG8:!ABG8!
-    set AFG256=%5
+    set AFG256=%~5
     rem echo AFG256:!AFG256!
-    set ABG256=%6
+    set ABG256=%~6
     rem echo ABG256:!ABG256!
-    set AESC=%7
+    set AESC=%~7
     rem echo AESC:!AESC!
 
     rem LStyles = LUSupport.TupleToStr (AStyles)
@@ -373,7 +373,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function aListToStr (ASTR*) -> aListToStr
+rem function aListToStr (s ASTR*) -> aListToStr
 rem --------------------------------------------------------------------------------
 :aListToStr
 rem beginfunction
@@ -411,7 +411,7 @@ rem beginfunction
             set LSTR=!sBEGIN!!LSTR!!sRESET!
         )
     )
-    rem echo LSTR:!LSTR!
+    echo LSTR:!LSTR!
 
     set aListToStr=!LSTR!
 

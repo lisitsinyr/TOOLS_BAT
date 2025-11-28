@@ -129,7 +129,7 @@ rem =================================================
 rem =================================================
 rem LYRConsole.bat
 rem =================================================
-:LYRConsole
+:LYRConsoleINIT
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :ConsoleTEST_00
@@ -207,13 +207,13 @@ exit /b 0
 rem =================================================
 rem LYRConst.bat
 rem =================================================
-:LYRConst
+:LYRConstINIT
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
-:LYRDateTime
+:LYRDateTimeINIT
 %LIB_BAT%\LYRDateTime.bat %*
 exit /b 0
 :YYYYMMDDHHMMSS
@@ -225,7 +225,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOY.bat
 rem =================================================
-:LYRDEPLOY
+:LYRDEPLOYINIT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :CopyFilesFromPATTERN
@@ -258,7 +258,7 @@ exit /b 0
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
-:LYRDEPLOYTools
+:LYRDEPLOYINITTools
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_BAT_SCRIPTS_BAT
@@ -315,7 +315,7 @@ exit /b 0
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
-:LYRFileUtils
+:LYRFileUtilsINIT
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :ExtractFileDir
@@ -360,7 +360,7 @@ exit /b 0
 rem =================================================
 rem LYRLIB.bat
 rem =================================================
-:LYRLIB
+:LYRLIBINIT
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
 :SET_LIB
@@ -387,7 +387,7 @@ exit /b 0
 rem =================================================
 rem LYRLog.bat
 rem =================================================
-:LYRLog
+:LYRLogINIT
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
 :__SETVarLog
@@ -417,7 +417,7 @@ exit /b 0
 rem =================================================
 rem LYRParserINI.bat
 rem =================================================
-:LYRParserINI
+:LYRParserINIINIT
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 :SetINI
@@ -435,7 +435,7 @@ exit /b 0
 rem =================================================
 rem LYRPY.bat
 rem =================================================
-:LYRPY
+:LYRPYINIT
 %LIB_BAT%\LYRPY.bat %*
 exit /b 0
 :VENV_START
@@ -447,7 +447,7 @@ exit /b 0
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
-:LYRStrUtils
+:LYRStrUtilsINIT
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
 :TrimLeft
@@ -474,7 +474,7 @@ exit /b 0
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
-:LYRSupport
+:LYRSupportINIT
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey

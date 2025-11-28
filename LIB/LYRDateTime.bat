@@ -16,7 +16,7 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRDateTime () -> None
 rem --------------------------------------------------------------------------------
-:LYRDateTime
+:LYRDateTimeINIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=LYRDateTime

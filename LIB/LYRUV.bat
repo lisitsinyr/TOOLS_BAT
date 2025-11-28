@@ -16,7 +16,7 @@ rem =================================================
 rem --------------------------------------------------------------------------------
 rem procedure LYRUV () -> None
 rem --------------------------------------------------------------------------------
-:LYRUV
+:LYRUVINIT
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=LYRUV
@@ -732,7 +732,7 @@ exit /b 0
 rem =================================================
 rem LYRSupport.bat
 rem =================================================
-:LYRSupport
+:LYRSupportINIT
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :PressAnyKey
