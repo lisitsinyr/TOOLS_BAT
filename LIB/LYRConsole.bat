@@ -401,7 +401,7 @@ rem beginfunction
             set LSTR=!sBEGIN!!LSTR!!sRESET!
         )
     )
-    echo LSTR:!LSTR!
+    rem echo LSTR:!LSTR!
 
     set __aListToStr=!LSTR!
 
@@ -447,9 +447,9 @@ rem beginfunction
             set LSTR=!LSTR!
         )
     )
-    echo LSTR:!LSTR!
+    rem echo LSTR:!LSTR!
 
-    rem set __bListToStr=!LSTR!
+    set __bListToStr=!LSTR!
 
     exit /b 0
 rem endfunction
@@ -471,7 +471,7 @@ rem beginfunction
     rem Чтобы избежать этого, обычно используют какую-либо внешнюю утилиту
     
     call :__bListToStr %* || exit /b 1
-    echo __bListToStr:!__bListToStr!
+    rem echo __bListToStr:!__bListToStr!
 
     rem <nul set /p strTemp=[33m
     rem <nul set /p strTemp=[!cFG8_WHITE!^;!cBG8_BLACK!m
