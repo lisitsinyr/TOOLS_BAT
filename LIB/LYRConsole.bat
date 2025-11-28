@@ -394,7 +394,7 @@ rem beginfunction
     rem echo Read_N:!Read_N!
     if !Read_N! GTR 0 (
         if !Read_N! EQU 1 (
-            set LSTR=%1
+            set LSTR=%~1
         ) else (
             set n=1
             for %%a in ( %* ) do (
@@ -403,9 +403,9 @@ rem beginfunction
                     set LSTR=!LSTR!%%a
                 ) else (
                     if !n! EQU !Read_N! (
-                        set LSTR=!LSTR!!sEND!%%a
+                        set LSTR=!LSTR!!sEND!%%~a
                     ) else (
-                        set LSTR=!LSTR!^;%%a
+                        set LSTR=!LSTR!^;%%~a
                     )
                 )
                 set /A n+=1
