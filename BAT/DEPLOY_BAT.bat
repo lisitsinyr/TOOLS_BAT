@@ -136,13 +136,13 @@ exit /b 0
 :ConsoleTEST_02
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
-:FormatColorStr
+:__FormatColorStr
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
-:aListToStr
+:__aListToStr
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
-:bListToStr
+:__bListToStr
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :SetColor
