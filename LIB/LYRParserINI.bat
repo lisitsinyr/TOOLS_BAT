@@ -61,6 +61,8 @@ rem beginfunction
 
     %SetINIAPP% "!AFileName!" !ASection! !AParameter! "!AValue!"
 
+    set SetINI=!AValue!
+
     exit /b 0
 rem endfunction
 
@@ -87,7 +89,6 @@ rem beginfunction
     rem echo __GetINI:!__GetINI!
 
     rem echo %GetINIAPP%
-
     %GetINIAPP% !AFileName! !ASection! !AParameter! > !__GetINI!
 
     rem type !__GetINI!
@@ -98,8 +99,10 @@ rem beginfunction
         if not defined ASection (
             for /f %%i in (!__GetINI!) do (
                 set Sections[!n!]=%%i
+                rem echo !Sections[%n%]!
                 set /A n+=1
             )
+            set GetINI=!AFileName!
         ) else (
             for /f "eol=# delims== tokens=1,2" %%i in (!__GetINI!) do (
                 rem В переменной i - ключ
@@ -121,11 +124,12 @@ rem beginfunction
                 call :TrimLeft !STRj! || exit /b 1
                 rem echo TrimLeft:!TrimLeft!
 
-                set FUNCNAME=GetINI
-                set !FUNCNAME!=!TrimLeft!
+                rem set FUNCNAME=GetINIPY
+                rem set !FUNCNAME!=!TrimLeft!
+                set GetINI=!TrimLeft!
 
                 set ParameterValue=!TrimLeft!
-
+                rem echo ParameterValue:!ParameterValue!
             )
         )
 
@@ -173,8 +177,10 @@ rem beginfunction
         if not defined ASection (
             for /f %%i in (!__GetINI!) do (
                 set Sections[!n!]=%%i
+                rem echo !Sections[%n%]!
                 set /A n+=1
             )
+            set GetINIPY=!AFileName!
         ) else (
             for /f "eol=# delims== tokens=1,2" %%i in (!__GetINI!) do (
                 rem В переменной i - ключ
@@ -196,10 +202,12 @@ rem beginfunction
                 call :TrimLeft !STRj! || exit /b 1
                 rem echo TrimLeft:!TrimLeft!
 
-                set FUNCNAME=GetINIPY
-                set !FUNCNAME!=!TrimLeft!
+                rem set FUNCNAME=GetINIPY
+                rem set !FUNCNAME!=!TrimRight!
+                set GetINIPY=!TrimRight!
 
-                set ParameterValue=!TrimLeft!
+                set ParameterValue=!TrimRight!
+                rem echo ParameterValue:!ParameterValue!
             )
         )
 
@@ -274,6 +282,7 @@ rem beginfunction
 
                         set FUNCNAME=GetINIParametr
                         set !FUNCNAME!=!TrimLeft!
+                        set GetINIParametr=!TrimLeft!
 
                         set ParameterValue=!TrimLeft!
                         
@@ -287,13 +296,17 @@ rem beginfunction
                         if "!ASection!"=="!Section!" (
                             set !TrimRight!=!TrimLeft!
                             rem echo !TrimRight!=!TrimLeft!
+
                             set !FUNCNAME!=!TrimLeft!
+                            set GetINIParametr=!TrimLeft!
                         )
                     ) else (
                         set !TrimRight!=!TrimLeft!
                         rem echo !TrimRight!=!TrimLeft!
+
                         set !FUNCNAME!=!TrimLeft!
-                    )
+                        set GetINIParametr=!TrimLeft!
+                )
                 )
             )
         )

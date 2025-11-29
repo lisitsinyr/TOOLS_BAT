@@ -398,11 +398,13 @@ rem beginfunction
     rem echo Avenv_dir:!Avenv_dir!
 
     if defined Aproject_dir (
+
         if not exist !Aproject_dir! (
             set venv_dir=
             echo ERROR: Dir !Aproject_dir! not exist ...
             exit /b 1
         )
+
     ) else (
         set venv_dir=
         echo ERROR: Dir project_dir not defined ...
@@ -531,7 +533,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if defined Apython_dir (
 
-       if !Apython_dir!==3.13 (
+        if !Apython_dir!==3.13 (
             set python_dir=C:\Users\lyr\AppData\Local\Programs\Python\Python313\
         ) else (
             if !Apython_dir!==3.14 (
@@ -540,6 +542,7 @@ rem beginfunction
                 set python_dir=
             )
         )
+        
         if defined python_dir (
             rem echo python_dir:!python_dir!
             if not exist !python_dir! (
@@ -551,6 +554,7 @@ rem beginfunction
             echo ERROR: Dir !python_dir! not defined ...
             exit /b 1
         )
+
     ) else (
         echo ERROR: Apython_dir not defined ...
         exit /b 3
@@ -674,22 +678,26 @@ rem beginfunction
     rem echo Avenv_dir:!Avenv_dir!
 
     if defined Avenv_dir (
+
         if not exist !Avenv_dir! (
             echo ERROR: Dir !Avenv_dir! not exist ...
             exit /b 1
         )
+        
         if not exist !Avenv_dir!Scripts\activate.bat (
             echo ERROR: File !Avenv_dir!Scripts\activate.bat not exist ...
             exit /b 2
         )
         call !Avenv_dir!Scripts\activate.bat
+
     ) else (
-        echo ERROR: Avenv_dir not defined ...
+        echo ERROR: Avenv_dir not defined ... VENV_START
         exit /b 3
     )
  
     exit /b 0
 rem endfunction
+
 
 rem -----------------------------------------------
 rem procedure VENV_STOP (Avenv_dir) -> None
@@ -717,7 +725,7 @@ rem beginfunction
         )
         call !Avenv_dir!Scripts\deactivate.bat
     ) else (
-        echo ERROR: Avenv_dir not defined ...
+        echo ERROR: Avenv_dir not defined ... VENV_STOP
         exit /b 3
     )
 
@@ -758,7 +766,7 @@ rem beginfunction
         )
 
     ) else (
-         echo ERROR: Avenv_dir not defined ...
+         echo ERROR: Avenv_dir not defined ... VENV_UPDATE
          exit /b 3
     )
 

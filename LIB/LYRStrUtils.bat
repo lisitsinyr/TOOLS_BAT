@@ -123,7 +123,8 @@ rem beginfunction
     set /a Alen=%2
     rem echo Alen:!Alen!
 
-    set Left=!ASTR:0,Alen!
+    set Left=!ASTR:~0,%Alen%!
+    rem set "substring=!string:~%start%,%length%!"
 
     exit /b 0
 rem endfunction
@@ -147,7 +148,7 @@ rem beginfunction
     set /a Alen=%3
     rem echo Alen:!Alen!
 
-    set Mid=!ASTR:~!Aposition!,Alen!
+    set Mid=!ASTR:~%Aposition%,%Alen%!
 
     exit /b 0
 rem endfunction
@@ -167,7 +168,10 @@ rem beginfunction
     set ASTR=%1
     rem echo ASTR:!ASTR!
 
-    for %%a in ( '%ASTR%' ) do set ASTR=%%~a
+    for %%a in ( '%ASTR%' ) do (
+        echo %%~a
+        set ASTR=%%~a
+    )
 
     set TrimQuotes=!ASTR!
 
@@ -180,7 +184,7 @@ rem ----------------------------------------------------------------------------
 :ListToStr
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=_ListToStr
+    set FUNCNAME=ListToStr
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
