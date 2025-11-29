@@ -33,6 +33,8 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
+    call :__SETVarLog
+
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
     exit /b 0

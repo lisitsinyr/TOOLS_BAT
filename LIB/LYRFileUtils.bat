@@ -51,13 +51,15 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFullFilename=%1
-    rem echo AFullFilename:!AFullFilename!
+    echo AFullFilename:!AFullFilename!
 
-    if exist AFullFilename (
-        set ExtractFileDir=%~d1%~p1
-    ) else (
-        set ExtractFileDir=
-    )
+    rem if exist !AFullFilename! (
+    rem     set ExtractFileDir=%~d1%~p1
+    rem ) else (
+    rem     set ExtractFileDir=
+    rem )
+
+    set ExtractFileDir=%~d1%~p1
 
     exit /b 0
 rem endfunction
@@ -229,6 +231,8 @@ rem beginfunction
             )
         )
         set CreateDir=!ADIRECTORY!
+        call :FullFileName !ADIRECTORY!
+        set CreateDir=!FullFileName!\
     )
 
     exit /b 0
@@ -286,7 +290,10 @@ rem beginfunction
             rem %touchRUN%
             D:\TOOLS\EXE\touch.exe "!AFILENAME!"
         )
-        set CreateFile="!AFILENAME!"
+
+        set CreateFile=!AFILENAME!
+        call :FullFileName !AFILENAME!
+        set CreateFile=!FullFileName!
     )
 
     exit /b 0
@@ -313,7 +320,9 @@ rem beginfunction
 
     if defined AFILENAME (
         if exist "!AFILENAME!" (
-            set CheckFile="!AFILENAME!"
+            set CheckFile=!AFILENAME!
+            call :FullFileName !AFILENAME!
+            set CheckFile=!FullFileName!
         )
     )
 
@@ -361,29 +370,32 @@ rem beginfunction
     set AARG=%~3
     rem echo AARG:!AARG!
 
-    if defined AARG if "!AARG!"=="/Y" (
+    if defined AARG if !AARG!==/Y (
         set LOverwrite=1
     ) else (
         set LOverwrite=
     )
     rem echo LOverwrite:!LOverwrite!
 
+    set COPY_FILE=
+
     if exist "!AFileName!" (
-        if not exist "!ADIR_TO!" (
+        if not exist "!ADIR_TO!\" (
             mkdir "!ADIR_TO!"                   >> %LOG_FULLFILENAME%
         )
         echo COPY_FILE: !AFileName! !ADIR_TO!   >> %LOG_FULLFILENAME%
-        if not exist !ADIR_TO!\!LFileName! (
+        if not exist "!ADIR_TO!\!LFileName!" (
             rem echo AFileName:!AFileName!
             copy !AFileName! !ADIR_TO! > NUL
             rem call :CheckErrorlevel COPY_FILES !errorlevel! 1
-            rem echo File !AFileName! copied ...    >> %LOG_FULLFILENAME%
+            echo File !AFileName! copied ...    >> %LOG_FULLFILENAME%
         ) else (
             if defined LOverwrite (
-                rem echo Overide: LFileName:!LFileName!
+                echo Overwrite: LFileName:!LFileName! >> %LOG_FULLFILENAME%
                 copy !AFileName! !ADIR_TO! > NUL
             )
         )
+        set COPY_FILE=!AFileName!
     )
 
     exit /b 0
@@ -414,8 +426,8 @@ rem beginfunction
 
     set LR=
     set res=
-    if "!AARG1!"=="/R" set res=true
-    if "!AARG2!"=="/R" set res=true
+    if !AARG1!==/R set res=true
+    if !AARG1!==/r set res=true
     if defined res ( 
         set LR=/R !ADIR_FROM!
     )
@@ -423,8 +435,8 @@ rem beginfunction
 
     set LOverwrite=
     set res=
-    if "!AARG1!"=="/Y" set res=true
-    if "!AARG2!"=="/Y" set res=true
+    if !AARG2!==/Y set res=true
+    if !AARG2!==/y set res=true
     if defined res ( 
         set LOverwrite=1
     )
@@ -463,8 +475,10 @@ rem beginfunction
 
         )
 
-        cd /D "!CurrentDir!"
+        rem cd /D "!CurrentDir!"
     )
+
+    set COPY_FILES=
 
     exit /b 0
 rem endfunction
@@ -506,6 +520,8 @@ rem beginfunction
 
     xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
     call :CheckErrorlevel XCOPY_FILES !errorlevel! 1
+
+    set XCOPY_FILES=
 
     exit /b 0
 rem endfunction

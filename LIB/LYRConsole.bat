@@ -115,17 +115,17 @@ rem beginfunction
     set cDEBUGTEXT=!cS_BOLD! !cFG8_BLUE!
     set cTEXT=!cS_BOLD! !cFG8_YELLOW!
 
-    set lNOTSET=0
-    set lDEBUG=1
-    set lINFO=2
-    set lWARNING=3
-    set lERROR=4
-    set lCRITICAL=5
-    set lBEGIN=6
-    set lEND=7
-    set lPROCESS=8
-    set lDEBUGTEXT=9
-    set lTEXT=10
+    rem set lNOTSET=0
+    rem set lDEBUG=1
+    rem set lINFO=2
+    rem set lWARNING=3
+    rem set lERROR=4
+    rem set lCRITICAL=5
+    rem set lBEGIN=6
+    rem set lEND=7
+    rem set lPROCESS=8
+    rem set lDEBUGTEXT=9
+    rem set lTEXT=10
 
     rem -------------------------------------------------------------------
     rem VAR
@@ -604,37 +604,37 @@ rem beginfunction
 
     rem call :WriteLN !cNOTSET! test
 
-    if !ALevel! EQU !lNOTSET! (
+    if !ALevel! EQU !NOTSET! (
         call :WriteLN !cNOTSET! !s!
     )
-    if !ALevel! EQU !lDEBUG! (
+    if !ALevel! EQU !DEBUG! (
         call :WriteLN !cDEBUG! !s!
     )
-    if !ALevel! EQU !lINFO! (
+    if !ALevel! EQU !INFO! (
         call :WriteLN !cINFO! !s!
     )
-    if !ALevel! EQU !lWARNING! (
+    if !ALevel! EQU !WARNING! (
         call :WriteLN !cWARNING! !s!
     )
-    if !ALevel! EQU !lERROR! (
+    if !ALevel! EQU !ERROR! (
         call :WriteLN !cERROR! !s!
     )
-    if !ALevel! EQU !lCRITICAL! (
+    if !ALevel! EQU !CRITICAL! (
         call :WriteLN !cCRITICAL! !s!
     )
-    if !ALevel! EQU !lBEGIN! (
+    if !ALevel! EQU !BEGIN! (
         call :WriteLN !cBEGIN! !s!
     )
-    if !ALevel! EQU !lEND! (
+    if !ALevel! EQU !END! (
         call :WriteLN !lcEND! !s!
     )
-    if !ALevel! EQU !lPROCESS! (
+    if !ALevel! EQU !PROCESS! (
         call :WriteLN !cPROCESS! !s!
     )
-    if !ALevel! EQU !lDEBUGTEXT! (
+    if !ALevel! EQU !DEBUGTEXT! (
         call :WriteLN !cDEBUGTEXT! !s!
     )
-    if !ALevel! EQU !lTEXT! (
+    if !ALevel! EQU !TEXT! (
         call :WriteLN !cTEXT! !s!
     )
 

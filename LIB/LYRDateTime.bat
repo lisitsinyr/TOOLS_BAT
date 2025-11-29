@@ -50,15 +50,11 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LFORMAT="!YYYY!!MM!!DD!!HH!!MIN!!SS!"
+    set LFORMAT="^!YYYY^!^!MM^!^!DD^!^!HH^!^!MIN^!^!SS^!"
     call :DateTime !LFORMAT! !! exit /b 1
 
-    rem set FUNCNAME=YYYYMMDDHHMMSS
-    rem set YYYYMMDDHHMMSS=!DateTime!
-    rem set !FUNCNAME!=!DateTime!
-    rem echo YYYYMMDDHHMMSS:!YYYYMMDDHHMMSS!
-
     set YYYYMMDDHHMMSS=!DateTime!
+    rem echo YYYYMMDDHHMMSS:!YYYYMMDDHHMMSS!
 
     exit /b 0
 rem endfunction
@@ -82,14 +78,12 @@ rem beginfunction
     set MIN=%TIME:~3,2%
     set SS=%TIME:~6,2%
 
+    rem set AFORMAT="!YYYY!-!MM!-!DD! !HH!:!MIN!:!SS!"
     set AFORMAT=%~1
     rem echo AFORMAT:!AFORMAT!
 
-    rem set DateTime=!AFORMAT!
-    rem set !FUNCNAME!=!AFORMAT!
-    rem echo DateTime:!DateTime!
-
     set DateTime=!AFORMAT!
+    rem echo DateTime:!DateTime!
 
     exit /b 0
 rem endfunction
