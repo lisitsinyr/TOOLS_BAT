@@ -208,6 +208,12 @@ rem beginfunction
 
                 set ParameterValue=!TrimRight!
                 rem echo ParameterValue:!ParameterValue!
+
+
+                set GetINIPY=!TrimLeft!
+                set ParameterValue=!TrimLeft!
+
+
             )
         )
 
