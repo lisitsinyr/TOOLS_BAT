@@ -493,7 +493,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem venv_dir
     rem -------------------------------------------------------------------
-    if not defined Avenv_dir
+    if not defined Avenv_dir (
         if exist !project_dir!.venv\ (
             set venv_dir=!Aproject_dir!.venv\
         ) else (
@@ -539,19 +539,21 @@ rem beginfunction
             if !Apython_dir!==3.14 (
                 set python_dir=C:\Users\lyr\AppData\Local\Programs\Python\Python314\
             ) else (
-                set python_dir=
+                if not exist !python_dir! (
+                    set python_dir=
+                )
             )
         )
         
         if defined python_dir (
             rem echo python_dir:!python_dir!
             if not exist !python_dir! (
-                set python_dir=
                 echo ERROR: Dir !python_dir! not exist ...
+                set python_dir=
                 exit /b 1
             )
         ) else (
-            echo ERROR: Dir !python_dir! not defined ...
+            echo ERROR: Dir python_dir not defined ...
             exit /b 1
         )
 
@@ -582,7 +584,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem python_dir
     rem -------------------------------------------------------------------
-    if not defined Apython_dir
+    if not defined Apython_dir (
         call :CurrentDir || exit /b 1
         set Apython_dir=3.13
     )
@@ -677,6 +679,8 @@ rem beginfunction
     set Avenv_dir=%~1
     rem echo Avenv_dir:!Avenv_dir!
 
+    set VENV_START=
+
     if defined Avenv_dir (
 
         if not exist !Avenv_dir! (
@@ -689,6 +693,7 @@ rem beginfunction
             exit /b 2
         )
         call !Avenv_dir!Scripts\activate.bat
+        set VENV_START=!Avenv_dir!
 
     ) else (
         echo ERROR: Avenv_dir not defined ... VENV_START
@@ -714,6 +719,8 @@ rem beginfunction
     set Avenv_dir=%~1
     rem echo Avenv_dir:!Avenv_dir!
 
+    set VENV_STOP=
+
     if defined Avenv_dir (
         if not exist !Avenv_dir! (
             echo ERROR: Dir !Avenv_dir! not exist ...
@@ -724,6 +731,8 @@ rem beginfunction
             exit /b 2
         )
         call !Avenv_dir!Scripts\deactivate.bat
+        set VENV_STOP=!Avenv_dir!
+
     ) else (
         echo ERROR: Avenv_dir not defined ... VENV_STOP
         exit /b 3
@@ -747,11 +756,15 @@ rem beginfunction
     set Avenv_dir=%~1
     rem echo Avenv_dir:!Avenv_dir!
 
+    set VENV_UPDATE=
+
     if defined Avenv_dir (
-        if not exist !Avenv_dir!\ (
+        if not exist !Avenv_dir! (
             echo ERROR: Dir !Avenv_dir! not exist ...
             exit /b 1
         )
+
+        set VENV_UPDATE=!Avenv_dir!
 
         echo Install packeges requirements.txt ...
         rem pip freeze > !Avenv_dir!\requirements.txt
