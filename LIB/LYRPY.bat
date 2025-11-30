@@ -101,7 +101,7 @@ rem beginfunction
         set Aproject_dir=!CurrentDir!
     )
 
-    call :GET_Ox "project_dir" "project_dir" "Aproject_dir" || exit /b 1
+    call :GET_Ox "project_dir" "project_dir" "!Aproject_dir!" || exit /b 1
     echo project_dir:!project_dir!
     if defined project_dir (
         call :SET_project_dir !project_dir! || exit /b 1
@@ -300,7 +300,7 @@ rem beginfunction
         set Aproject_dir=!CurrentDir!
     )
 
-    call :GET_Ox "script_dir" "script_dir" "Ascript_dir" || exit /b 1
+    call :GET_Ox "script_dir" "script_dir" "!Ascript_dir!" || exit /b 1
     echo script_dir:!script_dir!
     if defined script_dir (
         call :SET_script_dir !script_dir! || exit /b 1
@@ -367,7 +367,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem script_dir
     rem -------------------------------------------------------------------
-    call :GET_Ox "script" "script" "Ascript" || exit /b 1
+    call :GET_Ox "script" "script" "!Ascript!" || exit /b 1
     echo script:!script!
     if defined script (
         call :SET_script !script! || exit /b 1
@@ -616,7 +616,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem requirements_file
     rem -------------------------------------------------------------------
-    call :GET_Ox "requirements_file" "requirements_file" "Arequirements_file" || exit /b 1
+    call :GET_Ox "requirements_file" "requirements_file" "!Arequirements_file!" || exit /b 1
     echo requirements_file:!requirements_file!
     if defined requirements_file (
         if exist !Ox! (
@@ -650,7 +650,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem package_names
     rem -------------------------------------------------------------------
-    call :GET_Ox "package_names" "package_names" "Apackage_names" || exit /b 1
+    call :GET_Ox "package_names" "package_names" "!Apackage_names!" || exit /b 1
     echo package_names:!package_names!
     if defined package_names (
         set package_names=!Ox!
