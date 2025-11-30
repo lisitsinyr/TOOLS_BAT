@@ -96,7 +96,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
-    if not defined Aproject_dir
+    if not defined Aproject_dir (
         call :CurrentDir || exit /b 1
         set Aproject_dir=!CurrentDir!
     )
@@ -166,12 +166,12 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem projects_dir
     rem -------------------------------------------------------------------
-    if not defined Aprojects_dir
+    if not defined Aprojects_dir (
         call :CurrentDir || exit /b 1
         set Aprojects_dir=!CurrentDir!
     )
 
-    call :GET_Ox "projects_dir" "projects_dir" "!CurrentDir!" || exit /b 1
+    call :GET_Ox "projects_dir" "projects_dir" "!Aprojects_dir!" || exit /b 1
     echo projects_dir:!projects_dir!
     if defined projects_dir (
         call :SET_projects_dir !projects_dir! || exit /b 1
@@ -233,7 +233,7 @@ rem beginfunction
     call :GET_Ox "project_name" "project_name" "!Aproject_name!" || exit /b 1
     echo project_name:!project_name!
     if defined project_name (
-        call :SET_projects_name !project_name! || exit /b 1
+        call :SET_project_name !project_name! || exit /b 1
     )
 
     set GET_project_name=!project_name!
@@ -295,7 +295,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem script_dir
     rem -------------------------------------------------------------------
-    if not defined Ascript_dir
+    if not defined Ascript_dir (
         call :CurrentDir || exit /b 1
         set Aproject_dir=!CurrentDir!
     )
@@ -380,7 +380,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function venv_dir (Aproject_dir Avenv_dir) -> venv_dir
+rem function SET_venv_dir (Aproject_dir Avenv_dir) -> venv_dir
 rem --------------------------------------------------------------------------------
 :SET_venv_dir
 rem beginfunction
