@@ -134,13 +134,19 @@ rem setlocal enabledelayedexpansion
             set %P_Name%=!P_Default!
         ) else (
             set %P_Name%=!Input!
+            rem echo P_Name:!%P_Name%!
         )
 
     ) else (
         set %P_Name%=!P_Value!
     )
 
-    set Read_P=%P_Name%
+    rem if not defined !%P_Name%! (
+    rem     echo INFO: VarName:!P_Name! VarCaption:!P_Caption! not defined ...
+    rem )
+
+    set Read_P=!%P_Name%!
+    rem echo Read_P:!Read_P!
 
     exit /b 0
 rem endfunction
