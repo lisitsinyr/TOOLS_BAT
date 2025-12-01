@@ -549,7 +549,7 @@ rem beginfunction
     rem echo DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
 
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
-    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     if !PROJECT_NAME!==TOOLS_BAT (
         call :ClearDir !DIR_PROJECT_NAME!\BAT *.bat
