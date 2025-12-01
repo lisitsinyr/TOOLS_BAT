@@ -579,21 +579,22 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Apython_dir=%~1
+    set VarName=python_dir
+    rem echo VarName:!VarName!
+    set VarValue=!python_dir!
+    rem echo VarValue:!VarValue!
+    set VarCaption=python_dir_caption
+    rem echo VarCaption:!VarCaption!
+    set VarDefault=3.13
+    rem echo VarDefault:!VarDefault!
 
     rem -------------------------------------------------------------------
     rem python_dir
     rem -------------------------------------------------------------------
-    if not defined Apython_dir (
-        call :CurrentDir || exit /b 1
-        set Apython_dir=3.13
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
-
-    call :GET_Ox "python_dir" "python_dir" "!Apython_dir!" || exit /b 1
-    echo python_dir:!python_dir!
-    if defined python_dir (
-        call :SET_python_dir !python_dir! || exit /b 1
-    )
+    call :SET_python_dir !python_dir! || exit /b 1
 
     set GET_python_dir=!python_dir!
     rem echo GET_python_dir:!GET_python_dir!
@@ -687,7 +688,6 @@ rem beginfunction
             echo ERROR: Dir !Avenv_dir! not exist ...
             exit /b 1
         )
-
         
         if not exist !Avenv_dir!Scripts\activate.bat (
             echo ERROR: File !Avenv_dir!Scripts\activate.bat not exist ...
@@ -927,5 +927,8 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :GET_Ox
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GET_Oxxx
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0

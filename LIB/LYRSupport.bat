@@ -97,51 +97,107 @@ rem setlocal enabledelayedexpansion
     set !FUNCNAME!=
 
     set P_Name=%1
+    echo P_Name:!P_Name!
+
+    set P_Value=%~2
+    set P_Value=!%P_Name%!
+    echo P_Value:!P_Value!
+
+    set P_Caption=%~3
+    echo P_Caption:!P_Caption!
+  
+    set P_Default=%~4
+    echo P_Default:!P_Default!
+
     rem !P_Name! - имя переменной
-    rem echo P_Name:!P_Name!
     rem %P_Name% - имя переменной
     rem echo P_Name:%P_Name%
-
     rem !%P_Name%! - значение переменной по умолчанию
     rem echo P_Value_default:!%P_Name%!
-
     rem !P_Value! - значение переменной
     rem set P_Value=%2
     rem echo P_Value:!P_Value!
-
-    set P_Value=%~2
-    rem echo P_Value:!P_Value!
-
-    set P_Caption=%~3
-    rem echo P_Caption:!P_Caption!
-
-    rem !PN_CAPTION! - PN_CAPTION
-    if defined P_Caption (
-        set PN_CAPTION=!P_Caption!
-    )
-    rem echo PN_CAPTION:!PN_CAPTION!
-   
     rem [!P_Name!]   - имя переменной
     rem [!%P_Name%!] - значение переменной по умолчанию
 
     set Input=
     if not defined P_Value (
-        if defined PN_CAPTION (
-            set /p Input=!PN_CAPTION![!P_Name!][!%P_Name%!]:
+        if defined P_Caption (
+            set /p Input=!P_Caption![!P_Name!][!P_default!]:
         ) else (
-            set /p Input=[!P_Name!][!%P_Name%!]:
+            set /p Input=[!P_Name!][!P_default!]:
         )
+
+        rem echo Input:!Input!
+        if not defined Input (
+            rem set %P_Name%=!%P_Name%!
+            set %P_Name%=!P_Default!
+        ) else (
+            set %P_Name%=!Input!
+        )
+
     ) else (
         set %P_Name%=!P_Value!
-        exit /b 0
     )
-    rem echo Input:!Input!
 
-    if not defined Input (
-        set %P_Name%=!%P_Name%!
-    ) else (
-        set %P_Name%=!Input!
+    set Read_P=%P_Name%
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function GET_Ox (Aname Acaption Adefault) -> script
+rem --------------------------------------------------------------------------------
+:GET_Ox
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GET_Ox
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
+
+    set Aname=%~1
+    echo Aname:!Aname!
+    set Acaption=%~2
+    echo Acaption:!Acaption!
+    set Adefault=%~3
+    echo Adefault:!Adefault!
+
+    rem -------------------------------------------------------------------
+    rem Ox
+    rem -------------------------------------------------------------------
+    
+    set Ox=!%Aname%!
+    echo Ox:!%Aname%!
+
+    set Ox_Name=!Aname!
+    set Ox_Caption=!Acaption!
+    set Ox_Default=!Adefault!
+    set Ox=!Ox_Default!
+    set PN_CAPTION=!Ox_Caption!
+
+    if not defined Ox (
+        call :Read_P !Aname! "" "!PN_CAPTION!" || exit /b 1
+        set !Aname!=!Ox!
+    ) else (
+        call :Read_P Ox "" "!PN_CAPTION!" || exit /b 1
+        set !Aname!=!Ox!
+    )
+
+    if defined Ox (
+        rem set !Aname!=!%Aname%!
+        set !Aname!=!Ox!
+    ) else (
+        set !Aname!=
+        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
+        rem echo INFO: Ox [Ox_Name:!Aname! Ox_Caption:!Acaption!] not defined ...
+    )
+
+    rem echo !Aname!=!%Aname%!
+    
+    set GET_Ox=!Ox!
+    rem echo GET_Ox:!GET_Ox!
 
     exit /b 0
 rem endfunction
@@ -426,61 +482,6 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
-rem --------------------------------------------------------------------------------
-rem function GET_Ox (Aname Acaption Adefault) -> script
-rem --------------------------------------------------------------------------------
-:GET_Ox
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=GET_Ox
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set Aname=%~1
-    rem echo Aname:!Aname!
-    set Acaption=%~2
-    rem echo Acaption:!Acaption!
-    set Adefault=%~3
-    rem echo Adefault:!Adefault!
-
-    rem -------------------------------------------------------------------
-    rem Ox
-    rem -------------------------------------------------------------------
-    
-    set Ox=!%Aname%!
-    rem echo Ox:!%Aname%!
-
-    set Ox_Name=!Aname!
-    set Ox_Caption=!Acaption!
-    set Ox_Default=!Adefault!
-    set Ox=!Ox_Default!
-    set PN_CAPTION=!Ox_Caption!
-
-    if not defined Ox (
-        call :Read_P Ox "" !PN_CAPTION! || exit /b 1
-        set !Aname!=!Ox!
-    ) else (
-        rem call :Read_P Ox || exit /b 1
-        set !Aname!=!Ox!
-    )
-    if defined Ox (
-        rem set !Aname!=!%Aname%!
-        set !Aname!=!Ox!
-    ) else (
-        set !Aname!=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        rem echo INFO: Ox [Ox_Name:!Aname! Ox_Caption:!Acaption!] not defined ...
-    )
-
-    rem echo !Aname!=!%Aname%!
-    
-    set GET_Ox=!Ox!
-    rem echo GET_Ox:!GET_Ox!
-
-    exit /b 0
-rem endfunction
 
 rem =================================================
 rem ФУНКЦИИ LIB

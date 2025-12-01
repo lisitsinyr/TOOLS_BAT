@@ -5,12 +5,12 @@ rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 :begin
-    rem Р’С‹С…РѕРґ РёР· СЃС†РµРЅР°СЂРёСЏ. Р”Р°Р»СЊС€Рµ - С‚РѕР»СЊРєРѕ С„СѓРЅРєС†РёРё.
+    rem Выход из сценария. Дальше - только функции.
     exit /b 0
 :end
 
 rem =================================================
-rem Р¤РЈРќРљР¦РР
+rem ФУНКЦИИ
 rem =================================================
 
 rem --------------------------------------------------------------------------------
@@ -411,6 +411,8 @@ rem beginfunction
     echo uv self version ...
     uv self version
 
+    set UV_self_version=
+
     exit /b 0
 rem endfunction
 
@@ -426,13 +428,15 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem РЈСЃС‚Р°РЅРѕРІРєР° uv
+    echo Установка uv
 
-    rem Р РµРєРѕРјРµРЅРґСѓРµРјС‹Р№ СЃРїРѕСЃРѕР± СѓСЃС‚Р°РЅРѕРІРєРё uv СЃ РїРѕРјРѕС‰СЊСЋ Р°РІС‚РѕРЅРѕРјРЅРѕРіРѕ СѓСЃС‚Р°РЅРѕРІС‰РёРєР°
-    rem Р”Р»СЏ Windows:
+    echo Рекомендуемый способ установки uv с помощью автономного установщика
+    echo Для Windows:
 
     rem powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-    "C:\Program Files\PowerShell\7\pwsh.exe" -c "irm https://astral.sh/uv/install.ps1 | iex"
+    echo "C:\Program Files\PowerShell\7\pwsh.exe" -c "irm https://astral.sh/uv/install.ps1 | iex"
+    
+    set UV_install_self=
 
     exit /b 0
 rem endfunction
@@ -449,21 +453,23 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem РЈСЃС‚Р°РЅРѕРІРєР° uv
+    echo Установка uv
 
-    rem РРЅС‹Рµ СЃРїРѕСЃРѕР±С‹ СѓСЃС‚Р°РЅРѕРІРєРё uv
+    echo Иные способы установки uv
 
-    rem Cargo:
-    rem cargo install --git https://github.com/astral-sh/uv uv
+    echo Cargo:
+    echo cargo install --git https://github.com/astral-sh/uv uv
 
-    rem Homebrew:
-    rem brew install uv
+    echo Homebrew:
+    echo brew install uv
 
-    rem Winget:
-    rem winget install --id=astral-sh.uv  -e
+    echo Winget:
+    echo winget install --id=astral-sh.uv  -e
 
-    rem Scoop:
-    rem scoop install main/uv
+    echo Scoop:
+    echo scoop install main/uv
+    
+    set UV_install_other=
 
     exit /b 0
 rem endfunction
@@ -480,12 +486,14 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem РћР±РЅРѕРІР»РµРЅРёРµ uv
+    rem Обновление uv
 
-    rem Р•СЃР»Рё uv Р±С‹Р» СѓСЃС‚Р°РЅРѕРІР»РµРЅ С‡РµСЂРµР· Р°РІС‚РѕРЅРѕРјРЅС‹Р№ СѓСЃС‚Р°РЅРѕРІС‰РёРє, РѕР±РЅРѕРІРёС‚СЊ РµРіРѕ РјРѕР¶РЅРѕ СЃР»РµРґСѓСЋС‰РёРј РѕР±СЂР°Р·РѕРј:
+    rem Если uv был установлен через автономный установщик, обновить его можно следующим образом:
 
     echo self update ...
     uv self update
+
+    set UV_update_self=
 
     exit /b 0
 rem endfunction
@@ -502,11 +510,13 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem РЈСЃС‚Р°РЅРѕРІРєР° uv
+    echo Установка uv
 
-    rem Р•СЃР»Рё РІС‹ РїСЂРµРґРїРѕС‡РёС‚Р°РµС‚Рµ РєР»Р°СЃСЃРёС‡РµСЃРєРёР№ СЃРїРѕСЃРѕР± СѓСЃС‚Р°РЅРѕРІРєРё uv С‡РµСЂРµР· pip РёР· PYPI:
+    echo Если вы предпочитаете классический способ установки uv через pip из PYPI:
 
     pip install uv
+
+    set UV_install_pip=
 
     exit /b 0
 rem endfunction
@@ -523,7 +533,9 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem Р•СЃР»Рё uv Р±С‹Р» СѓСЃС‚Р°РЅРѕРІР»РµРЅ С‡РµСЂРµР· pip:
+    echo upgrade uv
+ 
+    echo Если uv был установлен через pip:
 
     pip install --upgrade uv
 
@@ -547,7 +559,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem python_version
     rem -------------------------------------------------------------------
-    call :GET_Ox "python_version" "python_version" "Apython_version" || exit /b 1
+    call :GET_Ox "python_version" "python_version" "!Apython_version!" || exit /b 1
     echo python_version:!python_version!
     if defined python_version (
         set result=F
@@ -559,6 +571,9 @@ rem beginfunction
             echo ERROR: !python_version! not defined ...
             exit /b 1
         )
+    ) else (
+        echo ERROR: python_version not defined ...
+        exit /b 1
     )
 
     set GET_python_version=!python_version!
@@ -584,7 +599,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem Aproject_type
     rem -------------------------------------------------------------------
-    call :GET_Ox "project_type" "project_type{app,lib,bare,script}" "Aproject_type" || exit /b 1
+    call :GET_Ox "project_type" "project_type{app,lib,bare,script}" "!Aproject_type!" || exit /b 1
     echo python_version:!python_version!
     if defined project_type (
         set result=F
@@ -623,7 +638,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem package
     rem -------------------------------------------------------------------
-    call :GET_Ox "package" "package[y/N]" "Apackage" || exit /b 1
+    call :GET_Ox "package" "package[y/N]" "!Apackage!" || exit /b 1
     echo package:!package!
     if defined package (
         set result=F
@@ -660,14 +675,14 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem no-workspace
     rem -------------------------------------------------------------------
-    call :GET_Ox "no-workspace" "no-workspace[y/N]" "Ano-workspace" || exit /b 1
+    call :GET_Ox "no-workspace" "no-workspace[y/N]" "!Ano-workspace!" || exit /b 1
     echo no-workspace:!no-workspace!
     if defined no-workspace (
         set result=F
         if !no-workspace!==y set result=T
         if !no-workspace!==Y set result=T
         if !result!==T (
-            set package=--no-workspace
+            set no-workspace=--no-workspace
         ) else (
             set no-workspace=
             echo INFO: !no-workspace! not defined ...
@@ -681,7 +696,7 @@ rem beginfunction
 rem endfunction
 
 rem =================================================
-rem Р¤РЈРќРљР¦РР LIB
+rem ФУНКЦИИ LIB
 rem =================================================
 
 rem =================================================
