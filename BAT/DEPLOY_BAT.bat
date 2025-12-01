@@ -94,10 +94,6 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_SRC_BAT
     call :DEPLOY_PROJECT
 
-    set PROJECT_NAME=TOOLS_BAT
-    call :DEPLOY_PROJECT
-
-
     call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     rem -------------------------------------------------------------------
