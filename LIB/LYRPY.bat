@@ -687,11 +687,13 @@ rem beginfunction
             echo ERROR: Dir !Avenv_dir! not exist ...
             exit /b 1
         )
+
         
         if not exist !Avenv_dir!Scripts\activate.bat (
             echo ERROR: File !Avenv_dir!Scripts\activate.bat not exist ...
             exit /b 2
         )
+        
         call !Avenv_dir!Scripts\activate.bat
         set VENV_START=!Avenv_dir!
 

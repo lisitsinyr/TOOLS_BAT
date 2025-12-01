@@ -55,7 +55,10 @@ rem beginfunction
     set !FUNCNAME!=
 
     echo List Python versions you have installed and versions you can install ...
-    uv python list              
+    echo uv python list ...
+    uv python list
+
+    set UV_python_list=
 
     exit /b 0
 rem endfunction
@@ -78,11 +81,14 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem version
     rem -------------------------------------------------------------------
+    set version=
     if defined Aversion (
         set version=!Aversion!
         echo Install Python !version!
         rem uv python install 3.13
+        echo uv python install !version! --force ...
         uv python install !version! --force
+
     ) else (
         echo ERROR: Aversion not defined ...
         exit /b 3
@@ -111,11 +117,14 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem version
     rem -------------------------------------------------------------------
+    set version=
     if defined Aversion (
         set version=!Aversion!
-        echo unInstall Python !Aversion! ...
+
+        echo uv python uninstall !Aversion! ...
         rem uv python uninstall 3.11.4
-        rem uv python uninstall !Aversion!
+        
+        uv python uninstall !Aversion!
 
     ) else (
         echo ERROR: Aversion not defined ...
@@ -140,7 +149,10 @@ rem beginfunction
     set !FUNCNAME!=
 
     echo Run your default Python ...
+    echo uv run python ...
     uv run python
+
+    set UV_python_run=
 
     exit /b 0
 rem endfunction
@@ -158,7 +170,10 @@ rem beginfunction
     set !FUNCNAME!=
 
     echo Upgrade your Python versions ...
+    echo uv python upgrade ...
     uv python upgrade
+
+    set UV_python_upgrade=
 
     exit /b 0
 rem endfunction
@@ -181,16 +196,18 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem version
     rem -------------------------------------------------------------------
+    set version=
     if defined Aversion (
         set version=!Aversion!
         echo Find specific Python version !Aversion! ...
+        echo uv python find !Aversion! ...
         uv python find !Aversion!
     ) else (
         echo ERROR: Aversion not defined ...
         exit /b 3
     )
 
-    set UV_python_find=version
+    set UV_python_find=!version!
 
     exit /b 0
 rem endfunction
@@ -208,7 +225,10 @@ rem beginfunction
     set !FUNCNAME!=
 
     echo View Python installation directory ...
+    echo uv python dir ...
     uv python dir
+
+    set UV_python_dir=
 
     exit /b 0
 rem endfunction
@@ -226,9 +246,11 @@ rem beginfunction
     set !FUNCNAME!=
 
     echo UV will now use this version for all commands in this directory ...
-    
-    rem  Will use Python 3.11
+    echo uv run python --version  ...
+    rem Will use Python 3.11
     uv run python --version 
+
+    set UV_python_version=
 
     exit /b 0
 rem endfunction
@@ -251,12 +273,14 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem version
     rem -------------------------------------------------------------------
+    set version=
     if defined Aversion (
         set version=!Aversion!
         rem uv python pin 3.X           
         rem cd myproject
         rem uv python pin 3.11
         echo Pin a version for your project ...
+        echo uv python pin !version! ...
         uv python pin !version!
     ) else (
         echo ERROR: Aversion not defined ...
@@ -280,8 +304,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    echo help ...
+    echo uv help ...
     uv help
+
+    set UV_help=
 
     exit /b 0
 rem endfunction
@@ -321,8 +347,11 @@ rem beginfunction
 
     set ACMD=%~1
     rem echo ACMD:!ACMD!
+    echo uv help !ACMD! ...
 
     uv help !ACMD!
+
+    set UV_help_cmd=!ACMD!
 
     exit /b 0
 rem endfunction
@@ -339,8 +368,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    echo --version ...
+    echo uv --version ...
     uv --version
+
+    set UV_version=
 
     exit /b 0
 rem endfunction
@@ -357,8 +388,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    echo self ...
+    echo uv self ...
     uv self
+
+    set UV_self=
 
     exit /b 0
 rem endfunction
@@ -375,7 +408,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    echo self version ...
+    echo uv self version ...
     uv self version
 
     exit /b 0
