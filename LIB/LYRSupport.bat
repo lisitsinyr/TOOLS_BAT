@@ -97,17 +97,17 @@ rem setlocal enabledelayedexpansion
     set !FUNCNAME!=
 
     set P_Name=%1
-    echo P_Name:!P_Name!
+    rem echo P_Name:!P_Name!
 
     set P_Value=%~2
     set P_Value=!%P_Name%!
-    echo P_Value:!P_Value!
+    rem echo P_Value:!P_Value!
 
     set P_Caption=%~3
-    echo P_Caption:!P_Caption!
+    rem echo P_Caption:!P_Caption!
   
     set P_Default=%~4
-    echo P_Default:!P_Default!
+    rem echo P_Default:!P_Default!
 
     rem !P_Name! - имя переменной
     rem %P_Name% - имя переменной
@@ -158,18 +158,18 @@ rem beginfunction
     set !FUNCNAME!=
 
     set Aname=%~1
-    echo Aname:!Aname!
+    rem echo Aname:!Aname!
     set Acaption=%~2
-    echo Acaption:!Acaption!
+    rem echo Acaption:!Acaption!
     set Adefault=%~3
-    echo Adefault:!Adefault!
+    rem echo Adefault:!Adefault!
 
     rem -------------------------------------------------------------------
     rem Ox
     rem -------------------------------------------------------------------
     
     set Ox=!%Aname%!
-    echo Ox:!%Aname%!
+    rem echo Ox:!%Aname%!
 
     set Ox_Name=!Aname!
     set Ox_Caption=!Acaption!
