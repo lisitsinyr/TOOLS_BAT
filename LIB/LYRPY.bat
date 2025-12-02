@@ -114,12 +114,12 @@ rem beginfunction
     set VarDefault=!CurrentDir!
     rem echo VarDefault:!VarDefault!
 
-    rem if not defined VarValue (
+    rem if not defined !VarName! (
     rem     call :CurrentDir || exit /b 1
     rem     set VarValue=!CurrentDir!
     rem )
 
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
@@ -204,12 +204,12 @@ rem beginfunction
     set VarDefault=!CurrentDir!
     rem echo VarDefault:!VarDefault!
 
-    rem if not defined VarValue (
+    rem if not defined !VarName! (
     rem     call :CurrentDir || exit /b 1
     rem     set VarValue=!CurrentDir!
     rem )
 
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -282,7 +282,7 @@ rem beginfunction
     set VarDefault=project_name
     rem echo VarDefault:!VarDefault!
 
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -368,12 +368,12 @@ rem beginfunction
     set VarDefault=!CurrentDir!
     rem echo VarDefault:!VarDefault!
 
-    rem if not defined VarValue (
+    rem if not defined !VarName! (
     rem     call :CurrentDir || exit /b 1
     rem     set VarValue=!CurrentDir!
     rem )
 
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
@@ -453,7 +453,7 @@ rem beginfunction
     set VarDefault=script.py
     rem echo VarDefault:!VarDefault!
 
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -603,7 +603,7 @@ rem beginfunction
     set VarDefault=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\
     rem echo VarDefault:!VarDefault!
 
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -700,7 +700,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem python_dir
     rem -------------------------------------------------------------------
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -743,7 +743,7 @@ rem beginfunction
     set VarDefault=
     rem echo VarDefault:!VarDefault!
 
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -791,7 +791,7 @@ rem beginfunction
     set VarDefault=
     rem echo VarDefault:!VarDefault!
 
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 

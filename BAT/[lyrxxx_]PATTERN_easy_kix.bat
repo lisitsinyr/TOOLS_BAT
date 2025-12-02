@@ -124,7 +124,7 @@ rem ----------------------------------------------------------------------------
     rem echo VarCaption:!VarCaption!
     set VarDefault=A1_default
     rem echo VarDefault:!VarDefault!
-    if not defined VarValue (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
