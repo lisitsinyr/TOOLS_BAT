@@ -763,11 +763,8 @@ rem beginfunction
         ) else (
             echo INFO: Каталог .git не существует ...
         )
-        )
     ) else (
         echo info: Каталог !LDIR_PROJECT_NAME! не существует...
-
-pause
         if !APROJECT_NAME!==TOOLS_SRC_GIT (
             call :GetINI !FILEINI! GITHUB TOOLS_SRC_GIT
             set urlGITHUB=!ParameterValue!
