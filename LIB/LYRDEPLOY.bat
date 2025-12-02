@@ -372,12 +372,14 @@ rem beginfunction
 
     set LDirectory=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\TOOLS_SRC_GIT\SRC\BAT\A.WORK
 
+
     set LFileName=lyrgit_push_main.bat
     rem echo LFileName:!LFileName!
     if exist !LDirectory!\!LFileName! (
         rem echo COPY:!LFileName!
         copy !LDirectory!\!LFileName! > NUL
     )
+
     set LFileName=lyrgit_pull.bat
     rem echo LFileName:!LFileName!
     if exist !LDirectory!\!LFileName! (
@@ -472,6 +474,8 @@ rem beginfunction
         set REPO_WORK=
         exit /b 1
     )
+
+    cd /D "!ADirectory!"
 
     call :CopyFilesROOT
 
