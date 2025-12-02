@@ -65,7 +65,7 @@ setlocal enabledelayedexpansion
     rem 
     rem -------------------------------------------------------------------
     set PROJECT_GROUP=PROJECTS_BAT
-    echo PROJECT_GROUP:!PROJECT_GROUP! 
+    rem echo PROJECT_GROUP:!PROJECT_GROUP! 
     
     call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
 
@@ -73,13 +73,13 @@ setlocal enabledelayedexpansion
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT
-    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
-    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     REM set PROJECT_NAME=COMMANDS_BAT
     REM call :DEPLOY_PROJECT
@@ -102,7 +102,7 @@ setlocal enabledelayedexpansion
     rem 
     rem -------------------------------------------------------------------
     set PROJECT_GROUP=BAT
-    echo PROJECT_GROUP:!PROJECT_GROUP! 
+    rem echo PROJECT_GROUP:!PROJECT_GROUP! 
 
     call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
 
@@ -110,13 +110,13 @@ setlocal enabledelayedexpansion
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT
-    echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
     
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
-    echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     set PROJECT_NAME=TOOLS_BAT
     call :DEPLOY_PROJECT
