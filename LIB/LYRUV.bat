@@ -190,12 +190,12 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aversion=%~1
-    rem echo Aversion:!Aversion!
-
     rem -------------------------------------------------------------------
     rem version
     rem -------------------------------------------------------------------
+    set Aversion=%~1
+    rem echo Aversion:!Aversion!
+
     set version=
     if defined Aversion (
         set version=!Aversion!
@@ -555,14 +555,26 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Apython_version=%~1
-
     rem -------------------------------------------------------------------
     rem python_version
     rem -------------------------------------------------------------------
-    call :GET_Ox "python_version" "python_version" "!Apython_version!" || exit /b 1
-    echo python_version:!python_version!
-    if defined python_version (
+    set VarName=python_version
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=python_version_caption
+    rem echo VarCaption:!VarCaption!
+
+    set VarDefault=3.13
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
         set result=F
         if !python_version!==3.13 set result=T
         if !python_version!==3.14 set result=T
@@ -573,8 +585,7 @@ rem beginfunction
             exit /b 1
         )
     ) else (
-        echo ERROR: python_version not defined ...
-        exit /b 1
+        echo INFO: !VarName! not defined ...
     )
 
     set GET_python_version=!python_version!
@@ -595,14 +606,26 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aproject_type=%~1
+    rem -------------------------------------------------------------------
+    rem project_type
+    rem -------------------------------------------------------------------
+    set VarName=project_type
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=project_type_caption
+    rem echo VarCaption:!VarCaption!
 
-    rem -------------------------------------------------------------------
-    rem Aproject_type
-    rem -------------------------------------------------------------------
-    call :GET_Ox "project_type" "project_type{app,lib,bare,script}" "!Aproject_type!" || exit /b 1
-    echo python_version:!python_version!
-    if defined project_type (
+    set VarDefault=app
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
         set result=F
         if !project_type!==app set result=T
         if !project_type!==lib set result=T
@@ -614,6 +637,8 @@ rem beginfunction
             echo ERROR: !project_type! not defined ...
             exit /b 1
         )
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
 
     set GET_project_type=!project_type!
@@ -634,14 +659,26 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Apackage=%~1
-
     rem -------------------------------------------------------------------
     rem package
     rem -------------------------------------------------------------------
-    call :GET_Ox "package" "package[y/N]" "!Apackage!" || exit /b 1
-    echo package:!package!
-    if defined package (
+    set VarName=package
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=package[y/N]_caption
+    rem echo VarCaption:!VarCaption!
+
+    set VarDefault=N
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
         set result=F
         if !package!==y set result=T
         if !package!==Y set result=T
@@ -651,8 +688,10 @@ rem beginfunction
             set package=
             echo INFO: !package! not defined ...
         )    
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
-    
+
     set GET_package=!package!
     rem echo GET_package:!GET_package!
 
@@ -671,14 +710,26 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Ano-workspace=%~1
-
     rem -------------------------------------------------------------------
     rem no-workspace
     rem -------------------------------------------------------------------
-    call :GET_Ox "no-workspace" "no-workspace[y/N]" "!Ano-workspace!" || exit /b 1
-    echo no-workspace:!no-workspace!
-    if defined no-workspace (
+    set VarName=no-workspace
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=no-workspace[y/N]_caption
+    rem echo VarCaption:!VarCaption!
+
+    set VarDefault=N
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
         set result=F
         if !no-workspace!==y set result=T
         if !no-workspace!==Y set result=T
@@ -688,8 +739,10 @@ rem beginfunction
             set no-workspace=
             echo INFO: !no-workspace! not defined ...
         )    
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
-    
+
     set GET_no-workspace=!no-workspace!
     rem echo GET_no-workspace:!GET_no-workspace!
 
@@ -792,8 +845,5 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :CheckErrorlevel
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GET_Ox
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0

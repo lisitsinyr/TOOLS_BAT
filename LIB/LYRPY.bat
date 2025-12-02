@@ -1068,9 +1068,3 @@ exit /b 0
 :GetCMD
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
-:GET_Ox
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
-:GET_Oxxx
-%LIB_BAT%\LYRSupport.bat %*
-exit /b 0
