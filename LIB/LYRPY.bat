@@ -602,10 +602,13 @@ rem beginfunction
 
     set VarName=python_dir
     rem echo VarName:!VarName!
-    set VarValue=!python_dir!
+    
+    set VarValue=%~1
     rem echo VarValue:!VarValue!
+    
     set VarCaption=python_dir_caption
     rem echo VarCaption:!VarCaption!
+
     set VarDefault=3.13
     rem echo VarDefault:!VarDefault!
 
@@ -615,7 +618,12 @@ rem beginfunction
     if not defined VarValue (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
-    call :SET_python_dir !python_dir! || exit /b 1
+
+    if defined !VarName! (
+        call :SET_python_dir !python_dir! || exit /b 1
+    ) else (
+        echo INFO: !VarName! not defined ...
+    )
 
     set GET_python_dir=!python_dir!
     rem echo GET_python_dir:!GET_python_dir!

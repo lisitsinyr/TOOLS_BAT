@@ -96,11 +96,12 @@ rem setlocal enabledelayedexpansion
     )
     set !FUNCNAME!=
 
+
     set P_Name=%1
     rem echo P_Name:!P_Name!
 
     set P_Value=%~2
-    set P_Value=!%P_Name%!
+    rem set P_Value=!%P_Name%!
     rem echo P_Value:!P_Value!
 
     set P_Caption=%~3
@@ -136,14 +137,15 @@ rem setlocal enabledelayedexpansion
             set %P_Name%=!Input!
             rem echo P_Name:!%P_Name%!
         )
+        rem echo P_Name:!P_Name!
 
     ) else (
         set %P_Name%=!P_Value!
     )
 
-    rem if not defined !%P_Name%! (
-    rem     echo INFO: VarName:!P_Name! VarCaption:!P_Caption! not defined ...
-    rem )
+    if not defined !P_Name! (
+        echo INFO: VarName:!P_Name! VarCaption:!P_Caption! not defined ...
+    )
 
     set Read_P=!%P_Name%!
     rem echo Read_P:!Read_P!
