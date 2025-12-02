@@ -85,38 +85,56 @@ rem ----------------------------------------------------------------------------
     rem OPTION
     rem -------------------------------------
     set OPTION=
-    set O1_Name=O1
-    set O1_Caption=O1_Caption
-    set O1_Default=O1_Default
-    set O1=!O1_Default!
-    set PN_CAPTION=!O1_Caption!
-    call :Read_P O1 !O1! || exit /b 1
-    rem echo O1:!O1!
-    if defined O1 (
-        set OPTION=!OPTION! -!O1_Name! "!O1!"
-    ) else (
-        echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
+
+    rem -------------------------------------------------------------------
+    rem O1
+    rem -------------------------------------------------------------------
+    set VarName=O1
+    rem echo VarName:!VarName!
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    set VarCaption=O1_caption
+    rem echo VarCaption:!VarCaption!
+    set VarDefault=O1_default
+    rem echo VarDefault:!VarDefault!
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
+    if defined !VarName! (
+        set OPTION=!OPTION! -!VarName! "!%VarName%!"
+    ) else (
+        echo INFO: !VarName! not defined ...
+    )
+
     echo OPTION:!OPTION!
- 
+
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
-    set A1_Name=A1
-    set A1_Caption=A1_Caption
-    set A1_Default=A1_Default
-    set A1=!A1_Default!
-    set PN_CAPTION=!A1_Caption!
-    call :Read_P A1 !A1! || exit /b 1
-    rem echo A1:!A1!
-    if defined A1 (
-        set ARGS=!ARGS! "!A1!"
+
+    rem -------------------------------------------------------------------
+    rem A1
+    rem -------------------------------------------------------------------
+    set VarName=A1
+    rem echo VarName:!VarName!
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    set VarCaption=A1_caption
+    rem echo VarCaption:!VarCaption!
+    set VarDefault=A1_default
+    rem echo VarDefault:!VarDefault!
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+    if defined !VarName! (
+        set ARGS=!ARGS! "!VarName!"
     ) else (
-        echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+        echo INFO: !VarName! not defined ...
         set OK=
         exit /b 1
     )
+
     echo ARGS:!ARGS!
 
     set SCRIPT_DIR=!SCRIPTS_DIR_KIX!\PATTERN

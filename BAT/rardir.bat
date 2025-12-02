@@ -41,31 +41,74 @@ rem ----------------------------------------------------------------------------
     rem -------------------------------------------------------------------
     set APP=rar
     set COMMAND=a
-    set OPTION= -r
-    set ARGS=
     set APPRUN=
     
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    set O1=
-    if defined O1 (
-        set OPTION=!OPTION! !O1!
-    )
+    set OPTION= -r
+
+    rem -------------------------------------------------------------------
+    rem O1
+    rem -------------------------------------------------------------------
+    set VarName=O1
+    rem echo VarName:!VarName!
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    set VarCaption=O1_caption
+    rem echo VarCaption:!VarCaption!
+    set VarDefault=O1_default
+    rem echo VarDefault:!VarDefault!
+    rem if not defined VarValue (
+    rem     call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    rem )
+    rem if defined !VarName! (
+    rem     set OPTION=!OPTION! -!VarName! "!%VarName%!"
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
+    rem )
+
+    echo OPTION:!OPTION!
+
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
+    set ARGS=
+
     rem Проверка на обязательные аргументы
-    set PN_CAPTION=Ввод значения directory
-    set directory=
-    call :Read_P directory %1 || exit /b 1
-    echo directory: !directory!
-    if defined directory (
+    rem set PN_CAPTION=Ввод значения directory
+    rem set directory=
+    rem call :Read_P directory %1 || exit /b 1
+    rem echo directory: !directory!
+    rem if defined directory (
+    rem     set ARGS=!ARGS! "!directory!".rar "!directory!"
+    rem ) else (
+    rem     echo ERROR: directory not defined ...
+    rem     echo Использование: !BATNAME! папка
+    rem     set OK=
+    rem )
+    rem -------------------------------------------------------------------
+    rem directory
+    rem -------------------------------------------------------------------
+    set VarName=directory
+    rem echo VarName:!VarName!
+    set VarValue=%1
+    rem echo VarValue:!VarValue!
+    set VarCaption=Ввод значения directory
+    rem echo VarCaption:!VarCaption!
+    set VarDefault=
+    rem echo VarDefault:!VarDefault!
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+    if defined !VarName! (
         set ARGS=!ARGS! "!directory!".rar "!directory!"
     ) else (
         echo ERROR: directory not defined ...
         echo Использование: !BATNAME! папка
+        echo INFO: !VarName! not defined ...
         set OK=
+        exit /b 1
     )
     
     if not defined Read_N (

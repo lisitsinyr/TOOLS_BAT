@@ -39,22 +39,10 @@ rem ----------------------------------------------------------------------------
     rem -------------------------------------
     rem OPTION
     rem -------------------------------------
-    rem set O1=
-    rem if defined O1 (
-    rem     set OPTION=!OPTION! !O1!
-    rem )
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
-    rem Проверка на обязательные аргументы
-    rem set A1=
-    rem if defined A1 (
-    rem     set ARGS=!ARGS! !A1!
-    rem ) else (
-    rem     echo ERROR: A1 not defined ...
-    rem     set OK=
-    rem )
     
     FOR /D %%d IN ( *.* ) DO  (
         rem command
