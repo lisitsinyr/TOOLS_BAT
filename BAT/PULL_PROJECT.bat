@@ -197,7 +197,7 @@ rem beginfunction
     )
     set A1=!A1_Default!
     set PN_CAPTION=!A1_Caption!
-    call :Read_P A1 !A1! || exit /b 1
+    call :Read_P A1 !A1! !A1_Caption! "" || exit /b 1
     rem echo A1:!A1!
     if defined A1 (
         set ARGS=!ARGS! "!A1!"
@@ -215,7 +215,7 @@ rem beginfunction
     )
     set A2=!A2_Default!
     set PN_CAPTION=!A2_Caption!
-    call :Read_P A2 !A2! || exit /b 1
+    call :Read_P A2 !A2! !A2_Caption! "" || exit /b 1
     rem echo A2:!A2!
     if defined A2 (
         set ARGS=!ARGS! !A2!

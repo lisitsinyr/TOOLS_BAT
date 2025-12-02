@@ -132,7 +132,7 @@ rem beginfunction
     set O1_Default=O1_Default
     set O1=!O1_Default!
     set PN_CAPTION=!O1_Caption!
-    call :Read_P O1 !O1! || exit /b 1
+    call :Read_P O1 !O1! !O1_Caption! "" || exit /b 1
     rem echo O1:!O1!
     if defined O1 (
         set OPTION=!OPTION! -!O1_Name! "!O1!"
@@ -150,7 +150,7 @@ rem beginfunction
     set A1_Default=A1_Default
     set A1=!A1_Default!
     set PN_CAPTION=!A1_Caption!
-    call :Read_P A1 !A1! || exit /b 1
+    call :Read_P A1 !A1! !A1_Caption! "" || exit /b 1
     rem echo A1:!A1!
     if defined A1 (
         set ARGS=!ARGS! "!A1!"

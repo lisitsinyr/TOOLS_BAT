@@ -82,7 +82,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure Read_P (P_Name, P_Value, P_Caption) -> None
+rem procedure Read_P (P_Name, P_Value, P_Caption, P_Default) -> None
 rem --------------------------------------------------------------------------------
 :Read_P
 rem beginfunction
@@ -184,10 +184,10 @@ rem beginfunction
     set PN_CAPTION=!Ox_Caption!
 
     if not defined Ox (
-        call :Read_P !Aname! "" "!PN_CAPTION!" || exit /b 1
+        call :Read_P !Aname! "" "!PN_CAPTION!" "" || exit /b 1
         set !Aname!=!Ox!
     ) else (
-        call :Read_P Ox "" "!PN_CAPTION!" || exit /b 1
+        call :Read_P Ox "" "!PN_CAPTION!" "" || exit /b 1
         set !Aname!=!Ox!
     )
 
