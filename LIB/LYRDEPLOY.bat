@@ -385,7 +385,7 @@ rem beginfunction
         copy !LDirectory!\!LFileName! > NUL
     )
 
-    set LDirectory=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
+    set LDirectory=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\99.DEPLOY
 
     set LFileName=DEPLOY_PROJECT.bat
     rem echo LFileName:!LFileName!
