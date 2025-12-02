@@ -343,7 +343,7 @@ rem beginfunction
     rem SCRIPTS_DIR_DEPLOY - Каталог скриптов DEPLOY
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR_DEPLOY (
-        set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\SCRIPTS_BAT\99.DEPLOY
+        set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\99.DEPLOY
     )
     rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
 
