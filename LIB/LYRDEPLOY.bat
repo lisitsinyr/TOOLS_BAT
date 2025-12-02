@@ -74,6 +74,8 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    set LYRDEPLOYINIT=
+
     exit /b 0
 rem endfunction
 
@@ -341,6 +343,8 @@ rem beginfunction
         )
     )
 
+    set CopyFilesFromPATTERN=
+
     exit /b 0
 rem endfunction
 
@@ -390,6 +394,8 @@ rem beginfunction
         copy !LDirectory!\!LFileName! > NUL
     )
 
+    set CopyFilesROOT=
+
     exit /b 0
 rem endfunction
 
@@ -411,6 +417,8 @@ rem beginfunction
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_NAME !PROJECT_NAME!
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general DIR_GROUP_ROOT !DIR_GROUP_ROOT!
 
+    set SetPROJECT_INI=
+
     exit /b 0
 rem endfunction
 
@@ -429,6 +437,8 @@ rem beginfunction
 
     call :SetINI !DIR_PROJECT_NAME!\REPO.ini general REPO_NAME !PROJECT_NAME!
 
+    set SetREPO_INI=
+
     exit /b 0
 rem endfunction
 
@@ -444,6 +454,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set LSaveDirectory=!cd!
+    
     rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :WritePROCESS DEPLOY проекта [REPO_WORK]: !PROJECT_NAME!
@@ -457,12 +469,9 @@ rem beginfunction
 
     if not exist "!ADirectory!"\ (
         echo ERROR: Каталог !ADirectory! не существует ...
+        set REPO_WORK=
         exit /b 1
     )
-
-    rem cd /D "!ADirectory!"
-    rem call :CurrentDir
-    rem echo CurrentDir:!CurrentDir!
 
     call :CopyFilesROOT
 
@@ -473,8 +482,8 @@ rem beginfunction
     call :SetREPO_INI
 
     cd /D "!ADirectory!"
-    call :CurrentDir
-    echo CurrentDir:!CurrentDir!
+    rem call :CurrentDir
+    rem echo CurrentDir:!CurrentDir!
 
     if exist .git\ (
         rem echo call lyrgit_push_main.bat ...
@@ -482,6 +491,10 @@ rem beginfunction
     ) else (
         echo INFO: Каталог .git не существует ...
     )
+
+    cd /D "!LSaveDirectory!"
+
+    set REPO_WORK=
 
     exit /b 0
 rem endfunction
@@ -498,6 +511,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set LSaveDirectory=!cd!
+
     rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :WritePROCESS ................................DEPLOY проекта [REPO_WORK_TOOLS]: !PROJECT_NAME!
@@ -511,10 +526,9 @@ rem beginfunction
 
     if not exist !ADirectory!\ (
         echo ERROR: Каталог !ADirectory! не существует ...
+        set REPO_WORK_TOOLS=
         exit /b 1
     )
-
-    rem cd /D "!ADirectory!"
 
     call :CopyFilesROOT
 
@@ -525,15 +539,20 @@ rem beginfunction
     call :SetREPO_INI
 
     cd /D "!ADirectory!"
-    call :CurrentDir
-    echo CurrentDir:!CurrentDir!
+    rem call :CurrentDir
+    rem echo CurrentDir:!CurrentDir!
 
     if exist ".git"\ (
-        echo call lyrgit_push_main.bat ...
         call lyrgit_push_main.bat
+    ) else (
+        echo INFO: Каталог .git не существует ...
     )
 
     call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
+
+    cd /D "!LSaveDirectory!"
+
+    set REPO_WORK_TOOLS=
 
     exit /b 0
 rem endfunction
@@ -556,12 +575,12 @@ rem beginfunction
     rem call :WritePROCESS PROJECT_NAME  : !PROJECT_NAME!
     rem call :WritePROCESS DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
 
-    echo PROJECT_GROUP : !PROJECT_GROUP!
-    echo PROJECT_NAME  : !PROJECT_NAME!
-    echo DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
+    rem echo PROJECT_GROUP : !PROJECT_GROUP!
+    rem echo PROJECT_NAME  : !PROJECT_NAME!
+    rem echo DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
 
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
-    echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
 
     if !PROJECT_NAME!==TOOLS_BAT (
         call :ClearDir !DIR_PROJECT_NAME!\BAT *.bat
@@ -569,6 +588,7 @@ rem beginfunction
         call :UPDATE_TOOLS_BAT_SCRIPTS_BAT
         call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        set DEPLOY_PROJECT=
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_GIT (
@@ -577,6 +597,7 @@ rem beginfunction
 
         call :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        set DEPLOY_PROJECT=
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_JAVA (
@@ -585,6 +606,7 @@ rem beginfunction
         call :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
         call :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        set DEPLOY_PROJECT=
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_KIX (
@@ -593,6 +615,7 @@ rem beginfunction
         call :UPDATE_TOOLS_KIX_SCRIPTS_KIX
         call :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        set DEPLOY_PROJECT=
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_PY (
@@ -601,6 +624,7 @@ rem beginfunction
         call :UPDATE_TOOLS_PY_SCRIPTS_PY
         call :UPDATE_TOOLS_PY_TOOLS_SRC_PY
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        set DEPLOY_PROJECT=
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_SH (
@@ -610,16 +634,18 @@ rem beginfunction
         call :UPDATE_TOOLS_SH_TOOLS_SRC_SH
         call :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        set DEPLOY_PROJECT=
         exit /b 0
     )    
     if !PROJECT_NAME!==TOOLS_PS (
         rem call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
+        set DEPLOY_PROJECT=
         exit /b 0
     )    
 
-    echo call :REPO_WORK !DIR_PROJECT_NAME!
-
     call :REPO_WORK !DIR_PROJECT_NAME!
+
+    set DEPLOY_PROJECT=
 
     exit /b 0
 rem endfunction
@@ -636,6 +662,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set LSaveDirectory=!cd!
+
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     set LOG_FILE_ADD=1
@@ -643,12 +671,11 @@ rem beginfunction
     rem echo git_pull:!ADirectory!
     if not exist !ADirectory!\ (
         echo ERROR: Каталог !ADirectory! не существует ...
+        set git_pull=
         exit /b 1
     )
 
     cd /D "!ADirectory!"
-    call :CurrentDir
-    echo CurrentDir:!CurrentDir!
 
     rem echo "git pull ..."
 
@@ -656,6 +683,8 @@ rem beginfunction
     
     rem git pull
     rem call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
+
+    cd /D "!LSaveDirectory!"
 
     set git_pull=
 
@@ -691,8 +720,11 @@ rem beginfunction
         )
     ) else (
         echo ERROR: Каталог !ADIR_PROJECTS_ROOT! не существует...
+        set git_clone=
         exit /b 1
     )
+
+    set git_clone=
 
     exit /b 0
 rem endfunction
@@ -708,6 +740,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
+
+    set LSaveDirectory=!cd!
 
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
@@ -726,6 +760,9 @@ rem beginfunction
         if exist ".git"\ (
             rem echo "call lyrgit_pull.bat ..."
             call lyrgit_pull.bat
+        ) else (
+            echo INFO: Каталог .git не существует ...
+        )
         )
     ) else (
         echo info: Каталог !LDIR_PROJECT_NAME! не существует...
@@ -879,6 +916,10 @@ rem beginfunction
             call :git_clone !ADIR_PROJECTS_ROOT! !urlTOOLS_SH!
         )
     )   
+
+    cd /D "!LSaveDirectory!"
+
+    set PULL_PROJECT=
 
     exit /b 0
 rem endfunction

@@ -50,6 +50,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set LSaveDirectory=!cd!
+
     set Aproject_dir=%~1
     rem echo Aproject_dir:!Aproject_dir!
 
@@ -59,10 +61,12 @@ rem beginfunction
     if defined Aproject_dir (
         if not exist !Aproject_dir!\ (
             echo ERROR: Dir !Aproject_dir! not exist ...
+            set SET_project_dir=
             exit /b 1
         ) else (
             if not exist !Aproject_dir!\PROJECT.ini (
                 echo ERROR: Dir !Aproject_dir!\PROJECT.ini not exist ...
+                set SET_project_dir=
                 exit /b 1
             ) else (
                 set project_dir=!Aproject_dir!
@@ -71,8 +75,11 @@ rem beginfunction
         )
     ) else (
         echo ERROR: Aproject_dir not defined ...
+        set SET_project_dir=
         exit /b 3
     )
+
+    cd /D "!LSaveDirectory!"
 
     set SET_project_dir=project_dir
 
@@ -125,6 +132,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set LSaveDirectory=
+
     set Aprojects_dir=%~1
     rem echo Aprojects_dir:!Aprojects_dir!
 
@@ -134,6 +143,7 @@ rem beginfunction
     if defined Aprojects_dir (
         if not exist !Aprojects_dir! (
             echo ERROR: Dir !Aprojects_dir! not exist ...
+            set SET_projects_dir=
             exit /b 1
         ) else (
             set projects_dir=!Aprojects_dir!
@@ -141,8 +151,11 @@ rem beginfunction
         )
     ) else (
         echo ERROR: Aprojects_dir not defined ...
+        set SET_projects_dir=
         exit /b 3
     )
+
+    cd /D "!LSaveDirectory!"
 
     set SET_projects_dir=!projects_dir!
 
@@ -254,6 +267,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set LSaveDirectory=!cd!
+
     set Ascript_dir=%~1
     rem echo Ascript_dir:!Ascript_dir!
 
@@ -263,6 +278,7 @@ rem beginfunction
     if defined Ascript_dir (
         if not exist !Ascript_dir! (
             echo ERROR: Dir !Ascript_dir! not exist ...
+            set SET_script_dir=
             exit /b 1
         ) else (
             set script_dir=!Ascript_dir!
@@ -270,8 +286,11 @@ rem beginfunction
         )
     ) else (
         echo ERROR: Ascript_dir not defined ...
+        set SET_script_dir=
         exit /b 3
     )
+
+    cd /D "!LSaveDirectory!"
 
     set SET_script_dir=!script_dir!
 
@@ -402,16 +421,16 @@ rem beginfunction
         if not exist !Aproject_dir! (
             set venv_dir=
             echo ERROR: Dir !Aproject_dir! not exist ...
+            set SET_venv_dir=
             exit /b 1
         )
 
     ) else (
         set venv_dir=
         echo ERROR: Dir project_dir not defined ...
+        set SET_venv_dir=
         exit /b 1
     )
-
-    rem cd /D !project_dir!
 
     set SET_venv_dir=
 
@@ -445,10 +464,12 @@ rem beginfunction
         if not exist !venv_dir! (
             set venv_dir=
             echo ERROR: Dir !venv_dir! not exist ...
+            set SET_venv_dir=
             exit /b 1
         )
     ) else (
         echo ERROR: Dir !venv_dir! not defined ...
+        set SET_venv_dir=
         exit /b 1
     )
 
@@ -480,15 +501,15 @@ rem beginfunction
         if not exist !Aproject_dir! (
             set venv_dir=
             echo ERROR: Dir !Aproject_dir! not exist ...
+            set GET_venv_dir=
             exit /b 1
         )
     ) else (
         set venv_dir=
         echo ERROR: Dir project_dir not defined ...
+        set GET_venv_dir=
         exit /b 1
     )
-
-    rem cd /D !project_dir!
 
     rem -------------------------------------------------------------------
     rem venv_dir

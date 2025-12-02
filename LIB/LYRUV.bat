@@ -284,6 +284,7 @@ rem beginfunction
         uv python pin !version!
     ) else (
         echo ERROR: Aversion not defined ...
+        set UV_python_pin=
         exit /b 3
     )
     

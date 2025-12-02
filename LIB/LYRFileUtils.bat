@@ -413,6 +413,8 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    set LSaveDirectory=!cd!
+
     set ADIR_FROM=%~1
     rem echo ADIR_FROM:!ADIR_FROM!
     set ADIR_TO=%~2
@@ -474,9 +476,9 @@ rem beginfunction
             )
 
         )
-
-        rem cd /D "!CurrentDir!"
     )
+
+    cd /D "!LSaveDirectory!"
 
     set COPY_FILES=
 
