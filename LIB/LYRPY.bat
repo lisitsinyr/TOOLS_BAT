@@ -52,12 +52,12 @@ rem beginfunction
 
     set LSaveDirectory=!cd!
 
-    set Aproject_dir=%~1
-    rem echo Aproject_dir:!Aproject_dir!
-
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
+    set Aproject_dir=%~1
+    rem echo Aproject_dir:!Aproject_dir!
+
     if defined Aproject_dir (
         if not exist !Aproject_dir!\ (
             echo ERROR: Dir !Aproject_dir! not exist ...
@@ -98,22 +98,36 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aproject_dir=%~1
-
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
-    if not defined Aproject_dir (
-        call :CurrentDir || exit /b 1
-        set Aproject_dir=!CurrentDir!
+    set VarName=project_dir
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=project_dir_caption
+    rem echo VarCaption:!VarCaption!
+
+    call :CurrentDir || exit /b 1
+    set VarDefault=!CurrentDir!
+    rem echo VarDefault:!VarDefault!
+
+    rem if not defined VarValue (
+    rem     call :CurrentDir || exit /b 1
+    rem     set VarValue=!CurrentDir!
+    rem )
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+    if defined !VarName! (
+        call :SET_project_dir !project_dir! || exit /b 1
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
 
-    call :GET_Ox "project_dir" "project_dir" "!Aproject_dir!" || exit /b 1
-    echo project_dir:!project_dir!
-    if defined project_dir (
-        call :SET_project_dir !project_dir! || exit /b 1
-    )
-    
     set GET_project_dir=!project_dir!
     rem echo GET_project_dir:!GET_project_dir!
 
@@ -132,14 +146,14 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LSaveDirectory=
-
-    set Aprojects_dir=%~1
-    rem echo Aprojects_dir:!Aprojects_dir!
+    set LSaveDirectory=!cd!
 
     rem -------------------------------------------------------------------
     rem projects_dir
     rem -------------------------------------------------------------------
+    set Aprojects_dir=%~1
+    rem echo Aprojects_dir:!Aprojects_dir!
+
     if defined Aprojects_dir (
         if not exist !Aprojects_dir! (
             echo ERROR: Dir !Aprojects_dir! not exist ...
@@ -174,20 +188,35 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aprojects_dir=%~1
-
     rem -------------------------------------------------------------------
     rem projects_dir
     rem -------------------------------------------------------------------
-    if not defined Aprojects_dir (
-        call :CurrentDir || exit /b 1
-        set Aprojects_dir=!CurrentDir!
+    set VarName=projects_dir
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=projects_dir_caption
+    rem echo VarCaption:!VarCaption!
+
+    call :CurrentDir || exit /b 1
+    set VarDefault=!CurrentDir!
+    rem echo VarDefault:!VarDefault!
+
+    rem if not defined VarValue (
+    rem     call :CurrentDir || exit /b 1
+    rem     set VarValue=!CurrentDir!
+    rem )
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
-    call :GET_Ox "projects_dir" "projects_dir" "!Aprojects_dir!" || exit /b 1
-    echo projects_dir:!projects_dir!
-    if defined projects_dir (
+    if defined !VarName! (
         call :SET_projects_dir !projects_dir! || exit /b 1
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
 
     set GET_projects_dir=!projects_dir!
@@ -208,12 +237,12 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aproject_name=%~1
-    rem echo Aproject_name:!Aproject_name!
-
     rem -------------------------------------------------------------------
     rem project_name
     rem -------------------------------------------------------------------
+    set Aproject_name=%~1
+    rem echo Aproject_name:!Aproject_name!
+
     if defined Aproject_name (
         set project_name=!Aproject_name!
     ) else (
@@ -238,15 +267,29 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aproject_name=%~1
-
     rem -------------------------------------------------------------------
     rem project_name
     rem -------------------------------------------------------------------
-    call :GET_Ox "project_name" "project_name" "!Aproject_name!" || exit /b 1
-    echo project_name:!project_name!
-    if defined project_name (
+    set VarName=project_name
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=project_name_caption
+    rem echo VarCaption:!VarCaption!
+
+    set VarDefault=project_name
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
         call :SET_project_name !project_name! || exit /b 1
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
 
     set GET_project_name=!project_name!
@@ -269,12 +312,12 @@ rem beginfunction
 
     set LSaveDirectory=!cd!
 
-    set Ascript_dir=%~1
-    rem echo Ascript_dir:!Ascript_dir!
-
     rem -------------------------------------------------------------------
     rem script_dir
     rem -------------------------------------------------------------------
+    set Ascript_dir=%~1
+    rem echo Ascript_dir:!Ascript_dir!
+
     if defined Ascript_dir (
         if not exist !Ascript_dir! (
             echo ERROR: Dir !Ascript_dir! not exist ...
@@ -309,22 +352,36 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Ascript_dir=%~1
-
     rem -------------------------------------------------------------------
     rem script_dir
     rem -------------------------------------------------------------------
-    if not defined Ascript_dir (
-        call :CurrentDir || exit /b 1
-        set Aproject_dir=!CurrentDir!
+    set VarName=script_dir
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=script_dir_caption
+    rem echo VarCaption:!VarCaption!
+
+    call :CurrentDir || exit /b 1
+    set VarDefault=!CurrentDir!
+    rem echo VarDefault:!VarDefault!
+
+    rem if not defined VarValue (
+    rem     call :CurrentDir || exit /b 1
+    rem     set VarValue=!CurrentDir!
+    rem )
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+    if defined !VarName! (
+        call :SET_script_dir !script_dir! || exit /b 1
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
 
-    call :GET_Ox "script_dir" "script_dir" "!Ascript_dir!" || exit /b 1
-    echo script_dir:!script_dir!
-    if defined script_dir (
-        call :SET_script_dir !script_dir! || exit /b 1
-    )
-    
     set GET_script_dir=!script_dir!
     rem echo GET_script_dir:!GET_script_dir!
 
@@ -343,12 +400,12 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    rem -------------------------------------------------------------------
+    rem script
+    rem -------------------------------------------------------------------
     set Ascript=%~1
     rem echo Ascript:!Ascript!
 
-    rem -------------------------------------------------------------------
-    rem script_name
-    rem -------------------------------------------------------------------
     if defined Ascript (
         set script=!Ascript!
         call :ExtractFileDir !script! || exit /b 1
@@ -381,15 +438,29 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Ascript=%~1
+    rem -------------------------------------------------------------------
+    rem script
+    rem -------------------------------------------------------------------
+    set VarName=script
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=script_caption
+    rem echo VarCaption:!VarCaption!
 
-    rem -------------------------------------------------------------------
-    rem script_dir
-    rem -------------------------------------------------------------------
-    call :GET_Ox "script" "script" "!Ascript!" || exit /b 1
-    echo script:!script!
-    if defined script (
+    set VarDefault=script.py
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
         call :SET_script !script! || exit /b 1
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
 
     set GET_script=!script!
@@ -491,12 +562,13 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    rem -------------------------------------------------------------------
+    rem venv_dir
+    rem -------------------------------------------------------------------
     set Aproject_dir=%~1
     rem echo Aproject_dir:!Aproject_dir!
-
     set Avenv_dir=%~2
     rem echo Avenv_dir:!Avenv_dir!
-
     if defined Aproject_dir (
         if not exist !Aproject_dir! (
             set venv_dir=
@@ -511,21 +583,34 @@ rem beginfunction
         exit /b 1
     )
 
-    rem -------------------------------------------------------------------
-    rem venv_dir
-    rem -------------------------------------------------------------------
     if not defined Avenv_dir (
         if exist !project_dir!.venv\ (
             set venv_dir=!Aproject_dir!.venv\
         ) else (
-            set venv_dir=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\
+            set venv_dir=
         )
     )
 
-    call :GET_Ox "venv_dir" "venv_dir" "!venv_dir!" || exit /b 1
-    echo venv_dir:!!
-    if defined venv_dir (
+    set VarName=venv_dir
+    rem echo VarName:!VarName!
+    
+    set VarValue=!venv_dir!
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=venv_dir_caption
+    rem echo VarCaption:!VarCaption!
+
+    set VarDefault=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\VENV\P313\
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
         call :SET_venv_dir !project_dir! !venv_dir! || exit /b 1
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
 
     set GET_venv_dir=!venv_dir!
@@ -643,22 +728,36 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Arequirements_file=%~1
-
     rem -------------------------------------------------------------------
     rem requirements_file
     rem -------------------------------------------------------------------
-    call :GET_Ox "requirements_file" "requirements_file" "!Arequirements_file!" || exit /b 1
-    echo requirements_file:!requirements_file!
-    if defined requirements_file (
-        if exist !Ox! (
-            set requirements_file=-r !Ox!
+    set VarName=requirements_file
+    rem echo VarName:!VarName!
+    
+    set VarValue=%~1
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=requirements_file_caption
+    rem echo VarCaption:!VarCaption!
+
+    set VarDefault=
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
+        if exist !requirements_file! (
+            set requirements_file=-r !requirements_file!
         ) else (
             set requirements_file=
-            echo INFO: File !Ox! not exist ...
+            echo INFO: File !requirements_file! not exist ...
         )
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
-    
+
     set GET_requirements_file=!requirements_file!
     rem echo GET_requirements_file:!GET_requirements_file!
 
@@ -677,15 +776,29 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Apackage_names=%*
-
     rem -------------------------------------------------------------------
     rem package_names
     rem -------------------------------------------------------------------
-    call :GET_Ox "package_names" "package_names" "!Apackage_names!" || exit /b 1
-    echo package_names:!package_names!
-    if defined package_names (
-        set package_names=!Ox!
+    set VarName=package_names
+    rem echo VarName:!VarName!
+    
+    set VarValue=%*
+    rem echo VarValue:!VarValue!
+    
+    set VarCaption=package_names_caption
+    rem echo VarCaption:!VarCaption!
+
+    set VarDefault=
+    rem echo VarDefault:!VarDefault!
+
+    if not defined VarValue (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
+    if defined !VarName! (
+        set package_names=!package_names!
+    ) else (
+        echo INFO: !VarName! not defined ...
     )
 
     set GET_package_names=!package_names!
