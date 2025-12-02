@@ -455,12 +455,14 @@ rem beginfunction
     set ADirectory=%~1
     rem echo ADirectory:!ADirectory!
 
-    if not exist !ADirectory!\ (
+    if not exist "!ADirectory!"\ (
         echo ERROR: Каталог !ADirectory! не существует ...
         exit /b 1
     )
 
-    cd /D "!ADirectory!"
+    rem cd /D "!ADirectory!"
+    rem call :CurrentDir
+    rem echo CurrentDir:!CurrentDir!
 
     call :CopyFilesROOT
 
@@ -470,9 +472,15 @@ rem beginfunction
 
     call :SetREPO_INI
 
-    if exist ".git"\ (
+    cd /D "!ADirectory!"
+    call :CurrentDir
+    echo CurrentDir:!CurrentDir!
+
+    if exist .git\ (
         rem echo call lyrgit_push_main.bat ...
         call lyrgit_push_main.bat
+    ) else (
+        echo INFO: Каталог .git не существует ...
     )
 
     exit /b 0
@@ -506,7 +514,7 @@ rem beginfunction
         exit /b 1
     )
 
-    cd /D "!ADirectory!"
+    rem cd /D "!ADirectory!"
 
     call :CopyFilesROOT
 
@@ -515,6 +523,10 @@ rem beginfunction
     call :SetPROJECT_INI
 
     call :SetREPO_INI
+
+    cd /D "!ADirectory!"
+    call :CurrentDir
+    echo CurrentDir:!CurrentDir!
 
     if exist ".git"\ (
         echo call lyrgit_push_main.bat ...
@@ -546,7 +558,7 @@ rem beginfunction
 
     echo PROJECT_GROUP : !PROJECT_GROUP!
     echo PROJECT_NAME  : !PROJECT_NAME!
-    rem echo DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
+    echo DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
 
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
     echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
@@ -605,6 +617,8 @@ rem beginfunction
         exit /b 0
     )    
 
+    echo call :REPO_WORK !DIR_PROJECT_NAME!
+
     call :REPO_WORK !DIR_PROJECT_NAME!
 
     exit /b 0
@@ -633,6 +647,8 @@ rem beginfunction
     )
 
     cd /D "!ADirectory!"
+    call :CurrentDir
+    echo CurrentDir:!CurrentDir!
 
     rem echo "git pull ..."
 
