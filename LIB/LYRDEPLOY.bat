@@ -746,14 +746,14 @@ rem beginfunction
     call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     set ADIR_PROJECTS_ROOT=%1
-    rem echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
+    echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
     set APROJECT_NAME=%2
-    rem echo APROJECT_NAME:!APROJECT_NAME!
+    echo APROJECT_NAME:!APROJECT_NAME!
 
     call :WritePROCESS PULL проекта: !APROJECT_NAME! ...
 
     set LDIR_PROJECT_NAME=!ADIR_PROJECTS_ROOT!\!APROJECT_NAME!
-    rem echo LDIR_PROJECT_ROOT:!LDIR_PROJECT_NAME!
+    echo LDIR_PROJECT_NAME:!LDIR_PROJECT_NAME!
 
     if exist "!LDIR_PROJECT_NAME!"\ (
         cd /D "!LDIR_PROJECT_NAME!"
@@ -766,6 +766,7 @@ rem beginfunction
         )
     ) else (
         echo info: Каталог !LDIR_PROJECT_NAME! не существует...
+
         if !APROJECT_NAME!==TOOLS_SRC_GIT (
             call :GetINI !FILEINI! GITHUB TOOLS_SRC_GIT
             set urlGITHUB=!ParameterValue!
