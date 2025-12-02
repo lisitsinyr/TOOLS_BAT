@@ -576,19 +576,19 @@ rem beginfunction
 
     if defined !VarName! (
         set result=F
-        if !python_version!==3.13 set result=T
-        if !python_version!==3.14 set result=T
+        if !%VarName%!==3.13 set result=T
+        if !%VarName%!==3.14 set result=T
         if !result!==T (
-            set pytho_version=!Ox!
+            rem set pytho_version=!%VarName%!
         ) else (
-            echo ERROR: !python_version! not defined ...
+            echo ERROR: !%VarName%! not defined ...
             exit /b 1
         )
     ) else (
         echo INFO: !VarName! not defined ...
-    )
+    )                      
 
-    set GET_python_version=!python_version!
+    set GET_python_version=!%VarName%!
     rem echo GET_python_version:!GET_python_version!
 
     exit /b 0
@@ -627,21 +627,21 @@ rem beginfunction
 
     if defined !VarName! (
         set result=F
-        if !project_type!==app set result=T
-        if !project_type!==lib set result=T
-        if !project_type!==bare set result=T
-        if !project_type!==script set result=T
+        if !%VarName%!==app set result=T
+        if !%VarName%!==lib set result=T
+        if !%VarName%!==bare set result=T
+        if !%VarName%!==script set result=T
         if !result!==T (
-            set project_type=--!project_type!
+            set project_type=--!%VarName%!
         ) else (
-            echo ERROR: !project_type! not defined ...
+            echo ERROR: !%VarName%! not defined ...
             exit /b 1
         )
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_project_type=!project_type!
+    set GET_project_type=!%VarName%!
     rem echo GET_project_type:!GET_project_type!
 
     exit /b 0
@@ -680,19 +680,19 @@ rem beginfunction
 
     if defined !VarName! (
         set result=F
-        if !package!==y set result=T
-        if !package!==Y set result=T
+        if !%VarName%!==y set result=T
+        if !%VarName%!==Y set result=T
         if !result!==T (
-            set package=--package
+            set !%VarName%!=--package
         ) else (
-            set package=
-            echo INFO: !package! not defined ...
+            set !%VarName%!=
+            echo INFO: !%VarName%! not defined ...
         )    
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_package=!package!
+    set GET_package=!%VarName%!
     rem echo GET_package:!GET_package!
 
     exit /b 0
@@ -731,19 +731,19 @@ rem beginfunction
 
     if defined !VarName! (
         set result=F
-        if !no-workspace!==y set result=T
-        if !no-workspace!==Y set result=T
+        if !%VarName%!==y set result=T
+        if !%VarName%!==Y set result=T
         if !result!==T (
-            set no-workspace=--no-workspace
+            set !%VarName%!=--no-workspace
         ) else (
-            set no-workspace=
-            echo INFO: !no-workspace! not defined ...
+            set !%VarName%!=
+            echo INFO: !%VarName%! not defined ...
         )    
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_no-workspace=!no-workspace!
+    set GET_no-workspace=!%VarName%!
     rem echo GET_no-workspace:!GET_no-workspace!
 
     exit /b 0

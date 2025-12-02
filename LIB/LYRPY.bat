@@ -123,12 +123,12 @@ rem beginfunction
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
-        call :SET_project_dir !project_dir! || exit /b 1
+        call :SET_project_dir !%VarName%! || exit /b 1
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_project_dir=!project_dir!
+    set GET_project_dir=!%VarName%!
     rem echo GET_project_dir:!GET_project_dir!
 
     exit /b 0
@@ -212,16 +212,15 @@ rem beginfunction
     if not defined !%VarName%! ( (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
-
-    echo Read_P:!Read_P!
+    rem echo Read_P:!Read_P!
 
     if defined !VarName! (
-        call :SET_projects_dir !projects_dir! || exit /b 1
+        call :SET_projects_dir !%VarName%! || exit /b 1
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_projects_dir=!projects_dir!
+    set GET_projects_dir=!%VarName%!
     rem echo GET_projects_dir:!GET_projects_dir!
 
     exit /b 0
@@ -289,12 +288,12 @@ rem beginfunction
     )
 
     if defined !VarName! (
-        call :SET_project_name !project_name! || exit /b 1
+        call :SET_project_name !%VarName%! || exit /b 1
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_project_name=!project_name!
+    set GET_project_name=!%VarName%!
     rem echo GET_project_name:!GET_project_name!
 
     exit /b 0
@@ -379,12 +378,12 @@ rem beginfunction
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
-        call :SET_script_dir !script_dir! || exit /b 1
+        call :SET_script_dir !%VarName%! || exit /b 1
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_script_dir=!script_dir!
+    set GET_script_dir=!%VarName%!
     rem echo GET_script_dir:!GET_script_dir!
 
     exit /b 0
@@ -460,12 +459,12 @@ rem beginfunction
     )
 
     if defined !VarName! (
-        call :SET_script !script! || exit /b 1
+        call :SET_script !%VarName%! || exit /b 1
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_script=!script!
+    set GET_script=!%VarName%!
     rem echo GET_script:!GET_script!
 
     exit /b 0
@@ -610,12 +609,12 @@ rem beginfunction
     )
 
     if defined !VarName! (
-        call :SET_venv_dir !project_dir! !venv_dir! || exit /b 1
+        call :SET_venv_dir !project_dir! !%VarName%! || exit /b 1
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_venv_dir=!venv_dir!
+    set GET_venv_dir=!%VarName%!
     rem echo GET_venv_dir:!GET_venv_dir!
 
     exit /b 0
@@ -707,12 +706,12 @@ rem beginfunction
     )
 
     if defined !VarName! (
-        call :SET_python_dir !python_dir! || exit /b 1
+        call :SET_python_dir !%VarName%! || exit /b 1
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_python_dir=!python_dir!
+    set GET_python_dir=!%VarName%!
     rem echo GET_python_dir:!GET_python_dir!
 
     exit /b 0
@@ -751,7 +750,7 @@ rem beginfunction
 
     if defined !VarName! (
         if exist !requirements_file! (
-            set requirements_file=-r !requirements_file!
+            set requirements_file=-r !%VarName%!
         ) else (
             set requirements_file=
             echo INFO: File !requirements_file! not exist ...
@@ -760,7 +759,7 @@ rem beginfunction
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_requirements_file=!requirements_file!
+    set GET_requirements_file=!%VarName%!
     rem echo GET_requirements_file:!GET_requirements_file!
 
     exit /b 0
@@ -798,12 +797,12 @@ rem beginfunction
     )
 
     if defined !VarName! (
-        set package_names=!package_names!
+        set package_names=!%VarName%!
     ) else (
         echo INFO: !VarName! not defined ...
     )
 
-    set GET_package_names=!package_names!
+    set GET_package_names=!%VarName%!
     rem echo GET_package_name:!GET_package_name!
 
     exit /b 0

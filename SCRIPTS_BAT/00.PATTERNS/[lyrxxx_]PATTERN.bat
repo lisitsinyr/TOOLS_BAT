@@ -141,8 +141,17 @@ rem beginfunction
     )
     if defined !VarName! (
         set OPTION=!OPTION! -!VarName! "!%VarName%!"
-    ) else (
-        echo INFO: !VarName! not defined ...
+    )
+
+    rem -------------------------------------------------------------------
+    rem O1
+    rem -------------------------------------------------------------------
+    set VarName=O1
+    if not defined !%VarName%! (
+        call :Read_P !VarName! "" "—сылка на сообщение" "" || exit /b 1
+    )
+    if defined !VarName! (
+        set OPTION=!OPTION! -!VarName! "!%VarName%!"
     )
 
     echo OPTION:!OPTION!
@@ -169,7 +178,6 @@ rem beginfunction
     if defined !VarName! (
         set ARGS=!ARGS! "!VarName!"
     ) else (
-        echo INFO: !VarName! not defined ...
         set OK=
         exit /b 1
     )

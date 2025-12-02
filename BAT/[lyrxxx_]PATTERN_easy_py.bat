@@ -107,8 +107,6 @@ rem ----------------------------------------------------------------------------
     )
     if defined !VarName! (
         set OPTION=!OPTION! -!VarName! "!%VarName%!"
-    ) else (
-        echo INFO: !VarName! not defined ...
     )
 
     echo OPTION:!OPTION!
@@ -135,7 +133,6 @@ rem ----------------------------------------------------------------------------
     if defined !VarName! (
         set ARGS=!ARGS! "!VarName!"
     ) else (
-        echo INFO: !VarName! not defined ...
         set OK=
         exit /b 1
     )
