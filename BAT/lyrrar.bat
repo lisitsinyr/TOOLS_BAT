@@ -59,7 +59,7 @@ rem ----------------------------------------------------------------------------
     rem echo VarCaption:!VarCaption!
     set VarDefault=O1_default
     rem echo VarDefault:!VarDefault!
-    rem if not defined !VarName! (
+    rem if not defined !%VarName%! (
     rem     call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     rem )
     rem if defined !VarName! (
@@ -97,7 +97,7 @@ rem ----------------------------------------------------------------------------
     rem echo VarCaption:!VarCaption!
     set VarDefault=archive
     rem echo VarDefault:!VarDefault!
-    if not defined !VarName! (
+    if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (

@@ -570,7 +570,7 @@ rem beginfunction
     set VarDefault=3.13
     rem echo VarDefault:!VarDefault!
 
-    if not defined !VarName! (
+    if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -621,7 +621,7 @@ rem beginfunction
     set VarDefault=app
     rem echo VarDefault:!VarDefault!
 
-    if not defined !VarName! (
+    if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -674,7 +674,7 @@ rem beginfunction
     set VarDefault=N
     rem echo VarDefault:!VarDefault!
 
-    if not defined !VarName! (
+    if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
@@ -725,7 +725,7 @@ rem beginfunction
     set VarDefault=N
     rem echo VarDefault:!VarDefault!
 
-    if not defined !VarName! (
+    if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 
