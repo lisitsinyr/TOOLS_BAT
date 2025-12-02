@@ -517,7 +517,7 @@ rem beginfunction
     call :SetREPO_INI
 
     if exist ".git"\ (
-        rem echo call lyrgit_push_main.bat ...
+        echo call lyrgit_push_main.bat ...
         call lyrgit_push_main.bat
     )
 
