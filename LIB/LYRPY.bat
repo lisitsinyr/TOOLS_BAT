@@ -39,7 +39,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function SET_project_dir (Aproject_dir) -> project_dir
+rem function SET_project_dir (VarName VarValue) -> project_dir
 rem --------------------------------------------------------------------------------
 :SET_project_dir
 rem beginfunction
@@ -50,44 +50,47 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set LSaveDirectory=!cd!
-
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
-    set Aproject_dir=%~1
-    rem echo Aproject_dir:!Aproject_dir!
+    set VarName=%1
+    rem echo VarName:!VarName!
+    set VarValue=%~2
+    rem echo VarValue:!VarValue!
 
-    if defined Aproject_dir (
-        if not exist !Aproject_dir!\ (
-            echo ERROR: Dir !Aproject_dir! not exist ...
-            set SET_project_dir=
-            exit /b 1
+    if defined VarName (
+        if defined VarValue (
+           set !VarName!=!VarValue!
         ) else (
-            if not exist !Aproject_dir!\PROJECT.ini (
-                echo ERROR: Dir !Aproject_dir!\PROJECT.ini not exist ...
-                set SET_project_dir=
-                exit /b 1
-            ) else (
-                set project_dir=!Aproject_dir!
-                cd /D !project_dir!
-            )
+            echo ERROR: !VarName! VarValue not defined ...
+            set SET_project_dir=
+            exit /b 3
         )
     ) else (
-        echo ERROR: Aproject_dir not defined ...
+        echo ERROR: VarName not defined ...
         set SET_project_dir=
         exit /b 3
     )
+    if not exist !%VarName%!\ (
+        echo ERROR: Dir !VarName!=!%VarName%! not exist ...
+        set SET_project_dir=
+        exit /b 1
+    ) else (
+        if not exist !%VarName%!\PROJECT.ini (
+            echo ERROR: Dir !VarName!=!%VarName%!\PROJECT.ini not exist ...
+            set SET_project_dir=
+            exit /b 1
+        )
+    )
 
-    cd /D "!LSaveDirectory!"
-
-    set SET_project_dir=project_dir
+    set SET_project_dir=!%VarName%!
+    rem echo SET_project_dir:!SET_project_dir!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function GET_project_dir (Aproject_dir) -> project_dir
+rem function GET_project_dir (VarName VarCaption VarDefault) -> project_dir
 rem --------------------------------------------------------------------------------
 :GET_project_dir
 rem beginfunction
@@ -101,29 +104,20 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
-    set VarName=project_dir
+    set VarName=%~1
     rem echo VarName:!VarName!
-    
-    set VarValue=%~1
+    set VarValue=!%VarName%!
     rem echo VarValue:!VarValue!
-    
-    set VarCaption=project_dir_caption
+    set VarCaption=%~2
     rem echo VarCaption:!VarCaption!
-
-    call :CurrentDir || exit /b 1
-    set VarDefault=!CurrentDir!
+    set VarDefault=%~3
     rem echo VarDefault:!VarDefault!
-
-    rem if not defined !%VarName%! (
-    rem     call :CurrentDir || exit /b 1
-    rem     set VarValue=!CurrentDir!
-    rem )
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
-        call :SET_project_dir !%VarName%! || exit /b 1
+        call :SET_project_dir !VarName! !%VarName%! || exit /b 1
     ) else (
         echo INFO: !VarName! not defined ...
     )
