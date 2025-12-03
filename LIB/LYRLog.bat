@@ -427,6 +427,26 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure EchoVar (VarName) -> None
+rem --------------------------------------------------------------------------------
+:EchoVar
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=StopLogFile
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set VarName=%~1
+
+    echo !VarName!:!%VarName%!
+
+    exit /b 0
+rem endfunction
+
+
 rem =================================================
 rem ‘”Õ ÷»» LIB
 rem =================================================

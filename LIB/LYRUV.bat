@@ -626,8 +626,8 @@ rem beginfunction
             echo ERROR: !%VarName%! not defined ...
             exit /b 1
         )
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_project_type=!%VarName%!
@@ -674,8 +674,8 @@ rem beginfunction
             set !%VarName%!=
             echo INFO: !%VarName%! not defined ...
         )    
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_package=!%VarName%!
@@ -721,8 +721,8 @@ rem beginfunction
             set !%VarName%!=
             echo INFO: !%VarName%! not defined ...
         )    
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_no-workspace=!%VarName%!

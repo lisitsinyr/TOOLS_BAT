@@ -116,8 +116,8 @@ rem beginfunction
     )
     if defined !VarName! (
         call :SET_project_dir !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_project_dir=!%VarName%!
@@ -160,11 +160,6 @@ rem beginfunction
     if not exist !%VarName%!\ (
         echo ERROR: Dir !VarName!=!%VarName%! not exist ...
         exit /b 1
-    ) else (
-        if not exist !%VarName%!\PROJECT.ini (
-            echo ERROR: Dir !VarName!=!%VarName%!\PROJECT.ini not exist ...
-            exit /b 1
-        )
     )
 
     cd /D "!%VarName%!"
@@ -204,8 +199,8 @@ rem beginfunction
     )
     if defined !VarName! (
         call :SET_projects_dir !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_projects_dir=!%VarName%!
@@ -281,8 +276,8 @@ rem beginfunction
     )
     if defined !VarName! (
         call :SET_project_name !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_project_name=!%VarName%!
@@ -364,8 +359,8 @@ rem beginfunction
     )
     if defined !VarName! (
         call :SET_project_dir !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_script_dir=!%VarName%!
@@ -447,8 +442,8 @@ rem beginfunction
     )
     if defined !VarName! (
         call :SET_project_name !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_script=!%VarName%!
@@ -585,8 +580,8 @@ rem beginfunction
     )
     if defined !VarName! (
         call :SET_venv_dir !!Aproject_dir!! !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_venv_dir=!%VarName%!
@@ -686,8 +681,8 @@ rem beginfunction
     )
     if defined !VarName! (
         call :SET_project_dir !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_python_dir=!%VarName%!
@@ -764,8 +759,8 @@ rem beginfunction
     )
     if defined !VarName! (
         call :SET_project_name !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
     )
 
     set GET_package_names=!%VarName%!
