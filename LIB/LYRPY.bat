@@ -358,7 +358,7 @@ rem beginfunction
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
-        call :SET_project_dir !VarName! !%VarName%! || exit /b 1
+        call :SET_script_dir !VarName! !%VarName%! || exit /b 1
     rem ) else (
     rem     echo INFO: !VarName! not defined ...
     )
@@ -408,7 +408,7 @@ rem beginfunction
     )
 
     set SET_script=!%VarName%!
-    echo SET_script:!SET_script!
+    rem echo SET_script:!SET_script!
 
     exit /b 0
 rem endfunction
@@ -441,7 +441,7 @@ rem beginfunction
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
-        call :SET_project_name !VarName! !%VarName%! || exit /b 1
+        call :SET_script !VarName! !%VarName%! || exit /b 1
     rem ) else (
     rem     echo INFO: !VarName! not defined ...
     )
@@ -579,7 +579,7 @@ rem beginfunction
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
-        call :SET_venv_dir !!Aproject_dir!! !VarName! !%VarName%! || exit /b 1
+        call :SET_venv_dir !Aproject_dir! !VarName! !%VarName%! || exit /b 1
     rem ) else (
     rem     echo INFO: !VarName! not defined ...
     )
@@ -619,7 +619,7 @@ rem beginfunction
                 if !%VarName%!==3.14 (
                     set !VarName!=C:\Users\lyr\AppData\Local\Programs\Python\Python314\
                 ) else (
-                    if not exist !python_dir! (
+                    if exist !%VarName%! (
                         set !VarName!=!%VarName%!
                     ) else (
                         set !VarName!=
@@ -680,7 +680,7 @@ rem beginfunction
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
-        call :SET_project_dir !VarName! !%VarName%! || exit /b 1
+        call :SET_python_dir !VarName! !%VarName%! || exit /b 1
     rem ) else (
     rem     echo INFO: !VarName! not defined ...
     )
@@ -718,11 +718,11 @@ rem beginfunction
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
-    if defined !VarName! (
-        call :SET_project_name !VarName! !%VarName%! || exit /b 1
-    ) else (
-        echo INFO: !VarName! not defined ...
-    )
+    rem if defined !VarName! (
+    rem     call :SET_requirements_file !VarName! !%VarName%! || exit /b 1
+    rem ) else (
+    rem     echo INFO: !VarName! not defined ...
+    rem )
 
     set GET_requirements_file=!%VarName%!
     rem echo GET_requirements_file:!GET_requirements_file!
@@ -757,11 +757,11 @@ rem beginfunction
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
-    if defined !VarName! (
-        call :SET_project_name !VarName! !%VarName%! || exit /b 1
+    rem if defined !VarName! (
+    rem     call :SET_project_name !VarName! !%VarName%! || exit /b 1
     rem ) else (
     rem     echo INFO: !VarName! not defined ...
-    )
+    rem )
 
     set GET_package_names=!%VarName%!
     rem echo GET_package_name:!GET_package_name!

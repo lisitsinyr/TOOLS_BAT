@@ -51,7 +51,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFullFilename=%1
-    echo AFullFilename:!AFullFilename!
+    rem echo AFullFilename:!AFullFilename!
 
     rem if exist !AFullFilename! (
     rem     set ExtractFileDir=%~d1%~p1
