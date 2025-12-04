@@ -616,18 +616,23 @@ rem beginfunction
     set VarDefault=%~3
     rem echo VarDefault:!VarDefault!
 
+    if not defined !%VarName%! (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+
     if defined !VarName! (
+
         set result=F
         if !%VarName%!==3.13 set result=T
         if !%VarName%!==3.14 set result=T
         if !result!==T (
             rem set pytho_version=!%VarName%!
+            set !%VarName%!=!%VarName%!
         ) else (
             echo ERROR: !%VarName%! not defined ...
             exit /b 1
         )
-    ) else (
-        echo INFO: !VarName! not defined ...
+
     )                      
 
     set GET_python_version=!%VarName%!
@@ -661,13 +666,20 @@ rem beginfunction
     rem echo VarDefaultStr:!VarDefaultStr!
 
     if not defined VarValue (
+
         call :__INIT_project_types !VarName!
         call :__SHOW_project_types !VarName!
         call :__GET_project_type_str !VarName! !VarDefaultStr!
         set VarDefaultInt=!__GET_project_type_str!
         call :Read_P !VarName! "" "!VarCaption!" "!VarDefaultInt!" || exit /b 1
+
         call :__GET_project_type_number !VarName! !%VarName%!
         call :__DEL_project_types !VarName!
+
+    )
+
+    if defined !VarName! (
+        rem set !%VarName%!=
     )
 
     set GET_project_type=!%VarName%!
@@ -695,7 +707,7 @@ rem beginfunction
     rem echo VarName:!VarName!
     set VarValue=!%VarName%!
     rem echo VarValue:!VarValue!
-    set VarCaption=%~2
+    set VarCaption=%~2{y,n}
     rem echo VarCaption:!VarCaption!
     set VarDefault=%~3
     rem echo VarDefault:!VarDefault!
@@ -705,18 +717,17 @@ rem beginfunction
     )
 
     if defined !VarName! (
+
         set result=F
         if !%VarName%!==y set result=T
         if !%VarName%!==Y set result=T
         if !result!==T (
-            set !%VarName%!=--package
             set !%VarName%!=package
         ) else (
             set !%VarName%!=
             echo INFO: !%VarName%! not defined ...
         )    
-    rem ) else (
-    rem     echo INFO: !VarName! not defined ...
+
     )
 
     set GET_package=!%VarName%!
@@ -744,7 +755,7 @@ rem beginfunction
     rem echo VarName:!VarName!
     set VarValue=!%VarName%!
     rem echo VarValue:!VarValue!
-    set VarCaption=%~2
+    set VarCaption=%~2{y,n}
     rem echo VarCaption:!VarCaption!
     set VarDefault=%~3
     rem echo VarDefault:!VarDefault!
@@ -752,19 +763,19 @@ rem beginfunction
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
+
     if defined !VarName! (
+
         set result=F
         if !%VarName%!==y set result=T
         if !%VarName%!==Y set result=T
         if !result!==T (
-            set !%VarName%!=--no-workspace
             set !%VarName%!=no-workspace
         ) else (
             set !%VarName%!=
             echo INFO: !%VarName%! not defined ...
         )    
-    rem ) else (
-    rem     echo INFO: !VarName! not defined ...
+
     )
 
     set GET_no-workspace=!%VarName%!
