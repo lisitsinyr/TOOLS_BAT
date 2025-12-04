@@ -35,6 +35,8 @@ rem beginfunction
 
     rem echo ERROR: function !FUNCNAME! not implemented! ...
 
+    call :LYRUV_vars_INIT
+
     exit /b 0
 rem endfunction
 
@@ -54,7 +56,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo List Python versions you have installed and versions you can install ...
+    echo ------------------------------------------------------------------------
+
     echo uv python list ...
     uv python list
 
@@ -75,6 +80,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
+    echo Install Python
+    echo ------------------------------------------------------------------------
+
     set Aversion=%~1
     rem echo Aversion:!Aversion!
 
@@ -84,10 +93,10 @@ rem beginfunction
     set version=
     if defined Aversion (
         set version=!Aversion!
-        echo Install Python !version!
-        rem uv python install 3.13
+
         echo uv python install !version! --force ...
         uv python install !version! --force
+        rem uv python install 3.13
 
     ) else (
         echo ERROR: Aversion not defined ...
@@ -123,7 +132,6 @@ rem beginfunction
 
         echo uv python uninstall !Aversion! ...
         rem uv python uninstall 3.11.4
-        
         uv python uninstall !Aversion!
 
     ) else (
@@ -148,7 +156,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo Run your default Python ...
+    echo ------------------------------------------------------------------------
+
     echo uv run python ...
     uv run python
 
@@ -169,7 +180,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo Upgrade your Python versions ...
+    echo ------------------------------------------------------------------------
+
     echo uv python upgrade ...
     uv python upgrade
 
@@ -190,6 +204,9 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
+    echo Find specific Python version !Aversion! ...
+    echo ------------------------------------------------------------------------
     rem -------------------------------------------------------------------
     rem version
     rem -------------------------------------------------------------------
@@ -199,9 +216,10 @@ rem beginfunction
     set version=
     if defined Aversion (
         set version=!Aversion!
-        echo Find specific Python version !Aversion! ...
+
         echo uv python find !Aversion! ...
         uv python find !Aversion!
+
     ) else (
         echo ERROR: Aversion not defined ...
         exit /b 3
@@ -224,7 +242,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo View Python installation directory ...
+    echo ------------------------------------------------------------------------
+
     echo uv python dir ...
     uv python dir
 
@@ -245,7 +266,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo UV will now use this version for all commands in this directory ...
+    echo ------------------------------------------------------------------------
+
     echo uv run python --version  ...
     rem Will use Python 3.11
     uv run python --version 
@@ -267,6 +291,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
+    echo Pin a version for your project ...
+    echo ------------------------------------------------------------------------
+
     set Aversion=%~1
     rem echo Aversion:!Aversion!
 
@@ -279,9 +307,10 @@ rem beginfunction
         rem uv python pin 3.X           
         rem cd myproject
         rem uv python pin 3.11
-        echo Pin a version for your project ...
+
         echo uv python pin !version! ...
         uv python pin !version!
+
     ) else (
         echo ERROR: Aversion not defined ...
         set UV_python_pin=
@@ -305,7 +334,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo uv help ...
+    echo ------------------------------------------------------------------------
+
     uv help
 
     set UV_help=
@@ -369,7 +401,10 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo uv --version ...
+    echo ------------------------------------------------------------------------
+
     uv --version
 
     set UV_version=
@@ -389,7 +424,9 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo uv self ...
+    echo ------------------------------------------------------------------------
     uv self
 
     set UV_self=
@@ -409,7 +446,9 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo uv self version ...
+    echo ------------------------------------------------------------------------
     uv self version
 
     set UV_self_version=
@@ -429,10 +468,12 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo Установка uv
-
+    echo ------------------------------------------------------------------------
     echo Рекомендуемый способ установки uv с помощью автономного установщика
     echo Для Windows:
+    echo ------------------------------------------------------------------------
 
     rem powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
     echo "C:\Program Files\PowerShell\7\pwsh.exe" -c "irm https://astral.sh/uv/install.ps1 | iex"
@@ -454,21 +495,23 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo Установка uv
-
+    echo ------------------------------------------------------------------------
     echo Иные способы установки uv
-
+    echo ------------------------------------------------------------------------
     echo Cargo:
     echo cargo install --git https://github.com/astral-sh/uv uv
-
+    echo ------------------------------------------------------------------------
     echo Homebrew:
     echo brew install uv
-
+    echo ------------------------------------------------------------------------
     echo Winget:
     echo winget install --id=astral-sh.uv  -e
-
+    echo ------------------------------------------------------------------------
     echo Scoop:
     echo scoop install main/uv
+    echo ------------------------------------------------------------------------
     
     set UV_install_other=
 
@@ -487,9 +530,11 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem Обновление uv
-
-    rem Если uv был установлен через автономный установщик, обновить его можно следующим образом:
+    echo ------------------------------------------------------------------------
+    echo Обновление uv
+    echo ------------------------------------------------------------------------
+    echo Если uv был установлен через автономный установщик, обновить его можно следующим образом:
+    echo ------------------------------------------------------------------------
 
     echo self update ...
     uv self update
@@ -511,9 +556,11 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo Установка uv
-
+    echo ------------------------------------------------------------------------
     echo Если вы предпочитаете классический способ установки uv через pip из PYPI:
+    echo ------------------------------------------------------------------------
 
     pip install uv
 
@@ -534,9 +581,11 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
+    echo ------------------------------------------------------------------------
     echo upgrade uv
- 
+    echo ------------------------------------------------------------------------
     echo Если uv был установлен через pip:
+    echo ------------------------------------------------------------------------
 
     pip install --upgrade uv
 
@@ -588,165 +637,6 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function __INIT_project_types (VarName) -> None
-rem --------------------------------------------------------------------------------
-:__INIT_project_types
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=INIT_project_types
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem project_type
-    rem -------------------------------------------------------------------
-    set VarName=%~1
-    rem echo VarName:!VarName!
-
-    set !VarName!_caption.1=1.app
-    set !VarName!_caption.2=2.lib
-    set !VarName!_caption.3=3.bare
-    set !VarName!_caption.4=4.script
-    set !VarName!_value.1=app
-    set !VarName!_value.2=lib
-    set !VarName!_value.3=bare
-    set !VarName!_value.4=script
-
-    rem set !VarName!_caption
-    rem set !VarName!_value
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function __DEL_project_types (VarName) -> None
-rem --------------------------------------------------------------------------------
-:__DEL_project_types
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__DEL_project_types
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem project_type
-    rem -------------------------------------------------------------------
-    set VarName=%~1
-    rem echo VarName:!VarName!
-
-    :: относительно просто удалить переменные
-    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_caption' ) do (
-        set %%k=
-    )
-    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_value' ) do (
-        set %%k=
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function __GET_project_type (VarName VarValue) -> None
-rem --------------------------------------------------------------------------------
-:__GET_project_type
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__GET_project_type
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem project_type
-    rem -------------------------------------------------------------------
-    set VarName=%~1
-    set VarValue=%~2
-
-    set /a i=0
-    set /a result=0
-    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_value' ) do (
-        set /a i=i+1
-        if !%%k!==!VarValue! set /a result=i
-    )
-    if !result! neq 0 (
-        set __GET_project_type=!result!
-    ) else (
-        echo INFO: !VarValue! not defined ...
-        set __GET_project_type=
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function __GET_project_type_number (VarName VarValue) -> None
-rem --------------------------------------------------------------------------------
-:__GET_project_type_number
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__GET_project_type
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem project_type
-    rem -------------------------------------------------------------------
-    set VarName=%~1
-    rem echo VarName:!VarName!
-    set /a VarValue=%~2
-    rem echo VarValue:!VarValue!
-
-    set /a i=0
-    set result=
-    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_value' ) do (
-        set /a i=i+1
-        if !i! == !VarValue! set result=!%%k!
-        )
-    )
-    if defined result (
-        set __GET_project_type_number=!result!
-    ) else (
-        echo INFO: !VarValue! not defined ...
-        set __GET_project_type_number=
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function __SHOW_project_types (VarName) -> None
-rem --------------------------------------------------------------------------------
-:__SHOW_project_types
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__SHOW_project_types
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem -------------------------------------------------------------------
-    rem project_type
-    rem -------------------------------------------------------------------
-    set VarName=%~1
-    rem echo VarName:!VarName!
-
-    :: относительно просто удалить переменные
-    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_caption' ) do (
-        echo !%%k!
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem function GET_project_type (VarName VarCaption VarDefault) -> project_type
 rem --------------------------------------------------------------------------------
 :GET_project_type
@@ -767,29 +657,20 @@ rem beginfunction
     rem echo VarValue:!VarValue!
     set VarCaption=%~2
     rem echo VarCaption:!VarCaption!
-
-    set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    set VarDefaultStr=%~3
+    rem echo VarDefaultStr:!VarDefaultStr!
 
     if not defined VarValue (
         call :__INIT_project_types !VarName!
         call :__SHOW_project_types !VarName!
-
-        call :__GET_project_type !VarName! !VarDefault!
-        rem echo __GET_project_type:!__GET_project_type!
-        set VarDefault=!__GET_project_type!
-        rem echo VarDefault:!VarDefault!
-
-        call :Read_P !VarName! "" "!VarCaption!" "!VarDefault!" || exit /b 1
-
-        call :__GET_project_type_number !VarName! !Read_P!
-
+        call :__GET_project_type_str !VarName! !VarDefaultStr!
+        set VarDefaultInt=!__GET_project_type_str!
+        call :Read_P !VarName! "" "!VarCaption!" "!VarDefaultInt!" || exit /b 1
+        call :__GET_project_type_number !VarName! !%VarName%!
         call :__DEL_project_types !VarName!
-        set GET_project_type=!__GET_project_type_number!
-    ) else (
-        set GET_project_type=!%VarName%!
     )
-    
+
+    set GET_project_type=!%VarName%!
     rem echo GET_project_type:!GET_project_type!
 
     exit /b 0
@@ -989,4 +870,26 @@ exit /b 0
 exit /b 0
 :CheckErrorlevel
 %LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRUV_vars.bat
+rem =================================================
+:LYRUV_vars_INIT
+%LIB_BAT%\LYRUV_vars.bat %*
+exit /b 0
+:__INIT_project_types
+%LIB_BAT%\LYRUV_vars.bat %*
+exit /b 0
+:__DEL_project_types
+%LIB_BAT%\LYRUV_vars.bat %*
+exit /b 0
+:__SHOW_project_types
+%LIB_BAT%\LYRUV_vars.bat %*
+exit /b 0
+:__GET_project_type_str
+%LIB_BAT%\LYRUV_vars.bat %*
+exit /b 0
+:__GET_project_type_number
+%LIB_BAT%\LYRUV_vars.bat %*
 exit /b 0
