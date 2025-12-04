@@ -588,6 +588,165 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem function __INIT_project_types (VarName) -> None
+rem --------------------------------------------------------------------------------
+:__INIT_project_types
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=INIT_project_types
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem project_type
+    rem -------------------------------------------------------------------
+    set VarName=%~1
+    rem echo VarName:!VarName!
+
+    set !VarName!_caption.1=1.app
+    set !VarName!_caption.2=2.lib
+    set !VarName!_caption.3=3.bare
+    set !VarName!_caption.4=4.script
+    set !VarName!_value.1=app
+    set !VarName!_value.2=lib
+    set !VarName!_value.3=bare
+    set !VarName!_value.4=script
+
+    rem set !VarName!_caption
+    rem set !VarName!_value
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function __DEL_project_types (VarName) -> None
+rem --------------------------------------------------------------------------------
+:__DEL_project_types
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__DEL_project_types
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem project_type
+    rem -------------------------------------------------------------------
+    set VarName=%~1
+    rem echo VarName:!VarName!
+
+    :: относительно просто удалить переменные
+    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_caption' ) do (
+        set %%k=
+    )
+    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_value' ) do (
+        set %%k=
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function __GET_project_type (VarName VarValue) -> None
+rem --------------------------------------------------------------------------------
+:__GET_project_type
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__GET_project_type
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem project_type
+    rem -------------------------------------------------------------------
+    set VarName=%~1
+    set VarValue=%~2
+
+    set /a i=0
+    set /a result=0
+    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_value' ) do (
+        set /a i=i+1
+        if !%%k!==!VarValue! set /a result=i
+    )
+    if !result! neq 0 (
+        set __GET_project_type=!result!
+    ) else (
+        echo INFO: !VarValue! not defined ...
+        set __GET_project_type=
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function __GET_project_type_number (VarName VarValue) -> None
+rem --------------------------------------------------------------------------------
+:__GET_project_type_number
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__GET_project_type
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem project_type
+    rem -------------------------------------------------------------------
+    set VarName=%~1
+    rem echo VarName:!VarName!
+    set /a VarValue=%~2
+    rem echo VarValue:!VarValue!
+
+    set /a i=0
+    set result=
+    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_value' ) do (
+        set /a i=i+1
+        if !i! == !VarValue! set result=!%%k!
+        )
+    )
+    if defined result (
+        set __GET_project_type_number=!result!
+    ) else (
+        echo INFO: !VarValue! not defined ...
+        set __GET_project_type_number=
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem function __SHOW_project_types (VarName) -> None
+rem --------------------------------------------------------------------------------
+:__SHOW_project_types
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=__SHOW_project_types
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    rem -------------------------------------------------------------------
+    rem project_type
+    rem -------------------------------------------------------------------
+    set VarName=%~1
+    rem echo VarName:!VarName!
+
+    :: относительно просто удалить переменные
+    for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_caption' ) do (
+        echo !%%k!
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem function GET_project_type (VarName VarCaption VarDefault) -> project_type
 rem --------------------------------------------------------------------------------
 :GET_project_type
@@ -608,29 +767,29 @@ rem beginfunction
     rem echo VarValue:!VarValue!
     set VarCaption=%~2
     rem echo VarCaption:!VarCaption!
+
     set VarDefault=%~3
     rem echo VarDefault:!VarDefault!
 
-    if not defined !%VarName%! (
-        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
-    )
-    if defined !VarName! (
-        set result=F
-        if !%VarName%!==app set result=T
-        if !%VarName%!==lib set result=T
-        if !%VarName%!==bare set result=T
-        if !%VarName%!==script set result=T
-        if !result!==T (
-            set project_type=--!%VarName%!
-        ) else (
-            echo ERROR: !%VarName%! not defined ...
-            exit /b 1
-        )
-    rem ) else (
-    rem     echo INFO: !VarName! not defined ...
-    )
+    if not defined VarValue (
+        call :__INIT_project_types !VarName!
+        call :__SHOW_project_types !VarName!
 
-    set GET_project_type=!%VarName%!
+        call :__GET_project_type !VarName! !VarDefault!
+        rem echo __GET_project_type:!__GET_project_type!
+        set VarDefault=!__GET_project_type!
+        rem echo VarDefault:!VarDefault!
+
+        call :Read_P !VarName! "" "!VarCaption!" "!VarDefault!" || exit /b 1
+
+        call :__GET_project_type_number !VarName! !Read_P!
+
+        call :__DEL_project_types !VarName!
+        set GET_project_type=!__GET_project_type_number!
+    ) else (
+        set GET_project_type=!%VarName%!
+    )
+    
     rem echo GET_project_type:!GET_project_type!
 
     exit /b 0
@@ -670,6 +829,7 @@ rem beginfunction
         if !%VarName%!==Y set result=T
         if !result!==T (
             set !%VarName%!=--package
+            set !%VarName%!=package
         ) else (
             set !%VarName%!=
             echo INFO: !%VarName%! not defined ...
@@ -717,6 +877,7 @@ rem beginfunction
         if !%VarName%!==Y set result=T
         if !result!==T (
             set !%VarName%!=--no-workspace
+            set !%VarName%!=no-workspace
         ) else (
             set !%VarName%!=
             echo INFO: !%VarName%! not defined ...

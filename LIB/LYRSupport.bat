@@ -96,17 +96,13 @@ rem setlocal enabledelayedexpansion
     )
     set !FUNCNAME!=
 
-
     set P_Name=%1
     rem echo P_Name:!P_Name!
-
     set P_Value=%~2
     rem set P_Value=!%P_Name%!
     rem echo P_Value:!P_Value!
-
     set P_Caption=%~3
     rem echo P_Caption:!P_Caption!
-  
     set P_Default=%~4
     rem echo P_Default:!P_Default!
 
@@ -154,63 +150,6 @@ rem setlocal enabledelayedexpansion
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function GET_Ox (Aname Acaption Adefault) -> script
-rem --------------------------------------------------------------------------------
-:GET_Ox
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=GET_Ox
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set Aname=%~1
-    rem echo Aname:!Aname!
-    set Acaption=%~2
-    rem echo Acaption:!Acaption!
-    set Adefault=%~3
-    rem echo Adefault:!Adefault!
-
-    rem -------------------------------------------------------------------
-    rem Ox
-    rem -------------------------------------------------------------------
-    
-    set Ox=!%Aname%!
-    rem echo Ox:!%Aname%!
-
-    set Ox_Name=!Aname!
-    set Ox_Caption=!Acaption!
-    set Ox_Default=!Adefault!
-    set Ox=!Ox_Default!
-    set PN_CAPTION=!Ox_Caption!
-
-    if not defined Ox (
-        call :Read_P !Aname! "" "!PN_CAPTION!" "" || exit /b 1
-        set !Aname!=!Ox!
-    ) else (
-        call :Read_P Ox "" "!PN_CAPTION!" "" || exit /b 1
-        set !Aname!=!Ox!
-    )
-
-    if defined Ox (
-        rem set !Aname!=!%Aname%!
-        set !Aname!=!Ox!
-    ) else (
-        set !Aname!=
-        echo INFO: Ox [Ox_Name:!Ox_Name! Ox_Caption:!Ox_Caption!] not defined ...
-        rem echo INFO: Ox [Ox_Name:!Aname! Ox_Caption:!Acaption!] not defined ...
-    )
-
-    rem echo !Aname!=!%Aname%!
-    
-    set GET_Ox=!Ox!
-    rem echo GET_Ox:!GET_Ox!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem procedure Read_F (P_Name, P_List, Atimeout) -> None
 rem procedure Read_F (P_Name, P_List, ADefault, ACaption, Atimeout) -> None
 rem --------------------------------------------------------------------------------
@@ -223,33 +162,20 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem P_Name      - Имя переменной
-    rem P_List      - список создаваемых вариантов
-    rem ADefault    - Значение по умолчанию 
-    rem ACaption    - CAPTION
-    rem Atimeout    - timeout
-
-    rem P_Value     - Значение переменной
-    rem !%P_Name%!  - Значение переменной по умолчанию
-    rem !P_Name!    - имя переменной
-
     set P_Name=%1
-    echo P_Name:!P_Name!
+    rem echo P_Name:!P_Name!
     set P_List=%~2
-    echo P_List:!P_List!
+    rem echo P_List:!P_List!
     set ADefault=%~3
-    echo ADefault:!ADefault!
+    rem echo ADefault:!ADefault!
     set ACaption=%~4
-    echo ACaption:!ACaption!
-    if not defined ACaption (
-        set ACaption=!PN_CAPTION!
-    )
-    set Atimeout=%5
+    rem echo ACaption:!ACaption!
     set Atimeout=!TIMEOUT!
+    set Atimeout=%5
     if not defined Atimeout (
         set Atimeout=5
     )
-    echo Atimeout:!Atimeout!
+    rem echo Atimeout:!Atimeout!
 
     rem set %P_Name%=!%P_Name%!
     set %P_Name%=!ADefault!
@@ -263,7 +189,13 @@ rem beginfunction
         rem ) else (
         rem     set %P_Name%=!ERRORLEVEL!
         rem )
+    ) else (
+        echo ERROR: P_List not defined ...
+        exit /b 1
     )
+
+    set Read_F=!%P_Name%!
+    rem echo Read_F:!Read_F!
 
     exit /b 0
 rem endfunction

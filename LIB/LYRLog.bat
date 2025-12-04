@@ -440,8 +440,8 @@ rem beginfunction
     set !FUNCNAME!=
 
     set VarName=%~1
-
-    echo !VarName!:!%VarName%!
+    if defined !VarName! set !VarName!
+    rem echo !VarName!:!%VarName%!
 
     exit /b 0
 rem endfunction
