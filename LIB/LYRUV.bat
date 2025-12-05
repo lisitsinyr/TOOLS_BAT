@@ -704,9 +704,9 @@ rem beginfunction
     rem package
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    echo VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    echo VarValue:!VarValue!
     set VarCaption=%~2{y,n}
     rem echo VarCaption:!VarCaption!
     set VarDefault=%~3
@@ -715,19 +715,17 @@ rem beginfunction
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
-
     if defined !VarName! (
-
-        set result=F
-        if !%VarName%!==y set result=T
-        if !%VarName%!==Y set result=T
-        if !result!==T (
-            set !%VarName%!=package
+        set result=
+        if !%VarName%!==y set result=True
+        if !%VarName%!==Y set result=True
+        if defined result (
+            set !VarName!=!VarName!
         ) else (
-            set !%VarName%!=
-            echo INFO: !%VarName%! not defined ...
+            set !VarName!=
+            echo INFO: !VarName! not defined ...
         )    
-
+        rem echo result:!result!
     )
 
     set GET_package=!%VarName%!
@@ -763,19 +761,17 @@ rem beginfunction
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
-
     if defined !VarName! (
-
-        set result=F
-        if !%VarName%!==y set result=T
-        if !%VarName%!==Y set result=T
-        if !result!==T (
-            set !%VarName%!=no-workspace
+        set result=
+        if !%VarName%!==y set result=True
+        if !%VarName%!==Y set result=True
+        if defined result (
+            set !VarName!=!VarName!
         ) else (
-            set !%VarName%!=
-            echo INFO: !%VarName%! not defined ...
+            set !VarName!=
+            echo INFO: !VarName! not defined ...
         )    
-
+        rem echo result:!result!
     )
 
     set GET_no-workspace=!%VarName%!
