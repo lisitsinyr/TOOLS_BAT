@@ -412,7 +412,7 @@ rem beginfunction
 
     rem echo errorlevel:!errorlevel!
 
-    if !errorlevel! NEQ 0 (
+    if not errorlevel 0 (
         echo ERROR: !ATEXT! errorlevel:!errorlevel!
         rem call :WriteLOG !lERROR! !ATEXT! errorlevel:!errorlevel!
         if defined APAUSE (
