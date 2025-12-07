@@ -686,7 +686,7 @@ rem beginfunction
     call lyrgit_pull.bat
     
     rem git pull
-    rem call :CheckErrorlevel !FUNCNAME! !errorlevel! 1
+    rem call :CheckErrorlevel !FUNCNAME! Yes
 
     cd /D "!LSaveDirectory!"
 

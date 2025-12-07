@@ -226,7 +226,7 @@ rem beginfunction
             mkdir "!ADIRECTORY!"
             if not !ERRORLEVEL! EQU 0 (
                 echo ERROR: Directory !ADIRECTORY! not created...
-                call :CheckErrorlevel CreateDir !errorlevel! 1
+                call :CheckErrorlevel CreateDir Yes
                 exit /b 1
             )
         )
@@ -387,7 +387,7 @@ rem beginfunction
         if not exist "!ADIR_TO!\!LFileName!" (
             rem echo AFileName:!AFileName!
             copy !AFileName! !ADIR_TO! > NUL
-            rem call :CheckErrorlevel COPY_FILES !errorlevel! 1
+            rem call :CheckErrorlevel COPY_FILES Yes
             echo File !AFileName! copied ...    >> %LOG_FULLFILENAME%
         ) else (
             if defined LOverwrite (
@@ -521,7 +521,7 @@ rem beginfunction
     )
 
     xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
-    call :CheckErrorlevel XCOPY_FILES !errorlevel! 1
+    call :CheckErrorlevel XCOPY_FILES Yes
 
     set XCOPY_FILES=
 

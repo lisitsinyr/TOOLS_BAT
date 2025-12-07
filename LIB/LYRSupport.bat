@@ -407,16 +407,20 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set ATEXT=%1
-    set GERRORLEVEL=%2
-    set APAUSE=%3
+    set ATEXT=%~1
+    set APAUSE=%~2
 
-    if not !GERRORLEVEL!==0 (
-        rem echo ERROR: !ATEXT!-!GERRORLEVEL!
-        call :WriteLOG !lERROR! !ATEXT!-!GERRORLEVEL!
+    rem echo errorlevel:!errorlevel!
+
+    if !errorlevel! NEQ 0 (
+        echo ERROR: !ATEXT! errorlevel:!errorlevel!
+        rem call :WriteLOG !lERROR! !ATEXT! errorlevel:!errorlevel!
         if defined APAUSE (
             call :PressAnyKey
         )
+    ) else (
+        echo INFO: !ATEXT! errorlevel:!errorlevel!
+        rem call :WriteLOG !lINFO! !ATEXT! errorlevel:!errorlevel!
     )
 
     exit /b 0
