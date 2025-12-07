@@ -419,7 +419,7 @@ rem beginfunction
             call :PressAnyKey
         )
     ) else (
-        echo INFO: !ATEXT! errorlevel:!errorlevel!
+        rem echo INFO: !ATEXT! errorlevel:!errorlevel!
         rem call :WriteLOG !lINFO! !ATEXT! errorlevel:!errorlevel!
     )
 
