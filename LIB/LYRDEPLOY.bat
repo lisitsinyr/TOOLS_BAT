@@ -242,7 +242,7 @@ rem beginfunction
         if exist !LDirPATTERN!\!LFileName! (
             echo .... !LDirPATTERN!\!LFileName!
             echo .... !DIR_PROJECT_NAME!
-            rem call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
+            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
             pause
         )
         set LFileName=.gitmodules
