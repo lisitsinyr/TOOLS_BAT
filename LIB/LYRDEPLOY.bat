@@ -91,7 +91,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem echo PROJECT_GROUP:!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
@@ -360,7 +360,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem set ADirectory=%~1
     rem echo ADirectory:!ADirectory!
@@ -413,7 +413,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_GROUP !PROJECT_GROUP!
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_NAME !PROJECT_NAME!
@@ -435,7 +435,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     call :SetINI !DIR_PROJECT_NAME!\REPO.ini general REPO_NAME !PROJECT_NAME!
 
@@ -573,7 +573,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem call :WritePROCESS PROJECT_GROUP : !PROJECT_GROUP!
     rem call :WritePROCESS PROJECT_NAME  : !PROJECT_NAME!
@@ -670,7 +670,7 @@ rem beginfunction
 
     set LSaveDirectory=!cd!
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     set LOG_FILE_ADD=1
     set ADirectory=%~1
@@ -709,7 +709,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     set ADIR_PROJECTS_ROOT=%1
     rem echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
@@ -749,7 +749,7 @@ rem beginfunction
 
     set LSaveDirectory=!cd!
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     set ADIR_PROJECTS_ROOT=%1
     rem echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
