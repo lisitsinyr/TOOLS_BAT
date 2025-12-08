@@ -214,8 +214,7 @@ rem beginfunction
     )
 
     if defined LDirPATTERN if exist "!LDirPATTERN!"\ ( 
-
-        rem echo LDirPATTERN:!LDirPATTERN!
+        echo ......... LDirPATTERN:!LDirPATTERN!
 
         set LFileName=PROJECT.INI
         rem echo LFileName: !LFileName!
@@ -240,7 +239,7 @@ rem beginfunction
         )
 
         set LFileName=.gitignore
-        rem echo LFileName: !LFileName!
+        echo ............ LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
             call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
         )
