@@ -625,8 +625,10 @@ rem beginfunction
     if !PROJECT_NAME!==TOOLS_PY (
         call :ClearDir !DIR_PROJECT_NAME!\BAT *.bat
 
-        call :UPDATE_TOOLS_PY_SCRIPTS_PY
+        rem call :UPDATE_TOOLS_PY_SCRIPTS_PY
+
         call :UPDATE_TOOLS_PY_TOOLS_SRC_PY
+
         call :REPO_WORK_TOOLS !DIR_PROJECT_NAME!
         set DEPLOY_PROJECT=
         exit /b 0

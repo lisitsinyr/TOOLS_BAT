@@ -50,7 +50,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -96,7 +96,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -142,7 +142,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS FUNCNAME:!FUNCNAME!
+    rem call :WritePROCESS FUNCNAME:!FUNCNAME!
 
     rem --------------------------------------------------------
     rem 
@@ -181,7 +181,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -227,7 +227,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -273,7 +273,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -319,7 +319,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -365,7 +365,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -411,7 +411,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem TOOLS_SRC_PY\SRC\BAT
@@ -457,7 +457,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -503,7 +503,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -524,7 +524,7 @@ rem beginfunction
     set LDIR_TO=!DIR_PROJECT_NAME!\LIB
     rem echo LDIR_TO:!LDIR_TO!
 
-    call :WritePROCESS Очистка !LDIR_TO! ...
+    rem call :WritePROCESS Очистка !LDIR_TO! ...
 
     set LMASK=*.*
     if exist "!LDIR_TO!" (
@@ -551,7 +551,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
+    rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
     rem 
@@ -561,7 +561,7 @@ rem beginfunction
     set LDIR_TO=D:\PROJECTS_LYR\CHECK_LIST\OS\UNIX\TOOLS_SH\SH_GIT
     rem echo LDIR_TO:!LDIR_TO!
 
-    call :WritePROCESS Очистка !LDIR_TO! ...
+    rem call :WritePROCESS Очистка !LDIR_TO! ...
 
     set LMASK=*.*
     if exist "!LDIR_TO!"\ (
