@@ -241,7 +241,7 @@ rem beginfunction
         set LFileName=.gitignore
         echo ............ LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
+            rem call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
         )
         set LFileName=.gitmodules
         rem echo LFileName: !LFileName!
