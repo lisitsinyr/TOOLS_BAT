@@ -90,7 +90,7 @@ rem beginfunction
 rem setlocal enabledelayedexpansion
 
     set FUNCNAME=%0
-    set FUNCNAME=Check_P
+    set FUNCNAME=Read_P
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
@@ -145,6 +145,86 @@ rem setlocal enabledelayedexpansion
 
     set Read_P=!%P_Name%!
     rem echo Read_P:!Read_P!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure Read_P_editenv (P_Name, P_Value, P_Caption, P_Default) -> None
+rem --------------------------------------------------------------------------------
+:Read_P_editenv
+rem beginfunction
+
+rem setlocal enabledelayedexpansion
+
+    set FUNCNAME=%0
+    set FUNCNAME=Read_P_editenv
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set P_Name=%1
+    rem echo P_Name:!P_Name!
+    set P_Value=%~2
+    rem set P_Value=!%P_Name%!
+    rem echo P_Value:!P_Value!
+    set P_Caption=%~3
+    rem echo P_Caption:!P_Caption!
+    set P_Default=%~4
+    rem echo P_Default:!P_Default!
+
+    rem !P_Name! - имя переменной
+    rem %P_Name% - имя переменной
+    rem echo P_Name:%P_Name%
+    rem !%P_Name%! - значение переменной по умолчанию
+    rem echo P_Value_default:!%P_Name%!
+    rem !P_Value! - значение переменной
+    rem set P_Value=%2
+    rem echo P_Value:!P_Value!
+    rem [!P_Name!]   - имя переменной
+    rem [!%P_Name%!] - значение переменной по умолчанию
+
+    set Input=
+
+    if not defined P_Value (
+        set %P_Name%=!P_Default!
+
+        if defined P_Caption (
+            D:\TOOLS\EXE\EditEnv.exe --prompt="!P_Caption![!P_Name!][!P_default!]:" !P_Name!
+            rem set /p Input=!P_Caption![!P_Name!][!P_default!]:
+        ) else (
+            D:\TOOLS\EXE\EditEnv.exe --prompt="[!P_Name!][!P_default!]:" !P_Name!
+            rem set /p Input=[!P_Name!][!P_default!]:
+        )
+
+        rem echo .... !%P_Name%!
+
+        if !errorlevel! EQU 13 (
+            rem variable empty
+            set Input=
+        ) else (
+            set Input=!%P_Name%!
+        )
+        rem echo Input:!Input!
+
+        if not defined Input (
+            set %P_Name%=!P_Default!
+        ) else (
+            set %P_Name%=!Input!
+        )
+        rem echo P_Name:!%P_Name%!
+
+    ) else (
+        set %P_Name%=!P_Value!
+    )
+
+    if not defined !P_Name! (
+        echo INFO: VarName:!P_Name! VarCaption:!P_Caption! not defined ...
+    )
+
+    set Read_P_editenv=!%P_Name%!
+    rem echo Read_P_editenv:!Read_P_editenv!
 
     exit /b 0
 rem endfunction
@@ -410,7 +490,8 @@ rem beginfunction
     set ATEXT=%~1
     set APAUSE=%~2
 
-    rem echo errorlevel:!errorlevel!
+    set CheckErrorlevel=!errorlevel!
+    rem echo CheckErrorlevel:!CheckErrorlevel!
 
     if not errorlevel 0 (
         echo ERROR: !ATEXT! errorlevel:!errorlevel!
