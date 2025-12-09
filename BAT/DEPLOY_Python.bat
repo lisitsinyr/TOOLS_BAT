@@ -71,28 +71,40 @@ setlocal enabledelayedexpansion
 
     set PROJECT_NAME=TRICKS
     call :DEPLOY_PROJECT
+
     set PROJECT_NAME=APPInfo_PY
     call :DEPLOY_PROJECT
+
     rem set PROJECT_NAME=EXAMPLES_PY
     rem call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=LIBRARY_PY
     call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=MobileAPP_PY
     call :DEPLOY_PROJECT
+    
     rem set PROJECT_NAME=PATTERN_PY
     rem call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=PATTERNS_PY
     call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=PROJECTS_PY
     call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=SOFTWARE_PY
     call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=TESTS_PY
     call :DEPLOY_PROJECT
+    
     rem set PROJECT_NAME=YOUTUBE_PY
     rem call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=SCRIPTS_PY
     call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=TOOLS_SRC_PY
     call :DEPLOY_PROJECT
 
