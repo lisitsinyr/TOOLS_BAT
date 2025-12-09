@@ -177,33 +177,49 @@ rem beginfunction
         set LDirPATTERN=!ParameterValue!
 
         set LFileName=PROJECT_PYupdate.bat
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
+            echo .... :COPY_FILE !LFileName! ...
             call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
         )
 
         set LFileName=pyproject.toml
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! if not exist !DIR_PROJECT_NAME!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
         )
         
         set LFileName=requirements.txt
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! if not exist !DIR_PROJECT_NAME!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
         )
 
         set LFileName=POETRY.ini
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
         )
 
         set LFileName=.pypirc
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
+        )
+
+        set LFileName=.python-version
+        if exist !LDirPATTERN!\!LFileName! (
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
         )
 
         set LDIR_FROM=!LDirPATTERN!\NOTEBOOKS
@@ -214,45 +230,68 @@ rem beginfunction
     )
 
     if defined LDirPATTERN if exist "!LDirPATTERN!"\ ( 
-        echo ......... LDirPATTERN:!LDirPATTERN!
+        echo .... LDirPATTERN:!LDirPATTERN!
 
         set LFileName=PROJECT.INI
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
+            )
         )
+
         set LFileName=REPO.INI
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
+            )
         )
+
         set LFileName=.editorconfig
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
         )
 
         set LFileName=.env
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! if not exist !DIR_PROJECT_NAME!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
         )
 
         set LFileName=.gitignore
         if exist !LDirPATTERN!\!LFileName! (
-            echo .... !LDirPATTERN!\!LFileName!
-            echo .... !DIR_PROJECT_NAME!
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
-            pause
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
+            )
+            rem pause
         )
+
         set LFileName=.gitmodules
-        rem echo LFileName: !LFileName!
         if exist !LDirPATTERN!\!LFileName! (
-            call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
         )
-        set LFileName=LICENSE
-        rem echo LFileName: !LFileName!
+
+        set LFileName=README.md
         if exist !LDirPATTERN!\!LFileName! (
+            if not exist !DIR_PROJECT_NAME!\!LFileName! (
+                echo .... :COPY_FILE !LFileName! ...
+                call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! || exit /b 1
+            )
+        )
+
+        set LFileName=LICENSE
+        if exist !LDirPATTERN!\!LFileName! (
+            echo .... :COPY_FILE !LFileName! ...
             call :COPY_FILE !LDirPATTERN!\!LFileName! !DIR_PROJECT_NAME! /Y || exit /b 1
         )
 
