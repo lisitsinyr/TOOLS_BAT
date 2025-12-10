@@ -106,6 +106,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    set OK=yes
+
     exit /b 0
 rem endfunction
 
@@ -128,28 +130,23 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem O1
     rem -------------------------------------------------------------------
+    rem set O1=test
     set VarName=O1
     rem echo VarName:!VarName!
-    set VarValue=%~1
+    set VarValue=!%VarName%!
     rem echo VarValue:!VarValue!
-    set VarCaption=O1_caption
+
+    rem set VarCaption=O1_caption
     rem echo VarCaption:!VarCaption!
-    set VarDefault=O1_default
+    rem set VarDefault=O1_default
     rem echo VarDefault:!VarDefault!
-    if not defined !%VarName%! (
-        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
-    )
-    if defined !VarName! (
-        set OPTION=!OPTION! -!VarName! "!%VarName%!"
+    rem if not defined !VarName! (
+    rem     call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    rem )
+    if not defined !VarName! (
+        call :Read_P !VarName! "!VarValue!" "O1_caption" "O1_default" || exit /b 1
     )
 
-    rem -------------------------------------------------------------------
-    rem O1
-    rem -------------------------------------------------------------------
-    set VarName=O1
-    if not defined !%VarName%! (
-        call :Read_P !VarName! "" "—сылка на сообщение" "" || exit /b 1
-    )
     if defined !VarName! (
         set OPTION=!OPTION! -!VarName! "!%VarName%!"
     )
@@ -164,24 +161,35 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem A1
     rem -------------------------------------------------------------------
+    rem set A1=test
+
     set VarName=A1
-    rem echo VarName:!VarName!
-    set VarValue=%~1
-    rem echo VarValue:!VarValue!
-    set VarCaption=A1_caption
-    rem echo VarCaption:!VarCaption!
-    set VarDefault=A1_default
-    rem echo VarDefault:!VarDefault!
-    if not defined !%VarName%! (
-        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
-    )
+    echo VarName:!VarName!
     if defined !VarName! (
-        set ARGS=!ARGS! "!VarName!"
+        set VarValue=!%VarName%!
+    ) else (
+        set VarValue=%~1
+    )
+    echo VarValue:!VarValue!
+
+    rem set VarCaption=A1_caption
+    rem echo VarCaption:!VarCaption!
+    rem set VarDefault=A1_default
+    rem echo VarDefault:!VarDefault!
+    rem if not defined !VarName! (
+    rem     call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    rem )
+    if not defined !VarName! (
+        call :Read_P !VarName! "!VarValue!" "A1_caption" "A1_default" || exit /b 1
+    )
+
+    if defined !VarName! (
+        set ARGS=!ARGS! "!%VarName%!"
     ) else (
         set OK=
         exit /b 1
     )
-
+    
     echo ARGS:!ARGS!
 
     exit /b 0
@@ -229,6 +237,8 @@ rem beginfunction
 
     call :MAIN_SET || exit /b 1
 
+    rem echo OK:!OK!
+    rem echo Read_N:!Read_N!
     rem if defined OK if not defined Read_N (
     rem     call :MAIN_CHECK_PARAMETR %* || exit /b 1
     rem )

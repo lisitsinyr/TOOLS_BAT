@@ -165,10 +165,11 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
+    
     call :MAIN_SET || exit /b 1
-    if defined OK if not defined Read_N (
-        call :MAIN_CHECK_PARAMETR %* || exit /b 1
-    )
+    
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+    
     if defined OK (
         call :MAIN_FUNC || exit /b 1
     )

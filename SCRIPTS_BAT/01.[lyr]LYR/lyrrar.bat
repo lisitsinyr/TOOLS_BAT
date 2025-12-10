@@ -48,43 +48,12 @@ rem ----------------------------------------------------------------------------
     rem -------------------------------------
     set OPTION= -r
     
-    rem -------------------------------------------------------------------
-    rem O1
-    rem -------------------------------------------------------------------
-    set VarName=O1
-    rem echo VarName:!VarName!
-    set VarValue=%~1
-    rem echo VarValue:!VarValue!
-    set VarCaption=O1_caption
-    rem echo VarCaption:!VarCaption!
-    set VarDefault=O1_default
-    rem echo VarDefault:!VarDefault!
-    rem if not defined !%VarName%! (
-    rem     call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
-    rem )
-    rem if defined !VarName! (
-    rem     set OPTION=!OPTION! -!VarName! "!%VarName%!"
-    rem ) else (
-    rem     echo INFO: !VarName! not defined ...
-    rem )
-
     echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
-
-    rem Проверка на обязательные аргументы
-    rem set PN_CAPTION=Ввод значения archive
-    rem set archive=archive
-    rem call :Read_P archive %1 || exit /b 1
-    rem echo archive: !archive!
-    rem if not defined archive (
-    rem     echo ERROR: Параметр archive не задан...
-    rem     echo Использование: !BATNAME! архив [файлы]
-    rem     set OK=
-    rem )
 
     rem -------------------------------------------------------------------
     rem archive
@@ -97,7 +66,7 @@ rem ----------------------------------------------------------------------------
     rem echo VarCaption:!VarCaption!
     set VarDefault=archive
     rem echo VarDefault:!VarDefault!
-    if not defined !%VarName%! (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
     if defined !VarName! (
