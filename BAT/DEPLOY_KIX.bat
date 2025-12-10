@@ -72,13 +72,20 @@ setlocal enabledelayedexpansion
 
     set PROJECT_NAME=PROJECTS_KIX
     call :DEPLOY_PROJECT
+
     set PROJECT_NAME=SOFTWARE_KIX
     call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=TESTS_KIX
     call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=SCRIPTS_KIX
     call :DEPLOY_PROJECT
+    
     set PROJECT_NAME=TOOLS_SRC_KIX
+    call :DEPLOY_PROJECT
+
+    set PROJECT_NAME=TOOLS_KIX
     call :DEPLOY_PROJECT
 
     call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
@@ -88,22 +95,22 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set PROJECT_GROUP=KIX
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
-    call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
+
+    rem call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
+    
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT
     rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    set PROJECT_NAME=TOOLS_KIX
-    call :DEPLOY_PROJECT
-
-    call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+    rem call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
 
     exit /b 0
 :end

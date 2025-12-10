@@ -58,12 +58,15 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set PROJECT_GROUP=Pascal_Delphi
     rem echo PROJECT_GROUP:!PROJECT_GROUP! 
+
     call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
+
     rem -------------------------------------------------------------------
     rem DIR_GROUP_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Pascal_Delphi
     rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
@@ -75,8 +78,10 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\Delphi_7\PROJECTS_D7
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=LUIS_D7
     call :DEPLOY_PROJECT
+
     set PROJECT_NAME=TOOLS_D7
     call :DEPLOY_PROJECT
 
@@ -85,8 +90,10 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\Delphi_11\PROJECTS_D11
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
     set PROJECT_NAME=LUIS_D11
     call :DEPLOY_PROJECT
+
     set PROJECT_NAME=TOOLS_D11
     call :DEPLOY_PROJECT
 

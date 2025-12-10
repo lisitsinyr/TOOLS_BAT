@@ -368,12 +368,12 @@ rem beginfunction
     rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
-    rem 
+    rem SCRIPTS_PY\SRC\SCRIPTS_PY\*.*
     rem --------------------------------------------------------
     set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
-    rem echo LDIR_FROM:!LDIR_FROM!
+    echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_PROJECT_NAME!\SCRIPTS_PY
-    rem echo LDIR_TO:!LDIR_TO!
+    echo LDIR_TO:!LDIR_TO!
 
     set LMASK=*.*
     if exist "!LDIR_TO!" (
@@ -386,12 +386,12 @@ rem beginfunction
     call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
 
     rem --------------------------------------------------------
-    rem 
+    rem SCRIPTS_PY\SRC\SCRIPTS_PY\*.bat
     rem --------------------------------------------------------
     set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\SCRIPTS_PY\SRC\SCRIPTS_PY
-    rem echo LDIR_FROM:!LDIR_FROM!
+    echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
-    rem echo LDIR_TO:!LDIR_TO!
+    echo LDIR_TO:!LDIR_TO!
 
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
@@ -414,23 +414,23 @@ rem beginfunction
     rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
     rem --------------------------------------------------------
-    rem TOOLS_SRC_PY\SRC\BAT
+    rem TOOLS_SRC_PY\SRC\BAT\*.bat
     rem --------------------------------------------------------
     set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\BAT
-    rem echo LDIR_FROM:!LDIR_FROM!
+    echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_PROJECT_NAME!\BAT
-    rem echo LDIR_TO:!LDIR_TO!
+    echo LDIR_TO:!LDIR_TO!
 
     set LMASK=*.bat
     call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
 
     rem --------------------------------------------------------
-    rem TOOLS_SRC_PY\SRC\LIB
+    rem TOOLS_SRC_PY\SRC\LIB\*.*
     rem --------------------------------------------------------
     set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\TOOLS_SRC_PY\SRC\LIB
-    rem echo LDIR_FROM:!LDIR_FROM!
+    echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_PROJECT_NAME!\LIB
-    rem echo LDIR_TO:!LDIR_TO!
+    echo LDIR_TO:!LDIR_TO!
 
     set LMASK=*.*
     if exist "!LDIR_TO!" (

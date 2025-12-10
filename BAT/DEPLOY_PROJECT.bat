@@ -230,7 +230,6 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    rem call :REPO_WORK !DIR_PROJECT_NAME! 1 || exit /b 1
     call :DEPLOY_PROJECT
 
     exit /b 0
