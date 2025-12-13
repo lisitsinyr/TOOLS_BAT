@@ -53,24 +53,24 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    set PROJECT_GROUP=GIT
+    set PROJECTS_GROUP=GIT
     
     rem -------------------------------------------------------------------
-    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem PROJECTS_DIR_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    if not defined DIR_GROUP_ROOT (
-        set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT
+    if not defined PROJECTS_DIR_ROOT (
+        set PROJECTS_DIR_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT
     )
-    rem DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    rem PROJECTS_DIR_ROOT:!PROJECTS_DIR_ROOT!
 
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\PROJECTS_GIT
+    set DIR_PROJECTS_ROOT=!PROJECTS_DIR_ROOT!\PROJECTS_GIT
     set DIR_PROJECTS_ROOT=D:\WORK
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    call :WriteBEGIN PULL группы проектов: !PROJECT_GROUP! ...
+    call :WriteBEGIN PULL группы проектов: !PROJECTS_GROUP! ...
 
     set PROJECT_NAME=TOOLS_SRC_GIT
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
@@ -78,7 +78,7 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_GIT
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    call :WriteEND Конец PULL группы проектов: !PROJECT_GROUP! ...
+    call :WriteEND Конец PULL группы проектов: !PROJECTS_GROUP! ...
 
     exit /b 0
 :end

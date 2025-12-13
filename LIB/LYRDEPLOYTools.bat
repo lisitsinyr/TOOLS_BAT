@@ -243,7 +243,7 @@ rem beginfunction
     rem --------------------------------------------------------
     rem 
     rem --------------------------------------------------------
-    set LDIR_FROM=!DIR_GROUP_ROOT!\PROJECTS_JAVA\TOOLS_SRC_JAVA\SRC\LIB
+    set LDIR_FROM=!PROJECTS_DIR_ROOT!\PROJECTS_JAVA\TOOLS_SRC_JAVA\SRC\LIB
     rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!DIR_PROJECT_NAME!\LIB
     rem echo LDIR_TO:!LDIR_TO!

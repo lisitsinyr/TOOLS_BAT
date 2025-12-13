@@ -53,7 +53,7 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    set PROJECT_GROUP=JAVA
+    set PROJECTS_GROUP=JAVA
     
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
@@ -61,7 +61,7 @@ setlocal enabledelayedexpansion
     set DIR_PROJECTS_ROOT=D:\WORK
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    call :WriteBEGIN PULL группы проектов: !PROJECT_GROUP! ...
+    call :WriteBEGIN PULL группы проектов: !PROJECTS_GROUP! ...
 
     set PROJECT_NAME=LIBRARY_JAVA
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
@@ -87,7 +87,7 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_JAVA
     call :PULL_PROJECT !DIR_PROJECTS_ROOT! !PROJECT_NAME!
 
-    call :WriteEND Конец PULL группы проектов: !PROJECT_GROUP! ...
+    call :WriteEND Конец PULL группы проектов: !PROJECTS_GROUP! ...
 
     exit /b 0
 :end

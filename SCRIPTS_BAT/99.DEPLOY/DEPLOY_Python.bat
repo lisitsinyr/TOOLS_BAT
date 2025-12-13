@@ -55,18 +55,18 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
-    set PROJECT_GROUP=PROJECTS_PY
-    rem echo PROJECT_GROUP:!PROJECT_GROUP! 
-    call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
+    set PROJECTS_GROUP=PROJECTS_PY
+    rem echo PROJECTS_GROUP:!PROJECTS_GROUP! 
+    call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECTS_GROUP! ...
     rem -------------------------------------------------------------------
-    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem PROJECTS_DIR_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Python
-    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    set PROJECTS_DIR_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP\Python
+    rem echo PROJECTS_DIR_ROOT:!PROJECTS_DIR_ROOT!
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
+    set DIR_PROJECTS_ROOT=!PROJECTS_DIR_ROOT!\!PROJECTS_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     set PROJECT_NAME=TRICKS
@@ -111,29 +111,29 @@ setlocal enabledelayedexpansion
     set PROJECT_NAME=TOOLS_PY
     call :DEPLOY_PROJECT
 
-    call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+    call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECTS_GROUP! ...
 
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
-    set PROJECT_GROUP=Python
-    rem echo PROJECT_GROUP:!PROJECT_GROUP! 
+    set PROJECTS_GROUP=Python
+    rem echo PROJECTS_GROUP:!PROJECTS_GROUP! 
    
-    rem call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECT_GROUP! ...
+    rem call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECTS_GROUP! ...
     
     rem -------------------------------------------------------------------
-    rem DIR_GROUP_ROOT - каталог группы проектов
+    rem PROJECTS_DIR_ROOT - каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_GROUP_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP
-    rem echo DIR_GROUP_ROOT:!DIR_GROUP_ROOT!
+    set PROJECTS_DIR_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\DESKTOP
+    rem echo PROJECTS_DIR_ROOT:!PROJECTS_DIR_ROOT!
     
     rem -------------------------------------------------------------------
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!DIR_GROUP_ROOT!\!PROJECT_GROUP!
+    set DIR_PROJECTS_ROOT=!PROJECTS_DIR_ROOT!\!PROJECTS_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
-    rem call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECT_GROUP! ...
+    rem call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECTS_GROUP! ...
 
     exit /b 0
 :end

@@ -313,7 +313,7 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set PROJECT_GROUP=ALL
+    set PROJECTS_GROUP=ALL
 
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR_DEPLOY - Каталог скриптов DEPLOY

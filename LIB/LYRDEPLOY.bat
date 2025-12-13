@@ -93,7 +93,7 @@ rem beginfunction
 
     rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
-    rem echo PROJECT_GROUP:!PROJECT_GROUP!
+    rem echo PROJECTS_GROUP:!PROJECTS_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
     rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
     rem echo PROJECT_NAME:!PROJECT_NAME!
@@ -104,8 +104,8 @@ rem beginfunction
     set LDirPATTERN=
 
     set res=
-    if !PROJECT_GROUP!==PROJECTS_GIT set res=true
-    if !PROJECT_GROUP!==GIT set res=true
+    if !PROJECTS_GROUP!==PROJECTS_GIT set res=true
+    if !PROJECTS_GROUP!==GIT set res=true
     if defined res ( 
         rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\GIT\PROJECTS_GIT\PATTERN_GIT
         call :GetINI !FILEINI! PATTERNS GIT
@@ -113,8 +113,8 @@ rem beginfunction
     )
 
     set res=
-    if !PROJECT_GROUP!==PROJECTS_BAT set res=true
-    if !PROJECT_GROUP!==BAT set res=true
+    if !PROJECTS_GROUP!==PROJECTS_BAT set res=true
+    if !PROJECTS_GROUP!==BAT set res=true
     if defined res ( 
         rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\PATTERN_BAT
         call :GetINI !FILEINI! PATTERNS BAT
@@ -122,8 +122,8 @@ rem beginfunction
     )
 
     set res=
-    if !PROJECT_GROUP!==PROJECTS_KIX set res=true
-    if !PROJECT_GROUP!==KIX set res=true
+    if !PROJECTS_GROUP!==PROJECTS_KIX set res=true
+    if !PROJECTS_GROUP!==KIX set res=true
     if defined res ( 
         rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\PROJECTS_KIX\PATTERN_KIX
         call :GetINI !FILEINI! PATTERNS KIX
@@ -132,8 +132,8 @@ rem beginfunction
     )
 
     set res=
-    if !PROJECT_GROUP!==PROJECTS_PS set res=true
-    if !PROJECT_GROUP!==PowerShell set res=true
+    if !PROJECTS_GROUP!==PROJECTS_PS set res=true
+    if !PROJECTS_GROUP!==PowerShell set res=true
     if defined res ( 
         rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\PowerShell\PROJECTS_PS\PATTERN_PS
         call :GetINI !FILEINI! PATTERNS PowerShell
@@ -141,8 +141,8 @@ rem beginfunction
     )
 
     set res=
-    if !PROJECT_GROUP!==PROJECTS_UNIX set res=true
-    if !PROJECT_GROUP!==UNIX set res=true
+    if !PROJECTS_GROUP!==PROJECTS_UNIX set res=true
+    if !PROJECTS_GROUP!==UNIX set res=true
     if defined res ( 
         rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\OS\UNIX\PROJECTS_UNIX\PATTERN_SH
         call :GetINI !FILEINI! PATTERNS UNIX
@@ -150,8 +150,8 @@ rem beginfunction
     )
 
     set res=
-    if !PROJECT_GROUP!==PROJECTS_JAVA set res=true
-    if !PROJECT_GROUP!==JAVA set res=true
+    if !PROJECTS_GROUP!==PROJECTS_JAVA set res=true
+    if !PROJECTS_GROUP!==JAVA set res=true
     if defined res ( 
         rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Java\PROJECTS_JAVA\PATTERN_JAVA
         call :GetINI !FILEINI! PATTERNS JAVA
@@ -159,9 +159,9 @@ rem beginfunction
     )
 
     set res=
-    if !PROJECT_GROUP!==PROJECTS_D7 set res=true
-    if !PROJECT_GROUP!==PROJECTS_D11 set res=true
-    if !PROJECT_GROUP!==Pascal_Delphi set res=true
+    if !PROJECTS_GROUP!==PROJECTS_D7 set res=true
+    if !PROJECTS_GROUP!==PROJECTS_D11 set res=true
+    if !PROJECTS_GROUP!==Pascal_Delphi set res=true
     if defined res ( 
         rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\PROJECTS\PATTERN_PAS
         call :GetINI !FILEINI! PATTERNS Pascal_Delphi
@@ -169,8 +169,8 @@ rem beginfunction
     )
 
     set res=
-    if !PROJECT_GROUP!==PROJECTS_PY set res=true
-    if !PROJECT_GROUP!==Python set res=true
+    if !PROJECTS_GROUP!==PROJECTS_PY set res=true
+    if !PROJECTS_GROUP!==Python set res=true
     if defined res ( 
         rem set LDirPATTERN=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PROJECTS_PY\PATTERN_PY
         call :GetINI !FILEINI! PATTERNS Python
@@ -405,7 +405,7 @@ rem beginfunction
     rem set ADirectory=%~1
     rem echo ADirectory:!ADirectory!
 
-    rem echo PROJECT_GROUP:!PROJECT_GROUP!
+    rem echo PROJECTS_GROUP:!PROJECTS_GROUP!
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
     rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
     rem echo PROJECT_NAME:!PROJECT_NAME!
@@ -455,9 +455,9 @@ rem beginfunction
 
     rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
-    call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_GROUP !PROJECT_GROUP!
+    call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECTS_GROUP !PROJECTS_GROUP!
     call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECT_NAME !PROJECT_NAME!
-    call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general DIR_GROUP_ROOT !DIR_GROUP_ROOT!
+    call :SetINI !DIR_PROJECT_NAME!\PROJECT.ini general PROJECTS_DIR_ROOT !PROJECTS_DIR_ROOT!
 
     set SetPROJECT_INI=
 
@@ -502,7 +502,7 @@ rem beginfunction
 
     call :WritePROCESS DEPLOY проекта [REPO_WORK]: !PROJECT_NAME!
 
-    rem call :WritePROCESS PROJECT_GROUP: !PROJECT_GROUP!
+    rem call :WritePROCESS PROJECTS_GROUP: !PROJECTS_GROUP!
     rem call :WritePROCESS DIR_PROJECTS_ROOT: !DIR_PROJECTS_ROOT!
     rem call :WritePROCESS DIR_PROJECT_NAME: !DIR_PROJECT_NAME!
 
@@ -561,7 +561,7 @@ rem beginfunction
 
     call :WritePROCESS ................................DEPLOY проекта [REPO_WORK_TOOLS]: !PROJECT_NAME!
 
-    rem call :WritePROCESS PROJECT_GROUP: !PROJECT_GROUP!
+    rem call :WritePROCESS PROJECTS_GROUP: !PROJECTS_GROUP!
     rem call :WritePROCESS DIR_PROJECTS_ROOT: !DIR_PROJECTS_ROOT!
     rem call :WritePROCESS DIR_PROJECT_NAME: !DIR_PROJECT_NAME!
 
@@ -615,13 +615,13 @@ rem beginfunction
 
     rem call :WritePROCESS ...FUNCNAME:!FUNCNAME!...
 
-    rem call :WritePROCESS PROJECT_GROUP : !PROJECT_GROUP!
+    rem call :WritePROCESS PROJECTS_GROUP : !PROJECTS_GROUP!
     rem call :WritePROCESS PROJECT_NAME  : !PROJECT_NAME!
-    rem call :WritePROCESS DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
+    rem call :WritePROCESS PROJECTS_DIR_ROOT: !PROJECTS_DIR_ROOT!
 
-    rem echo PROJECT_GROUP : !PROJECT_GROUP!
+    rem echo PROJECTS_GROUP : !PROJECTS_GROUP!
     rem echo PROJECT_NAME  : !PROJECT_NAME!
-    rem echo DIR_GROUP_ROOT: !DIR_GROUP_ROOT!
+    rem echo PROJECTS_DIR_ROOT: !PROJECTS_DIR_ROOT!
 
     set DIR_PROJECT_NAME=!DIR_PROJECTS_ROOT!\!PROJECT_NAME!
     rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
