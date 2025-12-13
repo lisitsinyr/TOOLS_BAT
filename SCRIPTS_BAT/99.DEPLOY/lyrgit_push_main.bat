@@ -1,6 +1,43 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_PROJECT.bat
+rem lyrgit_push_main.bat
+rem ----------------------------------------------------------------------------
+rem ***Отправить изменения
+rem ----------------------------------------------------------------------------
+rem usage: git push [<options>] [<repository> [<refspec>...]]
+rem 
+rem     -v, --verbose         be more verbose
+rem     -q, --quiet           be more quiet
+rem     --repo <repository>   repository
+rem     --all                 push all refs
+rem     --mirror              mirror all refs
+rem     -d, --delete          delete refs
+rem     --tags                push tags (can't be used with --all or --mirror)
+rem     -n, --dry-run         dry run
+rem     --porcelain           machine-readable output
+rem     -f, --force           force updates
+rem     --force-with-lease[=<refname>:<expect>]
+rem                           require old value of ref to be at this value
+rem     --force-if-includes   require remote updates to be integrated locally
+rem     --recurse-submodules (check|on-demand|no)
+rem                           control recursive pushing of submodules
+rem     --thin                use thin pack
+rem     --receive-pack <receive-pack>
+rem                           receive pack program
+rem     --exec <receive-pack>
+rem                           receive pack program
+rem     -u, --set-upstream    set upstream for git pull/status
+rem     --progress            force progress reporting
+rem     --prune               prune locally removed refs
+rem     --no-verify           bypass pre-push hook
+rem     --follow-tags         push missing but relevant tags
+rem     --signed[=(yes|no|if-asked)]
+rem                           GPG sign the push
+rem     --atomic              request atomic transaction on remote side
+rem     -o, --push-option <server-specific>
+rem                           option to transmit
+rem     -4, --ipv4            use IPv4 addresses only
+rem     -6, --ipv6            use IPv6 addresses only
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
@@ -11,6 +48,7 @@ rem
 rem --------------------------------------------------------------------------------
 :begin
     call :MAIN %* || exit /b 1
+
     exit /b 0
 :end
 rem --------------------------------------------------------------------------------
@@ -50,6 +88,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -94,7 +133,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_CHECK_PARAMETR (%*)
+rem procedure MAIN_CHECK_PARAMETR ()
 rem --------------------------------------------------------------------------------
 :MAIN_CHECK_PARAMETR
 rem beginfunction
@@ -108,78 +147,95 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set OPTION=
-     
-    rem -------------------------------------------------------------------
-    rem PROJECT_GROUP
-    rem -------------------------------------------------------------------
-    set VarName=PROJECT_GROUP
-    rem echo VarName:!VarName!
-    set VarValue=%~1
-    if not defined VarValue (
-        set VarValue=""
-    ) else (
-        if defined !VarName! (
-            set VarValue=!%VarName%!
-        ) else (
-            set VarValue=%~1
-        )
-    )
-    rem echo VarValue:!VarValue!
-    if not defined !VarName! (
-        call :Read_P !VarName! "!VarValue!" "PROJECT_GROUP" "" || exit /b 1
-    )
-
-    rem -------------------------------------------------------------------
-    rem PROJECT_NAME
-    rem -------------------------------------------------------------------
-    set VarName=PROJECT_NAME
-    rem echo VarName:!VarName!
-    set VarValue=%~1
-    if not defined VarValue (
-        set VarValue=""
-    ) else (
-        if defined !VarName! (
-            set VarValue=!%VarName%!
-        ) else (
-            set VarValue=%~2
-        )
-    )
-    rem echo VarValue:!VarValue!
-
-    if not defined !VarName! (
-        call :Read_P !VarName! "!VarValue!" "PROJECT_NAME" "" || exit /b 1
-    )
-
-    rem echo OPTION:!OPTION!
+    echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
-    rem echo ARGS:!ARGS!
+
+    rem set A1_Name=Comment
+    rem set A1_Caption=Comment
+    rem set A1_Default=Git Bash commit update
+    rem set A1_Default=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+    rem set A1=!A1_Default!
+    rem set PN_CAPTION=!A1_Caption!
+    rem call :Read_P A1 !A1! !A1_Caption! "" || exit /b 1
+    rem echo A1:!A1!
+    rem if defined A1 (
+    rem     set Comment="!A1!"
+    rem     set ARGS=!ARGS! "!A1!"
+    rem ) else (
+    rem     echo ERROR: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+    rem     set OK=
+    rem     exit /b 1
+    rem )
+
+    rem -------------------------------------------------------------------
+    rem A1
+    rem -------------------------------------------------------------------
+    set VarName=Comment
+    rem echo VarName:!VarName!
+    set VarValue=Git Bash commit update
+    set VarValue=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+    rem echo VarValue:!VarValue!
+    set VarCaption=Comment_caption
+    rem echo VarCaption:!VarCaption!
+    set VarDefault=Git Bash commit update
+    set VarDefault=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
+    rem echo VarDefault:!VarDefault!
+    if not defined !%VarName%! (
+        call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
+    )
+    if defined !VarName! (
+        set ARGS=!ARGS! "!%VarName%!"
+    ) else (
+        echo INFO: !VarName! not defined ...
+        set OK=
+        exit /b 1
+    )
+
+    echo ARGS:!ARGS!
 
     exit /b 0
 rem endfunction
 
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_DEPLOY_PROJECT ()
-rem --------------------------------------------------------------------------------
-:MAIN_DEPLOY_PROJECT
+rem =================================================
+rem procedure MAIN_GIT_RUN ()
+rem =================================================
+:MAIN_GIT_RUN
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=MAIN_DEPLOY_PROJECT
+    set FUNCNAME=MAIN_GIT_RUN
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :DEPLOY_PROJECT !PROJECT_GROUP! !PROJECT_NAME!
+    rem echo ...git add --all
+    call :WritePROCESS ...git add --all
+    git add --all >> !LOG_FULLFILENAME!
+    
+    rem echo ...git commit -m "%Comment%"
+    call :WritePROCESS ...git commit -m !Comment!
+    git commit -m !Comment! >> !LOG_FULLFILENAME!
+
+    rem echo ...git push -u origin main
+    call :WritePROCESS ...git push -u origin main
+ 
+    call :SetColor !cTEXT!
+    git push -u origin main >> !LOG_FULLFILENAME!
+    rem call :WriteCR
+    rem call :ReSetColorCR
+    call :ReSetColor
+    rem <nul set /p strTemp=!sRESET!
+
 
     exit /b 0
 rem endfunction
 
-rem --------------------------------------------------------------------------------
+rem =================================================
 rem procedure MAIN_FUNC ()
-rem --------------------------------------------------------------------------------
+rem =================================================
 :MAIN_FUNC
 rem beginfunction
     set FUNCNAME=%0
@@ -188,7 +244,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :MAIN_DEPLOY_PROJECT %* || exit /b 1
+    call :MAIN_GIT_RUN || exit /b 1
+
+    rem call :Pause !SLEEP! || exit /b 1
+    rem call :PressAnyKey || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -216,15 +275,15 @@ rem beginfunction
     call :StartLogFile || exit /b 1
 
     set OK=yes
-
+    
     call :MAIN_SET || exit /b 1
 
     call :MAIN_CHECK_PARAMETR %* || exit /b 1
-
+        
     if defined OK (
         call :MAIN_FUNC || exit /b 1
     )
-
+    
     call :StopLogFile || exit /b 1
 
     exit /b 0
@@ -236,89 +295,42 @@ rem ФУНКЦИИ LIB
 rem =================================================
 
 rem =================================================
-rem LYRConsole.bat
-rem =================================================
-:LYRConsoleINIT
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:ConsoleTEST_00
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:ConsoleTEST_01
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:ConsoleTEST_02
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:FormatColorStr
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:aListToStr
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:bListToStr
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:SetColor
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:ReSetColorCR
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:ReSetColor
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:Write
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteCR
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteLN
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteLOG
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteNOTSET
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteDEBUG
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteINFO
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteWARNING
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteERROR
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteCRITICAL
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteBEGIN
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteEND
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WritePROCESS
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteDEBUGTEXT
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:WriteTEXT
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-
-rem =================================================
 rem LYRConst.bat
 rem =================================================
 :LYRConstINIT
 %LIB_BAT%\LYRConst.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRDEPLOY.bat
+rem =================================================
+:LYRDEPLOYINIT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:REPO_WORK
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:git_pull
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:DEPLOY_PROJECT
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRLIB.bat
+rem =================================================
+:LYRLIBINIT
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
+:SET_LIB
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
+:SET_POETRY
+%LIB_BAT%\LYRLIB.bat %*
+exit /b 0
+:SET_KIX
+%LIB_BAT%\LYRLIB.bat %*
 exit /b 0
 
 rem =================================================
@@ -332,98 +344,6 @@ exit /b 0
 exit /b 0
 :DateTime
 %LIB_BAT%\LYRDateTime.bat %*
-exit /b 0
-
-rem =================================================
-rem LYRDEPLOY.bat
-rem =================================================
-:LYRDEPLOYINIT
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:CopyFilesFromPATTERN
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:CopyFilesROOT
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetPROJECT_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetREPO_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:REPO_WORK
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:DEPLOY_PROJECT
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:git_pull
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:git_clone
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:PULL_PROJECT
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-
-rem =================================================
-rem LYRDEPLOYTools.bat
-rem =================================================
-:LYRDEPLOYToolsINIT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_BAT_SCRIPTS_BAT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_BAT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_GIT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_JAVA
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_KIX_SCRIPTS_KIX
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_KIX
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_PY_SCRIPTS_PY
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_PY_TOOLS_SRC_PY
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_PY
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_SH_SCRIPTS_SH
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_SH_TOOLS_SRC_SH
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_SH
-%LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 
 rem =================================================
@@ -473,49 +393,9 @@ exit /b 0
 exit /b 0
 
 rem =================================================
-rem LYRLIB.bat
-rem =================================================
-:LYRLIBINIT
-%LIB_BAT%\LYRLIB.bat %*
-exit /b 0
-:SET_LIB
-%LIB_BAT%\LYRLIB.bat %*
-exit /b 0
-:SET_POETRY
-%LIB_BAT%\LYRLIB.bat %*
-exit /b 0
-:SET_KIX
-%LIB_BAT%\LYRLIB.bat %*
-exit /b 0
-:__SET_VAR_SCRIPT
-%LIB_BAT%\LYRLIB.bat %*
-exit /b 0
-:__SET_VAR_DEFAULT
-%LIB_BAT%\LYRLIB.bat %*
-exit /b 0
-:__SET_VAR_PROJECTS
-%LIB_BAT%\LYRLIB.bat %*
-exit /b 0
-:__SET_LOG
-%LIB_BAT%\LYRLIB.bat %*
-exit /b 0
-
-rem =================================================
 rem LYRLog.bat
 rem =================================================
 :LYRLogINIT
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
-:__SETVarLog
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
-:__SHORTLevelName
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
-:__LOG_STR
-%LIB_BAT%\LYRLog.bat %*
-exit /b 0
-:AddLogConsole
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
 :AddLog
@@ -529,38 +409,6 @@ exit /b 0
 exit /b 0
 :StopLogFile
 %LIB_BAT%\LYRLog.bat %*
-exit /b 0
-
-rem =================================================
-rem LYRParserINI.bat
-rem =================================================
-:LYRParserINIINIT
-%LIB_BAT%\LYRParserINI.bat %*
-exit /b 0
-:SetINI
-%LIB_BAT%\LYRParserINI.bat %*
-exit /b 0
-:GetINI
-%LIB_BAT%\LYRParserINI.bat %*
-exit /b 0
-:GetINIParametr
-%LIB_BAT%\LYRParserINI.bat %*
-exit /b 0
-:GetFileParser
-%LIB_BAT%\LYRParserINI.bat %*
-exit /b 0
-
-rem =================================================
-rem LYRPY.bat
-rem =================================================
-:LYRPYINIT
-%LIB_BAT%\LYRPY.bat %*
-exit /b 0
-:VENV_START
-%LIB_BAT%\LYRPY.bat %*
-exit /b 0
-:VENV_STOP
-%LIB_BAT%\LYRPY.bat %*
 exit /b 0
 
 rem =================================================
@@ -630,4 +478,85 @@ exit /b 0
 :CheckErrorlevel
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
+
+rem =================================================
+rem LYRParserINI.bat
+rem =================================================
+:LYRParserINIINIT
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetINI
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:SetINI
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetINIParametr
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetFileParser
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRConsole.bat
+rem =================================================
+:LYRConsoleINIT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:Write
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteLOG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:SetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:ReSetColor
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:ReSetColorCR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteNOTSET
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUG
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteINFO
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteWARNING
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteERROR
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteCRITICAL
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteBEGIN
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteEND
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WritePROCESS
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteDEBUGTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:WriteTEXT
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+
 rem =================================================

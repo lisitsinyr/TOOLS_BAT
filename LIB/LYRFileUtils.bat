@@ -50,10 +50,12 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set AFullFilename=%1
-    rem echo AFullFilename:!AFullFilename!
+    set AFilename=%1
+    rem echo AFilename:!AFilename!
+    set FILENAME=%~1
+    rem echo FILENAME: !FILENAME!
 
-    rem if exist !AFullFilename! (
+    rem if exist !AFilename! (
     rem     set ExtractFileDir=%~d1%~p1
     rem ) else (
     rem     set ExtractFileDir=
@@ -77,6 +79,8 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFilename=%1
+    set FILENAME=%~1
+    rem echo FILENAME: !FILENAME!
 
     set FullFileName=%~f1
 
@@ -96,6 +100,8 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFilename=%1
+    set FILENAME=%~1
+    rem echo FILENAME: !FILENAME!
 
     set ExtractFileName=%~nx1
 
@@ -115,6 +121,8 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFilename=%1
+    set FILENAME=%~1
+    rem echo FILENAME: !FILENAME!
 
     set ExtractFileNameWithoutExt=%~n1
 
@@ -134,6 +142,8 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFilename=%1
+    set FILENAME=%~1
+    rem echo FILENAME: !FILENAME!
 
     set ExtractFileExt=%~x1
 
@@ -153,7 +163,6 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFilename=%1
-
     set FILENAME=%~1
     rem echo FILENAME: !FILENAME!
 
@@ -188,7 +197,6 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFilename=%1
-
     set FILENAME=%~1
     rem echo FILENAME: !FILENAME!
 
@@ -377,7 +385,9 @@ rem beginfunction
     )
     rem echo LOverwrite:!LOverwrite!
 
-    set COPY_FILE=
+    rem Команда copy /y в командной строке (CMD) отключает запрос подтверждения 
+    rem на перезапись существующего файла. Это позволяет скопировать файл, 
+    rem даже если он уже существует, без запроса
 
     if exist "!AFileName!" (
         if not exist "!ADIR_TO!\" (
@@ -392,7 +402,8 @@ rem beginfunction
         ) else (
             if defined LOverwrite (
                 echo Overwrite: LFileName:!LFileName! >> %LOG_FULLFILENAME%
-                copy !AFileName! !ADIR_TO! > NUL
+                copy /y !AFileName! !ADIR_TO! > NUL
+                echo File !AFileName! copied ...    >> %LOG_FULLFILENAME%
             )
         )
         set COPY_FILE=!AFileName!
@@ -470,8 +481,8 @@ rem beginfunction
                 echo File %%f copied ...    >> %LOG_FULLFILENAME%
             ) else (
                 if defined LOverwrite (
-                    rem echo Overide: LFileName:!LFileName!
-                    copy "%%f" !ADIR_TO!    > NUL
+                    echo Overide: %%f >> %LOG_FULLFILENAME%
+                    copy /y "%%f" !ADIR_TO!    > NUL
                 )
             )
 
@@ -479,8 +490,6 @@ rem beginfunction
     )
 
     cd /D "!LSaveDirectory!"
-
-    set COPY_FILES=
 
     exit /b 0
 rem endfunction
@@ -510,6 +519,17 @@ rem beginfunction
         set AARG=/D /S /E /V /F /H /R /K /Y /O
     )
 
+    rem Ключ /L команды xcopy отображает полный список файлов для копирования,
+    rem но не выполняет само копирование
+    rem Ключ /U команды XCOPY позволяет обновлять только уже существующие файлы, 
+    rem при этом новые файлы не записываются. 
+
+    rem Ключ /E переключатель команды Xcopy, который копирует все папки и подпапки, включая пустые
+    rem Ключ /d в команде XCOPY в командной строке Windows позволяет копировать только файлы,
+    rem изменённые не ранее указанной даты
+
+    rem Параметр /Y команды Xcopy подавляет запрос подтверждения на перезапись существующего целевого файла
+
     echo ---------------------------   >> %LOG_FULLFILENAME%
     echo XCOPY_FILES:                  >> %LOG_FULLFILENAME%
     echo     !ADIR_FROM!               >> %LOG_FULLFILENAME%
@@ -520,10 +540,8 @@ rem beginfunction
         mkdir "!ADIR_TO!"              >> %LOG_FULLFILENAME%
     )
 
-    xcopy !ADIR_FROM! !ADIR_TO! !AARG! >> %LOG_FULLFILENAME%
+    xcopy !ADIR_FROM! !ADIR_TO!\ !AARG! >> %LOG_FULLFILENAME%
     call :CheckErrorlevel XCOPY_FILES Yes
-
-    set XCOPY_FILES=
 
     exit /b 0
 rem endfunction

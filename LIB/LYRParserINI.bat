@@ -39,7 +39,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure SetINI (AFileName, ASection, AParameter, AValue) -> None
+rem procedure SetINI (AFileName, ASection, AKeyName, AKeyValue) -> None
 rem --------------------------------------------------------------------------------
 :SetINI
 rem beginfunction
@@ -54,20 +54,20 @@ rem beginfunction
     rem echo AFileName:!AFileName!
     set ASection=%~2
     rem echo ASection:!ASection!
-    set AParameter=%~3
-    rem echo AParameter:!AParameter!
-    set AValue=%~4
-    rem echo AValue:!AValue!
+    set AKeyName=%~3
+    rem echo AKeyName:!AKeyName!
+    set AKeyValue=%~4
+    rem echo AKeyValue:!AKeyValue!
 
-    %SetINIAPP% "!AFileName!" !ASection! !AParameter! "!AValue!"
+    %SetINIAPP% "!AFileName!" !ASection! !AKeyName! "!AKeyValue!"
 
-    set SetINI=!AValue!
+    set SetINI=!AKeyValue!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINI (AFileName, ASection, AParameter) -> None
+rem procedure GetINI (AFileName, ASection, AKeyName) -> None
 rem --------------------------------------------------------------------------------
 :GetINI
 rem beginfunction
@@ -82,16 +82,18 @@ rem beginfunction
     rem echo AFileName:!AFileName!
     set ASection=%~2
     rem echo ASection:!ASection!
-    set AParameter=%~3
-    rem echo AParameter:!AParameter!
+    set AKeyName=%~3
+    rem echo AKeyName:!AKeyName!
 
     set __GetINI=!TEMP_DIR!\%random%.tmp
     rem echo __GetINI:!__GetINI!
 
     rem echo %GetINIAPP%
-    %GetINIAPP% !AFileName! !ASection! !AParameter! > !__GetINI!
+    %GetINIAPP% !AFileName! !ASection! !AKeyName! > !__GetINI!
 
     rem type !__GetINI!
+
+    set KeyValue=
 
     set n=0
     set k=0
@@ -111,7 +113,7 @@ rem beginfunction
                 set %%i=%%j
                 rem echo %%i:!%%i!
 
-                set Parameters[!k!]=%%i
+                set KeyNames[!k!]=%%i
                 set /A k+=1
 
                 set STRi=%%i
@@ -124,12 +126,10 @@ rem beginfunction
                 call :TrimLeft !STRj! || exit /b 1
                 rem echo TrimLeft:!TrimLeft!
 
-                rem set FUNCNAME=GetINIPY
-                rem set !FUNCNAME!=!TrimLeft!
-                set GetINI=!TrimLeft!
+                set KeyValue=!TrimLeft!
+                rem echo KeyValue:!KeyValue!
 
-                set ParameterValue=!TrimLeft!
-                rem echo ParameterValue:!ParameterValue!
+                set GetINI=!TrimLeft!
             )
         )
 
@@ -139,13 +139,13 @@ rem beginfunction
         echo INFO: File !__GetINI! not exist ...
     )
     set /a SectionsCount=n-1
-    set /a ParametersCount=k-1
+    set /a KeyNamesCount=k-1
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIPY (AFileName, ASection, AParameter) -> None
+rem procedure GetINIPY (AFileName, ASection, AKeyName) -> None
 rem --------------------------------------------------------------------------------
 :GetINIPY
 rem beginfunction
@@ -160,16 +160,19 @@ rem beginfunction
     rem echo AFileName:!AFileName!
     set ASection=%~2
     rem echo ASection:!ASection!
-    set AParameter=%~3
-    rem echo AParameter:!AParameter!
+    set AKeyName=%~3
+    rem echo AKeyName:!AKeyName!
 
     set __GetINI=!TEMP_DIR!\%random%.tmp
     rem echo __GetINI:!__GetINI!
 
-    rem echo %GetINIAPPPY%
-    call %GetINIAPPPY% !AFileName! !ASection! !AParameter!
+    echo %GetINIAPPPY%
+
+    call %GetINIAPPPY% !AFileName! !ASection! !AKeyName!
 
     rem type !__GetINI!
+
+    set KeyValue=
 
     set n=0
     set k=0
@@ -189,7 +192,7 @@ rem beginfunction
                 set %%i=%%j
                 rem echo %%i:!%%i!
 
-                set Parameters[!k!]=%%i
+                set KeyNames[!k!]=%%i
                 set /A k+=1
 
                 set STRi=%%i
@@ -202,18 +205,10 @@ rem beginfunction
                 call :TrimLeft !STRj! || exit /b 1
                 rem echo TrimLeft:!TrimLeft!
 
-                rem set FUNCNAME=GetINIPY
-                rem set !FUNCNAME!=!TrimRight!
-                set GetINIPY=!TrimRight!
-
-                set ParameterValue=!TrimRight!
-                rem echo ParameterValue:!ParameterValue!
-
+                set KeyValue=!TrimLeft!
+                rem echo KeyValue:!KeyValue!
 
                 set GetINIPY=!TrimLeft!
-                set ParameterValue=!TrimLeft!
-
-
             )
         )
 
@@ -223,13 +218,13 @@ rem beginfunction
         echo INFO: File !__GetINI! not exist ...
     )
     set /a SectionsCount=n-1
-    set /a ParametersCount=k-1
+    set /a KeyNamesCount=k-1
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIParametr (AFileName, ASection, AParameter) -> None
+rem procedure GetINIParametr (AFileName, ASection, AKeyName) -> None
 rem --------------------------------------------------------------------------------
 :GetINIParametr
 rem beginfunction
@@ -244,14 +239,17 @@ rem beginfunction
     rem echo AFileName:!AFileName!
     set ASection=%~2
     rem echo ASection:!ASection!
-    set AParameter=%~3
-    rem echo AParameter:!AParameter!
+    set AKeyName=%~3
+    rem echo AKeyName:!AKeyName!
 
     rem type !AFileName!
 
+    set Sections=
+    set KeyNames=
+
+    set KeyValue=
     set Section=
-    set n=0
-    set k=0
+    set /A n=0
     if exist !AFileName! (
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
             rem usebackq
@@ -280,39 +278,30 @@ rem beginfunction
                 rem echo Section:!Section!
                 set Sections[!n!]=!Section!
                 set /A n+=1
+                set /A k=0
             ) else (
-                if defined AParameter (
-                    if "!TrimRight!"=="!AParameter!" (
+                if defined AKeyName (
+                    if "!TrimRight!"=="!AKeyName!" (
                         set !TrimRight!=!TrimLeft!
-                        rem echo !TrimRight!=!TrimLeft!
-
-                        set FUNCNAME=GetINIParametr
-                        set !FUNCNAME!=!TrimLeft!
                         set GetINIParametr=!TrimLeft!
-
-                        set ParameterValue=!TrimLeft!
-                        
-                        exit /b 0
+                        set KeyValue=!TrimLeft!
                     )
                 ) else (
-                    set Parameters[!k!]=%%i
-                    set /A k+=1
-
                     if defined ASection (
                         if "!ASection!"=="!Section!" (
-                            set !TrimRight!=!TrimLeft!
-                            rem echo !TrimRight!=!TrimLeft!
+                            set KeyNames[!k!]=%%i
+                            set /A k+=1
 
-                            set !FUNCNAME!=!TrimLeft!
+                            set !TrimRight!=!TrimLeft!
+                            set KeyValue=!TrimLeft!
                             set GetINIParametr=!TrimLeft!
                         )
                     ) else (
-                        set !TrimRight!=!TrimLeft!
-                        rem echo !TrimRight!=!TrimLeft!
-
-                        set !FUNCNAME!=!TrimLeft!
-                        set GetINIParametr=!TrimLeft!
-                )
+                        rem echo INFO: ASection not defined ...
+                        rem set !TrimRight!=!TrimLeft!
+                        rem set KeyValue=!TrimLeft!
+                        rem set GetINIParametr=!TrimLeft!
+                    )
                 )
             )
         )
@@ -320,7 +309,13 @@ rem beginfunction
         echo INFO: File !AFileName! not exist ...
     )
     set /a SectionsCount=n-1
-    set /a ParametersCount=k-1
+    set /a KeyNamesCount=k-1
+
+rem Как удалить все переменные в cmd (только в одном окне)?
+rem Совершенно верно, можно при помощи for с ключом /f обработать вывод команды set без параметров, получив имена всех (почти) определённых переменных среды (частей выводимых строк до знака =: delims==):
+rem for /f "delims==" %v in ('set') do  set "%v="
+rem (при использовании в командных файлах % перед переменной цикла надо удвоить).
+
 
     exit /b 0
 rem endfunction

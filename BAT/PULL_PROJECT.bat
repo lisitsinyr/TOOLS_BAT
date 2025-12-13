@@ -1,17 +1,16 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_Python.bat
+rem PULL_PROJECT.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
 rem --------------------------------------------------------------------------------
-rem
+rem 
 rem --------------------------------------------------------------------------------
 :begin
     call :MAIN %* || exit /b 1
-
     exit /b 0
 :end
 rem --------------------------------------------------------------------------------
@@ -51,7 +50,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -77,9 +75,6 @@ rem beginfunction
     rem Настройка среды
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
-
-    set FILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
-    rem echo FILEINI:!FILEINI!
 
     exit /b 0
 rem endfunction
@@ -109,6 +104,54 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    rem ------------------------------------------------
+    rem PROJECTS_GROUP
+    rem ------------------------------------------------
+    if not defined PROJECTS_GROUP (
+        call :GetINIParametr !PROJECT_INI! general PROJECTS_GROUP || exit /b 1
+    )
+    rem echo PROJECTS_GROUP:!PROJECTS_GROUP!
+
+    rem ------------------------------------------------
+    rem PROJECT_NAME
+    rem ------------------------------------------------
+    if not defined PROJECT_NAME (
+        call :GetINIParametr !PROJECT_INI! general PROJECT_NAME || exit /b 1
+    )
+    rem echo PROJECT_NAME:!PROJECT_NAME!
+
+    rem -------------------------------------------------------------------
+    rem PROJECTS_DIR_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    if not defined PROJECTS_DIR_ROOT (
+        call :GetINIParametr !PROJECT_INI! general PROJECTS_DIR_ROOT || exit /b 1
+    )
+    rem echo PROJECTS_DIR_ROOT:!PROJECTS_DIR_ROOT!
+
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECTS_ROOT - каталог группы проектов
+    rem -------------------------------------------------------------------
+    set DIR_PROJECTS_ROOT=!PROJECTS_DIR_ROOT!\!PROJECTS_GROUP!
+    if not defined DIR_PROJECTS_ROOT (
+        call :GetINIParametr !PROJECT_INI! general DIR_PROJECTS_ROOT || exit /b 1
+    )
+    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+
+    rem ------------------------------------------------
+    rem DIR_PROJECT
+    rem ------------------------------------------------
+    set DIR_PROJECT=!DIR_PROJECTS_ROOT!
+    rem echo DIR_PROJECT:!DIR_PROJECT!
+
+    rem ------------------------------------------------
+    rem DIR_PROJECT_NAME
+    rem ------------------------------------------------
+    set DIR_PROJECT_NAME=!DIR_PROJECT!\!PROJECT_NAME!
+    rem echo DIR_PROJECT_NAME:!DIR_PROJECT_NAME!
+
+    rem call :GetINIParametr !REPO_INI! general REPO_NAME || exit /b 1
+    rem echo REPO_NAME:!REPO_NAME!
+
     exit /b 0
 rem endfunction
 
@@ -127,177 +170,78 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set OPTION=
-
-    echo OPTION:!OPTION!
+    set O1_Name=O1
+    set O1_Caption=O1_Caption
+    set O1_Default=
+    set O1=!O1_Default!
+    set PN_CAPTION=!O1_Caption!
+    rem call :Read_P O1 !O1! || exit /b 1
+    rem echo O1:!O1!
+    rem if defined O1 (
+    rem     set OPTION=!OPTION! -!O1_Name! "!O1!"
+    rem ) else (
+    rem     echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
+    rem )
+    rem echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
 
-    echo ARGS:!ARGS!
+    set A1_Name=DIR_PROJECTS_ROOT
+    set A1_Caption=DIR_PROJECTS_ROOT
+    set A1_Default=%1
+    if not defined A1 (
+        set A1_Default=!DIR_PROJECTS_ROOT!
+    )
+    set A1=!A1_Default!
+    set PN_CAPTION=!A1_Caption!
+    call :Read_P A1 !A1! !A1_Caption! "" || exit /b 1
+    rem echo A1:!A1!
+    if defined A1 (
+        set ARGS=!ARGS! "!A1!"
+        set DIR_PROJECTS_ROOT=!A1!
+    ) else (
+        set DIR_PROJECTS_ROOT=
+        echo INFO: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+    )
+
+    set A2_Name=PROJECT_NAME
+    set A2_Caption=PROJECT_NAME
+    set A2_Default=%2
+    if not defined A2 (
+        set A2_Default=!PROJECT_NAME!
+    )
+    set A2=!A2_Default!
+    set PN_CAPTION=!A2_Caption!
+    call :Read_P A2 !A2! !A2_Caption! "" || exit /b 1
+    rem echo A2:!A2!
+    if defined A2 (
+        set ARGS=!ARGS! !A2!
+        set PROJECT_NAME=!A2!
+    ) else (
+        set PROJECT_NAME=
+        echo INFO: A2 [A2_Name:!A2_Name! A2_Caption:!A2_Caption!] not defined ... 
+    )
+
+    rem echo ARGS:!ARGS!
 
     exit /b 0
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetLenArray (Array)
+rem procedure MAIN_PULL_PROJECT ()
 rem --------------------------------------------------------------------------------
-:GetLenArray
+:MAIN_PULL_PROJECT
 rem beginfunction
     set FUNCNAME=%0
-    set FUNCNAME=GetLenArray
+    set FUNCNAME=MAIN_PULL_PROJECT
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    echo %1
-    set AArray=%1
-
-    :: Here we initializing an variable named len to calculate length of array
-    set len=0
-    :: To iterate the element of array
-    :Loop 
-    :: It will check if the element is defined or not
-    if defined Sections[%len%] (
-    rem if defined %1[%len%] (
-        echo !Sections[%len%]!
-        set /a len+=1
-        GOTO :Loop 
-    )
-
-    set !FUNCNAME!=!len!
-    rem echo !FUNCNAME!:!%FUNCNAME%!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_TEST ()
-rem --------------------------------------------------------------------------------
-:MAIN_TEST
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_TEST
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    call :GetINI !FILEINI!
-    rem call :GetINIPY !FILEINI!
-    rem call :GetINIParametr !FILEINI!
-
-    rem call :GetLenArray !Sections!
-    rem echo GetLenArray:!GetLenArray!
-
-    rem set /a nmax=SectionsCount-1
-    for /L %%i in (0,1,!SectionsCount!) do (
-        set Section=!Sections[%%i]!
-        rem echo !Section! 
-
-        call :GetINI !FILEINI! !Section!
-        rem set /a kmax=KeyNamesCount-1
-        for /L %%i in (0,1,!KeyNamesCount!) do (
-            set KeyName=!KeyNames[%%i]!
-            rem echo !KeyName!
-
-            call :GetINI !FILEINI! !Section! !KeyName!
-            rem echo !GetINI!
-            
-            rem call :GetINIParametr !FILEINI! !Section! !KeyName!
-            rem echo !GetINIParametr!
-
-            rem echo !KeyValue!
-        )
-    )
-
-    rem set list=A B C D
-    rem for %%a in (%list%) do ( 
-    rem     echo %%a
-    rem )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_GITIGNORE ()
-rem --------------------------------------------------------------------------------
-:MAIN_GITIGNORE
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_GITIGNORE
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    set gitignoreJava=D:\PROJECTS_LYR\CHECK_LIST\GitHub\PROJECTS\PATTERN\GITIGNORE\Java\.gitignore
-    set gitignorePython=D:\PROJECTS_LYR\CHECK_LIST\GitHub\PROJECTS\PATTERN\GITIGNORE\Python\.gitignore
-
-    set Section=PATTERNS
-    call :GetINI !FILEINI! !Section!
-    rem set /a kmax=KeyNamesCount-1
-    for /L %%i in (0,1,!KeyNamesCount!) do (
-        set KeyName=!KeyNames[%%i]!
-        rem echo !KeyName!
-        call :GetINI !FILEINI! !Section! !KeyName!
-        if !KeyName!==GIT (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==BAT (
-            set LFileName=!gitignorePython!
-            rem echo LFileName:!LFileName!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==KIX (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==PowerShell (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==UNIX (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==Java (
-            set LFileName=!gitignoreJava!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==Pascal_Delphi (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==Python (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-    )
+    call :PULL_PROJECT !DIR_PROJECTS_ROOT! !DIR_PROJECT_NAME! || exit /b 1
 
     exit /b 0
 rem endfunction
@@ -313,64 +257,8 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    set PROJECTS_GROUP=ALL
+    call :MAIN_PULL_PROJECT %* || exit /b 1
 
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR_DEPLOY - Каталог скриптов DEPLOY
-    rem -------------------------------------------------------------------
-    if not defined SCRIPTS_DIR_DEPLOY (
-        set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\99.DEPLOY
-    )
-    rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
-
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
-    rem echo APPRUN:!APPRUN!
-
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure TEST_FUNC ()
-rem --------------------------------------------------------------------------------
-:TEST_FUNC
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_FUNC
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
     exit /b 0
 rem endfunction
 
@@ -405,13 +293,7 @@ rem beginfunction
     call :MAIN_CHECK_PARAMETR %* || exit /b 1
 
     if defined OK (
-        echo НАЧАЛО
-
-        call :MAIN_GITIGNORE
-
         call :MAIN_FUNC || exit /b 1
-
-        echo КОНЕЦ
     )
 
     call :StopLogFile || exit /b 1
@@ -565,7 +447,13 @@ exit /b 0
 :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
+:CLEAR_TOOLS_BAT
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
 :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_GIT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
@@ -574,13 +462,22 @@ exit /b 0
 :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
+:CLEAR_TOOLS_JAVA
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
 :UPDATE_TOOLS_KIX_SCRIPTS_KIX
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_KIX
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_PY_SCRIPTS_PY
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_PY_TOOLS_SRC_PY
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_PY
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_SH_SCRIPTS_SH
@@ -590,6 +487,9 @@ exit /b 0
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+:CLEAR_TOOLS_SH
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 rem =================================================
@@ -622,9 +522,6 @@ exit /b 0
 :CreateDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
-:ClearDir
-%LIB_BAT%\LYRFileUtils.bat %*
-exit /b 0
 :CreateFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
@@ -632,9 +529,6 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir
-%LIB_BAT%\LYRFileUtils.bat %*
-exit /b 0
-:COPY_FILE
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :COPY_FILES
@@ -710,9 +604,6 @@ exit /b 0
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 :GetINI
-%LIB_BAT%\LYRParserINI.bat %*
-exit /b 0
-:GetINIPY
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 :GetINIParametr
