@@ -74,9 +74,9 @@ rem beginfunction
     rem 
     rem --------------------------------------------------------
     set LDIR_FROM=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC
-    echo LDIR_FROM:!LDIR_FROM!
+    rem echo LDIR_FROM:!LDIR_FROM!
     set LDIR_TO=!GPROJECT_DIR!\BAT
-    echo LDIR_TO:!LDIR_TO!
+    rem echo LDIR_TO:!LDIR_TO!
     set LMASK=*.bat
     if exist !LDIR_FROM!\ (
         echo .... COPY_FILES
