@@ -79,7 +79,6 @@ rem beginfunction
     rem echo LDIR_TO:!LDIR_TO!
     set LMASK=*.bat
     if exist !LDIR_FROM!\ (
-        echo .... COPY_FILES
         call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
     )
 
