@@ -87,7 +87,7 @@ rem beginfunction
         echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
         set GPROJECT_PATTERN_DIR=
         call :__REPO_WORK !GPROJECT_DIR!
-        call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
+        call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
         exit /b 0
     )    
 
@@ -97,7 +97,7 @@ rem beginfunction
         call :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
         set GPROJECT_PATTERN_DIR=
         call :__REPO_WORK !GPROJECT_DIR!
-        call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
+        call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
         exit /b 0
     )    
 
@@ -107,7 +107,7 @@ rem beginfunction
         call :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
         set GPROJECT_PATTERN_DIR=
         call :__REPO_WORK !GPROJECT_DIR!
-        call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
+        call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
         exit /b 0
     )    
 
@@ -117,7 +117,7 @@ rem beginfunction
         call :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
         set GPROJECT_PATTERN_DIR=
         call :__REPO_WORK !GPROJECT_DIR!
-        call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
+        call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
         exit /b 0
     )    
 
@@ -127,7 +127,7 @@ rem beginfunction
         call :UPDATE_TOOLS_PY_TOOLS_SRC_PY
         set GPROJECT_PATTERN_DIR=
         call :__REPO_WORK !GPROJECT_DIR!
-        call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
+        call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
         exit /b 0
     )    
 
@@ -138,14 +138,14 @@ rem beginfunction
         call :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
         set GPROJECT_PATTERN_DIR=
         call :__REPO_WORK !GPROJECT_DIR!
-        call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
+        call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
         exit /b 0
     )    
 
     if !GPROJECT_NAME!==TOOLS_PS (
         set GPROJECT_PATTERN_DIR=
         rem call :__REPO_WORK !GPROJECT_DIR!
-        rem call :PULL_PROJECT D:\TOOLS !PROJECT_NAME!
+        rem call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
         exit /b 0
     )    
 
@@ -627,44 +627,26 @@ rem beginfunction
 
     set LSaveDirectory=!cd!
 
-    set APROJECT_GROUP=%1
-    echo APROJECT_GROUP:!APROJECT_GROUP!
+    set ADIR_PROJECTS_ROOT=%1
+    echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
     set APROJECT_NAME=%2
     echo APROJECT_NAME:!APROJECT_NAME!
 
-    call :GET_project_INFO !APROJECT_GROUP! !APROJECT_NAME!
-    
-    call :WritePROCESS PULL проекта: !APROJECT_NAME! ...
+    call :WritePROCESS PULL проекта: !ADIR_PROJECTS_ROOT! ...
 
-    if exist "!GPROJECT_DIR!"\ (
-        cd /D "!GPROJECT_DIR!"
+    if exist "!ADIR_PROJECTS_ROOT!"\ (
+        cd /D "!ADIR_PROJECTS_ROOT!"
         if exist ".git"\ (
-            call lyrgit_pull.bat
+            rem call lyrgit_pull.bat
+            git pull
         ) else (
             echo INFO: Каталог .git не существует ...
         )
     ) else (
-        echo info: Каталог !GPROJECT_DIR! не существует...
+        echo info: Каталог !APROJECT_DIR! не существует...
         if !APROJECT_NAME!==TOOLS_SRC_GIT (
-            call :__git_clone !GPROJECT_DIR! !Gurl_github!
+            call :__git_clone !ADIR_PROJECTS_ROOT! !Gurl_github!
         )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         if !APROJECT_NAME!==TOOLS_GIT (
             call :__git_clone !ADIR_PROJECTS_ROOT! !Gurl_github!
         )
