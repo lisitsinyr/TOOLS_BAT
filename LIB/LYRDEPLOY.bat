@@ -634,8 +634,8 @@ rem beginfunction
 
     call :WritePROCESS PULL проекта: !ADIR_PROJECTS_ROOT! ...
 
-    if exist "!ADIR_PROJECTS_ROOT!"\ (
-        cd /D "!ADIR_PROJECTS_ROOT!"
+    if exist "!ADIR_PROJECTS_ROOT!\!APROJECT_NAME!"\ (
+        cd /D "!ADIR_PROJECTS_ROOT!\!APROJECT_NAME!"
         if exist ".git"\ (
             rem call lyrgit_pull.bat
             git pull
