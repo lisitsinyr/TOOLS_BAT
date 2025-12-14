@@ -61,11 +61,6 @@ setlocal enabledelayedexpansion
     if not defined PROJECTS_DIR_ROOT (
         set PROJECTS_DIR_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\GIT
     )
-    rem PROJECTS_DIR_ROOT:!PROJECTS_DIR_ROOT!
-
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECT_ROOT - Каталог группы проектов
-    rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=!PROJECTS_DIR_ROOT!\PROJECTS_GIT
     set DIR_PROJECTS_ROOT=D:\WORK
     rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!

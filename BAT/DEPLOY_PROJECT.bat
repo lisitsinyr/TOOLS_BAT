@@ -134,7 +134,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set VarName=PROJECT_NAME
     rem echo VarName:!VarName!
-    set VarValue=%~1
+    set VarValue=%~2
     if not defined VarValue (
         set VarValue=""
     ) else (
@@ -145,7 +145,6 @@ rem beginfunction
         )
     )
     rem echo VarValue:!VarValue!
-
     if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "PROJECT_NAME" "" || exit /b 1
     )

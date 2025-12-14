@@ -170,59 +170,51 @@ rem beginfunction
     rem OPTION
     rem -------------------------------------
     set OPTION=
-    set O1_Name=O1
-    set O1_Caption=O1_Caption
-    set O1_Default=
-    set O1=!O1_Default!
-    set PN_CAPTION=!O1_Caption!
-    rem call :Read_P O1 !O1! || exit /b 1
-    rem echo O1:!O1!
-    rem if defined O1 (
-    rem     set OPTION=!OPTION! -!O1_Name! "!O1!"
-    rem ) else (
-    rem     echo INFO: O1 [O1_Name:!O1_Name! O1_Caption:!O1_Caption!] not defined ...
-    rem )
-    rem echo OPTION:!OPTION!
+    echo OPTION:!OPTION!
 
     rem -------------------------------------
     rem ARGS
     rem -------------------------------------
     set ARGS=
 
-    set A1_Name=DIR_PROJECTS_ROOT
-    set A1_Caption=DIR_PROJECTS_ROOT
-    set A1_Default=%1
-    if not defined A1 (
-        set A1_Default=!DIR_PROJECTS_ROOT!
-    )
-    set A1=!A1_Default!
-    set PN_CAPTION=!A1_Caption!
-    call :Read_P A1 !A1! !A1_Caption! "" || exit /b 1
-    rem echo A1:!A1!
-    if defined A1 (
-        set ARGS=!ARGS! "!A1!"
-        set DIR_PROJECTS_ROOT=!A1!
+    rem -------------------------------------------------------------------
+    rem DIR_PROJECTS_ROOT
+    rem -------------------------------------------------------------------
+    set VarName=DIR_PROJECTS_ROOT
+    rem echo VarName:!VarName!
+    set VarValue=%~2
+    if not defined VarValue (
+        set VarValue=""
     ) else (
-        set DIR_PROJECTS_ROOT=
-        echo INFO: A1 [A1_Name:!A1_Name! A1_Caption:!A1_Caption!] not defined ... 
+        if defined !VarName! (
+            set VarValue=!%VarName%!
+        ) else (
+            set VarValue=%~2
+        )
+    )
+    rem echo VarValue:!VarValue!
+    if not defined !VarName! (
+        call :Read_P !VarName! "!VarValue!" "DIR_PROJECTS_ROOT" "" || exit /b 1
     )
 
-    set A2_Name=PROJECT_NAME
-    set A2_Caption=PROJECT_NAME
-    set A2_Default=%2
-    if not defined A2 (
-        set A2_Default=!PROJECT_NAME!
-    )
-    set A2=!A2_Default!
-    set PN_CAPTION=!A2_Caption!
-    call :Read_P A2 !A2! !A2_Caption! "" || exit /b 1
-    rem echo A2:!A2!
-    if defined A2 (
-        set ARGS=!ARGS! !A2!
-        set PROJECT_NAME=!A2!
+    rem -------------------------------------------------------------------
+    rem PROJECT_NAME
+    rem -------------------------------------------------------------------
+    set VarName=PROJECT_NAME
+    rem echo VarName:!VarName!
+    set VarValue=%~2
+    if not defined VarValue (
+        set VarValue=""
     ) else (
-        set PROJECT_NAME=
-        echo INFO: A2 [A2_Name:!A2_Name! A2_Caption:!A2_Caption!] not defined ... 
+        if defined !VarName! (
+            set VarValue=!%VarName%!
+        ) else (
+            set VarValue=%~2
+        )
+    )
+    rem echo VarValue:!VarValue!
+    if not defined !VarName! (
+        call :Read_P !VarName! "!VarValue!" "PROJECT_NAME" "" || exit /b 1
     )
 
     rem echo ARGS:!ARGS!
