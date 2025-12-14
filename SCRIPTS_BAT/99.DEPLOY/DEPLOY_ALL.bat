@@ -333,7 +333,7 @@ rem beginfunction
     if exist "!APPRUN!" (
         call !APPRUN!
     )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PowerShell.bat
     if exist "!APPRUN!" (
         call !APPRUN!
     )
