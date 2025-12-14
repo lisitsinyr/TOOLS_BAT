@@ -38,11 +38,10 @@ rem beginfunction
 
     set GPROJECTS_DIR_ROOT=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT
     set GPROJECTS_DIR_ROOT=
+    set GPROJECTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT
+    set GPROJECTS_DIR=
     
     set GPROJECT_NAME=
-
-    rem set GPROJECTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT
-    rem set GPROJECTS_DIR=
 
     set /a GPROJECT_DEPLOY=0
 
@@ -97,7 +96,6 @@ rem beginfunction
             call :ClearDir !GPROJECT_DIR!\BAT *.bat
             call :ClearDir !GPROJECT_DIR!\BAT_KIX *.bat
             call :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
-            set GPROJECT_PATTERN_DIR=
             call :__REPO_WORK !GPROJECT_DIR!
             call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
             exit /b 0
@@ -107,7 +105,6 @@ rem beginfunction
             call :ClearDir !GPROJECT_DIR!\BAT *.bat
             call :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
             call :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
-            set GPROJECT_PATTERN_DIR=
             call :__REPO_WORK !GPROJECT_DIR!
             call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
             exit /b 0
@@ -117,7 +114,6 @@ rem beginfunction
             call :ClearDir !GPROJECT_DIR!\BAT *.bat
             call :UPDATE_TOOLS_KIX_SCRIPTS_KIX
             call :UPDATE_TOOLS_KIX_TOOLS_SRC_KIX
-            set GPROJECT_PATTERN_DIR=
             call :__REPO_WORK !GPROJECT_DIR!
             call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
             exit /b 0
@@ -127,7 +123,6 @@ rem beginfunction
             call :ClearDir !GPROJECT_DIR!\BAT *.bat
             call :UPDATE_TOOLS_PY_SCRIPTS_PY
             call :UPDATE_TOOLS_PY_TOOLS_SRC_PY
-            set GPROJECT_PATTERN_DIR=
             call :__REPO_WORK !GPROJECT_DIR!
             call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
             exit /b 0
@@ -138,24 +133,22 @@ rem beginfunction
             call :UPDATE_TOOLS_SH_SCRIPTS_SH
             call :UPDATE_TOOLS_SH_TOOLS_SRC_SH
             call :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
-            set GPROJECT_PATTERN_DIR=
             call :__REPO_WORK !GPROJECT_DIR!
             call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
             exit /b 0
         )    
     
         if !GPROJECT_NAME!==TOOLS_PS (
-            set GPROJECT_PATTERN_DIR=
-            rem call :__REPO_WORK !GPROJECT_DIR!
-            rem call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
+            call :__REPO_WORK !GPROJECT_DIR!
+            call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
             exit /b 0
         )    
     
         call :__REPO_WORK !GPROJECT_DIR!
     
         call :WriteBEGIN .... Стоп DEPLOY проекта !GPROJECTS_GROUP! !GPROJECT_NAME! ...
+
     ) else (
-        rem echo GPROJECT_DEPLOY:!GPROJECT_DEPLOY!
         call :WriteINFO .... проект !GPROJECTS_GROUP! !GPROJECT_NAME! пропущен ...
     )
 
@@ -191,8 +184,8 @@ rem beginfunction
     rem         set res=Yes
     rem     )
     rem )
-
     rem if defined res (
+
     if defined APROJECTS_GROUP ( if defined APROJECT_NAME (
         rem echo !APROJECTS_GROUP! !APROJECT_NAME! - True
         set GPROJECTS_GROUP=!APROJECTS_GROUP!
@@ -219,21 +212,21 @@ rem beginfunction
             rem GPROJECTS_GROUP
             rem ------------------------------------------------
             call :GetINIParametr !GPROJECT_DIR!\PROJECT.ini general PROJECTS_GROUP || exit /b 1
-            set GPROJECTS_GROUP=!GetINIParametr!
+            set GPROJECTS_GROUP=!KeyValue!
             rem echo GPROJECTS_GROUP:!GPROJECTS_GROUP!
         
             rem -------------------------------------------------------------------
             rem GPROJECTS_DIR_ROOT
             rem -------------------------------------------------------------------
             call :GetINIParametr !GPROJECT_DIR!\PROJECT.ini general PROJECTS_DIR_ROOT || exit /b 1
-            set GPROJECTS_DIR_ROOT=!GetINIParametr!
+            set GPROJECTS_DIR_ROOT=!KeyValue!
             rem echo GPROJECTS_DIR_ROOT:!GPROJECTS_DIR_ROOT!
         
             rem ------------------------------------------------
             rem GPROJECT_NAME
             rem ------------------------------------------------
             call :GetINIParametr !GPROJECT_DIR!\PROJECT.ini general PROJECT_NAME || exit /b 1
-            set GPROJECT_NAME=!GetINIParametr!
+            set GPROJECT_NAME=!KeyValue!
             rem echo GPROJECT_NAME:!GPROJECT_NAME!
         )
     )
