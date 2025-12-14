@@ -335,7 +335,7 @@ rem beginfunction
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
     if exist "!APPRUN!" (
-        rem call !APPRUN!
+        call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
     if exist "!APPRUN!" (

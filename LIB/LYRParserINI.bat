@@ -94,7 +94,7 @@ rem beginfunction
 
     %GetINIAPP% !AFileName! !ASection! !AKeyName! > !__GetINI!
 
-    type !__GetINI!
+    rem type !__GetINI!
 
     set KeyValue=
 
