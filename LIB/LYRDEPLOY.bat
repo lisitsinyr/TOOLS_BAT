@@ -193,9 +193,9 @@ rem beginfunction
     rem     )
     rem )
 
-    if defined res (
-    rem if defined APROJECTS_GROUP if defined APROJECT_NAME (
-        rem echo !APROJECTS_GROUP! !APROJECT_NAME! - True
+    rem if defined res (
+    if defined APROJECTS_GROUP ( if defined APROJECT_NAME (
+        echo !APROJECTS_GROUP! !APROJECT_NAME! - True
         set GPROJECTS_GROUP=!APROJECTS_GROUP!
         set GPROJECT_NAME=!APROJECT_NAME!
         rem ------------------------------------------------
@@ -204,6 +204,7 @@ rem beginfunction
         call :GetINIParametr !GFILEINI! PROJECTS_GROUP !GPROJECTS_GROUP! || exit /b 1
         set GPROJECTS_DIR_ROOT=!KeyValue!
         rem echo GPROJECTS_DIR_ROOT:!GPROJECTS_DIR_ROOT!
+        )
     ) else (
         rem echo .... APROJECTS_GROUP APROJECT_NAME - False
         if not exist !cd!\PROJECT.ini (
