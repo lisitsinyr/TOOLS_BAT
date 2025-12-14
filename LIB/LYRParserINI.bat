@@ -89,9 +89,12 @@ rem beginfunction
     rem echo __GetINI:!__GetINI!
 
     rem echo %GetINIAPP%
+
+    rem echo %GetINIAPP% !AFileName! !ASection! !AKeyName!
+
     %GetINIAPP% !AFileName! !ASection! !AKeyName! > !__GetINI!
 
-    rem type !__GetINI!
+    type !__GetINI!
 
     set KeyValue=
 

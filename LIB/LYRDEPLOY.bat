@@ -278,7 +278,9 @@ rem beginfunction
         rem ------------------------------------------------
         rem PROJECTS_PATTERN_DIR
         rem ------------------------------------------------
-        call :GetINI !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
+        echo !GPROJECTS_INI! general PROJECTS_PATTERN_DIR
+        rem call :GetINI !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
+        call :GetINIParametr !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
         set GPROJECT_PATTERN_DIR=!KeyValue!
         rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
     )
