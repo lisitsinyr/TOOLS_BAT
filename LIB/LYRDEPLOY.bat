@@ -195,7 +195,7 @@ rem beginfunction
 
     rem if defined res (
     if defined APROJECTS_GROUP ( if defined APROJECT_NAME (
-        echo !APROJECTS_GROUP! !APROJECT_NAME! - True
+        rem echo !APROJECTS_GROUP! !APROJECT_NAME! - True
         set GPROJECTS_GROUP=!APROJECTS_GROUP!
         set GPROJECT_NAME=!APROJECT_NAME!
         rem ------------------------------------------------
@@ -279,45 +279,22 @@ rem beginfunction
         rem ------------------------------------------------
         rem PROJECTS_PATTERN_DIR
         rem ------------------------------------------------
-        rem echo !GPROJECTS_INI! general PROJECTS_PATTERN_DIR
-        rem call :GetINI !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
+        rem echo :GetINI !GPROJECTS_INI! general PROJECTS_PATTERN_DIR
+        call :GetINI !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
+        set GPROJECT_PATTERN_DIR=!KeyValue!
+        rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
+
         call :GetINIParametr !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
         set GPROJECT_PATTERN_DIR=!KeyValue!
         rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
     )
 
     if not defined GPROJECT_PATTERN_DIR (
-        echo ERROR: GPROJECT_PATTERN_DIR not defined ...
-        exit /b 1
+        echo INFO: GPROJECT_PATTERN_DIR not defined ...
     ) else (
         if not exist !GPROJECT_PATTERN_DIR!\ (
-            echo ERROR: !GPROJECT_PATTERN_DIR! not exist ...
-            exit /b 1
+            echo INFO: !GPROJECT_PATTERN_DIR! not exist ...
         )
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure __CopyFilesFromPATTERN () -> None
-rem --------------------------------------------------------------------------------
-:__CopyFilesFromPATTERN
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=__CopyFilesFromPATTERN
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    call :__CopyFromPATTERN_ALL !GPROJECT_PATTERN_DIR!
-
-    set res=
-    if !GPROJECTS_GROUP!==PROJECTS_PY set res=true
-    if !GPROJECTS_GROUP!==Python set res=true
-    if defined res ( 
-        call :__CopyFromPATTERN_PYTHON !GPROJECT_PATTERN_DIR!
     )
 
     exit /b 0
