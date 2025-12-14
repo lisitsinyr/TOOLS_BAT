@@ -88,7 +88,7 @@ rem beginfunction
             call :ClearDir !GPROJECT_DIR!\BAT *.bat
             call :UPDATE_TOOLS_BAT_SCRIPTS_BAT
             call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
-            echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
+            rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
             set GPROJECT_PATTERN_DIR=
             call :__REPO_WORK !GPROJECT_DIR!
             call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
@@ -563,6 +563,7 @@ rem beginfunction
     call :__SetPROJECT_INI
     
     cd /D "!ADirectory!"
+    
     if exist .git\ (
         call lyrgit_push_main.bat
     ) else (
@@ -587,14 +588,18 @@ rem beginfunction
     set !FUNCNAME!=
 
     set LSaveDirectory=!cd!
+
     set LOG_FILE_ADD=1
     set ADirectory=%~1
     if not exist !ADirectory!\ (
         echo ERROR: Каталог !ADirectory! не существует ...
         exit /b 1
     )
+    
     cd /D "!ADirectory!"
+    
     call lyrgit_pull.bat
+    
     cd /D "!LSaveDirectory!"
 
     exit /b 0
@@ -648,9 +653,9 @@ rem beginfunction
     set LSaveDirectory=!cd!
 
     set ADIR_PROJECTS_ROOT=%1
-    echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
+    rem echo ADIR_PROJECTS_ROOT:!ADIR_PROJECTS_ROOT!
     set APROJECT_NAME=%2
-    echo APROJECT_NAME:!APROJECT_NAME!
+    rem echo APROJECT_NAME:!APROJECT_NAME!
 
     call :WritePROCESS PULL проекта: !ADIR_PROJECTS_ROOT! ...
 
