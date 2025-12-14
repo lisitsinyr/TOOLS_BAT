@@ -69,13 +69,19 @@ setlocal enabledelayedexpansion
 
     call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
-    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! PROJECTS_BAT
-    
-    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_BAT
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! HelloWorld
 
-    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_BAT
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_BAT
+
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PROJECTS_BAT
+    
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_BAT
+
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_BAT
 
     call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_BAT
+
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
 
     call :WriteEND ................................Конец DEPLOY группы проектов: !! ...
 
