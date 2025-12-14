@@ -88,7 +88,6 @@ rem beginfunction
             call :ClearDir !GPROJECT_DIR!\BAT *.bat
             call :UPDATE_TOOLS_BAT_SCRIPTS_BAT
             call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
-            set GPROJECT_PATTERN_DIR=
             call :__REPO_WORK !GPROJECT_DIR!
             call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
             exit /b 0
