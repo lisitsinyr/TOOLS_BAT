@@ -11,33 +11,41 @@ setlocal enabledelayedexpansion
     echo Старт !BATNAME! ...
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_ROOT - Каталог скриптов
+    rem PROJECTS_LYR_ROOT - Каталог ROOT
     rem -------------------------------------------------------------------
+    rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
     rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
-    rem PROJECTS_LYR_DIR - Каталог скриптов
+    rem PROJECTS_LYR_DIR - Каталог проектов LYR
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    if not exist "!PROJECTS_LYR_DIR!"\ (
+        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
+        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        rem mkdir "!PROJECTS_LYR_DIR!"
+        exit /b 1
+    )
 
     rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR - Каталог скриптов
+    rem SCRIPTS_DIR - Каталог скриптов BAT
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
-        set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+        rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
+        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
+        set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
-    rem echo SCRIPTS_DIR: !SCRIPTS_DIR!
+    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
 
     rem -------------------------------------------------------------------
-    rem LIB_BAT - каталог библиотеки скриптов
+    rem LIB_BAT - каталог библиотеки скриптов BAT
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
-        set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
+        set LIB_BAT=!SCRIPTS_DIR!\LIB
     )
-    rem echo LIB_BAT: !LIB_BAT!
+    rem echo LIB_BAT:!LIB_BAT!
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
@@ -56,61 +64,24 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
-    set PROJECTS_GROUP=PROJECTS_KIX
-    rem echo PROJECTS_GROUP:!PROJECTS_GROUP! 
-    call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECTS_GROUP! ...
-    rem -------------------------------------------------------------------
-    rem PROJECTS_DIR_ROOT - каталог группы проектов
-    rem -------------------------------------------------------------------
-    set PROJECTS_DIR_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\KIX
-    rem echo PROJECTS_DIR_ROOT:!PROJECTS_DIR_ROOT!
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECT_ROOT - Каталог группы проектов
-    rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_DIR_ROOT!\!PROJECTS_GROUP!
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    set LPROJECTS_GROUP=KIX
+    rem echo LPROJECTS_GROUP:!LPROJECTS_GROUP! 
 
-    set PROJECT_NAME=PROJECTS_KIX
-    call :DEPLOY_PROJECT
+    call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
-    set PROJECT_NAME=SOFTWARE_KIX
-    call :DEPLOY_PROJECT
-    
-    set PROJECT_NAME=TESTS_KIX
-    call :DEPLOY_PROJECT
-    
-    set PROJECT_NAME=SCRIPTS_KIX
-    call :DEPLOY_PROJECT
-    
-    set PROJECT_NAME=TOOLS_SRC_KIX
-    call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! HelloWorld
 
-    set PROJECT_NAME=TOOLS_KIX
-    call :DEPLOY_PROJECT
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_KIX
 
-    call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECTS_GROUP! ...
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_KIX
 
-    rem -------------------------------------------------------------------
-    rem 
-    rem -------------------------------------------------------------------
-    set PROJECTS_GROUP=KIX
-    rem echo PROJECTS_GROUP:!PROJECTS_GROUP! 
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_KIX
 
-    rem call :WriteBEGIN ................................DEPLOY группы проектов: !PROJECTS_GROUP! ...
-    
-    rem -------------------------------------------------------------------
-    rem PROJECTS_DIR_ROOT - каталог группы проектов
-    rem -------------------------------------------------------------------
-    set PROJECTS_DIR_ROOT=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT
-    rem echo PROJECTS_DIR_ROOT:!PROJECTS_DIR_ROOT!
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_KIX
 
-    rem -------------------------------------------------------------------
-    rem DIR_PROJECT_ROOT - Каталог группы проектов
-    rem -------------------------------------------------------------------
-    set DIR_PROJECTS_ROOT=!PROJECTS_DIR_ROOT!\!PROJECTS_GROUP!
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
 
-    rem call :WriteEND ................................Конец DEPLOY группы проектов: !PROJECTS_GROUP! ...
+    call :WriteEND ................................Конец DEPLOY группы проектов: !! ...
 
     exit /b 0
 :end
@@ -133,15 +104,6 @@ exit /b 0
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :ConsoleTEST_02
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:FormatColorStr
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:aListToStr
-%LIB_BAT%\LYRConsole.bat %*
-exit /b 0
-:bListToStr
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :SetColor
@@ -198,12 +160,14 @@ exit /b 0
 :WriteTEXT
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRConst.bat
 rem =================================================
 :LYRConstINIT
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
@@ -216,6 +180,7 @@ exit /b 0
 :DateTime
 %LIB_BAT%\LYRDateTime.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRDEPLOY.bat
 rem =================================================
@@ -249,6 +214,7 @@ exit /b 0
 :PULL_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
@@ -306,6 +272,10 @@ exit /b 0
 :CLEAR_TOOLS_SH
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
+:GET_url_github
+%LIB_BAT%\LYRDEPLOYTools.bat %*
+exit /b 0
+
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
@@ -345,15 +315,13 @@ exit /b 0
 :CurrentDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
-:COPY_FILE
-%LIB_BAT%\LYRFileUtils.bat %*
-exit /b 0
 :COPY_FILES
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :XCOPY_FILES
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRLIB.bat
 rem =================================================
@@ -381,6 +349,7 @@ exit /b 0
 :__SET_LOG
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRLog.bat
 rem =================================================
@@ -411,6 +380,7 @@ exit /b 0
 :StopLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRParserINI.bat
 rem =================================================
@@ -429,6 +399,7 @@ exit /b 0
 :GetFileParser
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRPY.bat
 rem =================================================
@@ -441,6 +412,7 @@ exit /b 0
 :VENV_STOP
 %LIB_BAT%\LYRPY.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
@@ -468,6 +440,7 @@ exit /b 0
 :ListToStr
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRSupport.bat
 rem =================================================

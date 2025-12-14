@@ -335,27 +335,27 @@ rem beginfunction
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PS.bat
     if exist "!APPRUN!" (
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
     if exist "!APPRUN!" (
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
     if exist "!APPRUN!" (
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
     if exist "!APPRUN!" (
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
     if exist "!APPRUN!" (
-        call !APPRUN!
+        rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
     if exist "!APPRUN!" (
-        call !APPRUN!
+        rem call !APPRUN!
     )
 
     exit /b 0
@@ -407,7 +407,7 @@ rem beginfunction
     if defined OK (
         echo ÍÀ×ÀËÎ
 
-        call :MAIN_GITIGNORE
+        rem call :MAIN_GITIGNORE
 
         call :MAIN_FUNC || exit /b 1
 
