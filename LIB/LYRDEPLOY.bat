@@ -88,7 +88,6 @@ rem beginfunction
             call :ClearDir !GPROJECT_DIR!\BAT *.bat
             call :UPDATE_TOOLS_BAT_SCRIPTS_BAT
             call :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
-            rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
             set GPROJECT_PATTERN_DIR=
             call :__REPO_WORK !GPROJECT_DIR!
             call :PULL_PROJECT D:\TOOLS !GPROJECT_NAME!
@@ -252,8 +251,9 @@ rem beginfunction
     rem ------------------------------------------------
     rem GPROJECT_PATTERN_DIR
     rem ------------------------------------------------
+    rem echo !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_PATTERN_DIR
     call :GetINI !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_PATTERN_DIR || exit /b 1
-    set GPROJECT_PATTERN_DIR=!GetINI!
+    set GPROJECT_PATTERN_DIR=!KeyValue!
     rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
 
     rem ------------------------------------------------
