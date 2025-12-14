@@ -337,11 +337,17 @@ rem beginfunction
     if exist "!APPRUN!" (
         call !APPRUN!
     )
+
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
+    if exist "!APPRUN!" (
+        call !APPRUN!
+    )
+
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
     if exist "!APPRUN!" (
         rem call !APPRUN!
     )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
+    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
     if exist "!APPRUN!" (
         rem call !APPRUN!
     )
@@ -350,10 +356,6 @@ rem beginfunction
         rem call !APPRUN!
     )
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
-    if exist "!APPRUN!" (
-        rem call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
     if exist "!APPRUN!" (
         rem call !APPRUN!
     )
