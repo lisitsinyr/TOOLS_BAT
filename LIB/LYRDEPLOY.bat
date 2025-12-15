@@ -61,7 +61,41 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure DEPLOY_PROJECT (PROJECT_GROUP PROJECT_NAME) -> None
+rem procedure DEPLOY_PROJECTS_GROUP (PROJECTS_GROUP PROJECTS_INI) -> None
+rem --------------------------------------------------------------------------------
+:DEPLOY_PROJECTS_GROUP
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=DEPLOY_PROJECTS_GROUP
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set APROJECTS_GROUP=%~1
+    echo APROJECTS_GROUP:!APROJECTS_GROUP!
+    set APROJECTS_INI=%~2
+    echo APROJECTS_INI:!APROJECTS_INI!
+
+    call :GetINIParametr "!APROJECTS_INI!" PROJECTS_NAME
+    rem echo KeyNamesCount:!KeyNamesCount!
+    set /a kmax=!KeyNamesCount!
+    rem echo kmax:!kmax!
+    for /L %%i in (0,1,!kmax!) do (
+        set LKeyName=!KeyNames[%%i]!
+        call :GetINIParametr "!APROJECTS_INI!" PROJECTS_NAME !LKeyName!
+        if !KeyValue! EQU 1 (
+            rem echo .... !APROJECTS_GROUP! ... !LKeyName!
+            echo DEPLOY ... !APROJECTS_GROUP! !LKeyName!
+            call :DEPLOY_PROJECT !APROJECTS_GROUP! !LKeyName!
+        )
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure DEPLOY_PROJECT (PROJECTS_GROUP PROJECT_NAME) -> None
 rem --------------------------------------------------------------------------------
 :DEPLOY_PROJECT
 rem beginfunction
@@ -237,29 +271,32 @@ rem beginfunction
     rem ------------------------------------------------
     rem GPROJECT_DIR
     rem ------------------------------------------------
-    call :GetINI !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_DIR || exit /b 1
+    rem call :GetINI !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_DIR || exit /b 1
+    call :GetINIParametr !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_DIR || exit /b 1
     set GPROJECT_DIR=!KeyValue!
     rem echo GPROJECT_DIR:!GPROJECT_DIR!
 
     rem ------------------------------------------------
     rem GPROJECT_PATTERN_DIR
     rem ------------------------------------------------
-    rem echo !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_PATTERN_DIR
-    call :GetINI !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_PATTERN_DIR || exit /b 1
+    rem call :GetINI !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_PATTERN_DIR || exit /b 1
+    call :GetINIParametr !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_PATTERN_DIR || exit /b 1
     set GPROJECT_PATTERN_DIR=!KeyValue!
     rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
 
     rem ------------------------------------------------
     rem Gurl_github
     rem ------------------------------------------------
-    call :GetINI !GPROJECTS_INI! !GPROJECT_NAME! url || exit /b 1
+    rem call :GetINI !GPROJECTS_INI! !GPROJECT_NAME! url || exit /b 1
+    call :GetINIParametr !GPROJECTS_INI! !GPROJECT_NAME! url || exit /b 1
     set Gurl_github=!KeyValue!
     rem echo Gurl_github:!Gurl_github!
 
     rem ------------------------------------------------
     rem GPROJECT_DEPLOY
     rem ------------------------------------------------
-    call :GetINI !GPROJECTS_INI! PROJECTS_NAME !GPROJECT_NAME! || exit /b 1
+    rem call :GetINI !GPROJECTS_INI! PROJECTS_NAME !GPROJECT_NAME! || exit /b 1
+    call :GetINIParametr !GPROJECTS_INI! PROJECTS_NAME !GPROJECT_NAME! || exit /b 1
     if not defined KeyValue (
         set /a GPROJECT_DEPLOY=0
     ) else (
@@ -271,11 +308,7 @@ rem beginfunction
         rem ------------------------------------------------
         rem PROJECTS_PATTERN_DIR
         rem ------------------------------------------------
-        rem echo :GetINI !GPROJECTS_INI! general PROJECTS_PATTERN_DIR
-        call :GetINI !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
-        set GPROJECT_PATTERN_DIR=!KeyValue!
-        rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!
-
+        rem call :GetINI !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
         call :GetINIParametr !GPROJECTS_INI! general PROJECTS_PATTERN_DIR || exit /b 1
         set GPROJECT_PATTERN_DIR=!KeyValue!
         rem echo GPROJECT_PATTERN_DIR:!GPROJECT_PATTERN_DIR!

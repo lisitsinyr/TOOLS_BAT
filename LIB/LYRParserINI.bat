@@ -98,16 +98,17 @@ rem beginfunction
 
     set KeyValue=
 
-    set n=0
-    set k=0
-    if exist !__GetINI! (
+    set /a n=0
+    set /a k=0
+
+    if defined __GetINI if exist !__GetINI! (
         if not defined ASection (
             for /f %%i in (!__GetINI!) do (
                 set Sections[!n!]=%%i
                 rem echo !Sections[%n%]!
                 set /A n+=1
             )
-            set GetINI=!AFileName!
+            set __GetINI=!AFileName!
         ) else (
             for /f "eol=# delims== tokens=1,2" %%i in (!__GetINI!) do (
                 rem В переменной i - ключ
@@ -136,11 +137,12 @@ rem beginfunction
             )
         )
 
-        del !__GetINI!
+        rem del !__GetINI!
 
     ) else (
-        echo INFO: File !__GetINI! not exist ...
+        rem echo INFO: File !__GetINI! not exist ...
     )
+
     set /a SectionsCount=n-1
     set /a KeyNamesCount=k-1
 
@@ -177,8 +179,9 @@ rem beginfunction
 
     set KeyValue=
 
-    set n=0
-    set k=0
+    set /a n=0
+    set /a k=0
+
     if exist !__GetINI! (
         if not defined ASection (
             for /f %%i in (!__GetINI!) do (
@@ -220,6 +223,7 @@ rem beginfunction
     ) else (
         echo INFO: File !__GetINI! not exist ...
     )
+
     set /a SectionsCount=n-1
     set /a KeyNamesCount=k-1
 
@@ -252,7 +256,10 @@ rem beginfunction
 
     set KeyValue=
     set Section=
+    
     set /A n=0
+    set /A k=0
+
     if exist !AFileName! (
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
             rem usebackq
@@ -281,7 +288,6 @@ rem beginfunction
                 rem echo Section:!Section!
                 set Sections[!n!]=!Section!
                 set /A n+=1
-                set /A k=0
             ) else (
                 if defined AKeyName (
                     if "!TrimRight!"=="!AKeyName!" (
@@ -293,6 +299,8 @@ rem beginfunction
                     if defined ASection (
                         if "!ASection!"=="!Section!" (
                             set KeyNames[!k!]=%%i
+                            rem echo .... .... %%i
+                            rem echo .... .... !KeyNames[%k%]!
                             set /A k+=1
 
                             set !TrimRight!=!TrimLeft!
@@ -311,6 +319,7 @@ rem beginfunction
     ) else (
         echo INFO: File !AFileName! not exist ...
     )
+
     set /a SectionsCount=n-1
     set /a KeyNamesCount=k-1
 
@@ -318,7 +327,6 @@ rem Как удалить все переменные в cmd (только в о
 rem Совершенно верно, можно при помощи for с ключом /f обработать вывод команды set без параметров, получив имена всех (почти) определённых переменных среды (частей выводимых строк до знака =: delims==):
 rem for /f "delims==" %v in ('set') do  set "%v="
 rem (при использовании в командных файлах % перед переменной цикла надо удвоить).
-
 
     exit /b 0
 rem endfunction

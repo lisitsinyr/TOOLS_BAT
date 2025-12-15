@@ -78,9 +78,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    set FILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
-    rem echo FILEINI:!FILEINI!
-
     exit /b 0
 rem endfunction
 
@@ -141,38 +138,6 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetLenArray (Array)
-rem --------------------------------------------------------------------------------
-:GetLenArray
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=GetLenArray
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    echo %1
-    set AArray=%1
-
-    :: Here we initializing an variable named len to calculate length of array
-    set len=0
-    :: To iterate the element of array
-    :Loop 
-    :: It will check if the element is defined or not
-    if defined Sections[%len%] (
-    rem if defined %1[%len%] (
-        echo !Sections[%len%]!
-        set /a len+=1
-        GOTO :Loop 
-    )
-
-    set !FUNCNAME!=!len!
-    rem echo !FUNCNAME!:!%FUNCNAME%!
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem procedure MAIN_TEST ()
 rem --------------------------------------------------------------------------------
 :MAIN_TEST
@@ -183,121 +148,104 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :GetINI !FILEINI!
-    rem call :GetINIPY !FILEINI!
-    rem call :GetINIParametr !FILEINI!
-
     rem call :GetLenArray !Sections!
     rem echo GetLenArray:!GetLenArray!
 
-    rem set /a nmax=SectionsCount-1
-    for /L %%i in (0,1,!SectionsCount!) do (
-        set Section=!Sections[%%i]!
-        rem echo !Section! 
+    rem set LFILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
+    set LFILEINI=!GFILEINI!
+    rem echo LFILEINI:!LFILEINI!
+    rem call :GetINIPY "!LFILEINI!"
+    call :GetINIParametr "!LFILEINI!"
+    rem call :GetINI "!LFILEINI!"
+    rem echo SectionsCount:!SectionsCount!
 
-        call :GetINI !FILEINI! !Section!
-        rem set /a kmax=KeyNamesCount-1
-        for /L %%i in (0,1,!KeyNamesCount!) do (
-            set KeyName=!KeyNames[%%i]!
-            rem echo !KeyName!
 
-            call :GetINI !FILEINI! !Section! !KeyName!
-            rem echo !GetINI!
-            
-            rem call :GetINIParametr !FILEINI! !Section! !KeyName!
-            rem echo !GetINIParametr!
+    call :GetINIParametr "!LFILEINI!" PROJECTS_GROUP
+    rem call :GetINI "!LFILEINI!" !Section!
+    set /a kmax=!KeyNamesCount!
+    rem echo kmax:!kmax!
+    set /a m=0
+    for /L %%i in (0,1,!kmax!) do (
+        set LKeyName=!KeyNames[%%i]!
+        rem echo !LKeyName!
 
-            rem echo !KeyValue!
+        call :GetINIParametr "!LFILEINI!" PROJECTS_GROUP !LKeyName!
+        rem call :GetINI "!FILEINI!" !Section! !KeyName!
+        rem echo !KeyValue!
+
+        set LPROJECTS_GROUP_INI=!KeyValue!\!LKeyName!.ini
+        rem echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
+
+        rem set FilesINI[!m!]=!LKeyName!=!LPROJECTS_GROUP_INI!
+        rem echo .... !FilesINI[%m%]!
+
+        call :DEPLOY_PROJECTS_GROUP !LKeyName! !LPROJECTS_GROUP_INI!
+
+        set /A m+=1
+    )
+
+goto :__end
+    set /a mmax=!m!
+    for /L %%i in (0,1,!mmax!) do (
+        set LValue=!FilesINI[%%i]!
+        rem echo .... !LValue!
+        for /F "eol=# delims== tokens=1,2" %%a in ("!LValue!") do (
+            rem В переменной a - ключ
+            rem В переменной b - значение
+            rem echo %%a:%%b
+            set LFILEINI=%%b
+            echo LFILEINI:!LFILEINI!
+            call :GetINIParametr "!LFILEINI!" PROJECTS_NAME
+            rem echo KeyNamesCount:!KeyNamesCount!
+            set /a kmax=!KeyNamesCount!
+            rem echo kmax:!kmax!
+
+            call :GetINIParametr "!LFILEINI!" general PROJECTS_GROUP
+            set LPROJECTS_GROUP=!KeyValue!
+
+            set /a mm=0
+            for /L %%i in (0,1,!kmax!) do (
+                set LKeyName=!KeyNames[%%i]!
+                call :GetINIParametr "!LFILEINI!" PROJECTS_NAME !LKeyName!
+        
+                if !KeyValue! EQU 1 (
+                    echo .... !LPROJECTS_GROUP! ... !LKeyName!
+
+                    set LPROJECTS[!mm!]=!LPROJECTS_GROUP!=!LKeyName!
+                    rem echo .... !LPROJECTS[%mm%]!
+
+                    set /A mm+=1
+                )
+            )
         )
     )
+
+:__end
+
+    rem set /a mmmax=!mm!
+    rem for /L %%i in (0,1,!mmmax!) do (
+    rem     set LValue=!LPROJECTS[%%i]!
+    rem     echo .... !LValue!
+    rem )
+
+
+
+    rem FOR /F "tokens=1,2" %%a in ("гитара рыбка") do echo Моя %%a и моя %%b — выводит «Моя гитара и моя рыбка».
+
+    rem call :GetINIParametr "!PROJECTS_GROUP_INI!" "PROJECTS_NAME"
+    rem call :GetINI "!PROJECTS_GROUP_INI!" "PROJECTS_NAME"
+    rem set /a kmax_2=!KeyNamesCount!
+    rem echo kmax_2:!kmax_2!
+
+    rem for /L %%i in (0,1,!kmax_2!) do (
+    rem     set LKeyName_2=!KeyNames[%%i]!
+    rem     echo .... !LKeyName_2!
+    rem )
 
     rem set list=A B C D
     rem for %%a in (%list%) do ( 
     rem     echo %%a
     rem )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_GITIGNORE ()
-rem --------------------------------------------------------------------------------
-:MAIN_GITIGNORE
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_GITIGNORE
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    set gitignoreJava=D:\PROJECTS_LYR\CHECK_LIST\GitHub\PROJECTS\PATTERN\GITIGNORE\Java\.gitignore
-    set gitignorePython=D:\PROJECTS_LYR\CHECK_LIST\GitHub\PROJECTS\PATTERN\GITIGNORE\Python\.gitignore
-
-    set Section=PATTERNS
-    call :GetINI !FILEINI! !Section!
-    rem set /a kmax=KeyNamesCount-1
-    for /L %%i in (0,1,!KeyNamesCount!) do (
-        set KeyName=!KeyNames[%%i]!
-        rem echo !KeyName!
-        call :GetINI !FILEINI! !Section! !KeyName!
-        if !KeyName!==GIT (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==BAT (
-            set LFileName=!gitignorePython!
-            rem echo LFileName:!LFileName!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==KIX (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==PowerShell (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==UNIX (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==Java (
-            set LFileName=!gitignoreJava!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==Pascal_Delphi (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-        if !KeyName!==Python (
-            set LFileName=!gitignorePython!
-            if exist !LFileName! (
-                rem echo !KeyValue!
-                call :COPY_FILE !LFileName! !KeyValue! /Y || exit /b 1
-            )
-        )
-    )
 
     exit /b 0
 rem endfunction
@@ -350,7 +298,6 @@ rem beginfunction
     if exist "!APPRUN!" (
         call !APPRUN!
     )
-
     set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
     if exist "!APPRUN!" (
         call !APPRUN!
@@ -409,9 +356,8 @@ rem beginfunction
     if defined OK (
         echo НАЧАЛО
 
-        rem call :MAIN_GITIGNORE
-
-        call :MAIN_FUNC || exit /b 1
+        call :MAIN_TEST || exit /b 1
+        rem call :MAIN_FUNC || exit /b 1
 
         echo КОНЕЦ
     )
@@ -528,28 +474,10 @@ rem =================================================
 :LYRDEPLOYINIT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:CopyFilesFromPATTERN
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:CopyFilesROOT
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetPROJECT_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetREPO_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:REPO_WORK
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
 :DEPLOY_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:git_pull
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:git_clone
+:DEPLOY_PROJECTS_GROUP
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :PULL_PROJECT
@@ -799,6 +727,9 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :CheckErrorlevel
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetLenArray
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

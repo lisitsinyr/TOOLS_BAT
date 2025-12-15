@@ -507,6 +507,37 @@ rem beginfunction
     exit /b 0
 rem endfunction
 
+rem --------------------------------------------------------------------------------
+rem procedure GetLenArray (Array)
+rem --------------------------------------------------------------------------------
+:GetLenArray
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetLenArray
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    echo %1
+    set AArray=%1
+
+    :: Here we initializing an variable named len to calculate length of array
+    set len=0
+    :: To iterate the element of array
+    :Loop 
+    :: It will check if the element is defined or not
+    if defined Sections[%len%] (
+    rem if defined %1[%len%] (
+        echo !Sections[%len%]!
+        set /a len+=1
+        GOTO :Loop 
+    )
+
+    set GetLenArray=!len!
+    rem echo GetLenArray:!GetLenArray!
+
+    exit /b 0
+rem endfunction
 
 rem =================================================
 rem ФУНКЦИИ LIB
