@@ -186,28 +186,13 @@ rem =================================================
 :LYRDEPLOYINIT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:CopyFilesFromPATTERN
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:CopyFilesROOT
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetPROJECT_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetREPO_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:REPO_WORK
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
 :DEPLOY_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:git_pull
+:DEPLOY_PROJECTS_GROUP
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:git_clone
+:DEPLOY_PROJECTS
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :PULL_PROJECT
