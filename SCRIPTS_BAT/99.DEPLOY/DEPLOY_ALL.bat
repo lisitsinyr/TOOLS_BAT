@@ -148,12 +148,9 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
-    call :DEPLOY_PROJECTS D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
+    rem call :DEPLOY_PROJECTS D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
 
 
-
-
-goto :__end
     rem call :GetLenArray !Sections!
     rem echo GetLenArray:!GetLenArray!
 
@@ -190,9 +187,9 @@ goto :__end
         set /A m+=1
     )
 
-    
-    
-    
+
+goto :__end
+   
     
     set /a mmax=!m!
     for /L %%i in (0,1,!mmax!) do (
