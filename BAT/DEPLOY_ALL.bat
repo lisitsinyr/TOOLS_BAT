@@ -150,43 +150,32 @@ rem beginfunction
     rem call :GetLenArray !Sections!
     rem echo GetLenArray:!GetLenArray!
 
+    call :DEPLOY_PROJECTS !GFILEINI!
 
 
-    rem call :DEPLOY_PROJECTS D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
-    rem call :DEPLOY_PROJECTS !GFILEINI!
+goto :__end0
 
-
-    set LFILEINI=!GFILEINI!
-    rem echo LFILEINI:!LFILEINI!
-
-    call :GetINIParametr "!LFILEINI!" PROJECTS_GROUP
-    rem call :GetINI "!LFILEINI!" !Section!
-    echo ..1.. KeyNamesCount:!KeyNamesCount!
+    call :GetINIParametr "!GFILEINI!" PROJECTS_GROUP
+    rem call :GetINI "!GFILEINI!" !Section!
+    rem echo ..1.. KeyNamesCount:!KeyNamesCount!
     set /a kmax=!KeyNamesCount!
-    echo ..1.. kmax:!kmax!
+    rem echo ..1.. kmax:!kmax!
     set /a m=0
     for /L %%i in (0,1,!kmax!) do (
         echo ..1.. %%i
         set LPROJECTS_GROUP=!KeyNames[%%i]!
         rem echo ..1.. LPROJECTS_GROUP:!LPROJECTS_GROUP!
 
-        call :GetINIParametr "!LFILEINI!" PROJECTS_GROUP !LPROJECTS_GROUP!
+        call :GetINIParametr "!GFILEINI!" PROJECTS_GROUP !LPROJECTS_GROUP!
         rem echo ..1.. KeyValue:!KeyValue!
 
         set LPROJECTS_GROUP_INI=!KeyValue!\!LPROJECTS_GROUP!.ini
         rem echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
 
-        rem set FilesINI[!m!]=!LKeyName!=!LPROJECTS_GROUP_INI!
-        rem echo ..1.. !FilesINI[%m%]!
-
-        rem echo ..1.. !LPROJECTS_GROUP!=!LPROJECTS_GROUP_INI!
-
         call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
         set /A m+=1
     )
-
-goto :__end0
 
 :__end0
 
