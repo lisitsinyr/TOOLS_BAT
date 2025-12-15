@@ -80,7 +80,6 @@ rem beginfunction
     set /a kmax=!KeyNamesCount!
     echo kmax:!kmax!
 
-    set /a m=0
     for /L %%i in (0,1,!kmax!) do (
         set LKeyName=!KeyNames[%%i]!
         echo !LKeyName!
@@ -91,13 +90,7 @@ rem beginfunction
 
         set LPROJECTS_GROUP_INI=!KeyValue!\!LKeyName!.ini
         rem echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
-
-        rem set FilesINI[!m!]=!LKeyName!=!LPROJECTS_GROUP_INI!
-        rem echo .... !FilesINI[%m%]!
-
         call :DEPLOY_PROJECTS_GROUP !LKeyName! !LPROJECTS_GROUP_INI!
-
-        set /A m+=1
     )
 
     exit /b 0
