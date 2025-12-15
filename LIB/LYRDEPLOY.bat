@@ -86,9 +86,11 @@ rem beginfunction
 
         rem call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP !LKeyName!
         call :GetINI "!APROJECTS_INI!" PROJECTS_GROUP !LKeyName!
-        rem echo !KeyValue!
+        echo GetINI:!GetINI!
+        echo KeyValue:!KeyValue!
 
         set LPROJECTS_GROUP_INI=!KeyValue!\!LKeyName!.ini
+
         rem echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
         call :DEPLOY_PROJECTS_GROUP !LKeyName! !LPROJECTS_GROUP_INI!
 
