@@ -67,7 +67,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINI (AFileName, ASection, AKeyName) -> None
+rem procedure GetINI (AFileName, ASection, AKeyName, AKeyNames) -> None
 rem --------------------------------------------------------------------------------
 :GetINI
 rem beginfunction
@@ -84,6 +84,8 @@ rem beginfunction
     rem echo ASection:!ASection!
     set AKeyName=%~3
     rem echo AKeyName:!AKeyName!
+    set AKeyNames=%~4
+    rem echo AKeyNames:!KeyNames!
 
     set __GetINI=!TEMP_DIR!\%random%.tmp
     rem echo __GetINI:!__GetINI!
@@ -117,7 +119,12 @@ rem beginfunction
                 set %%i=%%j
                 rem echo %%i:!%%i!
 
-                set KeyNames[!k!]=%%i
+                if defined AKeyNames (
+                    set !AKeyNames![!k!]=%%i
+                ) else (
+                    set KeyNames[!k!]=%%i
+                )
+
                 set /A k+=1
 
                 set STRi=%%i
@@ -150,7 +157,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIPY (AFileName, ASection, AKeyName) -> None
+rem procedure GetINIPY (AFileName, ASection, AKeyName, AKeyNames) -> None
 rem --------------------------------------------------------------------------------
 :GetINIPY
 rem beginfunction
@@ -167,6 +174,8 @@ rem beginfunction
     rem echo ASection:!ASection!
     set AKeyName=%~3
     rem echo AKeyName:!AKeyName!
+    set AKeyNames=%~4
+    rem echo AKeyNames:!KeyNames!
 
     set __GetINI=!TEMP_DIR!\%random%.tmp
     rem echo __GetINI:!__GetINI!
@@ -198,7 +207,12 @@ rem beginfunction
                 set %%i=%%j
                 rem echo %%i:!%%i!
 
-                set KeyNames[!k!]=%%i
+                if defined AKeyNames (
+                    set !AKeyNames![!k!]=%%i
+                ) else (
+                    set KeyNames[!k!]=%%i
+                )
+            
                 set /A k+=1
 
                 set STRi=%%i
@@ -231,7 +245,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIParametr (AFileName, ASection, AKeyName) -> None
+rem procedure GetINIParametr (AFileName, ASection, AKeyName, AKeyNames) -> None
 rem --------------------------------------------------------------------------------
 :GetINIParametr
 rem beginfunction
@@ -248,6 +262,8 @@ rem beginfunction
     rem echo ASection:!ASection!
     set AKeyName=%~3
     rem echo AKeyName:!AKeyName!
+    set AKeyNames=%~4
+    rem echo AKeyNames:!KeyNames!
 
     rem type !AFileName!
 
@@ -298,9 +314,14 @@ rem beginfunction
                 ) else (
                     if defined ASection (
                         if "!ASection!"=="!Section!" (
-                            set KeyNames[!k!]=%%i
+                            if defined AKeyNames (
+                                set !AKeyNames![!k!]=%%i
+                            ) else (
+                                set KeyNames[!k!]=%%i
+                            )
                             rem echo .... .... %%i
                             rem echo .... .... !KeyNames[%k%]!
+
                             set /A k+=1
 
                             set !TrimRight!=!TrimLeft!
@@ -332,7 +353,7 @@ rem (при использовании в командных файлах % пе
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIParametr2 (AFileName, ASection, AKeyName, KeyNames) -> None
+rem procedure GetINIParametr2 (AFileName, ASection, AKeyName, AKeyNames) -> None
 rem --------------------------------------------------------------------------------
 :GetINIParametr2
 rem beginfunction
@@ -401,12 +422,14 @@ rem beginfunction
                 ) else (
                     if defined ASection (
                         if "!ASection!"=="!Section!" (
-                            rem set KeyNames[!k!]=%%i
 
-                            set !AKeyNames![!k!]=%%i
-                            rem set !AKeyNames!
+                            if defined AKeyNames (
+                                set !AKeyNames![!k!]=%%i
+                            ) else (
+                                set KeyNames[!k!]=%%i
+                            )
+
                             rem set var=!AKeyNames![k]
-                            rem echo ..3.. !var!
 
                             rem echo .... .... %%i
                             rem echo .... .... !KeyNames[%k%]!
