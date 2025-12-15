@@ -61,6 +61,49 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem procedure DEPLOY_PROJECTS (PROJECTS_INI) -> None
+rem --------------------------------------------------------------------------------
+:DEPLOY_PROJECTS
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=DEPLOY_PROJECTS
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set APROJECTS_INI=%~1
+    echo APROJECTS_INI:!APROJECTS_INI!
+
+    call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP
+    rem call :GetINI "!LFILEINI!" !Section!
+    set /a kmax=!KeyNamesCount!
+    echo kmax:!kmax!
+
+    set /a m=0
+    for /L %%i in (0,1,!kmax!) do (
+        set LKeyName=!KeyNames[%%i]!
+        echo !LKeyName!
+
+        call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP !LKeyName!
+        rem call :GetINI "!FILEINI!" !Section! !KeyName!
+        rem echo !KeyValue!
+
+        set LPROJECTS_GROUP_INI=!KeyValue!\!LKeyName!.ini
+        rem echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
+
+        rem set FilesINI[!m!]=!LKeyName!=!LPROJECTS_GROUP_INI!
+        rem echo .... !FilesINI[%m%]!
+
+        call :DEPLOY_PROJECTS_GROUP !LKeyName! !LPROJECTS_GROUP_INI!
+
+        set /A m+=1
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem procedure DEPLOY_PROJECTS_GROUP (PROJECTS_GROUP PROJECTS_INI) -> None
 rem --------------------------------------------------------------------------------
 :DEPLOY_PROJECTS_GROUP
@@ -73,9 +116,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     set APROJECTS_GROUP=%~1
-    echo APROJECTS_GROUP:!APROJECTS_GROUP!
+    rem echo APROJECTS_GROUP:!APROJECTS_GROUP!
     set APROJECTS_INI=%~2
-    echo APROJECTS_INI:!APROJECTS_INI!
+    rem echo APROJECTS_INI:!APROJECTS_INI!
 
     call :GetINIParametr "!APROJECTS_INI!" PROJECTS_NAME
     rem echo KeyNamesCount:!KeyNamesCount!

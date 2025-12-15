@@ -148,6 +148,12 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
 
+    call :DEPLOY_PROJECTS D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
+
+
+
+
+goto :__end
     rem call :GetLenArray !Sections!
     rem echo GetLenArray:!GetLenArray!
 
@@ -184,7 +190,10 @@ rem beginfunction
         set /A m+=1
     )
 
-goto :__end
+    
+    
+    
+    
     set /a mmax=!m!
     for /L %%i in (0,1,!mmax!) do (
         set LValue=!FilesINI[%%i]!
@@ -478,6 +487,9 @@ exit /b 0
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :DEPLOY_PROJECTS_GROUP
+%LIB_BAT%\LYRDEPLOY.bat %*
+exit /b 0
+:DEPLOY_PROJECTS
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :PULL_PROJECT
