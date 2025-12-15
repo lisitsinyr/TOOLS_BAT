@@ -91,6 +91,8 @@ rem beginfunction
         set LPROJECTS_GROUP_INI=!KeyValue!\!LKeyName!.ini
         rem echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
         call :DEPLOY_PROJECTS_GROUP !LKeyName! !LPROJECTS_GROUP_INI!
+
+        pause
     )
 
     exit /b 0
