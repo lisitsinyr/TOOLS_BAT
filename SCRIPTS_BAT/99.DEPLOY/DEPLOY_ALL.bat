@@ -149,7 +149,9 @@ rem beginfunction
     )
 
     rem call :DEPLOY_PROJECTS D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
+    call :DEPLOY_PROJECTS !GFILEINI!
 
+goto :__end0
 
     rem call :GetLenArray !Sections!
     rem echo GetLenArray:!GetLenArray!
@@ -187,6 +189,7 @@ rem beginfunction
         set /A m+=1
     )
 
+:__end0
 
 goto :__end
    
