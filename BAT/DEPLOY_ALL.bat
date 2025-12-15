@@ -231,7 +231,7 @@ goto :__end
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC ()
+rem procedure MAIN_FUNC_01 ()
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC
 rem beginfunction
@@ -242,7 +242,6 @@ rem beginfunction
     )
 
     set PROJECTS_GROUP=ALL
-
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR_DEPLOY - Каталог скриптов DEPLOY
     rem -------------------------------------------------------------------
@@ -286,6 +285,22 @@ rem beginfunction
     if exist "!APPRUN!" (
         call !APPRUN!
     )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    call :DEPLOY_PROJECTS !GFILEINI!
 
     exit /b 0
 rem endfunction
@@ -336,8 +351,8 @@ rem beginfunction
     if defined OK (
         echo НАЧАЛО
 
-        call :MAIN_TEST || exit /b 1
-        rem call :MAIN_FUNC || exit /b 1
+        rem call :MAIN_TEST || exit /b 1
+        call :MAIN_FUNC || exit /b 1
 
         echo КОНЕЦ
     )
