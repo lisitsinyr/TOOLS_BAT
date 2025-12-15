@@ -147,14 +147,13 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+
     rem call :GetLenArray !Sections!
     rem echo GetLenArray:!GetLenArray!
 
     call :DEPLOY_PROJECTS !GFILEINI!
 
-
 goto :__end0
-
     call :GetINIParametr "!GFILEINI!" PROJECTS_GROUP
     rem call :GetINI "!GFILEINI!" !Section!
     rem echo ..1.. KeyNamesCount:!KeyNamesCount!
@@ -176,12 +175,9 @@ goto :__end0
 
         set /A m+=1
     )
-
 :__end0
 
 goto :__end
-   
-    
     set /a mmax=!m!
     for /L %%i in (0,1,!mmax!) do (
         set LValue=!FilesINI[%%i]!
@@ -216,7 +212,6 @@ goto :__end
             )
         )
     )
-
 :__end
 
     rem set /a mmmax=!mm!
@@ -225,19 +220,7 @@ goto :__end
     rem     echo .... !LValue!
     rem )
 
-
-
     rem FOR /F "tokens=1,2" %%a in ("гитара рыбка") do echo Моя %%a и моя %%b — выводит «Моя гитара и моя рыбка».
-
-    rem call :GetINIParametr "!PROJECTS_GROUP_INI!" "PROJECTS_NAME"
-    rem call :GetINI "!PROJECTS_GROUP_INI!" "PROJECTS_NAME"
-    rem set /a kmax_2=!KeyNamesCount!
-    rem echo kmax_2:!kmax_2!
-
-    rem for /L %%i in (0,1,!kmax_2!) do (
-    rem     set LKeyName_2=!KeyNames[%%i]!
-    rem     echo .... !LKeyName_2!
-    rem )
 
     rem set list=A B C D
     rem for %%a in (%list%) do ( 

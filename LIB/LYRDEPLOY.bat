@@ -84,18 +84,18 @@ rem beginfunction
     set /a m=0
     for /L %%s in (0,1,!kmax!) do (
         echo ..2.. s:%%s
-        rem set LKeyName=!KeyNames[%%s]!
-        set LKeyName=!PROJECTS_GROUP[%%s]!
-        rem echo ..2.. LKeyName:!LKeyName!
+        rem set LPROJECTS_GROUP=!KeyNames[%%s]!
+        set LPROJECTS_GROUP=!PROJECTS_GROUP[%%s]!
+        rem echo ..2.. LPROJECTS_GROUP:!LPROJECTS_GROUP!
 
-        call :GetINIParametr "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP !LKeyName!
-        rem call :GetINI "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP !LKeyName!
+        call :GetINIParametr "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
+        rem call :GetINI "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
         rem echo ..2.. KeyValue:!KeyValue!
 
-        set LPROJECTS_GROUP_INI=!KeyValue!\!LKeyName!.ini
+        set LPROJECTS_GROUP_INI=!KeyValue!\!LPROJECTS_GROUP!.ini
         rem echo ..2.. LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
 
-        call :DEPLOY_PROJECTS_GROUP !LKeyName! !LPROJECTS_GROUP_INI!
+        call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
     )
 
     exit /b 0
@@ -124,14 +124,14 @@ rem beginfunction
     
     for /L %%i in (0,1,!kmax!) do (
         echo ..2.. i:%%i
-        rem set LKeyName=!KeyNames[%%i]!
-        set LKeyName=!PROJECTS_NAME[%%i]!
-        rem echo ..2.. LKeyName:!LKeyName!
+        rem set LPROJECTS_NAME=!KeyNames[%%i]!
+        set LPROJECTS_NAME=!PROJECTS_NAME[%%i]!
+        rem echo ..2.. LPROJECTS_NAME:!LPROJECTS_NAME!
 
-        call :GetINIParametr "!APROJECTS_INI!" PROJECTS_NAME !LKeyName!
+        call :GetINIParametr "!APROJECTS_INI!" PROJECTS_NAME !LPROJECTS_NAME!
         if !KeyValue! EQU 1 (
-            rem echo ..2.. DEPLOY !APROJECTS_GROUP! !LKeyName!
-            call :DEPLOY_PROJECT !APROJECTS_GROUP! !LKeyName!
+            rem echo ..2.. DEPLOY !APROJECTS_GROUP! !LPROJECTS_NAME!
+            call :DEPLOY_PROJECT !APROJECTS_GROUP! !LPROJECTS_NAME!
         )
     )
 

@@ -65,23 +65,20 @@ setlocal enabledelayedexpansion
     rem 
     rem -------------------------------------------------------------------
     set LPROJECTS_GROUP=BAT
-    rem echo LPROJECTS_GROUP:!LPROJECTS_GROUP! 
+    rem echo LPROJECTS_GROUP:!LPROJECTS_GROUP!
+    set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\BAT.ini
 
     call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! HelloWorld
+    call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_BAT
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PROJECTS_BAT
-    
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_BAT
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_BAT
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_BAT
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! HelloWorld
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_BAT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! PROJECTS_BAT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_BAT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_BAT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_BAT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
 
     call :WriteEND ................................Конец DEPLOY группы проектов: !! ...
 
@@ -189,28 +186,10 @@ rem =================================================
 :LYRDEPLOYINIT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:CopyFilesFromPATTERN
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:CopyFilesROOT
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetPROJECT_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetREPO_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:REPO_WORK
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
 :DEPLOY_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:git_pull
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:git_clone
+:DEPLOY_PROJECTS_GROUP
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :PULL_PROJECT
