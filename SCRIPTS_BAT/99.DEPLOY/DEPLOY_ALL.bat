@@ -161,24 +161,27 @@ rem beginfunction
 
     call :GetINIParametr "!LFILEINI!" PROJECTS_GROUP
     rem call :GetINI "!LFILEINI!" !Section!
+    echo ..1.. KeyNamesCount:!KeyNamesCount!
     set /a kmax=!KeyNamesCount!
-    rem echo kmax:!kmax!
+    echo ..1.. kmax:!kmax!
     set /a m=0
     for /L %%i in (0,1,!kmax!) do (
-        set LKeyName=!KeyNames[%%i]!
-        rem echo !LKeyName!
+        echo ..1.. %%i
+        set LPROJECTS_GROUP=!KeyNames[%%i]!
+        rem echo ..1.. LPROJECTS_GROUP:!LPROJECTS_GROUP!
 
-        call :GetINIParametr "!LFILEINI!" PROJECTS_GROUP !LKeyName!
-        rem call :GetINI "!FILEINI!" !Section! !KeyName!
-        rem echo !KeyValue!
+        call :GetINIParametr "!LFILEINI!" PROJECTS_GROUP !LPROJECTS_GROUP!
+        rem echo ..1.. KeyValue:!KeyValue!
 
-        set LPROJECTS_GROUP_INI=!KeyValue!\!LKeyName!.ini
+        set LPROJECTS_GROUP_INI=!KeyValue!\!LPROJECTS_GROUP!.ini
         rem echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
 
         rem set FilesINI[!m!]=!LKeyName!=!LPROJECTS_GROUP_INI!
-        rem echo .... !FilesINI[%m%]!
+        rem echo ..1.. !FilesINI[%m%]!
 
-        call :DEPLOY_PROJECTS_GROUP !LKeyName! !LPROJECTS_GROUP_INI!
+        rem echo ..1.. !LPROJECTS_GROUP!=!LPROJECTS_GROUP_INI!
+
+        call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
         set /A m+=1
     )
@@ -455,12 +458,14 @@ exit /b 0
 :WriteTEXT
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRConst.bat
 rem =================================================
 :LYRConstINIT
 %LIB_BAT%\LYRConst.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRDateTime.bat
 rem =================================================
@@ -491,6 +496,7 @@ exit /b 0
 :PULL_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRDEPLOYTools.bat
 rem =================================================
@@ -530,6 +536,7 @@ exit /b 0
 :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRFileUtils.bat
 rem =================================================
@@ -581,6 +588,7 @@ exit /b 0
 :XCOPY_FILES
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRLIB.bat
 rem =================================================
@@ -608,6 +616,7 @@ exit /b 0
 :__SET_LOG
 %LIB_BAT%\LYRLIB.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRLog.bat
 rem =================================================
@@ -638,6 +647,7 @@ exit /b 0
 :StopLogFile
 %LIB_BAT%\LYRLog.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRParserINI.bat
 rem =================================================
@@ -656,9 +666,13 @@ exit /b 0
 :GetINIParametr
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
+:GetINIParametr2
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
 :GetFileParser
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRPY.bat
 rem =================================================
@@ -671,6 +685,7 @@ exit /b 0
 :VENV_STOP
 %LIB_BAT%\LYRPY.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRStrUtils.bat
 rem =================================================
@@ -698,6 +713,7 @@ exit /b 0
 :ListToStr
 %LIB_BAT%\LYRStrUtils.bat %*
 exit /b 0
+
 rem =================================================
 rem LYRSupport.bat
 rem =================================================

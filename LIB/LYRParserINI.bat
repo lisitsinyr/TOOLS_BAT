@@ -251,12 +251,12 @@ rem beginfunction
 
     rem type !AFileName!
 
-    set Sections=
-    set KeyNames=
-
     set KeyValue=
     set Section=
     
+    set SectionsCount=
+    set KeyNamesCount=
+
     set /A n=0
     set /A k=0
 
@@ -299,6 +299,115 @@ rem beginfunction
                     if defined ASection (
                         if "!ASection!"=="!Section!" (
                             set KeyNames[!k!]=%%i
+                            rem echo .... .... %%i
+                            rem echo .... .... !KeyNames[%k%]!
+                            set /A k+=1
+
+                            set !TrimRight!=!TrimLeft!
+                            set KeyValue=!TrimLeft!
+                            set GetINIParametr=!TrimLeft!
+                        )
+                    ) else (
+                        rem echo INFO: ASection not defined ...
+                        rem set !TrimRight!=!TrimLeft!
+                        rem set KeyValue=!TrimLeft!
+                        rem set GetINIParametr=!TrimLeft!
+                    )
+                )
+            )
+        )
+    ) else (
+        echo INFO: File !AFileName! not exist ...
+    )
+
+    set /a SectionsCount=n-1
+    set /a KeyNamesCount=k-1
+
+rem Как удалить все переменные в cmd (только в одном окне)?
+rem Совершенно верно, можно при помощи for с ключом /f обработать вывод команды set без параметров, получив имена всех (почти) определённых переменных среды (частей выводимых строк до знака =: delims==):
+rem for /f "delims==" %v in ('set') do  set "%v="
+rem (при использовании в командных файлах % перед переменной цикла надо удвоить).
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure GetINIParametr2 (AFileName, ASection, AKeyName, KeyNames) -> None
+rem --------------------------------------------------------------------------------
+:GetINIParametr2
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=GetINIParametr2
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+
+    set AFileName=%~1
+    rem echo AFileName:!AFileName!
+    set ASection=%~2
+    rem echo ASection:!ASection!
+    set AKeyName=%~3
+    rem echo AKeyName:!AKeyName!
+    set AKeyNames=%~4
+    rem echo AKeyNames:!KeyNames!
+
+    rem type !AFileName!
+
+    set KeyValue=
+    set Section=
+    
+    set SectionsCount=
+    set KeyNamesCount=
+
+    set /A n=0
+    set /A k=0
+
+    if exist !AFileName! (
+        for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
+            rem usebackq
+            rem В переменной i - ключ
+            rem echo i:%%i
+            rem В переменной j - значение
+            rem echo j:%%j
+            rem set %%i=%%j
+
+            set STRi=%%i
+            rem echo STRi:!STRi!
+            call :TrimRight !STRi! || exit /b 1
+            rem echo TrimRight:!TrimRight!
+
+            set STRj=%%j
+            rem echo STRj:!STRj!
+            call :TrimLeft !STRj! || exit /b 1
+            rem echo TrimLeft:!TrimLeft!
+
+            set s=%%i
+            set s=!s:~0,1!
+            rem echo s:!s!
+            if "!s!"=="[" (
+                set s=%%i
+                set Section=!s:~1,-1!
+                rem echo Section:!Section!
+                set Sections[!n!]=!Section!
+                set /A n+=1
+            ) else (
+                if defined AKeyName (
+                    if "!TrimRight!"=="!AKeyName!" (
+                        set !TrimRight!=!TrimLeft!
+                        set GetINIParametr=!TrimLeft!
+                        set KeyValue=!TrimLeft!
+                    )
+                ) else (
+                    if defined ASection (
+                        if "!ASection!"=="!Section!" (
+                            rem set KeyNames[!k!]=%%i
+
+                            set !AKeyNames![!k!]=%%i
+                            rem set !AKeyNames!
+                            rem set var=!AKeyNames![k]
+                            rem echo ..3.. !var!
+
                             rem echo .... .... %%i
                             rem echo .... .... !KeyNames[%k%]!
                             set /A k+=1

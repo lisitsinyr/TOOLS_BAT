@@ -114,20 +114,22 @@ rem beginfunction
     set !FUNCNAME!=
 
     set APROJECTS_GROUP=%~1
-    rem echo APROJECTS_GROUP:!APROJECTS_GROUP!
+    rem echo ..2.. APROJECTS_GROUP:!APROJECTS_GROUP!
     set APROJECTS_INI=%~2
-    rem echo APROJECTS_INI:!APROJECTS_INI!
+    rem echo ..2.. APROJECTS_INI:!APROJECTS_INI!
 
-    call :GetINIParametr "!APROJECTS_INI!" PROJECTS_NAME
-    rem echo KeyNamesCount:!KeyNamesCount!
+    call :GetINIParametr2 "!APROJECTS_INI!" PROJECTS_NAME "" PROJECTS_NAME
     set /a kmax=!KeyNamesCount!
-    rem echo kmax:!kmax!
+    rem echo ..2.. kmax:!kmax!
+    
     for /L %%i in (0,1,!kmax!) do (
-        set LKeyName=!KeyNames[%%i]!
+        rem set LKeyName=!KeyNames[%%i]!
+        set LKeyName=!PROJECTS_NAME[%%i]!
+        rem echo ..2.. LKeyName:!LKeyName!
+
         call :GetINIParametr "!APROJECTS_INI!" PROJECTS_NAME !LKeyName!
         if !KeyValue! EQU 1 (
-            rem echo .... !APROJECTS_GROUP! ... !LKeyName!
-            echo DEPLOY ... !APROJECTS_GROUP! !LKeyName!
+            echo ..2.. DEPLOY !APROJECTS_GROUP! !LKeyName!
             call :DEPLOY_PROJECT !APROJECTS_GROUP! !LKeyName!
         )
     )
@@ -1126,6 +1128,9 @@ exit /b 0
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 :GetINIParametr
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetINIParametr2
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 :GetFileParser
