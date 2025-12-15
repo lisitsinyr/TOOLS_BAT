@@ -77,22 +77,20 @@ rem beginfunction
     set __DEPLOY_PROJECTS_INI=!APROJECTS_INI!
     rem echo __DEPLOY_PROJECTS_INI:!__DEPLOY_PROJECTS_INI!
 
-    rem call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP
-    call :GetINI "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP
+    call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP
+    rem call :GetINI "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP
     set /a kmax_01=!KeyNamesCount!
     echo kmax_01:!kmax_01!
-
+    set /a m=0
     for /L %%s in (0,1,!kmax_01!) do (
         set LKeyName=!KeyNames[%%s]!
         echo !LKeyName!
 
-        rem call :GetINIParametr "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP !LKeyName!
-        call :GetINI "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP !LKeyName!
+        call :GetINIParametr "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP !LKeyName!
+        rem call :GetINI "!__DEPLOY_PROJECTS_INI!" PROJECTS_GROUP !LKeyName!
         rem echo KeyValue:!KeyValue!
-        set LKeyValue=!KeyValue!
-        echo LKeyValue:!LKeyValue!
 
-        set LPROJECTS_GROUP_INI=!LKeyValue!\!LKeyName!.ini
+        set LPROJECTS_GROUP_INI=!KeyValue!\!LKeyName!.ini
         echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
 
         call :DEPLOY_PROJECTS_GROUP !LKeyName! !LPROJECTS_GROUP_INI!

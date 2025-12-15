@@ -147,23 +147,17 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
-
-    rem call :DEPLOY_PROJECTS D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
-    call :DEPLOY_PROJECTS !GFILEINI!
-
-goto :__end0
-
     rem call :GetLenArray !Sections!
     rem echo GetLenArray:!GetLenArray!
 
-    rem set LFILEINI=D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
+
+
+    rem call :DEPLOY_PROJECTS D:\PROJECTS_LYR\CHECK_LIST\PROJECTS.ini
+    rem call :DEPLOY_PROJECTS !GFILEINI!
+
+
     set LFILEINI=!GFILEINI!
     rem echo LFILEINI:!LFILEINI!
-    rem call :GetINIPY "!LFILEINI!"
-    call :GetINIParametr "!LFILEINI!"
-    rem call :GetINI "!LFILEINI!"
-    rem echo SectionsCount:!SectionsCount!
-
 
     call :GetINIParametr "!LFILEINI!" PROJECTS_GROUP
     rem call :GetINI "!LFILEINI!" !Section!
@@ -188,6 +182,8 @@ goto :__end0
 
         set /A m+=1
     )
+
+goto :__end0
 
 :__end0
 
