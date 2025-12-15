@@ -73,14 +73,14 @@ rem beginfunction
     set !FUNCNAME!=
 
     set APROJECTS_INI=%~1
-    echo APROJECTS_INI:!APROJECTS_INI!
+    rem echo APROJECTS_INI:!APROJECTS_INI!
 
     rem call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP
     call :GetINI "!APROJECTS_INI!" PROJECTS_GROUP
-    set /a kmax=!KeyNamesCount!
-    echo kmax:!kmax!
+    set /a kmax_01=!KeyNamesCount!
+    echo kmax_01:!kmax_01!
 
-    for /L %%s in (0,1,!kmax!) do (
+    for /L %%s in (0,1,!kmax_01!) do (
         set LKeyName=!KeyNames[%%s]!
         echo !LKeyName!
 
