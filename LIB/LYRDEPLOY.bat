@@ -75,11 +75,10 @@ rem beginfunction
     set APROJECTS_INI=%~1
     rem echo APROJECTS_INI:!APROJECTS_INI!
 
-    call :GetINIParametr2 "!APROJECTS_INI!" PROJECTS_GROUP "" PROJECTS_GROUP
+    call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP "" PROJECTS_GROUP
     rem call :GetINI "!APROJECTS_INI!" PROJECTS_GROUP
     set /a kmax=!KeyNamesCount!
     rem echo ..2.. kmax:!kmax!
-    set /a m=0
     for /L %%s in (0,1,!kmax!) do (
         echo ..2.. s:%%s
         rem set LPROJECTS_GROUP=!KeyNames[%%s]!
@@ -116,7 +115,7 @@ rem beginfunction
     set APROJECTS_INI=%~2
     rem echo ..2.. APROJECTS_INI:!APROJECTS_INI!
 
-    call :GetINIParametr2 "!APROJECTS_INI!" PROJECTS_NAME "" PROJECTS_NAME
+    call :GetINIParametr "!APROJECTS_INI!" PROJECTS_NAME "" PROJECTS_NAME
     set /a kmax=!KeyNamesCount!
     rem echo ..2.. kmax:!kmax!
     
@@ -574,9 +573,11 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    call :SetINI !GPROJECT_DIR!\PROJECT.ini general PROJECTS_GROUP !GPROJECTS_GROUP!
-    call :SetINI !GPROJECT_DIR!\PROJECT.ini general PROJECT_NAME !GPROJECT_NAME!
-    call :SetINI !GPROJECT_DIR!\PROJECT.ini general PROJECTS_DIR_ROOT !GPROJECTS_DIR_ROOT!
+    if exist !GPROJECT_DIR!\PROJECT.ini (
+        call :SetINI !GPROJECT_DIR!\PROJECT.ini general PROJECTS_GROUP !GPROJECTS_GROUP!
+        call :SetINI !GPROJECT_DIR!\PROJECT.ini general PROJECT_NAME !GPROJECT_NAME!
+        call :SetINI !GPROJECT_DIR!\PROJECT.ini general PROJECTS_DIR_ROOT !GPROJECTS_DIR_ROOT!
+    )
 
     exit /b 0
 rem endfunction
