@@ -80,8 +80,8 @@ rem beginfunction
     set /a kmax=!KeyNamesCount!
     echo kmax:!kmax!
 
-    for /L %%i in (0,1,!kmax!) do (
-        set LKeyName=!KeyNames[%%i]!
+    for /L %%s in (0,1,!kmax!) do (
+        set LKeyName=!KeyNames[%%s]!
         echo !LKeyName!
 
         rem call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP !LKeyName!
