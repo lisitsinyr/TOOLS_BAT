@@ -65,17 +65,16 @@ setlocal enabledelayedexpansion
     rem 
     rem -------------------------------------------------------------------
     set LPROJECTS_GROUP=Pascal_Delphi
-    rem echo LPROJECTS_GROUP:!LPROJECTS_GROUP! 
+    set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\Pascal_Delphi.ini
 
     call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! LUIS_D7
+    call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_D7
-    
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! LUIS_D11
-    
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_D11
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! LUIS_D7
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_D7
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! LUIS_D11
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_D11
 
     call :WriteEND ................................Конец DEPLOY группы проектов: !! ...
 

@@ -65,25 +65,20 @@ setlocal enabledelayedexpansion
     rem 
     rem -------------------------------------------------------------------
     set LPROJECTS_GROUP=PowerShell
-    rem echo LPROJECTS_GROUP:!LPROJECTS_GROUP! 
+    set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\PowerShell\PowerShell.ini
 
     call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! HelloWorld
+    call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_PS
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PROJECTS_PS
-    
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_PS
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TESTS_PS
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_PS
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_PS
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! HelloWorld
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_PS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! PROJECTS_PS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_PS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TESTS_PS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_PS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_PS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
 
     call :WriteEND ................................Конец DEPLOY группы проектов: !! ...
 

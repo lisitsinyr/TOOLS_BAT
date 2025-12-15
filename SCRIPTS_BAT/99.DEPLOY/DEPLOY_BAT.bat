@@ -65,7 +65,6 @@ setlocal enabledelayedexpansion
     rem 
     rem -------------------------------------------------------------------
     set LPROJECTS_GROUP=BAT
-    rem echo LPROJECTS_GROUP:!LPROJECTS_GROUP!
     set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\BAT.ini
 
     call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...

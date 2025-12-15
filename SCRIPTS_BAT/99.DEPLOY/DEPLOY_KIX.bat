@@ -65,21 +65,18 @@ setlocal enabledelayedexpansion
     rem 
     rem -------------------------------------------------------------------
     set LPROJECTS_GROUP=KIX
-    rem echo LPROJECTS_GROUP:!LPROJECTS_GROUP! 
+    set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\KIX\KIX.ini
 
     call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! HelloWorld
+    call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_KIX
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_KIX
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_KIX
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_KIX
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! HelloWorld
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_KIX
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! SCRIPTS_KIX
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_KIX
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_KIX
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
 
     call :WriteEND ................................Конец DEPLOY группы проектов: !! ...
 

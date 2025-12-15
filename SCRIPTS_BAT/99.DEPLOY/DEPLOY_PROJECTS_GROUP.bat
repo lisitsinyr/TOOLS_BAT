@@ -1,14 +1,31 @@
 @echo off
 rem -------------------------------------------------------------------
-rem DEPLOY_BAT.bat
+rem DEPLOY_Python.bat
 rem -------------------------------------------------------------------
 chcp 1251>NUL
 
 setlocal enabledelayedexpansion
 
+rem --------------------------------------------------------------------------------
+rem
+rem --------------------------------------------------------------------------------
 :begin
-    set BATNAME=%~nx0
-    echo Старт !BATNAME! ...
+    call :MAIN %* || exit /b 1
+
+    exit /b 0
+:end
+rem --------------------------------------------------------------------------------
+
+rem -----------------------------------------------
+rem procedure MAIN_INIT ()
+rem -----------------------------------------------
+:MAIN_INIT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_INIT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
 
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_ROOT - Каталог ROOT
@@ -61,25 +78,146 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    rem -------------------------------------------------------------------
-    rem 
-    rem -------------------------------------------------------------------
-    set LPROJECTS_GROUP=Pascal_Delphi
-    set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Pascal_Delphi\Pascal_Delphi.ini
+    exit /b 0
+rem endfunction
 
-    call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET_DEFAULT ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET_DEFAULT
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET_DEFAULT
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_SET ()
+rem --------------------------------------------------------------------------------
+:MAIN_SET
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_SET
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_CHECK_PARAMETR (%*)
+rem --------------------------------------------------------------------------------
+:MAIN_CHECK_PARAMETR
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_CHECK_PARAMETR
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    rem -------------------------------------
+    rem OPTION
+    rem -------------------------------------
+    set OPTION=
+
+    echo OPTION:!OPTION!
+
+    rem -------------------------------------
+    rem ARGS
+    rem -------------------------------------
+    set ARGS=
+
+    echo ARGS:!ARGS!
+
+    exit /b 0
+rem endfunction
+
+rem --------------------------------------------------------------------------------
+rem procedure MAIN_FUNC ()
+rem --------------------------------------------------------------------------------
+:MAIN_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set LPROJECTS_GROUP=BAT
+
+    call :GetINIParametr "!GFILEINI!" PROJECTS_GROUP !LPROJECTS_GROUP!
+    rem call :GetINI "!GFILEINI!" PROJECTS_GROUP !LPROJECTS_GROUP!
+    rem echo ..2.. KeyValue:!KeyValue!
+
+    set LPROJECTS_GROUP_INI=!KeyValue!\!LPROJECTS_GROUP!.ini
+    rem echo ..2.. LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
 
     call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
-    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! LUIS_D7
-    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_D7
-    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! LUIS_D11
-    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_D11
+    exit /b 0
+rem endfunction
 
-    call :WriteEND ................................Конец DEPLOY группы проектов: !! ...
+rem --------------------------------------------------------------------------------
+rem procedure TEST_FUNC ()
+rem --------------------------------------------------------------------------------
+:TEST_FUNC
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN_FUNC
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    exit /b 0
+rem endfunction
+
+rem =================================================
+rem procedure MAIN (%*)
+rem =================================================
+:MAIN
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=MAIN
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+
+    set BATNAME=%~nx0
+    echo Start !BATNAME! ...
+
+    set DEBUG=
+
+    set /a LOG_FILE_ADD=0
+
+    call :MAIN_INIT || exit /b 1
+
+    call :StartLogFile || exit /b 1
+
+    set OK=yes
+
+    call :MAIN_SET_DEFAULT || exit /b 1
+
+    call :MAIN_SET || exit /b 1
+
+    call :MAIN_CHECK_PARAMETR %* || exit /b 1
+
+    if defined OK (
+        echo НАЧАЛО
+
+        rem call :MAIN_TEST || exit /b 1
+        call :MAIN_FUNC || exit /b 1
+
+        echo КОНЕЦ
+    )
+
+    call :StopLogFile || exit /b 1
 
     exit /b 0
-:end
+rem endfunction
 rem =================================================
 
 rem =================================================
@@ -99,6 +237,15 @@ exit /b 0
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :ConsoleTEST_02
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:FormatColorStr
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:aListToStr
+%LIB_BAT%\LYRConsole.bat %*
+exit /b 0
+:bListToStr
 %LIB_BAT%\LYRConsole.bat %*
 exit /b 0
 :SetColor
@@ -175,35 +322,19 @@ exit /b 0
 :DateTime
 %LIB_BAT%\LYRDateTime.bat %*
 exit /b 0
-
 rem =================================================
 rem LYRDEPLOY.bat
 rem =================================================
 :LYRDEPLOYINIT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:CopyFilesFromPATTERN
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:CopyFilesROOT
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetPROJECT_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:SetREPO_INI
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
-:REPO_WORK
-%LIB_BAT%\LYRDEPLOY.bat %*
-exit /b 0
 :DEPLOY_PROJECT
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:git_pull
+:DEPLOY_PROJECTS_GROUP
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
-:git_clone
+:DEPLOY_PROJECTS
 %LIB_BAT%\LYRDEPLOY.bat %*
 exit /b 0
 :PULL_PROJECT
@@ -222,13 +353,7 @@ exit /b 0
 :UPDATE_TOOLS_BAT_TOOLS_SRC_BAT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-:CLEAR_TOOLS_BAT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
 :UPDATE_TOOLS_GIT_TOOLS_SRC_GIT
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_GIT
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_JAVA_SCRIPTS_JAVA
@@ -237,22 +362,13 @@ exit /b 0
 :UPDATE_TOOLS_JAVA_TOOLS_SRC_JAVA
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
-:CLEAR_TOOLS_JAVA
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
 :UPDATE_TOOLS_KIX_SCRIPTS_KIX
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_KIX
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_PY_SCRIPTS_PY
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_PY_TOOLS_SRC_PY
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_PY
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_SH_SCRIPTS_SH
@@ -262,12 +378,6 @@ exit /b 0
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:CLEAR_TOOLS_SH
-%LIB_BAT%\LYRDEPLOYTools.bat %*
-exit /b 0
-:GET_url_github
 %LIB_BAT%\LYRDEPLOYTools.bat %*
 exit /b 0
 
@@ -301,6 +411,9 @@ exit /b 0
 :CreateDir
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
+:ClearDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
 :CreateFile
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
@@ -308,6 +421,9 @@ exit /b 0
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILE
 %LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
 :COPY_FILES
@@ -388,7 +504,13 @@ exit /b 0
 :GetINI
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
+:GetINIPY
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
 :GetINIParametr
+%LIB_BAT%\LYRParserINI.bat %*
+exit /b 0
+:GetINIParametr2
 %LIB_BAT%\LYRParserINI.bat %*
 exit /b 0
 :GetFileParser
@@ -473,6 +595,9 @@ exit /b 0
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 :CheckErrorlevel
+%LIB_BAT%\LYRSupport.bat %*
+exit /b 0
+:GetLenArray
 %LIB_BAT%\LYRSupport.bat %*
 exit /b 0
 rem =================================================

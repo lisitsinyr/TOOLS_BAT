@@ -65,19 +65,17 @@ setlocal enabledelayedexpansion
     rem 
     rem -------------------------------------------------------------------
     set LPROJECTS_GROUP=GIT
-    rem echo LPROJECTS_GROUP:!LPROJECTS_GROUP! 
+    set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\GIT\GIT.ini
 
     call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_GIT
+    call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! SOFTWARE_GIT
-    
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_GIT
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_GIT
-
-    call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! PATTERN_GIT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! SOFTWARE_GIT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_SRC_GIT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TOOLS_GIT
+    rem call :DEPLOY_PROJECT !LPROJECTS_GROUP! TRICKS
 
     call :WriteEND ................................Конец DEPLOY группы проектов: !! ...
 
