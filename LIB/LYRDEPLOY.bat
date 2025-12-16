@@ -85,7 +85,7 @@ rem beginfunction
         set LPROJECTS_GROUP=!PROJECTS_GROUP[%%s]!
         rem echo ..2.. LPROJECTS_GROUP:!LPROJECTS_GROUP!
 
-        echo "!APROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
+        rem echo "!APROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
         call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
         rem call :GetINI "!APROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
         rem echo ..2.. KeyValue:!KeyValue!
@@ -206,7 +206,7 @@ rem beginfunction
     
         if !GPROJECT_NAME!==TOOLS_SH (
             call :ClearDir !GPROJECT_DIR!\SH_GIT *.sh
-            call :UPDATE_TOOLS_SH_SCRIPTS_SH
+            rem call :UPDATE_TOOLS_SH_SCRIPTS_SH
             call :UPDATE_TOOLS_SH_TOOLS_SRC_SH
             call :UPDATE_TOOLS_SH_TOOLS_SRC_GIT_SH
             call :__REPO_WORK !GPROJECT_DIR!
