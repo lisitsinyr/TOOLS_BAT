@@ -67,7 +67,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINI (AFileName, ASection, AKeyName, AKeyNames) -> None
+rem procedure GetINI (AFileName, ASection, AKeyName) -> None
 rem --------------------------------------------------------------------------------
 :GetINI
 rem beginfunction
@@ -84,8 +84,6 @@ rem beginfunction
     rem echo ASection:!ASection!
     set AKeyName=%~3
     rem echo AKeyName:!AKeyName!
-    set AKeyNames=%~4
-    rem echo AKeyNames:!KeyNames!
 
     set __GetINI=!TEMP_DIR!\%random%.tmp
     rem echo __GetINI:!__GetINI!
@@ -100,7 +98,6 @@ rem beginfunction
 
     set KeyName=
     set KeyValue=
-    set Section=
 
     set /a n=0
     set /a k=0
@@ -147,10 +144,10 @@ rem beginfunction
             )
         )
 
-        rem del !__GetINI!
+        del !__GetINI!
 
     ) else (
-        rem echo INFO: File !__GetINI! not exist ...
+        echo INFO: File !__GetINI! not exist ...
     )
 
     set /a SectionsCount=n-1
@@ -160,7 +157,7 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure GetINIPY (AFileName, ASection, AKeyName, AKeyNames) -> None
+rem procedure GetINIPY (AFileName, ASection, AKeyName) -> None
 rem --------------------------------------------------------------------------------
 :GetINIPY
 rem beginfunction
@@ -177,8 +174,6 @@ rem beginfunction
     rem echo ASection:!ASection!
     set AKeyName=%~3
     rem echo AKeyName:!AKeyName!
-    set AKeyNames=%~4
-    rem echo AKeyNames:!KeyNames!
 
     set __GetINI=!TEMP_DIR!\%random%.tmp
     rem echo __GetINI:!__GetINI!
@@ -191,7 +186,6 @@ rem beginfunction
 
     set KeyName=
     set KeyValue=
-    set Section=
 
     set /a n=0
     set /a k=0
@@ -286,10 +280,9 @@ rem beginfunction
     if exist !AFileName! (
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
             rem В переменной i - ключ
-            rem echo i:%%i
             rem В переменной j - значение
+            rem echo i:%%i
             rem echo j:%%j
-            rem set %%i=%%j
 
             set STRi=%%i
             rem echo STRi:!STRi!
@@ -338,8 +331,6 @@ rem beginfunction
         echo INFO: File !AFileName! not exist ...
     )
 
-    rem set /a SectionsCount=n-1
-    rem set /a KeyNamesCount=k-1
     set /a SectionsCount=n-1
     set /a KeyNamesCount=k-1
 
@@ -381,12 +372,10 @@ rem beginfunction
 
     if exist !AFileName! (
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
-            rem usebackq
             rem В переменной i - ключ
-            rem echo i:%%i
             rem В переменной j - значение
+            rem echo i:%%i
             rem echo j:%%j
-            rem set %%i=%%j
 
             set STRi=%%i
             rem echo STRi:!STRi!
@@ -482,6 +471,7 @@ rem beginfunction
         for /f "eol=%Aeol% delims=%Adelims% tokens=%Atokens%" %%i in (!AFileName!) do (
             rem 1 token i - значение
             rem 2 token j - значение
+
             rem 3 token k - значение
 
             rem Переменная %i объявлена явно в инструкции FOR, а %j и %k объявлены неявно с помощью tokens=.

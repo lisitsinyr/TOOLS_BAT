@@ -89,7 +89,6 @@ rem beginfunction
     set VarName=%~1
     rem echo VarName:!VarName!
 
-    :: относительно просто удалить переменные
     for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_caption' ) do (
         set %%k=
     )
@@ -121,8 +120,8 @@ rem beginfunction
     set /a i=0
     set /a result=0
     for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_value' ) do (
-        set /a i=i+1
         if !%%k!==!VarValue! set /a result=i
+        set /a i=i+1
     )
 
     set !VarName!=!result!
