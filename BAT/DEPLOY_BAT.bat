@@ -23,9 +23,7 @@ setlocal enabledelayedexpansion
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
     if not exist "!PROJECTS_LYR_DIR!"\ (
-        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
-        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
-        rem mkdir "!PROJECTS_LYR_DIR!"
+        echo ERROR: Dir "!PROJECTS_LYR_DIR!" not exist ...
         exit /b 1
     )
 
@@ -34,7 +32,6 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -61,13 +58,13 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
+    call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
+
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
     set LPROJECTS_GROUP=BAT
     set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\BAT.ini
-
-    call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
     call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 

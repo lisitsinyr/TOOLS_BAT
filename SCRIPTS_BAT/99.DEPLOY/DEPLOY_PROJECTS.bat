@@ -40,9 +40,7 @@ rem beginfunction
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
     if not exist "!PROJECTS_LYR_DIR!"\ (
-        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
-        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
-        rem mkdir "!PROJECTS_LYR_DIR!"
+        echo ERROR: Dir "!PROJECTS_LYR_DIR!" not exist ...
         exit /b 1
     )
 
@@ -51,7 +49,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -138,158 +135,6 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem procedure MAIN_TEST ()
-rem --------------------------------------------------------------------------------
-:MAIN_TEST
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_TEST
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    rem call :GetLenArray !Sections!
-    rem echo GetLenArray:!GetLenArray!
-
-    call :DEPLOY_PROJECTS !GFILEINI!
-
-goto :__end0
-    call :GetINIParametr "!GFILEINI!" PROJECTS_GROUP
-    rem call :GetINI "!GFILEINI!" !Section!
-    rem echo ..1.. KeyNamesCount:!KeyNamesCount!
-    set /a kmax=!KeyNamesCount!
-    rem echo ..1.. kmax:!kmax!
-    set /a m=0
-    for /L %%i in (0,1,!kmax!) do (
-        echo ..1.. %%i
-        set LPROJECTS_GROUP=!KeyNames[%%i]!
-        rem echo ..1.. LPROJECTS_GROUP:!LPROJECTS_GROUP!
-
-        call :GetINIParametr "!GFILEINI!" PROJECTS_GROUP !LPROJECTS_GROUP!
-        rem echo ..1.. KeyValue:!KeyValue!
-
-        set LPROJECTS_GROUP_INI=!KeyValue!\!LPROJECTS_GROUP!.ini
-        rem echo LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
-
-        call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
-
-        set /A m+=1
-    )
-:__end0
-
-goto :__end
-    set /a mmax=!m!
-    for /L %%i in (0,1,!mmax!) do (
-        set LValue=!FilesINI[%%i]!
-        rem echo .... !LValue!
-        for /F "eol=# delims== tokens=1,2" %%a in ("!LValue!") do (
-            rem В переменной a - ключ
-            rem В переменной b - значение
-            rem echo %%a:%%b
-            set LFILEINI=%%b
-            echo LFILEINI:!LFILEINI!
-            call :GetINIParametr "!LFILEINI!" PROJECTS_NAME
-            rem echo KeyNamesCount:!KeyNamesCount!
-            set /a kmax=!KeyNamesCount!
-            rem echo kmax:!kmax!
-
-            call :GetINIParametr "!LFILEINI!" general PROJECTS_GROUP
-            set LPROJECTS_GROUP=!KeyValue!
-
-            set /a mm=0
-            for /L %%i in (0,1,!kmax!) do (
-                set LKeyName=!KeyNames[%%i]!
-                call :GetINIParametr "!LFILEINI!" PROJECTS_NAME !LKeyName!
-        
-                if !KeyValue! EQU 1 (
-                    echo .... !LPROJECTS_GROUP! ... !LKeyName!
-
-                    set LPROJECTS[!mm!]=!LPROJECTS_GROUP!=!LKeyName!
-                    rem echo .... !LPROJECTS[%mm%]!
-
-                    set /A mm+=1
-                )
-            )
-        )
-    )
-:__end
-
-    rem set /a mmmax=!mm!
-    rem for /L %%i in (0,1,!mmmax!) do (
-    rem     set LValue=!LPROJECTS[%%i]!
-    rem     echo .... !LValue!
-    rem )
-
-    rem FOR /F "tokens=1,2" %%a in ("гитара рыбка") do echo Моя %%a и моя %%b — выводит «Моя гитара и моя рыбка».
-
-    rem set list=A B C D
-    rem for %%a in (%list%) do ( 
-    rem     echo %%a
-    rem )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure MAIN_FUNC_01 ()
-rem --------------------------------------------------------------------------------
-:MAIN_FUNC
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_FUNC
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-
-    set PROJECTS_GROUP=ALL
-    rem -------------------------------------------------------------------
-    rem SCRIPTS_DIR_DEPLOY - Каталог скриптов DEPLOY
-    rem -------------------------------------------------------------------
-    if not defined SCRIPTS_DIR_DEPLOY (
-        set SCRIPTS_DIR_DEPLOY=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\SCRIPTS_BAT\SRC\99.DEPLOY
-    )
-    rem echo SCRIPTS_DIR_DEPLOY:!SCRIPTS_DIR_DEPLOY!
-
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_BAT.bat
-    rem echo APPRUN:!APPRUN!
-
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_KIX.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_PowerShell.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_GIT.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_JAVA.bat
-    if exist "!APPRUN!" (
-        rem call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_UNIX.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Python.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-    set APPRUN=!SCRIPTS_DIR_DEPLOY!\DEPLOY_Pascal_Delphi.bat
-    if exist "!APPRUN!" (
-        call !APPRUN!
-    )
-
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
 rem procedure MAIN_FUNC ()
 rem --------------------------------------------------------------------------------
 :MAIN_FUNC
@@ -302,19 +147,6 @@ rem beginfunction
 
     call :DEPLOY_PROJECTS !GFILEINI!
 
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure TEST_FUNC ()
-rem --------------------------------------------------------------------------------
-:TEST_FUNC
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_FUNC
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
     exit /b 0
 rem endfunction
 

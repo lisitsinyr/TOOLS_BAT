@@ -40,9 +40,7 @@ rem beginfunction
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
     if not exist "!PROJECTS_LYR_DIR!"\ (
-        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
-        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
-        rem mkdir "!PROJECTS_LYR_DIR!"
+        echo ERROR: Dir "!PROJECTS_LYR_DIR!" not exist ...
         exit /b 1
     )
 
@@ -51,7 +49,6 @@ rem beginfunction
     rem -------------------------------------------------------------------
     if not defined SCRIPTS_DIR (
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
-        rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
     rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
@@ -151,27 +148,13 @@ rem beginfunction
     set LPROJECTS_GROUP=BAT
 
     call :GetINIParametr "!GFILEINI!" PROJECTS_GROUP !LPROJECTS_GROUP!
-    rem call :GetINI "!GFILEINI!" PROJECTS_GROUP !LPROJECTS_GROUP!
-    rem echo ..2.. KeyValue:!KeyValue!
+    rem echo .... KeyValue:!KeyValue!
 
     set LPROJECTS_GROUP_INI=!KeyValue!\!LPROJECTS_GROUP!.ini
-    rem echo ..2.. LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
+    rem echo .... LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
 
     call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 
-    exit /b 0
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem procedure TEST_FUNC ()
-rem --------------------------------------------------------------------------------
-:TEST_FUNC
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=MAIN_FUNC
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
     exit /b 0
 rem endfunction
 
@@ -208,7 +191,6 @@ rem beginfunction
     if defined OK (
         echo Õ¿◊¿ÀŒ
 
-        rem call :MAIN_TEST || exit /b 1
         call :MAIN_FUNC || exit /b 1
 
         echo  ŒÕ≈÷
