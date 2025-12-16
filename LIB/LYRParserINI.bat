@@ -257,17 +257,18 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo AFileName:!AFileName!
+    rem echo ..L.. AFileName:!AFileName!
     set ASection=%~2
-    rem echo ASection:!ASection!
+    rem echo ..L.. ASection:!ASection!
     set AKeyName=%~3
-    rem echo AKeyName:!AKeyName!
+    rem echo ..L.. AKeyName:!AKeyName!
     set AKeyNames=%~4
-    rem echo AKeyNames:!KeyNames!
+    rem echo ..L.. AKeyNames:!KeyNames!
 
     rem type !AFileName!
 
     set KeyValue=
+    set LSection=None
     set Section=
     
     set SectionsCount=
@@ -288,12 +289,12 @@ rem beginfunction
             set STRi=%%i
             rem echo STRi:!STRi!
             call :TrimRight !STRi! || exit /b 1
-            rem echo TrimRight:!TrimRight!
+            rem echo ..L.. TrimRight:!TrimRight!
 
             set STRj=%%j
             rem echo STRj:!STRj!
             call :TrimLeft !STRj! || exit /b 1
-            rem echo TrimLeft:!TrimLeft!
+            rem echo ..L.. TrimLeft:!TrimLeft!
 
             set s=%%i
             set s=!s:~0,1!
@@ -307,13 +308,17 @@ rem beginfunction
             ) else (
                 if defined AKeyName (
                     if "!TrimRight!"=="!AKeyName!" (
-                        set !TrimRight!=!TrimLeft!
-                        set GetINIParametr=!TrimLeft!
-                        set KeyValue=!TrimLeft!
+                        if "!ASection!"=="!Section!" (
+                            rem echo ..L.. "!TrimRight!"=="!AKeyName!"
+                            rem echo ..L.. "!TrimRight!":"!TrimLeft!"
+                            set !TrimRight!=!TrimLeft!
+                            set GetINIParametr=!TrimLeft!
+                            set KeyValue=!TrimLeft!
+                        )
                     )
                 ) else (
                     if defined ASection (
-                        if "!ASection!"=="!Section!" (
+                        if !ASection!==!Section! (
                             if defined AKeyNames (
                                 set !AKeyNames![!k!]=%%i
                             ) else (
@@ -324,9 +329,9 @@ rem beginfunction
 
                             set /A k+=1
 
-                            set !TrimRight!=!TrimLeft!
-                            set KeyValue=!TrimLeft!
-                            set GetINIParametr=!TrimLeft!
+                            rem set !TrimRight!=!TrimLeft!
+                            rem set KeyValue=!TrimLeft!
+                            rem set GetINIParametr=!TrimLeft!
                         )
                     ) else (
                         rem echo INFO: ASection not defined ...

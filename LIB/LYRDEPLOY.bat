@@ -222,6 +222,8 @@ rem beginfunction
             exit /b 0
         )    
     
+        rem echo ..3.. !GPROJECT_DIR!
+
         call :__REPO_WORK !GPROJECT_DIR!
     
         call :WriteBEGIN .... Стоп DEPLOY проекта !GPROJECTS_GROUP! !GPROJECT_NAME! ...
@@ -316,7 +318,8 @@ rem beginfunction
     rem GPROJECT_DIR
     rem ------------------------------------------------
     rem call :GetINI !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_DIR || exit /b 1
-    call :GetINIParametr !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_DIR || exit /b 1
+    rem echo ..*.. !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_DIR
+    call :GetINIParametr !GPROJECTS_INI! !GPROJECT_NAME! PROJECT_DIR "" || exit /b 1
     set GPROJECT_DIR=!KeyValue!
     rem echo GPROJECT_DIR:!GPROJECT_DIR!
 
@@ -603,6 +606,7 @@ rem beginfunction
     
     set ADirectory_WORK=%~1
     rem echo ADirectory_WORK:!ADirectory_WORK!
+
     if not exist "!ADirectory_WORK!"\ (
         echo ERROR: Каталог !ADirectory_WORK! не существует ...
         exit /b 1
@@ -614,7 +618,8 @@ rem beginfunction
     call :__SetPROJECT_INI
     
     cd /D "!ADirectory_WORK!"
-    
+    rem echo cd:!cd!
+
     if exist .git\ (
         call lyrgit_push_main.bat
     ) else (
