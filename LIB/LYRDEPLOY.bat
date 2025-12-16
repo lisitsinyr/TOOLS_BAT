@@ -94,8 +94,6 @@ rem beginfunction
         rem echo ..2.. LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
 
         call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
-
-        pause
     )
 
     exit /b 0
