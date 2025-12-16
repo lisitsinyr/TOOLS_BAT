@@ -98,7 +98,9 @@ rem beginfunction
 
     rem type !__GetINI!
 
+    set KeyName=
     set KeyValue=
+    set Section=
 
     set /a n=0
     set /a k=0
@@ -137,6 +139,7 @@ rem beginfunction
                 call :TrimLeft !STRj! || exit /b 1
                 rem echo TrimLeft:!TrimLeft!
 
+                set KeyName=!AKeyName!
                 set KeyValue=!TrimLeft!
                 rem echo KeyValue:!KeyValue!
 
@@ -186,7 +189,9 @@ rem beginfunction
 
     rem type !__GetINI!
 
+    set KeyName=
     set KeyValue=
+    set Section=
 
     set /a n=0
     set /a k=0
@@ -225,6 +230,7 @@ rem beginfunction
                 call :TrimLeft !STRj! || exit /b 1
                 rem echo TrimLeft:!TrimLeft!
 
+                set KeyName=!AKeyName!
                 set KeyValue=!TrimLeft!
                 rem echo KeyValue:!KeyValue!
 
@@ -267,8 +273,8 @@ rem beginfunction
 
     rem type !AFileName!
 
+    set KeyName==
     set KeyValue=
-    set LSection=None
     set Section=
     
     set SectionsCount=
@@ -279,7 +285,6 @@ rem beginfunction
 
     if exist !AFileName! (
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
-            rem usebackq
             rem В переменной i - ключ
             rem echo i:%%i
             rem В переменной j - значение
@@ -307,12 +312,11 @@ rem beginfunction
                 set /A n+=1
             ) else (
                 if defined AKeyName (
-                    if "!TrimRight!"=="!AKeyName!" (
-                        if "!ASection!"=="!Section!" (
-                            rem echo ..L.. "!TrimRight!"=="!AKeyName!"
-                            rem echo ..L.. "!TrimRight!":"!TrimLeft!"
+                    if !TrimRight!==!AKeyName! (
+                        if !ASection!==!Section! (
                             set !TrimRight!=!TrimLeft!
                             set GetINIParametr=!TrimLeft!
+                            set KeyName=!AKeyName!
                             set KeyValue=!TrimLeft!
                         )
                     )
@@ -324,20 +328,8 @@ rem beginfunction
                             ) else (
                                 set KeyNames[!k!]=%%i
                             )
-                            rem echo .... .... %%i
-                            rem echo .... .... !KeyNames[%k%]!
-
                             set /A k+=1
-
-                            rem set !TrimRight!=!TrimLeft!
-                            rem set KeyValue=!TrimLeft!
-                            rem set GetINIParametr=!TrimLeft!
                         )
-                    ) else (
-                        rem echo INFO: ASection not defined ...
-                        rem set !TrimRight!=!TrimLeft!
-                        rem set KeyValue=!TrimLeft!
-                        rem set GetINIParametr=!TrimLeft!
                     )
                 )
             )
@@ -346,13 +338,10 @@ rem beginfunction
         echo INFO: File !AFileName! not exist ...
     )
 
+    rem set /a SectionsCount=n-1
+    rem set /a KeyNamesCount=k-1
     set /a SectionsCount=n-1
     set /a KeyNamesCount=k-1
-
-rem Как удалить все переменные в cmd (только в одном окне)?
-rem Совершенно верно, можно при помощи for с ключом /f обработать вывод команды set без параметров, получив имена всех (почти) определённых переменных среды (частей выводимых строк до знака =: delims==):
-rem for /f "delims==" %v in ('set') do  set "%v="
-rem (при использовании в командных файлах % перед переменной цикла надо удвоить).
 
     exit /b 0
 rem endfunction
@@ -380,6 +369,7 @@ rem beginfunction
 
     rem type !AFileName!
 
+    set KeyName=
     set KeyValue=
     set Section=
     
@@ -419,36 +409,24 @@ rem beginfunction
                 set /A n+=1
             ) else (
                 if defined AKeyName (
-                    if "!TrimRight!"=="!AKeyName!" (
-                        set !TrimRight!=!TrimLeft!
-                        set GetINIParametr=!TrimLeft!
-                        set KeyValue=!TrimLeft!
+                    if !TrimRight!==!AKeyName! (
+                        if !ASection!==!Section! (
+                            set !TrimRight!=!TrimLeft!
+                            set GetINIParametr=!TrimLeft!
+                            set KeyName=!AKeyName!
+                            set KeyValue=!TrimLeft!
+                        )
                     )
                 ) else (
                     if defined ASection (
-                        if "!ASection!"=="!Section!" (
-
+                        if !ASection!==!Section! (
                             if defined AKeyNames (
                                 set !AKeyNames![!k!]=%%i
                             ) else (
                                 set KeyNames[!k!]=%%i
                             )
-
-                            rem set var=!AKeyNames![k]
-
-                            rem echo .... .... %%i
-                            rem echo .... .... !KeyNames[%k%]!
                             set /A k+=1
-
-                            set !TrimRight!=!TrimLeft!
-                            set KeyValue=!TrimLeft!
-                            set GetINIParametr=!TrimLeft!
                         )
-                    ) else (
-                        rem echo INFO: ASection not defined ...
-                        rem set !TrimRight!=!TrimLeft!
-                        rem set KeyValue=!TrimLeft!
-                        rem set GetINIParametr=!TrimLeft!
                     )
                 )
             )
@@ -459,11 +437,6 @@ rem beginfunction
 
     set /a SectionsCount=n-1
     set /a KeyNamesCount=k-1
-
-rem Как удалить все переменные в cmd (только в одном окне)?
-rem Совершенно верно, можно при помощи for с ключом /f обработать вывод команды set без параметров, получив имена всех (почти) определённых переменных среды (частей выводимых строк до знака =: delims==):
-rem for /f "delims==" %v in ('set') do  set "%v="
-rem (при использовании в командных файлах % перед переменной цикла надо удвоить).
 
     exit /b 0
 rem endfunction

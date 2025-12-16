@@ -517,23 +517,24 @@ rem beginfunction
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
+    set !FUNCNAME!=
 
-    echo %1
-    set AArray=%1
+    rem echo %~1
+    set AArray=%~1
 
-    :: Here we initializing an variable named len to calculate length of array
-    set len=0
-    :: To iterate the element of array
-    :Loop 
-    :: It will check if the element is defined or not
-    if defined Sections[%len%] (
+    rem ---------------------------------------------
+    rem WHILE
+    rem ---------------------------------------------
+    set /A Result=0
+    :WHILE
+    if defined !AArray![%Result%] (
     rem if defined %1[%len%] (
-        echo !Sections[%len%]!
-        set /a len+=1
-        GOTO :Loop 
+        rem echo !AArray![%len%]!
+        set /a Result+=1
+        goto :WHILE
     )
 
-    set GetLenArray=!len!
+    set GetLenArray=!Result!
     rem echo GetLenArray:!GetLenArray!
 
     exit /b 0
