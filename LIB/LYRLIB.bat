@@ -35,7 +35,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -199,42 +199,42 @@ rem beginfunction
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_FULLFILENAME=%1
-    rem echo SCRIPT_FULLFILENAME:%SCRIPT_FULLFILENAME%
+    rem echo ..L6.. SCRIPT_FULLFILENAME:%SCRIPT_FULLFILENAME%
     rem -------------------------------------------------------------------
     rem SCRIPT_FULLFILENAME - Файл скрипта [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_FULLFILENAME=%~f1
-    rem echo SCRIPT_FULLFILENAME:!SCRIPT_FULLFILENAME!
+    rem echo ..L6.. SCRIPT_FULLFILENAME:!SCRIPT_FULLFILENAME!
 
     rem -------------------------------------------------------------------
     rem SCRIPT_BASEFILENAME - Файл скрипта [имя+расширение]
     rem -------------------------------------------------------------------
     set SCRIPT_BASEFILENAME=%~n1%~x1
-    rem echo SCRIPT_BASEFILENAME: !SCRIPT_BASEFILENAME!
+    rem echo ..L6.. SCRIPT_BASEFILENAME: !SCRIPT_BASEFILENAME!
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FILENAME - Файл скрипта [имя]
     rem -------------------------------------------------------------------
     set SCRIPT_FILENAME=%~n1
-    rem echo SCRIPT_FILENAME:!SCRIPT_FILENAME!
+    rem echo ..L6.. SCRIPT_FILENAME:!SCRIPT_FILENAME!
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FILEDIR - Файл скрипта: каталог
     rem -------------------------------------------------------------------
     set SCRIPT_FILEDIR=%~d1%~p1
-    rem echo SCRIPT_FILEDIR:!SCRIPT_FILEDIR!
+    rem echo ..L6.. SCRIPT_FILEDIR:!SCRIPT_FILEDIR!
 
     rem -------------------------------------------------------------------
     rem SCRIPT_FILEEXT - Файл скрипта: расширение
     rem -------------------------------------------------------------------
     set SCRIPT_FILEEXT=%~x1
-    rem echo SCRIPT_FILEEXT:!SCRIPT_FILEEXT!
+    rem echo ..L6.. SCRIPT_FILEEXT:!SCRIPT_FILEEXT!
 
     rem -------------------------------------------------------------------
     rem APPName - APP
     rem -------------------------------------------------------------------
     set APPName=%~n1
-    rem echo APPName:!APPName!
+    rem echo ..L6.. APPName:!APPName!
 
     exit /b 0
 rem endfunction
@@ -268,19 +268,19 @@ rem beginfunction
     rem DATETIME_STAMP - формат имени файла журнала [YYYYMMDDHHMMSS]
     rem -------------------------------------------------------------------
     set DATETIME_STAMP=%date:~6,4%%date:~3,2%%date:~0,2%%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%
-    rem echo DATETIME_STAMP [YYYYMMDDHHMMSS]: !DATETIME_STAMP!
+    rem echo ..L6.. DATETIME_STAMP [YYYYMMDDHHMMSS]: !DATETIME_STAMP!
 
     rem -------------------------------------------------------------------
     rem SLEEP - Number
     rem -------------------------------------------------------------------
     set /a SLEEP=0
-    rem echo SLEEP: !SLEEP!
+    rem echo ..L6.. SLEEP: !SLEEP!
 
     rem -------------------------------------------------------------------
     rem REPO_INI - Файл с параметрами репозитария
     rem -------------------------------------------------------------------
     set REPO_INI=REPO.ini
-    rem echo REPO_INI [REPO.ini]: !REPO_INI!
+    rem echo ..L6.. REPO_INI [REPO.ini]: !REPO_INI!
 
     rem -------------------------------------------------------------------
     rem REPO_NAME - Имя репозитария
@@ -291,7 +291,7 @@ rem beginfunction
     rem PROJECT_INI - Файл с параметрами проекта
     rem -------------------------------------------------------------------
     set PROJECT_INI=PROJECT.ini
-    rem echo PROJECT_INI [PROJECT.ini]: !PROJECT_INI!
+    rem echo ..L6.. PROJECT_INI [PROJECT.ini]: !PROJECT_INI!
 
     rem -------------------------------------------------------------------
     rem PROJECT_NAME - Имя проекта
@@ -307,7 +307,7 @@ rem beginfunction
     rem POETRY_INI - Файл с параметрами проекта
     rem -------------------------------------------------------------------
     set POETRY_INI=POETRY.ini
-    rem echo POETRY_INI [POETRY.ini]: !POETRY_INI!
+    rem echo ..L6.. POETRY_INI [POETRY.ini]: !POETRY_INI!
 
     rem -------------------------------------------------------------------
     rem POETRY_NAME - Имя проекта
@@ -335,7 +335,7 @@ rem beginfunction
     if not defined PROJECTS_LYR_ROOT (
         set PROJECTS_LYR_ROOT=D:
     )
-    rem echo PROJECTS_LYR_ROOT: !PROJECTS_LYR_ROOT!
+    rem echo ..L6.. PROJECTS_LYR_ROOT: !PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_DIR -
@@ -343,49 +343,49 @@ rem beginfunction
     if not defined PROJECTS_LYR_DIR (
         set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
     )
-    rem echo PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
+    rem echo ..L6.. PROJECTS_LYR_DIR: !PROJECTS_LYR_DIR!
 
     rem -------------------------------------------------------------------
     rem PROJECT - проект
     rem -------------------------------------------------------------------
     set PROJECT=
-    rem echo PROJECT: !PROJECT!
+    rem echo ..L6.. PROJECT: !PROJECT!
   
     rem -------------------------------------------------------------------
     rem PROJECT_DIR -
     rem -------------------------------------------------------------------
     set PROJECT_DIR=
-    rem echo PROJECT_DIR: !PROJECT_DIR!
+    rem echo ..L6.. PROJECT_DIR: !PROJECT_DIR!
 
     rem -------------------------------------------------------------------
     rem CURRENT_SYSTEM -
     rem -------------------------------------------------------------------
     set CURRENT_SYSTEM=%OS%
-    rem echo CURRENT_SYSTEM: !CURRENT_SYSTEM!
+    rem echo ..L6.. CURRENT_SYSTEM: !CURRENT_SYSTEM!
 
     rem -------------------------------------------------------------------
     rem UNAME - COMPUTERNAME
     rem -------------------------------------------------------------------
     set UNAME=%COMPUTERNAME%
-    rem echo UNAME: !UNAME!
+    rem echo ..L6.. UNAME: !UNAME!
 
     rem -------------------------------------------------------------------
     rem USERNAME - USERNAME
     rem -------------------------------------------------------------------
     set USERNAME=%USERNAME%
-    rem echo USERNAME: !USERNAME!
+    rem echo ..L6.. USERNAME: !USERNAME!
 
     rem -------------------------------------------------------------------
     rem CURRENT_DIR - Текущий каталог
     rem -------------------------------------------------------------------
     set CURRENT_DIR=%CD%
-    rem echo CURRENT_DIR: !CURRENT_DIR!
+    rem echo ..L6.. CURRENT_DIR: !CURRENT_DIR!
 
     rem -------------------------------------------------------------------
     rem TEMP_DIR - Временный каталог
     rem -------------------------------------------------------------------
     set TEMP_DIR=%temp%
-    rem echo TEMP_DIR: !TEMP_DIR!
+    rem echo ..L6.. TEMP_DIR: !TEMP_DIR!
 
     exit /b 0
 rem endfunction
@@ -412,7 +412,7 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT_DEFAULT='%Y%m%d'
     set LOG_DT_FORMAT_DEFAULT=%date:~6,4%%date:~3,2%%date:~0,2%
-    rem echo LOG_DT_FORMAT_DEFAULT: !LOG_DT_FORMAT_DEFAULT!
+    rem echo ..L6.. LOG_DT_FORMAT_DEFAULT: !LOG_DT_FORMAT_DEFAULT!
 
     rem -------------------------------------------------------------------
     rem LOG_FILE_ADD - Параметры журнала [0]
@@ -420,7 +420,7 @@ rem beginfunction
     if not defined LOG_FILE_ADD (
         set /a LOG_FILE_ADD=0
     )
-    rem echo LOG_FILE_ADD: !LOG_FILE_ADD!
+    rem echo ..L6.. LOG_FILE_ADD: !LOG_FILE_ADD!
 
     rem -------------------------------------------------------------------
     rem LOG_FILE_DT - Параметры журнала [0]
@@ -428,7 +428,7 @@ rem beginfunction
     if not defined LOG_FILE_DT (
         set /a LOG_FILE_DT=0
     )
-    rem echo LOG_FILE_DT: !LOG_FILE_DT!
+    rem echo ..L6.. LOG_FILE_DT: !LOG_FILE_DT!
 
     rem -------------------------------------------------------------------
     rem LOG_DT_FORMAT -
@@ -437,7 +437,7 @@ rem beginfunction
     if not defined LOG_DT_FORMAT (
         set LOG_DT_FORMAT=!LOG_DT_FORMAT_DEFAULT!
     )
-    rem echo LOG_DT_FORMAT: !LOG_DT_FORMAT!
+    rem echo ..L6.. LOG_DT_FORMAT: !LOG_DT_FORMAT!
 
     rem -------------------------------------------------------------------
     rem LOG_FILENAME_FORMAT - Формат имени файла журнала [FILENAME,DATETIME,...]
@@ -447,7 +447,7 @@ rem beginfunction
         set LOG_FILENAME_FORMAT=FILENAME
         rem set LOG_FILENAME_FORMAT=DATETIME
     )
-    rem echo LOG_FILENAME_FORMAT [FILENAME,DATETIME,...]: !LOG_FILENAME_FORMAT!
+    rem echo ..L6.. LOG_FILENAME_FORMAT [FILENAME,DATETIME,...]: !LOG_FILENAME_FORMAT!
 
     rem -------------------------------------------------------------------
     rem LOG_DIR - Каталог журнала [каталог]
@@ -456,13 +456,13 @@ rem beginfunction
     if not defined LOG_DIR (
         set LOG_DIR=!PROJECTS_LYR_DIR!\LOGS
     )
-    rem echo LOG_DIR: !LOG_DIR!
+    rem echo ..L6.. LOG_DIR: !LOG_DIR!
     if not exist !LOG_DIR! (
         echo INFO: Dir !LOG_DIR! not exist ...
-        rem echo INFO: Каталог "!LOG_DIR!" не существует...
+        rem echo ..L6.. INFO: Каталог "!LOG_DIR!" не существует...
         echo INFO: Create !LOG_DIR! ...
         mkdir "!LOG_DIR!"
-        rem echo ERRORLEVEL: !ERRORLEVEL!
+        rem echo ..L6.. ERRORLEVEL: !ERRORLEVEL!
         if not !ERRORLEVEL! EQU 0 (
             echo ERROR: Dir !LOG_DIR! not created...
             exit /b 1
@@ -490,26 +490,26 @@ rem beginfunction
            set LOG_FILENAME=!DATETIME_STAMP!_!LOG_FILENAME!
         )
     )
-    rem echo LOG_FILENAME: !LOG_FILENAME!
+    rem echo ..L6.. LOG_FILENAME: !LOG_FILENAME!
 
     rem -------------------------------------------------------------------
     rem LOG_FULLFILENAME - Файл журнала [каталог+имя+расширение]
     rem -------------------------------------------------------------------
     set LOG_FULLFILENAME=!LOG_DIR!\!LOG_FILENAME!.log
-    rem echo LOG_FULLFILENAME: !%LOG_FULLFILENAME!
+    rem echo ..L6.. LOG_FULLFILENAME: !%LOG_FULLFILENAME!
    
     rem -------------------------------------------------------------------
     rem DirectoryLOG - Каталог журнала
     rem -------------------------------------------------------------------
     set DirectoryLOG=D:\PROJECTS_LYR\LOGS
-    rem echo DirectoryLOG:!DirectoryLOG!
+    rem echo ..L6.. DirectoryLOG:!DirectoryLOG!
     rem -------------------------------------------------------------------
     rem FileNameLOG - Файл журнала
     rem -------------------------------------------------------------------
     set FileNameLOG=!APPName!.log
-    rem echo FileNameLOG:!FileNameLOG!
+    rem echo ..L6.. FileNameLOG:!FileNameLOG!
     set FileNameLOGjson=!APPName!_json.log
-    rem echo FileNameLOGjson:!FileNameLOGjson!
+    rem echo ..L6.. FileNameLOGjson:!FileNameLOGjson!
 
     exit /b 0
 rem endfunction

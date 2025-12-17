@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -54,7 +54,7 @@ rem beginfunction
     rem project_type
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..LD.. VarName:!VarName!
 
     set !VarName!_caption.1=1.app
     set !VarName!_caption.2=2.lib
@@ -87,7 +87,7 @@ rem beginfunction
     rem project_type
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..LD.. VarName:!VarName!
 
     for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_caption' ) do (
         set %%k=
@@ -177,7 +177,7 @@ rem beginfunction
     rem project_type
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..LD.. VarName:!VarName!
 
     for /f "tokens=1,* delims==" %%k in ( 'set !VarName!_caption' ) do (
         echo !%%k!

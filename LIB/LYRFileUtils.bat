@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -51,9 +51,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFilename=%1
-    rem echo AFilename:!AFilename!
+    rem echo ..L5.. AFilename:!AFilename!
     set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    rem echo ..L5.. FILENAME: !FILENAME!
 
     rem if exist !AFilename! (
     rem     set ExtractFileDir=%~d1%~p1
@@ -80,7 +80,7 @@ rem beginfunction
 
     set AFilename=%1
     set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    rem echo ..L5.. FILENAME: !FILENAME!
 
     set FullFileName=%~f1
 
@@ -101,7 +101,7 @@ rem beginfunction
 
     set AFilename=%1
     set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    rem echo ..L5.. FILENAME: !FILENAME!
 
     set ExtractFileName=%~nx1
 
@@ -122,7 +122,7 @@ rem beginfunction
 
     set AFilename=%1
     set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    rem echo ..L5.. FILENAME: !FILENAME!
 
     set ExtractFileNameWithoutExt=%~n1
 
@@ -143,7 +143,7 @@ rem beginfunction
 
     set AFilename=%1
     set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    rem echo ..L5.. FILENAME: !FILENAME!
 
     set ExtractFileExt=%~x1
 
@@ -164,7 +164,7 @@ rem beginfunction
 
     set AFilename=%1
     set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    rem echo ..L5.. FILENAME: !FILENAME!
 
     set FOLDER=
     if exist "!FILENAME!" (
@@ -198,7 +198,7 @@ rem beginfunction
 
     set AFilename=%1
     set FILENAME=%~1
-    rem echo FILENAME: !FILENAME!
+    rem echo ..L5.. FILENAME: !FILENAME!
 
     set /a FileSize=0
 
@@ -225,7 +225,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ADIRECTORY=%~1
-    rem echo ADIRECTORY: !ADIRECTORY!
+    rem echo ..L5.. ADIRECTORY: !ADIRECTORY!
 
     set CreateDir=
 
@@ -260,9 +260,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ADIRECTORY=%~1
-    rem echo ADIRECTORY: !ADIRECTORY!
+    rem echo ..L5.. ADIRECTORY: !ADIRECTORY!
     set AMASK=%~2
-    rem echo AMASK:!AMASK!
+    rem echo ..L5.. AMASK:!AMASK!
 
     if defined ADIRECTORY (
         if exist "!ADIRECTORY!\" (
@@ -287,14 +287,14 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFILENAME=%~1
-    rem echo AFILENAME: !AFILENAME!
+    rem echo ..L5.. AFILENAME: !AFILENAME!
 
     set CreateFile=
     if defined AFILENAME (
         if not exist "!AFILENAME!" (
             rem set touchRUN=touch -f "!AFILENAME!"
             rem set touchRUN=D:\TOOLS\EXE\touch.exe "!AFILENAME!"
-            rem echo !touchRUN!
+            rem echo ..L5.. !touchRUN!
             rem %touchRUN%
             D:\TOOLS\EXE\touch.exe "!AFILENAME!"
         )
@@ -319,10 +319,10 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
-    rem echo !FUNCNAME!: !%FUNCNAME%!
+    rem echo ..L5.. !FUNCNAME!: !%FUNCNAME%!
 
     set AFILENAME=%~1
-    rem echo AFILENAME: !AFILENAME!
+    rem echo ..L5.. AFILENAME: !AFILENAME!
 
     set CheckFile=
 
@@ -351,7 +351,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set CurrentDir=!cd!
-    rem echo CurrentDir: !CurrentDir!
+    rem echo ..L5.. CurrentDir: !CurrentDir!
 
     exit /b 0
 
@@ -370,20 +370,20 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo AFileName:!AFileName!
+    rem echo ..L5.. AFileName:!AFileName!
     set LFileName=%~n1%~x1
-    rem echo LFileName:!LFileName!
+    rem echo ..L5.. LFileName:!LFileName!
     set ADIR_TO=%~2
-    rem echo ADIR_TO:!ADIR_TO!
+    rem echo ..L5.. ADIR_TO:!ADIR_TO!
     set AARG=%~3
-    rem echo AARG:!AARG!
+    rem echo ..L5.. AARG:!AARG!
 
     if defined AARG if !AARG!==/Y (
         set LOverwrite=1
     ) else (
         set LOverwrite=
     )
-    rem echo LOverwrite:!LOverwrite!
+    rem echo ..L5.. LOverwrite:!LOverwrite!
 
     rem Команда copy /y в командной строке (CMD) отключает запрос подтверждения 
     rem на перезапись существующего файла. Это позволяет скопировать файл, 
@@ -395,7 +395,7 @@ rem beginfunction
         )
         echo COPY_FILE: !AFileName! !ADIR_TO!   >> %LOG_FULLFILENAME%
         if not exist "!ADIR_TO!\!LFileName!" (
-            rem echo AFileName:!AFileName!
+            rem echo ..L5.. AFileName:!AFileName!
             copy !AFileName! !ADIR_TO! > NUL
             rem call :CheckErrorlevel COPY_FILES Yes
             echo File !AFileName! copied ...    >> %LOG_FULLFILENAME%
@@ -427,15 +427,15 @@ rem beginfunction
     set LSaveDirectory=!cd!
 
     set ADIR_FROM=%~1
-    rem echo ADIR_FROM:!ADIR_FROM!
+    rem echo ..L5.. ADIR_FROM:!ADIR_FROM!
     set ADIR_TO=%~2
-    rem echo ADIR_TO:!ADIR_TO!
+    rem echo ..L5.. ADIR_TO:!ADIR_TO!
     set AMASK=%~3
-    rem echo AMASK:!AMASK!
+    rem echo ..L5.. AMASK:!AMASK!
     set AARG1=%~4
-    rem echo AARG1:!AARG1!
+    rem echo ..L5.. AARG1:!AARG1!
     set AARG2=%~5
-    rem echo AARG2:!AARG2!
+    rem echo ..L5.. AARG2:!AARG2!
 
     set LR=
     set res=
@@ -444,7 +444,7 @@ rem beginfunction
     if defined res ( 
         set LR=/R !ADIR_FROM!
     )
-    rem echo LR:!LR!
+    rem echo ..L5.. LR:!LR!
 
     set LOverwrite=
     set res=
@@ -453,7 +453,7 @@ rem beginfunction
     if defined res ( 
         set LOverwrite=1
     )
-    rem echo LOverwrite:!LOverwrite!
+    rem echo ..L5.. LOverwrite:!LOverwrite!
 
     if exist "!ADIR_FROM!" (
         call :CurrentDir || exit /b 1
@@ -471,10 +471,10 @@ rem beginfunction
     
         rem for %AARG1% %%f in (!AMASK!) do (
         for %LR% %%f in (!AMASK!) do (
-            rem echo %%f
-            rem echo %%~nf%%~xf
+            rem echo ..L5.. %%f
+            rem echo ..L5.. %%~nf%%~xf
             set LFileName=%%~nf%%~xf
-            rem echo LFileName:!LFileName!
+            rem echo ..L5.. LFileName:!LFileName!
 
             if not exist !ADIR_TO!\!LFileName! (
                 copy "%%f" !ADIR_TO!        > NUL
@@ -507,13 +507,13 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ADIR_FROM=%~1
-    rem echo ADIR_FROM:!ADIR_FROM!
+    rem echo ..L5.. ADIR_FROM:!ADIR_FROM!
     set ADIR_TO=%~2
-    rem echo ADIR_TO:!ADIR_TO!
+    rem echo ..L5.. ADIR_TO:!ADIR_TO!
     set AMASK=%~3
-    rem echo AMASK:!AMASK!
+    rem echo ..L5.. AMASK:!AMASK!
     set AARG=%~4
-    rem echo AARG:!AARG!
+    rem echo ..L5.. AARG:!AARG!
     if not defined AARG (
         set AARG=/O
         set AARG=/D /S /E /V /F /H /R /K /Y /O
@@ -561,7 +561,7 @@ rem beginfunction
     set AFileName=%~1
     echo AFileName:!AFileName!
     rem set LFileName=%~n1%~x1
-    rem echo LFileName:!LFileName!
+    rem echo ..L5.. LFileName:!LFileName!
     set Astr_find=%2
     echo Astr_find:!Astr_find!
     set Astr_replace=%3
@@ -585,7 +585,7 @@ rem beginfunction
         rem     echo line:!line! >> !FileNameOUT!
             rem SET "line=!line:‘!Astr_find!!"
             rem SET "line=!line:’!Astr_replace!!"
-            rem ECHO (!line!
+            rem echo ..L5.. !line!
         rem )
 
     )

@@ -35,7 +35,7 @@ rem beginfunction
 
     call :__SETVarLog
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -102,7 +102,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set /a Alevel=%1
-    rem echo Alevel: !Alevel!
+    rem echo ..L7.. Alevel: !Alevel!
 
     set __SHORTLevelName=
 
@@ -163,10 +163,10 @@ rem beginfunction
     set !FUNCNAME!=
 
     set /a Alevel=%1
-    rem echo Alevel: !Alevel!
+    rem echo ..L7.. Alevel: !Alevel!
 
     set Amessage=%2 %3 %4 %5 %6 %7 %8 %9
-    rem echo Amessage: %Amessage%
+    rem echo ..L7.. Amessage: %Amessage%
 
     set YYYY=%date:~6,4%
     set MM=%date:~3,2%
@@ -176,10 +176,10 @@ rem beginfunction
     set SS=%TIME:~6,2%
 
     set FORMAT=!YYYY!-!MM!-!DD! !HH!:!MIN!:!SS!
-    rem echo FORMAT:!FORMAT!
+    rem echo ..L7.. FORMAT:!FORMAT!
 
     call :__SHORTLevelName !Alevel! || exit /b 1
-    rem echo __SHORTLevelName:!__SHORTLevelName!
+    rem echo ..L7.. __SHORTLevelName:!__SHORTLevelName!
     
     set FUNCNAME=__LOG_STR
     set __LOG_STR=
@@ -296,20 +296,20 @@ rem beginfunction
     set !FUNCNAME!=
 
     set /a Aout=%1
-    rem echo Aout: !Aout!
+    rem echo ..L7.. Aout: !Aout!
     set /a Glevel=%2
-    rem echo Glevel: !Glevel!
+    rem echo ..L7.. Glevel: !Glevel!
 
     call :__LOG_STR !Glevel! %3 %4 %5 %6 %7 %8 %9 || exit /b 1
     if !Aout! EQU 0 (
-        rem echo !__LOG_STR!
+        rem echo ..L7.. !__LOG_STR!
         call ::AddLogConsole !__LOG_STR!
     )
     if !Aout! EQU 1 (
         echo !__LOG_STR! >> "!LOG_FULLFILENAME!"
     )
     if !Aout! EQU 2 (
-        rem echo !__LOG_STR!
+        rem echo ..L7.. !__LOG_STR!
         call ::AddLogConsole !__LOG_STR!
         echo !__LOG_STR! >> "!LOG_FULLFILENAME!"
     )
@@ -330,9 +330,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     set /a Aout=%1
-    rem echo Aout: !Aout!
+    rem echo ..L7.. Aout: !Aout!
     set AFileName=%2
-    rem echo AFileName: !AFileName!
+    rem echo ..L7.. AFileName: !AFileName!
 
     if defined AFileName (
         if exist "!AFileName!" (
@@ -376,21 +376,21 @@ rem beginfunction
     rem Открытие файла журнала
     rem ------------------------------------------------------
     set LFileName=!LOG_FULLFILENAME!
-    rem echo LFileName: !LFileName!
-    rem echo LOG_FILE_ADD:!LOG_FILE_ADD!
+    rem echo ..L7.. LFileName: !LFileName!
+    rem echo ..L7.. LOG_FILE_ADD:!LOG_FILE_ADD!
 
     if !LOG_FILE_ADD! EQU 0 (
         if exist "!LFileName!" (
-            rem echo INFO: File !LFileName! exist ...
+            rem echo ..L7.. INFO: File !LFileName! exist ...
             del "!LFileName!"
         )
         rem set touchRUN=touch -f "!LFileName!"
         rem set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
-        rem echo touchRUN: !touchRUN!
+        rem echo ..L7.. touchRUN: !touchRUN!
         %touchRUN% "!LFileName!"
     ) else (
         if not exist "!LFileName!" (
-            rem echo INFO: File !LFileName! not exist ...
+            rem echo ..L7.. INFO: File !LFileName! not exist ...
             rem set touchRUN=touch -f "!LFileName!"
             rem set touchRUN=D:\TOOLS\EXE\touch.exe "!LFileName!"
             echo touchRUN: !touchRUN!
@@ -441,7 +441,7 @@ rem beginfunction
 
     set VarName=%~1
     if defined !VarName! set !VarName!
-    rem echo !VarName!:!%VarName%!
+    rem echo ..L7.. !VarName!:!%VarName%!
 
     exit /b 0
 rem endfunction

@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     call :LYRUV_vars_INIT
 
@@ -85,7 +85,7 @@ rem beginfunction
     echo ------------------------------------------------------------------------
 
     set Aversion=%~1
-    rem echo Aversion:!Aversion!
+    rem echo ..LC.. Aversion:!Aversion!
 
     rem -------------------------------------------------------------------
     rem version
@@ -121,7 +121,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set Aversion=%~1
-    rem echo Aversion:!Aversion!
+    rem echo ..LC.. Aversion:!Aversion!
 
     rem -------------------------------------------------------------------
     rem version
@@ -211,7 +211,7 @@ rem beginfunction
     rem version
     rem -------------------------------------------------------------------
     set Aversion=%~1
-    rem echo Aversion:!Aversion!
+    rem echo ..LC.. Aversion:!Aversion!
 
     set version=
     if defined Aversion (
@@ -296,7 +296,7 @@ rem beginfunction
     echo ------------------------------------------------------------------------
 
     set Aversion=%~1
-    rem echo Aversion:!Aversion!
+    rem echo ..LC.. Aversion:!Aversion!
 
     rem -------------------------------------------------------------------
     rem version
@@ -379,7 +379,7 @@ rem beginfunction
     rem generate-shell-completion
 
     set ACMD=%~1
-    rem echo ACMD:!ACMD!
+    rem echo ..LC.. ACMD:!ACMD!
     echo uv help !ACMD! ...
 
     uv help !ACMD!
@@ -608,13 +608,13 @@ rem beginfunction
     rem python_version
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..LC.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..LC.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..LC.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..LC.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -636,7 +636,7 @@ rem beginfunction
     )                      
 
     set GET_python_version=!%VarName%!
-    rem echo GET_python_version:!GET_python_version!
+    rem echo ..LC.. GET_python_version:!GET_python_version!
 
     exit /b 0
 rem endfunction
@@ -657,13 +657,13 @@ rem beginfunction
     rem project_type
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..LC.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..LC.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..LC.. VarCaption:!VarCaption!
     set VarDefaultStr=%~3
-    rem echo VarDefaultStr:!VarDefaultStr!
+    rem echo ..LC.. VarDefaultStr:!VarDefaultStr!
 
     if not defined VarValue (
 
@@ -683,7 +683,7 @@ rem beginfunction
     )
 
     set GET_project_type=!%VarName%!
-    rem echo GET_project_type:!GET_project_type!
+    rem echo ..LC.. GET_project_type:!GET_project_type!
 
     exit /b 0
 rem endfunction
@@ -708,9 +708,9 @@ rem beginfunction
     set VarValue=!%VarName%!
     echo VarValue:!VarValue!
     set VarCaption=%~2{y,n}
-    rem echo VarCaption:!VarCaption!
+    rem echo ..LC.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..LC.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -725,11 +725,11 @@ rem beginfunction
             set !VarName!=
             echo INFO: !VarName! not defined ...
         )    
-        rem echo result:!result!
+        rem echo ..LC.. result:!result!
     )
 
     set GET_package=!%VarName%!
-    rem echo GET_package:!GET_package!
+    rem echo ..LC.. GET_package:!GET_package!
 
     exit /b 0
 rem endfunction
@@ -750,13 +750,13 @@ rem beginfunction
     rem no-workspace
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..LC.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..LC.. VarValue:!VarValue!
     set VarCaption=%~2{y,n}
-    rem echo VarCaption:!VarCaption!
+    rem echo ..LC.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..LC.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -771,11 +771,11 @@ rem beginfunction
             set !VarName!=
             echo INFO: !VarName! not defined ...
         )    
-        rem echo result:!result!
+        rem echo ..LC.. result:!result!
     )
 
     set GET_no-workspace=!%VarName%!
-    rem echo GET_no-workspace:!GET_no-workspace!
+    rem echo ..LC.. GET_no-workspace:!GET_no-workspace!
 
     exit /b 0
 rem endfunction

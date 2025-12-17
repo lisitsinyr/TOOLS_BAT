@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -51,13 +51,13 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo AFileName:!AFileName!
+    rem echo ..L8.. AFileName:!AFileName!
     set ASection=%~2
-    rem echo ASection:!ASection!
+    rem echo ..L8.. ASection:!ASection!
     set AKeyName=%~3
-    rem echo AKeyName:!AKeyName!
+    rem echo ..L8.. AKeyName:!AKeyName!
     set AKeyValue=%~4
-    rem echo AKeyValue:!AKeyValue!
+    rem echo ..L8.. AKeyValue:!AKeyValue!
 
     %SetINIAPP% "!AFileName!" !ASection! !AKeyName! "!AKeyValue!"
 
@@ -79,18 +79,18 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo AFileName:!AFileName!
+    rem echo ..L8.. AFileName:!AFileName!
     set ASection=%~2
-    rem echo ASection:!ASection!
+    rem echo ..L8.. ASection:!ASection!
     set AKeyName=%~3
-    rem echo AKeyName:!AKeyName!
+    rem echo ..L8.. AKeyName:!AKeyName!
 
     set __GetINI=!TEMP_DIR!\%random%.tmp
-    rem echo __GetINI:!__GetINI!
+    rem echo ..L8.. __GetINI:!__GetINI!
 
-    rem echo %GetINIAPP%
+    rem echo ..L8.. %GetINIAPP%
 
-    rem echo %GetINIAPP% !AFileName! !ASection! !AKeyName!
+    rem echo ..L8.. %GetINIAPP% !AFileName! !ASection! !AKeyName!
 
     %GetINIAPP% !AFileName! !ASection! !AKeyName! > !__GetINI!
 
@@ -106,7 +106,7 @@ rem beginfunction
         if not defined ASection (
             for /f %%i in (!__GetINI!) do (
                 set Sections[!n!]=%%i
-                rem echo !Sections[%n%]!
+                rem echo ..L8.. !Sections[%n%]!
                 set /A n+=1
             )
             set __GetINI=!AFileName!
@@ -116,7 +116,7 @@ rem beginfunction
                 rem В переменной j - значение
 
                 set %%i=%%j
-                rem echo %%i:!%%i!
+                rem echo ..L8.. %%i:!%%i!
 
                 if defined AKeyNames (
                     set !AKeyNames![!k!]=%%i
@@ -127,18 +127,18 @@ rem beginfunction
                 set /A k+=1
 
                 set STRi=%%i
-                rem echo STRi:!STRi!
+                rem echo ..L8.. STRi:!STRi!
                 call :TrimRight !STRi! || exit /b 1
-                rem echo TrimRight:!TrimRight!
+                rem echo ..L8.. TrimRight:!TrimRight!
 
                 set STRj=%%j
-                rem echo STRj:!STRj!
+                rem echo ..L8.. STRj:!STRj!
                 call :TrimLeft !STRj! || exit /b 1
-                rem echo TrimLeft:!TrimLeft!
+                rem echo ..L8.. TrimLeft:!TrimLeft!
 
                 set KeyName=!AKeyName!
                 set KeyValue=!TrimLeft!
-                rem echo KeyValue:!KeyValue!
+                rem echo ..L8.. KeyValue:!KeyValue!
 
                 set GetINI=!TrimLeft!
             )
@@ -169,14 +169,14 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo AFileName:!AFileName!
+    rem echo ..L8.. AFileName:!AFileName!
     set ASection=%~2
-    rem echo ASection:!ASection!
+    rem echo ..L8.. ASection:!ASection!
     set AKeyName=%~3
-    rem echo AKeyName:!AKeyName!
+    rem echo ..L8.. AKeyName:!AKeyName!
 
     set __GetINI=!TEMP_DIR!\%random%.tmp
-    rem echo __GetINI:!__GetINI!
+    rem echo ..L8.. __GetINI:!__GetINI!
 
     echo %GetINIAPPPY%
 
@@ -194,7 +194,7 @@ rem beginfunction
         if not defined ASection (
             for /f %%i in (!__GetINI!) do (
                 set Sections[!n!]=%%i
-                rem echo !Sections[%n%]!
+                rem echo ..L8.. !Sections[%n%]!
                 set /A n+=1
             )
             set GetINIPY=!AFileName!
@@ -204,7 +204,7 @@ rem beginfunction
                 rem В переменной j - значение
 
                 set %%i=%%j
-                rem echo %%i:!%%i!
+                rem echo ..L8.. %%i:!%%i!
 
                 if defined AKeyNames (
                     set !AKeyNames![!k!]=%%i
@@ -215,18 +215,18 @@ rem beginfunction
                 set /A k+=1
 
                 set STRi=%%i
-                rem echo STRi:!STRi!
+                rem echo ..L8.. STRi:!STRi!
                 call :TrimRight !STRi! || exit /b 1
-                rem echo TrimRight:!TrimRight!
+                rem echo ..L8.. TrimRight:!TrimRight!
 
                 set STRj=%%j
-                rem echo STRj:!STRj!
+                rem echo ..L8.. STRj:!STRj!
                 call :TrimLeft !STRj! || exit /b 1
-                rem echo TrimLeft:!TrimLeft!
+                rem echo ..L8.. TrimLeft:!TrimLeft!
 
                 set KeyName=!AKeyName!
                 set KeyValue=!TrimLeft!
-                rem echo KeyValue:!KeyValue!
+                rem echo ..L8.. KeyValue:!KeyValue!
 
                 set GetINIPY=!TrimLeft!
             )
@@ -257,13 +257,13 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo ..L.. AFileName:!AFileName!
+    rem echo ..L8..  AFileName:!AFileName!
     set ASection=%~2
-    rem echo ..L.. ASection:!ASection!
+    rem echo ..L8..  ASection:!ASection!
     set AKeyName=%~3
-    rem echo ..L.. AKeyName:!AKeyName!
+    rem echo ..L8..  AKeyName:!AKeyName!
     set AKeyNames=%~4
-    rem echo ..L.. AKeyNames:!KeyNames!
+    rem echo ..L8..  AKeyNames:!KeyNames!
 
     rem type !AFileName!
 
@@ -281,26 +281,26 @@ rem beginfunction
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
-            rem echo i:%%i
-            rem echo j:%%j
+            rem echo ..L8.. i:%%i
+            rem echo ..L8.. j:%%j
 
             set STRi=%%i
-            rem echo STRi:!STRi!
+            rem echo ..L8.. STRi:!STRi!
             call :TrimRight !STRi! || exit /b 1
-            rem echo ..L.. TrimRight:!TrimRight!
+            rem echo ..L8..  TrimRight:!TrimRight!
 
             set STRj=%%j
-            rem echo STRj:!STRj!
+            rem echo ..L8.. STRj:!STRj!
             call :TrimLeft !STRj! || exit /b 1
-            rem echo ..L.. TrimLeft:!TrimLeft!
+            rem echo ..L8..  TrimLeft:!TrimLeft!
 
             set s=%%i
             set s=!s:~0,1!
-            rem echo s:!s!
+            rem echo ..L8.. s:!s!
             if "!s!"=="[" (
                 set s=%%i
                 set Section=!s:~1,-1!
-                rem echo Section:!Section!
+                rem echo ..L8.. Section:!Section!
                 set Sections[!n!]=!Section!
                 set /A n+=1
             ) else (
@@ -350,13 +350,13 @@ rem beginfunction
     set !FUNCNAME!=
 
     set AFileName=%~1
-    rem echo AFileName:!AFileName!
+    rem echo ..L8.. AFileName:!AFileName!
     set ASection=%~2
-    rem echo ASection:!ASection!
+    rem echo ..L8.. ASection:!ASection!
     set AKeyName=%~3
-    rem echo AKeyName:!AKeyName!
+    rem echo ..L8.. AKeyName:!AKeyName!
     set AKeyNames=%~4
-    rem echo AKeyNames:!KeyNames!
+    rem echo ..L8.. AKeyNames:!KeyNames!
 
     rem type !AFileName!
 
@@ -374,26 +374,26 @@ rem beginfunction
         for /f "eol=# delims== tokens=1,2" %%i in (!AFileName!) do (
             rem В переменной i - ключ
             rem В переменной j - значение
-            rem echo i:%%i
-            rem echo j:%%j
+            rem echo ..L8.. i:%%i
+            rem echo ..L8.. j:%%j
 
             set STRi=%%i
-            rem echo STRi:!STRi!
+            rem echo ..L8.. STRi:!STRi!
             call :TrimRight !STRi! || exit /b 1
-            rem echo TrimRight:!TrimRight!
+            rem echo ..L8.. TrimRight:!TrimRight!
 
             set STRj=%%j
-            rem echo STRj:!STRj!
+            rem echo ..L8.. STRj:!STRj!
             call :TrimLeft !STRj! || exit /b 1
-            rem echo TrimLeft:!TrimLeft!
+            rem echo ..L8.. TrimLeft:!TrimLeft!
 
             set s=%%i
             set s=!s:~0,1!
-            rem echo s:!s!
+            rem echo ..L8.. s:!s!
             if "!s!"=="[" (
                 set s=%%i
                 set Section=!s:~1,-1!
-                rem echo Section:!Section!
+                rem echo ..L8.. Section:!Section!
                 set Sections[!n!]=!Section!
                 set /A n+=1
             ) else (
@@ -491,7 +491,7 @@ rem beginfunction
             rem set token3=%%k
             rem set token4=%%l
             rem set token5=%%m
-            rem echo !token1!!token2!!token3!!token4!!token5!
+            rem echo ..L8.. !token1!!token2!!token3!!token4!!token5!
 
         )
     ) else (

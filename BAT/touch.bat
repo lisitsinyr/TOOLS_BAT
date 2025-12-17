@@ -17,7 +17,7 @@ rem ----------------------------------------------------------------------------
 
     set file_stop=G:\___ÐÀÇÁÎÐ\YOUTUBE\TELEGRAM\stop
 
-    rem echo off > !file_stop! & echo on
+    rem echo ..S1.. off > !file_stop! & echo on
 
     rem type nul > !file_stop!
 

@@ -32,16 +32,16 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
-    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+    rem echo ..S1.. PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_DIR - Каталог проектов LYR
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    rem echo ..S1.. PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
     if not exist "!PROJECTS_LYR_DIR!"\ (
-        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
-        rem echo INFO: Create "!PROJECTS_LYR_DIR!" ...
+        rem echo ..S1.. INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
+        rem echo ..S1.. INFO: Create "!PROJECTS_LYR_DIR!" ...
         rem mkdir "!PROJECTS_LYR_DIR!"
         exit /b 1
     )
@@ -54,7 +54,7 @@ rem beginfunction
         rem set SCRIPTS_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
-    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
+    rem echo ..S1.. SCRIPTS_DIR:!SCRIPTS_DIR!
 
     rem -------------------------------------------------------------------
     rem LIB_BAT - каталог библиотеки скриптов BAT
@@ -62,7 +62,7 @@ rem beginfunction
     if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\LIB
     )
-    rem echo LIB_BAT:!LIB_BAT!
+    rem echo ..S1.. LIB_BAT:!LIB_BAT!
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
@@ -169,12 +169,12 @@ rem beginfunction
     
     echo НАЧАЛО
 
-    rem echo [101;93m NORMAL FOREGROUND COLORS [0m
-    rem echo ^<ESC^>[33m [33mYellow[0m
+    rem echo ..S1.. [101;93m NORMAL FOREGROUND COLORS [0m
+    rem echo ..S1.. ^<ESC^>[33m [33mYellow[0m
     rem call :ConsoleTEST_00 %* || exit /b 1
     rem set cFG8_WHITE = 37 &rem Белый
-    rem echo cFG8_WHITE:!cFG8_WHITE!
-    rem echo [33mYellow[0m
+    rem echo ..S1.. cFG8_WHITE:!cFG8_WHITE!
+    rem echo ..S1.. [33mYellow[0m
 
     call :WriteLN !cS_BOLD! !cFG8_GREEN! !cBG8_WHITE! Тест
     call :WriteLN !cS_BOLD! !cFG8_GREEN! !cBG8_WHITE! "Тест Тест Тест"

@@ -14,13 +14,13 @@ setlocal enabledelayedexpansion
     rem PROJECTS_LYR_ROOT - Каталог скриптов
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_ROOT=D:
-    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+    rem echo ..S1.. PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_DIR - Каталог скриптов
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    rem echo ..S1.. PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
 
     rem -------------------------------------------------------------------
     rem SCRIPTS_DIR - Каталог скриптов
@@ -29,7 +29,7 @@ setlocal enabledelayedexpansion
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
-    rem echo SCRIPTS_DIR: !SCRIPTS_DIR!
+    rem echo ..S1.. SCRIPTS_DIR: !SCRIPTS_DIR!
 
     rem -------------------------------------------------------------------
     rem LIB_BAT - каталог библиотеки скриптов
@@ -37,7 +37,7 @@ setlocal enabledelayedexpansion
     if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
     )
-    rem echo LIB_BAT: !LIB_BAT!
+    rem echo ..S1.. LIB_BAT: !LIB_BAT!
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
@@ -59,7 +59,7 @@ setlocal enabledelayedexpansion
     rem DIR_PROJECT_ROOT - Каталог группы проектов
     rem -------------------------------------------------------------------
     set DIR_PROJECTS_ROOT=D:\WORK
-    rem echo DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
+    rem echo ..S1.. DIR_PROJECTS_ROOT:!DIR_PROJECTS_ROOT!
 
     call :WriteBEGIN PULL группы проектов: !PROJECTS_GROUP! ...
 

@@ -32,13 +32,13 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
-    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+    rem echo ..S1.. PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_DIR - Каталог проектов LYR
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    rem echo ..S1.. PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
     if not exist "!PROJECTS_LYR_DIR!"\ (
         echo ERROR: Dir "!PROJECTS_LYR_DIR!" not exist ...
         exit /b 1
@@ -51,7 +51,7 @@ rem beginfunction
         rem set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT\SRC
     )
-    rem echo SCRIPTS_DIR:!SCRIPTS_DIR!
+    rem echo ..S1.. SCRIPTS_DIR:!SCRIPTS_DIR!
 
     rem -------------------------------------------------------------------
     rem LIB_BAT - каталог библиотеки скриптов BAT
@@ -59,7 +59,7 @@ rem beginfunction
     if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\LIB
     )
-    rem echo LIB_BAT:!LIB_BAT!
+    rem echo ..S1.. LIB_BAT:!LIB_BAT!
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...
         exit /b 1
@@ -129,9 +129,9 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem set O1=test
     set VarName=O1
-    rem echo VarName:!VarName!
+    rem echo ..S1.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..S1.. VarValue:!VarValue!
 
     if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "O1_caption" "O1_default" || exit /b 1

@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo ..S1.. ERROR: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction

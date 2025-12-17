@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -54,9 +54,9 @@ rem beginfunction
     rem project_dir
     rem -------------------------------------------------------------------
     set VarName=%1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=%~2
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -82,7 +82,7 @@ rem beginfunction
     cd /D "!%VarName%!"
 
     set SET_project_dir=!%VarName%!
-    rem echo SET_project_dir:!SET_project_dir!
+    rem echo ..L9.. SET_project_dir:!SET_project_dir!
 
     exit /b 0
 rem endfunction
@@ -103,13 +103,13 @@ rem beginfunction
     rem project_dir
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -120,7 +120,7 @@ rem beginfunction
     )
 
     set GET_project_dir=!%VarName%!
-    rem echo GET_project_dir:!GET_project_dir!
+    rem echo ..L9.. GET_project_dir:!GET_project_dir!
 
     exit /b 0
 rem endfunction
@@ -141,9 +141,9 @@ rem beginfunction
     rem projects_dir
     rem -------------------------------------------------------------------
     set VarName=%1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=%~2
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -164,7 +164,7 @@ rem beginfunction
     cd /D "!%VarName%!"
 
     set SET_projects_dir=!%VarName%!
-    rem echo SET_projects_dir:!SET_projects_dir!
+    rem echo ..L9.. SET_projects_dir:!SET_projects_dir!
 
     exit /b 0
 rem endfunction
@@ -185,13 +185,13 @@ rem beginfunction
     rem projects_dir
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -202,7 +202,7 @@ rem beginfunction
     )
 
     set GET_projects_dir=!%VarName%!
-    rem echo GET_projects_dir:!GET_projects_dir!
+    rem echo ..L9.. GET_projects_dir:!GET_projects_dir!
 
     exit /b 0
 rem endfunction
@@ -223,9 +223,9 @@ rem beginfunction
     rem project_name
     rem -------------------------------------------------------------------
     set VarName=%1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=%~2
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -240,7 +240,7 @@ rem beginfunction
     )
 
     set SET_project_name=!%VarName%!
-    rem echo SET_project_name:!SET_project_name!
+    rem echo ..L9.. SET_project_name:!SET_project_name!
 
     exit /b 0
 rem endfunction
@@ -261,13 +261,13 @@ rem beginfunction
     rem project_name
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -278,7 +278,7 @@ rem beginfunction
     )
 
     set GET_project_name=!%VarName%!
-    rem echo GET_project_name:!GET_project_name!
+    rem echo ..L9.. GET_project_name:!GET_project_name!
 
     exit /b 0
 rem endfunction
@@ -299,9 +299,9 @@ rem beginfunction
     rem script_dir
     rem -------------------------------------------------------------------
     set VarName=%1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=%~2
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -322,7 +322,7 @@ rem beginfunction
     cd /D "!%VarName%!"
 
     set SET_script_dir=!%VarName%!
-    rem echo SET_script_dir:!SET_script_dir!
+    rem echo ..L9.. SET_script_dir:!SET_script_dir!
 
     exit /b 0
 rem endfunction
@@ -343,13 +343,13 @@ rem beginfunction
     rem script_dir
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -360,7 +360,7 @@ rem beginfunction
     )
 
     set GET_script_dir=!%VarName%!
-    rem echo GET_script_dir:!GET_script_dir!
+    rem echo ..L9.. GET_script_dir:!GET_script_dir!
 
     exit /b 0
 rem endfunction
@@ -381,9 +381,9 @@ rem beginfunction
     rem script
     rem -------------------------------------------------------------------
     set VarName=%1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=%~2
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -404,7 +404,7 @@ rem beginfunction
     )
 
     set SET_script=!%VarName%!
-    rem echo SET_script:!SET_script!
+    rem echo ..L9.. SET_script:!SET_script!
 
     exit /b 0
 rem endfunction
@@ -425,13 +425,13 @@ rem beginfunction
     rem script
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -442,7 +442,7 @@ rem beginfunction
     )
 
     set GET_script=!%VarName%!
-    rem echo GET_script:!GET_script!
+    rem echo ..L9.. GET_script:!GET_script!
 
     exit /b 0
 rem endfunction
@@ -460,13 +460,13 @@ rem beginfunction
     set !FUNCNAME!=
 
     set Aproject_dir=%~1
-    rem echo Aproject_dir:!Aproject_dir!
+    rem echo ..L9.. Aproject_dir:!Aproject_dir!
 
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
     set Aproject_dir=%~1
-    rem echo Aproject_dir:!Aproject_dir!
+    rem echo ..L9.. Aproject_dir:!Aproject_dir!
     if defined Aproject_dir (
         if not exist !Aproject_dir! (
             set !VarName!=
@@ -483,9 +483,9 @@ rem beginfunction
     rem venv_dir
     rem -------------------------------------------------------------------
     set VarName=%1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=%~2
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -524,7 +524,7 @@ rem beginfunction
     )
 
     set SET_venv_dir=!%VarName%!
-    rem echo SET_venv_dir:!SET_venv_dir!
+    rem echo ..L9.. SET_venv_dir:!SET_venv_dir!
 
     exit /b 0
 rem endfunction
@@ -545,7 +545,7 @@ rem beginfunction
     rem project_dir
     rem -------------------------------------------------------------------
     set Aproject_dir=%~1
-    rem echo Aproject_dir:!Aproject_dir!
+    rem echo ..L9.. Aproject_dir:!Aproject_dir!
     if defined Aproject_dir (
         if not exist !Aproject_dir! (
             set !VarName!=
@@ -562,13 +562,13 @@ rem beginfunction
     rem venv_dir
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -579,7 +579,7 @@ rem beginfunction
     )
 
     set GET_venv_dir=!%VarName%!
-    rem echo GET_venv_dir:!GET_venv_dir!
+    rem echo ..L9.. GET_venv_dir:!GET_venv_dir!
 
     exit /b 0
 rem endfunction
@@ -600,9 +600,9 @@ rem beginfunction
     rem python_dir
     rem -------------------------------------------------------------------
     set VarName=%1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=%~2
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -641,7 +641,7 @@ rem beginfunction
     )
 
     set SET_python_dir=!%VarName%!
-    rem echo SET_python_dir:!SET_python_dir!
+    rem echo ..L9.. SET_python_dir:!SET_python_dir!
 
     exit /b 0
 rem endfunction
@@ -662,13 +662,13 @@ rem beginfunction
     rem python_dir
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -679,7 +679,7 @@ rem beginfunction
     )
 
     set GET_python_dir=!%VarName%!
-    rem echo GET_python_dir:!GET_python_dir!
+    rem echo ..L9.. GET_python_dir:!GET_python_dir!
 
     exit /b 0
 rem endfunction
@@ -700,13 +700,13 @@ rem beginfunction
     rem requirements_file
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -716,7 +716,7 @@ rem beginfunction
     )
 
     set GET_requirements_file=!%VarName%!
-    rem echo GET_requirements_file:!GET_requirements_file!
+    rem echo ..L9.. GET_requirements_file:!GET_requirements_file!
 
     exit /b 0
 rem endfunction
@@ -737,13 +737,13 @@ rem beginfunction
     rem package_names
     rem -------------------------------------------------------------------
     set VarName=%~1
-    rem echo VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
     echo VarValue:!VarValue!
     set VarCaption=%~2
-    rem echo VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~3
-    rem echo VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !%VarName%! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
@@ -753,7 +753,7 @@ rem beginfunction
     )
 
     set GET_package_names=!%VarName%!
-    rem echo GET_package_name:!GET_package_name!
+    rem echo ..L9.. GET_package_name:!GET_package_name!
 
     exit /b 0
 rem endfunction
@@ -774,7 +774,7 @@ rem beginfunction
     rem venv_dir
     rem -------------------------------------------------------------------
     set Avenv_dir=%~1
-    rem echo Avenv_dir:!Avenv_dir!
+    rem echo ..L9.. Avenv_dir:!Avenv_dir!
 
     if defined Avenv_dir (
         if not exist !Avenv_dir! (
@@ -813,7 +813,7 @@ rem beginfunction
     rem venv_dir
     rem -------------------------------------------------------------------
     set Avenv_dir=%~1
-    rem echo Avenv_dir:!Avenv_dir!
+    rem echo ..L9.. Avenv_dir:!Avenv_dir!
 
     if defined Avenv_dir (
         if not exist !Avenv_dir! (
@@ -851,7 +851,7 @@ rem beginfunction
     rem venv_dir
     rem -------------------------------------------------------------------
     set Avenv_dir=%~1
-    rem echo Avenv_dir:!Avenv_dir!
+    rem echo ..L9.. Avenv_dir:!Avenv_dir!
 
     if defined Avenv_dir (
         if not exist !Avenv_dir! (
@@ -862,7 +862,7 @@ rem beginfunction
         rem pip freeze > !Avenv_dir!\requirements.txt
         pip freeze > requirements.txt
         call :CHANGE_STR requirements.txt "==" ">=" || exit /b 1
-        rem echo cd:!cd!
+        rem echo ..L9.. cd:!cd!
         if exist LOG\ (
             pip install -r requirements.txt > LOG\install.log
         ) else (

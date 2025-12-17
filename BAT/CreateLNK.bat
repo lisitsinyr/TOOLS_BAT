@@ -32,15 +32,15 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_ROOT=D:\WORK\WIN
     set PROJECTS_LYR_ROOT=D:
-    rem echo PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
+    rem echo ..S1.. PROJECTS_LYR_ROOT:!PROJECTS_LYR_ROOT!
 
     rem -------------------------------------------------------------------
     rem PROJECTS_LYR_DIR - Каталог проектов LYR
     rem -------------------------------------------------------------------
     set PROJECTS_LYR_DIR=!PROJECTS_LYR_ROOT!\PROJECTS_LYR
-    rem echo PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
+    rem echo ..S1.. PROJECTS_LYR_DIR:!PROJECTS_LYR_DIR!
     if not exist "!PROJECTS_LYR_DIR!"\ (
-        rem echo INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
+        rem echo ..S1.. INFO: Dir "!PROJECTS_LYR_DIR!" not exist ...
         echo INFO: Create "!PROJECTS_LYR_DIR!" ...
         mkdir "!PROJECTS_LYR_DIR!"
     )
@@ -52,14 +52,14 @@ rem beginfunction
         set SCRIPTS_DIR=D:\TOOLS\TOOLS_BAT
         set SCRIPTS_DIR=!PROJECTS_LYR_DIR!\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     )
-    rem echo SCRIPTS_DIR: %SCRIPTS_DIR%
+    rem echo ..S1.. SCRIPTS_DIR: %SCRIPTS_DIR%
 
     rem -------------------------------------------------------------------
     rem LIB_BAT - каталог библиотеки скриптов BAT
     rem -------------------------------------------------------------------
     if not defined LIB_BAT (
         set LIB_BAT=!SCRIPTS_DIR!\SRC\LIB
-        rem echo LIB_BAT: !LIB_BAT!
+        rem echo ..S1.. LIB_BAT: !LIB_BAT!
     )
     if not exist !LIB_BAT!\ (
         echo ERROR: Каталог библиотеки LYR !LIB_BAT! не существует...

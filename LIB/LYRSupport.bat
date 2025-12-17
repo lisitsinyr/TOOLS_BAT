@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -50,7 +50,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem echo "Press any key to continue" && pause
+    rem echo ..LB.. "Press any key to continue" && pause
     
     pause
 
@@ -70,7 +70,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set /a APause=%1
-    rem echo APause:!APause!
+    rem echo ..LB.. APause:!APause!
 
     if not defined APause (
         timeout 0
@@ -97,23 +97,23 @@ rem setlocal enabledelayedexpansion
     set !FUNCNAME!=
 
     set P_Name=%1
-    rem echo P_Name:!P_Name!
+    rem echo ..LB.. P_Name:!P_Name!
     set P_Value=%~2
     rem set P_Value=!%P_Name%!
-    rem echo P_Value:!P_Value!
+    rem echo ..LB.. P_Value:!P_Value!
     set P_Caption=%~3
-    rem echo P_Caption:!P_Caption!
+    rem echo ..LB.. P_Caption:!P_Caption!
     set P_Default=%~4
-    rem echo P_Default:!P_Default!
+    rem echo ..LB.. P_Default:!P_Default!
 
     rem !P_Name! - имя переменной
     rem %P_Name% - имя переменной
-    rem echo P_Name:%P_Name%
+    rem echo ..LB.. P_Name:%P_Name%
     rem !%P_Name%! - значение переменной по умолчанию
-    rem echo P_Value_default:!%P_Name%!
+    rem echo ..LB.. P_Value_default:!%P_Name%!
     rem !P_Value! - значение переменной
     rem set P_Value=%2
-    rem echo P_Value:!P_Value!
+    rem echo ..LB.. P_Value:!P_Value!
     rem [!P_Name!]   - имя переменной
     rem [!%P_Name%!] - значение переменной по умолчанию
 
@@ -125,15 +125,15 @@ rem setlocal enabledelayedexpansion
             set /p Input=[!P_Name!][!P_default!]:
         )
 
-        rem echo Input:!Input!
+        rem echo ..LB.. Input:!Input!
         if not defined Input (
             rem set %P_Name%=!%P_Name%!
             set %P_Name%=!P_Default!
         ) else (
             set %P_Name%=!Input!
-            rem echo P_Name:!%P_Name%!
+            rem echo ..LB.. P_Name:!%P_Name%!
         )
-        rem echo P_Name:!P_Name!
+        rem echo ..LB.. P_Name:!P_Name!
 
     ) else (
         set %P_Name%=!P_Value!
@@ -144,7 +144,7 @@ rem setlocal enabledelayedexpansion
     )
 
     set Read_P=!%P_Name%!
-    rem echo Read_P:!Read_P!
+    rem echo ..LB.. Read_P:!Read_P!
 
     exit /b 0
 rem endfunction
@@ -165,23 +165,23 @@ rem setlocal enabledelayedexpansion
     set !FUNCNAME!=
 
     set P_Name=%1
-    rem echo P_Name:!P_Name!
+    rem echo ..LB.. P_Name:!P_Name!
     set P_Value=%~2
     rem set P_Value=!%P_Name%!
-    rem echo P_Value:!P_Value!
+    rem echo ..LB.. P_Value:!P_Value!
     set P_Caption=%~3
-    rem echo P_Caption:!P_Caption!
+    rem echo ..LB.. P_Caption:!P_Caption!
     set P_Default=%~4
-    rem echo P_Default:!P_Default!
+    rem echo ..LB.. P_Default:!P_Default!
 
     rem !P_Name! - имя переменной
     rem %P_Name% - имя переменной
-    rem echo P_Name:%P_Name%
+    rem echo ..LB.. P_Name:%P_Name%
     rem !%P_Name%! - значение переменной по умолчанию
-    rem echo P_Value_default:!%P_Name%!
+    rem echo ..LB.. P_Value_default:!%P_Name%!
     rem !P_Value! - значение переменной
     rem set P_Value=%2
-    rem echo P_Value:!P_Value!
+    rem echo ..LB.. P_Value:!P_Value!
     rem [!P_Name!]   - имя переменной
     rem [!%P_Name%!] - значение переменной по умолчанию
 
@@ -198,7 +198,7 @@ rem setlocal enabledelayedexpansion
             rem set /p Input=[!P_Name!][!P_default!]:
         )
 
-        rem echo .... !%P_Name%!
+        rem echo ..LB.. .... !%P_Name%!
 
         if !errorlevel! EQU 13 (
             rem variable empty
@@ -206,14 +206,14 @@ rem setlocal enabledelayedexpansion
         ) else (
             set Input=!%P_Name%!
         )
-        rem echo Input:!Input!
+        rem echo ..LB.. Input:!Input!
 
         if not defined Input (
             set %P_Name%=!P_Default!
         ) else (
             set %P_Name%=!Input!
         )
-        rem echo P_Name:!%P_Name%!
+        rem echo ..LB.. P_Name:!%P_Name%!
 
     ) else (
         set %P_Name%=!P_Value!
@@ -224,7 +224,7 @@ rem setlocal enabledelayedexpansion
     )
 
     set Read_P_editenv=!%P_Name%!
-    rem echo Read_P_editenv:!Read_P_editenv!
+    rem echo ..LB.. Read_P_editenv:!Read_P_editenv!
 
     exit /b 0
 rem endfunction
@@ -243,26 +243,26 @@ rem beginfunction
     set !FUNCNAME!=
 
     set P_Name=%1
-    rem echo P_Name:!P_Name!
+    rem echo ..LB.. P_Name:!P_Name!
     set P_List=%~2
-    rem echo P_List:!P_List!
+    rem echo ..LB.. P_List:!P_List!
     set ADefault=%~3
-    rem echo ADefault:!ADefault!
+    rem echo ..LB.. ADefault:!ADefault!
     set ACaption=%~4
-    rem echo ACaption:!ACaption!
+    rem echo ..LB.. ACaption:!ACaption!
     set Atimeout=!TIMEOUT!
     set Atimeout=%5
     if not defined Atimeout (
         set Atimeout=5
     )
-    rem echo Atimeout:!Atimeout!
+    rem echo ..LB.. Atimeout:!Atimeout!
 
     rem set %P_Name%=!%P_Name%!
     set %P_Name%=!ADefault!
 
     if defined P_List (
         choice /C !P_List! /D !%P_Name%! /T !Atimeout! /M "!ACaption!"
-        rem echo ERRORLEVEL:!ERRORLEVEL!
+        rem echo ..LB.. ERRORLEVEL:!ERRORLEVEL!
         set %P_Name%=!ERRORLEVEL!
         rem if !ERRORLEVEL!==1 (
         rem     set %P_Name%=!ERRORLEVEL!
@@ -275,7 +275,7 @@ rem beginfunction
     )
 
     set Read_F=!%P_Name%!
-    rem echo Read_F:!Read_F!
+    rem echo ..LB.. Read_F:!Read_F!
 
     exit /b 0
 rem endfunction
@@ -491,7 +491,7 @@ rem beginfunction
     set APAUSE=%~2
 
     set CheckErrorlevel=!errorlevel!
-    rem echo CheckErrorlevel:!CheckErrorlevel!
+    rem echo ..LB.. CheckErrorlevel:!CheckErrorlevel!
 
     if not errorlevel 0 (
         echo ERROR: !ATEXT! errorlevel:!errorlevel!
@@ -500,7 +500,7 @@ rem beginfunction
             call :PressAnyKey
         )
     ) else (
-        rem echo INFO: !ATEXT! errorlevel:!errorlevel!
+        rem echo ..LB.. INFO: !ATEXT! errorlevel:!errorlevel!
         rem call :WriteLOG !lINFO! !ATEXT! errorlevel:!errorlevel!
     )
 
@@ -519,7 +519,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem echo %~1
+    rem echo ..LB.. %~1
     set AArray=%~1
 
     rem ---------------------------------------------
@@ -529,13 +529,13 @@ rem beginfunction
     :WHILE
     if defined !AArray![%Result%] (
     rem if defined %1[%len%] (
-        rem echo !AArray![%len%]!
+        rem echo ..LB.. !AArray![%len%]!
         set /a Result+=1
         goto :WHILE
     )
 
     set GetLenArray=!Result!
-    rem echo GetLenArray:!GetLenArray!
+    rem echo ..LB.. GetLenArray:!GetLenArray!
 
     exit /b 0
 rem endfunction

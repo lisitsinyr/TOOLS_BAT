@@ -59,13 +59,13 @@ rem ----------------------------------------------------------------------------
     rem archive
     rem -------------------------------------------------------------------
     set VarName=archive
-    rem echo VarName:!VarName!
+    rem echo ..S1.. VarName:!VarName!
     set VarValue=
-    rem echo VarValue:!VarValue!
+    rem echo ..S1.. VarValue:!VarValue!
     set VarCaption=Ввод значения archive
-    rem echo VarCaption:!VarCaption!
+    rem echo ..S1.. VarCaption:!VarCaption!
     set VarDefault=archive
-    rem echo VarDefault:!VarDefault!
+    rem echo ..S1.. VarDefault:!VarDefault!
     if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
@@ -80,20 +80,20 @@ rem ----------------------------------------------------------------------------
     )
 
     call :FullFileName "!archive!" || exit /b 1
-    rem echo FullFileName: !FullFileName!
+    rem echo ..S1.. FullFileName: !FullFileName!
     call :ExtractFileName "!archive!" || exit /b 1
-    rem echo ExtractFileName: !ExtractFileName!
+    rem echo ..S1.. ExtractFileName: !ExtractFileName!
     call :ExtractFileNameWithoutExt "!archive!" || exit /b 1
-    rem echo ExtractFileNameWithoutExt: !ExtractFileNameWithoutExt!
+    rem echo ..S1.. ExtractFileNameWithoutExt: !ExtractFileNameWithoutExt!
     call :FileAttr "!archive!" || exit /b 1
-    rem echo FileAttr: !FileAttr!
-    rem echo FOLDER: !FOLDER!
+    rem echo ..S1.. FileAttr: !FileAttr!
+    rem echo ..S1.. FOLDER: !FOLDER!
 
     if not defined FOLDER (
         set PN_CAPTION=Файлы
         set files=*.*
         call :Read_P files !files! || exit /b 1
-        rem echo files: !files!    
+        rem echo ..S1.. files: !files!    
         set ARGS=!ARGS! "!archive!.rar" "!files!"
     )
 

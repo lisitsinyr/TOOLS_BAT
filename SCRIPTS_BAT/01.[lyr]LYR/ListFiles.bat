@@ -12,7 +12,7 @@ setlocal enabledelayedexpansion
 
     for %%f in ( *.* ) do (
         echo Τΰιλ: %%f
-        rem echo %%~nf%%~xf
+        rem echo ..S1.. %%~nf%%~xf
     )
 
     exit /b 0

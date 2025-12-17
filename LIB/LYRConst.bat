@@ -30,12 +30,13 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set PRESSANYKEY=5
     set TIMEOUT=5
+    rem echo ..L0.._
 
     rem -------------------------------------------------------------------
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction

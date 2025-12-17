@@ -59,13 +59,13 @@ rem ----------------------------------------------------------------------------
     rem directory
     rem -------------------------------------------------------------------
     set VarName=directory
-    rem echo VarName:!VarName!
+    rem echo ..S1.. VarName:!VarName!
     set VarValue=%1
-    rem echo VarValue:!VarValue!
+    rem echo ..S1.. VarValue:!VarValue!
     set VarCaption=¬вод значени€ directory
-    rem echo VarCaption:!VarCaption!
+    rem echo ..S1.. VarCaption:!VarCaption!
     set VarDefault=
-    rem echo VarDefault:!VarDefault!
+    rem echo ..S1.. VarDefault:!VarDefault!
     if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )

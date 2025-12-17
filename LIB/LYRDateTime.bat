@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -79,10 +79,10 @@ rem beginfunction
 
     set LFORMAT=^!YYYY^!^!MM^!^!DD^!^!HH^!^!MIN^!^!SS^!
     set LFORMAT=!YYYY!!MM!!DD!!HH!!MIN!!SS!
-    rem echo LFORMAT:!LFORMAT!
+    rem echo ..L2.. LFORMAT:!LFORMAT!
 
     set YYYYMMDDHHMMSS=!LFORMAT!
-    rem echo YYYYMMDDHHMMSS:!YYYYMMDDHHMMSS!
+    rem echo ..L2.. YYYYMMDDHHMMSS:!YYYYMMDDHHMMSS!
 
     exit /b 0
 rem endfunction
@@ -109,7 +109,7 @@ rem beginfunction
     )
 
     set DateTime=!AFORMAT!
-    rem echo DateTime:!DateTime!
+    rem echo ..L2.. DateTime:!DateTime!
 
     exit /b 0
 rem endfunction

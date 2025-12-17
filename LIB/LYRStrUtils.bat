@@ -33,7 +33,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -51,7 +51,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ASTR=%~1
-    rem echo ASTR:!ASTR!
+    rem echo ..LA.. ASTR:!ASTR!
 
     rem Обрезать слева - обрезать пробелы в начале строки
     for /f "tokens=* delims= " %%a in ("!ASTR!") do set ASTR=%%a
@@ -74,7 +74,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ASTR=%~1
-    rem echo ASTR:!ASTR!
+    rem echo ..LA.. ASTR:!ASTR!
 
     rem Обрезать справа - обрезать пробелы в конце строки
     for /l %%a in (1,1,31) do if "!ASTR:~-1!"==" " set ASTR=!ASTR:~0,-1!
@@ -119,9 +119,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ASTR=%~1
-    rem echo ASTR:!ASTR!
+    rem echo ..LA.. ASTR:!ASTR!
     set /a Alen=%2
-    rem echo Alen:!Alen!
+    rem echo ..LA.. Alen:!Alen!
 
     set Left=!ASTR:~0,%Alen%!
     rem set "substring=!string:~%start%,%length%!"
@@ -142,11 +142,11 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ASTR=%~1
-    rem echo ASTR:!ASTR!
+    rem echo ..LA.. ASTR:!ASTR!
     set /a Aposition=%2
-    rem echo Aposition:!Aposition!
+    rem echo ..LA.. Aposition:!Aposition!
     set /a Alen=%3
-    rem echo Alen:!Alen!
+    rem echo ..LA.. Alen:!Alen!
 
     set Mid=!ASTR:~%Aposition%,%Alen%!
 
@@ -166,7 +166,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ASTR=%1
-    rem echo ASTR:!ASTR!
+    rem echo ..LA.. ASTR:!ASTR!
 
     for %%a in ( '%ASTR%' ) do (
         echo %%~a
@@ -189,12 +189,12 @@ rem beginfunction
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
-    rem echo _:%*
+    rem echo ..LA.. _:%*
     set ASTR=%*
 
     set LSTR=
     call :Read_N %*
-    rem echo Read_N:!Read_N!
+    rem echo ..LA.. Read_N:!Read_N!
 
     if !Read_N! GTR 0 (
         if !Read_N! EQU 1 (
@@ -202,7 +202,7 @@ rem beginfunction
         ) else (
             set n=1
             for %%a in ( %* ) do (
-                rem echo a:%%a
+                rem echo ..LA.. a:%%a
                 if !n! EQU 1 (
                     set LSTR=!LSTR! %%a
                 ) else (
@@ -217,7 +217,7 @@ rem beginfunction
             rem set LSTR=!LSTR!
         )
     )
-    rem echo LSTR:!LSTR!
+    rem echo ..LA.. LSTR:!LSTR!
 
     set ListToStr=!LSTR!
 

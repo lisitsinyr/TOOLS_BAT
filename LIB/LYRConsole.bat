@@ -131,7 +131,7 @@ rem beginfunction
     rem VAR
     rem -------------------------------------------------------------------
 
-    rem echo ERROR: function !FUNCNAME! not implemented! ...
+    rem echo INFO: function !FUNCNAME! not implemented! ...
 
     exit /b 0
 rem endfunction
@@ -274,19 +274,19 @@ rem beginfunction
     set !FUNCNAME!=
 
     set s=%~1
-    rem echo s:!s!
+    rem echo ..L1.. s:!s!
     set AStyles=%~2
-    rem echo AStyles:!AStyles!
+    rem echo ..L1.. AStyles:!AStyles!
     set AFG8=%~3
-    rem echo AFG8:!AFG8!
+    rem echo ..L1.. AFG8:!AFG8!
     set ABG8=%~4
-    rem echo ABG8:!ABG8!
+    rem echo ..L1.. ABG8:!ABG8!
     set AFG256=%~5
-    rem echo AFG256:!AFG256!
+    rem echo ..L1.. AFG256:!AFG256!
     set ABG256=%~6
-    rem echo ABG256:!ABG256!
+    rem echo ..L1.. ABG256:!ABG256!
     set AESC=%~7
-    rem echo AESC:!AESC!
+    rem echo ..L1.. AESC:!AESC!
 
     rem LStyles = LUSupport.TupleToStr (AStyles)
     set LStyles=
@@ -297,7 +297,7 @@ rem beginfunction
         ) else (
             set LResult=!sBEGIN!!AESC!!s!!sRESET!
         )
-        rem echo 0.LResult:!LResult!
+        rem echo ..L1.. 0.LResult:!LResult!
     ) else (
 
         rem --------------------------------------------
@@ -314,7 +314,7 @@ rem beginfunction
         if defined LStyles (
             set LResult=!LResult!!LStyles!
         )
-        rem echo 1.LResult:!LResult!
+        rem echo ..L1.. 1.LResult:!LResult!
 
         rem --------------------------------------------
         if defined AFG8 (
@@ -324,7 +324,7 @@ rem beginfunction
                 set LResult=!LResult!!AFG8!
             )
         )
-        rem echo 2.LResult:!LResult!
+        rem echo ..L1.. 2.LResult:!LResult!
 
         rem --------------------------------------------
         if defined ABG8 (
@@ -336,7 +336,7 @@ rem beginfunction
                 set LResult=!LResult!!ABG8!
             )
         )
-        rem echo 3.LResult:!LResult!
+        rem echo ..L1.. 3.LResult:!LResult!
 
         rem --------------------------------------------
         if defined AFG8 if defined ABG8 (
@@ -346,7 +346,7 @@ rem beginfunction
                 ) else (
                     set LResult=!LResult!!sFG256_BEGIN!!AFG256!
                 )
-                rem echo LResult:!LResult!
+                rem echo ..L1.. LResult:!LResult!
             )
 
             rem --------------------------------------------
@@ -358,7 +358,7 @@ rem beginfunction
                 ) else (
                     set LResult=!LResult!!sBG256_BEGIN!!ABG256!
                 )
-                rem echo LResult:!LResult!
+                rem echo ..L1.. LResult:!LResult!
             )
         )
         rem --------------------------------------------
@@ -386,19 +386,19 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem echo _:%*
+    rem echo ..L1.. _:%*
     set ASTR=%*
 
     set LSTR=
     call :Read_N %*
-    rem echo Read_N:!Read_N!
+    rem echo ..L1.. Read_N:!Read_N!
     if !Read_N! GTR 0 (
         if !Read_N! EQU 1 (
             set LSTR=%~1
         ) else (
             set n=1
             for %%a in ( %* ) do (
-                rem echo a:%%a
+                rem echo ..L1.. a:%%a
                 if !n! EQU 1 (
                     set LSTR=!LSTR!%%a
                 ) else (
@@ -413,7 +413,7 @@ rem beginfunction
             set LSTR=!sBEGIN!!LSTR!!sRESET!
         )
     )
-    rem echo !LSTR!
+    rem echo ..L1.. !LSTR!
 
     set __aListToStr=!LSTR!
 
@@ -432,19 +432,19 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    rem echo _:%*
+    rem echo ..L1.. _:%*
     set ASTR=%*
                          
     set LSTR=
     call :Read_N %*
-    rem echo Read_N:!Read_N!
+    rem echo ..L1.. Read_N:!Read_N!
     if !Read_N! GTR 0 (
         if !Read_N! EQU 1 (
             set LSTR=%1
         ) else (
             set n=1
             for %%a in ( %* ) do (
-                rem echo a:%%a
+                rem echo ..L1.. a:%%a
                 if !n! EQU 1 (
                     set LSTR=!LSTR!%%a
                 ) else (
@@ -459,7 +459,7 @@ rem beginfunction
             set LSTR=!LSTR!
         )
     )
-    rem echo LSTR:!LSTR!
+    rem echo ..L1.. LSTR:!LSTR!
 
     set __bListToStr=!LSTR!
 
@@ -483,7 +483,7 @@ rem beginfunction
     rem Чтобы избежать этого, обычно используют какую-либо внешнюю утилиту
     
     call :__bListToStr %* || exit /b 1
-    rem echo __bListToStr:!__bListToStr!
+    rem echo ..L1.. __bListToStr:!__bListToStr!
 
     rem <nul set /p strTemp=[33m
     rem <nul set /p strTemp=[!cFG8_WHITE!^;!cBG8_BLACK!m
@@ -543,7 +543,7 @@ rem beginfunction
     set !FUNCNAME!=
 
     call :ListToStr %* || exit /b 1
-    rem echo !ListToStr!
+    rem echo ..L1.. !ListToStr!
 
     <nul set /p strTemp=!ListToStr!
 
@@ -598,9 +598,9 @@ rem beginfunction
     set !FUNCNAME!=
 
     set ALevel=%1
-    rem echo ALevel:!ALevel!
+    rem echo ..L1.. ALevel:!ALevel!
     set s=%2
-    rem echo s:!s!
+    rem echo ..L1.. s:!s!
 
     rem call :WriteLN !cNOTSET! test
 
