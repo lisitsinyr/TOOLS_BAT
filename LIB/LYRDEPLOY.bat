@@ -78,20 +78,20 @@ rem beginfunction
     call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP "" PROJECTS_GROUP
     rem call :GetINI "!APROJECTS_INI!" PROJECTS_GROUP
     set /a kmax=!KeyNamesCount!
-    rem echo ..2.. kmax:!kmax!
+    rem echo ..S.. kmax:!kmax!
     for /L %%s in (0,1,!kmax!) do (
-        echo ..2.. s:%%s
+        echo ..S.. s:%%s
         rem set LPROJECTS_GROUP=!KeyNames[%%s]!
         set LPROJECTS_GROUP=!PROJECTS_GROUP[%%s]!
-        rem echo ..2.. LPROJECTS_GROUP:!LPROJECTS_GROUP!
+        rem echo ..S.. LPROJECTS_GROUP:!LPROJECTS_GROUP!
 
         rem echo "!APROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
         call :GetINIParametr "!APROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
         rem call :GetINI "!APROJECTS_INI!" PROJECTS_GROUP !LPROJECTS_GROUP!
-        rem echo ..2.. KeyValue:!KeyValue!
+        rem echo ..S.. KeyValue:!KeyValue!
 
         set LPROJECTS_GROUP_INI=!KeyValue!\!LPROJECTS_GROUP!.ini
-        rem echo ..2.. LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
+        rem echo ..S.. LPROJECTS_GROUP_INI:!LPROJECTS_GROUP_INI!
 
         call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
     )
@@ -112,23 +112,23 @@ rem beginfunction
     set !FUNCNAME!=
 
     set APROJECTS_GROUP=%~1
-    rem echo ..2.. APROJECTS_GROUP:!APROJECTS_GROUP!
+    rem echo ..S.. APROJECTS_GROUP:!APROJECTS_GROUP!
     set APROJECTS_GROUP_INI=%~2
-    rem echo ..2.. APROJECTS_GROUP_INI:!APROJECTS_GROUP_INI!
+    rem echo ..S.. APROJECTS_GROUP_INI:!APROJECTS_GROUP_INI!
 
     call :GetINIParametr "!APROJECTS_GROUP_INI!" PROJECTS_NAME "" PROJECTS_NAME
     set /a kmax=!KeyNamesCount!
-    rem echo ..2.. kmax:!kmax!
+    rem echo ..S.. kmax:!kmax!
     
     for /L %%i in (0,1,!kmax!) do (
-        echo ..2.. i:%%i
+        echo ..S.. i:%%i
         rem set LPROJECTS_NAME=!KeyNames[%%i]!
         set LPROJECTS_NAME=!PROJECTS_NAME[%%i]!
-        rem echo ..2.. LPROJECTS_NAME:!LPROJECTS_NAME!
+        rem echo ..S.. LPROJECTS_NAME:!LPROJECTS_NAME!
 
         call :GetINIParametr "!APROJECTS_GROUP_INI!" PROJECTS_NAME !LPROJECTS_NAME!
         if !KeyValue! EQU 1 (
-            rem echo ..2.. DEPLOY !APROJECTS_GROUP! !LPROJECTS_NAME!
+            rem echo ..S.. DEPLOY !APROJECTS_GROUP! !LPROJECTS_NAME!
             call :DEPLOY_PROJECT !APROJECTS_GROUP! !LPROJECTS_NAME!
         )
     )
@@ -603,7 +603,7 @@ rem beginfunction
     call :WritePROCESS DEPLOY проекта [__REPO_WORK]: !PROJECT_NAME!
     
     set ADirectory_WORK=%~1
-    rem echo ADirectory_WORK:!ADirectory_WORK!
+    rem echo ..S.. ADirectory_WORK:!ADirectory_WORK!
 
     if not exist "!ADirectory_WORK!"\ (
         echo ERROR: Каталог !ADirectory_WORK! не существует ...
@@ -616,7 +616,7 @@ rem beginfunction
     call :__SetPROJECT_INI
     
     cd /D "!ADirectory_WORK!"
-    rem echo cd:!cd!
+    rem echo ..S.. cd:!cd!
 
     if exist .git\ (
         call lyrgit_push_main.bat
