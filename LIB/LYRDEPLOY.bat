@@ -130,6 +130,8 @@ rem beginfunction
         if !KeyValue! EQU 1 (
             rem echo ..L3.. DEPLOY !APROJECTS_GROUP! !LPROJECTS_NAME!
             call :DEPLOY_PROJECT !APROJECTS_GROUP! !LPROJECTS_NAME!
+        ) else (
+            echo INFO: Проект !LPROJECTS_NAME! not DEPLOY ...
         )
     )
 
