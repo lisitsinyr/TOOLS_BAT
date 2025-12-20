@@ -58,13 +58,13 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-    call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
-
     rem -------------------------------------------------------------------
     rem 
     rem -------------------------------------------------------------------
     set LPROJECTS_GROUP=PYTHON
     set LPROJECTS_GROUP_INI=D:\PROJECTS_LYR\CHECK_LIST\DESKTOP\Python\PYTHON.ini
+
+    call :WriteBEGIN ................................DEPLOY группы проектов: !LPROJECTS_GROUP! ...
 
     call :DEPLOY_PROJECTS_GROUP !LPROJECTS_GROUP! !LPROJECTS_GROUP_INI!
 

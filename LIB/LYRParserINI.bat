@@ -311,6 +311,7 @@ rem beginfunction
                             set GetINIParametr=!TrimLeft!
                             set KeyName=!AKeyName!
                             set KeyValue=!TrimLeft!
+                            rem echo ..L8.. KeyValue:!KeyValue!
                         )
                     )
                 ) else (
