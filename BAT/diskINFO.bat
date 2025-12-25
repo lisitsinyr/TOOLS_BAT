@@ -13,7 +13,7 @@ setlocal enabledelayedexpansion
     rem set disk=!disk_INFO:~0,1!
 
     set disk=%~1
-    set disk=!disk:~0,1!
+    rem set disk=!disk:~0,1!
     if defined disk (
         echo !Directory_INFO!\!disk!_dir.txt
         dir !disk!:\ /ad /one > !Directory_INFO!\!disk!_dir.txt
