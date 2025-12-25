@@ -7,16 +7,20 @@ chcp 1251>NUL
 setlocal enabledelayedexpansion
 
 :begin
-    set Directory_INFO="G:\SOFT-install\ÄÈÑÊÈ\HDD\disk_INFO"
+    set Directory_INFO="D:\PROJECTS_LYR\ÄÈÑÊÈ\HDD\disk_INFO"
 
-    set disk_INFO=%~d1
-    set disk=!disk_INFO:~0,1!
+    rem set disk_INFO=%~d1
+    rem echo disk_INFO:!disk_INFO!
+    rem set disk=!disk_INFO:~0,1!
+
+    set disk=%~1
     if defined disk (
-        echo disk:!disk!
         echo !Directory_INFO!\!disk!_dir.txt
-        dir !disk_INFO!:\ /ad /one > !Directory_INFO!\!disk!_dir.txt
+        dir !disk!:\ /ad /one > !Directory_INFO!\!disk!_dir.txt
+
         echo !Directory_INFO!\!disk!_tree.txt
-        tree /A !disk_INFO!:\ >  !Directory_INFO!\!disk!_tree.txt
+        tree /A !disk!:\ >  !Directory_INFO!\!disk!_tree.txt
+
     ) else (
         echo INFO: Disk not defined ...
     )
