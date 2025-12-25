@@ -20,7 +20,7 @@ setlocal enabledelayedexpansion
         dir !disk!:\ /ad /one > !Directory_INFO!\!disk!_dir.txt
 
         echo !Directory_INFO!\!disk!_tree.txt
-        rem tree /A !disk!:\ >  !Directory_INFO!\!disk!_tree.txt
+        tree /A !disk!:\ >  !Directory_INFO!\!disk!_tree.txt
 
     ) else (
         echo INFO: Disk not defined ...
