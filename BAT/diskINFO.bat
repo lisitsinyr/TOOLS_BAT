@@ -10,10 +10,10 @@ setlocal enabledelayedexpansion
     set Directory_INFO="D:\PROJECTS_LYR\ÄÈÑÊÈ\HDD\disk_INFO"
 
     rem set disk_INFO=%~d1
-    rem echo disk_INFO:!disk_INFO!
     rem set disk=!disk_INFO:~0,1!
 
     set disk=%~1
+    set disk=!disk:~0,1!
     if defined disk (
         echo !Directory_INFO!\!disk!_dir.txt
         dir !disk!:\ /ad /one > !Directory_INFO!\!disk!_dir.txt
