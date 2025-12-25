@@ -13,14 +13,14 @@ setlocal enabledelayedexpansion
     rem set disk=!disk_INFO:~0,1!
 
     set disk=%~1
-    rem set disk=!disk:~0,1!
+    set disk=!disk:~0,1!
     echo disk:!disk!
     if defined disk (
         echo !Directory_INFO!\!disk!_dir.txt
         dir !disk!:\ /ad /one > !Directory_INFO!\!disk!_dir.txt
 
         echo !Directory_INFO!\!disk!_tree.txt
-        tree /A !disk!:\ >  !Directory_INFO!\!disk!_tree.txt
+        rem tree /A !disk!:\ >  !Directory_INFO!\!disk!_tree.txt
 
     ) else (
         echo INFO: Disk not defined ...
