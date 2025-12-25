@@ -7,7 +7,7 @@ chcp 1251>NUL
 setlocal enabledelayedexpansion
 
 :begin
-    set Directory_INFO="D:\PROJECTS_LYR\ÄÈÑÊÈ\HDD\disk_INFO"
+    set Directory_INFO="D:\PROJECTS_LYR\ÄÈÑÊÈ\__DISK_INFO"
 
     rem set disk_INFO=%~d1
     rem set disk=!disk_INFO:~0,1!
