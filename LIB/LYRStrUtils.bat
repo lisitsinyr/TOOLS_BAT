@@ -238,62 +238,19 @@ rem beginfunction
     set !FUNCNAME!=
 
     set s=#!%~1!
-    rem echo s:!s!
     set var=%~2
-    rem echo var:!var!
-
     rem ---------------------------------------------
     rem 1 вариант
     rem ---------------------------------------------
     set /a __len=0
-
-    for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
-        if "!s:~%%N,1!" neq "" (
-            rem echo %%N
-            set /a __len+=%%N
-            set s=!s:~%%N!
-        )
+    set nums=4096 2048 1024 512 256 128 64 32 16 8 4 2 1
+    for %%N in (!nums!) do (
+        if not "!s:~%%N,1!"=="" set /a __len+=%%N & set s=!s:~%%N!
     )
     if defined var (
         set !var!=!__len!
     )
     set StrLen=!__len!
-
-    set /a __len=0
-
-    exit /b
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function StrLen2 (StrVar [RtnVar]) ->
-rem --------------------------------------------------------------------------------
-:StrLen2
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=StrLen2
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    set s=#!%~1!
-    rem echo s:!s!
-    set var=%~2
-    rem echo var:!var!
-
-    rem ---------------------------------------------
-    rem 2 вариант
-    rem ---------------------------------------------
-    set /a __len=0
-    set nums=32 16 8 4 2 1
-    for %%N in (%nums%) do if not "!s:~%%N,1!"=="" set /a __len+=%%N & set s=!s:~%%N!
-
-    if defined var (
-        set !var!=!__len!
-    )
-    set StrLen=!__len!
-
-    set /a __len=0
 
     exit /b
 rem endfunction
@@ -303,8 +260,7 @@ rem function __StrLen4 (StrVar) ->
 rem --------------------------------------------------------------------------------
 :__StrLen4
     set __s=%~1
-    rem echo __s:!__s!
-    if not "%__s%"=="" set /a __len+=1 & call :__StrLen4 "%__s:~1%"
+    if not "%__s%"=="" set /a __len+=1 & call :__StrLen4 "!__s:~1!"
 
     exit /b
 rem endfunction
@@ -316,55 +272,22 @@ rem ----------------------------------------------------------------------------
 rem beginfunction
     set FUNCNAME=%0
     set FUNCNAME=StrLen4
-
     if defined DEBUG (
         echo DEBUG: procedure !FUNCNAME! ...
     )
     set !FUNCNAME!=
 
-    set __s=%~1
-    set __var=%~2
-            
+    set s=!%~1!
+    set var=%~2
     rem ---------------------------------------------
     rem 4 вариант
     rem ---------------------------------------------
     set /a __len=0
-    call :__StrLen4 "!__s!"
-
-    if defined __var (
-        set !__var!=!__len!
+    call :__StrLen4 "!s!"
+    if defined var (
+        set !var!=!__len!
     )
     set StrLen4=!__len!
-
-    exit /b
-rem endfunction
-
-rem --------------------------------------------------------------------------------
-rem function StrLen5 (StrVar [RtnVar]) ->
-rem --------------------------------------------------------------------------------
-:StrLen5
-rem beginfunction
-    set FUNCNAME=%0
-    set FUNCNAME=StrLen4
-    if defined DEBUG (
-        echo DEBUG: procedure !FUNCNAME! ...
-    )
-    set !FUNCNAME!=
-
-    rem ---------------------------------------------
-    rem 5 вариант
-    rem ---------------------------------------------
-    rem :strlen4  StrVar  RtnVar  --  be sure to check if the returned errorlevel is 0
-    rem (   setlocal enabledelayedexpansion & set /a "}=0"
-    set /a "}=0"
-    if "%~1" neq "" if defined %~1 (
-        for %%# in (4096 2048 1024 512 256 128 64 32 16) do (
-            if "!%~1:~%%#,1!" neq "" set "%~1=!%~1:~%%#!" & set /a "}+=%%#"
-        )
-        set "%~1=!%~1!0FEDCBA9876543211" & set /a "}+=0x!%~1:~32,1!!%~1:~16,1!"
-    )
-
-    set /a "%~2=%}%"
 
     exit /b
 rem endfunction
