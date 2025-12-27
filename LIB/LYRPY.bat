@@ -482,9 +482,9 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem venv_dir
     rem -------------------------------------------------------------------
-    set VarName=%1
+    set VarName=%2
     rem echo ..L9.. VarName:!VarName!
-    set VarValue=%~2
+    set VarValue=%~3
     rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
@@ -561,16 +561,16 @@ rem beginfunction
     rem -------------------------------------------------------------------
     rem venv_dir
     rem -------------------------------------------------------------------
-    set VarName=%~1
-    rem echo ..L9.. VarName:!VarName!
+    set VarName=%~2
+    echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    rem echo ..L9.. VarValue:!VarValue!
-    set VarCaption=%~2
-    rem echo ..L9.. VarCaption:!VarCaption!
-    set VarDefault=%~3
-    rem echo ..L9.. VarDefault:!VarDefault!
+    echo ..L9.. VarValue:!VarValue!
+    set VarCaption=%~3
+    echo ..L9.. VarCaption:!VarCaption!
+    set VarDefault=%~4
+    echo ..L9.. VarDefault:!VarDefault!
 
-    if not defined !%VarName%! (
+    if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
     )
 

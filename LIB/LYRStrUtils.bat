@@ -237,7 +237,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set s=#!%~1!
+    set s=#%~1
     set var=%~2
     rem ---------------------------------------------
     rem 1 вариант
@@ -256,18 +256,14 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
-rem function __StrLen4 (StrVar) ->
+rem function StrLen4 (StrVar [RtnVar]) ->
 rem --------------------------------------------------------------------------------
 :__StrLen4
     set __s=%~1
     if not "%__s%"=="" set /a __len+=1 & call :__StrLen4 "!__s:~1!"
-
     exit /b
 rem endfunction
 
-rem --------------------------------------------------------------------------------
-rem function StrLen4 (StrVar [RtnVar]) ->
-rem --------------------------------------------------------------------------------
 :StrLen4
 rem beginfunction
     set FUNCNAME=%0
@@ -277,7 +273,7 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set s=!%~1!
+    set s=%~1
     set var=%~2
     rem ---------------------------------------------
     rem 4 вариант
