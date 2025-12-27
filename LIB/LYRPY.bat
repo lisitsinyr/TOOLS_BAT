@@ -459,14 +459,11 @@ rem beginfunction
     )
     set !FUNCNAME!=
 
-    set Aproject_dir=%~1
-    rem echo ..L9.. Aproject_dir:!Aproject_dir!
-
     rem -------------------------------------------------------------------
     rem project_dir
     rem -------------------------------------------------------------------
     set Aproject_dir=%~1
-    rem echo ..L9.. Aproject_dir:!Aproject_dir!
+    echo ..L9.. Aproject_dir:!Aproject_dir!
     if defined Aproject_dir (
         if not exist !Aproject_dir! (
             set !VarName!=
@@ -483,9 +480,9 @@ rem beginfunction
     rem venv_dir
     rem -------------------------------------------------------------------
     set VarName=%2
-    rem echo ..L9.. VarName:!VarName!
+    echo ..L9.. VarName:!VarName!
     set VarValue=%~3
-    rem echo ..L9.. VarValue:!VarValue!
+    echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -524,7 +521,7 @@ rem beginfunction
     )
 
     set SET_venv_dir=!%VarName%!
-    rem echo ..L9.. SET_venv_dir:!SET_venv_dir!
+    echo ..L9.. SET_venv_dir:!SET_venv_dir!
 
     exit /b 0
 rem endfunction
