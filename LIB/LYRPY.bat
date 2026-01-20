@@ -463,7 +463,7 @@ rem beginfunction
     rem project_dir
     rem -------------------------------------------------------------------
     set Aproject_dir=%~1
-    echo ..L9.. Aproject_dir:!Aproject_dir!
+    rem echo ..L9.. Aproject_dir:!Aproject_dir!
     if defined Aproject_dir (
         if not exist !Aproject_dir! (
             set !VarName!=
@@ -480,9 +480,9 @@ rem beginfunction
     rem venv_dir
     rem -------------------------------------------------------------------
     set VarName=%2
-    echo ..L9.. VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=%~3
-    echo ..L9.. VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
 
     if defined VarName (
         if defined VarValue (
@@ -521,7 +521,7 @@ rem beginfunction
     )
 
     set SET_venv_dir=!%VarName%!
-    echo ..L9.. SET_venv_dir:!SET_venv_dir!
+    rem echo ..L9.. SET_venv_dir:!SET_venv_dir!
 
     exit /b 0
 rem endfunction
@@ -559,13 +559,13 @@ rem beginfunction
     rem venv_dir
     rem -------------------------------------------------------------------
     set VarName=%~2
-    echo ..L9.. VarName:!VarName!
+    rem echo ..L9.. VarName:!VarName!
     set VarValue=!%VarName%!
-    echo ..L9.. VarValue:!VarValue!
+    rem echo ..L9.. VarValue:!VarValue!
     set VarCaption=%~3
-    echo ..L9.. VarCaption:!VarCaption!
+    rem echo ..L9.. VarCaption:!VarCaption!
     set VarDefault=%~4
-    echo ..L9.. VarDefault:!VarDefault!
+    rem echo ..L9.. VarDefault:!VarDefault!
 
     if not defined !VarName! (
         call :Read_P !VarName! "!VarValue!" "!VarCaption!" "!VarDefault!" || exit /b 1
