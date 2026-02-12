@@ -80,7 +80,7 @@ rem beginfunction
     set /a kmax=!KeyNamesCount!
     rem echo ..L3.. kmax:!kmax!
     for /L %%s in (0,1,!kmax!) do (
-        echo ..L31.. s:%%s
+        rem echo ..L31.. s:%%s
         rem set LPROJECTS_GROUP=!KeyNames[%%s]!
         set LPROJECTS_GROUP=!PROJECTS_GROUP[%%s]!
         rem echo ..L31.. LPROJECTS_GROUP:!LPROJECTS_GROUP!

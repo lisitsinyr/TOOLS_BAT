@@ -34,14 +34,14 @@ rem beginfunction
     rem -------------------------------------------------------------------
     set UV_BREAK_SYSTEM_PACKAGES=
     set UV_BUILD_CONSTRAINT=
-    set UV_CACHE_DIR added=
+    set UV_CACHE_DIR=
     set UV_COMPILE_BYTECODE=
     set UV_COMPILE_BYTECODE_TIMEOUT=
     set UV_CONCURRENT_BUILDS=
     set UV_CONCURRENT_DOWNLOADS=
     set UV_CONCURRENT_INSTALLS=
-    set UV_CONFIG_FILE added=
-    set UV_CONSTRAINT added=
+    set UV_CONFIG_FILE=
+    set UV_CONSTRAINT=
     set UV_CREDENTIALS_DIR=
     set UV_CUSTOM_COMPILE_COMMAND=
     set UV_DEFAULT_INDEX=
@@ -53,7 +53,7 @@ rem beginfunction
     set UV_EXTRA_INDEX_URL=
     set UV_FIND_LINKS=
     set UV_FORK_STRATEGY=
-    set UV_FROZEN
+    set UV_FROZEN=
     set UV_GITHUB_TOKEN=
     set UV_GIT_LFS=
     set UV_HIDE_BUILD_OUTPUT=
@@ -252,18 +252,18 @@ rem beginfunction
 
     set UV_BREAK_SYSTEM_PACKAGES
     set UV_BUILD_CONSTRAINT
-    set UV_CACHE_DIR added
+    set UV_CACHE_DIR
     set UV_COMPILE_BYTECODE
     set UV_COMPILE_BYTECODE_TIMEOUT
     set UV_CONCURRENT_BUILDS
     set UV_CONCURRENT_DOWNLOADS
     set UV_CONCURRENT_INSTALLS
-    set UV_CONFIG_FILE added
-    set UV_CONSTRAINT added
+    set UV_CONFIG_FILE
+    set UV_CONSTRAINT
     set UV_CREDENTIALS_DIR
     set UV_CUSTOM_COMPILE_COMMAND
     set UV_DEFAULT_INDEX
-    set UV_DEV added
+    set UV_DEV
     set UV_DOWNLOAD_URL
     set UV_ENV_FILE
     set UV_EXCLUDE
@@ -271,13 +271,13 @@ rem beginfunction
     set UV_EXTRA_INDEX_URL
     set UV_FIND_LINKS
     set UV_FORK_STRATEGY
-    set UV_FROZEN added
+    set UV_FROZEN
     set UV_GITHUB_TOKEN
     set UV_GIT_LFS
     set UV_HIDE_BUILD_OUTPUT
     set UV_HTTP_RETRIES
     set UV_HTTP_TIMEOUT
-    set UV_INDEX added
+    set UV_INDEX
     set UV_INDEX_STRATEGY
     set UV_INDEX_URL
     set UV_INDEX_{name}_PASSWORD
