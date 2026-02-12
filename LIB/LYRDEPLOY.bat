@@ -47,10 +47,10 @@ rem beginfunction
 
     set GPROJECT_PATTERN_DIR=
     
-    set GPROJECT_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
+    rem set GPROJECT_DIR=D:\PROJECTS_LYR\CHECK_LIST\SCRIPT\BAT\PROJECTS_BAT\TOOLS_SRC_BAT
     set GPROJECT_DIR=
 
-    set Gurl_github=git@github.com:lisitsinyr/TOOLS_SRC_BAT.git
+    rem set Gurl_github=git@github.com:lisitsinyr/TOOLS_SRC_BAT.git
     set Gurl_github=
 
     set GPROJECTS_INI=
@@ -124,7 +124,7 @@ rem beginfunction
         rem echo ..L32.. i:%%i
         rem set LPROJECTS_NAME=!KeyNames[%%i]!
         set LPROJECTS_NAME=!PROJECTS_NAME[%%i]!
-        rem echo ..L32.. LPROJECTS_NAME:!LPROJECTS_NAME!
+        echo ..L32.. LPROJECTS_NAME:!LPROJECTS_NAME!
 
         call :GetINIParametr "!APROJECTS_GROUP_INI!" PROJECTS_NAME !LPROJECTS_NAME!
         if !KeyValue! EQU 1 (
@@ -222,7 +222,8 @@ rem beginfunction
             exit /b 0
         )    
     
-        rem echo ..L33.. !GPROJECT_DIR!
+        echo ..L33.. !GPROJECT_DIR!
+
 
         call :__REPO_WORK !GPROJECT_DIR!
     
@@ -615,6 +616,11 @@ rem beginfunction
     
     set ADirectory_WORK=%~1
     rem echo ..L3.. ADirectory_WORK:!ADirectory_WORK!
+
+    if not defined ADirectory_WORK (
+        echo ERROR: Каталог ADirectory_WORK not defined ...
+        exit /b 1
+    )
 
     if not exist "!ADirectory_WORK!"\ (
         echo ERROR: Каталог !ADirectory_WORK! не существует ...
