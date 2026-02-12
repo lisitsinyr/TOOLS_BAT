@@ -124,7 +124,7 @@ rem beginfunction
         rem echo ..L32.. i:%%i
         rem set LPROJECTS_NAME=!KeyNames[%%i]!
         set LPROJECTS_NAME=!PROJECTS_NAME[%%i]!
-        echo ..L32.. LPROJECTS_NAME:!LPROJECTS_NAME!
+        rem echo ..L32.. LPROJECTS_NAME:!LPROJECTS_NAME!
 
         call :GetINIParametr "!APROJECTS_GROUP_INI!" PROJECTS_NAME !LPROJECTS_NAME!
         if !KeyValue! EQU 1 (
