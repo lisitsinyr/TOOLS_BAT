@@ -222,8 +222,7 @@ rem beginfunction
             exit /b 0
         )    
     
-        echo ..L33.. !GPROJECT_DIR!
-
+        rem echo ..L33.. !GPROJECT_DIR!
 
         call :__REPO_WORK !GPROJECT_DIR!
     
@@ -618,12 +617,14 @@ rem beginfunction
     rem echo ..L3.. ADirectory_WORK:!ADirectory_WORK!
 
     if not defined ADirectory_WORK (
-        echo ERROR: Каталог ADirectory_WORK not defined ...
+        rem echo ERROR: Для проекта !PROJECT_NAME!: Каталог PROJECT_DIR not defined ...
+        call :WriteERROR ERROR: Для проекта !PROJECT_NAME! Каталог PROJECT_DIR not defined ...
         exit /b 1
     )
 
     if not exist "!ADirectory_WORK!"\ (
-        echo ERROR: Каталог !ADirectory_WORK! не существует ...
+        rem echo ERROR: !PROJECT_NAME!: Каталог !ADirectory_WORK! не существует ...
+        call :WriteERROR ERROR: Каталог !ADirectory_WORK! не существует ...
         exit /b 1
     )
     
