@@ -443,28 +443,28 @@ rem beginfunction
         set LDIR_TO=!GPROJECT_DIR!\BUILD
         if exist !LDIR_FROM!\ (
             rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-            call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+            rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
         )
 
         set LDIR_FROM=!LDirPATTERN!\CONFIG
         set LDIR_TO=!GPROJECT_DIR!\CONFIG
         if exist !LDIR_FROM!\ (
             rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-            call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+            rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
         )
         
         set LDIR_FROM=!LDirPATTERN!\DATA
         set LDIR_TO=!GPROJECT_DIR!\DATA
         if exist !LDIR_FROM!\ (
             rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-            call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+            rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
         )
         
         set LDIR_FROM=!LDirPATTERN!\DIST
         set LDIR_TO=!GPROJECT_DIR!\DIST
         if exist !LDIR_FROM!\ (
             rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-            call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+            rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
         )
         
         set LDIR_FROM=!LDirPATTERN!\DOC
@@ -478,21 +478,21 @@ rem beginfunction
         set LDIR_TO=!GPROJECT_DIR!\EXE
         if exist !LDIR_FROM!\ (
             rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-            call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+            rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
         )
         
         set LDIR_FROM=!LDirPATTERN!\LOG
         set LDIR_TO=!GPROJECT_DIR!\LOG
         if exist !LDIR_FROM!\ (
             rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-            call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+            rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
         )
         
         set LDIR_FROM=!LDirPATTERN!\OUT
         set LDIR_TO=!GPROJECT_DIR!\OUT
         if exist !LDIR_FROM!\ (
             rem call :COPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! /R || exit /b 1
-            call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
+            rem call :XCOPY_FILES !LDIR_FROM! !LDIR_TO! !LMASK! || exit /b 1
         )
         
         set LDIR_FROM=!LDirPATTERN!\SRC
