@@ -11,12 +11,14 @@ rem
 rem --------------------------------------------------------------------------------
 :begin
     set BATNAME=%~nx0
-    echo Start !BATNAME! ...
+    rem echo Start !BATNAME! ...
 
     set Directory=%date:~6,4%%P1%%date:~3,2%%P1%%date:~0,2%
     if not exist !Directory! (
         mkdir !Directory!
     )
+
+    chcp 866>NUL
 
     exit /b 0
 :end

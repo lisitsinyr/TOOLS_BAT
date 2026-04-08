@@ -29,21 +29,35 @@ setlocal enabledelayedexpansion
     set BATNAME=%~nx0
     rem echo —Ú‡Ú !BATNAME! ...
 
+    set YYYY=%date:~6,4%
+    set MM=%date:~3,2%
+    set DD=%date:~0,2%
+
     rem -------------------------------------------------------------------
     rem LOG_FULLFILENAME - ‘‡ÈÎ ÊÛÌ‡Î‡ [Í‡Ú‡ÎÓ„+ËÏˇ+‡Ò¯ËÂÌËÂ]
     rem -------------------------------------------------------------------
-    set LOG_FULLFILENAME=G:\___–¿«¡Œ–\LOG\EveryDay.log
+    set LOG_FULLFILENAME=G:\___–¿«¡Œ–\LOG\!YYYY!!MM!!DD!_EveryDay.log
     rem echo LOG_FULLFILENAME: !%LOG_FULLFILENAME!
 
     rem call :StartLogFile || exit /b 1
 
-    call :AddLog !loTextFile! !PROCESS! "..."
+    call :AddLog !loTextFile! !PROCESS! "!YYYY!!MM!!DD!_EveryDay ..."
 
     rem G:\___–¿«¡Œ–\STORE\MHT_LUIS_24_4000\2026\04
-    rem call D:\TOOLS\TOOLS_BAT\BAT\GGGGMMDD.bat
+    set _DIRECTORY=G:\___–¿«¡Œ–\STORE\MHT_LUIS_24_4000\!YYYY!\!MM!
+    call :AddLog !loTextFile! !PROCESS! !_DIRECTORY!
+    call :CreateDir !_DIRECTORY!
+    echo !CreateDir!
+    cd /D "!CreateDir!"
+    call D:\TOOLS\TOOLS_BAT\BAT\GGGGMMDD.bat
 
     rem G:\___–¿«¡Œ–\STORE\YOUTUBE_LUIS_24_4000\2026\04
-    rem call D:\TOOLS\TOOLS_BAT\BAT\GGGGMMDD.bat
+    set _DIRECTORY=G:\___–¿«¡Œ–\STORE\YOUTUBE_LUIS_24_4000\!YYYY!\!MM!
+    call :AddLog !loTextFile! !PROCESS! !_DIRECTORY!
+    call :CreateDir !_DIRECTORY!
+    echo !CreateDir!
+    cd /D "!CreateDir!"
+    call D:\TOOLS\TOOLS_BAT\BAT\GGGGMMDD.bat
 
     rem call :StopLogFile || exit /b 1
 
@@ -94,4 +108,56 @@ exit /b 0
 exit /b 0
 :StopLogFile
 %LIB_BAT%\LYRLog.bat %*
+exit /b 0
+
+rem =================================================
+rem LYRFileUtils.bat
+rem =================================================
+:LYRFileUtilsINIT
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FullFileName
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileName
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileNameWithoutExt
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:ExtractFileExt
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FileAttr
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:FileSize
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CreateFile
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CheckFile
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CurrentDir
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILE
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:COPY_FILES
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:XCOPY_FILES
+%LIB_BAT%\LYRFileUtils.bat %*
+exit /b 0
+:CHANGE_STR
+%LIB_BAT%\LYRFileUtils.bat %*
 exit /b 0
