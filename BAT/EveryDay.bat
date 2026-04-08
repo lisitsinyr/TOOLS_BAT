@@ -23,8 +23,6 @@ setlocal enabledelayedexpansion
     rem -------------------------------------------------------------------
     call :SET_LIB %~f0 || exit /b 1
 
-
-
 :begin
     set BATNAME=%~nx0
     rem echo Старт !BATNAME! ...
@@ -60,6 +58,8 @@ setlocal enabledelayedexpansion
     call D:\TOOLS\TOOLS_BAT\BAT\GGGGMMDD.bat
 
     rem call :StopLogFile || exit /b 1
+
+    chcp 866>NUL
 
     exit /b 0
 :end
