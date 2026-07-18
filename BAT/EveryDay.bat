@@ -39,18 +39,16 @@ setlocal enabledelayedexpansion
 
     rem call :StartLogFile || exit /b 1
 
-    call :AddLog !loTextFile! !PROCESS! "!YYYY!!MM!!DD!_EveryDay ..."
+    rem call :AddLog !loTextFile! !PROCESS! "!YYYY!!MM!!DD!_EveryDay ..."
 
-    rem G:\___–¿«¡Œ–\STORE\MHT_LUIS_24_4000\2026\04
-    set _DIRECTORY=G:\___–¿«¡Œ–\STORE\MHT_LUIS_24_4000\!YYYY!\!MM!
+    set _DIRECTORY=G:\STORE\MHT_LUIS_24_4000\!YYYY!\!MM!
     call :AddLog !loTextFile! !PROCESS! !_DIRECTORY!
     call :CreateDir !_DIRECTORY!
     echo !CreateDir!
     cd /D "!CreateDir!"
     call D:\TOOLS\TOOLS_BAT\BAT\GGGGMMDD.bat
 
-    rem G:\___–¿«¡Œ–\STORE\YOUTUBE_LUIS_24_4000\2026\04
-    set _DIRECTORY=G:\___–¿«¡Œ–\STORE\YOUTUBE_LUIS_24_4000\!YYYY!\!MM!
+    set _DIRECTORY=G:\STORE\YOUTUBE_LUIS_24_4000\!YYYY!\!MM!
     call :AddLog !loTextFile! !PROCESS! !_DIRECTORY!
     call :CreateDir !_DIRECTORY!
     echo !CreateDir!
