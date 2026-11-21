@@ -360,8 +360,8 @@ rem beginfunction
         if exist "!ADirectory!" (
             echo ..L5.. ADirectory: !ADirectory!
             set CheckDirectory="!ADirectory!"
-            call :FullFileName "!ADirectory!"
-            set CheckDirectory="!FullFileName!"
+            rem call :FullFileName "!ADirectory!"
+            rem set CheckDirectory="!FullFileName!"
         )
     )
 
