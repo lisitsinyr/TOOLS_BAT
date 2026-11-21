@@ -359,9 +359,9 @@ rem beginfunction
     if defined ADirectory (
         if exist "!ADirectory!" (
             rem echo ..L5.. ADirectory: !ADirectory!
-            set CheckDirectory=!ADirectory!
-            call :FullFileName !ADirectory!
-            set CheckDirectory=!FullFileName!
+            set CheckDirectory="!ADirectory!"
+            call :FullFileName "!ADirectory!"
+            set CheckDirectory="!FullFileName!"
         )
     )
 
