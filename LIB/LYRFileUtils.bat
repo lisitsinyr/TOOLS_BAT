@@ -352,12 +352,13 @@ rem beginfunction
     rem echo ..L5.. !FUNCNAME!: !%FUNCNAME%!
 
     set ADirectory=%~1
-    rem echo ..L5.. AFILENAME: !AFILENAME!
+    rem echo ..L5.. ADirectory: !ADirectory!
 
     set CheckDirectory=
 
     if defined ADirectory (
         if exist "!ADirectory!" (
+            echo ..L5.. ADirectory: !ADirectory!
             set CheckDirectory=!ADirectory!
             call :FullFileName !ADirectory!
             set CheckDirectory=!FullFileName!
