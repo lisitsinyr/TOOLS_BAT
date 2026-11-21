@@ -339,6 +339,36 @@ rem beginfunction
 rem endfunction
 
 rem --------------------------------------------------------------------------------
+rem function CheckDirectory (Directory) -> CheckDirectory
+rem --------------------------------------------------------------------------------
+:CheckDirectory
+rem beginfunction
+    set FUNCNAME=%0
+    set FUNCNAME=CheckDirectory
+    if defined DEBUG (
+        echo DEBUG: procedure !FUNCNAME! ...
+    )
+    set !FUNCNAME!=
+    rem echo ..L5.. !FUNCNAME!: !%FUNCNAME%!
+
+    set ADirectory=%~1
+    rem echo ..L5.. AFILENAME: !AFILENAME!
+
+    set CheckDirectory=
+
+    if defined ADirectory (
+        if exist "!ADirectory!" (
+            set CheckDirectory=!ADirectory!
+            call :FullFileName !ADirectory!
+            set CheckDirectory=!FullFileName!
+        )
+    )
+
+    exit /b 0
+
+rem endfunction
+
+rem --------------------------------------------------------------------------------
 rem function CurrentDir () -> CurrentDir
 rem --------------------------------------------------------------------------------
 :CurrentDir
